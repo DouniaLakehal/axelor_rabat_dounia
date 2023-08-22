@@ -1,0 +1,1 @@
+﻿update hr_augmentation set echelon   =27,echelon_old=27, grade_old=12,  grade=12 where employer=47

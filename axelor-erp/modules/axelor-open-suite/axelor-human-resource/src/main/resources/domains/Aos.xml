@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="human-resource" package="com.axelor.apps.hr.db"/>
+
+    <entity name="Aos" lang="java">
+        <many-to-one name="employee" ref="com.axelor.apps.hr.db.Employee"/>
+        <date name="dateDebut" title="Date debut"/>
+        <date name="dateFin" title="Date fin" />
+        <decimal name="montant" title="Montant"/>
+        <decimal name="remboursement" title="Remboursement"/>
+        <many-to-one name="aos_config" ref="com.axelor.apps.configuration.db.AOS_config"/>
+    </entity>
+
+</domain-models>

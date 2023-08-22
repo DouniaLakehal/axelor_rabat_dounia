@@ -1,0 +1,21 @@
+apply plugin: "com.axelor.app-module"
+
+apply from: "../libs.gradle"
+apply from: "../version.gradle"
+
+apply {
+    version = openSuiteVersion
+}
+
+axelor {
+    title "Axelor Paie"
+    description "Axelor Paie Module"
+}
+
+dependencies {
+    api project(":modules:axelor-human-resource")
+    api project(":modules:axelor-configuration")
+
+    implementation libs.commons_lang3
+    implementation libs.commons_collections4
+}
