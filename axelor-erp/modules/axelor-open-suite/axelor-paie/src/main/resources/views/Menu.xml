@@ -104,5 +104,24 @@
         <context name="_showRecord" expr="eval: 3"/>
         <context name="type_aug" expr="eval:'long'"/>
     </action-view>
+
+
+    <menuitem title="Gestion de carrière" name="paie-gestion-salaire" parent="paie-root" icon="fa-sitemap"
+              order="5"/>
+
+    <menuitem name="paie-augmentation-all" parent="paie-gestion-salaire" title="Gestion des promotions"
+              action="paie.augmentation.all"/>
+    <action-view name="paie.augmentation.all" title="Gestion des promotions" model="com.axelor.apps.hr.db.Augmentation">
+        <view type="grid" name="config.augmentation-grid"/>
+        <view type="form" name="config.augmentation-form"/>
+    </action-view>
+
+    <menuitem name="paie-responsabilite-all" parent="paie-gestion-salaire" title="Gestion des responsabilites"
+              action="paie.respon.all"/>
+    <action-view name="paie.respon.all" title="Gestion des responsabilites"
+                 model="com.axelor.apps.hr.db.HistoriqueResponsabilite">
+        <view type="grid" name="emp-histo-respon-grid"/>
+    </action-view>
+
 </object-views>
 
