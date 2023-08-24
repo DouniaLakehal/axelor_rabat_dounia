@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="prime-grid" title="Prime" model="com.axelor.apps.hr.db.Prime">
+        <field name="employee"/>
+        <field name="pourcentage"/>
+        <field name="annee"/>
+    </grid>
+
+    <form name="prime-form" title="Prime" model="com.axelor.apps.hr.db.Prime">
+        <panel name="mainPanel">
+            <field name="employee"/>
+            <field name="pourcentage"/>
+            <field name="annee"/>
+        </panel>
+    </form>
+</object-views>

@@ -416,6 +416,11 @@
 		<view type="form" name="IR_form" />
 	</action-view>
 
+	<menuitem name="prime_configuration" parent="NATURE_DE_LA_DEPENSE" title="Prime" action="prime_config" />
+	<action-view name="prime_config" title="Prime" model="com.axelor.apps.hr.db.Prime" >
+		<view type="grid" name="prime-grid" />
+		<view type="form" name="prime-form" />
+	</action-view>
 
 	<menuitem name="gest_management_version_documents" parent="menu-configuration-root" title="Gestion Documents" icon="fa-cog" action="gest_docu_verison" />
 	<action-view name="gest_docu_verison" title="Gestion des documents" model="com.axelor.apps.configuration.db.ManagementDocuments" >
