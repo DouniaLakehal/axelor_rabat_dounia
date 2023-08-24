@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="account" package="com.axelor.apps.account.db"/>
+
+    <entity name="ModificationBudgetList" lang="java">
+        <integer name="annee"/>
+        <string name="code"/>
+        <one-to-many name="virements" ref="com.axelor.apps.account.db.Virements"/>
+        <string name="etat" selection="modificatioBudget.slection" />
+        <many-to-one name="picture" ref="com.axelor.meta.db.MetaFile" title="Photo" index="false"/>
+        <string name="commentaire"/>
+        <string name="signataire"/>
+    </entity>
+
+    <entity name="Virements" lang="java">
+        <many-to-one name="budget_retrait" ref="com.axelor.apps.configuration.db.RubriquesBudgetaire"/>
+        <many-to-one name="budget_ajout" ref="com.axelor.apps.configuration.db.RubriquesBudgetaire"/>
+        <decimal name="montant"/>
+    </entity>
+
+</domain-models>

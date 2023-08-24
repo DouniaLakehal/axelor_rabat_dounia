@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+   
+    <form name="suiviannu-form"
+          canNew="false" canArchive="false" canAttach="false"
+          canCopy="false" canDelete="false" canEdit="false" canSave="false"
+          title="Suivi du budget annuelle"
+          model="com.axelor.apps.configuration.db.HistoriqueCompte">
+        <panel >
+            <field name="annee" title="Année" type="integer" min="1900"/>
+            <button-group colSpan="4" colOffset="8">
+                <button title="Imprimer" name="btn_rech_res" onClick="com.axelor.apps.account.web.AccountController:imprimersuiviannuelle"/>
+            </button-group>
+        </panel>
+    </form>
+    
+</object-views>

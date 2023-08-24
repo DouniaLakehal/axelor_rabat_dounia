@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="versement-grid" title="Saisie des versements"
+          model="com.axelor.apps.account.db.Versement">
+         <field name="name" />
+        <field name="rib.rib" title="Numéro de compte" />
+        <field name="dateVersement" title="Date de versement"/>
+        <field name="montant" title="Montant"/>
+
+    </grid>
+
+    <form  name="versement-form" title="Nouveau versement"
+          model="com.axelor.apps.account.db.Versement" width="large">
+        <panel name="mainPanel" title="Saisie des versements" colSpan="12">
+             <field name="name" />
+            <field name="rib" title="Numéro de compte" target-name="rib" />
+            <field name="dateVersement" title="Date de versement"  />
+            <field name="montant" title="Montant" />
+
+        </panel>
+    </form>
+
+</object-views>

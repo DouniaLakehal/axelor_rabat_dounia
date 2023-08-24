@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+   <module name="account" package="com.axelor.apps.account.db"/>
+  
+   <entity name="Afranchissement" lang="java">
+            <integer name="code" title="Code"/>
+   			<string name="beneficiaire" title="Beneficiaire" />
+   			<string name="designation" title="Designation"/>
+   			<decimal name="montant" title="Montant"/>
+   			<date name="dateAjout" title="date d'ajout"/>
+   			<integer name="annee" title="Année"/>
+   </entity>
+</domain-models>

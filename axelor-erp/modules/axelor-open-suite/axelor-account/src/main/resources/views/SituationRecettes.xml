@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <form name="situation-recette-form" title="Situation des recettes"
+          model="com.axelor.apps.account.db.GestionRecette" width="large" canEdit="false" canDelete="false"
+          canArchive="false" canAttach="false" canCopy="false" canNew="false" canSave="false">
+        <panel name="mainPanel" title="Situation des recettes" colSpan="12">
+            <field name="anneeRecette" title="Année"/>
+            
+            <field name="rib" title="Numéro de compte" target-name="rib" />
+        </panel>
+        <panel>
+            <button name="printGestionRecetteBtn" title="Imprimer" icon="fa-print" onClick="action-print-recette"/>
+        </panel>
+    </form>
+
+    <action-method name="action-print-recette">
+        <call class="com.axelor.apps.account.web.AccountController" method="imprimerGestionRecette"/>
+    </action-method>
+</object-views>

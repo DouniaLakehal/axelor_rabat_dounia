@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+    
+	<grid name="tresaurerieAccount-grid" title="Tresaurerie" model="com.axelor.apps.account.db.TresaurerieAnnuel" >
+		<field name="mois" title="Mois"/>
+		<field name="year" title="Annee"/>
+		<field name="disponible" title="Disponible"/>
+	</grid>
+	
+	<form canSave="false" title="Tresaurerie" name="tresaurerieAccount-form" model="com.axelor.apps.account.db.TresaurerieAnnuel">
+		<panel title="Date d'arret">
+			<field name="$mois" title="Mois" selection="accounting.mois.Jfinancier.select"/>
+			<field name="$year" title="Annee" />
+			<button title="imprimer" name="btn_print_tresaurerie" onClick="actiongroupeprintTresorerie"/>
+		</panel>
+	</form>
+
+	<action-method name="getrecetteAttDate">
+		<call class="com.axelor.apps.account.web.AccountController" method="tw_domaine_tresorerie_recette"/>
+	</action-method>
+
+	<action-method name="delete_old_version">
+		<call class="com.axelor.apps.account.web.AccountController" method="tw_delete_old_version"/>
+	</action-method>
+
+	<action-method name="print_trasorerie">
+		<call class="com.axelor.apps.account.web.AccountController" method="tw_print_trasorerie"/>
+	</action-method>
+
+	<action-group name="actiongroupeprintTresorerie">
+		<action name="delete_old_version"/>
+		<action name="print_trasorerie"/>
+	</action-group>
+
+</object-views>

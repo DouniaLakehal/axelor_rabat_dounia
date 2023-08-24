@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+    <grid name="grid_prestataire" title="Les prestataires" model="com.axelor.apps.account.db.Prestataire">
+        <field name="name" title="Nom" />
+    </grid>
+
+    <form name="form_prestataire" title="Les prestataires" model="com.axelor.apps.account.db.Prestataire">
+        <panel >
+            <field name="name" title="Nom"/>
+        </panel>
+    </form>
+
+</object-views>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="account" package="com.axelor.apps.account.db"/>
+
+    <entity name="GestionRecette" lang="java">
+        <!--<one-to-many name="encaissement" ref="com.axelor.apps.account.db.EncaissementSelect"/>-->
+        <string name="ordredereceete" title="Ordre de recette" />
+        <many-to-one name="partierversement" ref="com.axelor.apps.configuration.db.PartierVersement" title="Partie Versement" />
+        <many-to-one name="natureoperation" ref="com.axelor.apps.configuration.db.NatureOperation" title="Nature Operation" />
+        <many-to-one name="rib" required="true" ref="com.axelor.apps.configuration.db.Compte" title="Numéro de compte"/>
+        <many-to-one name="historique" required="false" ref="com.axelor.apps.configuration.db.HistoriqueCompte"/>
+        <many-to-one name="historiqueRubrique" required="false" ref="com.axelor.apps.configuration.db.HistoriqueBudgetaire"/>
+        <date name="dateRecette" required="true" title="Date"/>
+        <string name="moisRecette" required="true" title="Mois"/>
+        <string name="anneeRecette" required="true" title="Année"/>
+        <decimal name="montant" required="true" title="Montant"/>
+        <string name="montantenlettre" title="Montant en lettres"/>
+        <string name="piecesJointes" title="Pièces  Jointes"/>
+        <integer name="annee" title="Année"/>
+        <integer name="mois" title="Mois"/>
+        <string name="ordre" title="Ordre"/>
+        <many-to-one name="annexe" required="false" ref="com.axelor.apps.configuration.db.AnnexeGenerale"/>
+
+        <many-to-one name="docAttach" title="Attacher le document" ref="com.axelor.meta.db.MetaFile" />
+        <many-to-one name="rubrique" required="true" ref="com.axelor.apps.configuration.db.RubriqueBudgetaireGenerale" title="Rubrique budgétaire"/>
+        <string name="releve" title="Numéro de relevé banquaire" required="true"/>
+        <many-to-many name="encaissement" ref="com.axelor.apps.account.db.Encaissement" title="Encaissement"/>
+    </entity>
+
+</domain-models>

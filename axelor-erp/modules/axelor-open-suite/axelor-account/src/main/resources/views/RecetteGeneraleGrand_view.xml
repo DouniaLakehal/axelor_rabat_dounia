@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+    <grid name="RecetteGenerale-grid" title="Recette Générale"
+          model="com.axelor.apps.account.db.RecetteGeneraleGrand">
+        <field colSpan="12" name="budgetrea"/>
+        <field name="annee" title="Année" />
+        <button name="imprimerRecetteGenerale" icon="fa-download"  title="Imprimer Recette Générale" onClick="imprimerReccettegenerale"/>
+    </grid>
+
+
+    <form  name="RecetteGenerale-form"  title="Recette Générale"
+           model="com.axelor.apps.account.db.RecetteGeneraleGrand" width="large">
+        <panel name="mainPanel" title="Recette Générale" colSpan="12">
+            <field colSpan="12" name="budgetrea" title="Réalisation budget"
+                   canSelect="false" canSuggest="false" canView="false"
+                   grid-view="RecetteGenerale_sous-grid"
+                   form-view="RecetteGenerale_sous-form"/>
+            <field name="annee" title="Année" />
+        </panel>
+    </form>
+    <action-method name="imprimerReccettegenerale" >
+        <call class="com.axelor.apps.account.web.AccountController" method="get_recette_parone"/>
+    </action-method>
+
+</object-views>

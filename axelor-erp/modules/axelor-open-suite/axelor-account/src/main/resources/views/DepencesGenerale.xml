@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+	
+    <grid name="depencesGenerale-grid" title="Dépenses Generales"
+          model="com.axelor.apps.account.db.DepencesGenerale">
+    	<field name="listRubriqueDepensesGenerale" title="Rubrique budgetaire"/>
+        <field name="year" title="Annee"/>
+    </grid>
+
+    <form name="depencesGenerale-form" title="Dépenses Generales"
+          model="com.axelor.apps.account.db.DepencesGenerale"
+          onNew="get_rubrique_by_year"
+    	onLoad="get_rubrique_by_year" width="large">
+       <panel name="mainPanel" >
+           <panel colSpan="12">
+               <field colSpan="6" onChange="get_rubrique_by_year" name="year" title="Annee"/>
+           </panel>
+           <field canSelect="false" canView="false" canSuggest="false"
+                  colSpan="12" name="listRubriqueDepensesGenerale" title="Rubrique budgetaire"/>
+       </panel>
+    </form>
+
+</object-views>

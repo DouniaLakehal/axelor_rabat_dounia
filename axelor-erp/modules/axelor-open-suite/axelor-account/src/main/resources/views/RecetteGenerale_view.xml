@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+    <grid name="RecetteGenerale_sous-grid" title="Réalisations de butget"
+          model="com.axelor.apps.account.db.RecetteGenerale">
+        <field name="budgetrub" title="Rubrique butgetaire" />
+        <field name="realisations" title="Réalisations" />
+
+    </grid>
+    <form  name="RecetteGenerale_sous-form"
+           onNew="get_rubrique_by_year" title="Réalisations de butget"
+           model="com.axelor.apps.account.db.RecetteGenerale" width="large">
+        <panel name="mainPanel" title="Recette Générale" colSpan="12">
+            <field name="budgetrub" title="Rubrique butgetaire" />
+            <field name="realisations" title="Réalisations" />
+        </panel>
+    </form>
+
+    <action-method name="action-burique-butget-on-new" >
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="get_all_rubriqueBudgetaireAC"/>
+    </action-method>
+
+</object-views>

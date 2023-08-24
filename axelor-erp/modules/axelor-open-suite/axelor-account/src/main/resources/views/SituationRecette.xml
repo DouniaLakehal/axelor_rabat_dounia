@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+   
+    <form name="frm_situation_recette_monsuel"
+          canNew="false" canArchive="false" canAttach="false"
+          canCopy="false" canDelete="false" canEdit="false" canSave="false"
+          title="Situation Mensuel"
+          model="com.axelor.apps.configuration.db.HistoriqueBudgetaire">
+        <panel >
+        	<field name="mois" title="Mois" selection="accounting.recettes.mois.select.number"/>
+            <field name="annee" title="Année" type="integer" min="1900"/>
+            <button-group colSpan="4" colOffset="8">
+                <button title="Imprimer" name="btn_rech_res" onClick="com.axelor.apps.account.web.AccountController:getsituation_mensuel"/>
+            </button-group>
+        </panel>
+    </form>
+
+    <form name="frm_situation_recette_annuelle"
+          canNew="false" canArchive="false" canAttach="false"
+          canCopy="false" canDelete="false" canEdit="false" canSave="false"
+          title="Situation Annuel"
+          model="com.axelor.apps.configuration.db.HistoriqueBudgetaire">
+        <panel >
+            <field name="annee" title="Année" type="integer" min="1900"/>
+            <button-group colSpan="4" colOffset="8">
+                <button title="Imprimer" name="btn_rech_res2" onClick="com.axelor.apps.account.web.AccountController:getsituation_anuelle"/>
+            </button-group>
+        </panel>
+    </form>
+
+
+    <form onNew="get_rubrique_by_year" onLoad="get_rubrique_by_year" canSave="false" canNew="false" canDelete="false" canArchive="false"
+            title="Situation de dépenses" name="situation_depenses_ccisbk" model="com.axelor.apps.configuration.db.HistoriqueBudgetaire">
+        <panel>
+            <field name="$year" title="Annee" onChange="get_rubrique_by_year"/>
+            <field type="many-to-one" target="com.axelor.apps.configuration.db.RubriqueBudgetaireGenerale"
+                   name="$rubriqueBudgetaire" title="Budget" target-name="name"/>
+            <button icon="fa-print" title="Imprimer" name="btn_print" onClick="imprimer_situation_depenses"/>
+        </panel>
+    </form>
+
+    <action-method name="imprimer_situation_depenses">
+        <call class="com.axelor.apps.purchase.web.PurchaseProductController" method="tw_imprimer_situation_depenses"/>
+    </action-method>
+</object-views>

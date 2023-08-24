@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="ModificationBudget-grid" title="Gestion des virements"
+          model="com.axelor.apps.account.db.ModificationBudget"
+          canSave="false">
+
+        <field name="budgetRetrait"/>
+        <field name="budgetAjout"/>
+        <field name="ajout"/>
+        <field name="dateDemande"/>
+        <field name="type"/>
+        <field name="commentaire"/>
+    </grid>
+
+    <form name="ModificationBudget-form" title="Gestion des virements"
+          model="com.axelor.apps.account.db.ModificationBudget" canSave="false">
+        <panel name="mainPanel">
+            <field name="budgetRetrait" target-name="rubriqueBudgetaire.name"/>
+            <field name="budgetAjout" target-name="rubriqueBudgetaire.name"/>
+            <field name="ajout"/>
+            <button onClick="action-demandeValidation" name="demandeValidation" title="Demande de validation"/>
+        </panel>
+    </form>
+
+    <action-group name="action-demandeValidation">
+        <action name="validation_champs4" if="budgetRetrait==null || budgetAjout==null || ajout==null "/>
+        <action name="com.axelor.apps.account.web.AccountController:DemandeRetraitBudget"
+                if="budgetRetrait!=null&amp;&amp; budgetAjout!=null &amp;&amp; ajout!=null"/>
+    </action-group>
+
+    <action-validate name="validation_champs4">
+        <error message="&lt;p&gt;les champs suivant sont obligatoire : &lt;p&gt; &lt;ul&gt; &lt;li&gt;budget de Retrait&lt;/li&gt; &lt;li&gt;budgetAjout&lt;/li&gt;&lt;li&gt;Montant&lt;/li&gt;&lt;li&gt;date début&lt;/li&gt;&lt;li&gt;date Fint&lt;/li&gt; &lt;/ul&gt;"
+               if="budgetRetrait==null || budgetAjout==null || ajout==null"/>
+
+    </action-validate>
+
+
+    <grid name="Traitamant_ModificationBudget-grid" title="Modification du budget par rubrique"
+          model="com.axelor.apps.account.db.ModificationBudget"
+          canSave="false" canNew="false">
+        <field name="budgetRetrait"/>
+        <field name="budgetAjout"/>
+        <field name="ajout"/>
+        <field name="dateDemande"/>
+        <field name="type"/>
+        <field name="commentaire"/>
+    </grid>
+
+    <form name="Traitement_ModificationBudget-form" title="Modification du budget par rubrique"
+          model="com.axelor.apps.account.db.ModificationBudget"
+          canSave="false" canNew="false">
+        <panel name="mainPanel">
+            <field name="budgetRetrait" readonly="true"/>
+            <field name="budgetAjout" readonly="true"/>
+            <field name="ajout" readonly="true"/>
+            <field name="type"/>
+            <field name="commentaire"/>
+
+            <button onClick="action-TraiterDemande" name="traiterdemande" title="Enregistrer"/>
+        </panel>
+    </form>
+
+    <action-group name="action-TraiterDemande">
+        <action name="validation_champsTraitementBudget" if="type==null || commentaire==null "/>
+        <action name="com.axelor.apps.account.web.AccountController:TraiterDemandeRetraitBudget"
+                if="type!=null &amp;&amp; commentaire!=null "/>
+    </action-group>
+
+    <action-validate name="validation_champsTraitementBudget">
+        <error message="&lt;p&gt;les champs suivant sont obligatoire : &lt;p&gt; &lt;ul&gt; &lt;li&gt;budget de Retrait&lt;/li&gt; &lt;li&gt;budgetAjout&lt;/li&gt;&lt;li&gt;Montant&lt;/li&gt;&lt;li&gt;date début&lt;/li&gt;&lt;li&gt;date Fint&lt;/li&gt; &lt;/ul&gt;"
+               if="type==null || commentaire==null"/>
+
+    </action-validate>
+
+</object-views>
