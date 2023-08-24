@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <form canDelete="false" canSave="false" canEdit="false" canNew="false"
+          canCopy="false" canAttach="false" canArchive="false"
+          name="recrutement_form" title="Recrutement" model="com.axelor.apps.talent.db.Recrutement">
+        <panel>
+            <field required="true" name="dateDebut" colSpan="4" title="Date debut" type="date"/>
+            <field required="true" name="dateFin" colSpan="4" title="Date Fin" type="date"/>
+            <button name="imprimer" title="imprimer" onClick="com.axelor.apps.talent.web.JobApplicationController:imprimerRecrutement" colSpan="2" colOffset="10"/>
+        </panel>
+    </form>
+
+</object-views>
