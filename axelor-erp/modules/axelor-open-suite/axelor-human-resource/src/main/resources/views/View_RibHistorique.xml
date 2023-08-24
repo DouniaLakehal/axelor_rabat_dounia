@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="ribHistorique-grid_conf" title="Historique des RIB" canDelete="false" canNew="false" canEdit="false" model="com.axelor.apps.hr.db.RibHistorique">
+        <field name="historiqueRib"/>
+        <field name="banque"/>
+        <field name="employee"/>
+        <field name="dateDebut"/>
+        <field name="dateFin"/>
+    </grid>
+
+    <form name="ribHistorique-form_conf" title="Historique des RIB" canDelete="false" canNew="false" canEdit="false" model="com.axelor.apps.hr.db.RibHistorique">
+        <panel name="mainPanel">
+            <field name="historiqueRib"/>
+            <field name="banque"/>
+            <field name="employee" />
+            <field name="dateDebut"/>
+            <field name="dateFin"/>
+        </panel>
+    </form>
+</object-views>

@@ -1,0 +1,86 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+  <module name="human-resource" package="com.axelor.apps.hr.db"/>
+
+
+  <entity name="EmployeeMissions" cacheable="true">
+   			 <many-to-one name="employee" ref="com.axelor.apps.hr.db.Employee" title="BENEFICIAIRE"/>
+    	     <one-to-many name="employeeMissionsList" ref="com.axelor.apps.hr.db.EmployeeMissionLine"  />
+	         <date name="dateOrdre" title="La date de l'ordre de mission"/>
+	         <boolean name="typeMission" title="TYPE DE MISSION"  default="true"/>
+	 		<many-to-one ref="com.axelor.apps.configuration.db.IndemniteKilo" name="indemnite" title="Désignation de la puissance fiscale"/>
+      		<integer name="statusSelect" selection="mission.status.select" title="Status"/>
+     		 <string name="ordre" title="Ordre de mission"/>
+  			<string name="moyen_transport" title="Moyen de transport" selection="hr.employee.mission.moyen"/>
+  		  	<string name="moyen_transport1" title="Moyen de transport" selection="hr.employee.mission.moyen" default="4"/>
+  	        <one-to-many name="employeeMissionsListFrais" ref="com.axelor.apps.hr.db.EmployeeMissionLine"  />
+  	        <one-to-many name="generalMissionLineList" ref="com.axelor.apps.hr.db.EmployeeMissionFrais" title="Frais par mission" />
+  	  		 <many-to-one ref="com.axelor.apps.configuration.db.ConfigurationFrais" name="fraisMission" title="Frais de déplacement"/>
+  	  		<many-to-one ref="com.axelor.apps.configuration.db.FraisDeplacement" name="fraisDeplacement" title="Frais de déplacement"/>
+  	  		<string name="indemniteJournaliere" title="Indemnité journalière">
+  	  		      <![CDATA[
+  	  		        String montant2="-";
+  	  		         Integer numJ= (nbrJour/3)+1;
+  	  		        if (typeMission == false) montant2=(groupe.getIndemniteExterne().multiply(new BigDecimal(numJ)))+"DH";
+
+  	  		         return montant2;
+  	  		      ]]>
+  	  		</string>
+  			 <string name="fraisIndemnite" title="Frais Indemnité">
+  				   <![CDATA[
+  					     String montant ="-";
+						if (moyen_transport.equals("1")) montant= (indemnite.getTaux().multiply((montant_carburant)))+"DH";
+ 						if (moyen_transport.equals("3")) montant= fraisBillet+"DH";
+ 						if (moyen_transport.equals("4")) montant= fraisBillet+"DH";
+
+ 						 return montant;
+					]]>
+  	 		 </string>
+
+  	 		 <string name="fraisRestauration" title="Frais restaurations">
+  	 		 <![CDATA[
+  	 		     String montant3="-";
+  	 		     if (typeMission == true)
+  	 		       if (nbrJour <= 45) montant3=(groupe.getIndemniteInterne1().multiply(new BigDecimal(nbrJour)))+"DH";
+  	 		    if (typeMission == true){
+
+  	 		       if (nbrJour > 45){
+  	 		          Integer diff=nbrJour-45;
+  	 		          Integer diff2=nbrJour-diff;
+  	 		       montant3=((groupe.getIndemniteInterne1().multiply(new BigDecimal(diff2)).add((groupe.getIndemniteInterne2().multiply(new BigDecimal(diff))))).subtract((new BigDecimal(isBreakfast)).multiply(new BigDecimal(100))))+"DH";
+  	 		       }}
+  	 		       return montant3;
+
+
+  	 		 ]]>
+  	 		 </string>
+  	 		 <boolean name="refMission" title="A partir d'une mission" default="true"/>
+  	 		 <string name="voiture" title="Désignation du moyen de transport"/>
+  	 		 <many-to-one name="grade" ref="com.axelor.apps.configuration.db.Grade" title="Grade"/>
+  	 	 	<many-to-one ref="com.axelor.apps.hr.db.EmployeeMissions" name="mission" title="Mission parent"/>
+  	  		<many-to-one ref="com.axelor.apps.configuration.db.Groupes" name="groupe" title="Groupe"/>
+  			<boolean name="hotel"  title="Hôtel" />
+  			<decimal name="montant_carburant" title="Distance kilométrique" precision="8" scale="2" />
+  			<decimal name="montant_restaurant" title="Frais Restauration(MAD)" precision="8" scale="2" />
+  			<many-to-one name="ville_depart" title="Ville du départ" ref="com.axelor.apps.base.db.City" />
+ 			<many-to-one name="ville_arrivee" title="Ville d'arrivée" ref="com.axelor.apps.base.db.City" />
+  			<date name="date_depart" title="Date départ"  />
+  			<many-to-one name="rapport" title="Rapport de mission" ref="com.axelor.meta.db.MetaFile" />
+  			<many-to-one name="pays_depart" title="Pays du départ" ref="com.axelor.apps.base.db.Country"/>
+ 			<many-to-one name="pays_arrivee" title="Pays d'arrivée" ref="com.axelor.apps.base.db.Country"/>
+  			<time name="heure_depart" title="Heure d'ouverture" />
+  			<time name="heure_arrivee" title="Heure de clôture" />
+  			<date name="date_retour" title="Date d'arrivée" />
+  			<date name="date_debut" title="Début mission"  />
+  			<date name="date_fin" title="Fin mission"  />
+  			<boolean name="titreRestaurant" title="Exclure un titre restaurant ?!"/>
+  			<integer name="isBreakfast" title="Nombre de repas à exclure" />
+
+  			<decimal name="fraisBillet" title="Frais du billet" />
+  	        <integer name="nbrJour" title="Nombre de jour"/>
+
+      </entity>
+      </domain-models>

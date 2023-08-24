@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+	<form name="ordre-form" title="Imprimer Ordre de paiement"
+		model="com.axelor.apps.hr.db.EmployeeOrdre" width="large" onLoad=""
+		onNew="" canNew="false" canSave="false">
+
+			<panel name="print_panel" colSpan="12">
+     <field ref="com.axelor.apps.configuration.db.RubriqueBudgetaireGenerale" name="rubrique" title="Rubrique budgétaire"/>
+
+
+				<button name="ordreBtn" title="imprimer" onClick=" action-print-ordre-paiement"
+				  icon="fa-file" />
+			</panel>
+
+
+	</form>
+
+	</object-views>

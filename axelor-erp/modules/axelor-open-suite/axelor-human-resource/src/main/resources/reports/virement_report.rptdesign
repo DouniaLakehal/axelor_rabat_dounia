@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">120</property>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2"/>
+    </page-setup>
+    <body>
+        <text id="6719">
+            <property name="fontFamily">"Arial"</property>
+            <property name="fontSize">10pt</property>
+            <property name="fontWeight">bold</property>
+            <property name="marginTop">5pt</property>
+            <property name="contentType">auto</property>
+            <text-property name="content"><![CDATA[TRESORERIE GENERALE ]]></text-property>
+        </text>
+        <text id="6720">
+            <property name="fontFamily">"Arial"</property>
+            <property name="fontSize">10pt</property>
+            <property name="fontWeight">bold</property>
+            <property name="marginLeft">15pt</property>
+            <property name="contentType">auto</property>
+            <text-property name="content"><![CDATA[DU ROYAUME]]></text-property>
+        </text>
+        <text id="6721">
+            <property name="fontFamily">"Arial"</property>
+            <property name="fontSize">18pt</property>
+            <property name="fontWeight">bold</property>
+            <property name="textUnderline">underline</property>
+            <property name="marginTop">20pt</property>
+            <property name="marginBottom">15pt</property>
+            <property name="textAlign">center</property>
+            <property name="contentType">auto</property>
+            <text-property name="content"><![CDATA[Ordre de Virement n° 77/2022]]></text-property>
+        </text>
+        <grid id="6882">
+            <column id="6883">
+                <property name="width">88%</property>
+            </column>
+            <column id="6884"/>
+            <row id="6885">
+                <cell id="6886">
+                    <text id="6889">
+                        <property name="textAlign">right</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[DH]]></text-property>
+                    </text>
+                </cell>
+                <cell id="6887">
+                    <data id="6888">
+                        <structure name="numberFormat">
+                            <property name="category">Fixed</property>
+                            <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                        </structure>
+                        <property name="textAlign">left</property>
+                        <property name="dataSet">Data Set_v1</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">indem_salair</property>
+                                <text-property name="displayName">indem_salair</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["indem_salair"]</expression>
+                                <property name="dataType">decimal</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">indem_salair</property>
+                    </data>
+                </cell>
+            </row>
+        </grid>
+        <text id="6724">
+            <property name="fontSize">12pt</property>
+            <property name="fontWeight">bold</property>
+            <property name="textUnderline">underline</property>
+            <property name="marginTop">10pt</property>
+            <property name="marginBottom">20pt</property>
+            <property name="textAlign">center</property>
+            <property name="contentType">html</property>
+            <text-property name="content"><![CDATA[Compte  N° 310090100202470176740128  tenu  à la  Trésorerie <br> Provinciale de Béni-Mellal]]></text-property>
+        </text>
+        <grid id="6779">
+            <column id="6780">
+                <property name="width">6cm</property>
+            </column>
+            <column id="6781"/>
+            <row id="6782">
+                <cell id="6783">
+                    <text id="6785">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">12pt</property>
+                        <property name="fontWeight">normal</property>
+                        <property name="color">#000000</property>
+                        <property name="marginTop">2pt</property>
+                        <property name="marginLeft">12pt</property>
+                        <property name="marginBottom">2pt</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Nom et prénom du titulaire  : ]]></text-property>
+                    </text>
+                </cell>
+                <cell id="6784">
+                    <text id="6786">
+                        <property name="fontFamily">"Times New Roman"</property>
+                        <property name="fontSize">12pt</property>
+                        <property name="marginTop">2pt</property>
+                        <property name="marginBottom">2pt</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[CCIS  Béni-Mellal Khénifra	]]></text-property>
+                    </text>
+                </cell>
+            </row>
+        </grid>
+        <grid id="6726">
+            <property name="marginLeft">12pt</property>
+            <column id="6727">
+                <property name="width">4cm</property>
+            </column>
+            <column id="6728"/>
+            <row id="6732">
+                <cell id="6733">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <text id="6756">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">12pt</property>
+                        <property name="marginTop">2pt</property>
+                        <property name="marginBottom">2pt</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Par débit de mon compte sus indiqué veuillez virer		]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="6735">
+                <cell id="6736">
+                    <text id="6742">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">12pt</property>
+                        <property name="fontWeight">normal</property>
+                        <property name="marginTop">2pt</property>
+                        <property name="marginBottom">2pt</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Au compte de      : ]]></text-property>
+                    </text>
+                </cell>
+                <cell id="6737">
+                    <text id="6745">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">10pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="marginTop">2pt</property>
+                        <property name="marginBottom">2pt</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Personnel de la CCIS et autres organismes]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="6757">
+                <cell id="6758">
+                    <text id="6766">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">12pt</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Ouvert chez        : ]]></text-property>
+                    </text>
+                </cell>
+                <cell id="6759">
+                    <text id="6769">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Diverses banques]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="6760">
+                <cell id="6761">
+                    <text id="6767">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">12pt</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Sous numéro      : ]]></text-property>
+                    </text>
+                </cell>
+                <cell id="6762">
+                    <text id="6770">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Divers  numéro]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="6763">
+                <cell id="6764">
+                    <text id="6768">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">12pt</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[La somme de      : ]]></text-property>
+                    </text>
+                </cell>
+                <cell id="6765">
+                    <data id="6891">
+                        <property name="fontSize">12pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">left</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">montantString</property>
+                                <expression name="expression" type="javascript">params["montantString"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">montantString</property>
+                    </data>
+                </cell>
+            </row>
+        </grid>
+        <text id="6772">
+            <property name="fontFamily">"Arial"</property>
+            <property name="marginTop">30pt</property>
+            <property name="contentType">auto</property>
+            <text-property name="content"><![CDATA[A Béni-Mellal, le …………………………………..]]></text-property>
+        </text>
+        <text id="6773">
+            <property name="fontFamily">"Arial"</property>
+            <property name="fontSize">12pt</property>
+            <property name="fontWeight">bold</property>
+            <property name="marginTop">30pt</property>
+            <property name="marginLeft">5pt</property>
+            <property name="contentType">html</property>
+            <text-property name="content"><![CDATA[Objet du virement : Salaires du mois <B><VALUE-OF>params["mois"].value +" / "+params["annee"].value</VALUE-OF></B>   + Indemnités ]]></text-property>
+        </text>
+        <text id="6774">
+            <property name="fontFamily">"Arial"</property>
+            <property name="fontSize">12pt</property>
+            <property name="fontWeight">bold</property>
+            <property name="marginLeft">70pt</property>
+            <property name="contentType">auto</property>
+            <text-property name="content"><![CDATA[Autres organismes]]></text-property>
+        </text>
+    </body>
+</report>

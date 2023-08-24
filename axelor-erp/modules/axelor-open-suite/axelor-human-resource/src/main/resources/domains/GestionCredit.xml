@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="human-resource" package="com.axelor.apps.hr.db"/>
+
+    <entity name="GestionCredit" lang="java">
+        <string name="id_Employee" />
+        <many-to-one title="Intitulé" name="intituler" ref="com.axelor.apps.configuration.db.IntitulerCredit"/>
+        <many-to-one name="employee" ref="com.axelor.apps.hr.db.Employee"/>
+        <string name="numDossier" title="Numéro de dossier"/>
+        <string name="numClient" title="Numéro de client"/>
+        <string name="montantLettre"/>
+        <decimal name="montant" title="Le montant"/>
+        <decimal name="remboursement" title="Remboursement"/>
+        <date name="dateDebut" title="Date de début" />
+        <date name="dateFin" title="Date de fin" />
+    </entity>
+
+</domain-models>

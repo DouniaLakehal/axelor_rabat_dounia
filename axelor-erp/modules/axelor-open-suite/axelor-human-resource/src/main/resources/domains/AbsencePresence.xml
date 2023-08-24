@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+  <module name="human-resource" package="com.axelor.apps.hr.db"/>
+
+  <entity name="EmployeeAbsense" cacheable="true">
+    <many-to-one name="employee" ref="com.axelor.apps.hr.db.Employee" title="Employee"/>
+  	<many-to-one name="justification" title="Justification" ref="com.axelor.meta.db.MetaFile" />
+  	<string name="statut" title="Statut" selection="hr.employee.presence" default="2"/>
+  	<date name="date1" title="Date de début"  required="true"/>
+	  <date name="date2" title="Date fin"/>
+	  <many-to-one name="absence" ref="com.axelor.apps.configuration.db.TypeAbsence" title="Type d'absence"/>
+  	<track>
+			<field name="employee" on="UPDATE"/>
+			<field name="justification"  on="UPDATE"/>
+			<field name="date1" on="UPDATE"/>
+			<field name="statut" on="UPDATE"/>
+		
+			
+	</track>
+      </entity>
+      </domain-models>

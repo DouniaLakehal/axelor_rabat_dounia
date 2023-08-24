@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="Personnel-formation-grid" title="Liste des formations" model="com.axelor.apps.hr.db.Formation">
+        <field name="formation"/>
+        <field name="dateDebut"/>
+        <field name="dateFin"/>
+        <field name="certification"/>
+    </grid>
+
+    <form name="Personnel-formation-form" title="Formations" model="com.axelor.apps.hr.db.Formation" width="large">
+        <panel name="FormationPanel">
+            <field name="formation" colSpan="4" />
+            <field name="dateDebut" colSpan="4" pattern="^\+?([\s()-.]*\d){7,}$"/>
+            <field name="dateFin" colSpan="4" pattern="^\+?([\s()-.]*\d){7,}$"/>
+            <field name="certification" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid"/>
+        </panel>
+    </form>
+
+</object-views>

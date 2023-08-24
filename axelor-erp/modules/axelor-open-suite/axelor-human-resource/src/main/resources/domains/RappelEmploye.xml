@@ -1,0 +1,41 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="human-resource" package="com.axelor.apps.hr.db"/>
+
+    <entity name="RappelEmploye" lang="java">
+
+        <many-to-one name="employe" ref="com.axelor.apps.hr.db.Employee"/>
+        <decimal name="amo_rappel"/>
+        <decimal name="cnss_rappel"/>
+        <decimal name="rcar_rappel"/>
+        <decimal name="comp_rappel"/>
+        <decimal name="regim_rappel"/>
+        <decimal name="salaire_plafonne_rappel"/>
+        <decimal name="ir_rappel"/>
+        <decimal name="traitementDebase_rappel"/>
+        <decimal name="indemniteDeResidence_rappel"/>
+        <decimal name="iasIndhierIndDeTech_rappel"/>
+        <decimal name="indemniteDeSujetion_rappel"/>
+        <decimal name="indemniteDencadrement_rappel"/>
+        <decimal name="traitBaseIndemStatu_rappel"/>
+        <decimal name="indemniteLogemBrut_rappel"/>
+        <decimal name="indemnitFonctionNet_rappel"/>
+        <decimal name="indemnitVoitureNet_rappel"/>
+        <decimal name="indemnitRepresentNet_rappel"/>
+        <decimal name="mutuelleMgpapSM_rappel"/>
+        <decimal name="mutuelleMgpapCcd_rappel"/>
+        <decimal name="mutuelleOmfamSm_rappel"/>
+        <decimal name="mutuelleOmfamCaad_rappel"/>
+        <decimal name="pretAxaCredit_rappel"/>
+        <decimal name="totalSalairMensuelBrutImposable_rappel"/>
+        <decimal name="netAPayer_rappel"/>
+        <integer name="nbr_mois"/>
+        <integer name="mois"/>
+        <integer name="annee"/>
+
+    </entity>
+
+</domain-models>

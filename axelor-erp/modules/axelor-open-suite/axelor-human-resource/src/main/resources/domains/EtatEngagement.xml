@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="human-resource" package="com.axelor.apps.hr.db"/>
+
+    <entity name="EtatEngagement" lang="java">
+        <many-to-one name="employee" ref="com.axelor.apps.hr.db.Employee"/>
+        <date name="dateDebut" title="Date de début" />
+        <date name="dateFin" title="Date de fin" />
+        <many-to-one name="echelon_old" ref="com.axelor.apps.configuration.db.Echelon"/>
+        <many-to-one name="echelon_new" ref="com.axelor.apps.configuration.db.Echelon"/>
+        <integer name="enfant_old"/>
+        <integer name="enfant_new"/>
+        <string name="sit_famille_old"/>
+        <string name="sit_famille_new"/>
+        <string name="duree"/>
+        <string name="natureDoc"/>
+        <string name="natureEtatEngagement"/>
+    </entity>
+
+</domain-models>

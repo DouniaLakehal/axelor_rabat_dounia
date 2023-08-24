@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="human-resource" package="com.axelor.apps.hr.db"/>
+
+    <entity name="Naissances" lang="java">
+        <many-to-one name="employee" ref="com.axelor.apps.hr.db.Employee"/>
+        <string name="name" title="Nom"/>
+        <date name="dateNaiss" title="Date de naissance" />
+        <string name="nameAssurance" title="Assurance enfant"/>
+        <boolean name="handicape" title="Présence de situation de handicap" default="false"/>
+        <many-to-one name="typeHandicap" ref="com.axelor.apps.configuration.db.TypeHandicape" title="Type de handicap" />
+        <date name="dateRappelNaiss"/>
+    </entity>
+
+</domain-models>

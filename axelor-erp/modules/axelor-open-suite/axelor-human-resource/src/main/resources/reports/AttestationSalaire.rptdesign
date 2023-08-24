@@ -1,0 +1,2950 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.8.0.v201805221921</property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">120</property>
+    <parameters>
+        <scalar-parameter name="dateDebut" id="37">
+            <property name="valueType">static</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="dateFin" id="38">
+            <property name="valueType">static</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="id_employee" id="39">
+            <property name="valueType">static</property>
+            <property name="isRequired">true</property>
+            <property name="dataType">decimal</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="Data Source" id="35">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5433/axelor_benimellal</property>
+            <property name="odaUser">postgres</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">ZG91bmlhMTIz</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Data Set" id="36">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">id</property>
+                    <property name="alias">id</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">id</text-property>
+                    <text-property name="heading">id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">cin</property>
+                    <property name="alias">cin</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">cin</text-property>
+                    <text-property name="heading">cin</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">imatriculation</property>
+                    <property name="alias">imatriculation</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">imatriculation</text-property>
+                    <text-property name="heading">imatriculation</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">employe</property>
+                    <property name="alias">employe</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">employe</text-property>
+                    <text-property name="heading">employe</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">annexe</property>
+                    <property name="alias">annexe</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">annexe</text-property>
+                    <text-property name="heading">annexe</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">code_budg</property>
+                    <property name="alias">code_budg</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">code_budg</text-property>
+                    <text-property name="heading">code_budg</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">birth_date</property>
+                    <property name="alias">birth_date</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">birth_date</text-property>
+                    <text-property name="heading">birth_date</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">daterecrutement</property>
+                    <property name="alias">daterecrutement</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">daterecrutement</text-property>
+                    <text-property name="heading">daterecrutement</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">sex_select</property>
+                    <property name="alias">sex_select</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">sex_select</text-property>
+                    <text-property name="heading">sex_select</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">company_cb_details</property>
+                    <property name="alias">company_cb_details</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">company_cb_details</text-property>
+                    <text-property name="heading">company_cb_details</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">case</property>
+                    <property name="alias">case</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">case</text-property>
+                    <text-property name="heading">case</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">count</property>
+                    <property name="alias">count</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">count</text-property>
+                    <text-property name="heading">count</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">deduc</property>
+                    <property name="alias">deduc</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">deduc</text-property>
+                    <text-property name="heading">deduc</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">grade</property>
+                    <property name="alias">grade</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">grade</text-property>
+                    <text-property name="heading">grade</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">echelle</property>
+                    <property name="alias">echelle</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">echelle</text-property>
+                    <text-property name="heading">echelle</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">echelon</property>
+                    <property name="alias">echelon</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">echelon</text-property>
+                    <text-property name="heading">echelon</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">indice</property>
+                    <property name="alias">indice</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">indice</text-property>
+                    <text-property name="heading">indice</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">zone</property>
+                    <property name="alias">zone</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">zone</text-property>
+                    <text-property name="heading">zone</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">organisme_metuelle2</property>
+                    <property name="alias">organisme_metuelle2</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">organisme_metuelle2</text-property>
+                    <text-property name="heading">organisme_metuelle2</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">traitement_debase</property>
+                    <property name="alias">traitement_debase</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">traitement_debase</text-property>
+                    <text-property name="heading">traitement_debase</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ias_indhier_ind_de_tech</property>
+                    <property name="alias">ias_indhier_ind_de_tech</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">ias_indhier_ind_de_tech</text-property>
+                    <text-property name="heading">ias_indhier_ind_de_tech</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">indemnite_de_sujetion</property>
+                    <property name="alias">indemnite_de_sujetion</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">indemnite_de_sujetion</text-property>
+                    <text-property name="heading">indemnite_de_sujetion</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">indemnite_dencadrement</property>
+                    <property name="alias">indemnite_dencadrement</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">indemnite_dencadrement</text-property>
+                    <text-property name="heading">indemnite_dencadrement</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">allocationfamil</property>
+                    <property name="alias">allocationfamil</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">allocationfamil</text-property>
+                    <text-property name="heading">allocationfamil</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">indemnite_de_residence</property>
+                    <property name="alias">indemnite_de_residence</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">indemnite_de_residence</text-property>
+                    <text-property name="heading">indemnite_de_residence</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">mutuelle_mgpap_ccd</property>
+                    <property name="alias">mutuelle_mgpap_ccd</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">mutuelle_mgpap_ccd</text-property>
+                    <text-property name="heading">mutuelle_mgpap_ccd</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">rcarrcomp</property>
+                    <property name="alias">rcarrcomp</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">rcarrcomp</text-property>
+                    <text-property name="heading">rcarrcomp</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">rcar_rg</property>
+                    <property name="alias">rcar_rg</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">rcar_rg</text-property>
+                    <text-property name="heading">rcar_rg</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ir</property>
+                    <property name="alias">ir</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">ir</text-property>
+                    <text-property name="heading">ir</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">mutuelle_mgpapsm</property>
+                    <property name="alias">mutuelle_mgpapsm</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">mutuelle_mgpapsm</text-property>
+                    <text-property name="heading">mutuelle_mgpapsm</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">amo</property>
+                    <property name="alias">amo</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">amo</text-property>
+                    <text-property name="heading">amo</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">mutuelle_omfam_caad</property>
+                    <property name="alias">mutuelle_omfam_caad</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">mutuelle_omfam_caad</text-property>
+                    <text-property name="heading">mutuelle_omfam_caad</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">mutuelle_omfam_sm</property>
+                    <property name="alias">mutuelle_omfam_sm</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">mutuelle_omfam_sm</text-property>
+                    <text-property name="heading">mutuelle_omfam_sm</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">total_salair_mensuel_brut_imposable</property>
+                    <property name="alias">total_salair_mensuel_brut_imposable</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">total_salair_mensuel_brut_imposable</text-property>
+                    <text-property name="heading">total_salair_mensuel_brut_imposable</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">total_retenue</property>
+                    <property name="alias">total_retenue</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">total_retenue</text-property>
+                    <text-property name="heading">total_retenue</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">netapayer</property>
+                    <property name="alias">netapayer</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">netapayer</text-property>
+                    <text-property name="heading">netapayer</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param_1</property>
+                    <property name="paramName">id_employee</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">id</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">cin</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">imatriculation</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">employe</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">annexe</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">code_budg</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">birth_date</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">daterecrutement</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">sex_select</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">company_cb_details</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">case</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">count</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">deduc</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">grade</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">echelle</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">echelon</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">indice</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">zone</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">organisme_metuelle2</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">traitement_debase</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
+                        <property name="name">ias_indhier_ind_de_tech</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">22</property>
+                        <property name="name">indemnite_de_sujetion</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">23</property>
+                        <property name="name">indemnite_dencadrement</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">24</property>
+                        <property name="name">allocationfamil</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">25</property>
+                        <property name="name">indemnite_de_residence</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">26</property>
+                        <property name="name">mutuelle_mgpap_ccd</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">27</property>
+                        <property name="name">rcarrcomp</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">28</property>
+                        <property name="name">rcar_rg</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">29</property>
+                        <property name="name">ir</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">30</property>
+                        <property name="name">mutuelle_mgpapsm</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">31</property>
+                        <property name="name">amo</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">32</property>
+                        <property name="name">mutuelle_omfam_caad</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">33</property>
+                        <property name="name">mutuelle_omfam_sm</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">34</property>
+                        <property name="name">total_salair_mensuel_brut_imposable</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">35</property>
+                        <property name="name">total_retenue</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">36</property>
+                        <property name="name">netapayer</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">cin</property>
+                    <property name="nativeName">cin</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">imatriculation</property>
+                    <property name="nativeName">imatriculation</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">employe</property>
+                    <property name="nativeName">employe</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">annexe</property>
+                    <property name="nativeName">annexe</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">code_budg</property>
+                    <property name="nativeName">code_budg</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">birth_date</property>
+                    <property name="nativeName">birth_date</property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">91</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">daterecrutement</property>
+                    <property name="nativeName">daterecrutement</property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">91</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">sex_select</property>
+                    <property name="nativeName">sex_select</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">company_cb_details</property>
+                    <property name="nativeName">company_cb_details</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">case</property>
+                    <property name="nativeName">case</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">count</property>
+                    <property name="nativeName">count</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">deduc</property>
+                    <property name="nativeName">deduc</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">grade</property>
+                    <property name="nativeName">grade</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">echelle</property>
+                    <property name="nativeName">echelle</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">echelon</property>
+                    <property name="nativeName">echelon</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">indice</property>
+                    <property name="nativeName">indice</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">zone</property>
+                    <property name="nativeName">zone</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">organisme_metuelle2</property>
+                    <property name="nativeName">organisme_metuelle2</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">20</property>
+                    <property name="name">traitement_debase</property>
+                    <property name="nativeName">traitement_debase</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">21</property>
+                    <property name="name">ias_indhier_ind_de_tech</property>
+                    <property name="nativeName">ias_indhier_ind_de_tech</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">22</property>
+                    <property name="name">indemnite_de_sujetion</property>
+                    <property name="nativeName">indemnite_de_sujetion</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">23</property>
+                    <property name="name">indemnite_dencadrement</property>
+                    <property name="nativeName">indemnite_dencadrement</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">24</property>
+                    <property name="name">allocationfamil</property>
+                    <property name="nativeName">allocationfamil</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">25</property>
+                    <property name="name">indemnite_de_residence</property>
+                    <property name="nativeName">indemnite_de_residence</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">26</property>
+                    <property name="name">mutuelle_mgpap_ccd</property>
+                    <property name="nativeName">mutuelle_mgpap_ccd</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">27</property>
+                    <property name="name">rcarrcomp</property>
+                    <property name="nativeName">rcarrcomp</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">28</property>
+                    <property name="name">rcar_rg</property>
+                    <property name="nativeName">rcar_rg</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">29</property>
+                    <property name="name">ir</property>
+                    <property name="nativeName">ir</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">30</property>
+                    <property name="name">mutuelle_mgpapsm</property>
+                    <property name="nativeName">mutuelle_mgpapsm</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">31</property>
+                    <property name="name">amo</property>
+                    <property name="nativeName">amo</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">32</property>
+                    <property name="name">mutuelle_omfam_caad</property>
+                    <property name="nativeName">mutuelle_omfam_caad</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">33</property>
+                    <property name="name">mutuelle_omfam_sm</property>
+                    <property name="nativeName">mutuelle_omfam_sm</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">34</property>
+                    <property name="name">total_salair_mensuel_brut_imposable</property>
+                    <property name="nativeName">total_salair_mensuel_brut_imposable</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">35</property>
+                    <property name="name">total_retenue</property>
+                    <property name="nativeName">total_retenue</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">36</property>
+                    <property name="name">netapayer</property>
+                    <property name="nativeName">netapayer</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select emp.id, emp.cin, emp.imatriculation, substring(emp.name from 9) as employe, cag.name as annexe,
+       crbg.code_budg, emp.birth_date, emp.daterecrutement, emp.sex_select, emp.company_cb_details,
+        case when emp.marital_status='1' then 'Marié(e)' else 'Célibataire' end,
+       (select count(h.id) from hr_naissances h where h.employee=emp.id),
+       (select count(h.id)+1 as deduc from hr_naissances h where h.employee=emp.id),
+       (select cg.name as grade from configuration_grade cg where cg.id=emp.grade),
+       (select ce.name as echelle from configuration_echelle ce where ce.id=emp.echelle),
+       (select cl.name as echelon from configuration_echelon cl where cl.id=emp.echelon),
+       (select cl.indice from configuration_echelon cl where cl.id=emp.echelon),
+       cze.name as zone,
+       emp.organisme_metuelle2,
+       es.traitement_debase, es.ias_indhier_ind_de_tech, es.indemnite_de_sujetion, es.indemnite_dencadrement, es.allocationfamil,
+       es.indemnite_de_residence, es.mutuelle_mgpap_ccd, es.rcarrcomp, es.rcar_rg, es.ir, es.mutuelle_mgpapsm, es.amo, es.mutuelle_omfam_caad, es.mutuelle_omfam_sm,
+       es.total_salair_mensuel_brut_imposable, es.total_retenue, es.netapayer
+
+from hr_employee emp left join hr_etat_salaire es on emp.id = es.employee
+    left join configuration_annexe_generale cag on emp.annexe = cag.id
+    left join configuration_rubrique_budgetaire_generale crbg on emp.rubrique_budgetaire = crbg.id
+    left join hr_naissances hn on emp.id = hn.employee
+    left join configuration_zone_employee cze on emp.zone_employee = cze.id
+where emp.id=? order by  es.traitement_debase desc limit 1]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>id</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>cin</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>cin</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>cin</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>imatriculation</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>imatriculation</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>imatriculation</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>marital_name</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>marital_name</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>marital_name</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>name</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>name</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>name</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>name</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>name</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>name</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>code_budg</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>code_budg</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>code_budg</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>birth_date</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>91</design:nativeDataTypeCode>
+            <design:precision>13</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>birth_date</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>birth_date</design:label>
+            <design:formattingHints>
+              <design:displaySize>13</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>daterecrutement</design:name>
+              <design:position>9</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>91</design:nativeDataTypeCode>
+            <design:precision>13</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>daterecrutement</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>daterecrutement</design:label>
+            <design:formattingHints>
+              <design:displaySize>13</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>name</design:name>
+              <design:position>10</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>name</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>name</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>name</design:name>
+              <design:position>11</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>name</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>name</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>indice</design:name>
+              <design:position>12</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>indice</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>indice</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>sex_select</design:name>
+              <design:position>13</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>sex_select</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>sex_select</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>company_cb_details</design:name>
+              <design:position>14</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>company_cb_details</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>company_cb_details</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>marital_name</design:name>
+              <design:position>15</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>marital_name</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>marital_name</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>case</design:name>
+              <design:position>16</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>case</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>case</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>count</design:name>
+              <design:position>17</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Unknown</design:nullability>
+            <design:uiHints>
+              <design:displayName>count</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>count</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>traitement_debase</design:name>
+              <design:position>18</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>traitement_debase</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>traitement_debase</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ias_indhier_ind_de_tech</design:name>
+              <design:position>19</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>ias_indhier_ind_de_tech</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ias_indhier_ind_de_tech</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>indemnite_de_sujetion</design:name>
+              <design:position>20</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>indemnite_de_sujetion</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>indemnite_de_sujetion</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>indemnite_dencadrement</design:name>
+              <design:position>21</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>indemnite_dencadrement</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>indemnite_dencadrement</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>allocationfamil</design:name>
+              <design:position>22</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>allocationfamil</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>allocationfamil</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>indemnite_de_residence</design:name>
+              <design:position>23</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>indemnite_de_residence</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>indemnite_de_residence</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>mutuelle_mgpap_ccd</design:name>
+              <design:position>24</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>mutuelle_mgpap_ccd</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>mutuelle_mgpap_ccd</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>rcarrcomp</design:name>
+              <design:position>25</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>rcarrcomp</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>rcarrcomp</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>rcar_rg</design:name>
+              <design:position>26</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>rcar_rg</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>rcar_rg</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ir</design:name>
+              <design:position>27</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>ir</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ir</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>mutuelle_mgpapsm</design:name>
+              <design:position>28</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>mutuelle_mgpapsm</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>mutuelle_mgpapsm</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>amo</design:name>
+              <design:position>29</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>amo</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>amo</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>mutuelle_omfam_caad</design:name>
+              <design:position>30</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>mutuelle_omfam_caad</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>mutuelle_omfam_caad</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>mutuelle_omfam_sm</design:name>
+              <design:position>31</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>mutuelle_omfam_sm</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>mutuelle_omfam_sm</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>total_salair_mensuel_brut_imposable</design:name>
+              <design:position>32</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>total_salair_mensuel_brut_imposable</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>total_salair_mensuel_brut_imposable</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>total_retenue</design:name>
+              <design:position>33</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>total_retenue</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>total_retenue</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>netapayer</design:name>
+              <design:position>34</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>netapayer</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>netapayer</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2"/>
+    </page-setup>
+    <body>
+        <grid id="4">
+            <column id="5">
+                <property name="fontWeight">bold</property>
+                <property name="textAlign">center</property>
+            </column>
+            <column id="6"/>
+            <column id="12"/>
+            <row id="7">
+                <cell id="8">
+                    <text id="10">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[ROYAUME DU MAROC
+Chambre de Commerce
+d'Industrie et de Services
+de Beni Mellal-Khenifra]]></text-property>
+                    </text>
+                </cell>
+                <cell id="9"/>
+                <cell id="11"/>
+            </row>
+        </grid>
+        <grid id="13">
+            <property name="marginTop">30pt</property>
+            <column id="14"/>
+            <row id="15">
+                <cell id="16">
+                    <text id="17">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontSize">12pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[ATTESTATION DE SALAIRE (*)]]></text-property>
+                    </text>
+                </cell>
+            </row>
+        </grid>
+        <table id="602">
+            <property name="marginTop">40pt</property>
+            <property name="dataSet">Data Set</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">id</property>
+                    <text-property name="displayName">id</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["id"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">cin</property>
+                    <text-property name="displayName">cin</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["cin"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">imatriculation</property>
+                    <text-property name="displayName">imatriculation</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["imatriculation"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">employe</property>
+                    <text-property name="displayName">employe</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["employe"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">annexe</property>
+                    <text-property name="displayName">annexe</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["annexe"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">code_budg</property>
+                    <text-property name="displayName">code_budg</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["code_budg"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">birth_date</property>
+                    <text-property name="displayName">birth_date</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["birth_date"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">daterecrutement</property>
+                    <text-property name="displayName">daterecrutement</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["daterecrutement"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">sex_select</property>
+                    <text-property name="displayName">sex_select</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["sex_select"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">company_cb_details</property>
+                    <text-property name="displayName">company_cb_details</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["company_cb_details"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">case</property>
+                    <text-property name="displayName">case</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["case"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">count</property>
+                    <text-property name="displayName">count</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["count"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">deduc</property>
+                    <text-property name="displayName">deduc</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["deduc"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">grade</property>
+                    <text-property name="displayName">grade</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["grade"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">echelle</property>
+                    <text-property name="displayName">echelle</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["echelle"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">echelon</property>
+                    <text-property name="displayName">echelon</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["echelon"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">indice</property>
+                    <text-property name="displayName">indice</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["indice"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">zone</property>
+                    <text-property name="displayName">zone</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["zone"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">organisme_metuelle2</property>
+                    <text-property name="displayName">organisme_metuelle2</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["organisme_metuelle2"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">traitement_debase</property>
+                    <text-property name="displayName">traitement_debase</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["traitement_debase"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">ias_indhier_ind_de_tech</property>
+                    <text-property name="displayName">ias_indhier_ind_de_tech</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ias_indhier_ind_de_tech"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">indemnite_de_sujetion</property>
+                    <text-property name="displayName">indemnite_de_sujetion</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["indemnite_de_sujetion"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">indemnite_dencadrement</property>
+                    <text-property name="displayName">indemnite_dencadrement</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["indemnite_dencadrement"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">allocationfamil</property>
+                    <text-property name="displayName">allocationfamil</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["allocationfamil"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">indemnite_de_residence</property>
+                    <text-property name="displayName">indemnite_de_residence</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["indemnite_de_residence"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">mutuelle_mgpap_ccd</property>
+                    <text-property name="displayName">mutuelle_mgpap_ccd</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["mutuelle_mgpap_ccd"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">rcarrcomp</property>
+                    <text-property name="displayName">rcarrcomp</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["rcarrcomp"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">rcar_rg</property>
+                    <text-property name="displayName">rcar_rg</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["rcar_rg"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">ir</property>
+                    <text-property name="displayName">ir</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ir"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">mutuelle_mgpapsm</property>
+                    <text-property name="displayName">mutuelle_mgpapsm</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["mutuelle_mgpapsm"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">amo</property>
+                    <text-property name="displayName">amo</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["amo"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">mutuelle_omfam_caad</property>
+                    <text-property name="displayName">mutuelle_omfam_caad</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["mutuelle_omfam_caad"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">mutuelle_omfam_sm</property>
+                    <text-property name="displayName">mutuelle_omfam_sm</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["mutuelle_omfam_sm"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">total_salair_mensuel_brut_imposable</property>
+                    <text-property name="displayName">total_salair_mensuel_brut_imposable</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["total_salair_mensuel_brut_imposable"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">total_retenue</property>
+                    <text-property name="displayName">total_retenue</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["total_retenue"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+                <structure>
+                    <property name="name">netapayer</property>
+                    <text-property name="displayName">netapayer</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["netapayer"]</expression>
+                    <property name="dataType">decimal</property>
+                </structure>
+            </list-property>
+            <column id="814"/>
+            <column id="815"/>
+            <column id="816"/>
+            <column id="817"/>
+            <column id="818"/>
+            <column id="819"/>
+            <column id="820"/>
+            <column id="821"/>
+            <header>
+                <row id="603">
+                    <cell id="660">
+                        <property name="colSpan">4</property>
+                        <property name="rowSpan">1</property>
+                        <property name="textAlign">left</property>
+                        <text id="1101">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="textAlign">left</property>
+                            <property name="contentType">auto</property>
+                            <text-property name="content"><![CDATA[LE ......................
+atteste que les émoluments ci-dessous sont servis]]></text-property>
+                        </text>
+                        <label id="1102">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="textAlign">left</property>
+                            <property name="display">inline</property>
+                            <text-property name="text">à compter du </text-property>
+                        </label>
+                        <data id="1103">
+                            <property name="fontFamily">sans-serif</property>
+                            <structure name="dateTimeFormat">
+                                <property name="category">Custom</property>
+                                <property name="pattern">dd/MM/y</property>
+                            </structure>
+                            <property name="display">inline</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">dateDebut</property>
+                                    <expression name="expression" type="javascript">params["dateDebut"]</expression>
+                                    <property name="dataType">date</property>
+                                </structure>
+                            </list-property>
+                            <property name="resultSetColumn">dateDebut</property>
+                        </data>
+                        <label id="1104">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="display">inline</property>
+                            <text-property name="text"> au </text-property>
+                        </label>
+                        <data id="1105">
+                            <property name="fontFamily">sans-serif</property>
+                            <structure name="dateTimeFormat">
+                                <property name="category">Custom</property>
+                                <property name="pattern">dd/MM/y</property>
+                            </structure>
+                            <property name="display">inline</property>
+                            <list-property name="boundDataColumns">
+                                <structure>
+                                    <property name="name">dateFin</property>
+                                    <expression name="expression" type="javascript">params["dateFin"]</expression>
+                                    <property name="dataType">date</property>
+                                </structure>
+                            </list-property>
+                            <property name="resultSetColumn">dateFin</property>
+                        </data>
+                    </cell>
+                    <cell id="668">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <grid id="1106">
+                            <column id="1107"/>
+                            <row id="1108">
+                                <cell id="1109">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">4px</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">4px</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">4px</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">4px</property>
+                                    <label id="1110">
+                                        <property name="fontFamily">sans-serif</property>
+                                        <property name="borderBottomStyle">solid</property>
+                                        <property name="borderBottomWidth">thin</property>
+                                        <text-property name="text">NUM C.I.N</text-property>
+                                    </label>
+                                    <data id="1124">
+                                        <property name="fontFamily">sans-serif</property>
+                                        <property name="resultSetColumn">cin</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </grid>
+                    </cell>
+                    <cell id="1122">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <grid id="1125">
+                            <column id="1126"/>
+                            <row id="1127">
+                                <cell id="1128">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">4px</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">4px</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">4px</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">4px</property>
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <label id="1129">
+                                        <property name="fontFamily">sans-serif</property>
+                                        <property name="borderBottomStyle">solid</property>
+                                        <property name="borderBottomWidth">thin</property>
+                                        <text-property name="text">MATRICULE</text-property>
+                                    </label>
+                                    <data id="1130">
+                                        <property name="fontFamily">sans-serif</property>
+                                        <property name="resultSetColumn">imatriculation</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </grid>
+                    </cell>
+                </row>
+                <row id="1147">
+                    <property name="height">0.5cm</property>
+                    <cell id="1148"/>
+                    <cell id="1149"/>
+                    <cell id="1150"/>
+                    <cell id="1151"/>
+                    <cell id="1152"/>
+                    <cell id="1153"/>
+                    <cell id="1154"/>
+                    <cell id="1155"/>
+                </row>
+                <row id="822">
+                    <cell id="823">
+                        <property name="colSpan">4</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">4px</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">4px</property>
+                        <label id="1136">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">NOM PRENOM ET GRADE</text-property>
+                        </label>
+                    </cell>
+                    <cell id="827">
+                        <property name="colSpan">4</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">4px</property>
+                        <label id="1139">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">IMPUTATION ET RESIDENCE</text-property>
+                        </label>
+                    </cell>
+                </row>
+                <row id="840">
+                    <cell id="841">
+                        <property name="colSpan">4</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">4px</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <data id="1137">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="marginLeft">5pt</property>
+                            <property name="textAlign">left</property>
+                            <property name="resultSetColumn">employe</property>
+                        </data>
+                    </cell>
+                    <cell id="845">
+                        <property name="colSpan">4</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <label id="1140">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">C.C.I.S 6 BENI MELLAL-KHENIFRA : PERS STA</text-property>
+                        </label>
+                    </cell>
+                </row>
+                <row id="831">
+                    <cell id="832">
+                        <property name="colSpan">4</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">4px</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <data id="1138">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="marginLeft">5pt</property>
+                            <property name="textAlign">left</property>
+                            <property name="resultSetColumn">grade</property>
+                        </data>
+                    </cell>
+                    <cell id="836">
+                        <property name="colSpan">4</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <data id="1141">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="resultSetColumn">code_budg</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="876">
+                    <cell id="877">
+                        <property name="colSpan">4</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">4px</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">4px</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                    </cell>
+                    <cell id="881">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">4px</property>
+                        <data id="1145">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="marginLeft">5pt</property>
+                            <property name="textAlign">left</property>
+                            <property name="resultSetColumn">annexe</property>
+                        </data>
+                    </cell>
+                    <cell id="1143">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">4px</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <data id="1146">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="marginRight">5pt</property>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">zone</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="867">
+                    <property name="height">0.5cm</property>
+                    <cell id="868"/>
+                    <cell id="869"/>
+                    <cell id="870"/>
+                    <cell id="871"/>
+                    <cell id="872"/>
+                    <cell id="873"/>
+                    <cell id="874"/>
+                    <cell id="875"/>
+                </row>
+                <row id="858">
+                    <cell id="859">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">4px</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">4px</property>
+                        <property name="verticalAlign">middle</property>
+                        <label id="1157">
+                            <property name="fontFamily">sans-serif</property>
+                            <text-property name="text">DATE DE NAISSANCE</text-property>
+                        </label>
+                    </cell>
+                    <cell id="860">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">4px</property>
+                        <property name="verticalAlign">middle</property>
+                        <label id="1158">
+                            <property name="fontFamily">sans-serif</property>
+                            <text-property name="text">DATE D'ENTREE</text-property>
+                        </label>
+                    </cell>
+                    <cell id="861">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">4px</property>
+                        <property name="verticalAlign">middle</property>
+                        <label id="1159">
+                            <property name="fontFamily">sans-serif</property>
+                            <text-property name="text">ECHELON</text-property>
+                        </label>
+                    </cell>
+                    <cell id="862">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">4px</property>
+                        <property name="verticalAlign">middle</property>
+                        <label id="1160">
+                            <property name="fontFamily">sans-serif</property>
+                            <text-property name="text">INDICE</text-property>
+                        </label>
+                    </cell>
+                    <cell id="863">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">4px</property>
+                        <property name="verticalAlign">middle</property>
+                        <label id="1161">
+                            <property name="fontFamily">sans-serif</property>
+                            <text-property name="text">SEXE</text-property>
+                        </label>
+                    </cell>
+                    <cell id="864">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">4px</property>
+                        <property name="verticalAlign">middle</property>
+                        <label id="1162">
+                            <property name="fontFamily">sans-serif</property>
+                            <text-property name="text">NATIONALITE</text-property>
+                        </label>
+                    </cell>
+                    <cell id="865">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">4px</property>
+                        <property name="verticalAlign">middle</property>
+                        <label id="1163">
+                            <property name="fontFamily">sans-serif</property>
+                            <text-property name="text">SITUATION FAMILIALE</text-property>
+                        </label>
+                    </cell>
+                    <cell id="866">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">4px</property>
+                        <property name="verticalAlign">middle</property>
+                        <label id="1164">
+                            <property name="fontFamily">sans-serif</property>
+                            <text-property name="text">ENFANT</text-property>
+                        </label>
+                    </cell>
+                </row>
+                <row id="849">
+                    <cell id="850">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">4px</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">4px</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <property name="verticalAlign">middle</property>
+                        <data id="1165">
+                            <property name="fontFamily">sans-serif</property>
+                            <structure name="dateTimeFormat">
+                                <property name="category">Custom</property>
+                                <property name="pattern">dd/MM/y</property>
+                            </structure>
+                            <property name="resultSetColumn">birth_date</property>
+                        </data>
+                    </cell>
+                    <cell id="851">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">4px</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <property name="verticalAlign">middle</property>
+                        <data id="1166">
+                            <property name="fontFamily">sans-serif</property>
+                            <structure name="dateTimeFormat">
+                                <property name="category">Custom</property>
+                                <property name="pattern">dd/MM/y</property>
+                            </structure>
+                            <property name="resultSetColumn">daterecrutement</property>
+                        </data>
+                    </cell>
+                    <cell id="852">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">4px</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <property name="verticalAlign">middle</property>
+                        <data id="1167">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="resultSetColumn">echelon</property>
+                        </data>
+                    </cell>
+                    <cell id="853">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">4px</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <property name="verticalAlign">middle</property>
+                        <data id="1168">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="resultSetColumn">indice</property>
+                        </data>
+                    </cell>
+                    <cell id="854">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">4px</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <property name="verticalAlign">middle</property>
+                        <data id="1169">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="resultSetColumn">sex_select</property>
+                        </data>
+                    </cell>
+                    <cell id="855">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">4px</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <property name="verticalAlign">middle</property>
+                        <data id="1170">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="resultSetColumn">company_cb_details</property>
+                        </data>
+                    </cell>
+                    <cell id="856">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">4px</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <property name="verticalAlign">middle</property>
+                        <data id="1171">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="resultSetColumn">case</property>
+                        </data>
+                        <label id="1173">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="display">inline</property>
+                            <text-property name="text">Déduc </text-property>
+                        </label>
+                        <data id="1174">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="display">inline</property>
+                            <property name="resultSetColumn">deduc</property>
+                        </data>
+                    </cell>
+                    <cell id="857">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">4px</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <property name="verticalAlign">middle</property>
+                        <data id="1172">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="resultSetColumn">count</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="948">
+                    <property name="height">0.5cm</property>
+                    <cell id="949"/>
+                    <cell id="950"/>
+                    <cell id="951"/>
+                    <cell id="952"/>
+                    <cell id="953"/>
+                    <cell id="954"/>
+                    <cell id="955"/>
+                    <cell id="956"/>
+                </row>
+                <row id="939">
+                    <cell id="940">
+                        <property name="colSpan">4</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">4px</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">4px</property>
+                        <label id="1175">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <text-property name="text">EMOLUMENTS BRUTS MENSUELS</text-property>
+                        </label>
+                    </cell>
+                    <cell id="944">
+                        <property name="colSpan">4</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">thin</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <property name="borderTopStyle">solid</property>
+                        <property name="borderTopWidth">4px</property>
+                        <label id="1176">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">bold</property>
+                            <property name="textAlign">center</property>
+                            <text-property name="text">RETENUES MENSUELLES</text-property>
+                        </label>
+                    </cell>
+                </row>
+                <row id="930">
+                    <cell id="931">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">4px</property>
+                        <label id="1177">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="marginLeft">5pt</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">TRAITEMENT DE BASE</text-property>
+                        </label>
+                    </cell>
+                    <cell id="934">
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="1183">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="marginRight">5pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Fixed</property>
+                                <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">traitement_debase</property>
+                        </data>
+                    </cell>
+                    <cell id="935">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <label id="1189">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="marginLeft">5pt</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">MUTUELLE GENERALE C.C.D</text-property>
+                        </label>
+                    </cell>
+                    <cell id="938">
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <data id="1196">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="marginRight">5pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Fixed</property>
+                                <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <list-property name="visibility">
+                                <structure>
+                                    <property name="format">all</property>
+                                    <expression name="valueExpr" type="javascript">row["organisme_metuelle2"]==1</expression>
+                                </structure>
+                            </list-property>
+                            <property name="resultSetColumn">mutuelle_omfam_caad</property>
+                        </data>
+                        <data id="1195">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="marginRight">5pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Fixed</property>
+                                <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <list-property name="visibility">
+                                <structure>
+                                    <property name="format">all</property>
+                                    <expression name="valueExpr" type="javascript">row["organisme_metuelle2"]==2</expression>
+                                </structure>
+                            </list-property>
+                            <property name="resultSetColumn">mutuelle_mgpap_ccd</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="921">
+                    <cell id="922">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">4px</property>
+                        <label id="1178">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="marginLeft">5pt</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">INDEMNITE ADMINISTR SPECIALE</text-property>
+                        </label>
+                    </cell>
+                    <cell id="925">
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="1184">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="marginRight">5pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Fixed</property>
+                                <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">ias_indhier_ind_de_tech</property>
+                        </data>
+                    </cell>
+                    <cell id="926">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <label id="1190">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="marginLeft">5pt</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">REGIME COMPLEMENTAIRE R.C.A.R</text-property>
+                        </label>
+                    </cell>
+                    <cell id="929">
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <data id="1198">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="marginRight">5pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Fixed</property>
+                                <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">rcarrcomp</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="912">
+                    <cell id="913">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">4px</property>
+                        <label id="1179">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="fontWeight">normal</property>
+                            <property name="marginLeft">5pt</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">INDEMNITE DE SUJETION</text-property>
+                        </label>
+                    </cell>
+                    <cell id="916">
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="1185">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="marginRight">5pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Fixed</property>
+                                <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">indemnite_de_sujetion</property>
+                        </data>
+                    </cell>
+                    <cell id="917">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <label id="1191">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="marginLeft">5pt</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">REGIME COLL D'ALLOCAT DE RETR</text-property>
+                        </label>
+                    </cell>
+                    <cell id="920">
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <data id="1197">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="marginRight">5pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Fixed</property>
+                                <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">rcar_rg</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="903">
+                    <cell id="904">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">4px</property>
+                        <label id="1180">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="marginLeft">5pt</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">INDEMNITE DE RESIDENCE</text-property>
+                        </label>
+                    </cell>
+                    <cell id="907">
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="1186">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="marginRight">5pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Fixed</property>
+                                <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">indemnite_de_residence</property>
+                        </data>
+                    </cell>
+                    <cell id="908">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <label id="1192">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="marginLeft">5pt</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">IMPOT SUR LE REVENU</text-property>
+                        </label>
+                    </cell>
+                    <cell id="911">
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <data id="1199">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="marginRight">5pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Fixed</property>
+                                <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">ir</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="894">
+                    <cell id="895">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">4px</property>
+                        <label id="1181">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="marginLeft">5pt</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">ALLOCATION D'ENCADREMENT</text-property>
+                        </label>
+                    </cell>
+                    <cell id="898">
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="1187">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="marginRight">5pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Fixed</property>
+                                <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">indemnite_dencadrement</property>
+                        </data>
+                    </cell>
+                    <cell id="899">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <label id="1193">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="marginLeft">5pt</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">MUTUELLE GENERALE S.M</text-property>
+                        </label>
+                    </cell>
+                    <cell id="902">
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <data id="1200">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="marginRight">5pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Fixed</property>
+                                <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <list-property name="visibility">
+                                <structure>
+                                    <property name="format">all</property>
+                                    <expression name="valueExpr" type="javascript">row["organisme_metuelle2"]==2</expression>
+                                </structure>
+                            </list-property>
+                            <property name="resultSetColumn">mutuelle_mgpapsm</property>
+                        </data>
+                        <data id="1201">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="marginRight">5pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Fixed</property>
+                                <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <list-property name="visibility">
+                                <structure>
+                                    <property name="format">all</property>
+                                    <expression name="valueExpr" type="javascript">row["organisme_metuelle2"]==1</expression>
+                                </structure>
+                            </list-property>
+                            <property name="resultSetColumn">mutuelle_omfam_sm</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="885">
+                    <cell id="886">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">4px</property>
+                        <label id="1182">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="marginLeft">5pt</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">INDEMNITE FAMILIALE MAROCAINE</text-property>
+                        </label>
+                    </cell>
+                    <cell id="889">
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                        <data id="1188">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="marginRight">5pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Fixed</property>
+                                <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">allocationfamil</property>
+                        </data>
+                    </cell>
+                    <cell id="890">
+                        <property name="colSpan">3</property>
+                        <property name="rowSpan">1</property>
+                        <label id="1194">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="marginLeft">5pt</property>
+                            <property name="textAlign">left</property>
+                            <text-property name="text">ASSURANCE MALADIE OBLIGATOIRE</text-property>
+                        </label>
+                    </cell>
+                    <cell id="893">
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                        <data id="1202">
+                            <property name="fontFamily">sans-serif</property>
+                            <property name="marginRight">5pt</property>
+                            <structure name="numberFormat">
+                                <property name="category">Fixed</property>
+                                <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                            </structure>
+                            <property name="textAlign">right</property>
+                            <property name="resultSetColumn">amo</property>
+                        </data>
+                    </cell>
+                </row>
+                <row id="1092">
+                    <property name="height">4cm</property>
+                    <cell id="1093">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">4px</property>
+                        <property name="borderLeftStyle">solid</property>
+                        <property name="borderLeftWidth">4px</property>
+                    </cell>
+                    <cell id="1094">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">4px</property>
+                    </cell>
+                    <cell id="1095">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">4px</property>
+                    </cell>
+                    <cell id="1096">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">4px</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">thin</property>
+                    </cell>
+                    <cell id="1097">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">4px</property>
+                    </cell>
+                    <cell id="1098">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">4px</property>
+                    </cell>
+                    <cell id="1099">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">4px</property>
+                    </cell>
+                    <cell id="1100">
+                        <property name="borderBottomStyle">solid</property>
+                        <property name="borderBottomWidth">4px</property>
+                        <property name="borderRightStyle">solid</property>
+                        <property name="borderRightWidth">4px</property>
+                    </cell>
+                </row>
+                <row id="1083">
+                    <property name="height">0.5cm</property>
+                    <cell id="1084"/>
+                    <cell id="1085"/>
+                    <cell id="1086"/>
+                    <cell id="1087"/>
+                    <cell id="1088"/>
+                    <cell id="1089"/>
+                    <cell id="1090"/>
+                    <cell id="1091"/>
+                </row>
+                <row id="1074">
+                    <cell id="1075">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <grid id="1203">
+                            <property name="marginLeft">10pt</property>
+                            <property name="marginRight">10pt</property>
+                            <column id="1204"/>
+                            <row id="1205">
+                                <cell id="1206">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">4px</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">4px</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">4px</property>
+                                    <label id="1207">
+                                        <property name="fontFamily">sans-serif</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <text-property name="text">BRUT MENSUEL</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                            <row id="1208">
+                                <cell id="1209">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">4px</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">4px</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">4px</property>
+                                    <data id="1228">
+                                        <property name="fontFamily">sans-serif</property>
+                                        <property name="fontWeight">bold</property>
+                                        <structure name="numberFormat">
+                                            <property name="category">Fixed</property>
+                                            <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="resultSetColumn">traitement_debase</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </grid>
+                    </cell>
+                    <cell id="1077">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <grid id="1211">
+                            <property name="marginLeft">10pt</property>
+                            <property name="marginRight">10pt</property>
+                            <column id="1212"/>
+                            <row id="1213">
+                                <cell id="1214">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">4px</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">4px</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">4px</property>
+                                    <label id="1215">
+                                        <property name="fontFamily">sans-serif</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <text-property name="text">TOT. RETENUE</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                            <row id="1216">
+                                <cell id="1217">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">4px</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">4px</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">4px</property>
+                                    <data id="1227">
+                                        <property name="fontFamily">sans-serif</property>
+                                        <property name="fontWeight">bold</property>
+                                        <structure name="numberFormat">
+                                            <property name="category">Fixed</property>
+                                            <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="resultSetColumn">total_retenue</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </grid>
+                    </cell>
+                    <cell id="1079">
+                        <property name="colSpan">2</property>
+                        <property name="rowSpan">1</property>
+                        <grid id="1219">
+                            <property name="marginLeft">10pt</property>
+                            <property name="marginRight">10pt</property>
+                            <column id="1220"/>
+                            <row id="1221">
+                                <cell id="1222">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">4px</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">4px</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">4px</property>
+                                    <label id="1223">
+                                        <property name="fontFamily">sans-serif</property>
+                                        <property name="fontWeight">bold</property>
+                                        <property name="marginLeft">0pt</property>
+                                        <property name="paddingLeft">1pt</property>
+                                        <property name="paddingRight">1pt</property>
+                                        <property name="textAlign">center</property>
+                                        <text-property name="text">NET MENSUEL</text-property>
+                                    </label>
+                                </cell>
+                            </row>
+                            <row id="1224">
+                                <cell id="1225">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">4px</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">4px</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">4px</property>
+                                    <data id="1229">
+                                        <property name="fontFamily">sans-serif</property>
+                                        <property name="fontWeight">bold</property>
+                                        <structure name="numberFormat">
+                                            <property name="category">Fixed</property>
+                                            <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="resultSetColumn">netapayer</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </grid>
+                    </cell>
+                    <cell id="1081"/>
+                    <cell id="1082"/>
+                </row>
+                <row id="1065">
+                    <cell id="1066"/>
+                    <cell id="1067"/>
+                    <cell id="1068"/>
+                    <cell id="1069"/>
+                    <cell id="1070"/>
+                    <cell id="1071"/>
+                    <cell id="1072"/>
+                    <cell id="1073"/>
+                </row>
+            </header>
+        </table>
+        <grid id="581">
+            <property name="marginTop">20pt</property>
+            <column id="582"/>
+            <row id="583">
+                <cell id="584">
+                    <label id="589">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="marginLeft">0.5cm</property>
+                        <property name="display">inline</property>
+                        <text-property name="text">(*) Attestation établie sur la base des informations fournies par </text-property>
+                    </label>
+                    <label id="590">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="display">inline</property>
+                        <text-property name="text"> LA T.G.R</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="585">
+                <cell id="586">
+                    <label id="591">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="marginLeft">0.5cm</property>
+                        <text-property name="text">Les retenues non réglementairesne figurent pas sur cette attestation</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="587">
+                <cell id="588">
+                    <label id="592">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="marginLeft">0.5cm</property>
+                        <property name="display">inline</property>
+                        <text-property name="text">BENI MELLAL LE </text-property>
+                    </label>
+                    <text id="593">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="display">inline</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                    </text>
+                    <label id="594">
+                        <property name="fontFamily">sans-serif</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="display">inline</property>
+                        <text-property name="text"> ( Edité par A_OUHRISS )</text-property>
+                    </label>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

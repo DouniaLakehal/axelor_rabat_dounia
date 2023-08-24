@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models
+	xmlns="http://axelor.com/xml/ns/domain-models"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+	<module name="helpdesk" package="com.axelor.apps.helpdesk.db" />
+	<entity name="Reclamation" cacheable="true">
+
+		<!--Les champs Bureau d'ordre-->
+
+		<string name="ticketSeqence" title="Numéro de réclamation" />
+		<integer name="statusSelect_new" selection="helpdesk.status.select_bureau_ordre" title="Status" default="0"/>
+		<string name="name" title="Nom et prenom"/>
+		<string name="etablissement" title="Etablissement"/>
+		<string name="phone" title="Telephone"/>
+		<string name="email" title="Email"/>
+		<boolean name="recevable" title="Recevable"/>
+		<string name="auteur" title="Rempli par"/>
+		<date name="remis" title="Remis le"/>
+		<date name="dateReclamation" title="Date de réclamation"/>
+		<string name="object" title="Object"/>
+		<string name="description" title="Description" large="true" required="true"/>
+		<one-to-many name="piecesJointe" ref="com.axelor.apps.helpdesk.db.PiecesJointe"  />
+
+		<integer name="sourceReclamation" selection="helpdesk.sourceReclamation.select_bureau_ordre" title="Source de Réclamation"/>
+		<many-to-one ref="com.axelor.apps.configuration.db.NaturePlainte" name="naturePlainte"  title="Nature de la plainte"/>
+		<integer name="priorite" selection="helpdesk.priorite.select_bureau_ordre" title="Priorite" default="2"/>
+		<datetime name="datedebut" title="Date debut" />
+		<datetime name="datefin" title="Date fin" />
+
+		<!--Les champs Directeur-->
+		<string name="directeur" title="Directeur" />
+		<many-to-one ref="com.axelor.auth.db.User" name="responsable_directeur" />
+		<integer name="typeReclamation" title="type" selection="helpdesk.reclamation.typeReclamation.directeur" />
+		<one-to-many name="actionReclamation" ref="com.axelor.apps.helpdesk.db.ActionsReclamation"/>
+		<string name="commenatireJustification" title="justification"/>
+		<string name="analyseEtSuggestion" title="analyseEtSuggestion"/>
+		<date name="dateDirecteur" title="Date"/>
+		<date name="delaiRealisation" title="Delais"/>
+		
+		<string name="typeReponse" title="Type de réponse"/>
+		<date name="dateEnvoi" title="Date d'envoi"/>
+
+		<date name="dateCloture" title="DateCloture"/>
+
+		<extra-code>
+			<![CDATA[
+				public static final int STATUS_NEW = 0;
+				public static final int STATUS_IN_PROGRESS = 1;
+				public static final int STATUS_RESOLVED = 2;
+				public static final int STATUS_CLOSED = 3;
+			]]>
+		</extra-code>
+
+	</entity>
+</domain-models>

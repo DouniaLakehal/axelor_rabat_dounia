@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+			  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid canNew="false" canDelete="false" canEdit="false"
+		  name="reclamation_no_reception_grid" title="Réclamation" model="com.axelor.apps.helpdesk.db.Reclamation" orderBy="ticketSeqence" >
+		<field name="ticketSeqence" title="N° réclamation"/>
+		<field name="statusSelect_new" title="Statut"/>
+		<field name="priorite" title="Priorité"/>
+		<field name="sourceReclamation" title="source de la Réclamation"/>
+		<field name="etablissement" title="Etablissement"/>
+		<field name="phone" title="Téléphone"/>
+		<field name="email" title="E-mail"/>
+		<field name="terminer" title="Terminer"/>
+	</grid>
+
+	<form canNew="false" canSave="false" canAttach="false" canEdit="false" canDelete="false" canArchive="false" canCopy="false"
+		  name="reclamation_no_reception_form" title="Réclamation" model="com.axelor.apps.helpdesk.db.Reclamation" width="large">
+
+		<panel name="panelBody" showTitle="false">
+
+			<field name="statusSelect_new" colSpan="12" readonly="true" widget="NavSelect" showTitle="false"/>
+
+			<field name="ticketSeqence" readonly="true" canEdit="false" showTitle="false" colSpan="12">
+				<viewer depends="ticketSeqence">
+					<![CDATA[
+					<h2> Réclamation N° : <mark> {{ record.ticketSeqence }} </mark></h2>
+				]]>
+				</viewer>
+			</field>
+
+			<field name="name" title="Nom et prénom" readonly="true"/>
+			<field name="etablissement" title="Etablissement" readonly="true"/>
+			<field name="phone" title="Téléphone"  widget="phone" readonly="true"/>
+			<field name="email" title="E-mail" widget="email" readonly="true" />
+			<field name="recevable" title="Recevable" readonly="true"/>
+			<field name="auteur" title="Rempli par" readonly="true"/>
+			<field name="remis" title="Date de réception" readonly="true"/>
+			<field name="dateReclamation" title="Date de Réclamation" readonly="true"/>
+			<field name="object" title="Object" colSpan="12" required="true" readonly="true"/>
+		</panel>
+
+		<panel-tabs name="mainPanelTab_reclamation" >
+			<panel name="descriptionPanel" colSpan="12" title="Description">
+				<field name="description" showTitle="false" colSpan="12" widget="html" readonly="true" />
+			</panel>
+			<panel-related canEdit="false" canNew="false" canSelect="false" canRemove="false" canMove="false" canView="false" canSuggest="false"
+					name="piecesJointePanel" title="Pieces jointe" colSpan="12" field="piecesJointe" form-view="piece-form" grid-view="piece-grid" />
+		</panel-tabs>
+
+		<panel name="panel_info_reclamation" sidebar="true" title="Caractéristiques" canCollapse="true">
+			<field name="sourceReclamation" title="Source de réclamation" readonly="true"/>
+			<field name="naturePlainte" target-name="titre" title="Nature de plainte" readonly="true"/>
+			<field name="priorite" title="Priorité" readonly="true"/>
+		</panel>
+
+		<panel name="panel_date_reclamation" sidebar="true" title="Dates" canCollapse="true">
+			<field name="datedebut" title="Date début" readonly="true" colSpan="6"/>
+			<field name="datefin" title="Date fin" colSpan="6" readonly="true"/>
+		</panel>
+	</form>
+
+
+
+</object-views>

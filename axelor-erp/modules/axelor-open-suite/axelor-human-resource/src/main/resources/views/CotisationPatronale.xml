@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <form name="cotisation_patronale_form" model="com.axelor.apps.hr.db.EtatSalaire" canNew="false" canDelete="false" canEdit="false" canSave="false" title="Cotisation patronale Form">
+        <panel name="CotisationPatronaleForm" colSpan="10">
+            <button name="rcar" title="Imprimer CP RCAR PATR" onClick="com.axelor.apps.hr.web.expense.ExpenseController:editEtatRCAR" icon="fa-print" colSpan="3"/>
+            <button name="axa" title="Imprimer CP RCAR SAL" onClick="com.axelor.apps.hr.web.expense.ExpenseController:editEtatRCARSal" icon="fa-print" colSpan="3"/>
+            <button name="amo" title="Imprimer OV CNOPS" onClick="com.axelor.apps.hr.web.expense.ExpenseController:OVCNOPS" icon="fa-print" colSpan="3"/>
+            <button name="ir" title="Imprimer CP IR" onClick="com.axelor.apps.hr.web.expense.ExpenseController:editEtatIR" icon="fa-print" colSpan="3"/>
+            <button name="css" title="Imprimer OV CSS" onClick="com.axelor.apps.hr.web.expense.ExpenseController:OVCSS" icon="fa-print" colSpan="3"/>
+        </panel>
+    </form>
+
+</object-views>

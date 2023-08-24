@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid canNew="false" canDelete="false" canEdit="false" canMove="false" canArchive="false" canSave="false"
+		  title="Liste des employées" name="etat-Engagement-list-grid" model="com.axelor.apps.hr.db.Employee">
+		<field name="name"/>
+		<field name="daterecrutement"/>
+		<field name="grade"/>
+	</grid>
+
+	<form title="Etat engagement Form" name="etat-Engagement-list-form" model="com.axelor.apps.hr.db.Employee">
+		<panel colSpan="12">
+			<field name="date_debut" title="date début" type="date" colSpan="6"/>
+			<field name="date_fin" title="date fin" type="date" colSpan="6"/>
+			<field name="type_engagement" title="Type d'engagement" selection="select_Normal.validate" colSpan="6"/>
+			<field name="type_doc" title="Document" selection="type_document" colSpan="6"/>
+			<button name="btn-add" onClick="createEtatengagament" title="Générer un etat d'engagement" colOffset="6"/>
+		</panel>
+		<panel colSpan="12">
+			<field name="etatEngagement"
+				   canEdit="false" canNew="false" canSuggest="false" canRemove="false" canView="false" canSelect="false"
+				   title="Etat Engagement" grid-view="etat-engagement-employer" colSpan="12"/>
+		</panel>
+	</form>
+
+	<grid title="Etat d'engagement" name="etat-engagement-employer" model="com.axelor.apps.hr.db.EtatEngagement">
+		<field name="dateDebut" title="Date de début"/>
+		<field name="dateFin" title="Date Fin" />
+		<button name="btn_printEtatEngagement" onClick="print-etatengagament" icon="fa-print"/>
+		<button name="btn_deleteEtatengagment" onClick="delete-etatEngagment" icon="fa-trash"/>
+	</grid>
+
+	<action-method name="createEtatengagament">
+		<call class="com.axelor.apps.hr.web.EmployeeControllerSimple" method="imprimerEtatEngagement_simple"/>
+	</action-method>
+
+	<action-method name="delete-etatEngagment">
+		<call class="com.axelor.apps.hr.web.EmployeeControllerSimple" method="deleteEtatEngagment"/>
+	</action-method>
+
+</object-views>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="human-resource" package="com.axelor.apps.hr.db"/>
+
+    <entity name="OrdreVirement" lang="java">
+        <integer name="numeroOV"/>
+        <many-to-one name="rubrique"  ref="com.axelor.apps.configuration.db.RubriqueBudgetaireGenerale" title="Rubrique"/>
+        <string name="beneficiaireName" title="Nom du beneficiaire"/>
+        <string name="beneficiaireRib" title="Rib du beneficiaire "/>
+        <string name="objetVirement" title="Objet de virement "/>
+        <string name="pieceProduiAppui" title="Pièces produites à l'appui  "/>
+        <decimal name="montant"  title="Montant"/>
+        <date name="datreOrdre" title="Date d'ordre"/>
+        <integer name="annee" title="annee"/>
+        <integer name="mois" title="mois"/>
+    </entity>
+
+</domain-models>

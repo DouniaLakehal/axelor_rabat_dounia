@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="human-resource" package="com.axelor.apps.hr.db"/>
+
+    <entity name="EtatSalaireTransactionDetail" lang="java">
+        <many-to-one name="etatSalaireTransaction" ref="com.axelor.apps.hr.db.EtatSalaireTransaction"/>
+        <many-to-one name="rubriqueBudgetaire" ref="com.axelor.apps.configuration.db.RubriqueBudgetaireGenerale"/>
+        <many-to-one name="historiqueBudgetaire" ref="com.axelor.apps.configuration.db.HistoriqueBudgetaire"/>
+        <decimal name="montant"/>
+    </entity>
+
+
+</domain-models>

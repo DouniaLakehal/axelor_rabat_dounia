@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models
+	xmlns="http://axelor.com/xml/ns/domain-models"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+	<module name="helpdesk" package="com.axelor.apps.helpdesk.db" />
+	<entity name="ActionsReclamation" cacheable="true">
+		<string name="titre" title="Titre" />
+		<many-to-one ref="com.axelor.auth.db.User" name="responsable" title="Responsable" />
+		<date name="dateRealisation" title="Date de réalisation" />
+		<string name="numAmelioration" title="N° de la fiche d’amélioration" />
+		<string name="description" title="Description" large="true" />
+		<boolean name="terminer" title="terminer" default="false"/>
+		<integer name="reclamation" title="reclamation"/>
+	</entity>
+</domain-models>

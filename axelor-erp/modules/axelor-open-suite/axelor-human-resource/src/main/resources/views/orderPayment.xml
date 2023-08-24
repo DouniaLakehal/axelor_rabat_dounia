@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<form  name="order_payment_form" model="com.axelor.apps.hr.db.EtatSalaire" canNew="false" canDelete="false" canEdit="false" canSave="false" title="Order Payment Form">
+		<panel name="orderPaymentForm">
+		  	<button name="rcar" title="Imprimer RCAR" onClick="com.axelor.apps.hr.web.expense.ExpenseController:RCAR" icon="fa-print" colSpan="3"/>
+		  	<button name="recore" title="Imprimer MT Recore" onClick="com.axelor.apps.hr.web.expense.ExpenseController:MT_Recore" icon="fa-print" colSpan="3"/>
+		  	<button name="amo" title="Imprimer MT AMO" onClick="com.axelor.apps.hr.web.expense.ExpenseController:MT_Amo" icon="fa-print" colSpan="3"/>
+		  	<button name="smccd" title="Imprimer MT SM-CCD" onClick="com.axelor.apps.hr.web.expense.ExpenseController:MT_SM_CDD" icon="fa-print" colSpan="3"/>
+		  	<button name="omfam" title="Imprimer OMFAM" onClick="com.axelor.apps.hr.web.expense.ExpenseController:OMFAM" icon="fa-print" colSpan="3"/>
+		  	<button name="ir" title="Imprimer IR" onClick="com.axelor.apps.hr.web.expense.ExpenseController:IR" icon="fa-print" colSpan="3"/>
+		  	<button name="axa" title="Imprimer Axa Credit" onClick="com.axelor.apps.hr.web.expense.ExpenseController:Axa" icon="fa-print" colSpan="3"/>
+		  	<button name="opCSS" title="Imprimer OP CSS" onClick="com.axelor.apps.hr.web.expense.ExpenseController:OpCss" icon="fa-print" colSpan="3"/>
+		  	<button name="mtc" title="Imprimer MT C" onClick="com.axelor.apps.hr.web.expense.ExpenseController:MtC" icon="fa-print" colSpan="3"/>
+		  	<button name="mt_amo_c" title="Imprimer MT AMO C" onClick="com.axelor.apps.hr.web.expense.ExpenseController:MtAmoC" icon="fa-print" colSpan="3"/>
+		  	<button name="mt_mgpap_c" title="Imprimer MT MGPAP C" onClick="com.axelor.apps.hr.web.expense.ExpenseController:MtMgpapC" icon="fa-print" colSpan="3"/>
+		  	<button name="irc" title="Imprimer IR C" onClick="com.axelor.apps.hr.web.expense.ExpenseController:IRC" icon="fa-print" colSpan="3"/>
+		  	<button name="mt_ind_logement" title="Imprimer MT IND LOGMENT" onClick="com.axelor.apps.hr.web.expense.ExpenseController:MtLogement" icon="fa-print" colSpan="3"/>
+		  	<button name="rcarinlog" title="Imprimer RCAR IN LOG" onClick="com.axelor.apps.hr.web.expense.ExpenseController:RcarInLog" icon="fa-print" colSpan="3"/>
+		  	<button name="irinlog" title="Imprimer IR IN LOG" onClick="com.axelor.apps.hr.web.expense.ExpenseController:IrInLog" icon="fa-print" colSpan="3"/>
+		  	<button name="mtindfonction" title="Imprimer MT IND Fonction" onClick="com.axelor.apps.hr.web.expense.ExpenseController:MtIndFonction" icon="fa-print" colSpan="3"/>
+		  	<button name="mtindvoit" title="Imprimer MT IND VOIT" onClick="com.axelor.apps.hr.web.expense.ExpenseController:MtIndVoit" icon="fa-print" colSpan="3"/>
+		  	<button name="mtindrepresentation" title="Imprimer MT IND REPRESENTATION" onClick="com.axelor.apps.hr.web.expense.ExpenseController:MtIndRepresentation" icon="fa-print" colSpan="3"/>
+		  	<button name="rcarp" title="Imprimer RCAR P" onClick="com.axelor.apps.hr.web.expense.ExpenseController:RcarP" icon="fa-print" colSpan="3"/>
+		  	<button name="cnopsp" title="Imprimer CNOPSP" onClick="com.axelor.apps.hr.web.expense.ExpenseController:Cnopsp" icon="fa-print" colSpan="3"/>
+	  	</panel>
+	</form>
+
+</object-views>

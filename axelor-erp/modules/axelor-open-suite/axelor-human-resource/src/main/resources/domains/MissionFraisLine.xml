@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+	<module name="human-resource" package="com.axelor.apps.hr.db"/>
+		<entity name="EmployeeMissionFrais" cacheable="true">
+		     <many-to-one ref="com.axelor.apps.configuration.db.ConfigurationFrais" name="fraisMission" title="Frais de déplacement"/>
+			 <many-to-one name="montant" title="Montant" ref="com.axelor.apps.configuration.db.ConfigurationFrais"/>
+		         <many-to-one ref="com.axelor.apps.configuration.db.FraisDeplacement" name="fraisDeplacement" title="Frais de déplacement"/>
+		
+		
+		
+	</entity>
+</domain-models>

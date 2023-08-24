@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<menuitem name="marketing-root" order="-107" title="comptabilité générale" icon="fa-calculator"
+	     icon-background="#3BACB6"  />
+	
+	<menuitem name="ouverture" parent="marketing-root" title="Ouverture" action="ouverture" order="-1000"/>
+	
+	<action-view name="ouverture" model="com.axelor.apps.account.db.GroupeMove"
+		title="Ouverture">
+		<view name="ouverture_move_custom-grid_delete" type="grid" />
+		<view name="ouverture_move_custom-form_delete" type="form" />
+	</action-view>
+
+	<menuitem name="traitement" parent="marketing-root" title="Traitement" action="traitement" order="-1000"/>
+
+	<action-view name="traitement" model="com.axelor.apps.marketing.db.Traitement"
+				 title="Traitement">
+		<view name="traitement-grid" type="grid" />
+		<view name="traitement-form" type="form" />
+	</action-view>
+
+	<menuitem name="saisir-ecriture" parent="traitement" title="Saisir une écriture" action="saisir-ecriture" />
+
+	<action-view name="saisir-ecriture" model="com.axelor.apps.account.db.GroupeMove"
+				 title="Saisir une écriture">
+		<view type="grid" name="ouverture_move_custom_grid_SaisirEcreture"/>
+	</action-view>
+
+	<!--<action-view name="saisir-ecriture_subMenu" title="Saisir une écriture"
+				 model="com.axelor.apps.account.db.Move">
+		<view name="ecriture-grid" type="grid" />
+		<view name="ecriture-form" type="form" />
+		<view-param name="forceEdit" value="true"/>
+	</action-view>-->
+
+
+	<menuitem name="analyse-compte" parent="traitement" title="Analyser un compte" action="analyse-compte" />
+
+	<action-view name="analyse-compte" model="com.axelor.apps.account.db.GroupeMove"
+				 title="Analyser un compte">
+		<view type="grid" name="ouverture_move_custom_grid_AnalyseCompte"/>
+		<!--<view type="form" name="account_simple-form"/>-->
+		<!--<domain>self.id in (${([0]+__repo__(MoveLine).all().fetch().collect{it->it.account.id}.flatten()).join(',') })</domain>-->
+	</action-view>
+
+	<action-view name="analyse-compte_v2" model="com.axelor.apps.account.db.Account"
+				 title="Analyser un compte">
+		<view type="grid" name="account-simple-grid"/>
+		<!--<view type="form" name="account_simple-form"/>-->
+		<domain>self.id in ( ${([0]+__repo__(MoveLine).all().filter('self.move in ([0]+__repo__(GroupeMove).find(id).collect(it->it.move_move.id).flatten().join(','))').fetch().collect{it->it.account.id}.flatten()).join(',')} )</domain>
+		<context name="ids" expr="eval:[0]+__repo__(GroupeMove).find(id).collect{it->it.move_move.id}.flatten().join(',')"/>
+	</action-view>
+
+	<menuitem name="reporting" parent="marketing-root" title="Reporting" action="reporting" order="-1000"/>
+
+	<action-view name="reporting" model="com.axelor.apps.marketing.db.Reporting"
+				 title="Reporting">
+		<view name="reporting-grid" type="grid" />
+		<view name="reporting-form" type="form" />
+	</action-view>
+
+	<menuitem name="editer-balance" parent="reporting" title="Editer la balance générale" action="editer-balance" />
+
+	<action-view name="editer-balance" model="com.axelor.apps.account.db.AccountingReport"
+				 title="Editer la balance générale">
+		<view name="editer-balance-grid" type="grid" />
+		<view name="editer-balance-form" type="form" />
+		<domain>self.typeSelect=2</domain>
+	</action-view>
+
+	<menuitem name="editer-livre" parent="reporting" title="Editer le grand livre" action="editer-livre" />
+
+	<action-view name="editer-livre"
+				 title="Editer le grand livre" model="com.axelor.apps.account.db.AccountingReport" >
+		<view type="grid" name="editer-livre-grid" />
+		<view type="form" name="editer-livre-form" />
+		<domain>self.typeSelect=1</domain>
+	</action-view>
+
+	<menuitem name="editer-journaux" parent="reporting" title="Editer les journaux" action="editer-journaux" />
+
+	<action-view name="editer-journaux" model="com.axelor.apps.account.db.AccountingReport"
+				 title="Editer les journaux">
+		<view name="editer-journaux-grid" type="grid" />
+		<view name="editer-journaux-form" type="form" />
+		<domain>self.typeSelect=11</domain>
+	</action-view>
+
+	<menuitem name="editer-etat" parent="reporting" title="Editer les états de synthèse" action="editer-etat" />
+
+	<action-view name="editer-etat" model="com.axelor.apps.account.db.AccountingReport"
+				 title="Editer les états de synthèse">
+		<view name="bilan_form" type="form" />
+	</action-view>
+
+	<menuitem name="clotureitems" parent="marketing-root" title="Clôture" action="clotureMoves_grid_action_show" order="-1000"/>
+
+	<action-view name="clotureMoves_grid_action_show" model="com.axelor.apps.account.db.GroupeMove" title="Clôture ">
+		<view name="cloture-grid_custom" type="grid" />
+	</action-view>
+
+	<menuitem name="gestionImmobilisation" parent="marketing-root" title="Immobilisation" action="gestionImmobilisations" order="-999"/>
+
+	<action-view name="gestionImmobilisations" model="com.axelor.apps.account.db.FixedAsset" title="Immobilisation">
+		<view name="immobilisation-grid_custom" type="grid"/>
+		<view name="immobilisation-form_custom" type="form"/>
+	</action-view>
+	
+	<menuitem name="marketing-conf" title="Configuration" parent="marketing-root" icon="fa-cog"/>
+	
+	<menuitem name="marketing.conf.gestionPeriode" parent="marketing-conf" title="Gestion des périodes" action="marketing.conf.gestionPeriode"/>
+
+	<action-view name="marketing.conf.gestionPeriode" model="com.axelor.apps.base.db.Period" title="Periods">
+		<view name="period-grid_custom" type="grid"/>
+		<view name="period-form_custom" type="form"/>
+		<domain>self.year.typeSelect = 1</domain>
+	</action-view>
+
+	<menuitem name="marketing.conf.gestionJournaux" parent="marketing-conf" title="Gestion des journaux" action="marketing.conf.gestionJournaux"/>
+
+	<action-view name="marketing.conf.gestionJournaux" model="com.axelor.apps.account.db.Journal" title="Journals">
+		<view name="journal-grid_custom" type="grid"/>
+		<view name="journal-form_custom" type="form"/>
+		<domain>(self.year is null OR self.year = 0  ) AND (self.is_journalAnouv is false or self.is_journalAnouv = null)</domain>
+	</action-view>
+
+     <!--################################## -->
+
+
+	<menuitem name="marketing.conf.immobilisationCat" parent="marketing-conf" title="Category Immobilisation" action="marketing.conf.immobilisationCateg"/>
+
+	<action-view name="marketing.conf.immobilisationCateg" model="com.axelor.apps.account.db.FixedAssetCategory" title="Category_Immobilisation">
+		<view name="immobilisationCat-grid_custom" type="grid"/>
+		<view name="immobilisationCat-form_custom" type="form"/>
+	</action-view>
+
+	<menuitem name="marketing.conf.immobilisationTyp" parent="marketing-conf" title="Type Immobilisation" action="marketing.conf.immobilisationType"/>
+
+	<action-view name="marketing.conf.immobilisationType" model="com.axelor.apps.account.db.FixedAssetType" title="Type_immobilisation">
+		<view name="immobilisationTyp-grid_custom" type="grid"/>
+		<view name="immobilisationTyp-form_custom" type="form"/>
+	</action-view>
+
+
+
+
+
+	<menuitem name="marketing.conf.gestionPlanComptable" parent="marketing-conf" title="Gestion du plan comptable" action="marketing.conf.gestionPlanComptable"/>
+
+	<action-view name="marketing.conf.gestionPlanComptable" model="com.axelor.apps.account.db.Account" title="Plan comptable">
+		<view name="account-grid_custom" type="grid"/>
+		<view name="account-form_custom" type="form"/>
+	</action-view>
+
+	<menuitem name="autres-conf" parent="marketing-conf" title="Autres" action="marketing.conf.autres"/>
+
+	<action-view name="marketing.conf.autres" model="com.axelor.apps.marketing.db.autres"
+				 title="Autres">
+		<view name="autres-grid" type="grid" />
+		<view name="autres-form" type="form" />
+	</action-view>
+
+	<menuitem name="marketing.conf.device" parent="autres-conf" title="Devise" action="marketing.conf.device"/>
+
+	<action-view name="marketing.conf.device" model="com.axelor.apps.base.db.Currency"
+				 title="Devise">
+		<view name="currency-grid" type="grid" />
+		<view name="currency-form" type="form" />
+	</action-view>
+
+	<menuitem name="marketing.conf.typeJ" parent="autres-conf" title="Type journaux" action="marketing.conf.typeJ"/>
+
+	<action-view name="marketing.conf.typeJ" model="com.axelor.apps.account.db.JournalType" title="Journal types">
+		<view name="journal-type-grid_custom" type="grid"/>
+		<view name="journal-type-form_custom" type="form"/>
+		<domain>self.id not in (${([0]+__repo__(Journal).all().filter('self.is_journalAnouv is true').fetch().collect{it->it.journalType.id}.flatten()).join(',')})</domain>
+	</action-view>
+
+	<menuitem name="marketing.conf.accountType" parent="autres-conf" title="Type de compte" action="marketing.conf.accountType"/>
+
+	<action-view name="marketing.conf.accountType" model="com.axelor.apps.account.db.AccountType" title="Account types">
+		<view name="account-type-grid" type="grid"/>
+		<view name="account-type-form" type="form"/>
+	</action-view>
+
+
+
+
+
+</object-views>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+		<grid name="employee-loans-grid" title="Loans amortization table" model="com.axelor.apps.hr.db.LoansTable" orderBy="employee">
+	     <toolbar>
+			<button name="printEmployeePhoneBookBtn"
+				title="Employee PhoneBook" icon="fa-print"
+				onClick="action-print-employee-phonebook" />
+		</toolbar>
+				
+				<field name="employee" />
+		<field name="loansType" title="Loans Type"/>			
+        <field name="loansValue" title="Loans value(MAD)"/>
+        <field name="repaymentPeriod" title="Repayment Period(months)" />
+        <field name="monthlyPaymentValue" title="Monthly Payment Value" />
+      	<field name="loansRecognition" title="Loans Recognition" widget="binary-link"
+			form-view="meta-files-form" grid-view="meta-files-grid" />
+      	<field name="withdrawalRate" title="withdrawal Rate" />
+		</grid>
+		<form name="employee-loans-form"
+		title="Loans amortization table" model="com.axelor.apps.hr.db.LoansTable" width="large" onLoad=""
+		onNew="">
+
+		<panel-stack name="generalDetailsPanel">
+			<panel name="loansDetailsPanel" colSpan="12">
+				<field name="ref" showTitle="false" readonly="true"
+					colSpan="12">
+					<viewer depends="ref"><![CDATA[
+					<h3>
+						{{record.ref}}
+					</h3>
+				]]></viewer>
+				</field>
+				<field name="employee" canSuggest="false" canNew="false"
+					canEdit="false" canView="false" hideIf="$popup()"
+					requiredIf="!$popup()" colSpan="8" />
+				<field name="loansType" title="Loans Type"/>			
+        <field name="loansValue" title="Loans value(MAD)"/>
+        <field name="repaymentPeriod" title="Repayment Period(months)" />
+        <field name="monthlyPaymentValue" title="Monthly Payment Value" />
+      	<field name="loansRecognition" title="Loans Recognition" widget="binary-link"
+			form-view="meta-files-form" grid-view="meta-files-grid" />
+      	<field name="withdrawalRate" title="withdrawal Rate" />
+      	</panel>
+
+		</panel-stack>
+
+	</form>
+		
+		</object-views>
+		
+	

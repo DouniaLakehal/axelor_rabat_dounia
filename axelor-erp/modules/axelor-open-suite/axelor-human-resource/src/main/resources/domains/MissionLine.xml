@@ -1,0 +1,33 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+  <module name="human-resource" package="com.axelor.apps.hr.db"/>
+
+  <entity name="EmployeeMissionLine" cacheable="true">
+    <many-to-one name="employee" ref="com.axelor.apps.hr.db.Employee" title="Functionary"/>
+  	<string name="moyen_transport" title="Moyen de transport" selection="hr.employee.moyen"/>
+  	<boolean name="hotel"  title="Hôtel" />
+  	<decimal name="montant_carburant" title="Frais carburant(MAD)" precision="8" scale="2" />
+  	<decimal name="montant_restaurant" title="Frais Restauration(MAD)" precision="8" scale="2" />
+  	<string name="ville_depart" title="Ville du départ" />
+ 	<string name="ville_arrivee" title="Destination" />
+  	<date name="date_depart" title="Date départ" />
+  	<time name="heure_depart" title="Heure du départ" />
+  	<date name="date_retour" title="Date de retour" />
+  	      	<many-to-one name="joindre" title="Joindre le fichier correspondant" ref="com.axelor.meta.db.MetaFile" />
+  		  	
+  			<many-to-one name="typedufichier" title="Type du fichier" ref="com.axelor.apps.configuration.db.DocParMission"/>
+
+  	<track>
+			<field name="employee" on="UPDATE"/>
+			<field name="montant"  on="UPDATE"/>
+			<field name="hotel" on="UPDATE"/>
+			<field name="montant_carburant" on="UPDATE"/>
+			<field name="montant_restaurant" on="UPDATE"/>
+			<field name="date_depart" on="UPDATE"/>
+			<field name="date_retour" on="UPDATE"/>
+	</track>
+      </entity>
+      </domain-models>

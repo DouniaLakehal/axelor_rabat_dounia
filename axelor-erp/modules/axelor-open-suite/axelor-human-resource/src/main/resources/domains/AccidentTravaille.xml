@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+  <module name="human-resource" package="com.axelor.apps.hr.db"/>
+
+  <entity name="EmployeeAccident" cacheable="true">
+    <many-to-one name="employee" ref="com.axelor.apps.hr.db.Employee" title="Employee"/>
+  	<date name="date_accident" title="Date d'accident"  required="true"/>
+  	<time name="heure_accident" title="Heure d 'accident"  required="true"/>
+  	<string name="description" title="Description"/>
+  	<many-to-one name="certificat" title="Certificat" ref="com.axelor.meta.db.MetaFile" />
+  	<track>
+			<field name="employee" on="UPDATE"/>
+			<field name="date_accident"  on="UPDATE"/>
+			<field name="heure_accident" on="UPDATE"/>
+			<field name="description" on="UPDATE"/>
+			<field name="certificat" on="UPDATE"/>
+			
+	</track>
+      </entity>
+      </domain-models>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+			  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid canNew="false" canDelete="false" canEdit="false" name="directeur_reclamation_grid" title="Réclamation" model="com.axelor.apps.helpdesk.db.Reclamation" orderBy="ticketSeqence">
+		<field name="ticketSeqence" title="N° réclamation"/>
+		<field name="statusSelect_new" title="Statut" selection="helpdesk.status.select_directeur"/>
+		<field name="priorite" title="Priorité"/>
+		<field name="sourceReclamation" title="source de la Réclamation"/>
+		<field name="etablissement" title="Etablissement"/>
+		<field name="phone" title="Téléphone"/>
+		<field name="email" title="E-mail"/>
+	</grid>
+
+	<form canNew="false" canDelete="false" name="directeur_reclamation_form" title="Réclamation" model="com.axelor.apps.helpdesk.db.Reclamation"
+		  onLoad="charger_data_current" width="large">
+
+		<panel-tabs name="mainPanelTab_reclamation" >
+			<panel name="panelBody" title="Bureau d'ordre" showTitle="true">
+
+				<field name="statusSelect_new" selection="helpdesk.status.select_directeur"
+					   colSpan="12" readonly="true" widget="NavSelect" showTitle="false"/>
+
+				<field name="ticketSeqence" readonly="true" canEdit="false" showTitle="false" colSpan="12">
+					<viewer depends="ticketSeqence">
+						<![CDATA[
+					<h2> Réclamation N° : <mark> {{ record.ticketSeqence }} </mark></h2>
+				]]>
+					</viewer>
+				</field>
+
+				<field name="name" title="Nom et prénom" readonly="true"/>
+				<field name="etablissement" title="Etablissement" readonly="true"/>
+				<field name="phone" title="Téléphone"  widget="phone" onChange="action-partner-method-normalize-telephone"
+					   pattern="^\+?([\s()-.]*\d){10,}$" placeholder="+212600000000" readonly="true"/>
+				<field name="email" title="E-mail" widget="email" readonly="true" />
+				<field name="recevable" title="Recevable" readonly="true"/>
+				<field name="auteur" title="Rempli par" readonly="true"/>
+				<field name="remis" title="Remis le" readonly="true"/>
+				<field name="dateReclamation" title="Date de Réclamation" readonly="true"/>
+				<field name="object" title="Object" colSpan="12" readonly="true"/>
+
+				<panel name="descriptionPanel" colSpan="12" title="Description">
+					<field name="description" showTitle="false" colSpan="12" widget="html" readonly="true" />
+				</panel>
+
+				<panel-related canNew="false" canRemove="false" canEdit="false" canMove="false" canSelect="false"
+							   name="piecesJointePanel" title="Pieces jointe" colSpan="12"
+							   field="piecesJointe" form-view="piece-form" grid-view="piece-grid" />
+			</panel>
+			<panel name="panel_directeur" title="Directeur" showTitle="true">
+				<field name="statusSelect_new" selection="helpdesk.status.select_directeur"
+					   colSpan="12" readonly="true" widget="NavSelect" showTitle="false"/>
+
+				<field name="ticketSeqence" readonly="true" canEdit="false" showTitle="false" colSpan="12">
+					<viewer depends="ticketSeqence">
+						<![CDATA[
+					<h2> Réclamation N° : <mark> {{ record.ticketSeqence }} </mark></h2>
+				]]>
+					</viewer>
+				</field>
+
+				<panel title="Analyse de la réclamation ou de la suggestion" colSpan="12" >
+					<field name="analyseEtSuggestion" colSpan="12" widget="html" showTitle="false" readonlyIf="statusSelect_new==3"/>
+				</panel>
+				<field name="responsable_directeur" title="Responsable"/>
+				<field name="dateDirecteur" title="Date" readonly="true"/>
+
+				<field name="typeReclamation" title="Type" readonlyIf="statusSelect_new==3" required="true"/>
+				<field name="delaiRealisation" title="Délai de réalisation des actions complémentaires" showIf="typeReclamation==1" hideIf="typeReclamation==2"  readonlyIf="statusSelect_new==3"/>
+				<panel title="Justification" showIf="typeReclamation==2" hideIf="typeReclamation==1" colSpan="12" >
+					<field name="commenatireJustification" colSpan="12" widget="html" showTitle="false"  readonlyIf="statusSelect_new==3" />
+				</panel>
+
+				<panel-related canNew="statusSelect_new!=3" canEdit="statusSelect_new!=3" canRemove="statusSelect_new!=3" canSelect="false"
+						name="actionReclamationPanel" title="Action décidée" colSpan="12" showIf="typeReclamation==1"  readonlyIf="statusSelect_new==3" hideIf="typeReclamation==2"
+							   field="actionReclamation" form-view="actionsReclamation_form" grid-view="actionsReclamation_grid" />
+
+				<panel title="Réponse au client en cas de réclamation" name="reponseProvisoirePanel" colSpan="12" showIf="typeReclamation==1" hideIf="typeReclamation==2" >
+					<field name="typeReponse" title="Type de réponse"  readonlyIf="statusSelect_new==3"/>
+					<field name="dateEnvoi" title="Date d'envoi"  readonlyIf="statusSelect_new==3" />
+				</panel>
+
+				<panel title="Clôture de la fiche" name="clotureProvisoirePanel" colSpan="12" showIf="typeReclamation==1" hideIf="typeReclamation==2">
+					<field name="dateCloture" title="Date de Clôture"  readonlyIf="statusSelect_new==3"/>
+				</panel>
+
+			</panel>
+		</panel-tabs>
+
+		<panel name="panel_info_reclamation" sidebar="true" title="Caractéristiques" canCollapse="true">
+			<field name="sourceReclamation" title="Source de réclamation" readonly="true"/>
+			<field name="naturePlainte" target-name="titre" title="Nature de plainte" readonly="true"/>
+			<field name="priorite" title="Priorité" readonly="true"/>
+		</panel>
+
+		<panel name="panel_date_reclamation" sidebar="true" title="Dates" canCollapse="true">
+			<field name="datedebut" title="Date début" readonly="true" colSpan="6"/>
+			<field name="datefin" title="Date fin" colSpan="6"/>
+		</panel>
+	</form>
+
+	<action-record name="charger_data_current" model="com.axelor.apps.helpdesk.db.Reclamation">
+		<field name="dateDirecteur" expr="eval: __date__" />
+	</action-record>
+
+
+</object-views>

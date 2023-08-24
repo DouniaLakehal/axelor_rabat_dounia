@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="analyseCompte-grid" model="com.axelor.apps.account.db.MoveLine" title="Move lines"  canArchive="false" onNew="action-account-move-line-onnew-group">
+		<field name="counter" hidden="true" width="80"/>
+		<field name="account.isTaxRequiredOnMoveLine" hidden="true" />
+		<field name="account.isTaxAuthorizedOnMoveLine" hidden="true"/>
+		<field name="account.analyticDistributionAuthorized" hidden="true"/>
+		<field name="account.analyticDistributionRequiredOnMoveLines" hidden="true"/>
+		<field name="date" width="100" onChange="account-move-line-group-date-onchange"/>
+		<field name="typeParter" hidden="true" title="Type Label"/>
+		<field name="partner" form-view="partner-form" grid-view="partner-grid" onSelect="action-account-move-line-partner-group" width="120" canEdit="false" readonlyIf="amountPaid &gt; 0"/>
+		<field width="300" name="libelle" title="Libelle"/>
+		<field width="100" name="pieceJustif" title="Piece"/>
+		<field name="account" form-view="account-form" grid-view="account-grid" onSelect="action-move-line-attrs-domain-account" width="200" canEdit="false" readonlyIf="amountPaid &gt; 0 " onChange="action-move-line-method-compute-analytic-distribution"/>
+		<field name="debit" onChange="action-record-account-moveline-debit-onchange,action-group-account-moveline-debitcredit-onchange" width="90" readonlyIf="amountPaid &gt; 0"/>
+		<field name="credit" onChange="action-record-account-moveline-credit-onchange,action-group-account-moveline-debitcredit-onchange" width="90" readonlyIf="amountPaid &gt; 0"/>
+		<field name= "amountRemaining" hidden="true" width="150"/>
+		<field name="amountPaid" hidden="true"/>
+		<field name="origin" hidden="true" width="120"/>
+		<field name="description" hidden="true" />
+		<field name="analyticMoveLineList" hidden="true"/>
+	</grid>
+
+
+</object-views>

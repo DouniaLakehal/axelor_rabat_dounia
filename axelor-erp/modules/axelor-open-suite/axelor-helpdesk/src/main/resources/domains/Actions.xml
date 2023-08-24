@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models
+	xmlns="http://axelor.com/xml/ns/domain-models"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+	<module name="helpdesk" package="com.axelor.apps.helpdesk.db" />
+	<entity name="Actions" cacheable="true">
+
+		<string name="titre" title="Titre" />
+		<string name="responsable" title="Responsable" />
+		<date name="dateRealisation" title="Date de réalisation" />
+		<string name="numAmelioration" title="N° de la fiche d’amélioration" />
+		
+		<track>
+			<field name="titre" on="UPDATE" />
+			<field name="responsable" on="UPDATE" />
+			<field name="dateRealisation" on="UPDATE" />
+			<field name="numAmelioration" on="UPDATE" />
+		</track>
+	</entity>
+</domain-models>

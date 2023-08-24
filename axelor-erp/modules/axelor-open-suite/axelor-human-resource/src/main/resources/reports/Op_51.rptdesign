@@ -1,0 +1,1606 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.8.0.v201805221921</property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">120</property>
+    <parameters>
+        <scalar-parameter name="annee" id="5476">
+            <property name="valueType">static</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="mois" id="5477">
+            <property name="valueType">static</property>
+            <property name="dataType">integer</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <parameter-group name="AMO" id="6291">
+            <parameters>
+                <scalar-parameter name="sommeAMO" id="7841">
+                    <property name="valueType">static</property>
+                    <property name="dataType">float</property>
+                    <property name="distinct">true</property>
+                    <list-property name="selectionList"/>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">text-box</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+                <scalar-parameter name="Montant_AMO" id="7846">
+                    <property name="valueType">static</property>
+                    <property name="dataType">string</property>
+                    <property name="distinct">true</property>
+                    <list-property name="selectionList"/>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">text-box</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+            </parameters>
+        </parameter-group>
+        <parameter-group name="RCAR" id="7994">
+            <parameters>
+                <scalar-parameter name="rcar_log" id="7995">
+                    <property name="valueType">static</property>
+                    <property name="dataType">float</property>
+                    <property name="distinct">true</property>
+                    <list-property name="selectionList"/>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">text-box</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+                <scalar-parameter name="net" id="7996">
+                    <property name="valueType">static</property>
+                    <property name="dataType">float</property>
+                    <property name="distinct">true</property>
+                    <list-property name="selectionList"/>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">text-box</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+                <scalar-parameter name="total_rcar" id="7997">
+                    <property name="valueType">static</property>
+                    <property name="dataType">float</property>
+                    <property name="distinct">true</property>
+                    <list-property name="selectionList"/>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">text-box</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+                <scalar-parameter name="montant_rcar" id="7998">
+                    <property name="valueType">static</property>
+                    <property name="dataType">string</property>
+                    <property name="distinct">true</property>
+                    <list-property name="selectionList"/>
+                    <property name="paramType">simple</property>
+                    <property name="controlType">text-box</property>
+                    <structure name="format">
+                        <property name="category">Unformatted</property>
+                    </structure>
+                </scalar-parameter>
+            </parameters>
+        </parameter-group>
+    </parameters>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="rightMargin">0.31666666666666665in</property>
+            <property name="headerHeight">1.6in</property>
+            <page-header>
+                <grid id="7848">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <property name="pageBreakAfter">avoid</property>
+                    <property name="pageBreakBefore">avoid</property>
+                    <property name="pageBreakInside">avoid</property>
+                    <property name="width">7.933in</property>
+                    <column id="7849">
+                        <property name="width">1in</property>
+                    </column>
+                    <column id="7850">
+                        <property name="width">3.367in</property>
+                    </column>
+                    <column id="7851">
+                        <property name="width">1.408in</property>
+                    </column>
+                    <row id="7852">
+                        <cell id="7853">
+                            <property name="colSpan">1</property>
+                            <property name="rowSpan">3</property>
+                            <image id="7854">
+                                <property name="height">1.1916666666666667in</property>
+                                <property name="width">1.6416666666666666in</property>
+                                <property name="source">embed</property>
+                                <property name="imageName">LOGOBANIMELLAL.png</property>
+                            </image>
+                        </cell>
+                        <cell id="7855">
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <text id="7856">
+                                <property name="fontFamily">sans-serif</property>
+                                <property name="fontWeight">bold</property>
+                                <property name="textAlign">center</property>
+                                <property name="contentType">auto</property>
+                                <text-property name="content"><![CDATA[SYSTEME DE MANAGEMENT DE LA QUALITE]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="7857">
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <grid id="7858">
+                                <column id="7859">
+                                    <property name="width">1.4022916666666667cm</property>
+                                </column>
+                                <column id="7860">
+                                    <property name="width">0.5291666666666667cm</property>
+                                </column>
+                                <column id="7861">
+                                    <property name="textAlign">left</property>
+                                    <property name="width">3.413125cm</property>
+                                </column>
+                                <row id="7862">
+                                    <cell id="7863">
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <text id="7864">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="paddingLeft">0pt</property>
+                                            <property name="paddingRight">0pt</property>
+                                            <property name="textAlign">left</property>
+                                            <property name="contentType">html</property>
+                                            <text-property name="content"><![CDATA[Réf]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="7865">
+                                        <text id="7866">
+                                            <property name="contentType">auto</property>
+                                            <text-property name="content"><![CDATA[:]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="7867">
+                                        <text id="7868">
+                                            <property name="contentType">auto</property>
+                                            <text-property name="content"><![CDATA[EN.GRH.51]]></text-property>
+                                        </text>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                    <row id="7869">
+                        <cell id="7870">
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <text id="7871">
+                                <property name="fontFamily">sans-serif</property>
+                                <property name="fontSize">12pt</property>
+                                <property name="fontWeight">bold</property>
+                                <property name="textLineThrough">none</property>
+                                <property name="marginTop">10pt</property>
+                                <property name="textAlign">center</property>
+                                <property name="contentType">auto</property>
+                                <text-property name="content"><![CDATA[ORDRE DE PAIEMENT]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="7872">
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <grid id="7873">
+                                <property name="width">2.3583333333333334in</property>
+                                <column id="7874">
+                                    <property name="width">1.3758333333333332cm</property>
+                                </column>
+                                <column id="7875">
+                                    <property name="width">0.5291666666666667cm</property>
+                                </column>
+                                <column id="7876">
+                                    <property name="width">4.085166666666667cm</property>
+                                </column>
+                                <row id="7877">
+                                    <cell id="7878">
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <text id="7879">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="paddingLeft">0pt</property>
+                                            <property name="paddingRight">0pt</property>
+                                            <property name="textAlign">left</property>
+                                            <property name="contentType">auto</property>
+                                            <text-property name="content"><![CDATA[Version]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="7880">
+                                        <text id="7881">
+                                            <property name="contentType">auto</property>
+                                            <text-property name="content"><![CDATA[:]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="7882">
+                                        <text id="7883">
+                                            <property name="contentType">auto</property>
+                                            <text-property name="content"><![CDATA[01]]></text-property>
+                                        </text>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                    <row id="7884">
+                        <cell id="7885">
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="textAlign">center</property>
+                        </cell>
+                        <cell id="7886">
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <grid id="7887">
+                                <property name="width">2.3583333333333334in</property>
+                                <column id="7888">
+                                    <property name="width">1.3758333333333332cm</property>
+                                </column>
+                                <column id="7889">
+                                    <property name="width">0.5291666666666667cm</property>
+                                </column>
+                                <column id="7890">
+                                    <property name="width">4.085166666666667cm</property>
+                                </column>
+                                <row id="7891">
+                                    <cell id="7892">
+                                        <property name="paddingLeft">0pt</property>
+                                        <property name="paddingRight">0pt</property>
+                                        <text id="7893">
+                                            <property name="fontWeight">bold</property>
+                                            <property name="paddingLeft">0pt</property>
+                                            <property name="paddingRight">0pt</property>
+                                            <property name="textAlign">left</property>
+                                            <property name="contentType">auto</property>
+                                            <text-property name="content"><![CDATA[Page]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="7894">
+                                        <text id="7895">
+                                            <property name="contentType">auto</property>
+                                            <text-property name="content"><![CDATA[:]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="7896">
+                                        <text id="7897">
+                                            <property name="contentType">auto</property>
+                                            <text-property name="content"><![CDATA[1/2]]></text-property>
+                                        </text>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                </grid>
+            </page-header>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="6123">
+            <property name="marginTop">10pt</property>
+            <property name="marginBottom">10pt</property>
+            <property name="display">inline</property>
+            <property name="height">0.5in</property>
+            <property name="width">2.8666666666666667in</property>
+            <column id="6124">
+                <property name="textAlign">left</property>
+                <property name="width">1.225in</property>
+            </column>
+            <column id="6131">
+                <property name="width">1in</property>
+            </column>
+            <column id="7833">
+                <property name="width">1in</property>
+            </column>
+            <column id="7836">
+                <property name="width">2in</property>
+            </column>
+            <column id="7839">
+                <property name="width">2in</property>
+            </column>
+            <row id="6125">
+                <cell id="6126">
+                    <property name="colSpan">1</property>
+                    <property name="rowSpan">2</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="textAlign">right</property>
+                    <label id="6103">
+                        <property name="textAlign">left</property>
+                        <property name="display">block</property>
+                        <text-property name="text">Numéro OP</text-property>
+                    </label>
+                </cell>
+                <cell id="6129">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                </cell>
+                <cell id="7831">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">2</property>
+                    <property name="borderBottomStyle">none</property>
+                    <property name="borderLeftStyle">none</property>
+                    <property name="borderRightStyle">none</property>
+                    <property name="borderTopStyle">none</property>
+                </cell>
+                <cell id="7837">
+                    <property name="colSpan">1</property>
+                    <property name="rowSpan">2</property>
+                    <property name="borderBottomStyle">none</property>
+                    <property name="borderLeftStyle">none</property>
+                    <property name="borderRightStyle">none</property>
+                    <property name="borderTopStyle">none</property>
+                    <property name="paddingLeft">1pt</property>
+                    <property name="textAlign">right</property>
+                    <label id="7840">
+                        <text-property name="text">OV N° </text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="6127">
+                <cell id="6130">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                </cell>
+            </row>
+        </grid>
+        <grid id="5188">
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+            <property name="marginTop">0pt</property>
+            <property name="pageBreakAfter">avoid</property>
+            <property name="pageBreakBefore">avoid</property>
+            <property name="pageBreakInside">avoid</property>
+            <property name="height">3.875in</property>
+            <column id="5189">
+                <property name="width">2.2in</property>
+            </column>
+            <column id="5191"/>
+            <column id="5193">
+                <property name="width">1.5in</property>
+            </column>
+            <column id="6141">
+                <property name="width">1.5in</property>
+            </column>
+            <column id="6149">
+                <property name="width">1.5in</property>
+            </column>
+            <row id="5291">
+                <property name="borderBottomStyle">solid</property>
+                <property name="borderBottomWidth">thin</property>
+                <property name="borderLeftStyle">solid</property>
+                <property name="borderLeftWidth">thin</property>
+                <property name="borderRightStyle">solid</property>
+                <property name="borderRightWidth">thin</property>
+                <property name="borderTopStyle">solid</property>
+                <property name="borderTopWidth">thin</property>
+                <cell id="5292">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <label id="5297">
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Nom &amp; prénom&#13;
+de la partie prenante</text-property>
+                    </label>
+                </cell>
+                <cell id="5294">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <label id="5299">
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Objet&#13;
+de la dépense</text-property>
+                    </label>
+                </cell>
+                <cell id="5296">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <label id="5301">
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Montant</text-property>
+                    </label>
+                </cell>
+                <cell id="6134">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <label id="6150">
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Pièces produites &#13;
+à l’appui de l’OP</text-property>
+                    </label>
+                </cell>
+                <cell id="6142">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <label id="6151">
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Contrôle budgétaire</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="5194">
+                <property name="borderLeftStyle">solid</property>
+                <property name="borderLeftWidth">thin</property>
+                <property name="borderRightStyle">solid</property>
+                <property name="borderRightWidth">thin</property>
+                <property name="height">1.425in</property>
+                <cell id="5195">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="paddingTop">10pt</property>
+                    <label id="5474">
+                        <property name="fontWeight">bold</property>
+                        <property name="marginTop">0.5in</property>
+                        <property name="marginLeft">5pt</property>
+                        <property name="textAlign">left</property>
+                        <text-property name="text">CNOPS   *AMO*</text-property>
+                    </label>
+                </cell>
+                <cell id="5197">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="paddingTop">10pt</property>
+                    <text id="7811">
+                        <property name="marginTop">0.5in</property>
+                        <property name="marginLeft">5pt</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[Cotisations Patronales du mois <B><VALUE-OF>params["mois"].value +" / "+params["annee"].value</VALUE-OF></B> ]]></text-property>
+                    </text>
+                </cell>
+                <cell id="5199">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="paddingTop">10pt</property>
+                    <data id="7842">
+                        <property name="fontWeight">bold</property>
+                        <property name="marginTop">0.5in</property>
+                        <property name="marginLeft">5pt</property>
+                        <structure name="numberFormat">
+                            <property name="category">Fixed</property>
+                            <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                        </structure>
+                        <property name="textAlign">right</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">sommeAMO</property>
+                                <expression name="expression" type="javascript">params["sommeAMO"]</expression>
+                                <property name="dataType">float</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">sommeAMO</property>
+                    </data>
+                </cell>
+                <cell id="6135">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="paddingTop">10pt</property>
+                </cell>
+                <cell id="6143">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="paddingTop">10pt</property>
+                    <text id="7805">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">12pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="marginTop">30pt</property>
+                        <property name="marginLeft">5pt</property>
+                        <property name="textAlign">center</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[Budget de l’exercice <B><VALUE-OF>params["annee"].value</VALUE-OF></B> ]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="5200">
+                <property name="borderLeftStyle">solid</property>
+                <property name="borderLeftWidth">thin</property>
+                <property name="borderRightStyle">solid</property>
+                <property name="borderRightWidth">thin</property>
+                <property name="height">0.4in</property>
+                <cell id="5201">
+                    <property name="colSpan">1</property>
+                    <property name="rowSpan">4</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                </cell>
+                <cell id="5203">
+                    <property name="colSpan">1</property>
+                    <property name="rowSpan">4</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                </cell>
+                <cell id="5205">
+                    <property name="colSpan">1</property>
+                    <property name="rowSpan">4</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                </cell>
+                <cell id="6136">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                </cell>
+                <cell id="6144">
+                    <property name="colSpan">1</property>
+                    <property name="rowSpan">3</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <text id="7808">
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Intitulé :
+CHARGES DE PERSONNEL
+CHARGES SOCIALES
+COTISATIONS AUX MUTUELLES
+]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="5246">
+                <property name="borderLeftStyle">solid</property>
+                <property name="borderLeftWidth">thin</property>
+                <property name="borderRightStyle">solid</property>
+                <property name="borderRightWidth">thin</property>
+                <cell id="6137">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                </cell>
+            </row>
+            <row id="5466">
+                <property name="borderLeftStyle">solid</property>
+                <property name="borderLeftWidth">thin</property>
+                <property name="borderRightStyle">solid</property>
+                <property name="borderRightWidth">thin</property>
+                <property name="height">0.5in</property>
+                <cell id="6138">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                </cell>
+            </row>
+            <row id="5240">
+                <property name="borderLeftStyle">solid</property>
+                <property name="borderLeftWidth">thin</property>
+                <property name="borderRightStyle">solid</property>
+                <property name="borderRightWidth">thin</property>
+                <property name="height">0.5in</property>
+                <cell id="6139">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                </cell>
+                <cell id="6147">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <text id="7809">
+                        <property name="fontWeight">bold</property>
+                        <property name="paddingTop">10pt</property>
+                        <property name="textAlign">center</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[CODE : 61743 ]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="5454">
+                <property name="borderBottomStyle">solid</property>
+                <property name="borderBottomWidth">thin</property>
+                <property name="borderLeftStyle">solid</property>
+                <property name="borderLeftWidth">thin</property>
+                <property name="borderRightStyle">solid</property>
+                <property name="borderRightWidth">thin</property>
+                <property name="borderTopStyle">solid</property>
+                <property name="borderTopWidth">thin</property>
+                <property name="height">0.3in</property>
+                <cell id="5455">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <label id="5473">
+                        <property name="fontWeight">bold</property>
+                        <property name="marginLeft">1.8in</property>
+                        <text-property name="text">Net à payer</text-property>
+                    </label>
+                </cell>
+                <cell id="5459">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <data id="7845">
+                        <property name="fontWeight">bold</property>
+                        <structure name="numberFormat">
+                            <property name="category">Fixed</property>
+                            <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                        </structure>
+                        <property name="textAlign">right</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">sommeAMO</property>
+                                <expression name="expression" type="javascript">params["sommeAMO"]</expression>
+                                <property name="dataType">float</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">sommeAMO</property>
+                    </data>
+                    <data id="7843">
+                        <property name="fontWeight">bold</property>
+                        <property name="marginTop">0.5in</property>
+                        <property name="marginLeft">5pt</property>
+                        <structure name="numberFormat">
+                            <property name="category">Fixed</property>
+                            <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                        </structure>
+                        <property name="textAlign">right</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">sommeAMO</property>
+                                <expression name="expression" type="javascript">params["sommeAMO"]</expression>
+                                <property name="dataType">float</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">sommeAMO</property>
+                    </data>
+                    <data id="7844">
+                        <property name="fontWeight">bold</property>
+                        <property name="marginTop">0.5in</property>
+                        <property name="marginLeft">5pt</property>
+                        <structure name="numberFormat">
+                            <property name="category">Fixed</property>
+                            <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                        </structure>
+                        <property name="textAlign">right</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">sommeAMO</property>
+                                <expression name="expression" type="javascript">params["sommeAMO"]</expression>
+                                <property name="dataType">float</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">sommeAMO</property>
+                    </data>
+                </cell>
+                <cell id="6140">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                </cell>
+                <cell id="6148">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                </cell>
+            </row>
+        </grid>
+        <grid id="5271">
+            <property name="marginTop">15pt</property>
+            <property name="marginBottom">20pt</property>
+            <property name="pageBreakAfter">avoid</property>
+            <property name="pageBreakBefore">avoid</property>
+            <property name="pageBreakInside">avoid</property>
+            <column id="5272"/>
+            <row id="7814">
+                <cell id="7815">
+                    <property name="paddingLeft">20pt</property>
+                    <label id="7816">
+                        <text-property name="text">Le présent ordre de paiement est arrêté à La somme de : </text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="5273">
+                <cell id="5274">
+                    <property name="paddingLeft">20pt</property>
+                    <data id="7847">
+                        <property name="fontWeight">bold</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">Montant_AMO</property>
+                                <expression name="expression" type="javascript">params["Montant_AMO"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">Montant_AMO</property>
+                    </data>
+                </cell>
+            </row>
+        </grid>
+        <text id="7694">
+            <property name="fontFamily">"Arial"</property>
+            <property name="marginTop">0pt</property>
+            <property name="textAlign">center</property>
+            <property name="contentType">auto</property>
+            <text-property name="content"><![CDATA[Emis à Béni-Mellal, le …………………………………..]]></text-property>
+        </text>
+        <grid id="7818">
+            <property name="marginTop">0.3in</property>
+            <column id="7819"/>
+            <column id="7820"/>
+            <row id="7821">
+                <cell id="7822">
+                    <label id="7824">
+                        <property name="fontWeight">bold</property>
+                        <property name="paddingLeft">20pt</property>
+                        <property name="pageBreakBefore">auto</property>
+                        <text-property name="text">Le Président</text-property>
+                    </label>
+                </cell>
+                <cell id="7823">
+                    <label id="7825">
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Visa du Trésorier Payeur</text-property>
+                    </label>
+                </cell>
+            </row>
+        </grid>
+        <grid id="7898">
+            <property name="marginTop">10pt</property>
+            <property name="marginBottom">10pt</property>
+            <property name="display">inline</property>
+            <property name="height">0.5in</property>
+            <property name="width">2.8666666666666667in</property>
+            <column id="7899">
+                <property name="textAlign">left</property>
+                <property name="width">1.225in</property>
+            </column>
+            <column id="7900">
+                <property name="width">1in</property>
+            </column>
+            <column id="7901">
+                <property name="width">1in</property>
+            </column>
+            <column id="7902">
+                <property name="width">2in</property>
+            </column>
+            <column id="7903">
+                <property name="width">2in</property>
+            </column>
+            <row id="7904">
+                <cell id="7905">
+                    <property name="colSpan">1</property>
+                    <property name="rowSpan">2</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="textAlign">right</property>
+                    <label id="7906">
+                        <property name="textAlign">left</property>
+                        <property name="display">block</property>
+                        <text-property name="text">Numéro OP</text-property>
+                    </label>
+                </cell>
+                <cell id="7907">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                </cell>
+                <cell id="7908">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">2</property>
+                    <property name="borderBottomStyle">none</property>
+                    <property name="borderLeftStyle">none</property>
+                    <property name="borderRightStyle">none</property>
+                    <property name="borderTopStyle">none</property>
+                </cell>
+                <cell id="7909">
+                    <property name="colSpan">1</property>
+                    <property name="rowSpan">2</property>
+                    <property name="borderBottomStyle">none</property>
+                    <property name="borderLeftStyle">none</property>
+                    <property name="borderRightStyle">none</property>
+                    <property name="borderTopStyle">none</property>
+                    <property name="paddingLeft">1pt</property>
+                    <property name="textAlign">right</property>
+                    <label id="7910">
+                        <text-property name="text">OV N° </text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="7911">
+                <cell id="7912">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                </cell>
+            </row>
+        </grid>
+        <grid id="7913">
+            <property name="borderBottomStyle">solid</property>
+            <property name="borderBottomWidth">thin</property>
+            <property name="borderLeftStyle">solid</property>
+            <property name="borderLeftWidth">thin</property>
+            <property name="borderRightStyle">solid</property>
+            <property name="borderRightWidth">thin</property>
+            <property name="borderTopStyle">solid</property>
+            <property name="borderTopWidth">thin</property>
+            <property name="marginTop">0pt</property>
+            <property name="pageBreakAfter">avoid</property>
+            <property name="pageBreakBefore">avoid</property>
+            <property name="pageBreakInside">avoid</property>
+            <property name="height">3.875in</property>
+            <column id="7914">
+                <property name="width">2.2in</property>
+            </column>
+            <column id="7915"/>
+            <column id="7916">
+                <property name="width">1.5in</property>
+            </column>
+            <column id="7917">
+                <property name="width">1.5in</property>
+            </column>
+            <column id="7918">
+                <property name="width">1.5in</property>
+            </column>
+            <row id="7919">
+                <property name="borderBottomStyle">solid</property>
+                <property name="borderBottomWidth">thin</property>
+                <property name="borderLeftStyle">solid</property>
+                <property name="borderLeftWidth">thin</property>
+                <property name="borderRightStyle">solid</property>
+                <property name="borderRightWidth">thin</property>
+                <property name="borderTopStyle">solid</property>
+                <property name="borderTopWidth">thin</property>
+                <cell id="7920">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <label id="7921">
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Nom &amp; prénom&#13;
+de la partie prenante</text-property>
+                    </label>
+                </cell>
+                <cell id="7922">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <label id="7923">
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Objet&#13;
+de la dépense</text-property>
+                    </label>
+                </cell>
+                <cell id="7924">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <label id="7925">
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Montant</text-property>
+                    </label>
+                </cell>
+                <cell id="7926">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <label id="7927">
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Pièces produites &#13;
+à l’appui de l’OP</text-property>
+                    </label>
+                </cell>
+                <cell id="7928">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <label id="7929">
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Contrôle budgétaire</text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="7930">
+                <property name="borderLeftStyle">solid</property>
+                <property name="borderLeftWidth">thin</property>
+                <property name="borderRightStyle">solid</property>
+                <property name="borderRightWidth">thin</property>
+                <property name="height">1.425in</property>
+                <cell id="7931">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="paddingTop">10pt</property>
+                    <label id="7932">
+                        <property name="fontWeight">bold</property>
+                        <property name="marginTop">0.5in</property>
+                        <property name="marginLeft">5pt</property>
+                        <property name="textAlign">left</property>
+                        <text-property name="text">CDG pour RCAR</text-property>
+                    </label>
+                </cell>
+                <cell id="7933">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="paddingTop">10pt</property>
+                    <text id="7934">
+                        <property name="fontWeight">bold</property>
+                        <property name="marginTop">0.5in</property>
+                        <property name="marginLeft">5pt</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[Cotisations Patronales du mois <B><VALUE-OF>params["mois"].value +" / "+params["annee"].value</VALUE-OF></B> ]]></text-property>
+                    </text>
+                </cell>
+                <cell id="7935">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="paddingTop">10pt</property>
+                    <data id="7999">
+                        <property name="fontWeight">bold</property>
+                        <property name="marginTop">0.5in</property>
+                        <property name="marginRight">5pt</property>
+                        <structure name="numberFormat">
+                            <property name="category">Fixed</property>
+                            <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                        </structure>
+                        <property name="textAlign">right</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">total_rcar</property>
+                                <expression name="expression" type="javascript">params["total_rcar"]</expression>
+                                <property name="dataType">float</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">total_rcar</property>
+                    </data>
+                </cell>
+                <cell id="7937">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="paddingTop">10pt</property>
+                    <label id="7981">
+                        <property name="fontSize">12pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="marginTop">0.5in</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Etat</text-property>
+                    </label>
+                </cell>
+                <cell id="7938">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="paddingTop">10pt</property>
+                    <text id="7939">
+                        <property name="fontFamily">"Arial"</property>
+                        <property name="fontSize">12pt</property>
+                        <property name="fontWeight">bold</property>
+                        <property name="marginTop">30pt</property>
+                        <property name="marginLeft">5pt</property>
+                        <property name="textAlign">center</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[Budget de l’exercice <B><VALUE-OF>params["annee"].value</VALUE-OF></B> ]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="7940">
+                <property name="borderLeftStyle">solid</property>
+                <property name="borderLeftWidth">thin</property>
+                <property name="borderRightStyle">solid</property>
+                <property name="borderRightWidth">thin</property>
+                <property name="height">0.4in</property>
+                <cell id="7941">
+                    <property name="colSpan">1</property>
+                    <property name="rowSpan">4</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                </cell>
+                <cell id="7942">
+                    <property name="colSpan">1</property>
+                    <property name="rowSpan">4</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <text id="7982">
+                        <property name="fontWeight">bold</property>
+                        <property name="marginTop">0.5in</property>
+                        <property name="marginLeft">5pt</property>
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[Cotisations Patronale RC  sur indemnités de log du mois  <B><VALUE-OF>params["mois"].value +" / "+params["annee"].value</VALUE-OF></B> ]]></text-property>
+                    </text>
+                </cell>
+                <cell id="7943">
+                    <property name="colSpan">1</property>
+                    <property name="rowSpan">4</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <data id="8000">
+                        <property name="fontWeight">bold</property>
+                        <property name="marginTop">0.5in</property>
+                        <property name="marginRight">5pt</property>
+                        <structure name="numberFormat">
+                            <property name="category">Fixed</property>
+                            <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                        </structure>
+                        <property name="textAlign">right</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">rcar_log</property>
+                                <expression name="expression" type="javascript">params["rcar_log"]</expression>
+                                <property name="dataType">float</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">rcar_log</property>
+                    </data>
+                </cell>
+                <cell id="7944">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                </cell>
+                <cell id="7945">
+                    <property name="colSpan">1</property>
+                    <property name="rowSpan">3</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <text id="7946">
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Intitulé :
+CHARGES DE PERSONNEL
+CHARGES SOCIALES
+COTISATIONS PATRONALES AU RCAR
+
+]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="7947">
+                <property name="borderLeftStyle">solid</property>
+                <property name="borderLeftWidth">thin</property>
+                <property name="borderRightStyle">solid</property>
+                <property name="borderRightWidth">thin</property>
+                <cell id="7948">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                </cell>
+            </row>
+            <row id="7949">
+                <property name="borderLeftStyle">solid</property>
+                <property name="borderLeftWidth">thin</property>
+                <property name="borderRightStyle">solid</property>
+                <property name="borderRightWidth">thin</property>
+                <property name="height">0.5in</property>
+                <cell id="7950">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                </cell>
+            </row>
+            <row id="7951">
+                <property name="borderLeftStyle">solid</property>
+                <property name="borderLeftWidth">thin</property>
+                <property name="borderRightStyle">solid</property>
+                <property name="borderRightWidth">thin</property>
+                <property name="height">0.5in</property>
+                <cell id="7952">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                </cell>
+                <cell id="7953">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <text id="7954">
+                        <property name="fontWeight">bold</property>
+                        <property name="paddingTop">10pt</property>
+                        <property name="textAlign">center</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[CODE : 617422]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="7955">
+                <property name="borderBottomStyle">solid</property>
+                <property name="borderBottomWidth">thin</property>
+                <property name="borderLeftStyle">solid</property>
+                <property name="borderLeftWidth">thin</property>
+                <property name="borderRightStyle">solid</property>
+                <property name="borderRightWidth">thin</property>
+                <property name="borderTopStyle">solid</property>
+                <property name="borderTopWidth">thin</property>
+                <property name="height">0.3in</property>
+                <cell id="7956">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <label id="7957">
+                        <property name="fontWeight">bold</property>
+                        <property name="marginLeft">1.8in</property>
+                        <text-property name="text">Net à payer</text-property>
+                    </label>
+                </cell>
+                <cell id="7958">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <data id="8001">
+                        <property name="fontWeight">bold</property>
+                        <property name="marginTop">0in</property>
+                        <property name="marginRight">5pt</property>
+                        <structure name="numberFormat">
+                            <property name="category">Fixed</property>
+                            <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                        </structure>
+                        <property name="textAlign">right</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">net</property>
+                                <expression name="expression" type="javascript">params["net"]</expression>
+                                <property name="dataType">float</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">net</property>
+                    </data>
+                    <data id="7960">
+                        <property name="fontWeight">bold</property>
+                        <property name="marginTop">0.5in</property>
+                        <property name="marginLeft">5pt</property>
+                        <structure name="numberFormat">
+                            <property name="category">Fixed</property>
+                            <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                        </structure>
+                        <property name="textAlign">right</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">sommeAMO</property>
+                                <expression name="expression" type="javascript">params["sommeAMO"]</expression>
+                                <property name="dataType">float</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">sommeAMO</property>
+                    </data>
+                    <data id="7961">
+                        <property name="fontWeight">bold</property>
+                        <property name="marginTop">0.5in</property>
+                        <property name="marginLeft">5pt</property>
+                        <structure name="numberFormat">
+                            <property name="category">Fixed</property>
+                            <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                        </structure>
+                        <property name="textAlign">right</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">sommeAMO</property>
+                                <expression name="expression" type="javascript">params["sommeAMO"]</expression>
+                                <property name="dataType">float</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">sommeAMO</property>
+                    </data>
+                </cell>
+                <cell id="7962">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                </cell>
+                <cell id="7963">
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                </cell>
+            </row>
+        </grid>
+        <grid id="7964">
+            <property name="marginTop">15pt</property>
+            <property name="marginBottom">20pt</property>
+            <property name="pageBreakAfter">avoid</property>
+            <property name="pageBreakBefore">avoid</property>
+            <property name="pageBreakInside">avoid</property>
+            <column id="7965"/>
+            <row id="7966">
+                <cell id="7967">
+                    <property name="paddingLeft">20pt</property>
+                    <label id="7968">
+                        <property name="fontWeight">bold</property>
+                        <text-property name="text">Le présent ordre de paiement est arrêté à La somme de : </text-property>
+                    </label>
+                </cell>
+            </row>
+            <row id="7969">
+                <cell id="7970">
+                    <property name="paddingLeft">20pt</property>
+                    <data id="8002">
+                        <property name="fontWeight">bold</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">montant_rcar</property>
+                                <expression name="expression" type="javascript">params["montant_rcar"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">montant_rcar</property>
+                    </data>
+                </cell>
+            </row>
+        </grid>
+        <text id="7972">
+            <property name="fontFamily">"Arial"</property>
+            <property name="marginTop">0pt</property>
+            <property name="textAlign">center</property>
+            <property name="contentType">auto</property>
+            <text-property name="content"><![CDATA[Emis à Béni-Mellal, le …………………………………..]]></text-property>
+        </text>
+        <grid id="7973">
+            <property name="marginTop">0.3in</property>
+            <column id="7974"/>
+            <column id="7975"/>
+            <row id="7976">
+                <cell id="7977">
+                    <label id="7978">
+                        <property name="fontWeight">bold</property>
+                        <property name="paddingLeft">20pt</property>
+                        <property name="pageBreakBefore">auto</property>
+                        <text-property name="text">Le Président</text-property>
+                    </label>
+                </cell>
+                <cell id="7979">
+                    <label id="7980">
+                        <property name="fontWeight">bold</property>
+                        <property name="textAlign">center</property>
+                        <text-property name="text">Visa du Trésorier Payeur</text-property>
+                    </label>
+                </cell>
+            </row>
+        </grid>
+    </body>
+    <list-property name="images">
+        <structure>
+            <property name="name">LOGOBANIMELLAL.png</property>
+            <property name="type">image/png</property>
+            <property name="data">
+                iVBORw0KGgoAAAANSUhEUgAAAOEAAADhCAMAAAAJbSJIAAABd1BMVEX///8da5sDg1L//v9kn8v///1k
+                nsz8//8da5z///wDg1H2/f3//f///v2FxLzN5eRng61aksE+aJ/o9vQAf0wcbJnT4usAekYAfUgAYpYA
+                YJdXmMvP1NYAXI8AX5AAW48AdT3s6+sAXJUAeEfGxsXd7eoAV4f09fQ2daIAbS+8180Acj0AZZT1+/8A
+                XovT7OLAytsdTIxumbPy//uJqsHe7fLB1+M9d5yox9XJ3eWWucyIvaZToYEeaaHQ1+ZOfLGisMuXyLNB
+                mXVej8Vxr5Sox90sU4tvpcng5fJhjrMsjGSJt6KQxrF0lrBXiqhLgquQscooao1AgJuozLx1pbVyt5un
+                rMSOnLUNNnp6jrJUZ5wSRYMwW5uhvdaKr82vy+JsfaGQut0AMoIYRYtRbZEfSptFYJY8Z6U0lm4tTH+0
+                v9ebp8VCcKNdgrOjx+V7kr9EdrGkop3S1s6ur69/gn4ATYiQkY94fXoAXBamxrxgsY634tEAcS3cWWR1
+                AAAgAElEQVR4nO19i3/axrL/GlleCaFfSkCAcHgE/MRgYkCAMY6LTZyYOCYpzWly4iSnN+c2aev0Jifn
+                pA/3j//NrHgI0Ar5gZ3ez52mxgZJ6KuZndfOzhLyf3QxUlVCRFGVCbxSSlVZvO47umxChIIg+GRVBKAE
+                8NHrvqVLJkRoMk5RcoYR2vxfxESRquw1Z5SrpUdHFS0bj8USSwHnc2SVPZS/BKlUDZRrhUo8EYvqWQlo
+                ZmZmO36HfwYlAmDEf38NUkXyKKFvm8jgfw1eZjStwD1BkEWDEFn+y8ixSsmRJHVxaQwk/NBWuCeIpJqq
+                lMoK/CoQ8hcQVoFSTTJxWUhLGCKRxw4GOFQ24jNSNr5+VDVAOckU5FX+olHKYi4+M4pQ0vSqbD/ORPUg
+                y46X4kvtlwb8Lcrjj+KLIjWUGuUgIiwwGbShckozDwHZzibaVQVRX+0t25LK1QtqNTaGEOWUCuNMBMWr
+                aDPb3afAOJmIH2wym/MloLQlldTidghjhs1DAXeuFO/qpcGziK3UAl+EoNo/ZJEU7ADO6FV1/K4F2UiY
+                dsUq0pIULRF6fTxUzf9zXIRtW4RSwTyTOaz9a6ltZNrwCSCtsTJHL10Fga4Dads8WgrItgpBJLotwpks
+                FUSIN4jgQ1ccLgOIxWpcGzsQdE4qdI08FEDYQkcpSTqhRLVRj2LOVtHMaCnDPEBmIZUAuorKgdg4QNA3
+                0rrC12RTJoRkFEC/b2v6o3GFCqEgCS3Z83C7cnBQKJRq1XLIUDDygEf1SNdsDtakCqHXgBAtMXxvoJTo
+                upyJGrE6HzDC0H+Wy1FbgHhKVtJ1PZqIx7XKQals0M2E7XFoPK9HSH2CTGvxrPakeyepsmrRBzgsRZko
+                paiN5JnSx25fA9M+IwHQVDZrr5M0/bEqXoPVF8CvDFViKG+9W4kb6sBTgVuiRrWQzW7b3Xb/9jHcYD8A
+                qcZ5FrGyeh2+qajmvk1Iwzf7JAe6E9Qi3o2yWViJ6WjdOPdtBcletFFL2EcY4rl4U4RHZVLWRuyAJmWP
+                iOwTqCwDPCnBMRNnJmlJuWp86F4phcToM9+e2U4xbRMqSTEUuW3NTjWeHWHl6gESOfdEHxc/GEn/Keeq
+                3yR0bUYa877ODVA/uAaEVAytj0V9bChpT6LbXJVxPorWVNXOmSDoLgpT0kAQBITWt8dlEPUKV2Gck6T1
+                MlheYmvyfZROSQeBqVND0fHshJlrumSI20chIvpsEcKgn1JchbIhgj9mp0kuFx5eT0sVDDPIHhJJFFGj
+                DC/TMpVUDWVtIU6BsomCIcogkz0wIkY0IqnGUyUiT8tppbIYSumXqlO4BJ5brEYRi2pBqBRimhYrKOAh
+                T4WNImWZv6shUM9RrWxRNwCpHI9iJidbMezV0IWJJTdv6Jc/8GwBwmiUEoUcm9NAZpLiowT6eWihZgwi
+                TEnhgBMail4JRJP0eJWIioxu+N2ZbiSC0LObxDcdhDKYfuOy3E83pK0fBSCuFpVSSutFXwByO7F56QOx
+                a2dlGIuh+FVpVPQo9GyZQNSW7U/1MJhSqnzJAEWB+JQuTDEUuzqImCMu1ZYkbWRsSIky8JZcXpTlw2m+
+                AJMMiKMA4hUilHRzXAzbKWmpfKkaFR5XoNlhv6ogqDds09pTQqjNPJmxSOhMF60UQ0G9BB4K8KR8lCiN
+                cLI7U62C9g7FuM7o0PuDh8/CD/aZdrY4S5rhHC8tbZLLsfyYIsy0wpF6/4FBpLEZG01VD4HqQe2ikczo
+                EQORy3LT8YqJ0GX44RS8iUA97PVEOn25lwUR1A3nm9mXm2NG17Ox2Ho8Hl+PZ+OMolGLrdEuZlg1TVs3
+                LiylFP9reIIerye82A/N4BcqbsZtgimTc/BPjyXilUKpWg6FjJwRCARyOSMUKldrhSMtHkPdoUkXRAhf
+                H6teWEp9Asnvpr0ej8fbotbJEhUgrg8bDTMRCneuJ/R2qRpi6SQzDyda0580sFkrVGLRrDQYm+cgeD76
+                0QWlVID/6FY66EUKNslQeA0RzI3hGQoN/+nrqXYtlENUsoiFUH2NTll4Dj9NsLlyqRJnuZ/zRiuStB64
+                2BSVClYw3woj/4BgGA5N4oKLOhJp4KzYeuEO07jgSQqCaDNIsKhENLMwKjGqR0v6+ZM8iSqhF0AoCNRH
+                GmnA5mEUzo/aHpWqRndyjGVr9MRBt2bEnKG2zFOrY3PWKjEnX4xaJZGV+nrZLVgU7ewB4U3TuiIQKVCh
+                ni4+jzdYHDtEVGUj2jUDUqpSMwhmkAS36g2nAXB8hkrrUWnmrANSmok6VpJNJoFkQIX2ydsaP4QVw2Aw
+                JWXjR5vEnJwRBLcQWVqCYjYmV3uSOnNKMnXvovmaQ7CBTEYZG4N1m0NAkcnGupZNHEDULQL/xqXRGSHO
+                J7P6GVqupKQzIJRmQI9eZBBCRA1G3jtgoSe4ZVchKoDRMJ4UDPUCdXc9jlcrKdeCCkNj3ZAvYO1hCLaC
+                Ho8VYaRjeyTmUS+rpoBW4/HRIIlD2kyqSuxUtWs69VjxeU1VaksipSq9jAlbnN1SSpwZ8jGEEsjouedQ
+                YXh00kMSipRe5B2PedrL8PDZDRvt+OTgGnynrHF+Ww+a8DDpGQXoSY8biykQgHwZkyZJKnhO314o+n2a
+                HOMg0JVMWuKkudFen6BV0Xmqnrc0HhzRZsQGH/jdl4uFRzLYx1qKPwFuIpwBVXq+60Msj37MGERvcPfq
+                ZtZFsrmuTzD/0ramnF2XQijhU+oROxH1ButXiJDKgaOUs5xua9HC2eUUPFEA6BnXMibCKyOwPbJSmAAR
+                LeKZNbhMKQK0I2+kObVJu3FSsSS8lnBMysI4jRnqGe0UJc2IHQMZwqdXiJAwPlaXtp3GIkRc7TP5ijjK
+                uAAB4dbVIlSZvnE2ixJEwGcgQLgVtod32QhVUVAnVeaBgyOrISeImKqMG2dI01DSSNoqma6m2bogLCsJ
+                MvnbdxNHkEplnCBx5OKRVZ+q/R+2X0oySS4HTR5eEmHyLff8mTGx3gCMhlyOOzpwWmpYTlXQUVxvLs8d
+                g2fnIa45HLOeuATR5Fvuzv6z5900o+NVIMItJxxDRklTLCsbuZcUBCoEWg743CMUVVw2iiXcw9+lqiz6
+                R5R3n+8/Oz4JkcmZTsblKie13gUYLRFZpKooi3A5xSiXHttdFnwZWg86AXSL0GSdTHKh8p0B3e0S/Pr8
+                78dvNm6e7LxyqbdgxJYcIILFXDJQLGkuVC18s55I6brNSg1M3D90lFFE+NTVHQH3cnd+/mH/xYuN4+P9
+                1DH82N/fGNDx25OdPf/8/ZxLHYgZ2gKv5piRXsDVjiuxWDQqSZqm6aXxkQgXObWNl6wIwadxQaKY+/qH
+                ZxvHN3fe7+357Wl2dv5VAFcluCKRikqFHzACpqw5C9JbtSHFFXlkiOAgTDtz0J3XRoEvd2GM3Wz752Zn
+                789aaa5Ps/NzLxVZcF3yI4iikbWdAhqAtCR3tJn4vZEYgfoo2Z2AD6X0j8kjR5W/Bh3y3m/BA1Dnuhi7
+                OGdfhUA3CGfIsVC5vOSQCx/RtZpUUUe8CTD1Ewahx4wtJlpo8tOz/R3g39z87Ly/yzyUy/m5eUYgoa9e
+                G6CIRPEMroggi6SkO4zEUZixu8NXF0g+PGEQetxEwKDajTf7H+bnZ+8/fh0CMpBCQ2TksPUAWw50JlLp
+                yiSIA6w4nTFyq62gG4Q2SX0ribKc+8d/TvZeldl6GHFAzBSav6B2Uc+UFu9BNOyXntiSlgoMq7FDTkg4
+                jNA7IROlyurdZxuvDGbv+8DgdxVdEyRRPrfvrlJSc81ELKK2nizk0xMZaCJ0zCYif77awOoPmc33iqSH
+                sA8WfkH36lwoRUIrrqvpJG2F9r8GHL960BVCT5ibEWa3IMi5vz+YWggJ1w2l3JZhSVoi1Lf6lHT4MeEw
+                8bL6PZJ9RL7IVMlEKjhG/FaEM7gCtQvRV2x5+UHhMMKMi7uY3uJdVQy4LYnE9VQU3Q8Bbf2WGzXDxDTc
+                4SbvIJD76buff/7ub9NcFQnKJjXjdoYxUWYPG0RqMe0SIAsueAhB1X0FjvbxzdwUUzmirLgGCO44m7cR
+                BEw9uUbY5CKEq311c88/63cbMZyHVCrfs1kzzKPu9HDeNQvBXOxyvxyCQkA4N+e/7KLWIaKy8mTiwj8k
+                TFEtbYosw910DntHiPvdMiIER3Tu3jQRAlWjbiwGrp+DKBGFNO/WUiAPPWlubYeJEOKil1NOqSqutCl4
+                4dkKVoaclYV8g9hDOPf9dAFijOFCSjUpUVKY/7QYdmUIezwMnxKb1h0WhMDE0NTWzplfFEhNQIjFg9Fv
+                elOLT8/CQq8nssWLn/oI/aEprWUxCdfvT5BTScvGql1/RihOTF0MI4Qon7P0r49w7p44TaMPdrfsmFuE
+                IZg4CmAxGTu+E+nduzuEntZkhPep7aqyUeHGFMZYlChMrkqHQOwJ1+pjskafKYMG7V25Nbh3dxi51RgD
+                hLM26+awsGvME7Dp6yW7yL+ppMZNLUrSduJbxVLPOmQqJgf5Hgdl2kM4NztrjN2lijmZESbKqkBGOw4J
+                ojy54k9UjRg3xJAqIYxT+w/P6rB5Xfk2kcYkhHOzr8eETyTKT3fGmPPgu7+NKiXVuLM8CSE8hxUuwPVN
+                VnWvWoTUrDv0RsL1zNPJcTCmTO3Xi/Xs4ezc/MseD1lxN+YMl79+8ew7dnPm+xD909B3L/7r6z5jWd9I
+                MfTPZ/91eyJCQkpZnqLRH4tDioLBA3xhzyE4KxOmLUyIvGRUH6HFq0Fpgd/vPn/25vjmy96RuBA0d/ef
+                z/777cm9wXuEYKb8+ObJZB5irM9VpUdkSC6YhvGGW50ihoqT4cH/YY7f1tc0QEYXIi65zt35x5uNmzt7
+                /j4afO+HNxtv2/69qql+8PAH3/3w4vjtjn8vNxkgVXgAZ7SsMpRGwXsGfKwrI7g3HvsiE+TyACEnzLcg
+                nDd6T1HM/bz/Yv/mDvPI1W4Httx37D2IQ/Zei6B3UbOHnr94gZlycIkmVzWD0S/Yp/gh7EgMOxzgpAQP
+                i93BkOH44N537yw1mMGH9iZrIKWzfkNWZWyZl3v+I9w3m8HAmANCSJnc/cfGm5uIBeyK/zUrS1XvfvUM
+                2cyy//OBSXOmuMKhqnOSblpieDGbJ90MYF9Npjy2OMMw8vB04Lx6Pe/sg2CLtQBVgxbxzj9ebLxlfGEI
+                X+IMHr4HWObnzDeBh+TBzziRs2Oy3xVCVRaNBA9htjQspRmsOe860/WgveGPdCw6yOtNByYhBK9Gzf0E
+                fPlhx++f60083UMsb47fvvf7zUka+OQ1vPfixf5Je8+csJmdd8dDQngxopYdbhhiynyXqy07eDjyFknA
+                4g5EMrZiOoSQvPzxzYAv5s/vqzffmEOtN9EG773a3zg+GTwGNzw0b7hgH0JBWLgy7DxZbrXItYbKkPMT
+                bDqNwy7C9wzL3AAh/PDvrDD2DebcYCTuMJE9K0KBl+AHhHFlyIuw3Csv2A/ussm33qc4eeGz8b4tuhQQ
+                fnXin2W4+jyEly6rrAi7s4tnRaiquNDaHmHKsF7AOqJOOQhZEQ1m5LoWwxvOCBMQzhL/jqlALVLaY2Yf
+                pRXZ2RCC45mL23SRQYgzqU1OVxvuFGkYF3PBOf2KxYht0nSAEP4nByv+sbt3Q+4QIm+4k956lReANTmq
+                FKMJivM3XYhecNwcEQKRr6aNkHCnofTHdoejudjlIAwumzLpMyMRL3NrxiFOQDg3ZyOSo++wGgaXCI94
+                zrf+yJ6HFD24cYTgsbW6LYvAbj5MskDEVpsOa5r3DOGc5daZdbg/wDRnHZpzg4Hpd7kWjRteZI+Ivdel
+                BO0QjlQ+d8Km6bcJ9Ed06coesxzstud7gObxv/l5eIdVMsyZno15WFfB3p93EVvg/Vd5OcXttu05lKUV
+                bRFaAkKB5FsRYGvYZvnTCMKdve/vAf0y+/29X3755d59k4f3XsNbv8x9jy/3TIbev/cSfv9+Fn7ce/kL
+                IHTBQ0RY5qW+pYoZAo+VsuQ5CMMNS1NEYPVWOMimL0bTpqMI/SF8kxzcIaJPJq92mP0PYHph+f1dcMxV
+                5WDnAI59hWUn8ms/a+tlgJvnJj4E2uRkTSG8qBoKeudDmQbVjCzsEEaGoyVgYz2NnhsdCfXHeBiCLxF8
+                N2tEln3kf1IM4QNZFuUHG3dVKou5k7f++fvz9zEMUb/+gQrYvGjj5L1LhAYvCJakeEwr1LAaxOqDCzDE
+                bDWpdyQeRNbl68ndsYWNYwjLNJdTlP2vSc6XI8+P38/ByDPgPfrgxR3iyym5v7/dmwWEVIHDvv5ByeVy
+                vgdvTnaWXelSbukJNgTH1cipmUcvQ5Z7FNDg2yJMjiTXBMIwZkbV1TDC/znZm3t/cx/o5OQEX96+B11y
+                /3775v6P+8cnKzd/3N/feOtnyvNkCT4/hsPgvf0VlwhFw641b5+P+JmuL2Wtp2zZLXRCHtonSKkzwq9O
+                9mb9Ox8+fADP+sOHlZ32exMN/LHzob2zBx/tvPejOr0Pzjf80W7vwSc7Owd7AXcJ88CEblxmc1TrGbZL
+                uYCCRTvbMl7fPKZp7m2WgWa/38TXV/Psk9f41uvZX9jLfWYG7+Pv5Zd77KXsn91bdofQmFw9JEmS9Qxu
+                SY3LFoXDCA8+oC6FYLX9GvPYpPSBeQAGKBrxwcldLB7KHewgX+/D57L803ss/5aNk3bbJcIcN6FopcHx
+                /KKhlsvFXCMIQZeCTZLV/Z+wFow834BxeH/WALUpP3hxF9SnnPsnCyfvY6GRCLrUVLMf/O68NlGZPIk4
+                xEMKbikPoTsaiw/LxgOg/a8NeDWe77/Hj0L4e/nH1/jJ3R/evkeE8Hno9s8/4NHG3Y2bbXeLOAGhm7ng
+                wQkCD6H33fkQgune2d/Y+M/x25ObGy9ebLDp4Tn/yfHGm/3jmzf3NzB7iDyc99+Ew0CXvt14sbFxfLKj
+                uOMhXbkshPzqiwkI5/z+9/69nT3/3vu9vbaZ35iF996/h7fYq595AXN75nt+84M9d563SNouAA4hfHdB
+                hPCdX510oycToZkwHGQq+lm3uX41tLVCmr1zf27eDQ9FCOPbbkqHrCe1bBFiWbA7gvsaR9iPGaxV3wPc
+                4xmb2Tm/O4tPqHZGhLTltY0P3SNU+7k2QOg/8c/NjQIZcG30jR7C+7PzLhGKOVet1KyncKTUHUIsAgYp
+                fbsH0d8cBICYp/HPn4tcWgvVmFSRMYKQOw4971zaQ0GVb93tVauTu3fvhs5JLqwFTjaWXRXTWhHy7KFr
+                a2Gub0BuYo8ktVe0zu5oiIbfsByCgavYSwE5cRI/48b4Z0XInREd/1oGCIIq2g2sVFyCzPriQpBrWd+B
+                W4/RHlnuGhw6jMtdlDbitR6d0Wtz8ksdvwxDc1otVCrtkumIyoJMArWjSuWgpsisHci3BUPFxIJRa6/A
+                uwG2isy8UwofFr6F/0vVAFEFkVQLNdbCEKSwUODuQyfCIW1etz8uwqa9tZjUCgPuZfNJPLYej0UTj9ha
+                d5WWoqnEejyKrWNlcvvWDO4XQ0gtnkosrccT0Wq/ElxYXpC2Y6lEIhFLparA7IXHOttqBwDGU4/43woX
+                0M6O0DZ68np5s9r9x1lN6AdlwwjVsnB32AWrEM2WQkZo80BfKiNCLQpOOGiGWA2XzxTisc2+IC4vVPQq
+                duErF7KJTZEs1KIFZs7LUb3k0C1BIDl3zZqtJ9lHwIDQsTyfysZ6FHdGWF74uBmNlmGI1WLrmyCAtz//
+                q5CVciog1EMqWW7HqjAylz8ulKIH/Vna5YUVfROCj+VPtwp6QQUeAkIIRcrr0RJxWBclEsNd81TrQ2nw
+                YnzH8nyfXMgemEtvFz4VjiuE5rJ6t/7g34vZpWqXh8u3pBgMQJGSz6H/rPcFHxDGylj9RT6XU+2ulFK1
+                mkiVzPoTLsKyIw/7y/SsCDucPA2nNVTvFg09vimbq3v/HSoH6O1qNtvdAmr582ZIUU2Et2+tAHDsfnBr
+                oRjoD0TkYZkZ3H9VgXsqQyiXo3HM0PG7lsD1azqnFnqob+p2/xSQfE6dgjfScDD54q1NfV3pVozcRn/r
+                VilVMOvaBPk2mrcuDz/XdL0Uklm1kECHpRQpsJKC4ckQVmNZEGinhSnwPQe8hRfmHj1ZPZpIrGtHg1Mo
+                myC1m7fAekv+dy2U9RWLdQZdcaTXhipoTYTk860CLtI9qBlUZus8cC0URYRHYCwKB3FAxTTNt+U46//E
+                mwTsPhpuowUtrqfiT45KtXIoYDEDcLmAbc7bOyF8WqhGLdMEIK0LR9GXQwOoq0vlzwvlo/VoVE+slHFR
+                gVlaBwi19RhYi0RUq1HGw0pWr+grjo3DBFGtctfOZB+XQzlq3oxFVwFCZdD+cYQUhyH/aYiHcNufjkC1
+                DnyxHkIcgJ/+datcaus67krTYwXwsGoshjbLNQ3N6cLjrBarBtDuOLk2IinwMm1Sloqku+h/KOMpCKTF
+                Qei4Xu3TZjxrCrGAjqVMPpbg7nzsLYFtDsUQqmxPQOH2rYUFo6BHDVJrH7XblZKysBLfBE28fOuzEU1t
+                gpRm18vqr+VEqupULK5S+12wcDOFI7bYGv1ccbhvjWA/B4wtS+3mQ/sIQ3rMYE63Sn3GN499H6vRivn8
+                RSJXC11rge5Ylanc5c+3jlK1hVIqtbS09EhFa8FE4Nangl5SmT0Eu1PKRg3RYVuATfs6aAiK2e40tucI
+                uL7LvmCowSt8Brr96Sj7rbkVmbhci8bJRyMa32SPRKXLbXBMTCn9dC91wFxrgXx8nKp9DCjFolJUQErj
+                ZfOOEKG48DhVQLtze0WvUG63OZGU7HcEAz8OPCNODS5OzdjzENtfcRc7kV8346kb6J2CZy2BGr0Nd1ph
+                OswHAU7c6CL8fCMVZ1twUVWpgAjK2GYXHsoA4fJMtGpaC5CuX0MxvcQNoNhOvBwpzeb4W5fwF8/wWQi6
+                c6EQ1XHnV7Kp6StgGn99oOnf4NyhghaQjUM9hEIY1dhhAfil3wkfEEa79vBIXw/AOGQ8JLc+1qLrZVGw
+                22kV5OXG+D61XYDSgUNgWeStBQ4vcnkI9KtxFE1pR0crKf0J9vdc/jWkpeKVoyNNj6EHZiIEwTuK6nBY
+                Ox6N9zuMgzdbkSpAmpaKLoH7Znre8MnHf7Wz2YD9xnK44pnTn30mW3PqvvOOg9DJb1PRllfb2Lf7SUnA
+                rkj09r9vl1bAo9DbZTQSgDCFJZ//hsM0OEwr5Qb+GFoL/YkOVClhF4IuDwV8cFm9TVUbz80nk4rGq2SP
+                G06NKDgroCy1CjYddSh6mrewswD294RQXiZ0YeEW/B0we3Uuf1KoQuFM87DbcARO95q0/FFRerE+/vi0
+                rOBlwOO5/ZEoijKkxc1KLBi+RpyDUNJmHHcQ7nDm14aDYJGwJsEDYqzEywqD5sHsW+APn9AtVBH6J1tP
+                716uD0FgNeDsA+wOqQ5/kfkgVFGucqr22LaXTsRdlB/phYjwFJVrJfbkOHMyuDVaquyUwaIKL1MzaIAl
+                0v93rYT9oFR+BxBJc5zsFPirEXCxkyluZNFCN66GBt+3iM6TEedG95Jzy1aVV6zg8aT7ndi7o46JwuLV
+                8O2GpXs2+oeFbV7sK8UdhRTYZG/zQXQjh/0z2Yg3VZwSuAJaNoM8tl2OD0tuQgnOFpk4U0MdmxbBrXMb
+                JrbMjZsFk4EyqHgFO+4rgog/fIKi+hQfNj5F30BRfD5mAQSFxS9F9q1wEN6p0hMGOJ6ApYC/KRyP/pyA
+                dsIH/xTc4BBzOvBTQQ2rFgU4RKTYD72tcfZRAHP/WJzUFYa7Jng44dZYXV1NZ9jLap2uNQlpPVRWscJm
+                d/V3kl9dI0345M+Hxd/wvcXfMPyiZOu3vEAyv5ksgV8CpPHb7/AiLP6Wz+ClWqQF0Xa9SdKHcI3V1S18
+                dw0XrXZ+u2H6xmBtuRsNz0gxQ3TeT0/gdwAJDjX56qQ7nboHX37vZCiuE3rXEJMZ8LXrkTpcJE22PJ3f
+                f79R/DMDjFtcNQPMd8lDQjKrRfOrMquBfLJJTlcDeEAm2fj9999JK5knzSbxNBaTW53fb2SSnd+bWLG0
+                m+xqc5wcKHGcUqCCIlOH9YsgdlyL6PUULdzvBAk5XQOE+IfiiTwkuw2aRH7VWy3S9KTJQzbbUWR8vWEi
+                DKy9ayFCJqbAw2Sx1SrCS4AEECED3grXSfMpIlxFockkFfgwQ4phONX0jUUBQideqyEJPGNiv9d7j2iL
+                UyfMcop9U9MJNxrvmuADNRqNPE3Xw0of4R/pYuuPMHnogY8WTYRdHnY8efiF8RBH52m6CWeQfPKws5UE
+                hIeNTgakdC1g8nC1k8kAwkzmKWDthPOrg301RBRU+xbKmhar4gY/DhB5UTDWdg98xE5kbQ3kppNcW1vt
+                kPBputFHuNU6TR8CwkhybTWDCEkP4W6ThDsMIbqlJBNOeyDwzITX1tYiixm44upD0uq0mgzhbTh9NZ+J
+                JJPBBqiHOgn2F3YyQU3Y7i6AmxOlviWONnGRI6beIV3TCRaLndXFTroIgTpN39jyvOshfNj8o3WaBCll
+                MfyfODYRoQiSVn8IkBChQJpraRiEHWBMJpkv5lFK83At4ul00u9MKT1dBIav5eueok9J1x+2BtOYKISl
+                mD0TAXb0yHl5H6fPidfjrXfzS8Qch4FkphPGP4rhTDEd7iBCFXjYSdYza/1xiI8lz3iYSQbT6XARxiFe
+                YOthfjUAd87GISJcZfM/rQ7xhLvjEDidWVOKoI0y6XQ6mLSutgKNmrI1GhoGwTFzoSyHMkmergEmDhA2
+                GvW1QCdyeHjYoeEMaSY7ShITVvWH+T+3Mkk2Dg8zSrLZaHTya1vwe7PFngoOuEOUXcS0lcznUZf+CTzc
+                goGLCBtJQNgBhGAGM2tFOCbwFE4trg0FqZSpG1vvbVvTEjW2JtUWJGLtcREAAAfKSURBVKXcDqaWivZG
+                OJwMPiSNNXhtUbCMi2sNZY1JaRN0X2aNboWT4bV6EQ/YXYRfk394DjHGbp6uJZNM9QNCNbBWz/esRTqc
+                TCuAsJjGcYiahSJCsbjWbGFTnN26JVbEsgjgoi1EcHikREHhJSMp3zf19mMoCmGMrMCQV4qKUvQVwZ8v
+                UvyHsZUQAD/EBwcUKYwghR2AQa5CfeCsLMMvSlGF38EtUuGHCm4PLQqigpk3uBR+DieQog/1EZwowPgU
+                wcIo6C4NCs6ZutHsSmrYJmDRJzlOXwefyM3WeHFPOaHnuxFrFTQdbFlF2dezz3pz2d2EscDm7odnefAt
+                cbCtkBkfDz5Wu2UBHGZ01Y2dUtX0nL1Kxep03uIgcwXwtPbDPjuJzIHj7J6As0P2pwls3QXHYgRb1OeQ
+                dLtyEk1BtTMacW4pNQa69iULHnPpxSgPBSJYXibd0tDYsJzTu4rDRcY+E0XBhxBtALImuw6+W57Xk8eL
+                m7B8MVKKJJBHdrtoSus5J4QOyQxPhN/M7DoI54lxLI6NQtv1eX3yOaT3vWk3XQWvjEQBIY5HGvGc4xw5
+                xbbevEYuEEWNNly5diqsD9UO4QQbcSyLo9TH7bjLlh5+WUNRFEwfdYBwRsvxXDaTkEW8PoO4fvQUh+KU
+                W7KdgcCTIAVro0HN3CLJ+Q4F7tJ8nE5cFEBQL2eDrvMTkyPmQGHNZiHa3y1Y0iqu2os2eMoGEL5TxtY8
+                XQcJAxPpo49i2hO2PaQmJcounr0gUIfW0OD8fwHOm0AWe4lJrErF2gyt2+XazQ5QAsknOZUZ2JDocGx5
+                5VUTeOP5/tbLAtY0FDB3I2nbWWO0Gbs9mU1NeWxMngoX2TjygiSYAIebp+NYRJvBgl93S8OKLYcmbjiP
+                cZ2CCjK2NryprSyzbidShbrvD5vh5049wVaeXJtdROk5DT8cihtZx61CYmYpJFK3N8b6J/PGotfbCgjj
+                y0iviARymnynDIczAtvg66jmftNO0UeUXYfmZsFW0U2Pw2mQggkim8JlJp9n2NMSbHqeDxDD4eJ1GA2U
+                m61k2K7mVaX0bG1FBRQGB4zBVuCKQqlh5a80I+G67bMVbPdfciJ4WvxNL7zeSItlUKfOxuXerldsn6rA
+                bsTbuqzdUIGLdf7GJRBneADilQiq2WaBTXd4ghNWD5yNaJE7GcW8GwiIr8T093iI/jK2Hbm0p4obq6Np
+                4BpGlpuaqvEfamxRxC5H6S2iXOr35YMepw614aai8oszL4VYghnzmKcgod50nV6ugsNVCo5NTSO7i1M2
+                GipZXsZuHE+x1D6yW3RMOp6dIIjIjG9e3R+LQEHP6WV+od09LGOvkVaYuYsKlrtc9hM9tdsb2AJ0rYnG
+                f1oNrgVscVTcAi8Zom/PlGwwOuF8iGgZM84J61E6QwZEwEU2p62IaZ4Cdt3+Lk7UGSJ+FGkGpmP68VkE
+                2AbT+P35aXlREI55sBOYw240EQ/O0Xb56GYWww0bKfZvLR6mg2YKDH0o39R8KIDIH4ksG5DezY/3Xb8I
+                sXJIpePpLiGIoB88PaVNSaDFrSDuiWq6nnf1hF22ugINo3SweRrrVo1mYpr+E9bf1Sds9QFyFG6iyzhJ
+                q6puZFRQSbHT6q6n83rCdQx5L9cSjn2l2VPQEaMnmGYYJ0mrI0BMOKOLdujp+xreta2ribYzHuctBpjJ
+                CtczChEuMlmMqcr8H+mwt3/RSKdXpDxNQksU2J24Ax1ibDWw/oeeZ9iwc5TOLjb267kZYVCivnNd7YyE
+                qwMo27WbG210m5t7I+l6hlXogbYQhmyHrXwKgmVji+Jp02NZ7On1hutmvuRKMibMPww62cUeBSOe5mm3
+                lHSYlsfndAaZgmKn7kkPJhTQCgZ5mzFMhXxwM8WnSdtONmNDMhgO1huL3bWWJols7UkPYS83LZqJAiXf
+                2E2HmWcx6I8eebc4WTlfIlHWUjDTmrwpq3l/wUjYU2/ku2kVau7u2F9DS8Xe2KKLmcO6JxwZndQL4m4a
+                rqYhLhcmUdCRcrlvizcCKHebjUw+YNdgoxjId7bqrXA4Ehkb3N7w7iVmZM5IgXra0cWx3CYeFgRmhtOe
+                d7vN5laj0UFqNLaa9d2WJx0OB21n8rwRz+n1zY1g0mvX9VZY3W1CQGiBgKXwL4y4gPiXCKa3rrF4R2XV
+                X5mWe4yWn24O9pq+kSBckY2wJXA86GkrHfS63GOod/uTPQawEOjDX6kK5YEUlNPdZND9ZlHuHkEk/Uf+
+                i5hHF8CTQgeymT7L3nR9IP0fI++n083FQW3qF0BgqwJbrXBXG16MmRCahD2Hto7QdZJPVQjNNIORID85
+                7gYdwIsE/8gol5wNvRTyoWcCDiXzuM4LMBiO1DvMw77+AThGyxCP46gpdprM8bI4lsMvI6B6vMP9wjz1
+                Dgu4xC9KPgfEHEd89sX8ITjPkaDHtQkBZyfY2jq9rAnBqZKAiyjhNQBOdIvBdBqXaPUizC/PIPNwJfqX
+                yb0RwlHEFt9BrNDcRZ8zEgkyFeT1dMNj5rmhk9qqb2XMqEPwCeRLFU/nlJISyJ+a/nUL8Jl7D7Z26+B8
+                d/L54hdj8CYRv5+qBQJVikiKovTf9IHXN7XZnMskXu4TxxVLv5j9Hsw3u60izNrQv8a4Y2SfXOL/eaXI
+                /j+fXe8P+MrYGQAAAABJRU5ErkJggg==
+</property>
+        </structure>
+    </list-property>
+</report>

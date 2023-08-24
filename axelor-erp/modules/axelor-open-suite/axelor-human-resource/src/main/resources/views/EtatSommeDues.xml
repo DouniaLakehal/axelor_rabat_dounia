@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+	<grid name="etat-somme-grid" title="Etat des sommes dues"  model="com.axelor.apps.hr.db.EmployeeEtatSomme" >
+
+	<field  name="emplo" required="true"  title="BENEFICIAIRE"/>
+			    <field name="mois1" title="Entre le :" />
+			    <field name="mois2" title="ET le :" />
+				<field name="typeIndem" title="Type d'état des sommes dues" selection="hr.etat.somme.due.type" widget="single-select"/>
+				<button onClick="action-print-etat-somme" colSpan="2" showIf="typeIndem == 1" name="etatSommeBtn" title="Etat de sommes dues kilométrique" icon="fa-print"/>
+				<button onClick="action-print-etat-somme-jour" colSpan="2" showIf="typeIndem == 2" name="etatSommeBtn" title="Etat de sommes dues journalière" icon="fa-print"/>
+
+	</grid>
+		<form name="etat-somme-form" title="Etat des sommes dues" model="com.axelor.apps.hr.db.EmployeeEtatSomme" width="large" onLoad="" onSave=""	onNew="" >
+	        <panel name="infoPanel" title="Sélectionner le bénéficiaire concerné">
+			    <field  name="emplo" required="true"  title="Bénéficiaire"/>
+			    <field name="typeIndem" title="Type d'état des sommes dues" selection="hr.etat.somme.due.type" widget="single-select"/>
+			    <field name="mois1" title="Entre le :" />
+			    <field name="mois2" title="Et le :" />
+			    <field name="montant" title="Montant" readonly="true" hidden="true"/>
+
+			</panel>
+			<panel>
+            <button name="printEmployeePhoneBookBtn" title="Etat de sommes dues kilométrique"  showIf="typeIndem == 1" onClick="save,action-print-etat-somme"  icon="fa-print" />
+            <button name="printEmployeePhoneBookBtn2" title="Etat de sommes dues Journalière"  onClick="save,action-print-etat-somme-jour" showIf="typeIndem == 2" icon="fa-print" />
+
+       </panel>
+
+	</form>
+	 <action-method name="action-print-etat-somme">
+        <call class="com.axelor.apps.hr.web.EmployeeController" method="imprimerEtatSomme"/>
+    </action-method>
+
+	 <action-method name="action-print-etat-somme-jour">
+        <call class="com.axelor.apps.hr.web.EmployeeController" method="imprimerEtatSomme2"/>
+    </action-method>
+
+
+		<action-view name="print-ordre" title="Imprimer l'état des sommes dues"
+	  model="com.axelor.apps.hr.db.EmployeeOrdre">
+	  <view type="form" name="ordre-form"/>
+		<view-param name="popup" value="reload"/>
+		<view-param name="popup-save" value="false"/>
+		<view-param name="show-toolbar" value="false"/>
+
+		</action-view>
+</object-views>

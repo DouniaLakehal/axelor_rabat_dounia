@@ -1,0 +1,40 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="human-resource" package="com.axelor.apps.hr.db"/>
+
+    <entity name="EtatDesRappelSurSalaire" lang="java">
+        <integer name="matriculeInterne" title="Matricule Interne"/>
+        <string name="cin" title="cin"/>
+        <string name="nomEtPrenom" title="Nom et prenom"/>
+        <many-to-one name="grade" ref="com.axelor.apps.configuration.db.Grade" title="Grade"/>
+        <string name="periode" title="Periode"/>
+        <decimal name="brut" title="Brut"/>
+        <decimal name="rcar" title="Rcar"/>
+        <decimal name="c_rcar" title="Complement Rcar"/>
+        <decimal name="amo" title="A.M.O"/>
+        <decimal name="mgpap_sm" title="MGPAP (S.M)"/>
+        <decimal name="mgpap_ccd" title="MGPAP (CCD)"/>
+        <decimal name="omfam_sm" title="OMFAM SM"/>
+        <decimal name="omfam_caad" title="OMFAM CAAD"/>
+        <decimal name="ir" title="I.R"/>
+        <decimal name="recore" title="COTISATION SALARIALE RECORE"/>
+        <decimal name="tot_retenues" title="TOTAL DES RETENUES"/>
+        <decimal name="net_payer" title="NET A PAYER"/>
+        <date name="date_debut" title="Date Debut"/>
+        <date name="date_fin" title="Date Fin"/>
+        <long name="id_employer" title="id_emp"/>
+        <boolean name="show_amo" title="show_amo" default="true"/>
+        <boolean name="show_etat_emp" title="show_etat_emp" default="true"/>
+        <boolean name="show_rcar" title="show_rcar" default="true"/>
+        <boolean name="show_ir" title="show_ir" default="true"/>
+        <boolean name="show_mgpap" title="show_ir" default="true"/>
+        <string name="rappleRegularisation" selection="selectionrappleRegularisation"/>
+        <string name="immatriculationCnops" title="immatriculationCnops"/>
+        <string name="observation" title="observation"/>
+        <string name="affiliation_mutuelle" title="affiliation_mutuelle"/>
+    </entity>
+
+</domain-models>

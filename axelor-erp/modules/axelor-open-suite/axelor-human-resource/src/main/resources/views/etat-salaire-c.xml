@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <form name="etat_salaire_c" title="ETAT DES SALAIRES" model="com.axelor.apps.hr.db.EtatSalaire">
+        <panel>
+            <field name="mois" selection="hr.etatEngagment.mois" title="Mois" required="true"/>
+            <field name="annee" required="true"/>
+            <button colSpan="4" colOffset="8" name="btn_principale" title="État des salaires" onClick="com.axelor.apps.hr.web.expense.ExpenseController:verifier_liste_salaire"/>
+        </panel>
+        <panel title="État des salaires globaux" hidden="true" name="btn_1">
+            <panel colOffset="2" colSpan="10">
+                <button name="btn_1" colSpan="5" title="Imprimer l'état des salaires" onClick="choix_type_etat"/>
+                <button name="btn_1" colSpan="5" title="Imprimer le bordereau d'émission" onClick="com.axelor.apps.hr.web.expense.DouniaController:BordereauEmission"/>
+            </panel>
+            <panel colOffset="2" colSpan="10">
+                <button  name="btn_1" colSpan="5" title="Imprimer l'ordre de paiement salariale" onClick="com.axelor.apps.hr.web.expense.DouniaController:OrdrePaiement"/>
+                <button  name="btn_1" colSpan="5" title="Imprimer le relevé bancaire" onClick="com.axelor.apps.hr.web.expense.DouniaController:ReleveBancaire"/>
+            </panel>
+            <panel colOffset="2" colSpan="10">
+                <button  name="btn_1" colSpan="5" title="Imprimer bordereau d'envoi RCAR" onClick="com.axelor.apps.hr.web.expense.AyoubController:bordereaudenvoi"/>
+                <button  name="btn_1" colSpan="5" title="Imprimer bordereau d'envoi MGPAP" onClick="com.axelor.apps.hr.web.expense.AyoubController:bordereaudenvoi_MGPAPM"/>
+            </panel>
+            <panel colOffset="2" colSpan="10">
+                <button  name="btn_1" colSpan="5" title="Imprimer bordereau d'envoi OMFAM" onClick="com.axelor.apps.hr.web.expense.AyoubController:bordereaudenvoi_OMFAM"/>
+                <button  name="btn_1" colSpan="5" title="Imprimer bordereau d'envoi CNOPS" onClick="com.axelor.apps.hr.web.expense.AyoubController:bordereaudenvoi_CNOPS"/>
+            </panel>
+            <panel colOffset="2" colSpan="10">
+                <button  name="btn_1" colSpan="5" title="Imprimer Ordre de Virement " onClick="com.axelor.apps.hr.web.expense.AchrafController:ordredevirement"/>
+                <button  name="btn_1" colSpan="5" title=" Bordereau d'émission (PG) " onClick="com.axelor.apps.hr.web.expense.DouniaController:pageDeGarde"/>
+            </panel>
+            <panel colOffset="2" colSpan="10">
+                <button  name="btn_1" colSpan="5" title="Imprimer Liste des Ordres de Virement " onClick="com.axelor.apps.hr.web.expense.AyoubController:listeordredevirement"/>
+                <button  name="btn_1" colSpan="5" title="Imprimer ETATS DES PRELEVEMENTS DE LA MUTUELLE (SM + CCD) " onClick="com.axelor.apps.hr.web.expense.AyoubController:etatprelevement"/>
+            </panel>
+            <panel colOffset="2" colSpan="10">
+                <button  name="btn_1" colSpan="5" title="Etat  détaillé  des  versements" onClick="com.axelor.apps.hr.web.expense.AyoubController:Etatdetailverselent"/>
+                <button  name="btn_1" colSpan="5" title="Ordre de paiement (cotisation)" onClick="com.axelor.apps.hr.web.expense.AchrafController:ordredepaiementN52"/>
+            </panel>
+        </panel>
+    </form>
+
+
+    <action-method name="choix_type_etat">
+        <call class="com.axelor.apps.recette.web.RecetteControlleur" method="show_button_imprimerEtatSalaire"/>
+    </action-method>
+
+    <action-method name="test_show_hide_compteInformationDetail">
+        <call class="com.axelor.apps.hr.web.CustomController" method="tw_test_show_hide_compteInformationDetail"/>
+    </action-method>
+
+    <action-method name="loadCheckButtonClicked">
+        <call class="com.axelor.apps.recette.web.RecetteControlleur" method="loadCheckButtonClicked"/>
+    </action-method>
+</object-views>

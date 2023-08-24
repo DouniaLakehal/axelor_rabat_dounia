@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+	
+	<grid name="registre-grid" title="Registre de réclamation"
+		model="com.axelor.apps.helpdesk.db.Registre">
+		  <field name="serviceRegistre" title="Nom du service"/>
+        <field name="abreviation" title="Abreviation"/>
+         <field name="version" title="Version"/>
+        <field name="titre" title="Titre"/>
+  
+	</grid>
+	<form model="com.axelor.apps.helpdesk.db.Registre"
+		title="Registre de réclamation" name="registre-form">
+		<panel name="registre" title="Registre" colSpan="12">
+		 <field name="serviceRegistre" title="Nom du service "/>
+        <field name="abreviation" title="Abreviation"/>
+         <field name="versionRegistre" title="Version"/>
+        <field name="titre" title="Titre"/>
+		
+		</panel>
+		</form>
+</object-views>

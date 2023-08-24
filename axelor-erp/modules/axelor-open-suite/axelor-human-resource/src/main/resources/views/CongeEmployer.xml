@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="employerConge-grid" title="Liste des employés" model="com.axelor.apps.hr.db.Employee" editable="false"
+		  canEdit="false" canDelete="false" canNew="false" canMove="false" canSave="false" canArchive="false"
+		  width="large">
+		<field name="contactPartner.simpleFullName"/>
+		<field name="contactPartner.fixedPhone"/>
+		<field name="contactPartner.mobilePhone"/>
+		<field name="annexe" title="Annexe"/>
+		<button name="addconge" title="Liste des Congés" icon="fa-plus" onClick="AjouterConge"/>
+	</grid>
+
+
+</object-views>

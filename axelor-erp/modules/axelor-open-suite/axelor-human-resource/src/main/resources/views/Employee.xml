@@ -1,0 +1,999 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="employee-grid" title="Fonctionnaire" model="com.axelor.apps.hr.db.Employee"
+          orderBy="contactPartner.simpleFullName">
+        <!--<toolbar>
+            <button name="printEmployeePhoneBookBtn" title="Employee PhoneBook" icon="fa-print"
+                    onClick="action-print-employee-phonebook"/>
+        </toolbar>-->
+
+        <field name="contactPartner.partnerSeq" width="120"/>
+        <field name="contactPartner.simpleFullName"/>
+        <field name="contactPartner.fixedPhone"/>
+        <field name="contactPartner.mobilePhone"/>
+        <field name="annexe" title="Annexe"/>
+        <field name="archived" hidden="true"/>
+        <button onClick="AjouterCredit" name="addcredit" title="Ajouter crédit" icon="fa-money"/>
+        <button onClick="AjouterConge" name="addconge" title="Ajouter congé" icon="fa-plus"/>
+    </grid>
+
+    <action-method name="AjouterCredit">
+        <call class="com.axelor.apps.hr.web.EmployeeController" method="AjouterNouveauCredit"/>
+    </action-method>
+
+    <action-method name="AjouterConge">
+        <call class="com.axelor.apps.hr.web.EmployeeController" method="AjouterNouveauConge"/>
+    </action-method>
+
+
+    <grid name="employee-lite-grid" title="Fonctionnaire" model="com.axelor.apps.hr.db.Employee">
+        <field name="contactPartner" grid-view="partner-contact-grid" form-view="partner-contact-form"/>
+        <field name="managerUser" form-view="user-form" grid-view="user-grid"/>
+        <field name="mainEmploymentContract.companyDepartment" form-view="company-department-form"
+               grid-view="company-department-grid"/>
+    </grid>
+
+
+    <form name="employee-form" title="Fonctionnaire" model="com.axelor.apps.hr.db.Employee" width="large"
+          onLoad="action-employee-method-set-social-network-url"
+          onSave="action-employee-historique-Rib,save,changer_dateRecrutement_linkaugmentation,com.axelor.apps.hr.web.EmployeeController:addHistoriqueResponsabilite"
+          onNew="action-employee-record-default">
+        <!-- New employee wizard -->
+        <panel name="stepByStepControlsPanel" showIf="stepByStepSelect &lt; 5 &amp;&amp; typePersonnel">
+            <button name="previousSBSBtn" colSpan="1" icon="fa-caret-left" readonlyIf="stepByStepSelect &lt; 2"
+                    onClick="validate,action-employee-record-previous-step,save"/>
+            <field name="stepByStepSelect" colSpan="9" css="text-center" readonly="true" showTitle="false"
+                   widget="NavSelect" selection-in="[1, 2, 3, 4]"/>
+            <button name="nextSBSBtn" colSpan="1" icon="fa-caret-right" readonlyIf="stepByStepSelect &gt; 3"
+                    onClick="validate,action-employee-record-next-step,save"/>
+            <button name="finishBtn" colSpan="1" title="Finish"
+                    onClick="validate,action-employee-record-finish-sbs,save" showIf="stepByStepSelect == 4"/>
+        </panel>
+
+        <!-- New employee wizard -->
+        <panel name="stepByStepControlsPanel" showIf="stepByStepSelect &lt; 5 &amp;&amp; !typePersonnel">
+            <button name="previousSBSBtn" colSpan="1" icon="fa-caret-left" readonlyIf="stepByStepSelect &lt; 2"
+                    onClick="validate,action-employee-record-previous-step,save"/>
+            <field name="stepByStepSelect" colSpan="9" css="text-center" readonly="true" showTitle="false"
+                   widget="NavSelect" selection-in="[1,3,4]"/>
+            <button name="nextSBSBtn" colSpan="1" icon="fa-caret-right" readonlyIf="stepByStepSelect &gt; 3"
+                    onClick="validate,action-employee-record-next-step,save"/>
+            <button name="finishBtn" colSpan="1" title="Finish"
+                    onClick="validate,action-employee-record-finish-sbs,save" showIf="stepByStepSelect == 4"/>
+        </panel>
+
+        <panel name="contactSBSPanel" colSpan="12" showIf="stepByStepSelect &lt; 5">
+            <field name="contactPartner" colSpan="12"
+                   domain="self.employee = null AND (self.partnerTypeSelect = 2 OR self.isContact = true)"
+                   form-view="partner-contact-form" grid-view="partner-contact-grid" showTitle="false">
+                <editor x-viewer="true">
+                    <field name="picture" colSpan="2" css="center" showTitle="false" widget="Image"/>
+                    <panel name="contactDetailsPanel" colSpan="10">
+                        <field name="titleSelect" colSpan="2"/>
+                        <field name="firstName" title="Nom"
+                               onChange="action-partner-record-simple-and-full-name,action-employee-contact-method-set-social-network-url"
+                               colSpan="5"/>
+                        <field name="name" title="Prénom"
+                               onChange="action-partner-record-simple-and-full-name,action-employee-contact-method-set-social-network-url"
+                               colSpan="5"/>
+
+                        <field name="emailAddress" canNew="true" form-view="email-address-simple-form"
+                               canSelect="false"/>
+
+                        <field name="fixedPhone" onChange="action-partner-method-normalize-fixedPhone" colSpan="4"
+                               pattern="^\+?([\s()-.]*\d){7,}$" placeholder="+21200000000"/>
+                        <field name="mobilePhone" onChange="action-partner-method-normalize-mobilePhone" colSpan="4"
+                               pattern="^\+?([\s()-.]*\d){7,}$" placeholder="+21200000000"/>
+                    </panel>
+                </editor>
+            </field>
+        </panel>
+
+        <!-- Basic info -->
+        <panel name="phoneProSBSPanel" title="Informations Personnelles" showIf="stepByStepSelect == 1">
+            <field name="typePersonnel" title="Type de Personnel" widget="boolean-radio" x-true-text="Contractuelle"
+                   x-false-text="Titulaire" colSpan="8"/>
+            <field name="cin" title="Numéro de CIN" colSpan="4"/>
+            <field name="imatriculation" title="Numéro d'imatriculation" colSpan="4"/>
+            <field name="matriculationInterne" title="Numéro de Matriculation interne" colSpan="4"/>
+            <field name="birthDate" colSpan="4" onChange="action-employee-method-normalize-birthDate"
+                   pattern="^\+?([\s()-.]*\d){7,}$"/>
+            <field name="cityOfBirth" colSpan="4"/>
+            <field name="maritalStatus" title="situation familiale" colSpan="4"/>
+            <field name="annexe" title="Annexe" colSpan="4"/>
+            <field name="dateDebutContrat" title="Date début de contrat" showIf="typePersonnel" colSpan="4"/>
+            <field name="dateFinContrat" title="Date fin de contrat" showIf="typePersonnel" colSpan="4"/>
+
+
+        </panel>
+
+        <panel name="personalInfoSBSPanel" title="Notation, Evaluation et Avancement" showIf="stepByStepSelect == 1">
+            <!--hatim-->
+            <field name="corps" title="Corps" showIf="id" colSpan="4" readonly="true"/>
+            <field name="grade" title="Grade" colSpan="4" showIf="id" readonly="true"/>
+            <field name="echelle" title="Echelle" showIf="id" readonly="true" colSpan="4"/>
+            <field name="echelon" title="Echelon" colSpan="4" showIf="id" readonly="true"/>
+            <field name="responsabilite" hidden="true" title="Responsabilité" showIf="id" colSpan="4" readonly="false"/>
+            <!--<field name="indice" title="Indice" colSpan="4" showIf="id" readonly="true"/>-->
+
+            <field name="corps" title="Corps" colSpan="4" hideIf="id" readonly="false" required="true"/>
+            <field name="grade" title="Grade" domain="self.corps = :corps" colSpan="4" hideIf="id" readonly="false"
+                   required="true"/>
+            <field name="echelle" title="Echelle" domain="self.grade = :grade" hideIf="id" readonly="false" colSpan="4"
+                   required="true"/>
+            <field name="echelon" title="Echelon" domain="self.echelle = :echelle" colSpan="4" hideIf="id"
+                   readonly="false" required="true"/>
+            <!--<field name="indice" title="Indice" domain="self.echelle = :echelle" target-name="indice" target="com.axelor.apps.configuration.db.Echelon" colSpan="4" hideIf="id" required="true"/>-->
+            <field name="responsabilite" hidden="true" title="Responsabilité" hideIf="id" colSpan="4" readonly="false"/>
+            <field name="rubriqueBudgetaire" title="Rubrique budgetaire" colSpan="4" readonly="false" required="true"/>
+
+
+            <field name="organismeMetuelle2" title="Organisme de Mutuelle" colSpan="4" readonly="false"
+                   required="true"/>
+            <field name="zoneEmployee" title="La zone" colSpan="4" readonly="false" required="true"/>
+
+            <field name="immatriculationSM" title="Immatriculation" colSpan="4" showIf="organismeMetuelle2"/>
+            <field name="affiliationSM" title="Affiliation" colSpan="4" showIf="organismeMetuelle2"/>
+            <field name="idents" title="Ident" colSpan="4"/>
+            <field name="hasEvolution" title="evolution" hidden="true"/>
+            <field name="id" hidden="true"/>
+
+            <!--
+                        <button colSpan="3" colOffset="9" name="loadAugmentation" title="Valider Rappel" onClick="saisirDateDebutEtatEngagement" showIf="id &amp;&amp; hasEvolution "/>
+            -->
+
+            <!--hatim end-->
+            <field name="daterecrutement" colSpan="6" required="true"/>
+            <!--
+                        <field name="retenueSalairePlafonne" colSpan="6" title="Retenue sur salaire plafonné" />
+            -->
+        </panel>
+
+
+        <panel colSpan="12" showIf="stepByStepSelect==1">
+            <field name="is_prime" title="Prime de naissance" colSpan="12"/>
+            <field name="montant_prime" title="Montant" showIf="is_prime" colSpan="6"/>
+            <field name="date_prime" title="Date" showIf="is_prime" colSpan="6"/>
+        </panel>
+        <panel name="personalInfoSBSPanel" showIf="stepByStepSelect == 1" showTitle="false" colSpan="12">
+            <field name="is_aos" title="A.O.S." colSpan="6"/>
+            <field name="aos" colSpan="12" showTitle="false"/>
+        </panel>
+        <panel name="personalInfoSBSPanel" showIf="stepByStepSelect == 1" showTitle="false" colSpan="12">
+            <field name="disposition" colSpan="12" title="Mise en Disponibilité"/>
+        </panel>
+        <panel colSpan="12" showIf="stepByStepSelect == 1" showTitle="false">
+            <field name="responsabiliteList" colSpan="12" title="Résponsabilite" grid-view="grid-responsabiliteList"
+                   form-view="form-responsabiliteList"/>
+        </panel>
+        <panel name="personalInfoSBSPanel" title="Cotisation" showIf="stepByStepSelect == 1">
+            <field name="isCotisation" title="Cotisation RECORE" colSpan="6"/>
+            <field name="montantCotisation" colSpan="6" showIf="isCotisation"/>
+            <field name="dateDebutCotisation" title="Date Début de Cotisation" colSpan="6" showIf="isCotisation"/>
+            <field name="immatriculationRECORE" title="Numéro immatriculation RECORE" colSpan="6"
+                   showIf="isCotisation"/>
+        </panel>
+        <panel name="personalInfoSBSPanel" title="Mutation" showIf="stepByStepSelect == 1">
+            <field name="mutation" title="Mutation"/>
+            <field name="mutationDate" title="Date de Mutation" showIf="mutation"/>
+            <field name="mutationDescription" title="Description de la mutation" colSpan="12" showIf="mutation"/>
+        </panel>
+        <panel name="personalInfoSBSPanel" title="Disposition" showIf="stepByStepSelect == 1">
+            <field name="miseDisposition" title="Disposition" colSpan="4"/>
+            <field name="miseDispositionDatedebut" title="Date de début" showIf="miseDisposition" colSpan="4"/>
+            <field name="miseDispositionDatefin" title="Date de fin" showIf="miseDisposition" colSpan="4"/>
+        </panel>
+
+        <panel name="personalInfoSBSPanel" title="Information banquaire" showIf="stepByStepSelect == 1">
+
+            <field name="rib" colSpan="6" title="RIB"
+                   onChange="com.axelor.apps.hr.web.EmployeeController:verifier_rib_employee" canEdit="false"
+                   required="true"/>
+            <field name="banque" colSpan="6" title="Banque" required="true"/>
+        </panel>
+        <panel name="personalInfoSBSPanel" title="Compétences" showIf="stepByStepSelect == 1">
+
+            <panel-related name="employmentContractsSBSPanel" title="Diplômes" colSpan="12"
+                           field="employmentContractListDiplome" form-view="Personnel-contract-form"
+                           grid-view="Personnel-contract-grid" showIf="stepByStepSelect == 1"/>
+            <panel-related name="employmentContractsSBSPanel" title="Expériences" colSpan="12"
+                           field="employmentContractListExperience" form-view="Personnel-experience-form"
+                           grid-view="Personnel-experience-grid" showIf="stepByStepSelect == 1"/>
+            <panel-related name="employmentContractsSBSPanel" title="Formations" colSpan="12"
+                           field="employmentContractListFormation" form-view="Personnel-formation-form"
+                           grid-view="Personnel-formation-grid" showIf="stepByStepSelect == 1"/>
+        </panel>
+
+        <panel name="personalInfoSBSPanel" title="Marriage" showIf="stepByStepSelect == 1">
+            <field name="maritalName" title="Nom de Famille" colSpan="4"/>
+            <field name="mobilePhone" title="Téléphone Mobile" onChange="action-partner-method-normalize-mobilePhone"
+                   colSpan="4" pattern="^\+?([\s()-.]*\d){7,}$" placeholder="+21200000000"/>
+            <field name="marriageDate" title="Date de Marriage" colSpan="4"/>
+        </panel>
+
+        <panel name="personalInfoSBSPanel" title="Naissances" showIf="stepByStepSelect == 1">
+            <panel-related name="employmentContractsSBSPanel" title="Liste des naissances" colSpan="12" canNew="true"
+                           field="employmentContractListNaissances" form-view="Personnel-naissance-form"
+                           grid-view="Personnel-naissance-grid" showIf="stepByStepSelect == 1"/>
+        </panel>
+        <panel name="contractualInfoSBSPanel" title="Contrat de travail" showIf="stepByStepSelect == 2">
+            <field name="hireDate" colSpan="3" onChange="action-employee-attrs-set-seniority-date"/>
+            <field name="seniorityDate" colSpan="3"/>
+            <field name="bonusCoef" colSpan="3"/>
+            <field name="profitSharingBeneficiary" colSpan="3"/>
+
+            <field name="weeklyWorkHours" colSpan="3"/>
+            <field name="dailyWorkHours" colSpan="3"/>
+            <field name="hourlyRate" colSpan="3"/>
+            <field name="$dailySalaryCost" title="Daily cost" colSpan="3" readonly="true"
+                   x-bind="{{hourlyRate * dailyWorkHours}}"/>
+        </panel>
+
+        <panel name="mainEmploymentContractSBSPanel" title="Main employment contract" showIf="stepByStepSelect == 2">
+            <field name="mainEmploymentContract" colSpan="12" domain="self.employee.id = :id" showTitle="false">
+                <editor x-viewer="true">
+                    <field name="payCompany" colSpan="3"/>
+                    <field name="executiveStatusSelect" colSpan="3"/>
+                    <field name="employment" colSpan="3"/>
+                    <field name="companyDepartment" colSpan="3" form-view="company-department-form"
+                           grid-view="company-department-grid"/>
+                </editor>
+            </field>
+        </panel>
+
+        <panel-related name="employmentContractsSBSPanel" field="employmentContractList"
+                       form-view="employment-contract-form" grid-view="employment-contract-employee-grid"
+                       showIf="stepByStepSelect == 2"/>
+        <panel>
+
+            <panel-related name="employmentContractsSBSPanel" title="Crédits" colSpan="12"
+                           field="employmentGestionCreditList" form-view="GestionCredit-form"
+                           grid-view="GestionCredit-grid" showIf="stepByStepSelect == 3" canEdit="false" canNew="false"
+                           canRemove="false" canSelect="false" canView="false"/>
+
+            <panel-related name="employmentCongeSBSPanel" title="Conges" colSpan="12"
+                           field="employmentCongeList" form-view="conge-form"
+                           grid-view="conge-grid" showIf="stepByStepSelect == 3" canEdit="false" canNew="false"
+                           canRemove="false" canSelect="false" canView="false"/>
+
+        </panel>
+
+
+        <panel name="timesheetsSBSPanel" title="Timesheets" if="__config__.app.isApp('timesheet')"
+               hidden="true">
+            <field name="timeLoggingPreferenceSelect" colSpan="3"/>
+            <field name="product" canEdit="false" colSpan="3" domain="self.isActivity = true AND self.dtype = 'Product'"
+                   form-view="product-form" grid-view="product-grid"/>
+            <field name="timesheetReminder" colSpan="3"/>
+            <field name="timesheetImputationSelect" colSpan="3"
+                   if="__config__.app.getApp('production')?.getEnableTimesheetOnManufOrder()"
+                   if-module="axelor-business-production"/>
+        </panel>
+        <panel name="userPanel" title="User" showIf="stepByStepSelect == 4">
+            <field name="user" title="Attach to"/>
+            <button name="createUserBtn" title="Create new user"
+                    onClick="save,action-employee-view-open-user-creation-wizard"/>
+        </panel>
+        <panel name="headerPanel">
+            <panel name="contactPanel" showIf="stepByStepSelect == 5" colSpan="10">
+                <field name="contactPartner" colSpan="12"
+                       domain="self.employee = null AND (self.partnerTypeSelect = 2 OR self.isContact = true)"
+                       form-view="partner-contact-form" grid-view="partner-contact-grid" showTitle="false">
+                    <editor x-viewer="true">
+                        <panel name="imagePanel" colSpan="2">
+                            <field name="picture" colSpan="12" css="center" showTitle="false" widget="Image"/>
+
+                            <panel name="socialNetworkPanel" colSpan="12" showIf="fullName != null">
+                                <label name="facebookLabel"
+                                       title="&lt;a class='fa fa-facebook' href='http://www.facebook.com' target='_blank' /&gt;"
+                                       colSpan="2"/>
+                                <label name="twitterLabel"
+                                       title="&lt;a class='fa fa-twitter' href='http://www.twitter.com' target='_blank' /&gt;"
+                                       colSpan="2"/>
+                                <label name="linkedinLabel"
+                                       title="&lt;a class='fa fa-linkedin' href='http://www.linkedin.com' target='_blank' /&gt;"
+                                       colSpan="2"/>
+                                <label name="youtubeLabel"
+                                       title="&lt;a class='fa fa-youtube' href='http://www.youtube.com' target='_blank' /&gt;"
+                                       colSpan="2"/>
+                            </panel>
+                        </panel>
+                        <panel name="contactDetailsPanel" colSpan="10">
+                            <field name="simpleFullName" colSpan="12" showTitle="false" showIf="$readonly()"
+                                   css="bold large"/>
+
+                            <field name="titleSelect" colSpan="2" showIf="!$readonly()"/>
+                            <field name="firstName" title="Nom"
+                                   onChange="action-partner-record-simple-and-full-name,action-employee-contact-method-set-social-network-url"
+                                   colSpan="5" showIf="!$readonly()"/>
+                            <field name="name" title="Prénom"
+                                   onChange="action-partner-record-simple-and-full-name,action-employee-contact-method-set-social-network-url"
+                                   colSpan="5" showIf="!$readonly()"/>
+
+                            <field name="emailAddress" canNew="true" form-view="email-address-simple-form"
+                                   canSelect="false"/>
+
+                            <field name="fixedPhone" onChange="action-partner-method-normalize-fixedPhone" colSpan="4"
+                                   pattern="^\+?([\s()-.]*\d){7,}$" placeholder="+21200000000"/>
+                            <field name="mobilePhone" onChange="action-partner-method-normalize-mobilePhone" colSpan="4"
+                                   pattern="^\+?([\s()-.]*\d){7,}$" placeholder="+21200000000"/>
+                        </panel>
+                    </editor>
+                </field>
+            </panel>
+
+            <panel name="companyPanel"
+                   showIf="stepByStepSelect == 5 &amp;&amp; mainEmploymentContract.payCompany != null" colSpan="2"
+                   readonly="true">
+                <field name="mainEmploymentContract" showTitle="false" colSpan="12" domain="self.employee.id = :id">
+                    <editor x-viewer="true">
+                        <panel name="payCompanyPanel" colSpan="12" showTitle="false">
+                            <field name="payCompany.logo" showTitle="false" colSpan="12" widget="Image"/>
+                            <field name="payCompany.name" showTitle="false" colSpan="12" css="bold large"
+                                   readonly="true"/>
+                        </panel>
+                    </editor>
+                </field>
+            </panel>
+        </panel>
+        <panel-tabs name="mainPanelTab" showIf="stepByStepSelect == 5">
+            <panel name="informationPanel" title="Information">
+                <panel name="phoneProSBSPanel" title="Informations Personnelles" colSpan="12">
+                    <field name="typePersonnel" title="Type de Personnel" widget="boolean-radio"
+                           x-true-text="Contractuelle" x-false-text="Titulaire" colSpan="8"/>
+                    <field name="cin" title="Numéro de CIN" colSpan="4"/>
+                    <field name="birthDate" colSpan="4" onChange="action-employee-method-normalize-birthDate"
+                           pattern="^\+?([\s()-.]*\d){7,}$"/>
+                    <field name="cityOfBirth" colSpan="4"/>
+                    <field name="maritalStatus" title="situation familiale" colSpan="4"/>
+                    <field name="imatriculation" title="Numéro d'imatriculation" colSpan="4"/>
+                    <field name="matriculationInterne" title="Numéro de Matriculation interne" colSpan="4"/>
+                    <field name="annexe" title="Annexe" colSpan="4"/>
+                    <field name="dateDebutContrat" title="Date début de contrat" showIf="typePersonnel" colSpan="4"/>
+                    <field name="dateFinContrat" title="Date fin de contrat" showIf="typePersonnel" colSpan="4"/>
+                </panel>
+
+
+                <panel name="personalInfoSBSPanel" title="Notation, Evaluation et Avancement" colSpan="12">
+                    <field name="corps" title="Corps" colSpan="4" showIf="id" readonly="true" required="true"/>
+                    <field name="grade" title="Grade" colSpan="4" showIf="id" readonly="true"/>
+                    <field name="echelle" title="Echelle" showIf="id" readonly="true" colSpan="4"/>
+                    <field name="echelon" title="Echelon" colSpan="4" showIf="id" readonly="true"/>
+                    <!--<field name="indice" title="Indice" colSpan="4" showIf="id" readonly="true"/>-->
+                    <field name="responsabilite" hidden="true" title="Responsabilité" colSpan="4" readonly="false"/>
+                    <field name="rubriqueBudgetaire" title="Rubrique budgetaire" colSpan="4" readonly="false"
+                           required="true"/>
+                    <field name="organismeMetuelle2" title="Organisme de Mutuelle" colSpan="4" readonly="false"
+                           required="true"/>
+                    <field name="zoneEmployee" title="La zone" colSpan="4" readonly="false" required="true"/>
+
+                    <field name="immatriculationSM" title="Immatriculation" colSpan="4" showIf="organismeMetuelle2"/>
+                    <field name="affiliationSM" title="Affiliation" colSpan="4" showIf="organismeMetuelle2"/>
+
+                    <field name="hasEvolution" title="evolution" hidden="true"/>
+                    <field name="id" hidden="true"/>
+                    <!--
+                                        <button colSpan="3" colOffset="9" name="loadAugmentation" title="Valider Rappel" onClick="saisirDateDebutEtatEngagement" showIf="id &amp;&amp; hasEvolution "/>
+                    -->
+                    <field name="daterecrutement" colSpan="6" required="true"/>
+                    <!--
+                                        <field name="retenueSalairePlafonne" colSpan="6" title="Retenue sur salaire plafonné" />
+                    -->
+
+                </panel>
+
+
+                <panel colSpan="12" name="personalInfoSBSPanel">
+                    <field name="is_prime" title="Prime de naissance" colSpan="12"/>
+                    <field name="montant_prime" title="Montant" colSpan="6"/>
+                    <field name="date_prime" title="Date" colSpan="6"/>
+                </panel>
+
+                <panel name="personalInfoSBSPanel" colSpan="12">
+                    <field name="is_aos" title="A.O.S." colSpan="12"/>
+                </panel>
+                <panel name="personalInfoSBSPanel" showTitle="false" colSpan="12">
+                    <field name="aos" colSpan="12" title="AOS"/>
+                </panel>
+                <panel name="personalInfoSBSPanel" showTitle="false" colSpan="12">
+                    <field name="disposition" colSpan="12" title="Mise en Disponibilité"/>
+                </panel>
+                <panel colSpan="12" showTitle="false">
+                    <field name="responsabiliteList" colSpan="12" title="Résponsabilite"
+                           grid-view="grid-responsabiliteList" form-view="form-responsabiliteList"/>
+                </panel>
+                <panel name="personalInfoSBSPanel" title="Cotisation">
+                    <field name="isCotisation" title="Cotisation RECORE" colSpan="6"/>
+                    <field name="montantCotisation" colSpan="6"/>
+                    <field name="dateDebutCotisation" title="Date Début de Cotisation" colSpan="6"/>
+                    <field name="immatriculationRECORE" title="Numéro immatriculation RECORE" colSpan="6"/>
+                </panel>
+                <panel title="Mutation" name="personalInfoSBSPanel">
+                    <field name="mutation" title="Mutation"/>
+                    <field name="mutationDate" title="Date de Mutation"/>
+                    <field name="mutationDescription" title="Description de la mutation" colSpan="12"/>
+                </panel>
+                <panel title="Disposition" name="personalInfoSBSPanel">
+                    <field name="miseDisposition" title="Disposition" colSpan="4"/>
+                    <field name="miseDispositionDatedebut" title="Date de début" colSpan="4"/>
+                    <field name="miseDispositionDatefin" title="Date de fin" colSpan="4"/>
+                </panel>
+                <panel name="personalInfoSBSPanel" title="Compétences" colSpan="12">
+                    <panel-related name="employmentContractsSBSPanel" title="Liste des Diplômes" colSpan="12"
+                                   field="employmentContractListDiplome" form-view="Personnel-contract-form"
+                                   grid-view="Personnel-contract-grid" showIf="stepByStepSelect == 5"/>
+
+
+                    <panel-related name="employmentContractsSBSPanel" title="Expériences" colSpan="12"
+                                   field="employmentContractListExperience" form-view="Personnel-experience-form"
+                                   grid-view="Personnel-experience-grid" showIf="stepByStepSelect == 1"/>
+
+                    <panel-related name="employmentContractsSBSPanel" title="Formations" colSpan="12"
+                                   field="employmentContractListExperience" form-view="Personnel-formation-form"
+                                   grid-view="Personnel-formation-grid" showIf="stepByStepSelect == 5"/>
+
+                </panel>
+
+                <panel name="personalInfoSBSPanel" title="Marriage" showIf="stepByStepSelect == 5" colSpan="12">
+                    <field name="maritalName" title="Nom de Famille" colSpan="4"/>
+                    <field name="mobilePhone" title="Téléphone Mobile" colSpan="4"
+                           onChange="action-partner-method-normalize-mobilePhone" pattern="^\+?([\s()-.]*\d){7,}$"
+                           placeholder="+21200000000"/>
+                    <field name="marriageDate" title="Date de Marriage" colSpan="4"/>
+                </panel>
+                <panel name="personalInfoSBSPanelNaissance" showIf="stepByStepSelect == 5" colSpan="12">
+                    <panel-related name="employmentContractsSBSPanel" title="Liste des Naissances"
+                                   field="employmentContractListNaissances"
+                                   form-view="Personnel-naissance-form" grid-view="Personnel-naissance-grid"
+                                   colSpan="12"
+                                   showIf="stepByStepSelect == 5" canNew="true"/>
+                </panel>
+            </panel>
+            <panel name="personalInfoSBSPanel" title="Information banquaire" showIf="stepByStepSelect == 5">
+
+                <field name="rib" colSpan="6" title="RIB"
+                       onChange="com.axelor.apps.hr.web.EmployeeController:verifier_rib_employee" required="true"/>
+                <field name="banque" colSpan="6" title="Banque" required="true"/>
+
+            </panel>
+            <panel name="personalInfoSBSPanel" title="Congés et crédits">
+                <panel-related name="employmentContractsSBSPanel" title="Crédits" colSpan="12"
+                               field="employmentGestionCreditList" form-view="GestionCredit-form"
+                               grid-view="GestionCredit-grid" canEdit="false" canNew="false" canRemove="false"
+                               canSelect="false" canView="false"/>
+
+                <panel-related name="employmentCongeSBSPanel" title="Conges" colSpan="12"
+                               field="employmentCongeList" form-view="conge-form"
+                               grid-view="conge-grid" canEdit="false" canNew="false" canRemove="false" canSelect="false"
+                               canView="false"/>
+
+            </panel>
+
+            <panel name="employmentContractsPanel" title="Employment contracts" hidden="true">
+                <panel name="contractualInfoPanel" title="Contractual information" colSpan="12" hidden="true">
+                    <field name="hireDate" colSpan="3" onChange="action-employee-attrs-set-seniority-date"/>
+                    <field name="seniorityDate" colSpan="3"/>
+                    <field name="bonusCoef" colSpan="3"/>
+                    <field name="profitSharingBeneficiary" colSpan="3"/>
+
+                    <field name="weeklyWorkHours" colSpan="3"/>
+                    <field name="dailyWorkHours" colSpan="3"/>
+                    <field name="hourlyRate" colSpan="3"/>
+                    <field name="$dailySalaryCost" title="Daily cost" colSpan="3" readonly="true"
+                           x-bind="{{hourlyRate * dailyWorkHours}}"/>
+
+                    <panel name="mainEmploymentContractPanel" title="Main employment contract" colSpan="12"
+                           hidden="true">
+                        <field name="mainEmploymentContract" colSpan="12" domain="self.employee.id = :id"
+                               showTitle="false">
+                            <editor x-viewer="true">
+                                <field name="payCompany" colSpan="3"/>
+                                <field name="executiveStatusSelect" colSpan="3"/>
+                                <field name="employment" colSpan="3"/>
+                                <field name="companyDepartment" colSpan="3" form-view="company-department-form"
+                                       grid-view="company-department-grid"/>
+                            </editor>
+                        </field>
+                    </panel>
+                </panel>
+
+                <field name="employmentContractList" colSpan="12" form-view="employment-contract-form"
+                       grid-view="employment-contract-employee-grid"/>
+            </panel>
+            <!--
+             <panel name="leaveListPanel" title="Leave List" if="__config__.app.isApp('leave')" hidden="true">
+                 <field name="leaveLineList" colSpan="12" form-view="leave-line-form" grid-view="leave-line-grid"/>
+                 <field name="negativeValueLeave" widget="InlineCheckbox" hidden="true" />
+             </panel>
+           -->
+            <panel name="timesheetsPanel" title="Timesheets" if="__config__.app.isApp('timesheet')" hidden="true">
+                <field name="timeLoggingPreferenceSelect" colSpan="3"/>
+                <field name="product" canEdit="false" colSpan="3"
+                       domain="self.isActivity = true AND self.dtype = 'Product'" form-view="product-form"
+                       grid-view="product-grid"/>
+                <field name="timesheetReminder" colSpan="3"/>
+                <field name="timesheetImputationSelect" colSpan="3"
+                       if="__config__.app.getApp('production')?.getEnableTimesheetOnManufOrder()"
+                       if-module="axelor-business-production"/>
+
+                <panel-dashlet name="employeeUserTimesheetsPanel" action="action-employee-view-user-timesheets"
+                               colSpan="12"/>
+            </panel>
+
+            <panel name="lunchVoucherPanel" title="Lunch vouchers"
+                   if="__config__.app.isApp('employee') &amp;&amp; __config__.app.getApp('employee').getLunchVoucher()"
+                   hidden="true">
+                <field name="lunchVoucherFormatSelect" colSpan="3"/>
+
+                <panel-dashlet name="lunchVouchersDashletPanel" title="Lunch vouchers"
+                               action="action-employee-view-show-lunch-voucher" colSpan="12"/>
+
+                <panel-related name="lunchVoucherAdvanceListPanel" field="lunchVoucherAdvanceList" canEdit="false"
+                               canNew="false" canRemove="true" colSpan="12" form-view="lunch-voucher-advance-form"
+                               grid-view="lunch-voucher-advance-grid"/>
+                <button name="addLunchVoucherAdvanceBtn" title="Add an advance" colSpan="3" icon="fa-ticket"
+                        onClick="save,action-lunch-voucher-advance-new"/>
+            </panel>
+
+            <panel name="expensesPanel" title="Expenses" hidden="true">
+                <field name="companyCbSelect" onChange="action-hr-record-reset-company-cb-details" colSpan="3"
+                       hidden="true"/>
+                <field name="companyCbDetails" colSpan="3" hidden="true" showIf="companyCbSelect > 1"/>
+
+                <panel-related name="employeeAdvanceListPanel" title="Employee advances" field="employeeAdvanceList"
+                               colSpan="12" form-view="employee-advance-employee-form"
+                               grid-view="employee-advance-employee-grid"
+                               if="__config__.app.isApp('employee') &amp;&amp; __config__.app.getApp('employee').getAdvanceManagement()"
+                               readonly="false"/>
+            </panel>
+
+            <panel name="vehiclePanel" title="Vehicle" if="__config__.app.isApp('expense')" hidden="true">
+                <panel-related name="kilometricLogListPanel" title="Kilometric log" field="kilometricLogList"
+                               colSpan="12" form-view="kilometric-log-form" grid-view="kilometric-log-grid"
+                               if="__config__.app.isApp('timesheet')" readonly="true"/>
+
+                <panel name="vehicleListPanel" title="Vehicles" colSpan="12">
+                    <field name="employeeVehicleList" colSpan="12" showTitle="false">
+                        <editor colSpan="12" x-layout="table" x-show-on-new="true" x-viewer="true">
+                            <field name="vehicleRegistrationCertificate" colSpan="2" widget="Image"/>
+                            <panel colSpan="10" itemSpan="4">
+                                <field name="vehicleMake"/>
+                                <field name="vehicleModel"/>
+                                <field name="plateNo"/>
+                                <field name="kilometricAllowParam" canEdit="false" widget="SuggestBox"/>
+                                <field name="startDate" onChange="action-employee-validate-dates"/>
+                                <field name="endDate" onChange="action-employee-validate-dates"/>
+                            </panel>
+                        </editor>
+                    </field>
+                </panel>
+            </panel>
+
+            <panel-dashlet name="employeeBonusDashletPanel" title="Bonuses" action="employee.dashlet.employee.bonus"
+                           colSpan="12"
+                           if="__config__.app.isApp('employee') &amp;&amp; __config__.app.getApp('employee').getEmployeeBonus()"
+                           readonly="true" hidden="true"/>
+
+            <!--   <panel-include  if-module="axelor-talent" view="talent-employee-form"/> -->
+
+            <panel name="dpaePanel" title="DPAE" if="__user__.activeCompany?.hrConfig?.enableDPAE" hidden="true">
+                <button name="generateNewDPAE" title="Generate new DPAE" colSpan="3"
+                        onClick="save,action-employee-method-generate-new-dpae"/>
+                <panel-related field="dpaeList" colSpan="12" canNew="false" grid-view="dpae-grid"
+                               form-view="dpae-form"/>
+            </panel>
+
+            <panel name="employeeFileListPanel" title="Files" colSpan="12" hidden="true">
+                <field name="employeeFileList" showTitle="false" colSpan="12">
+                    <editor colSpan="12" x-viewer="true" x-show-on-new="true" x-layout="table">
+                        <field name="fileType" colSpan="3" onChange="action-record-set-expiration-date"/>
+                        <field name="metaFile" widget="binary-link" colSpan="3"
+                               onChange="action-record-set-record-date"/>
+                        <field name="recordDate" colSpan="3" readonly="true"/>
+                        <field name="expirationDate" showIf="fileType.hasExpirationDate" colSpan="3"/>
+                        <field name="fileType.hasExpirationDate" hidden="true"/>
+                    </editor>
+                </field>
+            </panel>
+        </panel-tabs>
+
+        <!--<panel-mail name="mailPanel">
+            <mail-messages limit="4"/>
+            <mail-followers/>
+        </panel-mail>-->
+
+    </form>
+
+    <grid title="Liste AOS" name="aos-grid" model="com.axelor.apps.hr.db.Aos">
+        <field name="montant" title="Montant"/>
+        <field name="remboursement" title="Remboursement"/>
+        <field name="dateDebut" title="Date debut"/>
+        <field name="dateFin" title="Date fin"/>
+        <field name="employee" title="Employee"/>
+    </grid>
+    <form title="AOS" name="aos-form" model="com.axelor.apps.hr.db.Aos">
+        <panel showTitle="false">
+            <field name="montant" title="Montant"/>
+            <field name="remboursement" title="Remboursement"/>
+            <field name="dateDebut" title="Date debut"/>
+            <field name="dateFin" title="Date fin"/>
+            <field name="aos_config"/>
+        </panel>
+    </form>
+
+    <grid title="Liste disposition" name="disposition-grid" model="com.axelor.apps.hr.db.Disposition">
+        <field name="dateDebut" title="Date debut"/>
+        <field name="dateFin" title="Date fin"/>
+    </grid>
+    <form title="Disposition" name="disposition-form" model="com.axelor.apps.hr.db.Disposition">
+        <panel showTitle="false">
+            <field name="dateDebut" title="Date debut"/>
+            <field name="dateFin" title="Date fin"/>
+        </panel>
+    </form>
+
+    <action-view name="saisirDateDebutEtatEngagement" title="Saisir la date" model="com.axelor.apps.hr.db.Augmentation">
+        <view type="form" name="form_augmentation_date"/>
+        <view-param name="popup" value="reload"/>
+        <view-param name="show-toolbar" value="false"/>
+        <view-param name="forceEdit" value="true"/>
+        <context name="_showRecord"
+                 expr="eval:__repo__(Augmentation).all().filter('self.employer=?1 and self.etat=?2',id,'En attente').fetchOne().getId()"/>
+    </action-view>
+
+    <form onSave="save,upgradeGrade" title="Augmentation" name="form_augmentation_date"
+          model="com.axelor.apps.hr.db.Augmentation">
+        <panel>
+            <field name="grade" readonly="true"/>
+            <field name="echelle" readonly="true"/>
+            <field name="echelon" readonly="true"/>
+            <field name="dateRappel"/>
+        </panel>
+    </form>
+
+    <!--<action-method name="getAosData">
+        <call class="com.axelor.apps.hr.web.EmployeeController" method="wt_getAosData"/>
+    </action-method>-->
+
+    <action-method name="upgradeGrade">
+        <call class="com.axelor.apps.hr.web.EmployeeController" method="upgrade_Personnel"/>
+    </action-method>
+
+    <action-method name="action-employee-method-generate-new-dpae">
+        <call class="com.axelor.apps.hr.web.EmployeeController" method="generateNewDPAE"/>
+    </action-method>
+
+    <action-record name="action-employee-record-previous-step" model="com.axelor.apps.hr.db.Employee">
+        <field name="stepByStepSelect"
+               expr="eval:(!typePersonnel &amp;&amp; stepByStepSelect==3)? stepByStepSelect - 2:stepByStepSelect - 1"/>
+    </action-record>
+
+    <action-record name="action-employee-record-next-step" model="com.axelor.apps.hr.db.Employee">
+        <field name="stepByStepSelect"
+               expr="eval: (!typePersonnel &amp;&amp; stepByStepSelect==1)? stepByStepSelect + 2:stepByStepSelect + 1"/>
+    </action-record>
+
+    <action-record name="action-employee-record-finish-sbs" model="com.axelor.apps.hr.db.Employee">
+        <field name="stepByStepSelect" expr="eval: 5"/>
+    </action-record>
+
+    <action-attrs name="action-employee-attrs-country-of-birth-on-change">
+        <attribute name="value" for="citizenship" expr="eval: countryOfBirth?.citizenship"/>
+        <attribute name="value" for="departmentOfBirth" expr="eval: null"/>
+        <attribute name="value" for="cityOfBirth" expr="eval: null"/>
+    </action-attrs>
+
+    <action-attrs name="action-employee-attrs-department-of-birth-on-select">
+        <attribute name="domain" for="departmentOfBirth"
+                   expr="eval: &quot; self.region.country.id = ${countryOfBirth?.id} &quot;"/>
+    </action-attrs>
+
+    <!--    <action-attrs name="action-employee-attrs-city-of-birth-on-select">
+            <attribute name="domain" for="cityOfBirth" expr="eval: &quot; self.id IN (0) &quot;"/>
+            <attribute name="domain" for="cityOfBirth" expr="eval: &quot; self.country.id = ${countryOfBirth?.id} &quot;"
+                       if="countryOfBirth != null &amp;&amp; departmentOfBirth == null"/>
+            <attribute name="domain" for="cityOfBirth"
+                       expr="eval: &quot; self.department.id = ${departmentOfBirth?.id} &quot;"
+                       if="countryOfBirth == null &amp;&amp; departmentOfBirth != null"/>
+            <attribute name="domain" for="cityOfBirth"
+                       expr="eval: &quot; self.country.id = ${countryOfBirth?.id} AND self.department.id = ${departmentOfBirth?.id} &quot;"
+                       if="countryOfBirth != null &amp;&amp; departmentOfBirth != null"/>
+        </action-attrs>-->
+
+    <action-attrs name="action-employee-attrs-department-of-birth-on-change">
+        <attribute name="value" for="cityOfBirth" expr="eval: null"/>
+    </action-attrs>
+
+    <action-attrs name="action-employee-attrs-bank-details-on-select">
+        <attribute name="domain" expr="eval: &quot;self = null&quot;" for="bankDetails"/>
+        <attribute if="!mainEmploymentContract?.payCompany?.bankDetailsList?.isEmpty()" name="domain"
+                   expr="eval: &quot;self.id IN (${mainEmploymentContract?.payCompany?.bankDetailsList?.collect{it.id}.join(',')}) AND self.active = true&quot;"
+                   for="bankDetails"/>
+    </action-attrs>
+
+    <form name="employee-annual-report-form" title="Annual report" model="com.axelor.apps.hr.db.Employee">
+        <panel name="mainPanel">
+            <field name="year" title="Year" domain="self.typeSelect = 1" target="com.axelor.apps.base.db.Year"
+                   type="many-to-one"/>
+            <button name="showAnnualReportBtn" title="Show expenses annual report" readonlyIf="year == null"
+                    onClick="action-employee-method-show-annual-report"/>
+        </panel>
+    </form>
+
+    <form name="employee-etatEngagement-report-form" title="Etat d'engagement" model="com.axelor.apps.hr.db.Employee"
+          onNew="test_callFlous">
+
+        <panel colSpan="12">
+            <panel name="mainPanel" colSpan="10" colOffset="1">
+                <field name="rappel" showTitle="false" selection="type_Rappel" widget="RadioSelect" colSpan="8"
+                       colOffset="4" onChange="change_rappel"/>
+                <field name="dateDebut" title="Date Début" type="date" colSpan="4"/>
+                <field name="dateFin" title="Date Fin" type="date" colSpan="4"/>
+                <field name="type_engagement" title="Type d'engagement" selection="select_Normal.validate" colSpan="2"/>
+                <field name="type_doc" title="Document" selection="type_document" colSpan="2"/>
+                <button name="showAnnualReportBtn" title="Rechercher"
+                        onClick="com.axelor.apps.hr.web.EmployeeController:Imprimer_EtatEngagement,close" colOffset="10"
+                        colSpan="2"/>
+            </panel>
+        </panel>
+
+    </form>
+
+    <form name="employee-attestationSalaire-report-form" title="Attestation de salaire"
+          model="com.axelor.apps.hr.db.Employee">
+        <panel colSpan="12">
+            <panel name="mainPanel" colSpan="10" colOffset="1">
+                <field name="dateDebut" title="Date Début" type="date" colSpan="4"/>
+                <field name="dateFin" title="Date Fin" type="date" colSpan="4"/>
+                <field name="type_doc" title="Document" selection="type_document" colSpan="4"/>
+                <button name="showReportBtn" title="Imprimer"
+                        onClick="com.axelor.apps.hr.web.EmployeeController:Imprimer_AttestationSalaire,close"
+                        colOffset="10" colSpan="2"/>
+            </panel>
+        </panel>
+    </form>
+
+    <!--    //Ajout par ayoub lamghari-->
+    <form name="employee-DECOMPTE-report-form" title="Etat DECOMPTE IR" model="com.axelor.apps.hr.db.Employee"
+          onNew="test_callFlous">
+
+        <panel colSpan="12">
+            <panel name="mainPanel" colSpan="10" colOffset="1">
+                <field name="mois" selection="hr.etatEngagment.mois" title="Mois" required="true" type="integer"/>
+                <field name="annee" type="integer" required="true"/>
+
+                <button name="showDECOMPTE" title="Rechercher"
+                        onClick="com.axelor.apps.hr.web.expense.AyoubController:Etatdecompteir,close" colOffset="10"
+                        colSpan="2"/>
+            </panel>
+        </panel>
+
+    </form>
+    <!--    //Ajout par ayoub lamghari-->
+    <cards name="employee-card" title="Employee" model="com.axelor.apps.hr.db.Employee" css="rect-image" orderBy="name">
+        <!--<toolbar>
+            <button name="printEmployeePhoneBookBtn" title="Employee PhoneBook" icon="fa-print"
+                    onClick="action-print-employee-phonebook"/>
+        </toolbar>-->
+        <field name="contactPartner.picture"/>
+        <field name="contactPartner.fullName"/>
+        <field name="contactPartner.fixedPhone"/>
+        <field name="contactPartner.mobilePhone"/>
+        <field name="mainEmploymentContract.payCompany"/>
+        <field name="mainEmploymentContract.companyDepartment"/>
+        <field name="hrManager"/>
+        <template><![CDATA[
+			<div>
+			  <div class="span4 card-image" style="width: 128px; height: 64px;">
+			    <img ng-src="{{$image('contactPartner.picture', 'content')}}" style="width: 100%; height: 100%; object-fit: contain;" />
+			  </div>
+			  <div class="span8">
+			  	<span>
+				   <strong>{{contactPartner.fullName}}</strong><br/>
+			       <span ng-if="contactPartner.fixedPhone"><i class='fa fa-phone fa-flip-horizontal'/> {{ contactPartner.fixedPhone}}<br/></span>
+	               <span ng-if="contactPartner.mobilePhone"><i class='fa fa-mobile' style="margin-right:9px;"/>{{contactPartner.mobilePhone}}<br/></span>
+	               <span  ng-if="mainEmploymentContract.payCompany.name"><strong><span x-translate>Company</span></strong> : {{mainEmploymentContract.payCompany.name}}<br/></span>
+                   <span  ng-if="mainEmploymentContract.companyDepartment.name"><strong><span x-translate>Department</span></strong> : {{mainEmploymentContract.companyDepartment.name}}<br/></span>
+			    </span>
+			  </div>
+			  <div class="span12" style="margin-left:30px;">
+			   <span class="label label-important" ng-show="hrManager" x-translate>{{ "HR manager" }}</span>
+			  </div>
+			</div>
+		]]>
+        </template>
+    </cards>
+
+
+    <action-record name="action-employee-record-default" model="com.axelor.apps.hr.db.Employee">
+        <field name="timeLoggingPreferenceSelect"
+               expr="eval:__config__.app.getApp('base').getTimeLoggingPreferenceSelect()"/>
+        <field name="dailyWorkHours" expr="eval:__config__.app.getApp('base').getDailyWorkHours()"/>
+        <field name="negativeValueLeave" expr="eval:__config__.app.getApp('leave').getAllowNegativeLeaveEmployees()"
+               if="__config__.app.isApp('leave')"/>
+        <field name="publicHolidayEventsPlanning"
+               expr="eval: __user__.activeCompany?.hrConfig?.publicHolidayEventsPlanning"/>
+    </action-record>
+
+    <action-method name="test_callFlous">
+        <call class="com.axelor.apps.hr.web.EmployeeController" method="verifierRappel"/>
+    </action-method>
+
+
+    <action-record name="action-hr-record-reset-company-cb-details" model="com.axelor.apps.hr.db.Employee">
+        <field name="companyCbDetails" expr="eval: ''"/>
+    </action-record>
+
+    <action-view name="action-employee-user-show-employee" title="Employee"
+                 model="com.axelor.apps.hr.db.Employee">
+        <view type="grid" name="employee-grid"/>
+        <view type="form" name="employee-form"/>
+        <context name="_showRecord" expr="eval:employee?.id"/>
+    </action-view>
+
+    <action-view name="AjouterCredit2" title="Employee" model="com.axelor.apps.hr.db.GestionCredit">
+        <view type="grid" name="GestionCredit-grid"/>
+        <view type="form" name="GestionCredit-form"/>
+        <domain>self.employee.id = :employeeId</domain>
+        <context name="employeeId" expr="eval: id"/>
+    </action-view>
+
+    <action-view name="action-employee-view-show-lunch-voucher"
+                 title="Lunch Vouchers" model="com.axelor.apps.hr.db.LunchVoucherMgtLine">
+        <view type="grid" name="lunch-voucher-mgt-line-employee-grid"/>
+        <view type="form" name="lunch-voucher-mgt-line-form"/>
+        <domain>self.employee.id = :employeeId</domain>
+        <context name="employeeId" expr="eval: id"/>
+    </action-view>
+
+    <action-view name="employee.dashlet.employee.bonus" title="Bonuses"
+                 model="com.axelor.apps.hr.db.EmployeeBonusMgtLine">
+        <view type="grid" name="employee-bonus-mgt-line-employee-grid"/>
+        <view type="form" name="employee-bonus-mgt-line-employee-form"/>
+        <domain>self.employee.id = :employeeId</domain>
+        <context name="employeeId" expr="eval: id"/>
+    </action-view>
+
+    <action-view name="action-employee-view-annual-report-wizard" title="Annual report"
+                 model="com.axelor.apps.hr.db.Employee">
+        <view type="form" name="employee-annual-report-form"/>
+        <view-param name="popup" value="reload"/>
+        <view-param name="show-toolbar" value="false"/>
+        <view-param name="show-confirm" value="false"/>
+        <view-param name="popup-save" value="false"/>
+        <view-param name="width" value="800"/>
+    </action-view>
+
+    <action-view name="action-employee-view-etat-engagement-wizard" title="Formulaire d'engagement"
+                 model="com.axelor.apps.hr.db.Employee">
+        <view type="form" name="employee-etatEngagement-report-form"/>
+        <view-param name="popup" value="reload"/>
+        <view-param name="show-toolbar" value="false"/>
+        <view-param name="show-confirm" value="false"/>
+        <view-param name="popup-save" value="false"/>
+        <view-param name="width" value="800"/>
+    </action-view>
+
+    <action-view name="action-employee-view-attestation-salaire-wizard" title="Formulaire d'engagement"
+                 model="com.axelor.apps.hr.db.Employee">
+        <view type="form" name="employee-attestationSalaire-report-form"/>
+        <view-param name="popup" value="reload"/>
+        <view-param name="show-toolbar" value="false"/>
+        <view-param name="show-confirm" value="false"/>
+        <view-param name="popup-save" value="false"/>
+        <view-param name="width" value="800"/>
+    </action-view>
+
+    <!--//ajout par ayoub lamghari-->
+    <action-view name="action-employee-view-etat-DECOMPTEIR-wizard" title="Formulaire ETAT DECOMPTE IR"
+                 model="com.axelor.apps.hr.db.Employee">
+        <view type="form" name="employee-DECOMPTE-report-form"/>
+        <view-param name="popup" value="reload"/>
+        <view-param name="show-toolbar" value="false"/>
+        <view-param name="show-confirm" value="false"/>
+        <view-param name="popup-save" value="false"/>
+        <view-param name="width" value="800"/>
+    </action-view>
+    <!--//ajout par ayoub lamghari-->
+
+    <action-view name="action-employee-view-user-timesheets" title="Timesheets"
+                 model="com.axelor.apps.hr.db.Timesheet">
+        <view type="grid" name="my-timesheets-grid"/>
+        <view type="form" name="timesheet-form"/>
+        <domain>self.user.employee = :id</domain>
+    </action-view>
+
+
+    <action-view name="action-employee-view-user-timesheets" title="Timesheets"
+                 model="com.axelor.apps.hr.db.Timesheet">
+        <view type="form" name="timesheet-form"/>
+        <domain>self.user.employee = :id</domain>
+    </action-view>
+
+    <action-method name="action-employee-method-show-annual-report">
+        <call class="com.axelor.apps.hr.web.EmployeeController" method="showAnnualReport"/>
+    </action-method>
+
+    <action-group name="action-employee-historique-Rib">
+        <action name="com.axelor.apps.hr.web.EmployeeController:addToHistoriqueRib"/>
+    </action-group>
+
+
+    <action-method name="action-employee-method-set-social-network-url">
+        <call class="com.axelor.apps.hr.web.EmployeeController" method="setEmployeeSocialNetworkUrl"/>
+    </action-method>
+
+    <action-method name="action-employee-contact-method-set-social-network-url">
+        <call class="com.axelor.apps.hr.web.EmployeeController" method="setContactSocialNetworkUrl"/>
+    </action-method>
+
+    <action-method name="action-employee-method-normalize-fixedProPhone">
+        <call class="com.axelor.apps.base.web.PartnerController" method="normalizePhoneNumber"/>
+    </action-method>
+
+    <action-method name="action-employee-method-normalize-mobileProPhone">
+        <call class="com.axelor.apps.base.web.PartnerController" method="normalizePhoneNumber"/>
+    </action-method>
+
+    <action-method name="action-employee-method-normalize-phoneAtCustomer">
+        <call class="com.axelor.apps.base.web.PartnerController" method="normalizePhoneNumber"/>
+    </action-method>
+
+    <action-method name="action-employee-method-normalize-emergencyNumber">
+        <call class="com.axelor.apps.base.web.PartnerController" method="normalizePhoneNumber"/>
+    </action-method>
+
+    <action-method name="action-print-employee-phonebook">
+        <call class="com.axelor.apps.hr.web.EmployeeController" method="printEmployeePhonebook"/>
+    </action-method>
+
+    <action-method name="changer_dateRecrutement_linkaugmentation">
+        <call class="com.axelor.apps.hr.web.CustomController" method="updateDateRecrutement"/>
+    </action-method>
+
+    <action-method name="action-employee-method-print-employee-report">
+        <call class="com.axelor.apps.hr.web.EmployeeController" method="printEmployeeReport"/>
+    </action-method>
+
+    <action-method name="change_rappel">
+        <call class="com.axelor.apps.hr.web.EmployeeController" method="OnchangeReppel"/>
+    </action-method>
+
+    <action-condition name="action-employee-validate-dates">
+        <check error="Invalid date" field="endDate"
+               if="startDate != null &amp;&amp; endDate != null  &amp;&amp; (endDate &lt; startDate)"/>
+    </action-condition>
+
+    <action-attrs name="action-employee-attrs-set-seniority-date">
+        <attribute name="value" for="seniorityDate" expr="eval: hireDate" if="seniorityDate == null"/>
+    </action-attrs>
+
+    <search-filters name="employee-filters" model="com.axelor.apps.hr.db.Employee"
+                    title="Employee filters">
+        <field name="bankDetails" hidden="true" if="!__config__.app.getApp('base').getManageMultiBanks()"/>
+        <field name="timesheetImputationSelect" hidden="true"
+               if="!(__config__.app.isApp('production') &amp;&amp; __config__.app.getApp('production')?.getEnableTimesheetOnManufOrder())"/>
+        <field name="lunchVoucherFormatSelect" hidden="true"
+               if="!(__config__.app.isApp('employee') &amp;&amp; __config__.app.getApp('employee').getLunchVoucher())"/>
+        <field name="lunchVoucherAdvanceList" hidden="true"
+               if="!(__config__.app.isApp('employee') &amp;&amp; __config__.app.getApp('employee').getLunchVoucher())"/>
+        <field name="employeeAdvanceList" hidden="true"
+               if="!(__config__.app.isApp('employee') &amp;&amp; __config__.app.getApp('employee').getAdvanceManagement())"/>
+        <field name="leaveLineList" hidden="true" if="!__config__.app.isApp('leave')"/>
+        <field name="negativeValueLeave" hidden="true" if="!__config__.app.isApp('leave')"/>
+        <field name="timeLoggingPreferenceSelect" hidden="true" if="!__config__.app.isApp('timesheet')"/>
+        <field name="product" hidden="true" if="!__config__.app.isApp('timesheet')"/>
+        <field name="timesheetReminder" hidden="true" if="!__config__.app.isApp('timesheet')"/>
+        <field name="kilometricLogList" hidden="true" if="!__config__.app.isApp('timesheet')"/>
+        <field name="employeeVehicleList" hidden="true" if="!__config__.app.isApp('expense')"/>
+        <field name="mainEmploymentContract.payCompany"
+               title="Pay company main employment contract"/>
+        <field name="mainEmploymentContract.executiveStatusSelect"
+               title="Main employment contract status"/>
+        <field name="socialSecurityNumber" title="Social security number" hidden="true"/>
+        <field name="contactPartner.firstName" title="Nom"/>
+    </search-filters>
+</object-views>

@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+  <module name="human-resource" package="com.axelor.apps.hr.db"/>
+			
+
+  <entity name="EmployeeEtatSomme" cacheable="true">
+   			    <one-to-one  ref="com.axelor.apps.hr.db.Employee" name="emplo" required="true"  title="BENEFICIAIRE"/>
+   			    <string name="typeIndem" title="Type d'état des sommes dues" selection="hr.etat.somme.due.type"/>
+         		<date name="mois1" title="Entre le :" />
+			    <date name="mois2" title="ET le :" />
+			    <decimal name="montant" title="Montant"/>
+  
+  
+</entity>
+</domain-models>

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+  <module name="helpdesk" package="com.axelor.apps.helpdesk.db"/>
+
+  <entity name="Ticket">
+      
+		<string name="ticketSeq" title="Numéro de réclamation" readonly="true" />
+		<string name="subject" title="Subject"/>
+		<string name="contact" title="Contact" required="true"/>
+		<string name="typeTicket" selection="reclamation.typeReclamations" title="Source de réclamation"/>
+		<many-to-one name="naturePlainte" ref="com.axelor.apps.configuration.db.NaturePlainte" title="Nature de la plainte" />
+		<string name="etablissement" title="Etablissement" required="true"/>
+		<string name="tele" title="Téléphone" required="true"/>
+		<string name="email" title="e-mail" required="true"/>
+		<boolean name="recevable" title="Recevable" default="false"/>
+		<string name="remplisPar" title="remplis par" required="true"/>
+		<date name="remisle" title="Remis le" required="true"/>
+		<date name="datereclamation" title="Date de la réclamation" required="true"/>
+		<date name="dateEnregistrement" title="Date d’enregistrement : " />
+		<string name="numEnregistrement" title="N°  d’enregistrement : "/>
+		<string name="emetteur" title="Emetteur :"/>
+		<date name="transmisle" title="Transmis au Service Concerné le " />
+		<string name="analyseReclamation" title="Analyse de la réclamation :"/>
+		<boolean name="justified" title="Type" selection="reclamation.justify.selection"/>
+		<one-to-many name="actions" ref="com.axelor.apps.helpdesk.db.Actions"  />		
+		<string name="responsable" title="Responsable :"/>
+		<date name="dateAction" title="Date:" />
+		<string name="typeReponse" title="Type de réponse  :"/>
+		<date name="dateEnvoi" title="Date d’envoi :" />
+		<date name="dateCloture" title="Date de la clôture :" />
+		<string name="delai" title="Délai  :" />
+		<string name="delaiRealisation" title="Délai réalisation :" />
+		<string name="delairRalisationActions" title="Délai de réalisation des actions complémentaires :" />
+		<many-to-one name="project" ref="com.axelor.apps.project.db.Project" title="Project"/>
+		<many-to-one name="customer" ref="com.axelor.apps.base.db.Partner" title="Customer"/>
+		<many-to-one name="contactPartner" ref="com.axelor.apps.base.db.Partner" title="Customer contact"/>
+		<many-to-one name="slaPolicy" ref="com.axelor.apps.helpdesk.db.Sla" title="SLA Policy"/>
+		<many-to-one name="assignedToUser" ref="com.axelor.auth.db.User" title="Assigned to"/>
+		<many-to-one name="responsibleUser" ref="com.axelor.auth.db.User" title="User in charge of the issue"/>
+	  <integer name="statusSelect" selection="helpdesk.status.select" title="Status"/>
+		<many-to-one name="ticketType" ref="com.axelor.apps.helpdesk.db.TicketType" title="Type de réclamations"/>
+		<datetime name="startDateT" title="Start date"/>
+		<datetime name="endDateT" title="End date"/>
+		<datetime name="deadlineDateT" title="Deadline"/>
+		<boolean name="isSlaCompleted" title="SLA completed" default="false"/>
+		<long name="duration" title="Duration"/>
+		<string name="description" title="Description" large="true" required="true"/>
+		<string name="description2" title="Description" large="true" />
+		<integer name="progressSelect" title="Progress (%)" selection="helpdesk.ticket.progress.select"/>
+		<integer name="prioritySelect" title="Priority" selection="helpdesk.priority.select" default="2"/>
+		<string name="mailSubject"/>
+		<one-to-many name="timerList" ref="com.axelor.apps.base.db.Timer"/>
+		<decimal name="realTotalDuration" title="Real total duration (Hours)" min="0" default="0" />
+		<boolean name="timerState" readonly="true"/>
+		<one-to-many name="piecesJointe" ref="com.axelor.apps.helpdesk.db.PiecesJointe"  />		
+		<extra-code>
+			<![CDATA[
+				public static final int STATUS_NEW = 0;
+				public static final int STATUS_IN_PROGRESS = 1;
+				public static final int STATUS_RESOLVED = 2;
+				public static final int STATUS_CLOSED = 3;
+			]]>
+		</extra-code>
+
+		<track>
+		  <field name="ticketSeq"/>
+	      <field name="subject" />
+	      <field name="statusSelect" on="UPDATE"/>
+	      <message if="true" on="CREATE">Ticket created</message>
+	      <message if="statusSelect == 1" tag="info">Ticket In Progress</message>
+	      <message if="statusSelect == 2" tag="success">Ticket In Resolved</message>
+	      <message if="statusSelect == 3" tag="info">Ticket Closed</message>
+    	</track>
+		
+  </entity>
+  
+</domain-models>

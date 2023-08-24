@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="human-resource" package="com.axelor.apps.hr.db"/>
+
+    <entity name="EtatSalaireTransaction" lang="java">
+        <string name="moisString">
+            String[] tableau_mois_francais = {"JANVIER","FEVRIER","MARS","AVRIL","MAI","JUIN","JUILLET","AOUT","SEPTEMBRE","OCTOBRE","NOVEMBRE","DECEMBRE"};
+            return tableau_mois_francais[this.getMoisInt()-1];
+        </string>
+        <integer name="moisInt"/>
+       <integer name="annee"/>
+        <one-to-many name="etatSalaireTransactionDetail" ref="com.axelor.apps.hr.db.EtatSalaireTransactionDetail" mappedBy="etatSalaireTransaction"/>
+        <many-to-one name="compte" ref="com.axelor.apps.configuration.db.Compte"/>
+        <decimal name="montantTotal"/>
+        <many-to-one name="historiqueCompte" ref="com.axelor.apps.configuration.db.HistoriqueCompte"/>
+    </entity>
+
+
+</domain-models>

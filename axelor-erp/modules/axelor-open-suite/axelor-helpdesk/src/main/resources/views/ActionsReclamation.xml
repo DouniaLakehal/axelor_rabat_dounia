@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="actionsReclamation_grid" title="Actions"
+		model="com.axelor.apps.helpdesk.db.ActionsReclamation" orderBy="titre">
+		<field name="titre" title="Titre" />
+		<field name="responsable" title="Responsable" />
+		<field name="dateRealisation" title="Date de réalisation" />
+		<field name="numAmelioration" title="N° de la fiche d’amélioration" />
+		<field name="terminer" title="Terminer"/>
+	</grid>
+	<form name="actionsReclamation_form" title="Actions" onNew="com.axelor.apps.helpdesk.web.TicketController:updateactionreclamation"
+		model="com.axelor.apps.helpdesk.db.ActionsReclamation" width="large">
+		<panel-stack name="generalDetailsPanel">
+			<panel name="actionReclamationPanle" colSpan="12">
+				<field name="titre" title="Titre" required="true"/>
+				<field name="responsable" title="Responsable" required="true"/>
+				<field name="dateRealisation" title="Date de réalisation" required="true"/>
+				<field name="numAmelioration" title="N° de la fiche d’amélioration" required="true"/>
+				<field name="reclamation" hidden="true" title="reclamation"/>
+			</panel>
+		</panel-stack>
+
+	</form>
+
+</object-views>
+
+
+	

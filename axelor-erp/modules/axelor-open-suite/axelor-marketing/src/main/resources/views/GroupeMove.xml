@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+    <grid name="ouverture_move_custom-grid_delete" orderBy="-date" canArchive="false" title="Ouverture"
+          model="com.axelor.apps.account.db.GroupeMove" canDelete="false">
+        <field name="period" form-view="period-form" grid-view="period-grid_custom" width="120" canEdit="false"
+               canView="false"/>
+        <field name="date" title="Date ouverture" width="200"/>
+        <field name="statusSelect" width="200"/>
+        <button icon="fa-trash" title="Supprimer" name="deleteMoveGroupe" onClick="action_deleteMoveGroupe" />
+    </grid>
+
+
+
+
+    <action-method name="action_deleteMoveGroupe">
+        <call class="com.axelor.apps.marketing.web.CustomCtr" method="deleteMoveGroupe"/>
+    </action-method>
+
+    <form name="ouverture_move_custom-form_delete" title="Ouverture" canArchive="false"
+          model="com.axelor.apps.account.db.GroupeMove" canDelete="false" width="large"
+          onNew="load_current_date" onSave="saveGrouveMove_tmp"
+    >
+        <panel name="mainPanel" readonlyIf="statusSelect == 3" colSpan="12">
+            <panel name="moveContentPanel" colSpan="12">
+                <field canNew="false" canRemove="false" canSuggest="false" required="true" name="period" readonlyIf="moveLineList.length &gt; 0" form-view="period-form"
+                       grid-view="period-grid_this_grid" canEdit="false" canView="false" onChange="getLastPeriod"/>
+                <field name="date" title="Date Ouverture" readonly="true"/>
+                <field canSelect="false" canSuggest="false" canRemove="false" canNew="false" canEdit="false"
+                       canView="false" x-can-copy="false" x-can-export="false"
+                       name="move_move" colSpan="12" title="Liste des Journeaux" grid-view="ecriture-grid_v2"/>
+                <field hidden="true" name="$lastPeriod" title="last Period" target="com.axelor.apps.base.db.Period"
+                       form-view="period-form" grid-view="period-grid" type="many-to-one"/>
+                <field hidden="true" name="$isClosed" title="periodeClose"/>
+                <field hidden="true" name="$isFristYears" title="First"/>
+            </panel>
+        </panel>
+    </form>
+
+
+    <grid name="period-grid_this_grid" title="Period" model="com.axelor.apps.base.db.Period" orderBy="-fromDate">
+        <field name="name"/>
+        <field name="fromDate"/>
+        <field name="toDate"/>
+        <field name="statusSelect"/>
+    </grid>
+
+
+
+    <form canNew="false" canDelete="false" canEdit="false" canCopy="false" canAttach="false" canSave="false" canArchive="false"
+          name="jounal_information_detail" title="Journal" model="com.axelor.apps.account.db.Journal" width="large" onLoad="action-journal-group-on-load-actions" >
+        <panel name="mainPanel">
+            <field name="name" colSpan="4"/>
+            <field name="code" x-bind="{{code|unaccent|uppercase}}" colSpan="4"/>
+            <field name="journalType" form-view="journal-type-form" grid-view="journal-type-grid" colSpan="4"/>
+        </panel>
+        <panel name="totalPanel" showIf="id &amp;&amp; journalType.isDisplayBalances">
+            <field name="$totalDebit" title="Total Debit" readonly="true" colSpan="4">
+                <viewer><![CDATA[
+
+				<h3>{{record.$totalDebit}}</h3>
+
+		]]></viewer>
+            </field>
+            <field name="$totalCredit" title="Total Credit" readonly="true" colSpan="4">
+                <viewer><![CDATA[
+
+				<h3>{{record.$totalCredit}}</h3>
+
+		]]></viewer>
+            </field>
+            <field name="$balance" title="Balance" readonly="true" colSpan="4">
+                <viewer><![CDATA[
+
+				<h3>{{record.$totalDebit >= record.$totalCredit ? record.$totalDebit - record.$totalCredit : record.$totalCredit - record.$totalDebit}}</h3>
+
+		]]></viewer>
+            </field>
+        </panel>
+        <panel>
+            <panel-dashlet colSpan="12" name="viewMoveLinePanel" title="General" height="450" action="action-journal-view-move-line_custom" canSearch="true"/>
+        </panel>
+    </form>
+
+
+
+    <grid name="ecriture-grid_v2" orderBy="-date" canArchive="false" canNew="false" title="Account moves"
+          model="com.axelor.apps.account.db.Move" canDelete="false">
+        <field name="reference" width="200"/>
+        <field name="journal" form-view="journal-form" grid-view="journal-grid"/>
+        <field name="period" form-view="period-form" grid-view="period-grid" canEdit="false" canView="false"/>
+        <field name="date" title="date ouverture"/>
+        <field name="partner" form-view="partner-form" grid-view="partner-grid" hidden="true"/>
+        <field name="company" form-view="company-form" grid-view="company-grid" hidden="true" width="140"
+               if="__config__.app.getApp('base').getEnableMultiCompany()"/>
+        <field name="moveLineList" hidden="true" />
+        <field name="invoice" form-view="invoice-form" grid-view="invoice-grid" hidden="true" width="140"/>
+        <field name="statusSelect"/>
+        <button icon="fa-plus" name="showinfoJournale" onClick="action_showInfoJournal" title="Afficher les lignes d'écriture" showIf="moveLineList!=0"/>
+    </grid>
+
+    <action-view name="action_showInfoJournal" title="Journale" model="com.axelor.apps.account.db.Journal">
+        <view type="form" name="jounal_information_detail"/>
+        <view-param name="popup" value="reload"/>
+        <view-param name="show-toolbar" value="false"/>
+        <view-param name="show-confirm" value="false" />
+        <view-param name="popup-save" value="false"/>
+        <view-param name="forceEdit" value="false" />
+        <context name="_showRecord" expr="eval:__self__.journal?.id"/>
+    </action-view>
+
+
+    <form name="journal-form_custom_groupe_move" title="Journal" model="com.axelor.apps.account.db.Journal"
+          width="large">
+        <panel name="statusPanel" title="Status" hidden="true">
+            <field name="statusSelect" showTitle="false" readonly="true" widget="NavSelect" colSpan="9"/>
+            <button name="activeStatusBtn" title="Active" hideIf="statusSelect == 1"
+                    onClick="account-journal-record-status-active,save" colSpan="2"/>
+            <field hidden="true" name="company" canEdit="false" readonlyIf="statusSelect == 1 || statusSelect == 2"
+                   form-view="company-form" grid-view="company-grid"/>
+            <field name="journalType.isDisplayBalances" hidden="true"/>
+        </panel>
+        <panel name="mainPanel">
+            <field name="name"/>
+            <field colSpan="2" name="code" x-bind="{{code|unaccent|uppercase}}"/>
+            <field colSpan="4" name="journalType" grid-view="journal-type-grid" form-view="journal-type-form"/>
+        </panel>
+        <panel name="zone-comptComptableBanque" hidden="true">
+            <field colSpan="12" name="comptComptableBanque" title="Compte Comptable Banque"/>
+        </panel>
+        <panel name="zone-comptComptableCaisse" hidden="true">
+            <field colSpan="12" name="comptComptableCaisse" title="Compte Comptable Caisse"/>
+        </panel>
+        <panel hidden="true" name="totalPanel" showIf="id &amp;&amp; journalType.isDisplayBalances">
+            <field name="$totalDebit" title="Total Debit" colSpan="4" readonly="true">
+                <viewer>
+                    <![CDATA[
+						<h3>{{record.$totalDebit}}</h3>
+					]]>
+                </viewer>
+            </field>
+            <field name="$totalCredit" title="Total Credit" colSpan="4" readonly="true">
+                <viewer>
+                    <![CDATA[
+						<h3>{{record.$totalCredit}}</h3>
+					]]>
+                </viewer>
+            </field>
+            <field name="$balance" title="Balance" colSpan="4" readonly="true">
+                <viewer>
+                    <![CDATA[
+						<h3>{{record.$totalDebit >= record.$totalCredit ? record.$totalDebit - record.$totalCredit : record.$totalCredit - record.$totalDebit}}</h3>
+					]]>
+                </viewer>
+            </field>
+        </panel>
+
+        <panel-tabs name="mainPanelTab" hidden="false">
+            <panel-dashlet name="viewMoveLinePanel" title="General" action="action-journal-view-move-line_custom"
+                           height="450" canSearch="true" hideIf="$popup()"/>
+        </panel-tabs>
+
+    </form>
+
+    <action-view name="action-journal-view-move-line_custom" title="Move lines"
+                 model="com.axelor.apps.account.db.MoveLine">
+        <view type="grid" name="move-line-grid"/>
+        <view type="form" name="move-line-form"/>
+        <domain>self.move.journal.id = :id
+        </domain>
+        <context name="todayDate" expr="eval:__config__.app.getTodayDate(__user__.activeCompany)"/>
+    </action-view>
+
+
+    <action-method name="getLastPeriod">
+        <call class="com.axelor.apps.marketing.web.CustomCtr" method="getlastPeriod"/>
+    </action-method>
+
+    <action-group name="load_current_date">
+        <action name="action1"/>
+        <action name="action2"/>
+    </action-group>
+
+    <action-record name="action1" model="com.axelor.apps.account.db.GroupeMove">
+        <field name="date" expr="eval:__date__" if="date==null"/>
+        <field name="isFristYears" expr="eval:'non'"/>
+    </action-record>
+    <action-attrs name="action2">
+        <attribute for="period" name="domain"
+                   expr="eval: &quot; self.id not in (${([0]+__repo__(GroupeMove).all().fetch().collect{it->it.period.id}.flatten()).join(',')})&quot; "/>
+    </action-attrs>
+
+    <action-group name="saveGrouveMove_tmp">
+        <action name="show_message_Not_Journale"/>
+        <action name="show_message_Not_Journale_2" />
+        <action name="save"/>
+        <action name="addJournaleToMove" />
+        <action name="save"/>
+    </action-group>
+
+
+
+    <action-method name="addJournaleToMove">
+        <call class="com.axelor.apps.marketing.web.CustomCtr" method="addJournaleAndMove"/>
+    </action-method>
+
+    <action-validate name="show_message_Not_Journale">
+        <alert message="Le Journal &lt;b&gt;Report a Nouv&lt;/b&gt; n'est pas présent dans le system&lt;br&gt;le Journal &lt;b&gt;Report a Nouv&lt;/b&gt; ne sera pas générer.&lt;br&gt;Souhaiter vous Continuer sans générer le Journale &lt;b&gt;Report a Nouv&lt;/b&gt;."
+               if="__repo__(Journal).all().filter('self.is_journalAnouv=true').fetch().size()==0"/>
+    </action-validate>
+
+    <action-validate name="show_message_Not_Journale_2">
+        <alert message="&lt;p&gt;les journeaux de la période précedente ne sont pas cloturées&lt;/p&gt;&lt;p&gt;souhaitez vous continuer sans générer le journal a nouveau?&lt;/p&gt;"
+               if="isClosed.equals('open')"/>
+    </action-validate>
+
+
+    <grid name="ouverture_move_custom_grid_AnalyseCompte" orderBy="-date" canArchive="false" title="Ouverture"
+          model="com.axelor.apps.account.db.GroupeMove" canDelete="false" canNew="false" canMove="false" canEdit="false" canSave="false">
+        <field name="period" form-view="period-form" grid-view="period-grid_custom" width="120" canEdit="false"
+               canView="false"/>
+        <field name="date" title="Date ouverture" width="200"/>
+        <field name="statusSelect" width="200"/>
+        <button icon="fa-plus" title="afficher les Comptes" name="show_compte" onClick="analyse_compte_v2,close" />
+    </grid>
+
+
+    <grid name="ouverture_move_custom_grid_SaisirEcreture"
+          orderBy="-date" canArchive="false" title="Ouverture"
+          model="com.axelor.apps.account.db.GroupeMove" editable="false" edit-icon="false"
+          canDelete="false" canNew="false" canMove="false" canEdit="false" canSave="false">
+        <field name="period" form-view="period-form" grid-view="period-grid_custom" width="120" canEdit="false"
+               canView="false"/>
+        <field name="date" title="Date ouverture" width="200"/>
+        <field name="statusSelect" width="200"/>
+        <button icon="fa-plus" title="afficher les Comptes" name="show_compte" onClick="saisir_ecreture_interface,close" />
+    </grid>
+
+    <action-method name="analyse_compte_v2">
+        <call class="com.axelor.apps.account.web.AccountController" method="show_traitement_account_lettrage"/>
+    </action-method>
+
+    <action-method name="saisir_ecreture_interface">
+        <call class="com.axelor.apps.account.web.AccountController" method="show_traitement_move_moveline"/>
+    </action-method>
+
+
+
+</object-views>

@@ -1,0 +1,94 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="configuration" package="com.axelor.apps.hr.db"/>
+
+    <entity name="EtatSalaire" lang="java">
+        <many-to-one name="employee" ref="com.axelor.apps.hr.db.Employee"/>
+        <integer name="imatriculation" />
+        <date name="dateDebut"/>
+        <date name="dateFin"/>
+        <integer name="annee" />
+        <integer name="mois" />
+
+        <string name="nomPrenom"/>
+        <string name="gradeName"/>
+        <string name="situationfamiliale" />
+        <string name="nbEnfants" />
+        <string name="echelle" title="Echelle"/>
+        <string name="echelon" title="Echelon"/>
+        <string name="indice" title="Indice"/>
+        <boolean name="titulaire" title="Indice"/>
+        <boolean name="isDisposition" />
+        <date name="dateDebutDisposition"/>
+        <date name="dateFinDisposition"/>
+
+        <decimal name="traitementDebase"/>
+        <decimal name="indemniteDeResidence"/>
+        <decimal name="iasIndhierIndDeTech"/>
+        <decimal name="indemniteDeSujetion"/>
+        <decimal name="indemniteDencadrement"/>
+
+        <decimal name="traitBaseIndemStatu"/>
+        <decimal name="allocationfamil"/>
+        <decimal name="indemniteLogemBrut"/>
+        <decimal name="indemnitFonctionNet"/>
+        <decimal name="indemnitVoitureNet"/>
+        <decimal name="indemnitRepresentNet"/>
+        <decimal name="totalMensuelBrut617111"/>
+        <decimal name="totalSalairMensuelBrutImposable"/>
+        <decimal name="rcarRg"/>
+        <decimal name="rcarRComp"/>
+        <decimal name="recore"/>
+        <decimal name="amo"/>
+        <decimal name="mutuelleMgpapSM"/>
+        <decimal name="mutuelleMgpapCcd"/>
+        <decimal name="mutuelleOmfamSm"/>
+        <decimal name="mutuelleOmfamCaad"/>
+        <decimal name="iR"/>
+        <decimal name="rcarComp617131"/>
+        <decimal name="iR617131"/>
+        <decimal name="pretAxaCredit"/>
+        <decimal name="css"/>
+        <decimal name="totalRetenue"/>
+        <decimal name="salaireNet617111"/>
+        <decimal name="indemniteLogementNet617131"/>
+        <decimal name="netAPayer"/>
+        <decimal name="salairePlafonne"/>
+        <decimal name="aos"/>
+
+        <decimal name="amo_rappel"/>
+        <decimal name="cnss_rappel"/>
+        <decimal name="rcar_rappel"/>
+        <decimal name="comp_rappel"/>
+        <decimal name="regim_rappel"/>
+        <decimal name="salaire_plafonne_rappel"/>
+        <decimal name="ir_rappel"/>
+        <decimal name="traitementDebase_rappel"/>
+        <decimal name="indemniteDeResidence_rappel"/>
+        <decimal name="iasIndhierIndDeTech_rappel"/>
+        <decimal name="indemniteDeSujetion_rappel"/>
+        <decimal name="indemniteDencadrement_rappel"/>
+        <decimal name="traitBaseIndemStatu_rappel"/>
+        <decimal name="indemniteLogemBrut_rappel"/>
+        <decimal name="indemnitFonctionNet_rappel"/>
+        <decimal name="indemnitVoitureNet_rappel"/>
+        <decimal name="indemnitRepresentNet_rappel"/>
+        <decimal name="mutuelleMgpapSM_rappel"/>
+        <decimal name="mutuelleMgpapCcd_rappel"/>
+        <decimal name="mutuelleOmfamSm_rappel"/>
+        <decimal name="mutuelleOmfamCaad_rappel"/>
+        <decimal name="pretAxaCredit_rappel"/>
+        <decimal name="totalSalairMensuelBrutImposable_rappel"/>
+        <decimal name="netAPayer_rappel"/>
+        <decimal name="charge_familiale"/>
+        <decimal name="allocation_rappel"/>
+
+        <many-to-one name="historiqueCompte" ref="com.axelor.apps.configuration.db.HistoriqueCompte"/>
+        <many-to-one name="historiqueBudgetaire" ref="com.axelor.apps.configuration.db.HistoriqueBudgetaire"/>
+
+    </entity>
+
+</domain-models>

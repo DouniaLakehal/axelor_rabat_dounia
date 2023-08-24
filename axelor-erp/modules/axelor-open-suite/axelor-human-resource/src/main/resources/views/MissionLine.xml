@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+		
+	<grid name="employee-missions-grid1" title="Missions Details"
+		model="com.axelor.apps.hr.db.EmployeeMissionLine" >
+           <hilite color="success" if="$moment(todayDate).diff(endDate) &lt; 0"/>
+        <hilite color="warning" if="$moment(endDate).diff(todayDate) &gt;= 0 &amp;&amp; $moment(todayDate).diff(startDate) &gt;= 0"/>
+       <field name="typedufichier" title="Type du fichier"/>
+       <field name="joindre" title="Joindre le fichier correspondant"  widget="binary-link"
+			form-view="meta-files-form" grid-view="meta-files-grid"/>
+		
+	</grid>
+	<form name="employee-missions-form1"
+		title="Gestion des Missions"
+		model="com.axelor.apps.hr.db.EmployeeMissionLine" width="large" onLoad=""
+		onNew="" >
+
+		<panel-stack name="generalDetailsPanel">
+			<panel name="employeeDetailsPanel" colSpan="12">
+				<field name="ref" showTitle="false" readonly="true"
+					colSpan="12">
+					<viewer depends="ref"><![CDATA[
+					<h3>
+						{{record.ref}}
+					</h3>
+				]]></viewer>
+				</field>
+		<field name="typedufichier" title="Type du fichier"/>
+       <field name="joindre" title="Joindre Le Fichier Correspondant"  widget="binary-link"
+			form-view="meta-files-form" grid-view="meta-files-grid"/>
+					
+			</panel>
+           
+		</panel-stack>
+
+	</form>
+
+
+
+	
+</object-views>

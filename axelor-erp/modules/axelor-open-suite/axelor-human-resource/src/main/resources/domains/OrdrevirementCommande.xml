@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+   <module name="purchase" package="com.axelor.apps.purchase.db"/>
+
+    <entity name="SelectOP">
+        <string name="numero"/>
+        <string name="benificiaire"/>
+        <string name="compte"/>
+        <string name="somme"/>
+        <string name="ndart"/>
+        <many-to-one name="ordrevirementCommande" ref="com.axelor.apps.purchase.db.OrdrevirementCommande"/>
+        <one-to-one name="orderPaymentCommande" ref="com.axelor.apps.purchase.db.OrderPaymentCommande"/>
+    </entity>
+
+    <entity name="OrdrevirementCommande" lang="java">
+        <date name="datevirement"/>
+        <string name="numero" />
+        <many-to-one name="compte" ref="com.axelor.apps.configuration.db.Compte"/>
+        <many-to-one name="historique" ref="com.axelor.apps.configuration.db.HistoriqueCompte"/>
+        <one-to-many mappedBy="ordrevirementCommande" name="selectOP" ref="com.axelor.apps.purchase.db.SelectOP"/>
+        <long name="id_historique_budget"/>
+        <decimal name="montant"/>
+        <string name="fournisseurName"/>
+        <string name="banqueName"/>
+        <string name="rib"/>
+        <string name="montantLettre"/>
+        <string name="objetVirement" large="true" multiline="true"/>
+    </entity>
+
+    <entity name="OrderPaymentCommande">
+        <string name="beneficiaire"/>
+        <string name="compteBenef"/>
+        <decimal name="sommeVerement"/>
+        <string name="numero" title="Numero" />
+        <many-to-one name="rubriqueBudgetaire" ref="com.axelor.apps.configuration.db.RubriqueBudgetaireGenerale" title="rubriqueBudgetaire"/>
+        <date name="dateOrdre" />
+        <integer name="year"/>
+        <boolean name="haspayer" default="false"/>
+        <string name="nature_operation" selection="natureEngagementAchat.select"/>
+        <long name="id_reference"/>
+        <string name="objet_depences" large="true" multiline="true"/>
+        <many-to-one name="fournisseur" ref="com.axelor.apps.configuration.db.Fournisseur"/>
+        <boolean name="is_fournisseur_interne"/>
+        <boolean name="is_rh_module"/>
+        <string name="rib"/>
+    </entity>
+
+    <entity name="EtatSalaire_ops">
+        <many-to-many name="etatSalaireList" ref="com.axelor.apps.hr.db.EtatSalaire"/>
+        <integer name="mois"/>
+        <integer name="year"/>
+    </entity>
+
+</domain-models>

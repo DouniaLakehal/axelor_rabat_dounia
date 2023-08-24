@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+	<grid canNew="false" canArchive="false" canEdit="true" canSave="true" canDelete="false" canMove="false" edit-icon="false"
+		  title="Editer Etat salaire" name="etat_salaire_emp_grid" model="com.axelor.apps.hr.db.EtatDesRappelSurSalaire" editable="true" >
+		<menubar>
+			<menu title="Imprimer" icon="fa-print">
+				<item title="Etat salarier" name="Nomination_regional" action="com.axelor.apps.hr.web.EmployeeController:imprimer_EtatDesRappelSurSalaire"/>
+				<item title="OP MT TIT" name="OP_MT_TIT" action="com.axelor.apps.hr.web.EmployeeController:imprimer_OP_MT_TIT"/>
+				<item title="OP MT AMO" name="OP_MT_AMO" action="com.axelor.apps.hr.web.EmployeeController:imprimer_OP_AMO"/>
+				<!--<item title="OP MT SM CCD" name="OP_MT_SM_CCD" action="com.axelor.apps.hr.web.EmployeeController:imprimer_OP_MGPAP"/>-->
+				<item title="OV salarier" name="Ordre_de_virement" action="com.axelor.apps.hr.web.EmployeeController:imprimer_Ordre_de_virement"/>
+			</menu>
+		</menubar>
+
+		<field name="show_etat_emp" type="boolean" title="afficher"/>
+		<field name="matriculeInterne" title="Matricule Interne" />
+		<field name="nomEtPrenom" title="Nom et prenom" readonly="true" />
+		<field name="cin" title="CIN" readonly="true"/>
+		<field name="rappleRegularisation" title="Rappel ou Régularisation"/>
+	</grid>
+
+	<form onLoad="test_etat" canNew="false" canAttach="false" canArchive="false" canCopy="false" canDelete="false" canEdit="false" canSave="true"
+			title="Editer Etat salaire" name="etat_salaire_emp_form" model="com.axelor.apps.hr.db.EtatDesRappelSurSalaire">
+		<panel>
+			<panel colSpan="2">
+				<field name="show_etat_emp" type="boolean" title="afficher" readonly="true" hidden="true"/>
+				<field name="show_rcar" type="boolean" title="afficher" readonly="true" hidden="true"/>
+				<field name="show_ir" type="boolean" title="afficher" readonly="true" hidden="true"/>
+				<field name="show_amo" type="boolean" title="afficher" readonly="true" hidden="true"/>
+				<field name="show_mgpap" type="boolean" title="afficher" readonly="true" hidden="true"/>
+			</panel>
+
+			<field colSpan="2" name="nomEtPrenom" title="Nom et prenom" readonly="true" />
+			<field colSpan="2" name="cin" title="CIN" readonly="true"/>
+			<field colSpan="3" name="matriculeInterne" readonly="true" title="Matricule Interne" />
+			<field colSpan="3" name="rappleRegularisation" readonly="true" title="Rappel ou Régularisation"/>
+		</panel>
+	</form>
+
+	<grid canNew="false" canArchive="false" canEdit="true" canSave="true" canDelete="false" canMove="false"
+		  title="Editer Etat RCAR" name="etat_rcar_grid" model="com.axelor.apps.hr.db.EtatDesRappelSurSalaire" editable="true" edit-icon="false">
+		<menubar>
+			<menu title="RCAR" icon="fa-print">
+				<item title="Etat RCAR" name="Etat_RCAR" action="com.axelor.apps.hr.web.EmployeeController:imprimer_Etat_rcar"/>
+				<item title="OP RCAR" name="OP_RCAR" action="com.axelor.apps.hr.web.EmployeeController:imprimer_OP_RCAR"/>
+				<item title="OV RCAR" name="OV_RCAR" action="com.axelor.apps.hr.web.EmployeeController:imprimer_OV_Rcar"/>
+			</menu>
+			<menu title="RCAR Patronal" icon="fa-print">
+				<item title="Etat RCAR Patronal" name="Etat_RCAR_Patronal" action="com.axelor.apps.hr.web.EmployeeController:imprimer_cotisation_patronal"/>
+				<item title="OP RCAR Patronal" name="OP_RCAR_Patronal" action="com.axelor.apps.hr.web.EmployeeController:imprimer_OP_RCAR_Patronal"/>
+			</menu>
+		</menubar>
+
+		<field name="show_rcar" type="boolean" title="afficher"/>
+		<field name="matriculeInterne" title="Matricule Interne" />
+		<field name="nomEtPrenom" title="Nom et prenom" readonly="true" />
+		<field name="cin" title="CIN" readonly="true" />
+
+		<field name="rappleRegularisation" title="Rappel ou Régularisation"/>
+	</grid>
+
+	<grid canNew="false" canArchive="false" canEdit="true" canSave="true" canDelete="false" canMove="false"
+		  title="Editer Impot sur revenu" name="etat_ir_grid" model="com.axelor.apps.hr.db.EtatDesRappelSurSalaire" editable="true" edit-icon="false">
+		<menubar>
+			<menu title="Impot sur revenu" icon="fa-print">
+				<item title="Etat IR" name="Etat_impot_sur_revenu" action="com.axelor.apps.hr.web.EmployeeController:imprimer_impotSurRevenuRappel"/>
+				<item title="OP IR" name="OP_impot_sur_revenu" action="com.axelor.apps.hr.web.EmployeeController:imprimer_OP_IR"/>
+				<item title="OV IR" name="OV_impot_sur_revenu" action="com.axelor.apps.hr.web.EmployeeController:imprimer_OV_IR"/>
+			</menu>
+		</menubar>
+
+		<field name="show_ir" type="boolean" title="afficher"/>
+		<field name="matriculeInterne" title="Matricule Interne" />
+		<field name="nomEtPrenom" title="Nom et prenom" readonly="true" />
+		<field name="cin" title="CIN" readonly="true" />
+		<field name="observation" title="Observation" selection="selectionrappleRegularisation" />
+	</grid>
+
+
+	<grid canNew="false" canArchive="false" canEdit="true" canSave="true" canDelete="false" canMove="false" edit-icon="false"
+		  title="Editer Etat AMO" name="etat_amo_grid" model="com.axelor.apps.hr.db.EtatDesRappelSurSalaire" editable="true" >
+		<menubar>
+			<menu title="Imprimer" icon="fa-print">
+				<item title="Etat AMO" name="Etat_AMO" action="com.axelor.apps.hr.web.EmployeeController:imprimer_Etat_AMO"/>
+				<item title="OP CNOPS" name="Ordre_de_paiement_CNOPS" action="com.axelor.apps.hr.web.EmployeeController:imprimer_OP_CNOPS"/>
+				<item title="OV CNOPS" name="Ordre_de_virement_CNOPS" action="com.axelor.apps.hr.web.EmployeeController:imprimer_OV_CNOPS"/>
+			</menu>
+		</menubar>
+
+		<field name="show_amo" type="boolean" title="afficher"/>
+		<field name="matriculeInterne" title="Matricule Interne" />
+		<field name="nomEtPrenom" title="Nom et prenom" readonly="true" />
+		<field name="cin" title="CIN" readonly="true"/>
+		<field name="observation" title="Observation" selection="selectionrappleRegularisation" />
+	</grid>
+
+	<grid canNew="false" canArchive="false" canEdit="true" canSave="true" canDelete="false" canMove="false" edit-icon="false"
+		  title="Editer Etat AMO" name="etat_mgpap_grid" model="com.axelor.apps.hr.db.EtatDesRappelSurSalaire" editable="true" >
+		<menubar>
+			<menu title="Imprimer" icon="fa-print">
+				<item showIf="champs=='mgpap_sm'" title="Etat MGPAP (SM + CCD)" name="Etat_MGPAP_(SM_+_CCD)" action="com.axelor.apps.hr.web.EmployeeController:imprimer_ETAT_MGPAP"/>
+				<item showIf="champs=='mgpap_sm'" title="OP MGPAP (SM + CCD)" name="OP_MGPAP_(SM_+_CCD)" action="com.axelor.apps.hr.web.EmployeeController:imprimer_OP_MGPAP"/>
+				<item showIf="champs=='omfam_sm'" title="Etat OMFAM (SM + CCD)" name="Etat_OMFAM_(SM_+_CCD)" action="com.axelor.apps.hr.web.EmployeeController:imprimer_Etat_OMFAM"/>
+				<item showIf="champs=='omfam_sm'" title="OP OMFAM (SM + CCD)" name="OP_OMFAM_(SM_+_CCD)" action="com.axelor.apps.hr.web.EmployeeController:imprimer_OP_OMFAM"/>
+			</menu>
+		</menubar>
+
+		<field name="show_mgpap" type="boolean" title="afficher"/>
+		<field name="matriculeInterne" title="Matricule Interne" />
+		<field name="nomEtPrenom" title="Nom et prenom" readonly="true" />
+		<field name="cin" title="CIN" readonly="true"/>
+		<field name="observation" title="Observation" selection="selectionrappleRegularisation"/>
+	</grid>
+
+	<action-attrs name="test_etat">
+	<attribute for="show_etat_emp" name="hidden" expr="aval:toShowField!='show_etat_emp'"/>
+	<attribute for="show_rcar" name="hidden" expr="aval:toShowField!='show_rcar'"/>
+	<attribute for="show_ir" name="hidden" expr="aval:toShowField!='show_ir'"/>
+		<attribute for="show_amo" name="hidden" expr="aval:toShowField!='show_amo'"/>
+		<attribute for="show_mgpap" name="hidden" expr="aval:toShowField!='show_mgpap'"/>
+
+</action-attrs>
+
+</object-views>

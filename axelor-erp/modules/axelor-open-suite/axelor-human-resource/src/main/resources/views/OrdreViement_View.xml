@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="ordreVirementRH_grid" canSave="false" title="Ordre de Versement" model="com.axelor.apps.purchase.db.OrdrevirementCommande">
+        <field name="numero" title="Numero virement"/>
+        <field name="datevirement" title="Date virement"/>
+        <field name="montant" title="Total"/>
+        <button name="imprimer" onClick="imprimerOV" icon="fa-print"/>
+    </grid>
+
+    <form onNew="com.axelor.apps.purchase.web.AppPurchaseController:getNumerosOV"
+          canEdit="false" name="ordreVirementRH_form"
+          canSave="false" title="Ordre Versement" model="com.axelor.apps.purchase.db.OrdrevirementCommande" >
+        <panel name="info_ov" colSpan="12">
+            <field name="numero" title="Numero virement" colSpan="4" />
+            <field readonlyIf="id" name="compte" target-name="designation" required="true" title="Compte" colSpan="4" onChange="verifierMontanBycompte" />
+            <field readonlyIf="id" name="datevirement" required="true" title="Date de Virement" colSpan="4"/>
+        </panel>
+        <panel colSpan="12">
+            <field readonlyIf="id" onChange="verifierMontanBycompte" name="selectOP" colSpan="12" form-view="form_selectOP_2" grid-view="grid_selectOP_2"/>
+        </panel>
+
+        <panel>
+            <button-group>
+                <!--show bouton if sold disponible-->
+                <button title="Enregistrer" name="save1" onClick="saveOv" hidden="true"/>
+                <button title="Modifier" name="save2" onClick="updateov" hideIf="!id"/>
+            </button-group>
+        </panel>
+    </form>
+
+    <grid name="grid_selectOP_2" canSave="false" title="Ordre de paiement" model="com.axelor.apps.purchase.db.SelectOP">
+        <field name="numero" title="N° O.P"/>
+        <field name="benificiaire" title="NOMS DES BENIFICIAIRES"/>
+        <field name="rib" title="COMPTES A CREDITER"/>
+        <field name="somme" title="SOMMES A VIRER"/>
+        <field name="is_rh_module" title="Rh module"/>
+    </grid>
+
+    <form  name="form_selectOP_2" title="Select OP" model="com.axelor.apps.purchase.db.SelectOP" >
+        <panel name="infoifo" colSpan="12">
+            <field name="orderPaymentCommande" colSpan="4" colOffset="4" domain="self.haspayer=false" target-name="numero"
+                   onChange="com.axelor.apps.purchase.web.AppPurchaseController:load_selectOP"/>
+        </panel>
+        <panel colSpan="12">
+            <field name="numero" title="N° O.P" colSpan="6" readonly="true"/>
+            <field name="benificiaire" title="NOM DU BENIFICIAIRES" colSpan="6" readonly="true"/>
+            <field name="rubriqueBudgetaire" colSpan="6" readonly="true"/>
+            <field name="rib" title="COMPTES A CREDITER" colSpan="6" readonly="true"/>
+            <field name="somme" title="SOMMES A VIRER" colSpan="6" readonly="true"/>
+        </panel>
+    </form>
+
+
+    <action-group name="saveOv">
+        <action name="save"/>
+        <action name="com.axelor.apps.purchase.web.AppPurchaseController:updateCompteOv"/>
+        <action name="com.axelor.apps.purchase.web.AppPurchaseController:tw_modifierEngagementAchat"/>
+        <action name="com.axelor.apps.purchase.web.AppPurchaseController:imprimerOV"/>
+    </action-group>
+
+
+    <action-group name="verifierMontanBycompte">
+        <action name="com.axelor.apps.purchase.web.AppPurchaseController:checkMontantByListSelectOP"/>
+    </action-group>
+
+
+
+    <action-group name="updateov">
+        <action name="save"/>
+        <action name="com.axelor.apps.purchase.web.AppPurchaseController:imprimerOV"/>
+    </action-group>
+
+    <action-group name="imprimerOV">
+        <action name="com.axelor.apps.purchase.web.AppPurchaseController:imprimerOV" if="id"/>
+    </action-group>
+
+
+</object-views>

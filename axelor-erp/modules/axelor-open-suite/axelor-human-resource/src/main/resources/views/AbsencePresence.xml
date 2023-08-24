@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="employee-absent-grid" title="AbsencePresence"
+		model="com.axelor.apps.hr.db.EmployeeAbsense" orderBy="employee">
+
+		<field name="employee" />
+		<field name="date1" title="Date de début"  required="true"/>
+		<field name="date2" title="Date fin"/>
+		<field name="statut" title="Statut" />
+		<field name="absence" ref="com.axelor.apps.configuration.db.TypeAbsence" title="Type d'absence"/>
+		<field name="justification" widget="binary-link"
+			form-view="meta-files-form" grid-view="meta-files-grid" />
+	</grid>
+	<form name="employee-absent-form"
+		title="Gestion des absences et présences"
+		model="com.axelor.apps.hr.db.EmployeeAbsense" width="large" onLoad=""
+		onNew="">
+
+		<panel-stack name="generalDetailsPanel">
+			<panel name="employeeDetailsPanel" colSpan="12" title="Gestion des absences et présences">
+				<field name="employee" title="Personnels"/>
+				<field name="date1" title="Date de début"  required="true"/>
+				<field name="date2" title="Date fin"/>
+				<field name="statut" title="Statut" />
+				<field name="absence" ref="com.axelor.apps.configuration.db.TypeAbsence" title="Type d'absence"/>
+				<field name="justification" widget="binary-link"
+					   form-view="meta-files-form" grid-view="meta-files-grid" />
+			</panel>
+
+		</panel-stack>
+
+	</form>
+
+</object-views>

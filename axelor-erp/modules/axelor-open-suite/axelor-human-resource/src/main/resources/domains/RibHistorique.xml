@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="human-resource" package="com.axelor.apps.hr.db"/>
+    <entity name="RibHistorique" lang="java">
+        <string  name="historiqueRib" title="RIB"/>
+        <string  name="banque" title="Banque"/>
+        <many-to-one name="employee" ref="com.axelor.apps.hr.db.Employee"/>
+        <datetime name="dateDebut" title="date de début"/>
+        <datetime name="dateFin" title="date de fin"/>
+    </entity>
+
+</domain-models>

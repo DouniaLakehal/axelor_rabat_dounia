@@ -1,0 +1,191 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="human-resource" package="com.axelor.apps.hr.db"/>
+
+    <entity name="Employee" cacheable="true">
+        <string name="nonprenom_ar"/>
+
+        <one-to-one name="user" column="user_id" ref="com.axelor.auth.db.User" mappedBy="employee"/>
+        <one-to-one name="contactPartner" ref="com.axelor.apps.base.db.Partner" required="true" title="Contact"/>
+        <decimal name="hourlyRate" title="Hourly rate" scale="2" precision="20" />
+        <string name="timeLoggingPreferenceSelect" title="Time logging preference" selection="hr.time.logging.preference.select" massUpdate="true"/>
+        <decimal name="weeklyWorkHours" title="Weekly work hours" scale="2" precision="20" />
+        <!--hatim-->
+        <one-to-many name="etatEngagement" ref="com.axelor.apps.hr.db.EtatEngagement"/>
+        <boolean name="isIrRcar_6171313"/>
+        <decimal name="mt_ir_6171313"/>
+        <decimal name="mt_rcar_6171313"/>
+        <one-to-many name="responsabiliteList" ref="com.axelor.apps.hr.db.ResponsabiliteList"/>
+        <boolean name="typePersonnel" title="type de personnel"/>
+        <string name="cin" title="CIN"/>
+        <string name="imatriculation" title="Imatriculation"/>
+        <integer name="matriculationInterne" title="Matriculation intrene" min="0" />
+        <date name="dateDebutContrat" title="Date début de contrat" />
+        <date name="dateFinContrat" title="Date fin de contrat" />
+        <many-to-one name="grade" ref="com.axelor.apps.configuration.db.Grade" title="Grade"/>
+        <many-to-one name="echelle" ref="com.axelor.apps.configuration.db.Echelle" title="Echelle"/>
+        <many-to-one name="echelon" ref="com.axelor.apps.configuration.db.Echelon" title="Echelon"/>
+        <many-to-one name="responsabilite" ref="com.axelor.apps.configuration.db.Responsabilite"/>
+        <many-to-one name="zoneEmployee" ref="com.axelor.apps.configuration.db.ZoneEmployee"/>
+        <boolean name="hasEvolution" title="augmentation" default="false"/>
+        <boolean name="isDispose" title="Disposition" default="false"/>
+        <one-to-many name="disposition" ref="com.axelor.apps.hr.db.Disposition" title="Disposition"/>
+        <one-to-many mappedBy="employee" name="aos" ref="com.axelor.apps.hr.db.Aos" title="AOS"/>
+        <boolean name="isCNOPS" title="CNOPS" default="false"/>
+
+        <date name="dateDebutDisposition" title="Date Début de Disposition" />
+        <date name="dateFinDisposition" title="Date Fin de Disposition" />
+        <date name="daterecrutement" title="Date de recrutement"/>
+        <!--La cotisation de l'employee-->
+        <boolean name="isCotisation" title="Cotisation" default="false"/>
+        <decimal name="montantCotisation" title="Montant de Cotisation"/>
+        <date name="dateDebutCotisation" title="Date début de cotisation" />
+        <boolean name="isRegle"  default="false"/>
+
+        <!--La cotisation de l'employee-->
+        <boolean name="isHasCredit" title="Crédit" default="false"/>
+        <decimal name="montantCredit" title="Montant du crédit"/>
+
+        <string name="rib" title="RIB"/>
+        <string name="banque" title="Banque"/>
+
+
+        <!--correction save delete multiple-->
+
+        <one-to-many name="employmentContractListDiplome" ref="com.axelor.apps.hr.db.Diplome"  mappedBy="employee"/>
+        <one-to-many name="employmentContractListExperience" ref="com.axelor.apps.hr.db.Experiences"  mappedBy="employee"/>
+        <one-to-many name="employmentContractListFormation" ref="com.axelor.apps.hr.db.Formation"  mappedBy="employee"/>
+        <one-to-many name="employmentContractListNaissances" ref="com.axelor.apps.hr.db.Naissances"  mappedBy="employee"/>
+        <one-to-many name="employmentGestionCreditList" ref="com.axelor.apps.hr.db.GestionCredit"  mappedBy="employee"/>
+         <one-to-many name="employmentCongeList" ref="com.axelor.apps.hr.db.Conge"  mappedBy="employee"/>
+        <many-to-one name="annexe" ref="com.axelor.apps.configuration.db.AnnexeGenerale"/>
+        <!--hatim End-->
+
+        <decimal name="dailyWorkHours" title="Daily work hours" scale="2" precision="20" />
+        <many-to-one name="managerUser" ref="com.axelor.auth.db.User" title="Manager" massUpdate="true"/>
+        <boolean name="timesheetReminder" title="Timesheet reminder" />
+        <boolean name="external" title="External" />
+        <many-to-one name="weeklyPlanning" ref="com.axelor.apps.base.db.WeeklyPlanning" massUpdate="true"/>
+        <one-to-many name="leaveLineList" title="Leave List" ref="com.axelor.apps.hr.db.LeaveLine" mappedBy="employee"/>
+        <boolean name="negativeValueLeave" title="Allow negative value for leaves"/>
+        <many-to-one name="product" ref="com.axelor.apps.base.db.Product" title="Default Activity Product"/>
+        <many-to-one name="publicHolidayEventsPlanning" ref="com.axelor.apps.base.db.EventsPlanning" title="Public Holiday Planning" massUpdate="true"/>
+        <one-to-many name="employmentContractList" ref="com.axelor.apps.hr.db.EmploymentContract"  mappedBy="employee"/>
+
+
+        <boolean name="hrManager" title="HR manager" />
+        <many-to-many name="batchSet" ref="com.axelor.apps.base.db.Batch" title="Batches"/>
+        <date name="birthDate" title="Birth date" />
+        <string name="maritalStatus" title="Marital status" selection="hr.employee.marital.status"/>
+        <many-to-one name="cityOfBirth" title="City of birth" ref="com.axelor.apps.base.db.City"/>
+         <string name="villeNaissance" title="ville de naissance"/>
+        <many-to-one name="citizenship" title="Citizenship" ref="com.axelor.apps.base.db.Citizenship"/>
+        <many-to-one name="departmentOfBirth" title="Department of birth" ref="com.axelor.apps.base.db.Department" help="For foreign-born employees, please enter the code 99"/>
+        <many-to-one name="countryOfBirth" title="Country of birth" ref="com.axelor.apps.base.db.Country"/>
+        <many-to-one name="rubriqueBudgetaire" title="Rubrique budgetaire" ref="com.axelor.apps.configuration.db.RubriqueBudgetaireGenerale"/>
+         <many-to-one name="corps" title="Corps" ref="com.axelor.apps.configuration.db.Corps"/>
+
+         <many-to-one name="organismeMetuelle2" title=" OrganismeMetuelle" ref="com.axelor.apps.configuration.db.OrganismeMetuelle"/>
+        <many-to-one name="regem" title=" regem" ref="com.axelor.apps.configuration.db.Regem"/>
+        <string name="immatriculationSM" title="Immatriculation"/>
+        <string name="immatriculationCNOPS" title="Immatriculation"/>
+        <string name="affiliationSM" title="Affiliation"/>
+        <string name="idents" title="Ident"/>
+        <string name="sexSelect" title="Sex" selection="employee.hr.sex.select"/>
+        <string name="rank" title="Rank"/>
+        <string name="rung"  title="Rung" selection="hr.employee.rung" />
+        <string  name="ladder"  title="Ladder" selection="hr.employee.ladder"/>
+        <string name="indice"  title="Index" selection="hr.employee.indice" />
+        <string name="mobilePhone" title="Téléphone Mobile"  />
+        <date name="marriageDate" title="Date de Marriage" />
+        <string name="numberOfChildren" title="Number Of Children"/>
+        <date name="birthDateOfChildren" title="Birth Date Of Children" />
+        <string name="childrenInsurance" />
+        <string name="oui" title="Oui" />
+        <string name="non" title="Non"/>
+        <string name="typeOfHandicap" title="Type of handicap" />
+        <string name="fixedProPhone" title="Work fixed phone"/>
+        <string name="mobileProPhone" title="Work mobile phone"/>
+        <string name="phoneAtCustomer" title="Phone at the customer"/>
+        <string name="emergencyContact" title="Emergency contact"/>
+        <string name="emergencyNumber" title="Phone"/>
+        <string name="emergencyContactRelationship" title="Emergency contact relationship"/>
+        <date name="hireDate" title="Date of hire" />
+        <date name="seniorityDate" title="Seniority date" />
+        <many-to-one name="mainEmploymentContract" ref="com.axelor.apps.hr.db.EmploymentContract" title="Main employment contract" />
+        <boolean name="profitSharingBeneficiary" title="Profit-sharing beneficiary" default="false" massUpdate="true"/>
+        <many-to-one name="imposedDayEventsPlanning" ref="com.axelor.apps.base.db.EventsPlanning" title="Imposed day Planning" massUpdate="true"/>
+        <string name="socialSecurityNumber"  title="Social security number" encrypted="true"/>
+        <one-to-many name="employeeAdvanceList" ref="com.axelor.apps.hr.db.EmployeeAdvance" title="Employee advances" readonly="true" mappedBy="employee" />
+        <integer name="lunchVoucherFormatSelect" title="Lunch Voucher Format" selection="hr.lunch.voucher.mgt.line.lunch.voucher.format.select" massUpdate="true"/>
+        <one-to-many name="lunchVoucherAdvanceList" ref="com.axelor.apps.hr.db.LunchVoucherAdvance" title="Lunch voucher advances" mappedBy="employee"/>
+        <one-to-many name="kilometricLogList" ref="com.axelor.apps.hr.db.KilometricLog" mappedBy="employee"/>
+        <decimal name="bonusCoef" title="Coefficient for bonus" />
+        <string name="exportCode" title="Export code"/>
+        <one-to-many name="employeeVehicleList" ref="com.axelor.apps.hr.db.EmployeeVehicle" mappedBy="employee"/>
+        <integer name="companyCbSelect" title="Expense paid with company's credit card" selection="hr.expense.company.cb.payment" default="1"/>
+        <string name="companyCbDetails" title="Company credit card details"/>
+        <string name="immatriculationRECORE" title="Numéro immatriculation RE CO RE"/>
+        <string name="name" title="Name" search="contactPartner">
+            <![CDATA[
+	       		if(contactPartner != null && contactPartner.getFullName() != null) { return contactPartner.getFullName(); }
+	       		return "";
+	       ]]>
+
+        </string>
+
+        <!-- New employee wizard -->
+        <integer name="stepByStepSelect" title="Step by step" selection="hr.employee.form.step.by.step.select" default="1"/>
+        <!-- END OF New employee wizard -->
+
+        <!-- DPAE -->
+        <one-to-many name="dpaeList" title="DPAEs" ref="com.axelor.apps.hr.db.DPAE" mappedBy="employee"/>
+        <one-to-many name="employeeFileList" title="Files" ref="com.axelor.apps.hr.db.EmployeeFile" mappedBy="employee" />
+
+        <string name="maidenName" title="Maiden name"/>
+        <string name="maritalName" title="Nom de Famille"/>
+
+
+        <!--remarque de rabat-->
+        <boolean name="mutation"/>
+        <date name="mutationDate"/>
+        <string name="mutationDescription"/>
+
+        <boolean name="miseDisposition"/>
+        <date name="miseDispositionDatedebut"/>
+        <date name="miseDispositionDatefin"/>
+        <decimal name="montant_regim"/>
+        <boolean name="is_cnss"/>
+        <decimal name="montant_cnss"/>
+        <boolean name="is_prime"/>
+        <decimal name="montant_prime"/>
+        <date name="date_prime"/>
+        <boolean name="is_aos"/>
+        <decimal name="montant_aos"/>
+        <date name="date_aos"/>
+
+        <boolean name="is_prolongation"/>
+        <date name="dateProlongation"/>
+        <decimal name="retenueSalairePlafonne"/>
+        <decimal name="net"/>
+        <decimal name="irsalaire"/>
+
+        <extra-code>
+            <![CDATA[
+   			public static final String TIME_PREFERENCE_DAYS = "days";
+   			public static final String TIME_PREFERENCE_HOURS = "hours";
+   			public static final String TIME_PREFERENCE_MINUTES = "minutes";
+
+   			public static final String SEX_F = "F";
+   			public static final String SEX_M = "M";
+   		]]>
+        </extra-code>
+
+        <entity-listener class="com.axelor.apps.hr.db.repo.EmployeeListner"/>
+    </entity>
+
+
+</domain-models>

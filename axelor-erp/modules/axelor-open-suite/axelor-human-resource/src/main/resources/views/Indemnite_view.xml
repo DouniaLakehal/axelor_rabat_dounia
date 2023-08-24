@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="config.indemnite-grid" title="Liste des Indemnitées" model="com.axelor.apps.hr.db.Indemnite" >
+		<field name="newIndemnite" title="Indemnité" />
+		<field name="corps"/>
+		<field name="grade"/>
+		<field name="echelle"/>
+		<field name="echelon"/>
+		<field name="code"/>
+		<field name="region"/>
+		<field name="isIndemnise"/>
+		<field name="montant"/>
+		<field name="type"  selection="phr.indemnité.type"  title="Type"/>
+		<field name="rubriquebudgetaire"/>
+	</grid>
+
+	<form name="config.indemnite-form" title="Ajouter une indemnitée" model="com.axelor.apps.hr.db.Indemnite">
+		<panel name="mainPanel">
+			<field name="newIndemnite" colSpan="6" title="Indemnité"/>
+			<field name="corps" title="Corps" colSpan="4" showIf="id" readonly="true"/>
+			<field name="grade" title="Grade" colSpan="4" showIf="id" readonly="true"/>
+			<field name="echelle" title="Echelle" showIf="id" readonly="true" colSpan="4"/>
+			<field name="echelon" title="Echelon" colSpan="4" showIf="id" readonly="true"/>
+
+			<field name="corps" title="Corps" colSpan="4" hideIf="id" readonly="false" required="true"/>
+			<field name="grade" title="Grade" domain="self.corps = :corps" hideIf="id" readonly="false" colSpan="4" required="true"/>
+			<field name="echelle" title="Echelle" domain="self.grade = :grade" hideIf="id" readonly="false" colSpan="4" required="true"/>
+			<field name="echelon" title="Echelon" domain="self.echelle = :echelle" colSpan="4" hideIf="id" readonly="false" required="true"/>
+			<field name="code" colSpan="4"/>
+			<field name="region"  title ="Region" colSpan="6"/>
+			<field name="isIndemnise" colSpan="2"/>
+			<field name="montant" showIf="isIndemnise==true" colSpan="4"/>
+			<field name="type"  selection="hr.indemnité.type"  widget="single-select" />
+			<field name="rubriquebudgetaire" title =" Rubrique budgétaire"/>
+			<field name="id" hidden="true" />
+		</panel>
+	</form>
+
+</object-views>

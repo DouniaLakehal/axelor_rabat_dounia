@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+		<form name="PRELEVEMENTS-form"
+			  canNew="false" canArchive="false" canAttach="false"
+			  canCopy="false" canDelete="false" canEdit="false" canSave="false"
+			  title="Ordre de Paiement"
+			  model="com.axelor.apps.hr.db.EtatSalaire">
+			<panel >
+				<field name="annee" title="Année" type="integer" min="1900"/>
+				<field name="mois" title="Mois" type="integer" min="1"/>
+				<button-group colSpan="4" colOffset="8">
+					<button title="PERSONNEL TITULAIRE" name="btn_rech_res" onClick="com.axelor.apps.hr.web.AppHumanResourceController:imprimerOrdrePayementmt"/>
+				</button-group>
+				<button-group colSpan="4" colOffset="8">
+					<button title="Imprimer PERSONNEL CONTRACTUEL" name="btn_rech_res1" onClick="com.axelor.apps.hr.web.AppHumanResourceController:imprimerOrdrePayementmt1"/>
+				</button-group>
+			</panel>
+		</form>
+
+</object-views>

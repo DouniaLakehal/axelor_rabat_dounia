@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="human-resource" package="com.axelor.apps.hr.db"/>
+
+    <entity name="Conge" lang="java">
+        <string name="id_Employee" />
+        <many-to-one name="employee" ref="com.axelor.apps.hr.db.Employee"/>
+        <string name="typeGeneraleConge"/>
+         <many-to-one name="typeConge" ref="com.axelor.apps.configuration.db.TypeConge"/>
+        <many-to-one name="grade" ref="com.axelor.apps.configuration.db.Grade"/>
+        <decimal name="nbrDayMax" title="Le Max"/>
+        <decimal name="nbrDayRest" title="Le reste" />
+        <integer name="duree" title="Durée du congé"/>
+        <integer name="annee" title="annee"/>
+        <date name="dateDebut" title="Date de début" />
+        <date name="dateFin" title="Date de fin" />
+        <string name="occasion"/>
+        <string name="monasaba"/>
+       <boolean name="is_conge">
+           return getTypeGeneraleConge().equals("conge");
+       </boolean>
+       
+    </entity>
+
+</domain-models>

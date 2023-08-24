@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="grid-responsabiliteList" title="Responsabilite" model="com.axelor.apps.hr.db.ResponsabiliteList" >
+	    <field name="responsabilite_select" />
+		<field name="date_debut"/>
+		<field name="date_fin"/>
+    </grid>
+
+    <form name="form-responsabiliteList" title="Responsabilite" model="com.axelor.apps.hr.db.ResponsabiliteList" >
+    	<panel name="mainPanel">
+			<field name="responsabilite_select" colSpan="3" />
+			<field name="date_debut" colSpan="3"/>
+			<field name="date_fin" colSpan="3"/>
+        </panel>
+    </form>
+
+</object-views>

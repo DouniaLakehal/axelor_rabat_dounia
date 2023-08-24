@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="Personnel-naissance-grid" title="Liste des formations" model="com.axelor.apps.hr.db.Formation">
+        <field name="name"/>
+        <field name="dateNaiss"/>
+        <field name="dateRappelNaiss" title="Date d'effet"/>
+    </grid>
+
+    <form name="Personnel-naissance-form" title="Nouvelle naissance" model="com.axelor.apps.hr.db.Formation" width="large">
+        <panel name="NaissancePanel">
+            <field name="name" colSpan="12" />
+            <field name="dateNaiss" colSpan="6" pattern="^\+?([\s()-.]*\d){7,}$"/>
+            <field name="dateRappelNaiss" title="Date d'effet" colSpan="6" pattern="^\+?([\s()-.]*\d){7,}$"/>
+            <field name="handicape" colSpan="6" widget="boolean-radio" x-true-text="Oui" x-false-text="Non"/>
+            <field name="typeHandicap" colSpan="6" showIf="handicape" hidden="true"/>
+        </panel>
+    </form>
+
+</object-views>

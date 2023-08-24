@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<form canDelete="false" canSave="false" canEdit="false" canNew="false"
+		  canCopy="false" canAttach="false" canArchive="false"
+		  name="etat_engagement_form" title="Etat d'engagement" model="com.axelor.apps.hr.db.Employee">
+		<panel colSpan="12">
+			<field required="true" onChange="test_callFlous" name="employer" colOffset="4" colSpan="4" title="Fonctionnaire" type="many-to-one" target="com.axelor.apps.hr.db.Employee"/>
+		</panel>
+		<panel>
+			<field name="rappel" showTitle="false" selection="type_Rappel" widget="RadioSelect" colSpan="8" colOffset="4" onChange="change_rappel" hidden="true"/>
+			<field required="true" name="date_debut" colSpan="4" title="Date debut" type="date"/>
+			<field required="true" name="date_fin" colSpan="4" title="Date Fin" type="date"/>
+			<field name="type_engagement" title="Type d'engagement" selection="select_Normal.validate" colSpan="2"/>
+			<field required="true" name="type_doc" title="Document" selection="type_document" colSpan="2"/>
+			<button name="imprimer" title="imprimer" onClick="com.axelor.apps.hr.web.EmployeeController:imprimerEtatEngagement" colSpan="2" colOffset="10"/>
+		</panel>
+
+	</form>
+
+</object-views>

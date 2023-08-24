@@ -1,0 +1,61 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="human-resource" package="com.axelor.apps.hr.db"/>
+
+    <entity name="Augmentation" lang="java">
+        <many-to-one ref="com.axelor.apps.hr.db.Employee" name="employer" title="Personnel"/>
+        <many-to-one ref="com.axelor.apps.configuration.db.Grade" name="grade" title="Grade"/>
+        <many-to-one ref="com.axelor.apps.configuration.db.Echelle" name="echelle" title="Echelle"/>
+        <many-to-one ref="com.axelor.apps.configuration.db.Echelon" name="echelon" title="Echelon"/>
+        <date name="dateDebut" title="Date Début"/>
+        <date name="dateFin" title="Date Fin"/>
+        <string name="etat" default="En attente"/>
+        <boolean name="hasRappel" title="hasRappel">
+            <![CDATA[
+                if(this.hasRappel==null)
+                    return true;
+                return this.hasRappel;
+            ]]>
+        </boolean>
+        <date name="dateRappel" title="dateRappel"/>
+        <many-to-one ref="com.axelor.apps.configuration.db.Grade" name="grade_old" title="Grade_old"/>
+        <many-to-one ref="com.axelor.apps.configuration.db.Echelle" name="echelle_old" title="Echelle_old"/>
+        <many-to-one ref="com.axelor.apps.configuration.db.Echelon" name="echelon_old" title="Echelon_old"/>
+        <string name="avtRecalss"/>
+
+        <finder-method name="getAugmentationByDate1" using="LocalDate:fromDate1,LocalDate:fromDate2,Employee:emp" filter="
+        self.dateDebut &gt;=:fromDate1 and ((self.dateFin &lt;=:fromDate2 AND self.etat!='En cours') or (self.dateFin is null AND self.etat='En cours'))
+        AND self.employer = :emp" orderBy="dateFin Desc" />
+
+
+        <!--<finder-method name="getAugmentationByDate2" using="LocalDate:fromDate1,LocalDate:fromDate2,Employee:emp" filter="
+        self.dateDebut &gt;=:fromDate1 and ((self.dateFin &lt;=:fromDate2 AND self.etat!='En cours') or (self.dateFin is null AND self.etat='En cours'))
+        AND self.employer = :emp" orderBy="dateFin Asc" />-->
+
+
+        <extra-imports>
+            <![CDATA[
+            import com.axelor.apps.hr.db.Employee;
+            import com.axelor.db.Query;
+            import java.util.*;
+            ]]>
+        </extra-imports>
+        <extra-code>
+            <![CDATA[
+              public List<Augmentation> findByEmployee(Employee employer, String etat) {
+                return Query.of(Augmentation.class)
+                .filter("self.employer = :employer AND self.etat = :etat")
+                .bind("employer", employer)
+                .bind("etat", etat).fetch();
+                }
+            ]]>
+        </extra-code>
+
+    </entity>
+
+
+
+</domain-models>

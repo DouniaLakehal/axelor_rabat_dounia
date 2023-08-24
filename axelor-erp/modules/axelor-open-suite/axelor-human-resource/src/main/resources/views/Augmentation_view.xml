@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="config.augmentation-grid" title="Liste des promotions" model="com.axelor.apps.hr.db.Augmentation" >
+	    <field name="employer" />
+		<field name="grade"/>
+		<field name="echelle"/>
+		<field name="echelon"/>
+		<field name="dateDebut"/>
+		<field name="dateFin"/>
+		<field name="etat"/>
+    </grid>
+
+    <form name="config.augmentation-form"  title="Ajouter une promotion" model="com.axelor.apps.hr.db.Augmentation" canSave="false" canEdit="true" onNew="default_rappel,chargerData">
+    	<panel name="mainPanel">
+			<field name="employer" colSpan="3" />
+			<field name="grade" colSpan="3"/>
+			<field name="echelle" onchange="com.axelor.apps.hr.web.CustomController:changeAvancement" colSpan="3" domain="self.grade = :grade"/>
+			<field name="echelon" onchange="com.axelor.apps.hr.web.CustomController:changeAvancement" colSpan="3" domain="self.echelle = :echelle"/>
+			<field name="dateDebut" colSpan="3" title="Date d'effet"/>
+			<field name="avtRecalss" colSpan="6" selection="select_avancement_reclassement" hidden="true"/>
+			<field name="etat" colSpan="4" hidden="true"/>
+			<button name="enregistrer" hideIf="id" onClick="action-groupe-save-augmentation" title="enregistrer" colSpan="3" colOffset="9"/>
+			<button name="Modifier"  showIf="id" onClick="save" title="enregistrer" colSpan="3" colOffset="9"/>
+			<field name="hasRappel" title="Rappel" hidden="true"/>
+        </panel>
+    </form>
+
+	<action-record name="default_rappel" model="com.axelor.apps.hr.db.Augmentation">
+		<field name="hasRappel" expr="eval:true" if="!id"/>
+	</action-record>
+
+
+	<action-group name="action-groupe-save-augmentation">
+		<action name="action-save-augmentation"/>
+	</action-group>
+
+	<action-method name="chargerData">
+		<call class="com.axelor.apps.hr.web.CustomController" method="loadDataconfigurationAuglenatation"/>
+	</action-method>
+
+
+	<action-method name="action-save-augmentation">
+		<call class="com.axelor.apps.hr.web.EmployeeController" method="modifierDate"/>
+	</action-method>
+
+</object-views>

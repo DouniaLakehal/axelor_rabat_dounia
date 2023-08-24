@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<form name="etat_salaire_form" title="ETAT DES RAPPELS SUR SALAIRES" model="com.axelor.apps.hr.db.EtatDesRappelSurSalaire">
+		<panel>
+			<field name="date_debut" title="Date de début" required="true" type="date"/>
+			<field name="date_fin" title="Date de fin" required="true" type="date"/>
+			<button colSpan="4" colOffset="8" name="btn_principale" title="Rechercher" onClick="com.axelor.apps.hr.web.EmployeeController:verifier_liste_rappel"/>
+		</panel>
+
+		<panel title="Etats de cotisation" hidden="true" name="btn_1">
+			<panel colOffset="2" colSpan="8">
+				<button hidden="true" name="btn_1" title="Nomination régional" onClick="com.axelor.apps.hr.web.EmployeeController:load_grid_emp"/>
+				<button hidden="true" name="btn_1" title="Rcar" onClick="com.axelor.apps.hr.web.EmployeeController:load_grid_Rcar"/>
+			</panel>
+
+			<panel colOffset="2" colSpan="8">
+				<button hidden="true" name="btn_1" title="IMPOT SUR REVENU" onClick="com.axelor.apps.hr.web.EmployeeController:load_grid_IR"/>
+				<button hidden="true" name="btn_1" title="Assurance Maladie Obligatoire" onClick="com.axelor.apps.hr.web.EmployeeController:load_grid_AMO"/>
+			</panel>
+
+			<panel colOffset="2" colSpan="8">
+				<button hidden="true" name="btn_1" title="MGPAP" onClick="com.axelor.apps.hr.web.EmployeeController:load_grid_MGPAP"/>
+				<button hidden="true" name="btn_1" title="OMFAM" onClick="com.axelor.apps.hr.web.EmployeeController:load_grid_OMFAM"/>
+			</panel>
+
+			<panel colOffset="2" colSpan="8">
+				<button colSpan="12" hidden="true" name="btn_1" title="Bordereau d'émission" onClick="com.axelor.apps.hr.web.EmployeeController:imprimer_BD_Emission"/>
+			</panel>
+
+			<!--<panel colOffset="2" colSpan="8">
+				<button hidden="true" name="btn_1" title="Bordereau Emission" onClick="com.axelor.apps.hr.web.EmployeeController:imprimer_BD_Emission"/>
+				<button hidden="true" name="btn_1" title="Cotisation patronal Rcar" onClick="com.axelor.apps.hr.web.EmployeeController:imprimer_cotisation_patronal"/>
+			</panel>-->
+
+		</panel>
+
+		<!--<panel title="Ordres de Payement" hidden="true" name="btn_1">
+			<panel colOffset="2" colSpan="8">
+				<button hidden="true" name="btn_1" title="OP IR" onClick="com.axelor.apps.hr.web.EmployeeController:imprimer_OP_IR"/>
+				<button hidden="true" name="btn_1" title="OP RCAR Patronal" onClick="com.axelor.apps.hr.web.EmployeeController:imprimer_OP_RCAR_Patronal"/>
+			</panel>
+			<panel colOffset="2" colSpan="8">
+				<button hidden="true" name="btn_1" title="OP Rcar" onClick="com.axelor.apps.hr.web.EmployeeController:imprimer_OP_RCAR"/>
+				<button hidden="true" name="btn_1" title="OP CNOPS" onClick="com.axelor.apps.hr.web.EmployeeController:imprimer_OP_CNOPS"/>
+			</panel>
+			<panel colOffset="2" colSpan="8">
+				<button hidden="true" name="btn_1" title="OP AMO" onClick="com.axelor.apps.hr.web.EmployeeController:imprimer_OP_AMO"/>
+				<button hidden="true" name="btn_1" title="OP MT TIT" onClick="com.axelor.apps.hr.web.EmployeeController:imprimer_OP_MT_TIT"/>
+			</panel>
+			<panel colOffset="2" colSpan="8">
+				<button hidden="true" name="btn_1" title="OP OMFAM" onClick="com.axelor.apps.hr.web.EmployeeController:imprimer_OP_OMFAM"/>
+				<button hidden="true" name="btn_1" title="OP MGPAP" onClick="com.axelor.apps.hr.web.EmployeeController:imprimer_OP_MGPAP"/>
+			</panel>
+		</panel>
+
+		<panel title="Ordres de virements" hidden="true" name="btn_1">
+			<panel colOffset="2" colSpan="8">
+				<button hidden="true" name="btn_1" title="OV salarier" onClick="com.axelor.apps.hr.web.EmployeeController:imprimer_Ordre_de_virement"/>
+				<button hidden="true" name="btn_1" title="OV IR" onClick="com.axelor.apps.hr.web.EmployeeController:imprimer_OV_IR"/>
+			</panel>
+			<panel colOffset="2" colSpan="8">
+				<button hidden="true" name="btn_1" title="OV RCAR" onClick="com.axelor.apps.hr.web.EmployeeController:imprimer_OV_Rcar"/>
+				<button hidden="true" name="btn_1" title="OV CNOPS" onClick="com.axelor.apps.hr.web.EmployeeController:imprimer_OV_CNOPS"/>
+			</panel>
+		</panel>-->
+
+	</form>
+
+</object-views>

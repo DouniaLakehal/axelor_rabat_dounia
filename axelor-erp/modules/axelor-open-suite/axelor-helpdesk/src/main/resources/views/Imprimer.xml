@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="reaclmations-grid" title="Imprimer réclamation"
+		model="com.axelor.apps.helpdesk.db.Imprimer" orderBy="titre">
+			<field name="from_" title="A partire de" />
+				<field name="to_" title="à" />
+	</grid>
+	
+	<form name="reaclmations-form" title="Imprimer réclamation"
+		model="com.axelor.apps.helpdesk.db.Imprimer" width="large" onLoad=""
+		onNew="" canNew="false" canSave="false">
+
+			<panel name="print_panel" colSpan="12">
+
+				<field name="from_" title="A partire de" />
+				<field name="to_" title="à" />
+				<button name="customBtn" title="imprimer" onClick="action-method-print-reclamation-report"
+				  icon="fa-file" />
+			</panel>
+
+
+	</form>
+	
+	
+	<action-method name="action-method-print-reclamation-report" >
+		<call class="com.axelor.apps.helpdesk.web.TicketController" method="printReclamation"/>
+	</action-method>
+		<action-report name="action-report-invoice"
+		    design="Reclamation.rptdesign"
+		    output="invoice-${date}${time}"
+		    format="pdf">
+		    <param name="some" expr="eval: expression" if="confirmed"/>
+		    <param name="thing" expr="constant" />
+		</action-report>
+</object-views>
+
+
+	

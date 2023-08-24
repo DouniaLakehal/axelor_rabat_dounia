@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="conge-grid" title="Liste des conges" model="com.axelor.apps.hr.db.Conge">
+        <field name="typeGeneraleConge" selection="conge_serv_dmd_grid"/>
+        <field name="typeConge"/>
+        <field name="duree"/>
+        <field name="dateDebut"/>
+        <field name="dateFin"/>
+        <field name="employee.nonprenom_ar"/>
+        <field name="grade.nom_ar"/>
+        <field name="is_conge" hidden="true"/>
+        <button name="print_decision_fr" title="Décision FR" onClick="printDecision" icon="fa-print" showIf="is_conge"/>
+        <button name="print_decision_ar" title="Décision AR" onClick="printDecision_ar" icon="fa-print" showIf="is_conge"/>
+        <button name="print_conge_exeption" title="Conge Exceptionnel" onClick="printexecption" icon="fa-print" hideIf="is_conge"/>
+    </grid>
+
+    <form name="conge-form" title="Nouveau conge" model="com.axelor.apps.hr.db.Conge" width="large"
+          onNew="com.axelor.apps.hr.web.EmployeeController:NewConge" onLoad="com.axelor.apps.hr.web.EmployeeController:NewConge" canSave="false">
+       <panel title="info" hidden="false">
+           <field name="id_Employee"/>
+           <field name="nbrDayMax_conge" title="Reliquat"/>
+           <field name="nbrDayMax_autorisation" title="Le nombre de jours autorisé"/>
+       </panel>
+        <panel>
+            <field onChange="diable_filed_dateFin" name="typeGeneraleConge" title="Nature du congé" selection="conge_serv_dmd"/>
+            <field name="typeConge" title="Type de conge" domain="self.typeCongeGenerale =:typeGeneraleConge"/>
+        </panel>
+        <panel name="CongePanel" title="Information Generale">
+            <panel name="ocasion" showIf="typeGeneraleConge=='autorisation'" colSpan="12">
+                <field name="occasion" title="Occasion"/>
+                <field name="monasaba" title="مناسبة" css="tw_arabe_orient"/>
+            </panel>
+            <panel colSpan="12">
+                <field name="dateDebut" onChange="load_duree_congee" colSpan="5"/>
+                <field name="dateFin" onChange="load_duree_congee" colSpan="5"/>
+                <field name="duree" title="Durée (jours)" readonly="true" colSpan="2"/>
+            </panel>
+           <button onClick="action-addConge" name="addCongeBtn" title="Enregistrer"/>
+       </panel>
+    </form>
+
+     <action-group name="action-addConge" >
+         <action name="validation_champs3" if="typeConge==null || duree==null || dateDebut==null || dateFin==null "/>
+         <action name="loadEmployeeConge" if="typeConge!=null &amp;&amp; duree!=null &amp;&amp; dateDebut!=null &amp;&amp; dateFin!=null"/>
+    </action-group>
+
+    <action-group name="loadEmployeeConge">
+        <action name="com.axelor.apps.hr.web.EmployeeController:AddEmployeToConge" />
+        <action name="close"/>
+    </action-group>
+
+    <action-validate name="validation_champs3">
+		<error message="&lt;p&gt;les champs suivant sont obligatoire : &lt;p&gt; &lt;ul&gt; &lt;li&gt;typeConge&lt;/li&gt; &lt;li&gt;max&lt;/li&gt;&lt;li&gt;duree&lt;/li&gt;&lt;li&gt;date début&lt;/li&gt;&lt;li&gt;date Fint&lt;/li&gt; &lt;/ul&gt;" if="typeConge==null || duree==null || dateDebut==null || dateFin==null "/>
+	</action-validate>
+
+    <action-method name="load_duree_congee">
+        <call class="com.axelor.apps.hr.web.EmployeeController" method="get_duree_congee"/>
+    </action-method>
+
+    <action-method name="printDecision">
+        <call class="com.axelor.apps.hr.web.CustomController" method="printDecision"/>
+    </action-method>
+
+    <action-method name="printexecption">
+        <call class="com.axelor.apps.hr.web.CustomController" method="printExecption"/>
+    </action-method>
+
+    <action-method name="diable_filed_dateFin">
+        <call class="com.axelor.apps.hr.web.CustomController" method="diableFiledDateFin"/>
+    </action-method>
+
+    <action-group name="printDecision_ar">
+        <action name="printDecision_ar_doc" if="employee.nonprenom_ar!=null"/>
+        <action name="printDecision_ar_form" if="employee.nonprenom_ar==null"/>
+    </action-group>
+
+    <!--<action-method name="printDecision_ar_form">
+        <call class="com.axelor.apps.hr.web.CustomController" method="showmessage"/>
+    </action-method>-->
+
+    <action-method name="printDecision_ar_doc">
+        <call class="com.axelor.apps.hr.web.CustomController" method="printDecision_ar"/>
+    </action-method>
+
+    <action-view name="printDecision_ar_form" title="Employer"
+                 model="com.axelor.apps.hr.db.Employee" >
+        <view type="form" name="conge_frm_emp_simple_name" />
+        <view-param name="popup" value="reload"/>
+        <view-param name="show-toolbar" value="false"/>
+        <view-param name="forceEdit" value="true"/>
+        <view-param name="show-confirm" value="false" />
+        <view-param name="popup-save" value="false"/>
+        <context name="_showRecord" expr="eval: employee.id"/>
+    </action-view>
+
+
+    <form title="Employer" onLoad="afficheNomGrade" name="conge_frm_emp_simple_name" model="com.axelor.apps.hr.db.Employee">
+        <panel>
+            <field name="contactPartner.simpleFullName" title="Nom Employer Français"/>
+            <field name="nonprenom_ar" title="Nom Employer Arabe" readonly="false"/>
+            <field name="grade" title="Grade Francais" readonly="true"/>
+            <field name="grade_ar" title="Grade Arabe" readonly="false"/>
+            <field name="grade.nom_ar" title="Grade Arabe" hidden="true"/>
+            <button name="imprimer" title="imprimer" onClick="imprimerDecisionAr"/>
+        </panel>
+    </form>
+
+    <action-record name="afficheNomGrade" model="com.axelor.apps.hr.db.Employee">
+        <field name="grade_ar" expr="eval:grade.nom_ar"/>
+    </action-record>
+
+    <action-method name="imprimerDecisionAr">
+        <call class="com.axelor.apps.hr.web.CustomController" method="printDecision_ar_nameSave"/>
+    </action-method>
+
+</object-views>

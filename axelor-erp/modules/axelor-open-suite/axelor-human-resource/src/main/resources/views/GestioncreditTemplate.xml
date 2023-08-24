@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="GestionCredit-grid" title="Liste des crédits" model="com.axelor.apps.hr.db.GestionCredit">
+        <field name="intituler"/>
+        <field name="numDossier"/>
+        <field name="numClient"/>
+        <field name="montant"/>
+        <field name="remboursement"/>
+         <field name="dateDebut"/>
+        <field name="dateFin"/>
+    </grid>
+
+    <form name="GestionCredit-form" title="Crédit" model="com.axelor.apps.hr.db.GestionCredit" width="large"
+    onNew="com.axelor.apps.hr.web.EmployeeController:NewCredit" canSave="false">
+
+       <panel name="CreditPanel" >
+           <field name="id_Employee" hidden="true" />
+           <field name="intituler" title="intituler"/>
+           <field name="numDossier" title="Numéro de dossier"/>
+           <field name="numClient" title="Numéro de client"/>
+           <field name="montant"/>
+           <field name="montantLettre" hidden="true"/>
+           <field name="remboursement"/>
+           <field name="dateDebut"/>
+           <field name="dateFin"/>
+           <button onClick="action-addCredit" name="addcreditBtn" title="Enregistrer"/>
+       </panel>
+    </form>
+     <action-group name="action-addCredit" >
+        <action name="validation_champs2" if="intituler==null || montant==null || remboursement==null || dateDebut==null || dateFin==null "/>
+        <action name="com.axelor.apps.hr.web.EmployeeController:AddEmployeToCredit"
+            if="!id &amp;&amp; intituler!=null &amp;&amp; montant!=null &amp;&amp; remboursement!=null &amp;&amp; dateDebut!=null &amp;&amp; dateFin!=null"/>
+        <action name="com.axelor.apps.hr.web.EmployeeController:UpdateEmployeToCredit"
+            if="id &amp;&amp; intituler!=null &amp;&amp; montant!=null &amp;&amp; remboursement!=null &amp;&amp; dateDebut!=null &amp;&amp; dateFin!=null"/>
+<!--
+        <action name="com.axelor.apps.hr.web.EmployeeController:getloadMontantCredit"/>
+-->
+    </action-group>
+
+    <action-validate name="validation_champs2">
+		<error message="&lt;p&gt;les champs suivant sont obligatoire : &lt;p&gt; &lt;ul&gt; &lt;li&gt;intituler&lt;/li&gt; &lt;li&gt;montant&lt;/li&gt;&lt;li&gt;remboursement&lt;/li&gt;&lt;li&gt;date début&lt;/li&gt;&lt;li&gt;date Fint&lt;/li&gt; &lt;/ul&gt;" if="intituler==null || montant==null || remboursement==null || dateDebut==null || dateFin==null "/>
+
+	</action-validate>
+
+
+</object-views>

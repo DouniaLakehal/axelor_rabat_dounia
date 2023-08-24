@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid canEdit="false" canNew="false" canMove="false" canSave="false" canArchive="false" canDelete="false" editable="false" edit-icon="false"
+		  title="Avancement" name="AvancementEmployer-grid" model="com.axelor.apps.hr.db.Employee" >
+		<field name="contactPartner.simpleFullName" title="Nom complet"/>
+		<field name="grade.name" title="Grade"/>
+		<field name="echelon.indice" title="Indice"/>
+		<button name="addaugmentation" onClick="emp.augmentation.all2" icon="fa-plus" title="Ajouter augmentation"/>
+	</grid>
+
+	<form canNew="false" canDelete="false" canArchive="false" canSave="false" canEdit="false" canAttach="false" canCopy="false"
+		  title="Avancement" name="avancementEmployer-form1" model="com.axelor.apps.hr.db.Avancement" width="large">
+		<panel colSpan="12">
+			<field colSpan="12" canNew="false" canEdit="false" canSelect="false" canSuggest="false" canRemove="false"
+				   name="employer" grid-view="AvancementEmployer-grid"/>
+		</panel>
+	</form>
+
+	<form canNew="false" canDelete="false" canArchive="false" canSave="false" canEdit="false" canAttach="false" canCopy="false"
+		  title="Avancement" name="avancementEmployer-form2" model="com.axelor.apps.hr.db.Avancement" width="large">
+		<panel colSpan="12">
+			<field colSpan="12" canNew="false" canEdit="false" canSelect="false" canSuggest="false" canRemove="false"
+				   name="employer" grid-view="AvancementEmployer-grid"/>
+		</panel>
+	</form>
+
+	<form canNew="false" canDelete="false" canArchive="false" canSave="false" canEdit="false" canAttach="false" canCopy="false"
+		  title="Avancement" name="avancementEmployer-form3" model="com.axelor.apps.hr.db.Avancement" width="large">
+		<panel colSpan="12">
+			<field colSpan="12" canNew="false" canEdit="false" canSelect="false" canSuggest="false" canRemove="false"
+				   name="employer" grid-view="AvancementEmployer-grid"/>
+		</panel>
+	</form>
+
+	<action-group name="emp.augmentation.all2">
+		<action name="action_avancement_1"/>
+		<action name="action_avancement_2"/>
+	</action-group>
+
+	<action-view name="action_avancement_2" title="Gestion des promotions" model="com.axelor.apps.hr.db.Augmentation">
+		<view type="form" name="config.augmentation-form"/>
+		<context name="type_aug" expr="eval:type_aug"/>
+	</action-view>
+
+	<action-method name="action_avancement_1">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="tw_check_data_kouidi"/>
+	</action-method>
+</object-views>

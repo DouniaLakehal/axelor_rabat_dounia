@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="piece-grid" title="Documents de consultation"
+		model="com.axelor.apps.helpdesk.db.PiecesJointe" orderBy="titre">
+		<field name="titre" title="Titre"/>
+
+		<field name="piece" widget="binary-link" title="Document"
+			form-view="meta-files-form" grid-view="meta-files-grid" />
+	</grid>
+	<form name="piece-form"
+		title="Documents de consultation"
+		model="com.axelor.apps.helpdesk.db.PiecesJointe" width="large" onLoad=""
+		onNew="">
+
+		<panel-stack name="generalDetailsPanel">
+			<panel name="employeeDetailsPanel" colSpan="12">
+
+				<field name="titre" title="Titre" colSpan="6" />
+				<field name="piece" widget="binary-link"
+					form-view="meta-files-form" grid-view="meta-files-grid" colSpan="6" />
+			</panel>
+
+		</panel-stack>
+
+	</form>
+
+</object-views>
+
+

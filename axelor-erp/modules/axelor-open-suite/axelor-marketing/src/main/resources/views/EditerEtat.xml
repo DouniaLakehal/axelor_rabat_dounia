@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <form name="bilan_form" onNew="dafault_file_export" title="Bilan Form" model="com.axelor.apps.account.db.AccountingReport">
+        <panel name="mainPanel" >
+            <field onChange="load_date_by_periode" title="Periode" name="$periode" colSpan="4" target="com.axelor.apps.base.db.Period" type="many-to-one" />
+            <field readonly="true" name="dateFrom" colSpan="3" />
+            <field readonly="true" name="dateTo" colSpan="3" />
+            <field name="$format" title="Format" selection="type_fichier_telecharger" colSpan="2"/>
+        </panel>
+        <panel title="Bilan" name="btn_1">
+            <panel colOffset="2" colSpan="8">
+                <panel colSpan="6">
+                    <button name="btn_3" title="Imprimer Bilan" onClick="imprimer_bilan" colSpan="12"/>
+                </panel>
+            </panel>
+            <panel colOffset="2" colSpan="8">
+                <panel colSpan="6">
+                    <button name="btn_13" title="COMPTE DE PRODUITS ET CHARGES" onClick="imprimer_Compte_Produits"  colSpan="12" />
+                </panel>
+                <panel colSpan="6">
+                    <button title="DETAIL DES POSTES DU C.P.C." onClick="imprimer_cpc" colSpan="12" name="btn"/>
+                </panel>
+
+            </panel>
+        </panel>
+    </form>
+
+
+    <action-record name="dafault_file_export" model="com.axelor.apps.account.db.AccountingReport">
+        <field name="$format" expr="eval:'pdf'"/>
+    </action-record>
+    <action-method name="imprimer_bilan">
+        <call class="com.axelor.apps.bankpayment.web.AccountingReportController" method="imprimer_bilan_generale"/>
+    </action-method>
+
+    <action-method name="imprimer_bilan_passif">
+        <call class="com.axelor.apps.bankpayment.web.AccountingReportController" method="imprimer_bilan_passif"/>
+    </action-method>
+    
+    <action-method name="load_date_by_periode">
+        <call class="com.axelor.apps.account.web.AccountController" method="tw_load_date_by_periode"/>
+    </action-method>
+
+    <action-method name="imprimer_bilan_actif">
+        <call class="com.axelor.apps.bankpayment.web.AccountingReportController" method="imprimer_bilan_actif"/>
+    </action-method>
+
+    <action-method name="imprimer_cpc">
+        <call class="com.axelor.apps.bankpayment.web.AccountingReportController" method="imprimer_cpc"/>
+    </action-method>
+
+    <action-method name="imprimer_Compte_Produits">
+        <call class="com.axelor.apps.bankpayment.web.AccountingReportController" method="imprimer_Compte_Produits"/>
+    </action-method>
+
+</object-views>

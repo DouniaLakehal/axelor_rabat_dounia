@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="employee-missions-grid" title="Gestion des missions"
+		model="com.axelor.apps.hr.db.EmployeeMissions" orderBy="employee">
+		   <field name="ordre" title="Ordre de mission"/>
+			<field name="employee"  title="BENEFICIAIRE" />
+			<field name="date_debut" title="Début mission"  />
+
+			<field name="statusSelect" title="Statut"/>
+	</grid>
+	<form name="employee-missions-form" title="Gestion des Missions" model="com.axelor.apps.hr.db.EmployeeMissions" width="large" onLoad=""	onNew="">
+      <toolbar>
+            <button name="printEmployeePhoneBookBtn" title="Ordre de mission" icon="fa-print" onClick="action-print-ordre-mission" showIf="statusSelect==1"/>
+        </toolbar>
+     <panel name="employeeMissionPanel">
+         	<panel name="mainPanel" colSpan="12">
+			<field name="statusSelect" colSpan="8" readonly="true"
+				widget="NavSelect" showTitle="false" />
+			<panel name="details" showTitle="false" colSpan="12">
+                 <field name="typeMission" widget="boolean-radio" x-true-text="A l'intérieure" x-false-text="A l'extérieure" colSpan="4"/>
+                  <field name="refMission" widget="boolean-radio" x-true-text="Nouvelle" x-false-text="Existante" default="true" colSpan="4"/>
+              	 <field ref="com.axelor.apps.configuration.db.Groupes" name="groupe" title="Groupe" colSpan="4" />
+				<field ref="com.axelor.apps.hr.db.EmployeeMissions" name="mission" title="Mission parent" showIf="refMission==false" target-name="ordre"/>
+                  </panel>
+        <panel name="missionInterne" title="Mission à l'intérieure" showIf="typeMission" colSpan="12">
+                     <field name="ordre" title="Ordre de mission"/>
+					<field name="employee" canSuggest="false" canNew="false" title="BENEFICIAIRE" canEdit="false" canView="false" hideIf="$popup()" colSpan="3" onChange="com.axelor.apps.hr.web.EmployeeController:theGrade"/>
+					<field name="grade" readonly="true" title="Grade" colSpan="3" />
+					<field name="ville_depart" title="Ville du départ" />
+ 					<field name="ville_arrivee" title="Ville d'arrivée" />
+ 					<field name="moyen_transport" title="Moyen de transport" />
+					<field  ref="com.axelor.apps.configuration.db.IndemniteKilo" target-name="puissancefiscale" name="indemnite" title="Désignation de la puissance fiscale" showIf="moyen_transport == 1" colSpan="3"/>
+					<field name="montant_carburant" title="Distance kilométrique" precision="8" scale="2" showIf="moyen_transport == 1" colSpan="3"/>
+  	  				<field name="voiture" title="Désignation du moyen de transport" showIf="moyen_transport == 1" colSpan="12"/>
+  	  				<field name="date_debut" title="Début mission"  colSpan="3"/>
+  	  				<field name="date_fin" title="Fin mission"  colSpan="3"/>
+  					<field name="heure_depart" title="Heure d'ouverture" colSpan="2"/>
+  					<field name="heure_arrivee" title="Heure de clôture" colSpan="2"/>
+  			 		<field name="fraisBillet" title="Frais du billet" showIf="moyen_transport == 3 " colSpan="12"/>
+					<field name="fraisBillet" title="Frais du billet" showIf="moyen_transport == 4" colSpan="12"/>
+		</panel>
+		 <panel name="missionExterne" title="Mission à l'extérieure"  hideIf="typeMission" colSpan="12">
+				<field name="ordre" title="Ordre de mission"/>
+				<field name="employee" canSuggest="false" canNew="false" title="BENEFICIAIRE" canEdit="false" canView="false" hideIf="$popup()" colSpan="3"/>
+  	  			<field name="grade" ref="com.axelor.apps.configuration.db.Grade" title="Grade" colSpan="3"/>
+  	  			<field name="pays_depart" title="Pays du départ" />
+ 				<field name="pays_arrivee" title="Pays d'arrivée" />
+  				<field name="moyen_transport" title="Moyen de transport" colSpan="3"/>
+  				<field name="fraisBillet" title="Frais du billet" colSpan="3" hideIf="moyen_transport == 1"/>
+				<field  ref="com.axelor.apps.configuration.db.IndemniteKilo" target-name="puissancefiscale" name="indemnite" title="Désignation de la puissance fiscale" showIf="moyen_transport == 1" colSpan="3"/>
+				<field name="montant_carburant" title="Distance kilométrique" precision="8" scale="2" showIf="moyen_transport == 1" colSpan="3"/>
+
+  	  			<field name="date_debut" title="Début mission"  colSpan="3"/>
+  	  			<field name="date_fin" title="Fin mission"  colSpan="3"/>
+  				<field name="heure_depart" title="Heure d'ouverture" colSpan="2"/>
+  				<field name="heure_arrivee" title="Heure de clôture" colSpan="2"/>
+ 		</panel>
+		</panel>
+
+		<panel name="voucherDetails"  title="Repas à exclure" colSpan="12" showIf="typeMission == true">
+		 		<field name="titreRestaurant" widget="inline-checkbox" title="Exclure un titre restaurant ?!" />
+			 <field name="isBreakfast" title="Nombre de repas à exclure" colSpan="4" showIf="titreRestaurant == true"/>
+		</panel>
+	 <field name="nbrJour" title="Nombre Repas" hidden="true"/>
+
+		 <panel-related name="employeeMissionsSBSPanel" showIf="statusSelect>1" domain="self.typeMission = :typeMission" title="Pièces jointes par mission" colSpan="12" field="employeeMissionsList" form-view="employee-missions-form1" grid-view="employee-missions-grid1" />
+	<!-- <panel-related name="generalMissionLineListPanel" showIf="statusSelect>1" field="generalMissionLineList" title="Frais par mission"  colSpan="12"
+				editable="true" form-view="missionfrais-line-form" grid-view="missionfrais-line-grid" />
+			 -->
+</panel>
+		<panel name="detailPanel" sidebar="true">
+			<button name="requestBtn" title="Start" icon="fa-play"
+				 onClick="save,action-mission-set-status-requested,action-mission-method-show-nbr-jour,save" />
+
+			<button name="acceptBtn" title="Document par mission" icon="fa-check"
+				onClick="save,action-mission-set-status-accepted,save" />
+			<button name="refuseBtn" title="Payée" icon="fa-times" css="btn-danger"
+			onClick="save,action-mission-set-status-cancel,save" />
+			<field name="dateOrdre" title="La date de l'ordre de mission" showIf="statusSelect==1" colSpan="6"/>
+			<field name="fraisIndemnite" showTitle="false"  showIf="moyen_transport != 2">
+				<viewer depends="fraisIndemnite" >
+					<![CDATA[
+						<h3>
+							<span  style="margin: 5px 0 !important; display: inline-table; line-height: initial; "><span x-translate style="position:center;">Taux de transport: </span><span style="margin: 3px 100px !important;">{{record.fraisIndemnite}}</span></span>
+						</h3>
+					]]>
+				</viewer>
+			</field>
+	    	 <field name="indemniteJournaliere" title="Indemnité journalière" showTitle="false" showIf="typeMission==false">
+			  <viewer depends="indemniteJournaliere" >
+			 	<![CDATA[
+						<h3>
+							<span  style="margin: 5px 0 !important; display: inline-table; line-height: initial; font-weight:15px;"><span x-translate style="position:center;">Indemnité journalière: </span><span style="margin: 3px 100px !important;"> {{record.indemniteJournaliere}}</span></span>
+						</h3>
+					]]>
+				</viewer>
+
+			 </field>
+			  <field name="fraisRestauration" title="Frais Restauration" showTitle="false" showIf="typeMission==true">
+			  <viewer depends="fraisRestauration" >
+			 	<![CDATA[
+						<h3>
+							<span  style="margin: 5px 0 !important; display: inline-table; line-height: initial; font-weight:15px;"><span x-translate style="position:center;">Indemnité journalière: </span><span style="margin: 3px 100px !important;"> {{record.fraisRestauration}}</span></span>
+						</h3>
+					]]>
+				</viewer>
+
+			 </field>
+		<!-- 	<field name="total1" title="Total" showTitle="false" showIf="typeMission==true">
+			  <viewer depends="total1" >
+			 	<![CDATA[
+						<h3>
+							<span  style="margin: 60px 0 !important; display: inline-table; line-height: initial; font-weight:15px;"><span x-translate style="position:center;">Total: </span><span style="margin: 3px 100px !important;"> {{record.total1}}</span></span>
+						</h3>
+					]]>
+				</viewer>
+
+			 </field> -->
+
+		</panel>
+
+	</form>
+	<action-record name="action-mission-set-status-requested" model="com.axelor.apps.hr.db.EmployeeMissions">
+    	<field name="statusSelect" expr="eval:1"/>
+  	</action-record>
+
+  	<action-record name="action-mission-set-status-accepted" model="com.axelor.apps.hr.db.EmployeeMissions">
+    	<field name="statusSelect" expr="eval:2"/>
+  	</action-record>
+
+  	<action-record name="action-mission-set-status-cancel" model="com.axelor.apps.hr.db.EmployeeMissions">
+    	<field name="statusSelect" expr="eval:3"/>
+  	</action-record>
+	<action-method name="action-mission-method-show-nbr-jour">
+        <call class="com.axelor.apps.hr.web.EmployeeController" method="nbrJour"/>
+    </action-method>
+
+	<action-method name="action-print-ordre-mission">
+		<call class="com.axelor.apps.hr.web.EmployeeController" method="imprimerOrdreMission"/>
+	</action-method>
+
+</object-views>

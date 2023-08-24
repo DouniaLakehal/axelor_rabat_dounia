@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="actions-grid" title="Actions"
+		model="com.axelor.apps.helpdesk.db.Actions" orderBy="titre">
+		<field name="titre" title="Titre" />
+		<field name="responsable" title="Responsable" />
+		<field name="dateRealisation" title="Date de réalisation" />
+		<field name="numAmelioration"
+			title="N° de la fiche d’amélioration" />
+	</grid>
+	<form name="actions-form" title="Actions"
+		model="com.axelor.apps.helpdesk.db.Actions" width="large" onLoad=""
+		onNew="">
+
+		<panel-stack name="generalDetailsPanel">
+			<panel name="employeeDetailsPanel" colSpan="12">
+
+				<field name="titre" title="Titre" />
+				<field name="responsable" title="Responsable" />
+				<field name="dateRealisation" title="Date de réalisation" />
+				<field name="numAmelioration"
+					title="N° de la fiche d’amélioration" />
+			</panel>
+
+		</panel-stack>
+
+	</form>
+
+</object-views>
+
+
+	

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models
+	xmlns="http://axelor.com/xml/ns/domain-models"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+	<module name="helpdesk" package="com.axelor.apps.helpdesk.db" />
+	<entity name="Imprimer" cacheable="true">
+
+		<date name="from_" title="A partire de" required="true" />
+		<date name="to_" title="à" required="true" />
+		
+		<track>
+			<field name="from_" on="UPDATE" />
+			<field name="to_" on="UPDATE" />
+		
+		</track>
+	</entity>
+</domain-models>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid canEdit="true" canMove="false" canArchive="false" canSave="false" canNew="false" orderBy="id"
+		  name="ordrePayementRH_grid" title="Ordre de paiement" model="com.axelor.apps.purchase.db.OrderPaymentCommande">
+		<toolbar>
+			<button icon="fa-compress" title="Importer OP(s)" name="btn_load_auto_op_from_etat_salaire" onClick="action_load_auto_op_from_etat_salaire"/>
+		</toolbar>
+		<field name="numero" title="Numero OP"/>
+		<field name="beneficiaire" title="Bénificaire"/>
+		<field name="objet_depences" title="Objet de la dépenses"/>
+		<field name="sommeVerement" title="Somme"/>
+		<field name="haspayer" title="payer"/>
+    </grid>
+	
+	<action-view name="action_load_auto_op_from_etat_salaire" title="Importer OP(s) depuis etat de salaire"
+				 model="com.axelor.apps.hr.db.EtatSalaire">
+		<view type="form" name="frm_load_ops_from_etat_salaire"/>
+		<view-param name="popup" value="reload"/>
+		<view-param name="forceEdit" value="false"/>
+		<view-param name="popup-save" value="false" />
+		<view-param name="show-confirm" value="false" />
+		<view-param name="show-toolbar" value="false"/>
+	</action-view>
+	
+	<form title="Importer OP(s) depuis etat de salaire" name="frm_load_ops_from_etat_salaire" 
+		  model="com.axelor.apps.purchase.db.OrderPaymentCommande" canSave="false">
+		<panel>
+			<field name="$year" title="Annee" type="Integer"/>
+			<field name="$mois" title="mois" selection="hr.etatEngagment.mois" type="Integer"/>
+			<button colSpan="4" colOffset="8" title="generer les OP(s)" name="btn_generateOPs"
+					onClick="com.axelor.apps.hr.web.OrdrePaiementController:genererOrdrePayement,createEngagementPayement,close"/>
+		</panel>
+	</form>
+
+	<form canEdit="true" canArchive="false" canSave="true" canNew="false" canDelete="false"
+		  name="ordrePayementRH_form" title="paiement" model="com.axelor.apps.purchase.db.OrderPaymentCommande">
+		<panel>
+			<field name="numero" title="Numero OP" readonly="false"/>
+			<field name="beneficiaire" title="Bénificaire" readonly="true"/>
+			<field name="rubriqueBudgetaire" title="Rubrique Budgétaire" readonly="true"/>
+			<field name="sommeVerement" title="Somme" readonly="true"/>
+			<field name="haspayer" title="payer" readonly="true"/>
+			<field name="objet_depences" title="Objet de la dépenses" colSpan="12" readonly="true"/>
+		</panel>
+
+
+	</form>
+
+	<action-method name="createEngagementPayement">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="tw_create_engagement_rh"/>
+	</action-method>
+	
+    
+
+</object-views>

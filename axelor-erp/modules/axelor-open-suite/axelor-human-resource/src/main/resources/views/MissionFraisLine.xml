@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+<grid name="missionfrais-line-grid"
+		  title="Frais par mission"
+		  model="com.axelor.apps.hr.db.EmployeeMissionFrais" 
+		  onNew="">
+	 		<field  name="fraisMission" title="Frais de déplacement" />
+		
+	</grid>
+	<form name="missionfrais-line-form" title="Frais par mission" model="com.axelor.apps.hr.db.EmployeeMissionFrais"
+		onNew=""
+		 width="large">
+	<panel-stack name="generalDetailsPanel">
+		
+		<panel name="mainPanel" title="Main">
+				         <field ref="com.axelor.apps.configuration.db.FraisDeplacement" name="fraisDeplacement" title="Frais de déplacement" hidden="true"/>
+		
+				<field  name="fraisMission" title="Frais de déplacement" x-target-name="fraisDeplacement"/>
+			 <field name="montant" title="Montant" />
+		
+		</panel>
+		</panel-stack>
+		</form>
+		
+	</object-views>

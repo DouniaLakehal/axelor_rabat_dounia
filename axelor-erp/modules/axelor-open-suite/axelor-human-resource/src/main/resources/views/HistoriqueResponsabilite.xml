@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+	 <grid model="com.axelor.apps.hr.db.HistoriqueResponsabilite" title="Historique des responsabilites" name="emp-histo-respon-grid" canNew="false" canDelete="false" canEdit="false">
+	   		<field ref="com.axelor.apps.hr.db.Employee" name="employee"/>
+	    	<field ref="com.axelor.apps.configuration.db.Responsabilite" name="responsabilite"/>
+	        <field name="dateDebut" title="Date Début"/>
+	        <field name="dateFin" title="Date Fin"/>
+	        <field name="etat" default="En cours"/>
+	 </grid>
+
+
+
+
+</object-views>

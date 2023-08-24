@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+    <grid canNew="false" canSave="false" canEdit="false" canMove="false"
+          name="cloture-grid_custom" orderBy="-date" canArchive="false" title="Ouverture"
+          model="com.axelor.apps.account.db.GroupeMove" canDelete="false">
+        <field readonly="true" name="period" form-view="period-form" grid-view="period-grid_custom" width="120" canEdit="false"
+               canView="false"/>
+        <field readonly="true" name="date" title="Date ouverture" width="200"/>
+        <field readonly="true" name="statusSelect" width="200"/>
+        <button icon="fa-close" title="Cloturer" name="btnCloturer" onClick="action_cloturer_test"/>
+    </grid>
+
+	<action-method name="deleteMoveNotHasMoveline">
+		<call class="com.axelor.apps.account.web.AccountController" method="check_all_move_has_content"/>
+	</action-method>
+
+    <action-group name="action_cloturer_test">
+        <action name="deleteMoveNotHasMoveline"/>
+        <action name="genererJoutnalAnouv"/>
+        <action name="action_cloturer"/>
+    </action-group>
+
+    <action-group name="action_cloturer">
+        <action name="cloture_moves"/>
+        <action name="cloture_periode"/>
+        <action name="cloture_renouv"/>
+        <action name="cloture_groupe"/>
+    </action-group>
+
+    <action-method name="genererJoutnalAnouv">
+        <call class="com.axelor.apps.marketing.web.CampaignController" method="tw_genererJoutnalAnouv"/>
+    </action-method>
+
+    <action-method name="cloture_renouv">
+        <call class="com.axelor.apps.marketing.web.CustomCtr" method="cloture_anouv"/>
+    </action-method>
+    <action-method name="cloture_periode">
+        <call class="com.axelor.apps.marketing.web.CustomCtr" method="cloturePeriode"/>
+    </action-method>
+    <action-method name="cloture_moves">
+        <call class="com.axelor.apps.marketing.web.CustomCtr" method="clotureMoves"/>
+    </action-method>
+
+    <action-method name="cloture_groupe">
+        <call class="com.axelor.apps.marketing.web.CustomCtr" method="cloturerGroupeMove"/>
+    </action-method>
+
+
+</object-views>

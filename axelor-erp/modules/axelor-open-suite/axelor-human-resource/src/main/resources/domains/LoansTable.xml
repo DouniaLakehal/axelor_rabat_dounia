@@ -1,0 +1,19 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+  <module name="human-resource" package="com.axelor.apps.hr.db"/>
+    <entity name="LoansTable" cacheable="true">
+        <many-to-one name="employee" ref="com.axelor.apps.hr.db.Employee" title="Employee"/>
+        <string name="loansType" title="Loans Type" selection="hr.employee.loans.type"/>
+        
+        <decimal name="loansValue" title="Loans value(MAD)" scale="1" precision="5"/>
+        <decimal name="repaymentPeriod" title="Repayment Period(months)" scale="1" precision="5"/>
+        <decimal name="monthlyPaymentValue" title="Monthly Payment Value" scale="1" precision="5"/>
+      	<many-to-one name="loansRecognition" title="Loans Recognition" ref="com.axelor.meta.db.MetaFile" />
+      	<string name="withdrawalRate" title="withdrawal Rate" selection="hr.employee.withdrawal.rate"/>
+      	
+    
+  </entity>
+</domain-models>

@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="human-resource" package="com.axelor.apps.hr.db"/>
+
+    <entity name="Experiences" lang="java">
+        <many-to-one name="employee" ref="com.axelor.apps.hr.db.Employee"/>
+        <string name="experience" title="Stages et Expériences"/>
+        <date name="dateDebut" title="Date de début" />
+        <date name="dateFin" title="Date de Fin" />
+        <many-to-one name="certification" title="Certificat" ref="com.axelor.meta.db.MetaFile" />
+    </entity>
+
+</domain-models>

@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="tw_reclamation_grid" title="Réclamation" model="com.axelor.apps.helpdesk.db.Reclamation" orderBy="ticketSeqence">
+		<field name="ticketSeqence" title="N° réclamation"/>
+		<field name="statusSelect_new" title="Statut"/>
+		<field name="priorite" title="Priorité"/>
+		<field name="sourceReclamation" title="source de la Réclamation"/>
+		<field name="etablissement" title="Etablissement"/>
+		<field name="phone" title="Téléphone"/>
+		<field name="email" title="E-mail"/>
+	</grid>
+
+	<form name="tw_reclamation_form" title="Réclamation" model="com.axelor.apps.helpdesk.db.Reclamation"
+		  onNew="action-remplisPar" onSave="updateNumReclamation" width="large">
+
+		<panel name="panelBody" showTitle="false">
+
+			<field name="statusSelect_new" colSpan="12" readonly="true" widget="NavSelect" showTitle="false"/>
+
+			<field name="ticketSeqence" readonly="true" canEdit="false" showTitle="false" colSpan="12">
+				<viewer depends="ticketSeqence">
+					<![CDATA[
+					<h2> Réclamation N° : <mark> {{ record.ticketSeqence }} </mark></h2>
+				]]>
+				</viewer>
+			</field>
+
+			<field name="name" title="Nom et prénom" required="true"/>
+			<field name="etablissement" title="Etablissement"/>
+			<field name="phone" title="Téléphone"  widget="phone" onChange="action-partner-method-normalize-telephone" pattern="^\+?([\s()-.]*\d){10,}$" placeholder="+212600000000" required="true"/>
+			<field name="email" title="E-mail" widget="email" required="true" />
+			<field name="recevable" title="Recevable"/>
+			<!--<field name="recevable" title="Recevable" onChange="show_bouton_lancer"/>-->
+			<field name="auteur" title="Rempli par" readonly="true"/>
+			<field name="remis" title="Date de réception" required="true"/>
+			<field name="dateReclamation" title="Date de Réclamation" readonly="true"/>
+			<field name="object" title="Object" colSpan="12" required="true"/>
+		</panel>
+
+		<panel-tabs name="mainPanelTab_reclamation" >
+			<panel name="descriptionPanel" colSpan="12" title="Description">
+				<field name="description" showTitle="false" colSpan="12" widget="html" />
+			</panel>
+			<panel-related canSelect="false" canRemove="statusSelect_new!=1" canMove="false" canSuggest="false" canView="false" canNew="statusSelect_new!=1" canEdit="statusSelect_new!=1"
+					name="piecesJointePanel" title="Pieces jointe" colSpan="12" field="piecesJointe" form-view="piece-form" grid-view="piece-grid" />
+		</panel-tabs>
+
+		<panel name="panelLeft" showTitle="false" sidebar="true">
+			<button hideIf="statusSelect_new &gt; 0 || recevable==false || recevable==null" icon="fa-play" title="Demarer" name="bouton_demarer" onClick="demarer_reclamation"/>
+		</panel>
+
+		<panel name="panel_info_reclamation" sidebar="true" title="Caractéristiques" canCollapse="true">
+			<field name="sourceReclamation" title="Source de réclamation"/>
+			<field name="naturePlainte" target-name="titre" title="Nature de plainte"/>
+			<field name="priorite" title="Priorité"/>
+		</panel>
+
+		<panel name="panel_date_reclamation" sidebar="true" title="Dates" canCollapse="true">
+			<field name="datedebut" title="Date début" readonly="true" colSpan="6"/>
+			<field name="datefin" title="Date fin" colSpan="6"/>
+		</panel>
+	</form>
+
+
+	<action-record name="action-remplisPar" model="com.axelor.apps.helpdesk.db.Reclamation">
+		<field name="auteur" expr="eval: __user__.name" />
+		<field name="dateReclamation" expr="eval: __date__" />
+		<field name="datedebut" expr="eval: __time__" />
+		<field name="sourceReclamation" expr="eval: 1"/>
+	</action-record>
+
+	<action-method name="action-partner-method-normalize-telephone">
+		<call class="com.axelor.apps.contract.web.ContractController" method="normalizePhoneNumber"/>
+	</action-method>
+
+	<action-group name="updateNumReclamation">
+		<action name="save"/>
+		<action name="meth_update_numreclamation"/>
+		<action name="save"/>
+	</action-group>
+
+	<action-method name="meth_update_numreclamation">
+		<call class="com.axelor.apps.helpdesk.web.TicketController" method="update_numreclamation"/>
+	</action-method>
+
+	<action-group name="demarer_reclamation">
+		<action name="save"/>
+		<action name="change_statu_recl"/>
+		<action name="meth_update_numreclamation"/>
+		<action name="disabled_reclamation_new"/>
+		<action name="save"/>
+	</action-group>
+
+	<action-attrs name="disabled_reclamation_new">
+		<attribute for="name" name="readonly" expr="true"/>
+		<attribute for="etablissement" name="readonly" expr="true"/>
+		<attribute for="phone" name="readonly" expr="true"/>
+		<attribute for="email" name="readonly" expr="true"/>
+		<attribute for="recevable" name="readonly" expr="true"/>
+		<attribute for="remis" name="readonly" expr="true"/>
+		<attribute for="description" name="readonly" expr="true"/>
+	</action-attrs>
+
+	<action-record name="change_statu_recl" model="com.axelor.apps.helpdesk.db.Reclamation">
+		<field name="statusSelect_new" expr="eval: 1"/>
+	</action-record>
+
+	<!--<action-attrs name="show_bouton_lancer">
+		<attribute for="bouton_demarer" name="hidden" expr="eval: recevable == false"/>
+	</action-attrs>-->
+
+
+</object-views>
+
+
+	

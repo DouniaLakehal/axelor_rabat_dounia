@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="Personnel-contract-grid" title="Liste des Diplomes" model="com.axelor.apps.hr.db.Diplome">
+        <field name="diplome"/>
+        <field name="diplomeDateObtention"/>
+        <field name="certification"/>
+    </grid>
+
+    <form name="Personnel-contract-form" title="Diplôme" model="com.axelor.apps.hr.db.Diplome" width="large">
+        <panel name="diplomePanel">
+            <field name="diplome" colSpan="6" />
+            <field name="diplomeDateObtention" colSpan="6" pattern="^\+?([\s()-.]*\d){7,}$"/>
+            <field name="certification" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid"/>
+        </panel>
+    </form>
+
+</object-views>
