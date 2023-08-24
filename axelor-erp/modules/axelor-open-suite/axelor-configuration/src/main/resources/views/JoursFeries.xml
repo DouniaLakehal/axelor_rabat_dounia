@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="jourFeries-grid" title="Liste des jours Féries" model="com.axelor.apps.configuration.db.JoursFeries">
+        <field name="name" title="Titre"/>
+        <field name="datedebut" title="Date Debut"/>
+        <field name="datefin" title="Date Fin"/>
+    </grid>
+
+    <form name="jourFeries-form" title="Ajouter Jours Feries" model="com.axelor.apps.configuration.db.JoursFeries" >
+        <panel name="articlePanel" title="Information Générale">
+            <field name="name" title="Titre"/>
+            <field name="feteReligion" colSpan="3"/>
+            <field name="feteNationnal" colSpan="3"/>
+            <field name="datedebut" title="Date Debut"/>
+            <field name="datefin" title="Date Fin"/>
+        </panel>
+    </form>
+
+</object-views>

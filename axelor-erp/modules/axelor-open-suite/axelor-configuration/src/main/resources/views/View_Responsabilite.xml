@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="responsabilite-grid" title="Responsabilité" model="com.axelor.apps.configuration.db.Responsabilite">
+        <field name="name" title="Nom"/>
+        <field name="description" title="Description"/>
+        <field name="indemnitLogement" />
+        <field name="indemnitFonction"/>
+        <field name="indemnitVoiture" />
+        <field name="indemnitRepresentation" />
+        
+        <field name="indemnitLogement_Net"  />
+        <field name="indemnitFonction_Net"/>
+        <field name="indemnitVoiture_Net" />
+        <field name="indemnitRepresentation_Net" />
+    </grid>
+
+    <form name="responsabilite-form" title="Responsabilité" model="com.axelor.apps.configuration.db.Responsabilite"  onSave="action-enregistrer-responsabilite" canSave="false">
+        <panel name="mainPanel">
+            <field name="name" title="Nom" required="true"/>
+            <field name="description" title="Description" />
+         <panel>
+            <field name="logementIsNet" title="Net" colSpan="2" />
+            <field name="indemnitLogement_Net" showIf="logementIsNet"  colSpan="5" />
+            <field name="indemnitLogement" showIf="!logementIsNet" colSpan="5" />
+         </panel>
+         <panel>
+            <field name="fonctionIsNet" title="Net" colSpan="2" />
+             <field name="indemnitFonction_Net" showIf="fonctionIsNet" colSpan="5" />
+	        <field name="indemnitFonction" showIf="!fonctionIsNet"  colSpan="5" />
+	      </panel>
+	     <panel>   
+	        <field name="voitureIsNet" title="Net"  colSpan="2" />
+	       <field name="indemnitVoiture_Net" showIf="voitureIsNet" colSpan="5" />
+	        <field name="indemnitVoiture" showIf="!voitureIsNet"  colSpan="5" />
+	     </panel>
+	      <panel>
+	        <field name="representationIsNet" title="Net" colSpan="2" />
+	        <field name="indemnitRepresentation_Net" showIf="representationIsNet" colSpan="5" />
+	        <field name="indemnitRepresentation" showIf="!representationIsNet"  colSpan="5" />
+	      </panel>
+	     
+			 <button name="Enregistrer" title="Enregistrer" onClick="action-enregistrer-responsabilite" showIf="!id"/>
+			 <button name="modifier" title="Modifier" onClick="action-modifier-responsabilite" showIf="id"/>
+        </panel>
+      
+
+    </form>
+    
+    <action-group name="action-enregistrer-responsabilite">
+		<action name="validation_champs" if="name==null || description==null"/>
+	
+		<action name="com.axelor.apps.configuration.web.AppConfigurationController:EnregistrerResponsabilite" if="name!=null &amp;&amp; description!=null"/>
+	</action-group>
+
+	<action-validate name="validation_champs">
+		<error message="&lt;p&gt;les champs suivant sont obligatoire : &lt;p&gt; &lt;ul&gt; &lt;li&gt;Nom&lt;/li&gt; &lt;li&gt;Description&lt;/li&gt; &lt;/ul&gt;" if="name==null || description==null"/>
+		
+	</action-validate>
+	
+	
+	<action-group name="action-modifier-responsabilite">
+		<action name="validation_champs" if="name==null || description==null"/>
+	
+		<action name="com.axelor.apps.configuration.web.AppConfigurationController:update_Responsabilite" if="name!=null &amp;&amp; description!=null"/>
+	</action-group>
+
+	
+   
+   <!--
+    <action-method name="action-enregistrer-responsabilite">
+		<call class="com.axelor.apps.configuration.web.AppConfigurationController" method="EnregistrerResponsabilite"/>
+		
+	</action-method>
+	
+	<action-method name="action-modifier-responsabilite">
+		<call class="com.axelor.apps.configuration.web.AppConfigurationController" method="update_Responsabilite"/>
+		
+	</action-method>
+	-->
+	 
+</object-views>

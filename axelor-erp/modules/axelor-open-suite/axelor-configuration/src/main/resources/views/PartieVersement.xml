@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="partier_ver_grid" title="Partier d'opération" model="com.axelor.apps.configuration.db.PartierVersement">
+        <field name="code"/>
+        <field name="libelle"/>
+        <field name="debit"/>
+        <field name="credit"/>
+    </grid>
+
+    <form name="partier_ver_form" title="Partier d'opération" model="com.axelor.apps.configuration.db.PartierVersement" >
+        <panel name="articlePanel" >
+            <field name="code"/>
+            <field name="libelle"/>
+            <field name="debit"/>
+            <field name="credit"/>
+        </panel>
+    </form>
+
+</object-views>

@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="configuration" package="com.axelor.apps.configuration.db"/>
+
+    <entity name="AvancementPeriode" lang="java">
+
+        <string name="echelon_start" selection="avancemenEchelon.select"/>
+        <string name="echelon_end" selection="avancemenEchelon.select"/>
+        <integer name="nbr_mois_rapide"/>
+        <integer name="nbr_mois_moyen"/>
+        <integer name="nbr_mois_long"/>
+        <boolean name="etatSave" default="false"/>
+    </entity>
+
+</domain-models>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="rubriqueBudgetaire-grid" title="Rubrique Budgetaire" model="com.axelor.apps.configuration.db.RubriqueBudgetaireGenerale">
+		<field name="name"/>
+		<field name="codeBudg"/>
+		<field name="parent"/>
+		<field name="annexeGenerale"/>
+		<field name="annee"/>
+    </grid>
+
+    <form name="rubriqueBudgetaire-form" title="Rubrique Budgetaire" model="com.axelor.apps.configuration.db.RubriqueBudgetaireGenerale" >
+		<panel name="mainPanel">
+			<field colSpan="12" name="name"/>
+			<field name="codeBudg"/>
+			<field name="parent"/>
+			<field colSpan="4" name="annexeGenerale"/>
+			<field colSpan="4" name="annee"/>
+			<field name="type" title="Type" selection="purchase.budget.slection" widget="single-select" colSpan="4" placeholder="Type"/>
+		</panel>
+    </form>
+
+	<grid canNew="false" canDelete="false" canSave="false" canEdit="false" canArchive="false" canMove="false"
+		  name="tw_HistoriquerubriqueBudgetaire-grid" title="Rubrique Budgetaire" model="com.axelor.apps.configuration.db.HistoriqueBudgetaire">
+		<field name="rubriqueBudgetaire" title="Rubrique budgaitaire"/>
+		<field name="annexe" title="Annexe"/>
+		<field name="dateEx" title="Date Execution"/>
+		<field name="mois" title="Mois"/>
+		<field name="annee" title="Année"/>
+		<field name="montant" title="Montant"/>
+		<field name="montantRubrique" title="montantRubrique"/>
+	</grid>
+
+
+</object-views>

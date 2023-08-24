@@ -1,0 +1,36 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="account" package="com.axelor.apps.account.db"/>
+
+    <entity name="ModificationBudget" lang="java">
+        <many-to-one name="budgetRetrait" ref="com.axelor.apps.configuration.db.BudgetParRubrique"
+                     title="Budget de retrait"/>
+        <decimal name="ajout" title="Le montant à ajouter"/>
+        <many-to-one name="budgetAjout" ref="com.axelor.apps.configuration.db.BudgetParRubrique"
+                     title="Budget d'ajout"/>
+        <date name="dateDemande" title="date de la demande"></date>
+        <string name="type" title="Type" selection="modificatioBudget.slection" default="En attente"/>
+        <string name="commentaire" title="Commentaire"/>
+        <integer name="year" title="year">
+            <![CDATA[
+	    	if (dateDemande != null)
+				return dateDemande.getYear();
+			else
+				return null;
+	    ]]>
+        </integer>
+        <integer name="mois" title="mois">
+            <![CDATA[
+	    	if (dateDemande != null)
+				return dateDemande.getMonthValue();
+			else
+				return null;
+	    ]]>
+        </integer>
+
+    </entity>
+
+</domain-models>

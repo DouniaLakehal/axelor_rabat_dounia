@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="actionVehicule_detail_grid" title="Liste des véhicules" model="com.axelor.apps.configuration.db.Vehicules">
+        <field name="name"/>
+        <field name="matricule"/>
+        <field name="modele"/>
+    </grid>
+
+    <form name="actionVehicule_detail_form" title="Véhicules" model="com.axelor.apps.configuration.db.Vehicules" >
+        <panel name="vehiculePanel" >
+            <field name="name" colSpan="4"/>
+            <field name="matricule" colSpan="4"/>
+            <field name="modele" colSpan="4"/>
+        </panel>
+    </form>
+
+</object-views>

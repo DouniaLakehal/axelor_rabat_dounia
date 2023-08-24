@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid  name="IR_grid" title="IR" model="com.axelor.apps.configuration.db.IR">
+        <toolbar>
+            <button icon="fa-university" title="Information Banquaire" name="btn_ir_banque"  onClick="loaf_form_banque_info"/>
+        </toolbar>
+        <field name="montant_max" title="Montant maximum"/>
+        <field name="montant_min" title="Montnat minimum"/>
+        <field name="montant_red" title="Déduction"/>
+        <field name="pors" title="Pourcentage"/>
+        <field name="exonerer" title="Exonerer"/>
+    </grid>
+
+    <form name="IR_form" title="IR" model="com.axelor.apps.configuration.db.IR" onLoad="com.axelor.apps.configuration.web.AppConfigurationController:show_other_field" >
+        <panel name="articlePanel" >
+            <field name="montant_min" min="0" colSpan="5"/>
+            <field name="montant_max" min="0" colSpan="5"/>
+            <field name="exonerer" colSpan="2" onChange="com.axelor.apps.configuration.web.AppConfigurationController:show_other_field"/>
+            <field name="pors" min="0" colSpan="6"/>
+            <field name="montant_red" min="0" colSpan="6"/>
+        </panel>
+    </form>
+
+    <action-view name="loaf_form_banque_info" title="Information Banquaire" model="com.axelor.apps.configuration.db.IrBanqueInfo">
+        <view type="grid" name="irBanqueInfo-grid"/>
+        <view type="form" name="irBanqueInfo-form"/>
+        <view-param name="forceEdit" value="true"/>
+    </action-view>
+</object-views>

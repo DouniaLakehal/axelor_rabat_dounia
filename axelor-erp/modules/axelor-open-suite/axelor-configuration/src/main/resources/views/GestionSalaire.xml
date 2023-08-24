@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="tw_gestion_salaire_grid" title="Gestion des salaires"
+          model="com.axelor.apps.configuration.db.GestionSalaire">
+        <toolbar>
+            <button name="generer" title="Générer année" icon="fa-download" onClick="tw-generer-annee"/>
+        </toolbar>
+        <field name="corps" title="Corps"/>
+        <field name="grade" title="Grade"/>
+        <field name="echelle" title="Echelle"/>
+        <field name="echelon" title="Echelon"/>
+        <field name="indice" title="Indice"/>
+        <field name="traitementDeBase" title="Traitement de Base"/>
+        <field name="indemniteDeResidenceZC10" title="Indemnité de résidence Z.C 10%"/>
+        <field name="indemniteDeResidenceZB15" title="Indemnité de résidence Z.B 15%"/>
+        <field name="indemniteDeResidenceZA25" title="Indemnité de résidence Z.A 25%"/>
+        <field name="indemniteDeHierarchieAdministrative" title="indemnité de hiérarchie administrative"/>
+        <field name="indemniteDeTechnicite" title="Indemnité de technicité"/>
+        <field name="indemniteDeSujetion" title="Indemnité de sujétion"/>
+        <field name="indemniteEncadrement" title="Indemnité d'encadrement"/>
+        <field name="annee" title="Année"/>
+    </grid>
+
+    <form name="tw_gestion_salaire_form" title="Gestion des salaires"
+          model="com.axelor.apps.configuration.db.GestionSalaire">
+        <panel name="mainPanel">
+            <field name="corps" title="Corps" required="true"/>
+            <field name="grade" title="Grade" required="true" domain="self.corps=:corps"/>
+            <field name="echelle" title="Echelle" required="true"/>
+            <field name="echelon" title="Echelon" required="true"/>
+            <field name="indice" title="Indice" required="true"/>
+            <field name="traitementDeBase" title="Traitement de Base" required="true"/>
+            <field name="indemniteDeResidenceZC10" title="Indemnité de résidence Z.C 10%" required="true"/>
+            <field name="indemniteDeResidenceZB15" title="Indemnité de résidence Z.B 15%" required="true"/>
+            <field name="indemniteDeResidenceZA25" title="Indemnité de résidence Z.A 25%" required="true"/>
+            <field name="indemniteDeSujetion" title="Indemnité de sujétion" required="true"/>
+            <field name="indemniteEncadrement" title="Indemnité d'encadrement" required="true"/>
+            <field name="indemniteDeHierarchieAdministrative" title="Indemnité de hiérarchie administrative"/>
+            <field name="indemniteDeTechnicite" title="Indemnité de technicité"/>
+            <field name="annee" title="Année"/>
+
+            <!--<button name="btn_save_data" onClick="saveDataplize" title="Enregistrer" icon="fa-save" />-->
+        </panel>
+    </form>
+
+     <!--<action-method name="tw-generer-annee">
+         <call class="com.axelor.apps.configuration.web.AppConfigurationController" method="genererAnnee"/>
+     </action-method>-->
+
+    <form name="generer-annee-form" title="Année" model="com.axelor.apps.configuration.db.GestionSalaire">
+        <panel colSpan="12">
+            <panel name="mainPanel" colSpan="10" colOffset="1">
+                <field name="$courant" title="Année disponible" type="Integer" colSpan="6"/>
+                <field name="$generer" title="Année à générer" type="Integer" colSpan="6"/>
+                <button name="showAnneeReportBtn" title="Enregistrer" onClick="com.axelor.apps.configuration.web.AppConfigurationController:genererAnnee,close" colOffset="10" colSpan="2" />
+            </panel>
+        </panel>
+
+    </form>
+
+    <action-view name="tw-generer-annee" title="Annee"
+                 model="com.axelor.apps.configuration.db.GestionSalaire">
+        <view type="form" name="generer-annee-form"/>
+        <view-param name="popup" value="reload"/>
+        <view-param name="show-toolbar" value="false"/>
+        <view-param name="show-confirm" value="false"/>
+        <view-param name="popup-save" value="false"/>
+        <view-param name="width" value="800"/>
+    </action-view>
+
+    <!-- <action-method name="saveDataplize">
+         <call class="com.axelor.apps.configuration.web.AppConfigurationController" method="savedataGestionSalaire"/>
+     </action-method>-->
+
+    <!--<action-attrs name="affiche_indemnite_tech_hierar">
+        <attribute for="indemniteDeHierarchieAdministrative" name="hidden" expr="eval: corps.id == 14"/>
+        <attribute for="indemniteDeTechnicite" name="hidden" expr="eval: corps.id != 14"/>
+    </action-attrs>-->
+</object-views>

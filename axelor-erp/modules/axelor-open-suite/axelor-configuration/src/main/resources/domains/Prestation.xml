@@ -1,0 +1,28 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="configuration" package="com.axelor.apps.configuration.db"/>
+    <entity name="Prestation" lang="java">
+        <string name="designation" title="Designation"/>
+        <string name="description" title="Description"/>
+        <string name="type" title="Type"/>
+        <decimal name="montant" title="Montant"/>
+        <decimal name="annee" title="Année"/>
+        <string name="reference" title="Imputation budgétaire"/>
+
+        <string name="typePrestation">
+            <![CDATA[
+            if(this.getType()!=null){
+            return this.getDescription()+" "+this.getType();
+            }else{
+            return this.getDescription();
+            }
+            ]]>
+        </string>
+    </entity>
+
+
+
+</domain-models>

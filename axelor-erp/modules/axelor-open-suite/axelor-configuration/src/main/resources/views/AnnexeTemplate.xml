@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="annexe-grid" title="Annexe" model="com.axelor.apps.configuration.db.AnnexeGenerale">
+        <field name="name"/>
+        <field name="adresse"/>
+		<field name="telephone"/>
+		<field name="typeCentral"/>
+    </grid>
+
+    <form name="annexe-form" title="Annexe" model="com.axelor.apps.configuration.db.AnnexeGenerale">
+		<panel name="mainPanel">
+			<field name="typeCentral" title="Central"/>
+			<field name="name"/>
+			<field name="adresse" widget="string"/>
+			<field name="telephone" onChange="action-partner-method-normalize-telephone" colSpan="6"
+				   pattern="^\+?([\s()-.]*\d){7,}$" placeholder="+21200000000" required="true"/>
+		</panel>
+    </form>
+
+	<action-method name="action-partner-method-normalize-telephone">
+		<call class="com.axelor.apps.contract.web.ContractController" method="normalizePhoneNumber"/>
+	</action-method>
+
+</object-views>

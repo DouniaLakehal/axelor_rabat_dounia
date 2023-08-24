@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="typePrestation-grid" title="Liste de nature de prestation" model="com.axelor.apps.configuration.db.TypePrestation">
+        <field name="nom_fr" title="Nature de prestation"/>
+        <field name="nom_ar" title="طرق ابرام الصفقات"/>
+    </grid>
+
+    <form name="typePrestation-form" title="Nature de prestation" model="com.axelor.apps.configuration.db.TypePrestation" >
+        <panel name="articlePanel">
+            <field name="nom_fr" title="Nature de prestation" colSpan="6"/>
+            <field name="nom_ar" css="tw_arabe_orient" title="طرق ابرام الصفقات" colSpan="6"/>
+        </panel>
+    </form>
+
+</object-views>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <form name="encaissement-edit-form" title="Encaissement" canNew="false"
+          model="com.axelor.apps.account.db.Encaissement" width="large">
+        <panel name="mainPanel" title="Modification de l'encaissement" colSpan="12">
+            <field name="numero" title="N° des quittances à souche" readonly="true"/>
+            <field name="prestataire" widget="tag-select" title="Nom et prénom / société" />
+            <field name="prestation" target-name="typePrestation" title="Prestation" onChange="com.axelor.apps.account.web.AccountController:getMontantPrestation"/>
+            <field name="annexe" title="Annexe" readonly="true"/>
+            <field name="dateencaissement" title="Date d'encaissement"/>
+            <field name="montant" title="Montant"/>
+        </panel>
+    </form>
+
+</object-views>

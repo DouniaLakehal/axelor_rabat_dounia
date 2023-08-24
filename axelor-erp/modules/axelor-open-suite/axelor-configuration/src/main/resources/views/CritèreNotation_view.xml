@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="critereNotation-grid" title="Critère de notation" model="com.axelor.apps.configuration.db.CritereNotation">
+        <field name="name" title="Critère"/>
+        <field name="noteMax" title="Note Max"/>
+        <field name="description" title="Description"/>
+    </grid>
+
+    <form name="critereNotation-form" title="Ajouter un critère" model="com.axelor.apps.configuration.db.CritereNotation">
+        <panel name="mainPanel" showTitle="false">
+            <field name="name" title="Critère"/>
+            <field name="noteMax" title="Note Max"/>
+            <field name="description" title="Description"/>
+        </panel>
+    </form>
+
+</object-views>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+<module name="account" package="com.axelor.apps.account.db"/>
+
+<entity name="Encaissement" lang="java" >
+    <date name="dateencaissement" title="Date d'encaissement" />
+    <many-to-one name="prestation" ref="com.axelor.apps.configuration.db.Prestation" title="Prestation" />
+    <decimal name="montant" title="Montant" />
+    <integer name="nbr" title="Nombre" />
+    <many-to-one name="annexe" ref="com.axelor.apps.configuration.db.AnnexeGenerale" title="Annexe"/>
+    <boolean name="versed"/>
+</entity>
+
+</domain-models>

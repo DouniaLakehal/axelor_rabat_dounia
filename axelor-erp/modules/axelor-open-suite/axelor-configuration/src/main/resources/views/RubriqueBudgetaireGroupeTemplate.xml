@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <form title="Afficher" name="formRubriquesBudgetaireAffichage"
+          model="com.axelor.apps.configuration.db.RubriquesBudgetaire"
+          canDelete="false" canNew="false" canArchive="false" canEdit="false" canCopy="false" canAttach="false" canSave="false"
+          width="large">
+       <menubar>
+            <menu title="Imprimer">
+                <item title="Budget" action="imprimerBudgetPrincipal"/>
+                <item title="Prod F" action="imprimerBudgetProdF"/>
+                <item title="Fonc" action="imprimerBudgetPrincipal"/>
+                <item title="Fonc-d" action="imprimerBudgetPrincipal"/>
+                <item title="Equip" action="imprimerEquip"/>
+                <item title="Equip-d" action="imprimerBudgetPrincipal"/>
+            </menu>
+        </menubar>
+        <panel>
+            <field name="$updateDate" title="année" type="number" hidden="true"/>
+            <panel colSpan="12">
+                <field name="$date_anne" title="année" type="number"/>
+                <button colSpan="2" name="btn_click_active" title="Rechercher"
+                        onClick="refreshAttrTables,calculelesTotalSum"/>
+            </panel>
+        </panel>
+
+        <panel-tabs name="show_result">
+            <panel colSpan="12" title="LES RECETTES">
+
+                <panel-dashlet canSearch="false" readonly="true" name="$bank" title="Disponible à la trésorerie "
+                               action="afficher_banque" colSpan="12"/>
+                <panel colSpan="3" colOffset="9">
+                    <field type="decimal" readonly="true" colSpan="12" name="$recette_som1"
+                           title="Total Disponible à la trésorerie"/>
+                </panel>
+
+                <panel-dashlet readonly="true" name="$produit" title="Produit d'exploitation" action="afficher_produit"
+                               colSpan="12"/>
+                <panel colSpan="3" colOffset="9">
+                    <field type="decimal" readonly="true" name="$recette_som2"
+                           title="Total des Produits d'exploitation"/>
+                </panel>
+
+                <panel-dashlet readonly="true" name="$investissement" title="PRODUITS NON COURANTS"
+                               action="afficher_ressource" colSpan="12"/>
+                <panel colSpan="12" >
+                    <button colSpan="2" showIf="($recette_som3!=0 &amp;&amp; $recette_som3!=null) || ($recette_som2!=0 &amp;&amp; $recette_som2!=null)" name="afficher_detail"
+                            title="Détail prod F" onClick="afficher_detail" icon="fa-search"/>
+                    <field colSpan="3" colOffset="9" type="decimal" readonly="true" name="$recette_som3"
+                           title="Total des PRODUITS NON COURANTS"/>
+                </panel>
+
+                <panel colSpan="12">
+                    <field colSpan="3" colOffset="9" readonly="true" name="$total_total_recette" type="decimal"
+                           title="Total Recette"/>
+                </panel>
+            </panel>
+
+            <panel colSpan="12" title="LES Dépenses">
+                <panel-dashlet readonly="true" colSpan="12" name="$charges" title="Charges d'exploitation"
+                               action="afficher_charges"/>
+                <panel colSpan="12">
+                    <button colSpan="2" showIf="$recette_som4!=0 &amp;&amp; $recette_som4!=null" name="afficher_detail_612"
+                            title="Détail fonc" onClick="afficher_detail_depense" icon="fa-search"/>
+                    <field colSpan="3" colOffset="9" type="decimal" readonly="true" name="$recette_som4" title="Total Charges d'exploitation"/>
+                </panel>
+
+                <panel-dashlet readonly="true" colSpan="12" name="$emplois" title="Emplois d'investissement"
+                               action="afficher_emplois"/>
+                <panel colSpan="12" >
+                    <button  colSpan="2" showIf="$recette_som5!=0 &amp;&amp; $recette_som5!=null" name="afficher_detail_23"
+                            title="Détail" onClick="afficher_detail_equip" icon="fa-search"/>
+                    <field colSpan="3" colOffset="9" type="decimal" readonly="true" name="$recette_som5" title="Total Emplois d'investissement"/>
+                </panel>
+
+                <panel-dashlet readonly="true" colSpan="12" name="$credit" title="Crédits non programmés"
+                               action="afficher_credit"/>
+                <panel colSpan="3" colOffset="9">
+                    <field type="decimal" readonly="true" colSpan="12" name="$recette_som6"
+                           title="Total Crédits non programmés"/>
+                </panel>
+
+                <panel colSpan="12">
+                    <field colSpan="3" colOffset="9" readonly="true" name="$total_total_depense" type="decimal"
+                           title="Total Dépenses"/>
+                </panel>
+            </panel>
+        </panel-tabs>
+    </form>
+
+
+    <action-view name="afficher_banque" title="Banque" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+        <view type="grid" name="gridRubriquesBudgetaireAfficher"/>
+        <domain>self.anneCurrent =:anne and self.is_principal is true and self.depenceAndRecette is true and
+            self.typeRubriquePrincipal.id=:my_id
+        </domain>
+        <context name="anne" expr="eval:date_anne"/>
+        <context name="my_id" expr="eval:6"/>
+    </action-view>
+
+    <action-view name="afficher_produit" title="Produit" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+        <view type="grid" name="gridRubriquesBudgetaireAfficher"/>
+        <domain>self.anneCurrent =:anne and self.is_principal is true and self.depenceAndRecette is true and
+            self.typeRubriquePrincipal.id=:my_id
+        </domain>
+        <context name="anne" expr="eval:date_anne"/>
+        <context name="my_id" expr="eval:7"/>
+    </action-view>
+
+
+    <action-view name="afficher_ressource" title="Banque" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+        <view type="grid" name="gridRubriquesBudgetaireAfficher"/>
+        <domain>self.anneCurrent =:anne and self.is_principal is true and self.depenceAndRecette is true and
+            self.typeRubriquePrincipal.id=:my_id
+        </domain>
+        <context name="anne" expr="eval:date_anne"/>
+        <context name="my_id" expr="eval:8"/>
+    </action-view>
+
+    <action-view name="afficher_charges" title="charges" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+        <view type="grid" name="gridRubriquesBudgetaireAfficher"/>
+        <domain>self.anneCurrent =:anne and self.is_principal is true and self.depenceAndRecette is false and
+            self.typeRubriquePrincipal.id=:my_id
+        </domain>
+        <context name="anne" expr="eval:date_anne"/>
+        <context name="my_id" expr="eval:9"/>
+    </action-view>
+
+    <action-view name="afficher_emplois" title="emplois" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+        <view type="grid" name="gridRubriquesBudgetaireAfficher"/>
+        <domain>self.anneCurrent =:anne and self.is_principal is true and self.depenceAndRecette is false and
+            self.typeRubriquePrincipal.id=:my_id
+        </domain>
+        <context name="anne" expr="eval:date_anne"/>
+        <context name="my_id" expr="eval:23"/>
+    </action-view>
+
+    <action-view name="afficher_credit" title="credit" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+        <view type="grid" name="gridRubriquesBudgetaireAfficher"/>
+        <domain>self.anneCurrent =:anne and self.is_principal is true and self.depenceAndRecette is false and
+            self.typeRubriquePrincipal.id=:my_id
+        </domain>
+        <context name="anne" expr="eval:date_anne"/>
+        <context name="my_id" expr="eval:11"/>
+    </action-view>
+
+    <grid orderBy="code_budget" canDelete="false" title="Rubrique Bidgetaire" name="gridRubriquesBudgetaireAfficher"
+          model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+        <field name="typeRubriquePrincipal.name" hidden="true" title="Catégorie"/>
+        <field name="code_budget" title="Code"/>
+        <field name="titre_budget" title="Rubrique"/>
+        <field name="somme_mtChildren_mtBudget" title="Budget"/>
+    </grid>
+
+    <action-attrs name="refreshAttrTables">
+        <attribute for="$bank" name="refresh" expr="eval:true"/>
+        <attribute for="$produit" name="refresh" expr="eval:true"/>
+        <attribute for="$investissement" name="refresh" expr="eval:true"/>
+        <attribute for="$charges" name="refresh" expr="eval:true"/>
+        <attribute for="$emplois" name="refresh" expr="eval:true"/>
+        <attribute for="$credit" name="refresh" expr="eval:true"/>
+    </action-attrs>
+
+    <action-method name="calculelesTotalSum">
+        <call class="com.axelor.apps.configuration.web.AppConfigurationController" method="sum_total_generale"/>
+    </action-method>
+
+    <action-method name="afficher_detail">
+        <call class="com.axelor.apps.configuration.web.AppConfigurationController" method="redirect_to_detail"/>
+    </action-method>
+
+    <action-method name="afficher_detail_depense">
+        <call class="com.axelor.apps.configuration.web.AppConfigurationController" method="redirect_to_detail_depense"/>
+    </action-method>
+
+    <action-method name="afficher_detail_equip">
+        <call class="com.axelor.apps.configuration.web.AppConfigurationController" method="redirect_to_detail_equipe"/>
+    </action-method>
+
+    <action-method name="imprimerBudgetPrincipal">
+        <call class="com.axelor.apps.account.web.AppConfigurationController" method="tw_printCodeBudgetPrincipal"/>
+    </action-method>
+
+</object-views>

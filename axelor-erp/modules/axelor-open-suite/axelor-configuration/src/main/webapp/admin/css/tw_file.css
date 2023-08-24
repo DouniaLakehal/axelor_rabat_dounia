@@ -1,0 +1,10 @@
+.tw_arabe_orient{
+   direction: rtl;
+}
+
+.tw_pannel{
+   background: blue !important;
+   border-top-right-radius: 15px !important;
+   border-top-left-radius: 15px !important;
+   color: white !important;
+}

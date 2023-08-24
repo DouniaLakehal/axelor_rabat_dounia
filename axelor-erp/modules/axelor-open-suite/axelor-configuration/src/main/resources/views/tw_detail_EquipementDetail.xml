@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+	<form title="Budget detail" name="tw_equipeDetail" onNew="getTotalEquipeByType"
+		  model="com.axelor.apps.configuration.db.RubriquesBudgetaire" width="large">
+		<menubar>
+			<menu title="Imprimer">
+				<item title="Budget Equip" action="imprimerEquip"/>
+			</menu>
+		</menubar>
+
+		<panel colSpan="12" >
+			<panel-dashlet  canSearch="false" readonly="true" name="$titreDeParticipation" title="TITRES DE PARTICIPATION" action="titreDeParticipation_detail" colSpan="12"/>
+			<panel colSpan="12">
+				<panel colSpan="6" colOffset="6"  title="TOTAL DES TITRES DE PARTICIPATION">
+					<field colSpan="12" type="decimal" readonly="true" name="$equip_som_x_1_1" showTitle="false">
+						<viewer>
+							<![CDATA[
+
+								<table class="table w-100 table-bordered">
+									<tr>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Total Report</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Nouveaux crédits</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Crédit d'engagement</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Projet budget {{record.$anne_current}}</span></td>
+									</tr>
+									<tr>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_1_1')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_1_2')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_1_4')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_1_3')}}</span></td>
+									</tr>
+								</table>
+							]]>
+						</viewer>
+					</field>
+				</panel>
+			</panel>
+
+			<panel-dashlet  canSearch="false" readonly="true" name="$terrain" title="TERRAINS" action="terrain" colSpan="12"/>
+			<panel colSpan="12">
+				<panel colSpan="6" colOffset="6"  title="TOTAL DES TERRAINS">
+					<field colSpan="12" type="decimal" readonly="true" name="$equip_som_x_3_1" showTitle="false">
+						<viewer>
+							<![CDATA[
+								<table class="table w-100 table-bordered">
+								<tr>
+									<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Total Report</span></td>
+									<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Nouveaux crédits</span></td>
+									<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Crédit d'engagement</span></td>
+									<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Projet budget {{record.$anne_current}}</span></td>
+								</tr>
+								<tr>
+									<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_3_1')}}</span></td>
+									<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_3_2')}}</span></td>
+									<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_3_4')}}</span></td>
+									<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_3_3')}}</span></td>
+								</tr>
+							</table>
+							]]>
+						</viewer>
+					</field>
+				</panel>
+			</panel>
+
+			<panel-dashlet  canSearch="false" readonly="true" name="$construction" title="CONSTRUCTIONS" action="construction_detail" colSpan="12"/>
+			<panel colSpan="12">
+				<panel colSpan="6" colOffset="6"  title="TOTAL DES CONSTRUCTIONS">
+					<field colSpan="12" type="decimal" readonly="true" name="$equip_som4_1" showTitle="false">
+						<viewer>
+							<![CDATA[
+							<table class="table w-100 table-bordered">
+								<tr>
+									<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Total Report</span></td>
+									<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Nouveaux crédits</span></td>
+									<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Crédit d'engagement</span></td>
+									<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Projet budget {{record.$anne_current}}</span></td>
+								</tr>
+								<tr>
+									<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som4_1')}}</span></td>
+									<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som4_2')}}</span></td>
+									<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som4_4')}}</span></td>
+									<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som4_3')}}</span></td>
+								</tr>
+							</table>
+							]]>
+						</viewer>
+					</field>
+				</panel>
+			</panel>
+
+			<panel-dashlet  canSearch="false" readonly="true" name="$mattrans" title="MATERIEL DE TRANSPORT" action="mattrans_detail" colSpan="12"/>
+			<panel colSpan="12">
+				<panel colSpan="6" colOffset="6"  title="TOTAL DU MATERIEL DE TRANSPORT">
+					<field colSpan="12" type="decimal" readonly="true" name="$equip_som5_1" showTitle="false">
+						<viewer>
+							<![CDATA[
+							<table class="table w-100 table-bordered">
+								<tr>
+									<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Total Report</span></td>
+									<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Nouveaux crédits</span></td>
+									<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Crédit d'engagement</span></td>
+									<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Projet budget {{record.$anne_current}}</span></td>
+								</tr>
+								<tr>
+									<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som5_1')}}</span></td>
+									<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som5_2')}}</span></td>
+									<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som5_4')}}</span></td>
+									<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som5_3')}}</span></td>
+								</tr>
+							</table>
+							]]>
+						</viewer>
+					</field>
+				</panel>
+			</panel>
+
+			<panel-dashlet  canSearch="false" readonly="true" name="$mobAmenag" title="MOBILIER DE BURAU ET AMENAGEMENT DIVERS" action="mobAmenag_detail" colSpan="12"/>
+			<panel colSpan="12">
+				<panel colSpan="6" colOffset="6"  title="TOTAL DU MOBILIER DE BURAU ET AMENAGEMENT DIVERS">
+					<field colSpan="12" type="decimal" readonly="true" name="$equip_som6_1" showTitle="false">
+						<viewer>
+							<![CDATA[
+
+								<table class="table w-100 table-bordered">
+									<tr>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Total Report</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Nouveaux crédits</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Crédit d'engagement</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Projet budget {{record.$anne_current}}</span></td>
+									</tr>
+									<tr>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som6_1')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som6_2')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som6_4')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som6_3')}}</span></td>
+									</tr>
+								</table>
+							]]>
+						</viewer>
+					</field>
+				</panel>
+			</panel>
+
+			<panel-dashlet  canSearch="false" readonly="true" name="$cecogec" title="Charges d'investissement afférentes à la création du CECOGEC régional" action="cecogec_detail" colSpan="12"/>
+			<panel colSpan="12">
+				<panel colSpan="6" colOffset="6"  title="TOTAL Des Charges d'investissement afférentes à la création du CECOGEC régional">
+					<field colSpan="12" type="decimal" readonly="true" name="$equip_som7_1" showTitle="false">
+						<viewer>
+							<![CDATA[
+								<table class="table w-100 table-bordered">
+									<tr>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Total Report</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Nouveaux crédits</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Crédit d'engagement</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Projet budget {{record.$anne_current}}</span></td>
+									</tr>
+									<tr>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som7_1')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som7_2')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som7_4')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som7_3')}}</span></td>
+									</tr>
+								</table>
+							]]>
+						</viewer>
+					</field>
+				</panel>
+			</panel>
+
+			<panel-dashlet  canSearch="false" readonly="true" name="$centreMediation" title="Charges d'investissement afférentes à la création Centre Régional de Mediation et d'arbitrage" action="centreMediation_detail" colSpan="12"/>
+			<panel colSpan="12">
+				<panel colSpan="6" colOffset="6"  title="TOTAL Des Charges d'investissement afférentes à la création Centre Régional de Mediation et d'arbitrage">
+					<field colSpan="12" type="decimal" readonly="true" name="$equip_som8_1" showTitle="false">
+						<viewer>
+							<![CDATA[
+								<table class="table w-100 table-bordered">
+									<tr>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Total Report</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Nouveaux crédits</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Crédit d'engagement</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Projet budget {{record.$anne_current}}</span></td>
+									</tr>
+									<tr>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som8_1')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som8_2')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som8_4')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som8_3')}}</span></td>
+									</tr>
+								</table>
+							]]>
+						</viewer>
+					</field>
+				</panel>
+			</panel>
+
+			<panel-dashlet  canSearch="false" readonly="true" name="$parcExpo" title="Charges d'investissement afférentes au projet de construction du parc d'exposition de Fès" action="parcExpo_detail" colSpan="12"/>
+			<panel colSpan="12">
+				<panel colSpan="6" colOffset="6"  title="TOTAL Des Charges d'investissement afférentes au projet de construction du parc d'exposition de Fès">
+					<field colSpan="12" type="decimal" readonly="true" name="$equip_som9_1" showTitle="false">
+						<viewer>
+							<![CDATA[
+								<table class="table w-100 table-bordered">
+									<tr>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Total Report</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Nouveaux crédits</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Crédit d'engagement</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Projet budget {{record.$anne_current}}</span></td>
+									</tr>
+									<tr>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som9_1')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som9_2')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som9_4')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som9_3')}}</span></td>
+									</tr>
+								</table>
+							]]>
+						</viewer>
+					</field>
+				</panel>
+			</panel>
+
+			<panel-dashlet  canSearch="false" readonly="true" name="$foireTaza" title="Charges d'investissement afférentes au projet de construction dde la Foire de Taza" action="foireTaza_detail" colSpan="12"/>
+			<panel colSpan="12">
+				<panel colSpan="6" colOffset="6"  title="TOTAL Des Charges d'investissement afférentes au projet de construction dde la Foire de Taza">
+					<field colSpan="12" type="decimal" readonly="true" name="$equip_som_x_10_1" showTitle="false">
+						<viewer>
+							<![CDATA[
+								<table class="table w-100 table-bordered">
+									<tr>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Total Report</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Nouveaux crédits</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Crédit d'engagement</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Projet budget {{record.$anne_current}}</span></td>
+									</tr>
+									<tr>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_10_1')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_10_2')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_10_4')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_10_3')}}</span></td>
+									</tr>
+								</table>
+							]]>
+						</viewer>
+					</field>
+				</panel>
+			</panel>
+
+			<panel-dashlet  canSearch="false" readonly="true" name="$ziBensouda" title="Charges d'investissement afférentes au projet de la réhabilitation de la zone industrielle de Bensouda Fès" action="ziBensouda_detail" colSpan="12"/>
+			<panel colSpan="12">
+				<panel colSpan="6" colOffset="6"  title="TOTAL Des Charges d'investissement afférentes au projet de la réhabilitation de la zone industrielle de Bensouda Fès">
+					<field colSpan="12" type="decimal" readonly="true" name="$equip_som_x_11_1" showTitle="false">
+						<viewer>
+							<![CDATA[
+								<table class="table w-100 table-bordered">
+									<tr>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Total Report</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Nouveaux crédits</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Crédit d'engagement</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Projet budget {{record.$anne_current}}</span></td>
+									</tr>
+									<tr>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_11_1')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_11_2')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_11_4')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_11_3')}}</span></td>
+									</tr>
+								</table>
+							]]>
+						</viewer>
+					</field>
+				</panel>
+			</panel>
+
+			<panel-dashlet  canSearch="false" readonly="true" name="$ziChaussure" title="Charges d'investissement afférentes à la réalisation d'une ZI dédiée à l'industie de la chaussure " action="ziChaussure_detail" colSpan="12"/>
+			<panel colSpan="12">
+				<panel colSpan="6" colOffset="6"  title="TOTAL Des Charges d'investissement afférentes à la réalisation d'une ZI dédiée à l'industie de la chaussure">
+					<field colSpan="12" type="decimal" readonly="true" name="$equip_som_x_12_1" showTitle="false">
+						<viewer>
+							<![CDATA[
+								<table class="table w-100 table-bordered">
+									<tr>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Total Report</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Nouveaux crédits</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Crédit d'engagement</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Projet budget {{record.$anne_current}}</span></td>
+									</tr>
+									<tr>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_12_1')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_12_2')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_12_4')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_12_3')}}</span></td>
+									</tr>
+								</table>
+							]]>
+						</viewer>
+					</field>
+				</panel>
+			</panel>
+
+			<panel-dashlet  canSearch="false" readonly="true" name="$ainCheggag" title="Charges d'investissement afférentes au projet de Parc industriel d'Ain Cheggag" action="ainCheggag_detail" colSpan="12"/>
+			<panel colSpan="12">
+				<panel colSpan="6" colOffset="6"  title="TOTAL Des Charges d'investissement afférentes au projet de Parc industriel d'Ain Cheggag">
+					<field colSpan="12" type="decimal" readonly="true" name="$equip_som_x_14_1" showTitle="false">
+						<viewer>
+							<![CDATA[
+								<table class="table w-100 table-bordered">
+									<tr>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Total Report</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Nouveaux crédits</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Crédit d'engagement</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Projet budget {{record.$anne_current}}</span></td>
+									</tr>
+									<tr>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_14_1')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_14_2')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_14_4')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_14_3')}}</span></td>
+									</tr>
+								</table>
+							]]>
+						</viewer>
+					</field>
+				</panel>
+			</panel>
+
+			<panel-dashlet  canSearch="false" readonly="true" name="$ecoleMeknes" title="Charges d'investissement afférentes à la création d'une école à Meknès" action="ecoleMeknes_detail" colSpan="12"/>
+			<panel colSpan="12">
+				<panel colSpan="6" colOffset="6"  title="TOTAL Des Charges d'investissement afférentes à la création d'une école à Meknès">
+					<field colSpan="12" type="decimal" readonly="true" name="$equip_som_x_15_1" showTitle="false">
+						<viewer>
+							<![CDATA[
+								<table class="table w-100 table-bordered">
+									<tr>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Total Report</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Nouveaux crédits</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Crédit d'engagement</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Projet budget {{record.$anne_current}}</span></td>
+									</tr>
+									<tr>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_15_1')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_15_2')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_15_4')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_15_3')}}</span></td>
+									</tr>
+								</table>
+							]]>
+						</viewer>
+					</field>
+				</panel>
+			</panel>
+
+			<panel-dashlet  canSearch="false" readonly="true" name="$centreMissour" title="Charges d'investissement afférentes à la création d'un centre Multiservices à Missour" action="centreMissour_detail" colSpan="12"/>
+			<panel colSpan="12">
+				<panel colSpan="6" colOffset="6"  title="TOTAL Des Charges d'investissement afférentes à la création d'un centre Multiservices à Missour">
+					<field colSpan="12" type="decimal" readonly="true" name="$equip_som_x_16_1" showTitle="false">
+						<viewer>
+							<![CDATA[
+								<table class="table w-100 table-bordered">
+									<tr>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Total Report</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Nouveaux crédits</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Crédit d'engagement</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Projet budget {{record.$anne_current}}</span></td>
+									</tr>
+									<tr>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_16_1')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_16_2')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_16_4')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_16_3')}}</span></td>
+									</tr>
+								</table>
+							]]>
+						</viewer>
+					</field>
+				</panel>
+
+			</panel>
+
+			<panel-dashlet  canSearch="false" readonly="true" name="$centreAinChkef" title="CHARGES D'INVESTISSEMENT DU CENTRE MULTISERVICES D'AIN CHKEF" action="centreAinChkef_detail" colSpan="12"/>
+			<panel colSpan="12">
+				<panel colSpan="6" colOffset="6"  title="TOTAL Des CHARGES D'INVESTISSEMENT DU CENTRE MULTISERVICES D'AIN CHKEF">
+					<field colSpan="12" type="decimal" readonly="true" name="$equip_som_x_17_1" showTitle="false">
+						<viewer>
+							<![CDATA[
+								<table class="table w-100 table-bordered">
+									<tr>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Total Report</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Nouveaux crédits</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Crédit d'engagement</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Projet budget {{record.$anne_current}}</span></td>
+									</tr>
+									<tr>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_17_1')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_17_2')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_17_4')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_17_3')}}</span></td>
+									</tr>
+								</table>
+							]]>
+						</viewer>
+					</field>
+				</panel>
+			</panel>
+
+			<panel-dashlet  canSearch="false" readonly="true" name="$planDevCCISFM" title="Mise en œuvre du Plan de Développent de la  CCIS Fès Meknès" action="planDevCCISFM_detail" colSpan="12"/>
+			<panel colSpan="12">
+				<panel colSpan="6" colOffset="6"  title="TOTAL de la mise en œuvre du Plan de Développent de la CCIS Fès Meknès">
+					<field colSpan="12" type="decimal" readonly="true" name="$equip_som_x_18_1" showTitle="false">
+						<viewer>
+							<![CDATA[
+								<table class="table w-100 table-bordered">
+									<tr>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Total Report</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Nouveaux crédits</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Crédit d'engagement</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Projet budget {{record.$anne_current}}</span></td>
+
+									</tr>
+									<tr>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_18_1')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_18_2')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_18_4')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_x_18_3')}}</span></td>
+									</tr>
+								</table>
+							]]>
+						</viewer>
+					</field>
+				</panel>
+			</panel>
+
+			<panel colSpan="12">
+				<panel colSpan="6" colOffset="6" title="TOTAL DES EMPLOIS">
+					<field colSpan="12" type="decimal" readonly="true" name="$equip_som_total" showTitle="false">
+						<viewer>
+							<![CDATA[
+								<table class="table w-100 table-bordered">
+									<tr>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Total Report</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold; text-align:center">Nouveaux crédits</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Crédit d'engagement</span></td>
+										<td style="width: calc(100% / 4);"><span style="font-size: 14px;font-weight: bold;">Total Projet budget {{record.$anne_current}}</span></td>
+									</tr>
+									<tr>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_total_1')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_total_2')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_total_4')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_total_3')}}</span></td>
+									</tr>
+								</table>
+							]]>
+						</viewer>
+					</field>
+				</panel>
+			</panel>
+		</panel>
+	</form>
+
+
+	<grid title="Budget Detail" orderBy="code_budget" name="tw_Equipe_detail_grid" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+		<field name="code_budget" title="Code"/>
+		<field name="titre_budget" title="Rubriques"/>
+		<field name="reportCredit" title="Report"/>
+		<field name="nouvCredit" title="Nouveaux crédits"/>
+		<field name="creditEngagement" title="Crédit d'engagement"/>
+		<field name="montant_budget" title="Projet budget"/>
+	</grid>
+
+	<action-view name="titreDeParticipation_detail" title="Produit Exploitation" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+		<view type="grid" name="tw_Equipe_detail_grid"/>
+		<domain>self.id_version =:id_version and self.is_detaille is true and self.typeRubriqueDetaille.id=:type_detail_1 </domain>
+	</action-view>
+
+
+	<action-view name="terrain_detail" title="Terrain" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+		<view type="grid" name="tw_Equipe_detail_grid"/>
+		<domain>self.id_version =:id_version and self.is_detaille is true and self.typeRubriqueDetaille.id=:type_detail_3 </domain>
+	</action-view>
+
+	<action-view name="construction_detail" title="Construction" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+		<view type="grid" name="tw_Equipe_detail_grid"/>
+		<domain>self.id_version =:id_version and self.is_detaille is true and self.typeRubriqueDetaille.id=:type_detail_4 </domain>
+	</action-view>
+
+	<action-view name="mattrans_detail" title="MATERIEL DE TRANSPORT" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+		<view type="grid" name="tw_Equipe_detail_grid"/>
+		<domain>self.id_version =:id_version and self.is_detaille is true and self.typeRubriqueDetaille.id=:type_detail_5 </domain>
+	</action-view>
+
+	<action-view name="mobAmenag_detail" title="MOBILIER DE BURAU ET AMENAGEMENT DIVERS" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+		<view type="grid" name="tw_Equipe_detail_grid"/>
+		<domain>self.id_version =:id_version and self.is_detaille is true and self.typeRubriqueDetaille.id=:type_detail_6 </domain>
+	</action-view>
+
+	<action-view name="cecogec_detail" title="Charges d'investissement afférentes à la création du CECOGEC régional" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+		<view type="grid" name="tw_Equipe_detail_grid"/>
+		<domain>self.id_version =:id_version and self.is_detaille is true and self.typeRubriqueDetaille.id=:type_detail_7 </domain>
+	</action-view>
+
+	<action-view name="centreMediation_detail" title="Charges d'investissement afférentes à la création Centre Régional de Mediation et d'arbitrage" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+		<view type="grid" name="tw_Equipe_detail_grid"/>
+		<domain>self.id_version =:id_version and self.is_detaille is true and self.typeRubriqueDetaille.id=:type_detail_8 </domain>
+	</action-view>
+
+	<action-view name="parcExpo_detail" title="Charges d'investissement afférentes au projet de construction du parc d'exposition de Fès" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+		<view type="grid" name="tw_Equipe_detail_grid"/>
+		<domain>self.id_version =:id_version and self.is_detaille is true and self.typeRubriqueDetaille.id=:type_detail_9 </domain>
+	</action-view>
+
+	<action-view name="foireTaza_detail" title="Charges d'investissement afférentes au projet de construction de la Foire de Taza" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+		<view type="grid" name="tw_Equipe_detail_grid"/>
+		<domain>self.id_version =:id_version and self.is_detaille is true and self.typeRubriqueDetaille.id=:type_detail_10 </domain>
+	</action-view>
+
+
+	<action-view name="ziBensouda_detail" title="Charges d'investissement afférentes au projet de la réhabilitation de la zone industrielle de Bensouda Fès" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+		<view type="grid" name="tw_Equipe_detail_grid"/>
+		<domain>self.id_version =:id_version and self.is_detaille is true and self.typeRubriqueDetaille.id=:type_detail_11 </domain>
+	</action-view>
+
+	<action-view name="ziChaussure_detail" title="Charges d'investissement afférentes à la réalisation d'une ZI dédiée à l'industie de la chaussure " model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+		<view type="grid" name="tw_Equipe_detail_grid"/>
+		<domain>self.id_version =:id_version and self.is_detaille is true and self.typeRubriqueDetaille.id=:type_detail_12 </domain>
+	</action-view>
+
+	<action-view name="ainCheggag_detail" title="Charges d'investissement afférentes au projet de Parc industriel d'Ain Cheggag" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+		<view type="grid" name="tw_Equipe_detail_grid"/>
+		<domain>self.id_version =:id_version and self.is_detaille is true and self.typeRubriqueDetaille.id=:type_detail_14 </domain>
+	</action-view>
+
+	<action-view name="ecoleMeknes_detail" title="Charges d'investissement afférentes à la création d'une école à Meknès" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+		<view type="grid" name="tw_Equipe_detail_grid"/>
+		<domain>self.id_version =:id_version and self.is_detaille is true and self.typeRubriqueDetaille.id=:type_detail_15 </domain>
+	</action-view>
+
+	<action-view name="centreMissour_detail" title="Charges d'investissement afférentes à la création d'un centre Multiservices à Missour" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+		<view type="grid" name="tw_Equipe_detail_grid"/>
+		<domain>self.id_version =:id_version and self.is_detaille is true and self.typeRubriqueDetaille.id=:type_detail_16 </domain>
+	</action-view>
+
+	<action-view name="centreAinChkef_detail" title="CHARGES D'INVESTISSEMENT DU CENTRE MULTISERVICES D'AIN CHKEF" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+		<view type="grid" name="tw_Equipe_detail_grid"/>
+		<domain>self.id_version =:id_version and self.is_detaille is true and self.typeRubriqueDetaille.id=:type_detail_17 </domain>
+	</action-view>
+
+	<action-view name="planDevCCISFM_detail" title="Mise en œuvre du Plan de Développent de la  CCIS Fès Meknès" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+		<view type="grid" name="tw_Equipe_detail_grid"/>
+		<domain>self.id_version =:id_version and self.is_detaille is true and self.typeRubriqueDetaille.id=:type_detail_18 </domain>
+	</action-view>
+
+</object-views>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="edition-grid" title="Édition de la recette" canDelete="false" canNew="false"  canSave="false"
+          model="com.axelor.apps.account.db.GestionRecette">
+        <field name="ordredereceete" title="Ordere de recette N°"/>
+        <field name="partierversement" title="Partie Versement"/>
+        <field name="natureoperation" title="Nature de l'opération"/>
+        <field name="annexe" title="Annexe"/>
+        <field name="rib.rib" title="Numéro de compte" />
+        <field name="dateRecette" title="Date"/>
+        <field name="moisRecette" title="Mois"/>
+        <field name="anneeRecette" title="Année"/>
+        <field name="montant" title="Montant"/>
+        <field name="piecesJointes" title="Nom de Fichier"/>
+        <field name="rubrique" title="Rubrique budgétaire"/>
+    </grid>
+
+    <form  canSave="false" name="edition-form" title="Édition de la recette" canDelete="false" canNew="false"
+          model="com.axelor.apps.account.db.GestionRecette" width="large">
+        <panel name="mainPanel" title="Gestion des recettes" colSpan="12">
+            <field name="ordredereceete"  title="Ordere de recette N° : " required="true"/>
+            <field name="partierversement" target-name="libelle" title="Partie Versement :" required="true"/>
+            <field name="natureoperation" target-name="nom" title="Nature de l'opération :" required="true"/>
+            <field name="annexe" title="Annexe"/>
+            <field name="rib" title="Numéro de compte" target-name="rib" domain="self.annexe = :annexe "/>
+            <field name="dateRecette" title="Date de recette" onChange="refresh_date" />
+            <field name="moisRecette" title="Mois" hidden="true"/>
+            <field name="anneeRecette" title="Année" hidden="true"/>
+            <field name="montant" title="Montant" />
+            <field name="montantenlettre" title="Montant en lettres :" required="true" />
+            <field name="piecesJointes" title="Nom de Fichier :" required="true" />
+            <field name="docAttach" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid"/>
+            <field name="rubrique" title="Rubrique budgétaire"  domain="self.type='Recettes' " />
+        </panel>
+        <panel>
+            <button name="save" onClick="save_gestion" title="Modifier" icon="fa-edit"/>
+        </panel>
+    </form>
+
+    <action-method name="refresh_date">
+        <call class="com.axelor.apps.account.web.AccountController" method="refresh_date"/>
+    </action-method>
+
+    <action-group name="save_gestion">
+        <action name="save"/>
+        <action name="com.axelor.apps.account.web.AccountController:update_compte"/>
+    </action-group>
+
+
+</object-views>

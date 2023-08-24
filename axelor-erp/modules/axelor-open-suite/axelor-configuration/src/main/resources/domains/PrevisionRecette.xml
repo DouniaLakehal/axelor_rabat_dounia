@@ -1,0 +1,17 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+   <module name="configuration" package="com.axelor.apps.configuration.db"/>
+  
+   <entity name="PrevisionRecette" lang="java">
+         <string name="name" title="Intitule" required="true"/>
+        <many-to-one ref="com.axelor.apps.configuration.db.RubriqueBudgetaireGenerale" name="rubriqueBudgetaire" title="Rubrique Budgetaire"/>
+        <decimal name="montant" title="Montant"/>
+       <integer name="year" title="annee" max="9999"/>
+       
+		
+    </entity>
+
+</domain-models>

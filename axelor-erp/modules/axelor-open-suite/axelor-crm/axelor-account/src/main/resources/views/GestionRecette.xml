@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="recette-grid" title="Saisie des versement" canEdit="false" canDelete="false"
+          model="com.axelor.apps.account.db.GestionRecette">
+        <toolbar>
+            <button name="imprimerVersement" onClick="imprimerVersement" title="Visualiser versement"/>
+        </toolbar>
+        <field name="rib.rib" title="Numéro de compte" />
+        <field name="dateRecette" title="Date"/>
+        <field name="moisRecette" title="Mois"/>
+        <field name="anneeRecette" title="Année"/>
+        <field name="montant" title="Montant"/>
+        <field name="piecesJointes" title="Nom de Fichier"/>
+        <field name="rubrique" title="Rubrique budgétaire"/>
+        <field name="releve" title="Référence de relevé banquaire"/>
+        <field name="annexe" title="Annexe"/>
+        <button name="btn-print-document" icon="fa-download" title="Versement" onClick="com.axelor.apps.account.web.AppAccountController:imprimerGestionRegie"/>
+    </grid>
+
+    <grid name="recette-true-grid" title="Saisie des versement" canSave="false" canNew="false" canEdit="false" canDelete="false"
+          model="com.axelor.apps.account.db.GestionRecette">
+        <toolbar>
+            <button name="imprimerVersement" onClick="imprimerVersement" title="Visualiser versement"/>
+        </toolbar>
+        <field name="rib.rib" title="Numéro de compte" />
+        <field name="dateRecette" title="Date"/>
+        <field name="moisRecette" title="Mois"/>
+        <field name="anneeRecette" title="Année"/>
+        <field name="montant" title="Montant"/>
+        <field name="piecesJointes" title="Nom de Fichier"/>
+        <field name="rubrique" title="Rubrique budgétaire"/>
+        <field name="releve" title="Référence de relevé banquaire"/>
+        <field name="annexe" title="Annexe"/>
+        <button name="btn-print-document" icon="fa-download" title="Versement" onClick="com.axelor.apps.account.web.AppAccountController:imprimerGestionRegie"/>
+    </grid>
+
+    <form  name="recette-form" onNew="actionAnnexeSelect, actionAnnexeRecette,defaultRubrique" title="Enregistrement du versement" canEdit="false" canDelete="false"
+          model="com.axelor.apps.account.db.GestionRecette" width="large">
+        <panel name="mainPanel" title="Gestion de versement" colSpan="12">
+            <field grid-view="encaissement-xx-grid" canNew="false" canEdit="false" domain="self.versed=false and self.etatEncaissement=false and self.annexe=:data" colSpan="12" name="encaissement" target-name="nomPrestation" onChange="com.axelor.apps.account.web.AccountController:getloadMontantEncaissement"/>
+            <field name="partierversement" target-name="libelle" title="Partie Versement :" required="true"/>
+            <field name="natureoperation" target-name="nom" title="Nature de l'opération :" required="true"/>
+            <field name="rib" title="Numéro de compte" target-name="rib"/>
+            <field name="dateRecette" title="Date de versement" onChange="refresh_date" />
+            <field name="moisRecette" title="Mois" hidden="true"/>
+            <field name="anneeRecette" title="Année" hidden="true"/>
+            <field name="montant" title="Montant" readonly="true"/>
+            <field name="montantenlettre" title="Montant en lettres :" readonly="true"/>
+            <field name="piecesJointes" title="Nom de Fichier :" />
+            <field name="docAttach" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid"/>
+            <field name="rubrique" title="Rubrique budgétaire"  domain="self.type='Recettes' " />
+            <field name="releve" title="Référence de relevé banquaire"/>
+            <field name="data" title="data" hidden="true"/>
+        </panel>
+        <panel>
+            <button name="save" onClick="save_gestion" title="Enregistrer" icon="fa-save"/>
+        </panel>
+    </form>
+
+    <form  name="recette-true-form" canNew="false" canSave="false" title="Enregistrement du versement" canEdit="false" canDelete="false"
+           model="com.axelor.apps.account.db.GestionRecette" width="large">
+        <panel name="mainPanel" title="Gestion de versement" colSpan="12">
+            <field grid-view="encaissement-xx-grid" canNew="false" canEdit="false" domain="self.versed=false and self.etatEncaissement=false and self.annexe=:data" colSpan="12" name="encaissement" target-name="nomPrestation" onChange="com.axelor.apps.account.web.AccountController:getloadMontantEncaissement"/>
+            <field name="partierversement" target-name="libelle" title="Partie Versement :" required="true"/>
+            <field name="natureoperation" target-name="nom" title="Nature de l'opération :" required="true"/>
+            <field name="rib" title="Numéro de compte" target-name="rib"/>
+            <field name="dateRecette" title="Date de versement" onChange="refresh_date" />
+            <field name="moisRecette" title="Mois" hidden="true"/>
+            <field name="anneeRecette" title="Année" hidden="true"/>
+            <field name="montant" title="Montant" readonly="true"/>
+            <field name="montantenlettre" title="Montant en lettres :" readonly="true"/>
+            <field name="piecesJointes" title="Nom de Fichier :" />
+            <field name="docAttach" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid"/>
+            <field name="rubrique" title="Rubrique budgétaire"  domain="self.type='Recettes' " />
+            <field name="releve" title="Référence de relevé banquaire"/>
+            <field name="data" title="data" hidden="true"/>
+        </panel>
+    </form>
+
+    <action-record name="actionAnnexeSelect" model="com.axelor.apps.account.db.Encaissement">
+        <field name="data" expr="eval: __user__?.employee?.annexe"/>
+    </action-record>
+
+    <action-group name="imprimerVersement">
+        <action name="afficheFormVersement"/>
+    </action-group>
+
+    <action-view name="afficheFormVersement" title="title" model="com.axelor.apps.account.db.GestionRecette">
+        <view type="form" name="form_versement_download"/>
+        <view-param name="forceEdit" value="true"/>
+        <view-param name="popup" value="true"/>
+        <view-param name="show-confirm" value="false"/>
+        <view-param name="popup-save" value="false"/>
+        <view-param name="show-toolbar" value="false"/>
+    </action-view>
+
+
+    <form title="Visualiser versement" onNew="actionAnnexeg" name="form_versement_download" model="com.axelor.apps.account.db.GestionRecette">
+        <panel>
+            <field name="etat" title="Etat" required="true" selection="iaccount.recette.versement.status.select"/>
+            <field showIf="etat==1 || etat==2" required="true" name="annee" title="Année" colSpan="6" type="integer"/>
+            <field showIf="etat==1 || etat==2" name="mois" type="integer" required="true" title="Mois" colSpan="6" selection="accounting.recettes.mois.select.number"/>
+            <field if="__user__?.allencaissement==true" showIf="etat==1 || etat==2" colSpan="6" name="dateDebut" title="Date début" type="date"/>
+            <field if="__user__?.allencaissement==true" showIf="etat==1 || etat==2" colSpan="6" name="dateFin" title="Date fin" type="date"/>
+            <field onChange="com.axelor.apps.account.web.AccountController:showAnnexe" if="__user__?.allencaissement==true" showIf="etat==1 || etat==2" colSpan="6" name="choixAnnexe" title="Type d'annexe" selection="myselectionAnnexe" widget="RadioSelect" />
+            <field if="__user__?.allencaissement==true" colSpan="6" name="annexe" hidden="true" title="Annexe" type="String"/>
+            <field name="annexeg" title="Annexe" colSpan="6" type="String" hidden="true"/>
+            <button colSpan="4" title="Visualiser versement" name="btn_imprimer" onClick="imprimerVersement1"/>
+        </panel>
+    </form>
+
+    <action-group name="imprimerVersement1">
+        <action name="com.axelor.apps.account.web.AppAccountController:imprimerVersement"/>
+        <action name="close"/>
+    </action-group>
+
+    <!--<action-record name="actionRubrique" model="com.axelor.apps.configuration.db.RubriqueBudgetaireGenerale">
+        <field name="rubrique" expr="eval:self.id==32"/>
+    </action-record>-->
+
+    <action-record name="actionAnnexeRecette" model="com.axelor.apps.account.db.GestionRecette">
+        <field name="annexe" expr="eval: __user__?.employee?.annexe"/>
+    </action-record>
+
+    <action-group name="checkMontant">
+        <action name="afficheFormcheckMontant"/>
+    </action-group>
+
+    <action-view name="afficheFormcheckMontant" title="title" model="com.axelor.apps.account.db.GestionRecette">
+        <view type="form" name="form_checkMontant_download"/>
+        <view-param name="forceEdit" value="true"/>
+        <view-param name="popup" value="true"/>
+        <view-param name="popup-save" value="false"/>
+        <view-param name="show-toolbar" value="false"/>
+    </action-view>
+
+    <form title="Vérifier le montant" name="form_checkMontant_download" model="com.axelor.apps.account.db.GestionRecette">
+        <panel>
+            <field name="dateDebut" title="Date début" colSpan="6" type="date"/>
+            <field name="dateFin" title="Date fin" colSpan="6" type="date"/>
+            <field name="somme" title="Montant encaisser" colSpan="6" hidden="true" readonly="true"/>
+            <button colSpan="12" title="Vérifier" name="btn_imprimer" onClick="com.axelor.apps.account.web.AppAccountController:checkMontant"/>
+        </panel>
+    </form>
+
+    <action-view name="imprimerRecette" title="title" model="com.axelor.apps.account.db.GestionRecette">
+        <view type="form" name="form_recette_download"/>
+        <view-param name="forceEdit" value="true"/>
+        <view-param name="popup" value="reload"/>
+        <view-param name="popup" value="true"/>
+        <view-param name="popup-save" value="false"/>
+        <view-param name="show-toolbar" value="false"/>
+        <view-param name="show-confirm" value="false" />
+        <context name="_showRecord" expr="eval: id"/>
+    </action-view>
+
+    <action-method name="refresh_date">
+        <call class="com.axelor.apps.account.web.AccountController" method="refresh_date"/>
+    </action-method>
+
+    <action-group name="save_gestion">
+        <action name="save"/>
+        <action name="com.axelor.apps.account.web.AccountController:update_compte"/>
+        <!--<action name="com.axelor.apps.account.web.AccountController:setVersed"/>-->
+    </action-group>
+
+    <action-record name="defaultRubrique" model="com.axelor.apps.account.db.GestionRecette">
+        <field name="rubrique" expr="eval:__repo__(RubriqueBudgetaireGenerale).all().filter('self.id=13').fetchOne()"/>
+    </action-record>
+
+</object-views>

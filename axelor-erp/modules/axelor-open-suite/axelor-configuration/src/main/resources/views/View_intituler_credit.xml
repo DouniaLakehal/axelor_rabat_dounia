@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="intitulerCredit-grid" title="credits" model="com.axelor.apps.configuration.db.IntitulerCredit">
+        <field name="name"/>
+        <field name="nameBank"/>
+        <field name="rib"/>
+    </grid>
+
+    <form title="credits" name="intitulerCredit-form" model="com.axelor.apps.configuration.db.IntitulerCredit">
+        <panel title="Information Générale">
+            <field name="name" title="Intituler" required="true"/>
+        </panel>
+        <panel title="Information Bancaire">
+            <field name="nameBank" title="Banque" required="true"/>
+            <field name="rib" title="Rib" required="true"/>
+        </panel>
+    </form>
+</object-views>

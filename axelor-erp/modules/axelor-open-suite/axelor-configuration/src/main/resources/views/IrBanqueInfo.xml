@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="irBanqueInfo-grid" title="Gestion des compte banquaire IR" model="com.axelor.apps.configuration.db.IrBanqueInfo">
+        <field name="year" />
+        <field name="namBank" />
+        <field name="rib" />
+    </grid>
+	
+    <form name="irBanqueInfo-form" title="Gestion des compte banquaire IR" model="com.axelor.apps.configuration.db.IrBanqueInfo">
+		<panel name="mainPanel">
+            <field name="year" colSpan="4" />
+            <field name="namBank" colSpan="4"/>
+            <field name="rib" colSpan="4"/>
+		</panel>
+    </form>
+
+</object-views>

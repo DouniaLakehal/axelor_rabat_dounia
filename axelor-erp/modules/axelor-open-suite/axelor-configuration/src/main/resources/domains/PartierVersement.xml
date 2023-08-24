@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="configuration" package="com.axelor.apps.configuration.db"/>
+
+    <entity name="PartierVersement" lang="java">
+        <integer name="code" title="Code"/>
+        <string name="libelle" title="Libelle"/>
+        <decimal name="debit" title="Debit"/>
+        <decimal name="credit" title="Credit"/>
+    </entity>
+
+</domain-models>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+    <grid name="encaissement-grid" canEdit="false" canDelete="false" title="tous les encaissements" orderBy="dateencaissement"
+          model="com.axelor.apps.account.db.Encaissement">
+        <toolbar>
+            <button name="imprimerEncaissement" onClick="imprimerEncaissement" title="Visualiser encaissement"/>
+        </toolbar>
+        <hilite if="$moment(dateLimite).diff(__date__,'days') &lt;= 3 &amp;&amp; versed==false " background="danger"/>
+        <field name="numero" title="Numéro d'encaissement" />
+        <field name="reference" title="Réference" />
+        <field name="nomcomplet" title="Nom et prénom" />
+        <field name="prestation.description" title="Prestation" />
+        <field name="prestation.reference" title="Imputation budgétaire" />
+        <field name="annexe" title="Annexe"/>
+        <field name="createdBy" title="Nom et prénom"/>
+        <field name="dateencaissement" title="Date d'encaissement"/>
+        <field name="montant" title="Montant" />
+        <field name="dateLimite" title="date limite" hidden="true" />
+        <field name="versed" hidden="true"/>
+        <field name="etatEncaissement" title="Etat" hidden="true"/>
+        <field name="commentaire" title="Commentaire"/>
+        <button name="btn-annuler" showIf="versed==false &amp;&amp; etatEncaissement==false" icon="fa-trash" title="Annuler" onClick="com.axelor.apps.account.web.AppAccountController:afficherAnnulerEncaissement"/>
+        <button name="btn-modifier" showIf="versed==false &amp;&amp; etatEncaissement==false &amp;&amp; $moment(createdOn).diff(todayDate,'days') &lt;= 2" icon="fa-edit" title="Modifier" onClick="com.axelor.apps.account.web.AppAccountController:afficherEncaissement"/>
+    </grid>
+
+    <grid name="encaissement-true-grid" canEdit="false" canNew="false" canDelete="false" title="tous les encaissements" orderBy="dateencaissement"
+          model="com.axelor.apps.account.db.Encaissement">
+        <toolbar>
+            <button name="imprimerEncaissement" onClick="imprimerEncaissement" title="Visualiser encaissement"/>
+        </toolbar>
+        <hilite if="$moment(dateLimite).diff(__date__,'days') &lt;= 3 &amp;&amp; versed==false " background="danger"/>
+        <field name="numero" title="Numéro d'encaissement" />
+        <field name="reference" title="Réference" />
+        <field name="nomcomplet" title="Nom et prénom" />
+        <field name="prestation.description" title="Prestation" />
+        <field name="prestation.reference" title="Imputation budgétaire" />
+        <field name="annexe" title="Annexe"/>
+        <field name="createdBy" title="Nom et prénom"/>
+        <field name="dateencaissement" title="Date d'encaissement"/>
+        <field name="montant" title="Montant" />
+        <field name="dateLimite" title="date limite" hidden="true" />
+        <field name="versed" hidden="true"/>
+        <field name="etatEncaissement" title="Etat" hidden="true"/>
+        <field name="commentaire" title="Commentaire"/>
+    </grid>
+
+
+    <grid name="encaissement-xx-grid" canEdit="false" canDelete="false" title="tous les encaissements" orderBy="dateencaissement"
+          model="com.axelor.apps.account.db.Encaissement">
+        <field name="numero" title="Numéro d'encaissement" />
+        <field name="reference" title="Réference" />
+        <field name="nomcomplet" title="Nom et prénom" />
+        <field name="prestation.description" title="Prestation" />
+        <field name="prestation.reference" title="Imputation budgétaire" />
+        <field name="annexe" title="Annexe"/>
+        <field name="createdBy" title="Nom et prénom"/>
+        <field name="dateencaissement" title="Date d'encaissement"/>
+        <field name="montant" title="Montant" />
+        </grid>
+
+    <form name="encaissement-form" onNew="EnregistrerDateLimite,actionDateJour,actionAnnexe" title="Nouveau encaissement"
+          model="com.axelor.apps.account.db.Encaissement" width="large">
+        <panel name="mainPanel" title="Saisie des encaissements" colSpan="12">
+            <field name="numero" title="Numéro d'encaissement" />
+            <field name="reference" title="Réference" />
+            <field name="nomcomplet" title="Nom et prénom" />
+            <field name="prestation" target-name="typePrestation" title="Prestation" onChange="com.axelor.apps.account.web.AccountController:getMontantPrestation"/>
+            <field name="annexe" title="Annexe" readonly="true"/>
+            <field name="dateencaissement" title="Date d'encaissement"/>
+            <field name="montant" title="Montant"/>
+        </panel>
+    </form>
+
+    <form name="encaissement-true-form" canNew="false" canDelete="false" canEdit="false" canSave="false" title="Nouveau encaissement"
+          model="com.axelor.apps.account.db.Encaissement" width="large">
+        <panel name="mainPanel" title="Saisie des encaissements" colSpan="12">
+            <field name="prestation" target-name="nomSelect" title="Prestation" onChange="com.axelor.apps.account.web.AccountController:getMontantPrestation"/>
+            <field name="annexe" title="Annexe" readonly="true"/>
+            <field name="dateencaissement" title="Date d'encaissement"/>
+            <field name="montant" title="Montant"/>
+        </panel>
+    </form>
+
+    <action-record name="actionDateJour" model="com.axelor.apps.account.db.Encaissement">
+        <field name="dateencaissement" expr="eval:__date__"/>
+    </action-record>
+
+    <action-record name="actionAnnexe" model="com.axelor.apps.account.db.Encaissement">
+        <field name="annexe" expr="eval: __user__?.employee?.annexe"/>
+    </action-record>
+
+    <action-record name="actionAnnexeg" model="com.axelor.apps.account.db.Encaissement">
+        <field name="annexeg" expr="eval: __user__?.employee?.annexe"/>
+    </action-record>
+
+    <action-group name="EnregistrerDateLimite">
+        <action name="com.axelor.apps.account.web.AccountController:updateDateLimite"/>
+    </action-group>
+
+    <action-group name="imprimerEncaissement">
+        <action name="afficheFormEncaissement"/>
+    </action-group>
+
+    <action-view name="afficheFormEncaissement" title="title" model="com.axelor.apps.account.db.Encaissement">
+        <view type="form" name="form_encaissement_download"/>
+        <view-param name="forceEdit" value="true"/>
+        <view-param name="popup" value="true"/>
+        <view-param name="show-confirm" value="false"/>
+        <view-param name="popup-save" value="false"/>
+        <view-param name="show-toolbar" value="false"/>
+    </action-view>
+
+    <action-group name="imprimerStPrestation">
+        <action name="afficheFormStPrestation"/>
+    </action-group>
+
+    <action-view name="afficheFormStPrestation" title="title" model="com.axelor.apps.account.db.Encaissement">
+        <view type="form" name="form_StPrestation"/>
+        <view-param name="forceEdit" value="true"/>
+        <view-param name="show-confirm" value="false"/>
+        <view-param name="popup" value="true"/>
+        <view-param name="popup-save" value="false"/>
+        <view-param name="show-toolbar" value="false"/>
+    </action-view>
+
+    <action-group name="EnregistreAnnexe">
+        <action name="com.axelor.apps.account.web.AccountController:showAnnexe"/>
+    </action-group>
+
+    <form title="Visualiser l'encaissement" onNew="actionAnnexeg" name="form_encaissement_download" model="com.axelor.apps.account.db.Encaissement">
+        <panel>
+            <field name="etat" title="Etat" required="true" selection="iaccount.recette.encaissement.status.select"/>
+            <field showIf="etat==3 || etat==4 || etat==5 || etat==6" required="true" name="annee" title="Année" colSpan="6" type="integer"/>
+            <field showIf="etat==3" name="mois" type="integer" required="true" title="Mois" colSpan="6" selection="accounting.recettes.mois.select.number"/>
+            <field if="__user__?.allencaissement==true" showIf="etat==3 || etat==4 || etat==5 || etat==6" colSpan="6" name="dateDebut" title="Date début" type="date"/>
+            <field if="__user__?.allencaissement==true" showIf="etat==3 || etat==4 || etat==5 || etat==6" colSpan="6" name="dateFin" title="Date fin" type="date"/>
+<!--            <field if="__user__?.allencaissement==true" showIf="etat==3 || etat==4 || etat==5 || etat==6" colSpan="12" name="choixAnnexe" title="type annexe" type="boolean" widget="RadioSelect" x-true-text="Tous les Annexe" x-false-text="choisir Annexe"/>-->
+            <field onChange="com.axelor.apps.account.web.AccountController:showAnnexe" if="__user__?.allencaissement==true" showIf="etat==3 || etat==4 || etat==5 || etat==6" colSpan="6" name="choixAnnexe" title="type annexe" selection="myselectionAnnexe" widget="RadioSelect" />
+            <field if="__user__?.allencaissement==true" colSpan="6" name="annexe" hidden="true" title="Annexe" type="String"/>
+            <field name="annexeg" title="Annexe" colSpan="6" type="String" hidden="true"/>
+            <button colSpan="4" title="Visualiser l'encaissement" name="btn_imprimer" onClick="imprimerEncaissement1"/>
+        </panel>
+    </form>
+
+    <action-group name="imprimerEncaissement1">
+        <action name="com.axelor.apps.account.web.AppAccountController:imprimerEncaissementParAnnee"/>
+        <action name="close"/>
+    </action-group>
+
+</object-views>

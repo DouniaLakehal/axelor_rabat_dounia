@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid canDelete="false" canNew="false" name="Prestation_grid" title="Prestation" model="com.axelor.apps.configuration.db.Prestation">
+        <field name="designation"/>
+        <field name="description"/>
+        <field name="type"/>
+        <field name="montant"/>
+        <field name="reference"/>
+    </grid>
+
+    <form canDelete="false" canNew="true" name="Prestation_form" title="Prestation" model="com.axelor.apps.configuration.db.Prestation" >
+        <panel name="prestationPanel" title="Prestation">
+            <field name="designation"/>
+            <field name="description"/>
+            <field name="type"/>
+            <!--<field name="type" title="Type" widget="boolean-radio" x-true-text="Physique" x-false-text="Morale"/>-->
+            <field name="montant"/>
+            <field name="reference"/>
+        </panel>
+    </form>
+
+</object-views>

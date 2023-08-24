@@ -1,0 +1,2 @@
+"name";"code";"installOrder";"description";"imagePath";"modules";"dependsOn";"sequence"
+"Custom";"custom";70009;"custom management";"app-project.png";"axelor-custom";"base";11

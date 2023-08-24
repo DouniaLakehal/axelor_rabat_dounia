@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="periodeAvancement-grid" title="List des avancement" model="com.axelor.apps.configuration.db.AvancementPeriode">
+        <field name="echelon_start"/>
+        <field name="echelon_end"/>
+        <field name="nbr_mois_rapide"/>
+        <field name="nbr_mois_moyen"/>
+        <field name="nbr_mois_long"/>
+    </grid>
+	
+    <form onSave="checkData" onLoad="checkupdate" name="periodeAvancement-form" title="Ajouter Avancement" model="com.axelor.apps.configuration.db.AvancementPeriode">
+		<panel name="mainPanel">
+            <field name="echelon_start" title="Echelon Début"/>
+            <field name="echelon_end" title="Echelon Fin"/>
+            <field name="nbr_mois_rapide" title="Nombre de mois (Rapide)" colSpan="4"/>
+            <field name="nbr_mois_moyen" title="Nombre de mois (Moyen)" colSpan="4"/>
+            <field name="nbr_mois_long" title="Nombre de mois (Long)" colSpan="4"/>
+            <field name="etatSave"/>
+		</panel>
+    </form>
+
+    <action-record name="checkupdate" model="com.axelor.apps.configuration.db.AvancementPeriode">
+        <field name="etatSave" expr="eval:true" if="id"/>
+    </action-record>
+
+    <action-group name="checkData">
+        <action name="com.axelor.apps.configuration.web.AppConfigurationController:checkDoublon"/>
+        <action name="save" if="etatSave==true"/>
+    </action-group>
+
+
+</object-views>

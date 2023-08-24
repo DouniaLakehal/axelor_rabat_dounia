@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="tresorerieSituationAnnuelle_grid" title="Tresorerie Situation Annuelle"
+          canArchive="false" canDelete="false" canSave="false" canNew="false" canEdit="false" canMove="false"
+          model="com.axelor.apps.configuration.db.TresorerieSituationAnnuelle">
+        <field name="annee" title="Annee" width="120" />
+        <field name="mois" title="Mois" width="120" />
+        <field name="total" title="Disponible a la tresorerie" width="120" />
+        <field name="compteListe" title="Nombre des comptes" width="120" />
+    </grid>
+
+    <form name="tresorerieSituationAnnuelle_form" title="Tresorerie Situation Annuelle"
+          canEdit="false" canNew="false" canSave="false" canAttach="false" canCopy="false" canArchive="false" canDelete="false"
+          model="com.axelor.apps.configuration.db.TresorerieSituationAnnuelle">
+        <panel colSpan="12">
+            <field name="annee"  title="Annee" colSpan="12" readonly="true" />
+            <field name="mois"  title="Mois" colSpan="12" readonly="true" />
+            <field name="total"  title="Disponible a la tresorerie" readonly="true" />
+            <field name="compteListe" title="Liste des Comptes" readonly="true"/>
+        </panel>
+    </form>
+
+
+
+
+
+
+</object-views>

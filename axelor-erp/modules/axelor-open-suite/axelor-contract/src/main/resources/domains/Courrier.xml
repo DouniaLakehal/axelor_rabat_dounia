@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models
+	xmlns="http://axelor.com/xml/ns/domain-models"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+	<module name="contract" package="com.axelor.apps.contract.db"  />
+
+	<entity name="Courrier" repository="abstract">
+<many-to-one name="nomExpediteur" ref="com.axelor.apps.contract.db.Expediteur"/>
+  		  <string name="typeLangue" title="Langue" selection="courrier.langue.select"/>
+  	 <many-to-one name="responsible"  title="Responsable" ref="com.axelor.apps.hr.db.Employee"  />
+  		<string name="courrierSeq" title="Numéro de courrier" readonly="true" />
+  		<integer name="numCourrier"  title="numCourrier" readonly="true"/>
+  		<string name="numAnnee"  title="numAnnee" readonly="true"/>
+        <string name="natureSelect" title="Nature de l'enregistrement" selection="courrier.version.enregistrement.nature" />
+		<string name="courrierNature" title="Nature du courrier" selection="courrier.version.courrier.nature" />
+		<many-to-one name="name" ref="com.axelor.apps.contract.db.Nomcourrier" title="Nom du courrier"/>
+		<string name="destinataire" title="Destinataire" />
+		<many-to-one name="destinat" title="Destinataire"  ref="com.axelor.apps.hr.db.Employee"/>
+		<string name="adresseDuDestinataire" title="Adresse du destinataire" />
+		<string name="adresseMailDestinataire" title="Adresse mail du destinataire"/>
+		<string name="expediteur" title="Expéditeur" default="PRESIDENT DE LA CCISBK"/>
+        <date name="dateReception" title="Date du reception"/>
+        <string name="expedit" title="Expéditeur"  />
+		<string name="adresseDuExpedit" title="Adresse du l'expéditeur" />
+		<string name="adresseMailExpedit" title="Adresse mail de l'expéditeur"/>
+        <integer name="prioritySelect" title="Priorite" selection="courrier.priority.select" default="2"/>
+        <date name="dateLimite" title="Date Limite"/>
+        <string name="description" title="Description" large="true"/>
+		<many-to-one  name="courrier" title="Faire joindre une copie du courrier" ref="com.axelor.meta.db.MetaFile" />
+        <string name="reponseNatureSelect" title=" Nature du réponse" selection="courrier.reponse.nature.select"/>
+        <date name="dateEnvoi" title="Date d'envoi" />
+        <many-to-one name="reponse" title="Réponse à" ref="com.axelor.apps.contract.db.Courrier" />
+        <many-to-one name="etagere" title="Etagère" ref="com.axelor.apps.configuration.db.Etagere"/>
+        <many-to-one name="armoire" title="Armoire" ref="com.axelor.apps.configuration.db.Armoire"/>
+        <many-to-one name="bureau" title="Bureau" ref="com.axelor.apps.configuration.db.Bureau"/>
+                <many-to-one name="annexe" title="Annexe" ref="com.axelor.apps.configuration.db.AnnexeGenerale"/>
+                        <many-to-one name="couloir" title="Couloir" ref="com.axelor.apps.configuration.db.Couloir"/>
+        <string name="localisation" title="Localisation par:" selection="courrier.localisation.physique.select" default="1"/>
+          	<string name="etat" title="Statut" selection="courrier.version.etat.select" default="1"/>
+		<date name="datedelait" title="Nombre du jours restants" >
+			<![CDATA[
+          	if(this.getDateLimite()!=null){
+          		LocalDate date = this.getDateLimite().minusDays(5);
+          		return date;
+			}
+			return null;
+  	  		      ]]>
+		</date>
+		<one-to-many name="pjCourriel" ref="com.axelor.apps.purchase.db.PiecesJointe2" />
+
+		<finder-method name="getListCourierAlert" using="dateLimite" />
+
+
+		<extra-imports>
+			import static java.time.temporal.ChronoUnit.DAYS;
+			import java.time.LocalDate;
+			import java.util.List;
+		</extra-imports>
+
+	</entity>
+
+</domain-models>

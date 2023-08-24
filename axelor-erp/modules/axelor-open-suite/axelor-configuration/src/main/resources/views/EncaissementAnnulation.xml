@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <form name="encaissement-annuler-form" title="Encaissement" canNew="false"
+          model="com.axelor.apps.account.db.Encaissement" width="large">
+        <panel name="mainPanel" title="Saisie des encaissements" colSpan="12">
+            <field name="prestation" target-name="description" readonly="true" title="Prestation" onChange="com.axelor.apps.account.web.AccountController:getMontantPrestation"/>
+            <field name="annexe" title="Annexe" readonly="true"/>
+            <field name="dateencaissement" title="Date d'encaissement" readonly="true"/>
+            <field name="montant" title="Montant" readonly="true"/>
+            <field name="commentaire" title="Commentaire" required="true"/>
+            <button name="annuler" showIf="commentaire!=null" colSpan="3" icon="fa-save" title="Enregistrer l'annulation" onClick="com.axelor.apps.account.web.AppAccountController:annulerEncaissement"/>
+        </panel>
+    </form>
+
+</object-views>

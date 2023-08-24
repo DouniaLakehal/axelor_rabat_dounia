@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="encaissementSelect-grid" title="Encaissement" model="com.axelor.apps.account.db.EncaissementSelect">
+        <field name="annexSelect" title="Annexe"/>
+        <field name="dateEncaisSelect" title="Date d'encaissement"/>
+        <field name="montantSelect" title="Montant d'encaissement"/>
+    </grid>
+
+    <form name="encaissementSelect-form" onNew="actionAnnexeSelect" title="Encaissement" model="com.axelor.apps.account.db.EncaissementSelect">
+        <panel colSpan="12">
+            <field domain="self.versed=false and self.annexe=:data" onChange="loadDataEncaissement" name="encaissementSelect" target-name="nomPrestation" title="Prestation" colSpan="4" colOffset="4"/>
+        </panel>
+        <panel colSpan="12">
+            <field name="annexSelect" title="Annexe" readonly="true" colSpan="4"/>
+            <field name="dateEncaisSelect" title="Date d'encaissement" readonly="true" colSpan="4"/>
+            <field name="montantSelect" title="Montant d'encaissement" readonly="true" colSpan="4"/>
+            <field name="data" title="data" hidden="true"/>
+        </panel>
+    </form>
+
+    <action-record name="actionAnnexeSelect" model="com.axelor.apps.account.db.Encaissement">
+        <field name="data" expr="eval: __user__?.employee?.annexe"/>
+    </action-record>
+
+    <action-method name="loadData">
+        <call class="com.axelor.apps.account.web.AccountController" method="affecterSelectEncaissement"/>
+    </action-method>
+
+    <action-method name="loadDataEncaissement">
+        <call class="com.axelor.apps.account.web.AccountController" method="getloadDataEncaissement"/>
+    </action-method>
+
+    <action-method name="checklist">
+        <call class="com.axelor.apps.account.web.AccountController" method="checklistEncaissement"/>
+    </action-method>
+
+
+</object-views>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="bordereau-grid" title="Gestion bordereau" model="com.axelor.apps.configuration.db.Bordereau">
+        <field name="annee" title="Année"/>
+        <field name="active" title="Activée"/>
+    </grid>
+
+    <form name="bordereau-form" title="Gestion bordereau" model="com.axelor.apps.configuration.db.Bordereau" onSave="save,traitement-ayoub-save">
+        <panel name="mainPanel">
+            <field name="annee" title="Année" colSpan="6"/>
+            <field name="active" title="Activée" colSpan="6"/>
+            <field grid-view="bordereau-grid_detail" form-view="bordereau-form_detail1" name="productivite_salariel" title="Productivité salariale" colSpan="12"/>
+            <field  grid-view="bordereau-grid_detail" form-view="bordereau-form_detail2"   name="productivite_patronal" title="Productivité patronal" colSpan="12"/>
+        </panel>
+    </form>
+
+
+    <grid name="bordereau-grid_detail" title="Gestion bordereau detail"
+          model="com.axelor.apps.configuration.db.Bordereau_detail">
+        <field name="objet" title="Objet de la depense"/>
+        <field name="beneficiare" title="Beneficiare"/>
+        <field name="montant_net" title="Montant net"/>
+        <field name="code" title="Code"/>
+    </grid>
+
+    <form onNew="enable_is_patronal" name="bordereau-form_detail1" title="Productivité salariale" model="com.axelor.apps.configuration.db.Bordereau_detail">
+        <panel name="mainPanel">
+            <field name="objet" title="Objet de la depense"/>
+            <field name="beneficiare" title="Beneficiare"/>
+            <field name="montant_net" title="Montant net"/>
+            <field name="code" title="Code"/>
+            <field readonly="true" name="is_patronal" title="is_patronal" hidden="true"/>
+        </panel>
+    </form>
+
+    <form onNew="disable_is_patronal" name="bordereau-form_detail2" title="Productivité patronal" model="com.axelor.apps.configuration.db.Bordereau_detail">
+        <panel name="mainPanel">
+            <field name="objet" title="Objet de la depense"/>
+            <field name="beneficiare" title="Beneficiare"/>
+            <field name="montant_net" title="Montant net"/>
+            <field name="code" title="Code"/>
+            <field readonly="true" name="is_patronal" title="is_patronal" hidden="true"/>
+        </panel>
+    </form>
+
+<action-attrs name="enable_is_patronal">
+    <attribute for="is_patronal" name="value" expr="eval:true"/>
+</action-attrs>
+
+    <action-attrs name="disable_is_patronal">
+        <attribute for="is_patronal" name="value" expr="eval:false"/>
+    </action-attrs>
+
+
+<action-method name="traitement-ayoub-save">
+    <call class="com.axelor.apps.configuration.web.AppConfigurationController" method="get_traitement_ayoub_save"/>
+</action-method>
+
+</object-views>

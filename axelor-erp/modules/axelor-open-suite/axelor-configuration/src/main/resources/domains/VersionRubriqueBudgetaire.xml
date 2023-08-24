@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="configuration" package="com.axelor.apps.configuration.db"/>
+
+    <entity name="VersionRB" lang="java">
+        <boolean name="is_versionFinale"/>
+        <string name="nomVersion"/>
+        <boolean name="is_generate"/>
+        <boolean name="is_saved"/>
+        <boolean name="has_version_final"/>
+        <string name="commentaire"/>
+    </entity>
+
+    <entity name="VersionRubriqueBudgetaire" lang="java">
+        <integer name="annee"/>
+        <one-to-many name="versionRubriques" ref="com.axelor.apps.configuration.db.VersionRB"/>
+        <boolean name="has_version_final"/>
+    </entity>
+
+
+
+</domain-models>

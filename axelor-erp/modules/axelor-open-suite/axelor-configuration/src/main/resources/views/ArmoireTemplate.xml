@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="armoire-grid" title="Armoire" model="com.axelor.apps.configuration.db.Armoire">
+        <field name="name"/>
+        <field name="description"/>
+        <field name="bureau"/>
+        <field name="couloir"/>
+    </grid>
+	
+    <form name="armoire-form" title="Armoire" model="com.axelor.apps.configuration.db.Armoire" onSave="AddArmoire-ByCouloir-Or-ByBureau">
+		<panel name="mainPanel">
+			<field name="name"/>
+			<field name="description" widget="string" />
+			<field name="isCouloir" hideIf="isBureau==true"  /> 
+			<field name="isBureau" hideIf="isCouloir==true" />
+			<field name="bureau" showIf="isBureau==true" colSpan="12" />
+			<field name="couloir" showIf="isCouloir==true" colSpan="12"/>
+		</panel>
+    </form>
+    
+    <action-method name="AddArmoire-ByCouloir-Or-ByBureau">
+    	<call class="com.axelor.apps.contract.web.ContractController" method="AddArmoire" />
+    </action-method>
+    
+
+</object-views>

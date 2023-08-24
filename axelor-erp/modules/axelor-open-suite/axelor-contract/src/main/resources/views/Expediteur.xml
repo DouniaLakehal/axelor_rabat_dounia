@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+              http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="expediteur-grid" title="Expediteur" model="com.axelor.apps.contract.db.Expediteur" >
+		<field name="nomExpediteur" title="Nom d'expéditeur" />
+		<field name="phone" title="Nom d'expéditeur" />
+		<field name="email" title="Téléphone" />
+		<field name="fax" title="Email" />
+		<field name="adresee" title="Adresse" />
+		<field name="commentatire" title="Commentatire" />
+
+	</grid>
+	<form name="expediteur-form" title="Expediteur" model="com.axelor.apps.contract.db.Expediteur" >
+		<panel name="mainPanel">
+		  <field name="nomExpediteur" title="Nom d'expéditeur"/>
+			<field name="phone" title="Téléphone" />
+			<field name="email" title="Email" />
+			<field name="fax" title="Fax" />
+			<field name="adresee" title="Adresse" />
+			<field name="commentatire" title="Commentatire" />
+		</panel>
+
+	</form>
+
+</object-views>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="IndemniteK-grid" title="Indemnité kilometrique(CV)" model="com.axelor.apps.configuration.db.IndemniteKilo">
+        <field name="puissancefiscale" widget="single-select" title=" Indemnité kilometrique(CV) " />
+        <field name="taux" title="Taux(MAD)"/>
+    </grid>
+	
+    <form name="IndemniteK-form" title="Indemnité kilometrique(CV)" model="com.axelor.apps.configuration.db.IndemniteKilo">
+		<panel name="mainPanel">
+			 <field name="puissancefiscale"  title=" Désignation de la puissance fiscale" />
+            <field name="taux" title="Taux(MAD)"/>
+		</panel>
+    </form>
+
+</object-views>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="managementDocuments_grid" title="Gestion des Documents" model="com.axelor.apps.configuration.db.ManagementDocuments">
+        <field name="name" title="Titre du document"/>
+        <field name="reference"/>
+		<field name="num_version"/>
+    </grid>
+
+    <form name="managementDocuments_form" title="Gestion des Documents" model="com.axelor.apps.configuration.db.ManagementDocuments">
+		<panel name="mainPanel">
+			<field name="name" title="Titre du document"/>
+			<field name="reference" title="Réference"/>
+			<field name="num_version" title="Version" min="0"/>
+		</panel>
+    </form>
+
+</object-views>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="ModificationBudgetList-grid" title="Gestion des virements"
+          model="com.axelor.apps.account.db.ModificationBudgetList"
+          canSave="false">
+        <field name="annee" title="Année"/>
+        <field name="code" title="Numéros"/>
+        <field name="virements" title="Total des transaction"/>
+
+        <button name="btn_add_signatiare" title="Ajouter Signataire" icon="fa-plus" onClick="ajouterSignataire"/>
+        <button name="btn_print_decision_virement" title="Décision de virement" icon="fa-print" onClick="print_decisionDeVirement"/>
+    </grid>
+
+    <grid name="validation_virement_ModificationBudget_grid" title="Gestion des virements"
+          model="com.axelor.apps.account.db.ModificationBudgetList"
+          canSave="false">
+        <field name="annee" title="Année"/>
+        <field name="code" title="Numéros"/>
+        <field name="virements" title="Total des transaction"/>
+        <field name="etat" title="Etat"/>
+    </grid>
+
+    <form onSave="reduireBudget,save" name="validation_virement_ModificationBudget_form" title="Gestion des virements"
+          model="com.axelor.apps.account.db.ModificationBudgetList" >
+        <panel colSpan="12">
+            <field readonly="true" name="annee" title="Annee" required="true"/>
+            <field readonly="true" name="code" title="Numéros" required="true"/>
+        </panel>
+        <panel colSpan="12" readonly="true">
+            <field canEdit="false" canView="false" canSuggest="false" canRemove="false" canNew="false" canSelect="false"
+                   form-view="gest_virements_form" grid-view="gest_virements_grid" name="virements" colSpan="12"/>
+        </panel>
+        <panel>
+            <field name="etat" title="Etat"/>
+            <field name="picture" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid" title="Ajouter document"/>
+            <field name="commentaire" title="Commentaire" colSpan="12"/>
+        </panel>
+    </form>
+
+    <form name="ModificationBudgetList-form" title="Gestion des virements"
+          model="com.axelor.apps.account.db.ModificationBudgetList" >
+        <panel colSpan="12">
+            <field name="annee" title="Annee" required="true"/>
+            <field name="code" title="Numéros" required="true"/>
+        </panel>
+        <panel colSpan="12">
+            <field form-view="gest_virements_form" grid-view="gest_virements_grid" name="virements" colSpan="12"/>
+        </panel>
+    </form>
+
+
+    <grid title="Gestions des virements" name="gest_virements_grid" model="com.axelor.apps.account.db.Virements">
+        <field name="budget_retrait.titre_budget" title="Budget Retrait"/>
+        <field name="budget_ajout.titre_budget" title="Budget Ajout"/>
+        <field name="montant" title="Montant"/>
+    </grid>
+
+    <form onNew="new_test" title="Gestions des virements" name="gest_virements_form" model="com.axelor.apps.account.db.Virements">
+        <panel colSpan="12">
+            <field domain="self.montant_budget &gt; 0" canEdit="false" canNew="false" canRemove="false" canSuggest="false" canView="false" grid-view="ribrique_gride" target-name="titre_budget"
+                   name="budget_retrait" colSpan="4" title="budget Retrait" required="true"/>
+            <field canEdit="false" canNew="false" canRemove="false" canSuggest="false" canView="false" grid-view="ribrique_gride" target-name="titre_budget"
+                   name="budget_ajout" colSpan="4" title="budget Ajout" required="true"/>
+            <field name="montant" colSpan="4" title="Montant" required="true"/>
+        </panel>
+    </form>
+
+    <form title="Ajouter un signataire" name="form_ajouter_signataire" model="com.axelor.apps.account.db.ModificationBudgetList">
+        <panel colSpan="12">
+            <field name="signataire" title="Signature"/>
+        </panel>
+    </form>
+
+
+
+    <grid title="Liste des rubriques budgétaire" name="ribrique_gride" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+        <field name="code_budget" title="Code"/>
+        <field name="titre_budget" title="Rubrique"/>
+        <field name="somme_mtChildren_mtBudget" title="Montant"/>
+        <field name="anneCurrent" title="Annee"/>
+    </grid>
+
+	<action-method name="print_decisionDeVirement">
+		<call class="com.axelor.apps.account.web.AccountController" method="tw_print_decisionDeVirement"/>
+	</action-method>
+
+    <action-method name="new_test">
+        <call class="com.axelor.apps.account.web.AccountController" method="tw_new_test"/>
+    </action-method>
+    <action-method name="ajouterSignataire">
+        <call class="com.axelor.apps.account.web.AccountController" method="tw_ajouterSignataire"/>
+    </action-method>
+
+    <action-method name="reduireBudget">
+        <call class="com.axelor.apps.account.web.AccountController" method="tw_reduireBudget"/>
+    </action-method>
+
+
+
+</object-views>

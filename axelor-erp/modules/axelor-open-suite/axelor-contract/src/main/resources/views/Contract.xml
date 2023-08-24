@@ -1,0 +1,324 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+              http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="contract-grid" title="Enregistrement du courrier"
+		model="com.axelor.apps.contract.db.Contract">
+		<field name="courrierNature" title="Nature du courrier" />
+		<field name="nomDuCourrier" title="Nom du courrier" />
+		<field name="origineDuCourrier" title="Origine du courrier" />
+		<field name="destinataire" title="Destinataire" />
+		<field name="adresseDuDestinataire"
+			title="Adresse du destinataire" />
+		<field name="expediteur" title="Expéditeur" />
+		<field name="correspondantRepertorie"
+			title="Correspondant répertorié" />
+		<field name="correspondantNonRepertorie"
+			title="Correspondant non répertorié" />
+		<field name="courrier"
+			title="Faire joindre une copie du courrier" widget="binary-link"
+			form-view="meta-files-form" grid-view="meta-files-grid" />
+
+	</grid>
+
+	<grid name="duration-grid2" title="Boîte des courriers"
+		model="com.axelor.apps.contract.db.Contract">
+		<field name="courrierNature" title="Nature du courrier" />
+		<field name="nomDuCourrier" title="Nom du courrier" />
+		<field name="origineDuCourrier" title="Origine du courrier" />
+		<field name="destinataire" title="Destinataire" />
+		<field name="expediteur" title="Expéditeur" />
+		<field name="dateReception" title="Date du reception" />
+
+	</grid>
+	<form name="contract-form" title="Enregistrement du courrier"
+		model="com.axelor.apps.contract.db.Contract" width="large"
+		readonlyIf="statusSelect == 3" onNew="action-contract-record-default"
+		onLoad="action-contract-group-on-load"
+		onSave="action-contract-method-is-valid">
+		<toolbar>
+			<button name="printContractBtn" title="Print" hidden="true"
+				icon="fa-print" onClick="notImplementedYet" />
+		</toolbar>
+		<panel name="mainPanel">
+
+			<field name="courrierNature" title="Nature du courrier" />
+			<field name="nomDuCourrier" title="Nom du courrier" />
+			<field name="origineDuCourrier" title="Origine du courrier" />
+			<field name="destinataire" title="Destinataire" />
+			<field name="adresseDuDestinataire"
+				title="Adresse du destinataire" />
+			<field name="expediteur" title="Expéditeur" />
+			<field name="correspondantRepertorie"
+				title="Correspondant répertorié" />
+			<field name="correspondantNonRepertorie"
+				title="Correspondant non répertorié" />
+			<field name="courrier"
+				title="Faire joindre une copie du courrier" widget="binary-link"
+				form-view="meta-files-form" grid-view="meta-files-grid" />
+
+		</panel>
+	</form>
+
+	<action-attrs name="action-contract-attrs-show-close-btn">
+		<attribute for="closeContractBtn" name="hidden"
+			expr="terminatedDate == null || statusSelect != 2 || __config__.app.getTodayDate(__user__.activeCompany) &lt; terminatedDate" />
+	</action-attrs>
+
+	<action-method name="action-contract-method-close">
+		<call class="com.axelor.apps.contract.web.ContractController"
+			method="close" />
+	</action-method>
+
+	<action-group name="action-contract-group-on-load">
+		<action name="action-contract-attrs-require-payment-config" />
+		<action name="action-contract-attrs-readonly-by-config" />
+		<action name="action-contract-readonly-if-unchangable" />
+	</action-group>
+
+	<action-attrs
+		name="action-contract-attrs-readonly-by-config">
+		<attribute for="currentContractVersionDescriptionPanel"
+			name="readonly"
+			expr="eval: __config__.app.getApp('contract').isUnchangableContract &amp;&amp; statusSelect > 1" />
+	</action-attrs>
+
+	<action-record name="action-contract-record-default"
+		model="com.axelor.apps.contract.db.Contract">
+		<field name="statusSelect" expr="eval: 1" />
+		<field name="company" expr="eval: __user__.activeCompany" />
+		<field name="targetTypeSelect" expr="eval: _xTargetType"
+			if="_xTargetType != null" />
+		<field name="currentContractVersion"
+			expr="action:action-record-contract-version-default-record" />
+		<field name="partner" expr="eval: _partner" />
+		<field name="currency"
+			expr="eval: __user__.activeCompany?.currency" />
+		<field name="project" expr="eval:_project" if="_project != null" />
+	</action-record>
+
+	<action-record
+		name="action-record-contract-version-default-record"
+		model="com.axelor.apps.contract.db.ContractVersion">
+		<field name="statusSelect" expr="eval: 1" />
+	</action-record>
+
+	<action-attrs name="action-attrs-contract-partner-domain">
+		<attribute for="partner" name="domain"
+			expr="eval: &quot;self IS NULL AND :company member of self.companySet&quot;" />
+		<attribute for="partner" name="domain"
+			expr="eval: &quot;self.isCustomer IS TRUE AND :company member of self.companySet&quot;"
+			if="targetTypeSelect == 1" />
+		<attribute for="partner" name="domain"
+			expr="eval: &quot;self.isSupplier IS TRUE AND :company member of self.companySet&quot;"
+			if="targetTypeSelect == 2" />
+	</action-attrs>
+
+	<action-method
+		name="action-contract-method-copy-from-template">
+		<call class="com.axelor.apps.contract.web.ContractController"
+			method="copyFromTemplate" />
+	</action-method>
+
+	<action-method
+		name="action-contract-method-delete-next-version">
+		<call class="com.axelor.apps.contract.web.ContractController"
+			method="deleteNextVersion" />
+	</action-method>
+
+	<action-method name="action-contract-method-waiting">
+		<call class="com.axelor.apps.contract.web.ContractController"
+			method="waiting" />
+	</action-method>
+
+	<action-method name="action-contract-method-ongoing">
+		<call class="com.axelor.apps.contract.web.ContractController"
+			method="ongoing" />
+	</action-method>
+
+	<action-method name="action-contract-method-renew">
+		<call class="com.axelor.apps.contract.web.ContractController"
+			method="renew" />
+	</action-method>
+
+	<form name="contract-archived-version-form" title="Version"
+		model="com.axelor.apps.contract.db.ContractVersion">
+		<panel title="Information" name="informationsPanel">
+			<field name="statusSelect" colSpan="12" readonly="true"
+				widget="NavSelect" showTitle="false" />
+			<panel showIf="id" colSpan="12" name="creationDetailsPanel">
+				<field name="createdOn" />
+				<field name="createdBy" />
+			</panel>
+			<panel name="activationPanel" showIf="statusSelect >= 3"
+				colSpan="12" readonly="true">
+				<field name="activationDate" />
+				<field name="activatedByUser" />
+			</panel>
+			<field name="supposedEndDate" />
+			<field name="endDate" hidden="true" showIf="endDate"
+				readonly="true" />
+			<field name="description" widget="html" />
+			<field name="metaFile" widget="binary-link" />
+			<field name="contractLineList" showTitle="false" hidden="true"
+				showIf="contractHistory.isInvoicingManagement" colSpan="12"
+				form-view="contract-line-form" grid-view="contract-line-grid" />
+			<field name="contractHistory.isInvoicingManagement"
+				hidden="true" />
+		</panel>
+	</form>
+
+	<action-view name="action-view-contract-show-version"
+		title="Version" model="com.axelor.apps.contract.db.ContractVersion">
+		<view type="grid" name="contract-version-next-grid" />
+		<view type="form" name="contract-version-next-form" />
+		<context name="_showRecord" expr="eval: nextVersion.id" />
+	</action-view>
+
+	<action-view name="action-view-contract-add-version"
+		title="Nouvelle version"
+		model="com.axelor.apps.contract.db.ContractVersion">
+		<view type="form" name="contract-version-next-form" />
+		<view type="grid" name="contract-version-next-grid" />
+		<view-param name="forceEdit" value="true" />
+		<context name="_xContractId" expr="eval: id" />
+		<context name="_xIsNextVersion" expr="true" />
+	</action-view>
+
+	<action-view name="action.contract.view.contract"
+		model="com.axelor.apps.contract.db.Contract" title="Contract">
+		<view type="form" name="contract-form" />
+		<view type="grid" name="contract-grid" />
+		<context name="_showRecord" expr="eval: nextContract.id" />
+	</action-view>
+
+	<action-view name="action-contract-view-invoicing"
+		model="com.axelor.apps.account.db.Invoice" title="Invoices">
+		<view type="grid" name="invoice-lite-grid" />
+		<view type="form" name="invoice-form" />
+		<domain>self.contract.id = :contractId</domain>
+		<context name="contractId" expr="eval: id" />
+	</action-view>
+
+	<action-attrs
+		name="action-contract-attrs-domains-template">
+		<attribute for="$contractTemplate" name="domain"
+			expr="eval: &quot;self.targetTypeSelect = ${targetTypeSelect}&quot;" />
+		<attribute for="partner" name="domain"
+			expr="eval: &quot;self.isCustomer = true AND :company member of self.companySet&quot;"
+			if="targetTypeSelect == 1" />
+		<attribute for="partner" name="domain"
+			expr="eval: &quot;self.isSupplier = true AND :company member of self.companySet&quot;"
+			if="targetTypeSelect == 2" />
+	</action-attrs>
+
+	<action-method name="action-contract-method-terminated">
+		<call class="com.axelor.apps.contract.web.ContractController"
+			method="terminated" />
+	</action-method>
+
+	<action-attrs
+		name="action-contract-attrs-required-payment-config">
+		<attribute for="currentContractVersion.paymentMode"
+			name="required" expr="eval: isInvoicingManagement" />
+		<attribute for="currentContractVersion.paymentCondition"
+			name="required" expr="eval: isInvoicingManagement" />
+	</action-attrs>
+
+	<action-attrs
+		name="action-contract-attrs-partner-payment-config">
+		<attribute for="currentContractVersion.paymentMode"
+			name="value" expr="eval: partner?.inPaymentMode"
+			if="targetTypeSelect == 1" />
+		<attribute for="currentContractVersion.paymentMode"
+			name="value" expr="eval: partner?.outPaymentMode"
+			if="targetTypeSelect == 2" />
+		<attribute for="currentContractVersion.paymentCondition"
+			name="value" expr="eval: partner?.paymentCondition" />
+	</action-attrs>
+
+	<action-method
+		name="action-method-contract-change-product">
+		<call class="com.axelor.apps.contract.web.ContractController"
+			method="changeProduct" />
+	</action-method>
+
+	<action-method name="action-contract-method-invoicing">
+		<call class="com.axelor.apps.contract.web.ContractController"
+			method="invoicing" />
+	</action-method>
+
+	<action-method name="action-contract-method-is-valid">
+		<call class="com.axelor.apps.contract.web.ContractController"
+			method="isValid" />
+	</action-method>
+
+	<action-validate
+		name="action-contract-validate-on-going">
+		<alert
+			message="Attention the contract will have as starting date the provisional activation
+        date ${currentContractVersion.supposedActivationDate}, Are you sure?"
+			if="currentContractVersion.supposedActivationDate &amp;&amp; currentContractVersion.supposedActivationDate &lt; __date__" />
+	</action-validate>
+
+	<action-attrs
+		name="action-contract-readonly-if-unchangable"
+		model="com.axelor.apps.contract.db.Contract">
+		<attribute
+			for="currentContractVersion.contractLineList,isInvoicingManagement,isAdditionaBenefitManagement,isConsumptionManagement,
+          currentContractVersion.isConsumptionBeforeEndDate,currentContractVersion.paymentMode,currentContractVersion.paymentCondition,
+          currentContractVersion.automaticInvoicing,currentContractVersion.invoicingMomentSelect,currentContractVersion.invoicingDuration,
+          currentContractVersion.isTimeProratedInvoice,currentContractVersion.isVersionProratedInvoice,currentContractVersion.isTacitRenewal,
+          currentContractVersion.renewalDuration,currentContractVersion.isAutoEnableVersionOnRenew,currentContractVersion.isWithEngagement,
+          currentContractVersion.engagementDuration,currentContractVersion.engagementStartFromVersion,currentContractVersion.isWithPriorNotice,
+          currentContractVersion.priorNoticeDuration,currentContractVersion.isPeriodicInvoicing,firstPeriodEndDate,currentContractVersion.numberOfDays"
+			name="readonly"
+			expr="eval: (__config__.app.getApp('contract').isUnchangableContract &amp;&amp; currentContractVersion.statusSelect > 2)
+          || (!__config__.app.getApp('contract').isUnchangableContract &amp;&amp; currentContractVersion.statusSelect > 3)" />
+		<attribute for="currentContractVersion.contractLineList"
+			name="readonly"
+			expr="eval: (__config__.app.getApp('contract').isUnchangableContract &amp;&amp; currentContractVersion.statusSelect > 2)
+          || (!__config__.app.getApp('contract').isUnchangableContract &amp;&amp; currentContractVersion.statusSelect > 3)
+          || !id" />
+	</action-attrs>
+
+	<action-attrs name="action-contract-attrs-domains-partner">
+		<attribute name="domain" for="partner"
+			expr="eval: &quot; :company member of self.companySet AND (self.isProspect = true OR self.isCustomer = true) &quot;"
+			if="_xTargetType == 1" />
+		<attribute name="domain" for="partner"
+			expr="eval: &quot; :company member of self.companySet AND self.isSupplier = true &quot;"
+			if="_xTargetType == 2" />
+	</action-attrs>
+
+	<action-attrs
+		name="action-contract-attrs-set-payment-mode-domain">
+		<attribute name="domain" for="paymentMode"
+			expr="self.inOutSelect = 1" if="__parent__?.targetTypeSelect == 1" />
+		<attribute name="domain" for="paymentMode"
+			expr="self.inOutSelect = 2" if="__parent__?.targetTypeSelect == 2" />
+	</action-attrs>
+
+	<search-filters name="contract-filters"
+		model="com.axelor.apps.contract.db.Contract" title="Contract filters">
+		<field name="company" hidden="true"
+			if="!__config__.app.getApp('base').getEnableMultiCompany()" />
+		<field name="currency" hidden="true"
+			if="!__config__.app.getApp('contract').getIsInvoicingManagement()" />
+		<field name="renewalNumber" hidden="true"
+			if="!__config__.app.getApp('contract').getIsRenewalManagement()" />
+		<field name="lastRenewalDate" hidden="true"
+			if="!__config__.app.getApp('contract').getIsRenewalManagement()" />
+		<field name="engagementStartDate" hidden="true"
+			if="!__config__.app.getApp('contract').isConfigContract" />
+		<field name="isInvoicingManagement" hidden="true"
+			if="!__config__.app.getApp('contract').isInvoicingManagement" />
+		<field name="isAdditionaBenefitManagement" hidden="true"
+			if="!__config__.app.getApp('contract').isAdditionalBenefitManagement" />
+		<field name="isConsumptionManagement" hidden="true"
+			if="!__config__.app.getApp('contract').isConsumptionManagement" />
+	</search-filters>
+
+</object-views>

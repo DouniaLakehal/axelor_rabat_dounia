@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="configuration" package="com.axelor.apps.configuration.db"/>
+
+    <entity name="TresorerieSituationAnnuelle" lang="java">
+        <decimal name="total" />
+        <integer name="annee" />
+        <integer name="mois"/>
+        <one-to-many ref="com.axelor.apps.configuration.db.TresorerieAtYear" name="compteListe"/>
+    </entity>
+
+    <entity name="TresorerieAtYear">
+        <many-to-one name="compte" ref="com.axelor.apps.configuration.db.Compte"/>
+        <decimal name="montant"/>
+    </entity>
+
+</domain-models>

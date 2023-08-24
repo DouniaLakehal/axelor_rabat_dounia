@@ -1,0 +1,24 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="configuration" package="com.axelor.apps.configuration.db"/>
+
+    <entity name="HistoriqueCompte" lang="java">
+        <datetime name="dateTransaction" title="DateTransaction"/>
+        <string name="designation" title="Designation"/>
+        <string name="rib" title="RIB"/>
+        <decimal name="montant" title="Montant"/>
+        <string name="description" title="Description"/>
+        <integer name="action" selection="config.compte.action.operation" default="1"/>
+        <many-to-one ref="com.axelor.apps.configuration.db.AnnexeGenerale" name="annexe" title="Annexe"/>
+        <decimal name="recette" title="Recette"/>
+        <decimal name="depense" title="Dépense"/>
+        <string name="moisHistorique" title="Mois"/>
+        <integer name="anneeHistorique" title="Année"/>
+        <one-to-one name="compte" ref="com.axelor.apps.configuration.db.Compte"/>
+        <string name="numPiece"/>
+    </entity>
+
+</domain-models>

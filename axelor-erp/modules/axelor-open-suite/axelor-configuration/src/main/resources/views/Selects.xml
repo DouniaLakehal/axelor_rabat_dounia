@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+	<!-- Nomenclature : * name : "interfaceName" + "fieldName" + ".select" -->
+
+	<selection name="config.compte.action.operation">
+		<option value="1">Crédit</option>
+		<option value="2">Débit</option>
+	</selection>
+
+	<selection name='config.deplacement.configurationDeplacement'>
+		<option value='1'>A l'intérieure </option>
+		<option value="2">A l'extérieure </option>
+	</selection>
+
+	<selection name="config.fournisseur.slection">
+		<option value="1">Personne morale</option>
+		<option value="2">Personne physique</option>
+	</selection>
+
+	<selection name="config.budget.slection">
+		<option value="Depenses">Depenses</option>
+		<option value="Recettes">Recettes</option>
+	</selection>
+
+	<selection name="select.TypeDoc.AO">
+		<option value="Maitre ouvrage">Maitre d'ouvrage</option>
+		<option value="Soumissionnaire">Soumissionnaire</option>
+	</selection>
+
+	<selection name="select.natureDoc.AO">
+		<option value="Dossier administratif technique et additif">Dossier administratif technique et additif</option>
+		<option value="Offre technique">Offre technique</option>
+		<option value="Offre financière">Offre financière</option>
+	</selection>
+
+	<selection name="conge_serv_dmd">
+		<option value="autorisation">Autorisation - رخصة</option>
+		<option value="conge">Congé Annuel - عطلة سنوية</option>
+	</selection>
+
+	<selection name="conge_serv_dmd_grid">
+		<option value="">Tous</option>
+		<option value="autorisation">Autorisation - رخصة</option>
+		<option value="conge">Congé Annuel - عطلة سنوية</option>
+	</selection>
+
+	<selection name="avancemenEchelon.select">
+		<option value="1">Echellon 1</option>
+		<option value="2">Echellon 2</option>
+		<option value="3">Echellon 3</option>
+		<option value="4">Echellon 4</option>
+		<option value="5">Echellon 5</option>
+		<option value="6">Echellon 6</option>
+		<option value="7">Echellon 7</option>
+		<option value="8">Echellon 8</option>
+		<option value="9">Echellon 9</option>
+		<option value="10">Echellon 10</option>
+		<option value="11">Echellon 11</option>
+		<option value="12">Hors echelle</option>
+	</selection>
+
+	<selection name="anneeSelect.rubrique">
+		<option value="2021">2021</option>
+		<option value="2022">2022</option>
+		<option value="2023">2023</option>
+		<option value="2024">2024</option>
+		<option value="2025">2025</option>
+		<option value="2026">2026</option>
+		<option value="2027">2027</option>
+		<option value="2028">2028</option>
+		<option value="2029">2029</option>
+	</selection>
+
+	<selection name="config.type.operation.budget">
+		<option value="credit">Crédit</option>
+		<option value="debit">Débit</option>
+	</selection>
+
+	<selection name="select.type.rubriqueBudgetaire">
+		<option value="Charges d'exploitation">Charges d'exploitation</option>
+		<option value="Charges d'investissement">Charges d'investissement</option>
+	</selection>
+
+
+
+</object-views>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <form name="tresorerie-form" title="Situation de tresorerie"
+          model="com.axelor.apps.account.db.GestionRecette" width="large" canEdit="false" canDelete="false"
+          canArchive="false" canAttach="false" canCopy="false" canNew="false" canSave="false">
+        <panel name="mainPanel" title="Situation de tresorerie" colSpan="12">
+            <field name="anneetresorerie" title="Année" type="integer"/>
+            <field name="rib" title="Numéro de compte" target-name="rib"/>
+        </panel>
+        <panel>
+            <button name="printGestionTresorerieBtn" title="Imprimer" icon="fa-print" onClick="action-print-tresorerie"/>
+        </panel>
+    </form>
+
+    <action-method name="action-print-tresorerie">
+        <call class="com.axelor.apps.account.web.AccountController" method="imprimerGestionTresorerie"/>
+    </action-method>
+    
+     <!--   ___________________________  Arrete de compte suite______________________-->
+    
+    <form name="ArreteCompteSuite-form" title="Arrete de comptes suite"
+          model="com.axelor.apps.account.db.GestionRecette" width="large" canEdit="false" canDelete="false"
+          canArchive="false" canAttach="false" canCopy="false" canNew="false" canSave="false">
+        <panel name="mainPanel" title="Arrete de comptes suite" colSpan="12">
+            <field name="anneeArreteCompte" min="0" max="9999"  title="Année"/>
+           
+            
+        </panel>
+        <panel>
+            <button name="printArreteSuiteBtn" title="Imprimer" icon="fa-print" onClick="action-print-ArreteSuite"/>
+        </panel>
+    </form>
+    
+    <action-group name="action-print-ArreteSuite">
+         <action name="validation_champsArreteSuite" if="anneeArreteCompte==null  "/>
+         <action name="com.axelor.apps.account.web.AccountController:ImprimerCompteArreteSuite" if="anneeArreteCompte!=null  "/>
+         
+    </action-group>
+    
+    <action-validate name="validation_champsArreteSuite">
+           <alert message="Tous les champs sont obligatoires"/>
+    </action-validate>
+    
+         
+               <!--   ___________________________  Arrete de compte______________________-->
+    
+    
+     <form name="ArreteCompte-form" title="Arrete de comptes"
+          model="com.axelor.apps.account.db.GestionRecette" width="large" canEdit="false" canDelete="false"
+          canArchive="false" canAttach="false" canCopy="false" canNew="false" canSave="false">
+        <panel name="mainPanel" title="Arrete de comptes" colSpan="12">
+            <field name="anneeArreteCompte" min="0" max="9999" title="Année"/>
+            
+            
+            
+        </panel>
+        <panel>
+            <button name="printArreteBtn" title="Imprimer" icon="fa-print" onClick="action-print-Arrete"/>
+        </panel>
+    </form>
+    
+    <action-group name="action-print-Arrete">
+         <action name="validation_champsArrete" if="anneeArreteCompte==null "/>
+         <action name="com.axelor.apps.account.web.AccountController:ImprimerCompteArrete" if="anneeArreteCompte!=null "/>
+         
+    </action-group>
+    
+    <action-validate name="validation_champsArrete">
+           <alert message="Tous les champs sont obligatoires"/>
+    </action-validate>
+    
+    
+     <!--   ___________________________  Journal financier______________________-->
+    
+    
+     <form name="journalFinancier-form" title="Journal financier"
+          model="com.axelor.apps.account.db.GestionRecette" width="large" canEdit="false" canDelete="false"
+          canArchive="false" canAttach="false" canCopy="false" canNew="false" canSave="false">
+        <panel name="mainPanel" title="Journal financier" colSpan="12">
+            <field name="anneeJoFinancier" type="integer" default="2021"  title="Année" min="1000" max="9999"/>
+             <field name="moisJoFinancier" selection="accounting.mois.Jfinancier.select" default="1"  title="Mois" />
+             
+            
+            
+            
+        </panel>
+        <panel>
+            <button name="printJfinancierBtn" title="Imprimer" icon="fa-print" onClick="action-print-JFinancier"/>
+        </panel>
+    </form>
+    
+    <action-group name="action-print-JFinancier">
+         <action name="validation_champsJfinancier" if="anneeJoFinancier==null || moisJoFinancier==null "/>
+         <action name="com.axelor.apps.account.web.ComptabiliteController:ImprimerJFInancier" if="anneeJoFinancier!=null &amp;&amp; moisJoFinancier!=null"/>
+         
+    </action-group>
+    
+    <action-validate name="validation_champsJfinancier">
+           <alert message="L'année et le mois sont obligatoires et l'année doit avoir un format correct "/>
+    </action-validate>
+    
+    
+</object-views>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="Mutuelle_grid" title="Mutuelle" model="com.axelor.apps.configuration.db.MUTUELLE">
+        <field name="mutuelle"/>
+        <field name="montant_max"/>
+        <field name="montant_min"/>
+        <field name="pors"/>
+        <field name="annee"/>
+    </grid>
+
+    <form name="Mutuelle_form" title="Mutuelle" model="com.axelor.apps.configuration.db.MUTUELLE" >
+        <panel name="articlePanel" >
+            <field name="mutuelle" title="Type de mutuelle"/>
+            <field name="montant_max" title="Montant maximum"/>
+            <field name="montant_min" title="Montant minimum"/>
+            <field name="pors" title="Pourcentage"/>
+            <field name="annee" title="Année" />
+        </panel>
+        <panel title="Infomations Banquaire">
+            <field name="namBank" title="Banque"/>
+            <field name="rib" title="Rib"/>
+        </panel>
+    </form>
+
+
+
+</object-views>

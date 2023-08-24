@@ -1,0 +1,62 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="configuration" package="com.axelor.apps.configuration.db"/>
+
+    <entity name="RubriquesBudgetaire" lang="java">
+        <integer name="anneCurrent"/>
+        <boolean name="depenceAndRecette"/>
+        <boolean name="is_principal"/>
+        <boolean name="is_detaille"/>
+        <string name="code_budget"/>
+        <string name="titre_budget"/>
+        <decimal name="montant_budget"/>
+        <decimal name="old_montant_budget"/>
+        <decimal name="montant_total_children"/>
+        <many-to-one name="budgetParent" ref="com.axelor.apps.configuration.db.RubriquesBudgetaire"/>
+        <many-to-one name="typeRubriquePrincipal" ref="com.axelor.apps.configuration.db.RubriqueConfiguration"/>
+        <many-to-one name="typeRubriqueDetaille" ref="com.axelor.apps.configuration.db.RubriqueConfiguration"/>
+        <long name="id_rubrique_generale"/>
+        <long name="id_budget_par_rubrique_generale"/>
+        <decimal name="somme_mtChildren_mtBudget"/>
+
+        <decimal name="reportCredit"/>
+        <decimal name="nouvCredit"/>
+        <decimal name="creditEngagement"/>
+        <boolean name="hide_in_principale"/>
+        <boolean name="show_row_fonc"/>
+        <boolean name="hide_montant_fonc"/>
+        <decimal name="tot_mt_fonc"/>
+
+        <boolean name="show_row_equipe"/>
+        <boolean name="hide_mt_equipe"/>
+
+
+        <!--pour les version-->
+        <long name="id_version"/>
+        <long name="id_origine_version"/>
+        <long name="id_parent_origine_version"/>
+        <decimal name="montant_old_version"/>
+
+        <decimal name="reportCredit_old"/>
+        <decimal name="nouvCredit_old"/>
+        <decimal name="creditEngagement_old"/>
+
+        <decimal name="somme_mtChildren_mtreportCredit"/>
+        <decimal name="somme_mtChildren_mtnouvCredit"/>
+        <decimal name="somme_mtChildren_creditEngagement"/>
+
+        <decimal name="equip_mt_reportCredit"/>
+        <decimal name="equip_mt_nouvCredit"/>
+        <decimal name="equip_mt_creditEngagement"/>
+        <decimal name="equip_mt_montant_Budget"/>
+
+        <decimal name="budgetStart"/>
+
+        <string name="commentaire"/>
+
+    </entity>
+
+</domain-models>

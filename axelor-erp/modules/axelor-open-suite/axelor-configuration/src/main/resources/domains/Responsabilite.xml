@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="configuration" package="com.axelor.apps.configuration.db"/>
+    <entity name="Responsabilite" lang="java">
+        <string  name="name" title="Nom"/>
+        <string  name="description" title="Description"/>
+        <boolean name="logementIsNet" default="false"/>
+        <decimal name="indemnitLogement" title="Indemnité de logement"/>     
+        
+        <boolean name="fonctionIsNet" default="false"/>
+        <decimal name="indemnitFonction" title="Indemnité de fonction"/>
+        
+        <boolean name="voitureIsNet" default="false"/>
+        <decimal name="indemnitVoiture" title="Indemnité de voiture"/>
+        
+        <boolean name="representationIsNet" default="false"/>
+        <decimal name="indemnitRepresentation" title="Indemnité de représentation"/>
+           
+        <decimal name="indemnitLogement_Net" title="Indemnité de logement"/>
+      
+        <decimal name="indemnitFonction_Net" title="Indemnité de fonction"/>
+        
+        <decimal name="indemnitVoiture_Net" title="Indemnité de voiture"/>
+       
+        <decimal name="indemnitRepresentation_Net" title="Indemnité de représentation"/>
+       
+        
+        
+    </entity>
+    
+    
+
+</domain-models>

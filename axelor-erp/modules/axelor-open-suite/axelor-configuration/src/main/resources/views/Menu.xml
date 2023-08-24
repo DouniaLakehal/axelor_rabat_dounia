@@ -1,0 +1,427 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<menuitem name="menu-configuration-root" title="Configuration" icon="fa-gear" icon-background="orange"  order="0" />
+
+	<menuitem name="gest_comptes_configuration" parent="menu-configuration-root" title="Gestion des prestations" icon="fa-cog" action="gest_comptes_config" />
+	<action-view name="gest_comptes_config" title="Gestion des prestations" model="com.axelor.apps.configuration.db.Prestation" >
+		<view type="grid" name="Prestation_grid" />
+		<view type="form" name="Prestation_form" />
+	</action-view>
+
+	<menuitem name="gest_compte" parent="menu-configuration-root" title="Gestion des comptes" order="1" icon="fa-cog" tag-style="default" />
+
+	<menuitem name="gest_comptes_configuration_aa" parent="gest_compte" title="Compte" action="gest_comptes_config_aa" />
+	<action-view name="gest_comptes_config_aa" title="Compte" model="com.axelor.apps.configuration.db.Compte" >
+		<view type="grid" name="Compte_detail_grid" />
+		<view type="form" name="Compte_detail_form" />
+	</action-view>
+
+	<menuitem name="gest_situationAnnuelle" parent="gest_compte" title="Situation Annuelle" action="sit_annelle" />
+	<action-view name="sit_annelle" title="Situation Annuelle" model="com.axelor.apps.configuration.db.TresorerieSituationAnnuelle" >
+		<view type="grid" name="tresorerieSituationAnnuelle_grid" />
+		<view type="form" name="tresorerieSituationAnnuelle_form" />
+	</action-view>
+
+	<menuitem name="gest_Histcomptes_configuration" parent="gest_compte" title="Historique des comptes" action="gest_Histcomptes_config" />
+	<action-view name="gest_Histcomptes_config" title="Historique des comptes" model="com.axelor.apps.configuration.db.HistoriqueCompte" >
+		<view type="grid" name="HistCompte_detail_grid" />
+		<view type="form" name="HistCompte_detail_form" />
+	</action-view>
+
+	<menuitem name="grades-all" parent="menu-configuration-root" title="Grades / Echelle"  order="2" icon="fa-cog" tag-style="default" />
+
+	<menuitem name="hr_corps_conf" parent="grades-all" title="Corps" action="corps.all"/>
+	<action-view name="corps.all" title="Corps" model="com.axelor.apps.configuration.db.Corps">
+		<view type="grid" name="corps-grid_conf"/>
+		<view type="form" name="corps-form_conf"/>
+	</action-view>
+
+	<menuitem name="hr_grade_conf" parent="grades-all" title="Grade" action="grade.all"/>
+	<action-view name="grade.all" title="grade" model="com.axelor.apps.configuration.db.Grade">
+		<view type="grid" name="grade-grid_conf"/>
+		<view type="form" name="grade-form_conf"/>
+	</action-view>
+
+
+	<menuitem name="hr_echelle_conf" parent="grades-all" title="Echelle" action="echelle.all"/>
+	<action-view name="echelle.all" title="echelle" model="com.axelor.apps.configuration.db.Echelle">
+		<view type="grid" name="echelle-grid_conf"/>
+		<view type="form" name="echelle-form_conf"/>
+	</action-view>
+
+	<menuitem name="hr_echelon_conf" parent="grades-all" title="Echelon" action="echelon.all"/>
+	<action-view name="echelon.all" title="echelon" model="com.axelor.apps.configuration.db.Echelon">
+		<view type="grid" name="echelon-grid_conf"/>
+		<view type="form" name="echelon-form_conf"/>
+	</action-view>
+
+	<menuitem name="offreappel_all" parent="menu-configuration-root" title="Appel d'offre"  order="3" icon="fa-cog" tag-style="default" />
+
+	<menuitem order="1" name="offreappel_conf" parent="offreappel_all" title="Titre des pièces" action="offreAppel.all"/>
+	<action-view name="offreAppel.all" title="Titre des pièces" model="com.axelor.apps.configuration.db.TitrePiece">
+		<view type="grid" name="titrePiece-grid_conf"/>
+		<view type="form" name="titrePiece-form_conf"/>
+	</action-view>
+
+	<menuitem order="2" name="grille_conf" parent="offreappel_all" title="Grille de notation" action="grille.all"/>
+	<action-view name="grille.all" title="Grille de notation" model="com.axelor.apps.configuration.db.CritereNotation">
+		<view type="grid" name="critereNotation-grid"/>
+		<view type="form" name="critereNotation-form"/>
+	</action-view>
+
+	<menuitem order="3" name="cat_conf" parent="offreappel_all" title="Sous catégories" action="categor.all"/>
+	<action-view name="categor.all" title="Sous catégories" model="com.axelor.apps.configuration.db.SousCategorie">
+		<view type="grid" name="categorieNotation-grid"/>
+		<view type="form" name="categorieNotation-form"/>
+	</action-view>
+
+	<menuitem order="4" name="typePrestation_conf" parent="offreappel_all" title="Nature de prestation" action="typePrestation.all"/>
+	<action-view name="typePrestation.all" title="Nature de prestation" model="com.axelor.apps.configuration.db.TypePrestation">
+		<view type="grid" name="typePrestation-grid"/>
+		<view type="form" name="typePrestation-form"/>
+	</action-view>
+
+	<menuitem order="5" name="lieuExecution_conf" parent="offreappel_all" title="Lieu d'éxecution" action="lieuExecution.all"/>
+	<action-view name="lieuExecution.all" title="Lieu d'éxecution" model="com.axelor.apps.configuration.db.LieuExecution">
+		<view type="grid" name="lieuExecution-grid"/>
+		<view type="form" name="lieuExecution-form"/>
+	</action-view>
+
+<menuitem order="6" name="modePassassion_conf" parent="offreappel_all" title="Mode de passassion" action="modePassassion.all"/>
+	<action-view name="modePassassion.all" title="Mode de passassion" model="com.axelor.apps.configuration.db.ModePassation">
+		<view type="grid" name="modePassassion-grid"/>
+		<view type="form" name="modePassassion-form"/>
+	</action-view>
+
+
+	<menuitem name="achat_all" parent="menu-configuration-root" title="Achats"  order="4" icon="fa-cog" tag-style="default" />
+
+	<menuitem name="fournisseur_configuration" parent="achat_all" title="Fournisseurs" action="fournisseur_config"/>
+	<action-view name="fournisseur_config" title="Frounisseur" model="com.axelor.apps.configuration.db.Fournisseur">
+		<view type="grid" name="fournisseur_grid_conf"/>
+		<view type="form" name="fournisseur_form_conf"/>
+	</action-view>
+
+	<menuitem name="CreditAchatCCIS_configuration" parent="achat_all" title="Credits" action="CreditAchatCCIS_config"/>
+	<action-view name="CreditAchatCCIS_config" title="Credits" model="com.axelor.apps.configuration.db.CreditAchatCCIS">
+		<view type="grid" name="CreditAchatCCIS-grid"/>
+		<view type="form" name="CreditAchatCCIS-form"/>
+	</action-view>
+
+
+	<menuitem name="budget_configuration" parent="menu-configuration-root" title="Gestion Budgétaires" order="5" icon="fa-cog" tag-style="default" />
+
+	<menuitem name="rub_budgetaire_configuration" parent="budget_configuration" title="Rubrique Budgetaire" action="rub_budgetaire_config" />
+	<action-view name="rub_budgetaire_config" title="Rubrique Budgetaire" model="com.axelor.apps.configuration.db.RubriqueBudgetaireGenerale" >
+		<view type="grid" name="rubriqueBudgetaire-grid" />
+		<view type="form" name="rubriqueBudgetaire-form" />
+	</action-view>
+
+	<menuitem name="budget_par_rub_configuration" parent="budget_configuration" title="Budget par rubrique" action="budget_par_rub_config" />
+	<action-view name="budget_par_rub_config" title="Budget Par Rubrique" model="com.axelor.apps.configuration.db.BudgetParRubrique" >
+		<view type="grid" name="budgetParRubrique-grid" />
+		<view type="form" name="budgetParRubrique-form" />
+	</action-view>
+
+	<menuitem name="budget_par_rub_configuration_v2" parent="budget_configuration" title="Saisir le budget" action="budget_par_rub_config_custom_in_list" />
+	<action-view name="budget_par_rub_config_custom_in_list" title="Budget Par Rubrique" model="com.axelor.apps.configuration.db.RubriquesBudgetaire" >
+		<view type="grid" name="gridRubriquesBudgetaireSaisieNew"/>
+		<view type="form" name="custom_budget_info"/>
+		<view-param name="forceEdit" value="true"/>
+	</action-view>
+	<menuitem name="budget_par_rub_configuration_v3" parent="budget_configuration" title="Categorie des rubriques" action="budget_categorie_configuration" />
+	<action-view name="budget_categorie_configuration" title="Configuration des Rubriques" model="com.axelor.apps.configuration.db.RubriqueConfiguration" >
+		<view type="grid" name="gridRubriquesBudgetaireConfiguration"/>
+		<view type="form" name="formRubriquesBudgetaireConfiguration"/>
+		<view-param name="forceEdit" value="true"/>
+	</action-view>
+	<menuitem name="budget_par_rub_configuration_v4" parent="budget_configuration" title="Afficher le budget" action="budget_categorie_afficher" />
+	<action-group name="budget_categorie_afficher">
+		<action name="com.axelor.apps.configuration.web.AppConfigurationController:tw_updateAllTotal"/>
+	</action-group>
+	<!--<action-view name="tw_budget_categorie_afficher" title="Afficher les Rubriques" model="com.axelor.apps.configuration.db.RubriquesBudgetaire" >
+		<view type="form" name="formRubriquesBudgetaireAffichage"/>
+		<view-param name="forceEdit" value="false"/>
+		<context name="$date_anne" expr="eval:(__date__).getYear()"/>
+	</action-view>-->
+
+	<menuitem name="retraitFromRubrique_configuration" parent="budget_configuration" title="Retrait depuis une Rubrique" action="retraitFromRubrique_config" />
+	<action-view name="retraitFromRubrique_config" title="Retrait depuis une Rubrique" model="com.axelor.apps.configuration.db.RetraitFromRubrique" >
+		<view type="grid" name="retraitFromRubrique-grid" />
+		<view type="form" name="retraitFromRubrique-form" />
+	</action-view>
+
+	<menuitem name="tw_retraitFromRubrique_configuration" parent="budget_configuration" title="Historique Budgetaire" action="tw_retraitFromRubrique_config" />
+	<action-view name="tw_retraitFromRubrique_config" title="Historique Budgetaire" model="com.axelor.apps.configuration.db.HistoriqueBudgetaire" >
+		<view type="grid" name="tw_HistoriquerubriqueBudgetaire-grid" />
+		<view-param name="show-toolbar" value="false" />
+		<view-param name="show-confirm" value="false" />
+	</action-view>
+
+
+
+	<menuitem name="previsionRecette_configuration" parent="budget_configuration" title="Prévision annuel des recettes" action="previsionRecette_config" />
+	<action-view name="previsionRecette_config" title="Prévision annuel des recettes" model="com.axelor.apps.configuration.db.PrevisionRecette" >
+		<view type="grid" name="previsionRecette-grid" />
+		<view type="form" name="previsionRecette-form" />
+	</action-view>
+
+	<menuitem name="courier_configuration" parent="menu-configuration-root" title="Courrier" order="6" icon="fa-cog" tag-style="default" />
+
+	<menuitem name="annexe_configuration" parent="courier_configuration" title="Annexe" action="annexe_config" />
+	<action-view name="annexe_config" title="Annexe" model="com.axelor.apps.configuration.db.AnnexeGenerale">
+		<view type="grid" name="annexe-grid"/>
+		<view type="form" name="annexe-form"/>
+	</action-view>
+
+	<menuitem name="bureau_configuration" parent="courier_configuration" title="Bureau" action="bureau_config"/>
+	<action-view name="bureau_config" title="Bureau" model="com.axelor.apps.configuration.db.Bureau">
+		<view type="grid" name="bureau-grid"/>
+		<view type="form" name="bureau-form"/>
+	</action-view>
+
+	<menuitem name="couloir_configuration" parent="courier_configuration" title="Couloir" action="couloir_config"/>
+	<action-view name="couloir_config" title="Couloir" model="com.axelor.apps.configuration.db.Couloir">
+		<view type="grid" name="couloir-grid"/>
+		<view type="form" name="couloir-form"/>
+	</action-view>
+
+	<menuitem name="armoir_configuration" parent="courier_configuration" title="Armoire" action="armoir_config"/>
+	<action-view name="armoir_config" title="Armoire" model="com.axelor.apps.configuration.db.Armoire">
+		<view type="grid" name="armoire-grid"/>
+		<view type="form" name="armoire-form"/>
+	</action-view>
+
+	<menuitem name="etagere_configuration" parent="courier_configuration" title="Etagères" action="etagere_config"/>
+	<action-view name="etagere_config" title="Etagères" model="com.axelor.apps.configuration.db.Etagere">
+		<view type="grid" name="etagere-grid"/>
+		<view type="form" name="etagere-form"/>
+	</action-view>
+
+
+	<menuitem name="rsLogistique_configuration" parent="menu-configuration-root" title="Ressources Logistiques" order="7" icon="fa-cog" tag-style="default" />
+
+	<menuitem name="compt_action_vehicule_configuration" parent="rsLogistique_configuration" title="Liste des véhicules" action="compt_action_vehicule_configuration" />
+	<action-view name="compt_action_vehicule_configuration" title="Liste des véhicules" model="com.axelor.apps.configuration.db.Vehicules" >
+		<view type="grid" name="actionVehicule_detail_grid" />
+		<view type="form" name="actionVehicule_detail_form" />
+	</action-view>
+
+	<menuitem name="entretiens_configuration" parent="rsLogistique_configuration" title="Entretiens" action="entretiens_config"/>
+	<action-view name="entretiens_config" title="Entretiens" model="com.axelor.apps.configuration.db.Entretiens">
+		<view type="grid" name="actionEntretiens_detail_grid" />
+		<view type="form" name="actionEntretiens_detail_form" />
+	</action-view>
+
+	<menuitem name="membre_commision_configuration" parent="rsLogistique_configuration" title="Membre de commission" action="membre_commision_config" />
+	<action-view name="membre_commision_config" title="Membre de commission" model="com.axelor.apps.configuration.db.MembreCommission" >
+		<view type="grid" name="membreCommission-grid" />
+		<view type="form" name="membreCommission-form" />
+	</action-view>
+
+<!--	<menuitem name="documents_configuration" parent="menu-configuration-root" title="Documents" order="7" icon="fa-cog" tag-style="default" />
+
+	<menuitem name="etiquette_configuration" parent="rsLogistique_configuration" title="Membre de commission" action="etiquette_config" />
+	<action-view name="etiquette_config" model="com.axelor.dms.db.DMSFileTag" title="Tags">
+		<view name="dms-tag-grid" type="grid"/>
+		<view name="dms-tag-form" type="form"/>
+	</action-view>-->
+
+	<menuitem name="mission_configuration" parent="menu-configuration-root" title="Mission/Déplacement" order="8" icon="fa-cog" tag-style="default" />
+
+	<menuitem name="indemnite_configuration" parent="mission_configuration" title="Indeminte Kilometrique" action="indemnite_config" />
+	<action-view name="indemnite_config" model="com.axelor.apps.configuration.db.IndemniteKilo" title="Indemnité kilometrique">
+		<view name="IndemniteK-grid" type="grid"/>
+		<view name="IndemniteK-form" type="form"/>
+	</action-view>
+
+	<menuitem name="fraisdeplacement_configuration" parent="mission_configuration" title="Frais de déplacement" action="fraisdeplacement_config" />
+	<action-view name="fraisdeplacement_config" model="com.axelor.apps.configuration.db.FraisDeplacement" title="Frais de déplacement">
+		<view name="fraisDeplacement-grid" type="grid"/>
+		<view name="fraisDeplacement-form" type="form"/>
+	</action-view>
+
+	<menuitem name="frais_configuration" parent="mission_configuration" title="Configuration des frais" action="frais_config" />
+	<action-view name="frais_config" model="com.axelor.apps.configuration.db.ConfigurationFrais" title="Configuration des frais">
+		<view name="configurationFrais-grid" type="grid"/>
+		<view name="configurationFrais-form" type="form"/>
+	</action-view>
+
+	<menuitem name="docMission_configuration" parent="mission_configuration" title="Document par mission" action="docMission_config" />
+	<action-view name="docMission_config" model="com.axelor.apps.configuration.db.DocParMission" title="Document par mission">
+		<view name="docParMission-grid" type="grid"/>
+		<view name="docParMission-form" type="form"/>
+	</action-view>
+
+	<menuitem name="rh_configuration" parent="menu-configuration-root" title="Ressources Humaines" order="9" icon="fa-cog" tag-style="default" />
+
+	<menuitem name="groupe_configuration" parent="rh_configuration" title="Groupes" action="groupe_config" />
+	<action-view name="groupe_config" model="com.axelor.apps.configuration.db.Groupes" title="Groupes">
+		<view type="grid" name="Groupe-grid"/>
+		<view type="form" name="Groupe-form"/>
+	</action-view>
+
+	<menuitem name="organismeMetuelle_configuration" parent="rh_configuration" title="Organisme de mutuelle" action="organismeMetuelle_config" />
+	<action-view name="organismeMetuelle_config" model="com.axelor.apps.configuration.db.OrganismeMetuelle" title="Organisme de mutuelle">
+		<view type="grid" name="organismeMetuelle-grid_conf"/>
+		<view type="form" name="organismeMetuelle-form_conf"/>
+	</action-view>
+
+	<menuitem name="zoneEmployee_configuration" parent="rh_configuration" title="Les zones" action="zoneEmployee_config" />
+	<action-view name="zoneEmployee_config" model="com.axelor.apps.configuration.db.ZoneEmployee" title="Les zones">
+		<view type="grid" name="zoneEmployee-grid"/>
+		<view type="form" name="zoneEmployee-form"/>
+	</action-view>
+
+	<menuitem name="credit_configuration" parent="rh_configuration" title="Intituler des crédits" action="intitulerCredit_config" />
+	<action-view name="intitulerCredit_config" model="com.axelor.apps.configuration.db.IntitulerCredit" title="Intituler des crédits">
+		<view type="grid" name="intitulerCredit-grid"/>
+		<view type="form" name="intitulerCredit-form"/>
+	</action-view>
+
+
+
+	<menuitem hidden="true" name="retenu_configuration" parent="rh_configuration" title="Retenues" action="retenu_config" />
+	<action-view name="retenu_config" model="com.axelor.apps.configuration.db.Retenues" title="Retenues">
+		<view type="grid" name="config.retenu-grid"/>
+		<view type="form" name="config.retenu-form"/>
+	</action-view>
+
+	<menuitem name="responsabilite_configuration" parent="rh_configuration" title="Résponsabilité" action="responsabilite_config" />
+	<action-view name="responsabilite_config" model="com.axelor.apps.configuration.db.Responsabilite" title="Résponsabilité">
+		<view type="grid" name="responsabilite-grid"/>
+		<view type="form" name="responsabilite-form"/>
+	</action-view>
+
+	<menuitem name="avancement_configuration" parent="rh_configuration" title="Période Avancement" action="avancement_config" />
+	<action-view name="avancement_config" model="com.axelor.apps.configuration.db.AvancementPeriode" title="Période Avancement">
+		<view type="grid" name="periodeAvancement-grid"/>
+		<view type="form" name="periodeAvancement-form"/>
+	</action-view>
+	<!--
+	<menuitem name="responsabilite2_configuration" parent="rh_configuration" title="Résponsabilité2" action="responsabilite2_config" />
+	<action-view name="responsabilite2_config" model="com.axelor.apps.configuration.db.Responsabilite2" title="Résponsabilité2">
+		<view type="grid" name="responsabilite2-grid"/>
+		<view type="form" name="responsabilite2-form"/>
+	</action-view>
+	-->
+	<menuitem name="indemnite_configuration" parent="rh_configuration" title="Indemnite" action="indemnite_config" />
+	<action-view name="indemnite_config" model="com.axelor.apps.configuration.db.NewIndemnite" title="Indemnite">
+		<view type="grid" name="newIndemnite-grid"/>
+		<view type="form" name="newIndemnite-form"/>
+	</action-view>
+
+	<menuitem name="handicape_configuration" parent="rh_configuration" title="Type Handicape" action="handicape_config" />
+	<action-view name="handicape_config" model="com.axelor.apps.configuration.db.TypeHandicape" title="Type Handicape">
+		<view type="grid" name="config.handicape-grid"/>
+		<view type="form" name="config.handicape-form"/>
+	</action-view>
+
+	<menuitem name="histRib_configuration" parent="rh_configuration" title="Historique RIB" action="histRib_config" />
+	<action-view name="histRib_config" model="com.axelor.apps.configuration.db.HistoriqueRIB" title="Historique RIB">
+		<view type="grid" name="historique-rib-grid"/>
+	</action-view>
+
+	<menuitem name="gest-salaire" parent="rh_configuration" title="Gestion Salaire" action="gest.salaire" />
+	<action-view name="gest.salaire" title="Gestion Salaire" model="com.axelor.apps.configuration.db.GestionSalaire" >
+		<view type="grid" name="tw_gestion_salaire_grid" />
+		<view type="form" name="tw_gestion_salaire_form" />
+		<view-param name="forceEdit" value="true"/>
+	</action-view>
+
+	<menuitem name="conge.type" parent="rh_configuration" title="Types de congé" action="type.conge" />
+	<action-view name="type.conge" title="Types de congé" model="com.axelor.apps.configuration.db.TypeConge" >
+		<view type="grid" name="typeConge-grid" />
+		<view type="form" name="typeConge-form" />
+		<view-param name="forceEdit" value="true" />
+	</action-view>
+
+	<menuitem name="absence.type" parent="rh_configuration" title="Types d'absence" action="type.absence" />
+	<action-view name="type.absence" title="Types d'absence" model="com.axelor.apps.configuration.db.TypeAbsence" >
+		<view type="grid" name="typeAbsence-grid" />
+		<view type="form" name="typeAbsence-form" />
+	</action-view>
+
+	<menuitem name="gestion.jour.feries" parent="rh_configuration" title="Jours Feries" action="jour.feries" />
+	<action-view name="jour.feries" title="Jours Ferrier" model="com.axelor.apps.configuration.db.JoursFeries" >
+		<view type="grid" name="jourFeries-grid" />
+		<view type="form" name="jourFeries-form" />
+	</action-view>
+
+	<menuitem hidden="true" name="gestion.bordereau" parent="rh_configuration" title="Bordereau d'émission" action="bordereau_d" />
+	<action-view name="bordereau_d" title="Bordereau d'émission" model="com.axelor.apps.configuration.db.Bordereau" >
+		<view type="grid" name="bordereau-grid" />
+		<view type="form" name="bordereau-form" />
+	</action-view>
+
+	<menuitem name="reclamation_configuration" parent="menu-configuration-root" title="Reclamations" order="10" icon="fa-cog" tag-style="default" />
+	<menuitem name="NaturePlainte_configuration" parent="reclamation_configuration" title="Nature de plainte" action="NaturePlainte_config" />
+	<action-view name="NaturePlainte_config" title="Nature de plainte" model="com.axelor.apps.configuration.db.NaturePlainte" >
+		<view type="grid" name="nature-grid" />
+		<view type="form" name="nature-form" />
+	</action-view>
+
+	<menuitem name="autre_configuration" parent="menu-configuration-root" title="Autres" order="11" icon="fa-cog" tag-style="default" />
+
+	<menuitem name="Nature_Op_configuration" parent="autre_configuration" title="Nature d'opération" action="Nature_Op_config" />
+	<action-view name="Nature_Op_config" title="Nature d'opération" model="com.axelor.apps.configuration.db.NatureOperation" >
+		<view type="grid" name="Nature_Op_grid" />
+		<view type="form" name="Nature_Op_form" />
+	</action-view>
+
+	<menuitem name="partier_ver_configuration" parent="autre_configuration" title="Partier versement" action="partier_ver_config" />
+	<action-view name="partier_ver_config" title="Partier versement" model="com.axelor.apps.configuration.db.PartierVersement" >
+		<view type="grid" name="partier_ver_grid" />
+		<view type="form" name="partier_ver_form" />
+	</action-view>
+
+	<menuitem name="Tresorerie_configuration" parent="autre_configuration" title="Trésorerie" action="Tresorerie_T" />
+	<action-view name="Tresorerie_T" title="Trésorerie" model="com.axelor.apps.configuration.db.Tresorerie" >
+		<view type="grid" name="Tresorerie_grid" />
+		<view type="form" name="Tresorerie_form" />
+	</action-view>
+
+	<menuitem name="NATURE_DE_LA_DEPENSE" parent="menu-configuration-root" title="NATURE DE LA DEPENSE" order="12" icon="fa-cog" tag-style="default" />
+	<menuitem name="AOS_configuration" parent="NATURE_DE_LA_DEPENSE" title="AOS" action="AOS_configs" />
+	<action-view name="AOS_configs" title="AOS" model="com.axelor.apps.configuration.db.AOS_config" >
+		<view type="grid" name="AOS_configs_grid" />
+		<view type="form" name="AOS_configs_form" />
+	</action-view>
+	<menuitem name="RCAR_configuration" parent="NATURE_DE_LA_DEPENSE" title="RCAR" action="RCAR_config" />
+	<action-view name="RCAR_config" title="RCAR" model="com.axelor.apps.configuration.db.RCAR" >
+		<view type="grid" name="RCAR_grid" />
+		<view type="form" name="RCAR_form" />
+	</action-view>
+	<menuitem name="RCARC_configuration" parent="NATURE_DE_LA_DEPENSE" title="COMPLEMENT RCAR" action="RCARC_config" />
+	<action-view name="RCARC_config" title="RCARC" model="com.axelor.apps.configuration.db.RCARC" >
+		<view type="grid" name="RCARC_grid" />
+		<view type="form" name="RCARC_form" />
+	</action-view>
+	<menuitem name="type_configuration" parent="NATURE_DE_LA_DEPENSE" title="Type" action="type_config" />
+	<action-view name="type_config" title="Type" model="com.axelor.apps.configuration.db.Lestypes" >
+		<view type="grid" name="type_grid" />
+		<view type="form" name="type_form" />
+	</action-view>
+	<menuitem name="mutuelle_configuration" parent="NATURE_DE_LA_DEPENSE" title="Mutuelle" action="mutuelle_config" />
+	<action-view name="mutuelle_config" title="Mutuelle" model="com.axelor.apps.configuration.db.MUTUELLE" >
+		<view type="grid" name="Mutuelle_grid" />
+		<view type="form" name="Mutuelle_form" />
+	</action-view>
+	<menuitem name="IR_configuration" parent="NATURE_DE_LA_DEPENSE" title="IR" action="IR_config" />
+	<action-view name="IR_config" title="IR" model="com.axelor.apps.configuration.db.IR" >
+		<view type="grid" name="IR_grid" />
+		<view type="form" name="IR_form" />
+	</action-view>
+
+
+	<menuitem name="gest_management_version_documents" parent="menu-configuration-root" title="Gestion Documents" icon="fa-cog" action="gest_docu_verison" />
+	<action-view name="gest_docu_verison" title="Gestion des documents" model="com.axelor.apps.configuration.db.ManagementDocuments" >
+		<view type="grid" name="managementDocuments_grid" />
+		<view type="form" name="managementDocuments_form" />
+	</action-view>
+
+
+</object-views>

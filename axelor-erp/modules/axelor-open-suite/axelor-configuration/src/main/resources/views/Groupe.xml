@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="Groupe-grid" title="Groupes" model="com.axelor.apps.configuration.db.Groupes">
+       <field name="name" title="Groupe" required="true"/>
+        <field name="type" title="Type" selection="hr.deplacement.configurationDeplacement" />
+        <field name="indemniteInterne1" title="Pendant les 15 premiers jours dans la même localité" />
+        <field name="indemniteInterne2" title="A compter du 16e jours dans la même localité"  />
+        <field name="indemniteExterne" title="Indemnité journalier"   />
+        
+    </grid>
+	
+    <form name="Groupe-form" title="Groupes" model="com.axelor.apps.configuration.db.Groupes">
+		<panel name="mainPanel">
+		<field name="name" title="Groupe" required="true"/>
+        <field name="type" title="Type" selection="config.deplacement.configurationDeplacement" />
+        <field name="indemniteInterne1" title="Pendant les 15 premiers jours dans la même localité" showIf="type == 1" />
+        <field name="indemniteInterne2" title="A compter du 16e jours dans la même localité"  showIf="type == 1"/>
+        <field name="indemniteExterne" title="Indemnité journalier"   showIf="type == 2"/>
+		</panel>
+		
+    </form>
+</object-views>

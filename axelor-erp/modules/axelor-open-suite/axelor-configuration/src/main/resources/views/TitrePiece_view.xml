@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="titrePiece-grid_conf" title="Liste des Titres des documents" model="com.axelor.apps.configuration.db.TitrePiece">
+        <field name="name" title="Nom"/>
+        <field name="description" title="Description"/>
+        <field name="typeDoc" title="Type du document"/>
+        <field name="nature" title="Nature du document"/>
+    </grid>
+
+    <form name="titrePiece-form_conf" title="Liste des titres des documents" model="com.axelor.apps.configuration.db.TitrePiece" >
+        <panel name="articlePanel">
+            <field name="name" colSpan="6"/>
+            <field name="typeDoc" selection="select.TypeDoc.AO" colSpan="6"/>
+            <field name="nature" selection="select.natureDoc.AO" colSpan="6"/>
+            <field name="description" colSpan="12"/>
+        </panel>
+    </form>
+
+</object-views>

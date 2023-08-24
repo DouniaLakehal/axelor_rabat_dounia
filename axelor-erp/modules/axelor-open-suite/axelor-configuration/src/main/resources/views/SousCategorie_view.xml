@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="categorieNotation-grid" title="Sous catégories" model="com.axelor.apps.configuration.db.SousCategorie">
+        <field name="grille.name" title="Grille de notation"/>
+        <field name="name" title="Critère"/>
+        <field name="noteMax" title="Note Max"/>
+        <field name="prestation.nom_fr" title="Prestation"/>
+        <field name="description" title="Description"/>
+    </grid>
+
+    <form name="categorieNotation-form" title="Ajouter une catégorie" model="com.axelor.apps.configuration.db.SousCategorie">
+        <panel name="mainPanel" showTitle="false">
+            <field name="grille" target-name="name" title="Grille de notation"/>
+            <field name="name" title="Critère"/>
+            <field name="noteMax" title="Note Max"/>
+            <field name="prestation" target-name="nom_fr" title="Prestation"/>
+            <field name="description" title="Description"/>
+        </panel>
+    </form>
+
+</object-views>

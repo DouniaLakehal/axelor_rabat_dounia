@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="lieuExecution-grid" title="Liste de lieu d'execution" model="com.axelor.apps.configuration.db.LieuExecution">
+        <field name="nom_fr" title="Lieu d'execution"/>
+        <field name="nom_ar" title="مكان التنفيذ"/>
+    </grid>
+
+    <form name="lieuExecution-form" title="Lieu d'execution" model="com.axelor.apps.configuration.db.LieuExecution" >
+        <panel name="articlePanel">
+            <field name="nom_fr" title="Lieu d'execution" colSpan="6"/>
+            <field name="nom_ar" css="tw_arabe_orient" title="مكان التنفيذ" colSpan="6"/>
+        </panel>
+    </form>
+
+</object-views>

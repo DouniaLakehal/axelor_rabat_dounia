@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+	<grid name="Tresorerie_grid"  title="Trésorerie" model="com.axelor.apps.configuration.db.Tresorerie">
+		<field name="nom"/>
+		<field name="RIB"/>
+		<field name="description"/>
+	</grid>
+	<form name="Tresorerie_form"  title="Trésorerie" model="com.axelor.apps.configuration.db.Tresorerie" >
+		<panel name="articlePanel" >
+			<field name="nom" colSpan="4"/>
+			<field name="RIB" colSpan="4"/>
+			<field name="description" colSpan="4"/>
+		</panel>
+	</form>
+</object-views>

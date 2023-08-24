@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+	<grid name="regietest-grid" title="Article" model="com.axelor.apps.account.db.RegieTest">
+		<field name="ordredereceete"  title="Ordere de recette"/>
+		<field name="compteregie.rib" title="Numéro de compte" />
+		<field name="partierversement.libelle" title="Partie Versement" />
+		<field name="natureoperation.nom"  title="Nature de l'opération" />
+		<field name="montant" title="Montant (DH)" required="true"/>
+		<field name="montantenlettre" title="Montant en lettres"/>
+		<field name="piecesJointes" title="Nom de Fichier"  />
+		<field name="docAttach" title="document"/>
+	</grid>
+
+    <form name="regietest-form" title="Regie" model="com.axelor.apps.account.db.RegieTest">
+	<panel name="mainPanel">
+	    <field name="ordredereceete"  title="Ordere de recette N° : " required="true"/>
+		<field name="compteregie" target-name="rib" title="Numéro de compte :" required="true"/>
+		<field name="partierversement" target-name="libelle" title="Partie Versement :" required="true"/>
+		<field name="natureoperation" target-name="nom" title="Nature de l'opération :" required="true"/>
+	    <field name="montant" title="Montant (DH) :" required="true"/>
+        <field name="montantenlettre" title="Montant en lettres :" required="true" />
+		<field name="piecesJointes" title="Nom de Fichier :" required="true" />
+		<field name="docAttach" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid"/>
+		<button name="printEmployeePhoneBookBtn"
+				title="Imprimer" icon="fa-print" onClick="save, action-print-regie"/>
+
+	</panel>
+    </form>
+	<action-method name="action-print-regie">
+		<call class="com.axelor.apps.account.web.AppAccountController" method="imprimerGestionRegie"/>
+	</action-method>
+
+</object-views>

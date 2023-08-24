@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="configuration" package="com.axelor.apps.configuration.db"/>
+
+    <entity name="GestionSalaire" lang="java">
+        <many-to-one name="corps" ref="com.axelor.apps.configuration.db.Corps"/>
+        <many-to-one name="grade" ref="com.axelor.apps.configuration.db.Grade"/>
+        <string name="echelle" title="Echelle"/>
+        <string name="echelon" title="Echelon"/>
+        <string name="indice" title="Indice"/>
+        <decimal name="traitementDeBase" title="Traitement de base"/>
+        <decimal name="indemniteDeResidenceZC10" title="Indemnité de résidence Z.C 10%"/>
+        <decimal name="indemniteDeResidenceZB15" title="Indemnité de résidence Z.B 15%"/>
+        <decimal name="indemniteDeResidenceZA25" title="Indemnité de résidence Z.A 25%"/>
+        <decimal name="indemniteDeHierarchieAdministrative" title="Indemnité de hiérarchie administrative"/>
+        <decimal name="indemniteDeSujetion" title="Indemnité de sujétion"/>
+        <decimal name="indemniteEncadrement" title="Indemnité d'encadrement"/>
+        <decimal name="indemniteDeTechnicite" title="Indemnité de technicité"/>
+        <integer name="annee" title="Année"/>
+    </entity>
+
+</domain-models>

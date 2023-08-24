@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+              http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="courrier-grid" title="Enregistrement du courrier"
+		model="com.axelor.apps.contract.db.Courrier">
+		<field name="natureSelect" widget="single-select" title="Nature du courrier" />
+		<field name="name" title="Nom du courrier" />
+		<field name="prioritySelect" title="Priorité" widget="single-select" />
+		<field name="dateEnvoi" title="Date d'envoi" widget="single-select" />
+		<field name="dateReception" title="Date de reception" widget="single-select" />
+	</grid>
+
+	<grid name="suivi-grid" title="Suivi du courrier" canSave="false" canArchive="false" canMove="false"
+		model="com.axelor.apps.contract.db.Courrier" canEdit="false" canNew="false" canDelete="false">
+		<hilite if="$moment(dateLimite).diff(__date__,'days') &lt; 5" background="danger"/>
+		<field name="name" title="Nom du courrier"  />
+		<field name="dateReception"  title="Date de reception" />
+		<field name="dateLimite" title="Date Limite" />
+		<field name="datedelait" title="Date délait" />
+
+		<field name="etat" title="Statut" />
+
+	</grid>
+	<grid name="localisation-grid" title="Localisation Physique du courrier"
+		model="com.axelor.apps.contract.db.Courrier">
+				<field name="name" title="Nom du courrier" />
+
+		 <field name="etagere" title="Etagère" ref="com.axelor.apps.configuration.db.Etagere"/>
+        <field name="armoire" title="Armoire" ref="com.axelor.apps.configuration.db.Armoire"/>
+        <field name="bureau" title="Bureau" ref="com.axelor.apps.configuration.db.Bureau"/>
+
+	</grid>
+	<form name="courrier-form" title="Enregistrement du courrier" onNew="actiondatenow"
+		model="com.axelor.apps.contract.db.Courrier" width="large">
+	<panel name="mainPanel" >
+	<field name="numAnnee" showTitle="false" colSpan="12">
+				<viewer depends="numAnnee">
+					<![CDATA[
+						<h3>
+							<span  style="margin: 5px 0 !important; display: inline-table; line-height: initial;"><span x-translate>Courrier N° </span>{{record.numAnnee}}</span>
+						</h3>
+					]]>
+				</viewer>
+			</field>
+            <field name="natureSelect" title="Nature du courrier" widget="single-select" colSpan="12" />
+
+
+
+		<panel name="mainPanel" title="Informations du courrier" colSpan="12" showIf="natureSelect == 1">
+			<field name="courrierNature" title="Type du courrier" />
+				  <field name="typeLangue" title="Langue" selection="courrier.langue.select" showIf="natureSelect == 1"/>
+			<field name="name" title="Nom du courrier"  required="true"/>
+			 <field name="responsible"  title="Responsable"  />
+			<field name="expediteur" title="Expéditeur" />
+			 <field  name="reponse" title="Réponse à" showIf="courrierNature == 2"/>
+			<field name="prioritySelect" colSpan="6" widget="single-select" />
+      	     <field name="dateEnvoi" title="Date d'envoi" />
+<!--            <field name="destinataire" title="Destinataire" />-->
+			<field name="nomExpediteur" title="Destinataire" target-name="nomExpediteur" onChange="com.axelor.apps.contract.web.ContractController:theadresse"/>
+			<field name="adresseDuDestinataire"  title="Adresse du destinataire" />
+			<field name="adresseMailDestinataire" title="Adresse mail du destinataire" />
+
+			<field name="pjCourriel" grid-view="pieceJointe2-grid" form-view="pieceJointe2-form" title="Faire joindre une copie du courrier"
+				   required="true" colSpan="12"/>
+			<field name="description" title="Ordre de la correspondance" />
+
+		</panel>
+			<panel name="mainPanel" title="Informations du courrier" colSpan="12" showIf="natureSelect == 2">
+				<field name="name" title="Nom du courrier"  required="true"/>
+			<field name="prioritySelect" colSpan="6" widget="single-select" />
+			<field name="dateReception" title="Date du reception" />
+      	    <field name="dateLimite" title="Date Limite pour répondre" />
+            <field name="nomExpediteur" title="Expéditeur" target-name="nomExpediteur" onChange="com.axelor.apps.contract.web.ContractController:theemail"/>
+		<field name="adresseDuExpedit" title="Adresse du l'expéditeur" />
+		<field name="adresseMailExpedit" title="Adresse mail de l'expéditeur"/>
+				<field name="pjCourriel" grid-view="pieceJointe2-grid" form-view="pieceJointe2-form" title="Faire joindre une copie du courrier" colSpan="12"/>
+			<field name="description" title="Objet de la correspondance" />			
+		</panel>
+		</panel>
+		<panel name="mainPanel" title="Localisation physique" colSpan="12" >
+		        <field name="annexe" title="Annexe" ref="com.axelor.apps.configuration.db.AnnexeGenerale"/>
+		        <field name="localisation" title="Localisation par:" selection="courrier.localisation.physique.select" widget="single-select"/>		        
+		        <field name="bureau" title="Bureau" ref="com.axelor.apps.configuration.db.Bureau" domain="self.annexe = :annexe " showIf="localisation == 1" colSpan="12"/>
+		        <field name="couloir" title="Couloir" domain="self.annexe = :annexe " showIf="localisation == 2" colSpan="12"/>
+		        <field name="armoire" title="Armoire" ref="com.axelor.apps.configuration.db.Armoire" domain="self.bureau = :bureau " showIf="localisation == 1"/>
+		        <field name="armoire" title="Armoire" ref="com.axelor.apps.configuration.db.Armoire" domain="self.couloir = :couloir " showIf="localisation == 2"/>
+		                
+			<field name="etagere" title="Etagère" ref="com.axelor.apps.configuration.db.Etagere" domain="self.armoire = :armoire"/>
+     
+
+		</panel>
+	</form>
+
+
+	<action-record name="actiondatenow" model="com.axelor.apps.contract.db.Courrier">
+		<field name="dateEnvoi" expr="eval:__date__"/>
+	</action-record>
+
+
+
+
+
+
+
+</object-views>

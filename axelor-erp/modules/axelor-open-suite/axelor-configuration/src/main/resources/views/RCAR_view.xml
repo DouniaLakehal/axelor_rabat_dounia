@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="RCAR_grid" title="RCAR" model="com.axelor.apps.configuration.db.RCAR">
+        <field name="montant_max"/>
+        <field name="montant_min"/>
+        <field name="pors"/>
+        <field name="annee"/>
+    </grid>
+
+    <form name="RCAR_form" title="RCAR" model="com.axelor.apps.configuration.db.RCAR" >
+        <panel name="articlePanel" >
+            <field name="montant_max"/>
+            <field name="montant_min"/>
+            <field name="pors"/>
+            <field name="annee"/>
+        </panel>
+        <panel title="Infomations Banquaire">
+            <field name="namBank"/>
+            <field name="rib"/>
+        </panel>
+    </form>
+
+</object-views>

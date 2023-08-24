@@ -1,0 +1,2 @@
+name;code;installOrder;description;imagePath;modules;dependsOn;sequence
+Configuration;configuration;7;configuration de l'application;app-configuration.png;axelor-configuration;base;11

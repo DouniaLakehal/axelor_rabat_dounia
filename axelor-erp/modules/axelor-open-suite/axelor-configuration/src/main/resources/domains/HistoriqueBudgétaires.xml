@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="configuration" package="com.axelor.apps.configuration.db"/>
+
+    <entity name="HistoriqueBudgetaire" lang="java">
+        <integer name="annee" title="Année"/>
+        <integer name="mois" title="mois"/>
+        <many-to-one name="annexe" ref="com.axelor.apps.configuration.db.AnnexeGenerale" title="annexe"/>
+        <date name="dateEx" title="Date"/>
+        <many-to-one ref="com.axelor.apps.configuration.db.RubriqueBudgetaireGenerale" name="rubriqueBudgetaire" title="Rubrique Budgetaire"/>
+        <decimal name="montant" title="Montant"/>
+        <decimal name="montantRubrique" title="MontantRubrique"/>
+        <datetime name="dateExecution" title="dateExecution"/>
+        <many-to-one name="budgetParRubrique" ref="com.axelor.apps.configuration.db.BudgetParRubrique"/>
+        <string name="typeOperation" selection="config.type.operation.budget" />
+
+    </entity>
+
+</domain-models>

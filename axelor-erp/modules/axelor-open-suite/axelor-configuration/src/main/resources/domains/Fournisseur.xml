@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="configuration" package="com.axelor.apps.configuration.db"/>
+
+    <entity name="Fournisseur" lang="java">
+       <string name="type" title="Type" selection="config.fournisseur.slection" default="1"/>
+       <string name="raisonSocial" title="Raison Social " />
+       <string name="adresse" title="Adresse" />
+       <string name="ville" title="Ville " />
+       <string name="nomAgence" title="Nom d'agence bancaire "  />
+       <string name="rib" title="RIB" />
+       <string name="tele" title="Téléphone " />
+       <string name="email" title="Email" />
+       <string name="identifiantFiscal" title="Identifiant fiscal"/>
+       <string name="representantLegal" title="Représentant légal"/>
+       <string name="nom" title="Nom" />
+       <string name="prenom" title="Prénom" />
+       <string name="name" namecolumn="true" search="raisonSocial,nom" title="Name">
+
+ <![CDATA[
+   String name = " - ";
+   if (raisonSocial!= null) name = raisonSocial.toString();
+   if (nom != null) name = nom.toString();
+   return name;
+ ]]>
+</string>
+        <string name="banqueName"/>
+    </entity>
+
+</domain-models>

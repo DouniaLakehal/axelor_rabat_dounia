@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models
+	xmlns="http://axelor.com/xml/ns/domain-models"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+	<module name="contract" package="com.axelor.apps.contract.db"  />
+	<entity name="Expediteur">
+      <string name="nomExpediteur" title="Nom d'expéditeur"/>
+		<string name="phone" title="Téléphone"/>
+		<string name="email" title="Email"/>
+		<string name="fax" title="Fax"/>
+		<string name="adresee" title="Adresee"/>
+		<string name="commentatire" title="Commentatire"/>
+	</entity>
+
+</domain-models>

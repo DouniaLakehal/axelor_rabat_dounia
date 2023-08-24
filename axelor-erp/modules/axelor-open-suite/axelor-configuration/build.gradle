@@ -1,0 +1,19 @@
+apply plugin: "com.axelor.app-module"
+
+apply from: "../version.gradle"
+
+apply {
+	version = openSuiteVersion
+}
+
+axelor {
+	title "Axelor Configuration"
+	description "Axelor configuration Module"
+}
+
+dependencies {
+	api project(":modules:axelor-base")
+	// https://mvnrepository.com/artifact/com.itextpdf/itextpdf
+	implementation group: 'com.itextpdf', name: 'itextpdf', version: '5.5.13.2'
+
+}

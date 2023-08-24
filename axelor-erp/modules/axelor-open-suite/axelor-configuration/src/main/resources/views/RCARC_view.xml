@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="RCARC_grid" title="COMPLEMENT RCAR" model="com.axelor.apps.configuration.db.RCARC">
+        <field name="montant"/>
+        <field name="pors"/>
+        <field name="annee"/>
+    </grid>
+
+    <form name="RCARC_form" title="COMPLEMENT RCAR" model="com.axelor.apps.configuration.db.RCARC" >
+        <panel name="articlePanel" >
+            <field name="montant"/>
+            <field name="pors"/>
+            <field name="annee"/>
+        </panel>
+    </form>
+
+</object-views>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="ListRubriqueDepensesGenerale-grid" title="Gestion ListRubriqueDepensesGenerale" model="com.axelor.apps.configuration.db.ListRubriqueDepensesGenerale">
+        <field name="rubriquesBudgetaire" title="Rubriques budgétaites"/>
+        <field name="is_titre" title="Titre"/>
+    </grid>
+
+    <form onNew="get_rubrique_by_year" onLoad="get_rubrique_by_year"
+          name="ListRubriqueDepensesGenerale-form" title="Gestion ListRubriqueDepensesGenerale" model="com.axelor.apps.configuration.db.ListRubriqueDepensesGenerale" >
+        <panel name="mainPanel">
+            <field name="rubriquesBudgetaire" title="Rubriques budgétaites" colSpan="6"/>
+            <field name="is_titre" title="Titre" colSpan="6"/>
+        </panel>
+    </form>
+
+
+
+</object-views>

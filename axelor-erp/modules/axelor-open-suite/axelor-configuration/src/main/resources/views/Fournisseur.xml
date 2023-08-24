@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="fournisseur_grid_conf" title="Fournisseur" model="com.axelor.apps.configuration.db.Fournisseur">
+	   <field name="type"  selection="config.fournisseur.slection"  title="type de tiers"/>
+	   <field  name="raisonSocial" title="Raison Social"/>
+	   <field name="identifiantFiscal" title="Identifiant fiscal"/>
+       <field name="representantLegal" title="Représentant légal"/>
+       <field name="nom" title="Nom"/>
+       <field name="prenom" title="Prénom"/>
+       <field name="adresse" title="Adresse"/>
+       <field name="ville" title="Ville"/>
+       <field name="nomAgence" title="Nom d'agence bancaire"/>
+       <field name="rib" title="RIB" />
+       <field name="tele" title="Téléphone"/>
+       <field name="email" title="Email"/>
+    </grid>
+	
+    <form onSave="save,com.axelor.apps.purchase.web.AppPurchaseController:updateSelectFournisseur" name="fournisseur_form_conf" title="Fournisseur" model="com.axelor.apps.configuration.db.Fournisseur">
+	<panel name="mainPanel">
+	   <field name="type"  selection="config.fournisseur.slection"  widget="single-select" colSpan="12" placeholder="Partner Type"/>
+	   <field name="raisonSocial" title="Raison Social " showIf="type == 1"/>
+	   <field name="identifiantFiscal" title="Identifiant fiscal" showIf="type == 1"/>
+       <field name="representantLegal" title="Représentant légal" showIf="type == 1"/>
+       <field name="nom" title="Nom" showIf="type == 2"/>
+       <field name="prenom" title="Prénom" showIf="type == 2"/>
+       <field name="adresse" title="Adresse" colSpan="12"/>
+       <field name="ville" title="Ville " />
+       <field name="nomAgence" title="Nom d'agence bancaire"/>
+        <field name="rib" title="RIB" />
+        <field name="banqueName" title="Nom de la banque" />
+       <field name="tele" title="Téléphone" />
+       <field name="email" title="Email" />
+	</panel>
+    </form>
+
+</object-views>

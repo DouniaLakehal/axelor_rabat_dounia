@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<form canDelete="false" canCopy="false" canAttach="false" canArchive="false"
+		  onNew="load_default_date" onLoad="auto_saisie_short_code" onSave="save,saveRubriqueBudgetaire" title="Budget"
+		  name="custom_budget_info" model="com.axelor.apps.configuration.db.RubriquesBudgetaire" width="large">
+		<panel showTitle="false" >
+			<field name="anneCurrent" title="Année" colSpan="2"/>
+			<field name="code_budget" colSpan="2" onChange="auto_saisie_short_code"/>
+			<field name="titre_budget" colSpan="8"/>
+			<panel name="investissement" hidden="true" colSpan="12">
+				<field name="reportCredit" colSpan="3"/>
+				<field name="nouvCredit" colSpan="3"/>
+				<field hidden="true" name="creditEngagement" colSpan="3"/>
+			</panel>
+
+			<field onChange="changerDomaineType" name="depenceAndRecette" colSpan="3" title="Type de la Rubrique" widget="boolean-radio" x-true-text="Recette" x-false-text="Dépense" />
+			<field name="montant_budget" colSpan="3"/>
+			<field canView="false" canNew="false" canRemove="false" canEdit="false" grid-view="select_rubrique" x-bind=""
+				   name="budgetParent" title="Rubrique parent" target-name="titre_budget" onSelect="changerDomaine"
+				   domain="self.id_version=:id_version and self.anneCurrent=:anneCurrent and self.montant_budget=0 "/>
+			<field name="is_principal" onChange="changerDomaineType" title="Afficher la rubrique dans le tableau principal"/>
+			<field name="is_detaille" onChange="changerDomaineType" title="Afficher la rubrique dans le tableau détaillé"/>
+			<panel colSpan="12">
+				<field title="Categorie de la rubrique principal" colSpan="6" showIf="is_principal" name="typeRubriquePrincipal" domain="self.depenceAndRecette=:depenceAndRecette and self.principalAndDetailler is true"/>
+				<field title="Categorie de la rubrique détaillée" colSpan="6" showIf="is_detaille" name="typeRubriqueDetaille" domain="self.depenceAndRecette=:depenceAndRecette and self.principalAndDetailler is false"/>
+			</panel>
+		</panel>
+		<panel hidden="true" colSpan="12">
+			<field name="id_version"/>
+		</panel>
+	</form>
+
+	<grid title="Rubrique Budgetaire" name="select_rubrique" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+		<field name="code_budget" title="Code budgetaire"/>
+		<field name="titre_budget" title="Rubrique budgetaire"/>
+		<field name="anneCurrent" title="Annee"/>
+		<field name="id_version" title="Version" hidden="true"/>
+	</grid>
+
+	<action-attrs name="changerDomaineType">
+		<attribute if="!is_principal" for="typeRubriquePrincipal" name="value" expr="eval:null"/>
+		<attribute if="!is_detaille" for="typeRubriqueDetaille" name="value" expr="eval:null"/>
+		<!--<attribute for="typeRubrique" name="domain" expr="eval: &quot; self.depenceAndRecette=:depenceAndRecette and self.detailler=true &quot;" if="!is_principal &amp;&amp; is_detaille"/>
+		<attribute for="typeRubrique" name="domain" expr="eval: &quot; self.depenceAndRecette=:depenceAndRecette and self.principal=true &quot;" if="is_principal"/>-->
+	</action-attrs>
+
+	<action-attrs name="auto_saisie_short_code">
+		<attribute if="code_budget!=null" for="budgetParent" name="domain" expr="eval: &quot; self.id_version=:id_version AND self.anneCurrent=:anneCurrent and self.montant_budget=0 &quot; "/>
+		<attribute for="investissement" name="hidden" expr="eval:!(code_budget.startsWith('2'))"/>
+	</action-attrs>
+
+
+
+	<action-record name="load_default_date" model="com.axelor.apps.configuration.db.RubriqueConfiguration">
+<!--		<field name="anneCurrent" expr="eval:(__date__).getYear()"/>-->
+		<field name="anneCurrent" expr="eval:2022"/>
+		<field name="id_version" expr="eval:id_version"/>
+	</action-record>
+
+	<grid orderBy="code_budget" canDelete="false" title="Rubrique Bidgetaire" name="gridRubriquesBudgetaireSaisieNew" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+		<menubar>
+			<menu title="Gestion Rubrique principale">
+				<item title="Cacher les montant des rubriques principale" action="tw_cacher_Rubrique_principale_version"/>
+			</menu>
+			<menu title="Gestion Rubrique detaillée">
+				<menu title="Gestion des charges Exploitation">
+					<item title="Choisir les lignes a afficher dans FONC" action="tw_affiche_Row_Fonc_version"/>
+					<item title="Cacher les montants des lignes" action="tw_cacher_montant_Fonc_version"/>
+				</menu>
+				<menu title="Gestion des emplois d'investissement">
+					<item title="Choisir les lignes a afficher dans Equipe" action="tw_afficher_Row_Equipe_version"/>
+					<item title="Cacher les montants des lignes" action="tw_cacher_montant_Equipe_version"/>
+				</menu>
+			</menu>
+
+		</menubar>
+		<hilite if="montant_total_children!=0" background="warning"/>
+		<hilite if="montant_old_version!=montant_budget &amp;&amp; montant_old_version!= null &amp;&amp; montant_old_version &gt; 0 " background="info"/>
+		<field name="code_budget" title="Code"/>
+		<field name="titre_budget" title="Rubrique"/>
+		<field name="montant_budget" title="Montant Rubrique"/>
+		<field name="montant_total_children" title="Montant total des sous-rubrique"/>
+		<field name="montant_old_version" title="old version" hidden="true"/>
+		<field name="commentaire" hidden="true" title="commentaire"/>
+		<button icon="fa-trash" name="btn_action_view_rubrique" onClick="delete_rubriqueBudgitaire" title="supprimer"/>
+		<button icon="fa-commenting" name="btn_comment_view_rubrique" onClick="edit_comment_versionRb" title="Ajouter un commentaire" css="red_comment" />
+		<!--<button icon="fa-eye" name="btn_action_view_rubrique" onClick="action_view_rubrique"/>-->
+	</grid>
+
+	<action-method name="edit_comment_versionRb">
+		<call class="com.axelor.apps.configuration.web.AppConfigurationController" method="tw_edit_comment_versionRb"/>
+	</action-method>
+
+	<form title="Saisir le commentaire" name="versionRb_saisie_commentaire" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+		<panel colSpan="12">
+			<field colSpan="12" name="commentaire" title="Commentaire" widget="Text" height="4"/>
+		</panel>
+	</form>
+
+	<grid canSave="false" canNew="false" canArchive="false" canMove="false" canEdit="true" edit-icon="false" editable="true" orderBy="code_budget" canDelete="false"
+		  title="Rubrique Bidgetaire" name="tw_grid_cacher_rubrique_principale" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+		<field readonly="true" name="code_budget" title="Code"/>
+		<field readonly="true" name="titre_budget" title="Rubrique"/>
+		<field readonly="true" name="anneCurrent" title="Annee"/>
+		<field name="hide_in_principale" title="Cacher le montant"/>
+		<!--<button icon="fa-eye" name="btn_action_view_rubrique" onClick="action_view_rubrique"/>-->
+	</grid>
+	<grid canSave="false" canNew="false" canArchive="false" canMove="false" canEdit="true" edit-icon="false" editable="true" orderBy="code_budget" canDelete="false"
+		  title="Rubrique Bidgetaire" name="tw_grid_cacher_Row_Equipe" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+		<field readonly="true" name="code_budget" title="Code"/>
+		<field readonly="true" name="titre_budget" title="Rubrique"/>
+		<field readonly="true" name="anneCurrent" title="Annee"/>
+		<field name="show_row_equipe" title="Afficher la ligne dans Equipe"/>
+	</grid>
+
+
+	<grid canSave="false" canNew="false" canArchive="false" canMove="false" canEdit="true" edit-icon="false" editable="true" orderBy="code_budget" canDelete="false"
+		  title="Rubrique Bidgetaire" name="tw_grid_affiche_Row_Fonc" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+		<field readonly="true" name="code_budget" title="Code"/>
+		<field readonly="true" name="titre_budget" title="Rubrique"/>
+		<field readonly="true" name="anneCurrent" title="Annee"/>
+		<field name="show_row_fonc" title="Afficher la ligne"/>
+	</grid>
+
+	<grid canSave="false" canNew="false" canArchive="false" canMove="false" canEdit="true" edit-icon="false" editable="true" orderBy="code_budget" canDelete="false"
+		  title="Rubrique Bidgetaire" name="tw_grid_hide_montant_fonc" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+		<field readonly="true" name="code_budget" title="Code"/>
+		<field readonly="true" name="titre_budget" title="Rubrique"/>
+		<field readonly="true" name="anneCurrent" title="Annee"/>
+		<field name="hide_montant_fonc" title="Cacher le montant dans FONC"/>
+	</grid>
+
+	<grid canSave="false" canNew="false" canArchive="false" canMove="false" canEdit="true" edit-icon="false" editable="true" orderBy="code_budget" canDelete="false"
+		  title="Rubrique Bidgetaire" name="tw_grid_hide_montant_equip" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+		<field readonly="true" name="code_budget" title="Code"/>
+		<field readonly="true" name="titre_budget" title="Rubrique"/>
+		<field readonly="true" name="anneCurrent" title="Annee"/>
+		<field name="hide_mt_equipe" title="Cacher le montant dans Equipe"/>
+	</grid>
+
+
+
+	<action-method name="saveRubriqueBudgetaire">
+		<call class="com.axelor.apps.configuration.web.AppConfigurationController" method="calucle_some_total_rubrique"/>
+	</action-method>
+
+	<action-method name="delete_rubriqueBudgitaire">
+		<call class="com.axelor.apps.configuration.web.AppConfigurationController" method="tw_delete_rubriqueBudgitaire"/>
+	</action-method>
+
+
+
+	<!--menu finction-->
+	<action-method name="tw_afficher_Row_Equipe_version">
+		<call class="com.axelor.apps.configuration.web.AppConfigurationController" method="tw_afficher_Row_Equipe_version"/>
+	</action-method>
+
+	<action-method name="tw_cacher_Rubrique_principale_version">
+		<call class="com.axelor.apps.configuration.web.AppConfigurationController" method="get_tw_cacher_Rubrique_principale_version"/>
+	</action-method>
+
+	<action-method name="tw_affiche_Row_Fonc_version">
+		<call class="com.axelor.apps.configuration.web.AppConfigurationController" method="get_tw_affiche_Row_Fonc_version"/>
+	</action-method>
+
+	<action-method name="tw_cacher_montant_Fonc_version">
+		<call class="com.axelor.apps.configuration.web.AppConfigurationController" method="get_tw_cacher_montant_Fonc_version"/>
+	</action-method>
+
+	<action-method name="tw_cacher_montant_Equipe_version">
+		<call class="com.axelor.apps.configuration.web.AppConfigurationController" method="get_tw_cacher_montant_Equipe_version"/>
+	</action-method>
+
+
+
+
+
+
+
+
+
+
+
+
+</object-views>

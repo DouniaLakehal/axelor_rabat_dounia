@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="configuration" package="com.axelor.apps.configuration.db"/>
+
+    <entity name="JournaleFinancier" lang="java">
+        <integer name="moisEncours"/>
+        <integer name="anneeEncours"/>
+        <decimal name="montantOpen"/>
+        <decimal name="montantClose"/>
+        <decimal name="tot_debit"/>
+        <decimal name="tot_credit"/>
+        <many-to-one name="compte" ref="com.axelor.apps.configuration.db.Compte"/>
+        <one-to-many name="operationJournaleFinancier" ref="com.axelor.apps.configuration.db.OperationJournaleFinancier"/>
+    </entity>
+
+    <entity name="OperationJournaleFinancier">
+        <long name="journaleFinancier_id"/>
+        <date name="dateOperation"/>
+        <string name="libelle"/>
+        <string name="nPiece"/>
+        <decimal name="debit"/>
+        <decimal name="credit"/>
+        <decimal name="debiteur"/>
+    </entity>
+
+</domain-models>

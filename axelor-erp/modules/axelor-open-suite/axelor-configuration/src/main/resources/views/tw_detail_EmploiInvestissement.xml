@@ -1,0 +1,298 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+    <form title="Budget detail" name="tw_EmploiInvestissement" onNew="getTotalEquipeByType"
+          model="com.axelor.apps.configuration.db.RubriquesBudgetaire" width="large">
+
+        <panel colSpan="12">
+
+            <panel-dashlet canSearch="false" readonly="true" name="$immobilisation_non_valeur"
+                           title="IMMOBILISATION EN NON-VALEURS" action="immobilisation_non_valeur" colSpan="12"/>
+            <panel colSpan="12">
+                <panel colSpan="6" colOffset="6" title="TOTAL DES IMMOBILISATION EN NON-VALEURS">
+                    <field colSpan="12" type="decimal" readonly="true" name="$equip_som1_1" showTitle="false">
+                        <viewer>
+                            <![CDATA[
+
+								<table class="table w-100 table-bordered">
+									<tr>
+										<td style="width: calc(100% / 3);"><span style="font-size: 14px;font-weight: bold; text-align:center">Total Report</span></td>
+										<td style="width: calc(100% / 3);"><span style="font-size: 14px;font-weight: bold; text-align:center">Nouveaux crédits</span></td>
+										<td style="width: calc(100% / 3);"><span style="font-size: 14px;font-weight: bold;">Total Projet budget {{record.$anne_current}}</span></td>
+									</tr>
+									<tr>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$mt_report_immobilisation_en_non_valeurs')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$mt_nouv_immobilisation_en_non_valeurs')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$mt_budget_immobilisation_en_non_valeurs')}}</span></td>
+									</tr>
+								</table>
+							]]>
+                        </viewer>
+                    </field>
+                </panel>
+            </panel>
+
+            <panel-dashlet canSearch="false" readonly="true" name="$terrain" title="TERRAINS" action="terrain"
+                           colSpan="12"/>
+            <panel colSpan="12">
+                <panel colSpan="6" colOffset="6" title="TOTAL DES TERRAINS">
+                    <field colSpan="12" type="decimal" readonly="true" name="$equip_som3_1" showTitle="false">
+                        <viewer>
+                            <![CDATA[
+								<table class="table w-100 table-bordered">
+								<tr>
+									<td style="width: calc(100% / 3);"><span style="font-size: 14px;font-weight: bold; text-align:center">Total Report</span></td>
+									<td style="width: calc(100% / 3);"><span style="font-size: 14px;font-weight: bold; text-align:center">Nouveaux crédits</span></td>
+									<td style="width: calc(100% / 3);"><span style="font-size: 14px;font-weight: bold;">Total Projet budget {{record.$anne_current}}</span></td>
+								</tr>
+								<tr>
+									<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$mt_report_terrains')}}</span></td>
+									<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$mt_nouv_terrains')}}</span></td>
+									<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$mt_budget_terrains')}}</span></td>
+								</tr>
+							</table>
+							]]>
+                        </viewer>
+                    </field>
+                </panel>
+            </panel>
+
+            <panel-dashlet canSearch="false" readonly="true" name="$construction" title="CONSTRUCTIONS"
+                           action="construction" colSpan="12"/>
+            <panel colSpan="12">
+                <panel colSpan="6" colOffset="6" title="TOTAL DES CONSTRUCTIONS">
+                    <field colSpan="12" type="decimal" readonly="true" name="$equip_som4_1" showTitle="false">
+                        <viewer>
+                            <![CDATA[
+							<table class="table w-100 table-bordered">
+								<tr>
+									<td style="width: calc(100% / 3);"><span style="font-size: 14px;font-weight: bold; text-align:center">Total Report</span></td>
+									<td style="width: calc(100% / 3);"><span style="font-size: 14px;font-weight: bold; text-align:center">Nouveaux crédits</span></td>
+									<td style="width: calc(100% / 3);"><span style="font-size: 14px;font-weight: bold;">Total Projet budget {{record.$anne_current}}</span></td>
+								</tr>
+								<tr>
+									<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$mt_report_construction')}}</span></td>
+									<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$mt_nouv_construction')}}</span></td>
+									<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$mt_budget_construction')}}</span></td>
+								</tr>
+							</table>
+							]]>
+                        </viewer>
+                    </field>
+                </panel>
+            </panel>
+
+            <panel-dashlet canSearch="false" readonly="true" name="$mattrans" title="MATERIEL DE TRANSPORT"
+                           action="mattrans" colSpan="12"/>
+            <panel colSpan="12">
+                <panel colSpan="6" colOffset="6" title="TOTAL DU MATERIEL DE TRANSPORT">
+                    <field colSpan="12" type="decimal" readonly="true" name="$equip_som5_1" showTitle="false">
+                        <viewer>
+                            <![CDATA[
+							<table class="table w-100 table-bordered">
+								<tr>
+									<td style="width: calc(100% / 3);"><span style="font-size: 14px;font-weight: bold; text-align:center">Total Report</span></td>
+									<td style="width: calc(100% / 3);"><span style="font-size: 14px;font-weight: bold; text-align:center">Nouveaux crédits</span></td>
+									<td style="width: calc(100% / 3);"><span style="font-size: 14px;font-weight: bold;">Total Projet budget {{record.$anne_current}}</span></td>
+								</tr>
+								<tr>
+									<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$mt_report_materiel_transport')}}</span></td>
+									<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$mt_nouv_materiel_transport')}}</span></td>
+									<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$mt_budget_materiel_transport')}}</span></td>
+								</tr>
+							</table>
+							]]>
+                        </viewer>
+                    </field>
+                </panel>
+            </panel>
+
+            <panel-dashlet canSearch="false" readonly="true" name="$mobAmenag"
+                           title="MOBILIER DE BURAU ET AMENAGEMENT DIVERS" action="mobAmenag" colSpan="12"/>
+            <panel colSpan="12">
+                <panel colSpan="6" colOffset="6" title="TOTAL DU MOBILIER DE BURAU ET AMENAGEMENT DIVERS">
+                    <field colSpan="12" type="decimal" readonly="true" name="$equip_som6_1" showTitle="false">
+                        <viewer>
+                            <![CDATA[
+
+								<table class="table w-100 table-bordered">
+									<tr>
+										<td style="width: calc(100% / 3);"><span style="font-size: 14px;font-weight: bold; text-align:center">Total Report</span></td>
+										<td style="width: calc(100% / 3);"><span style="font-size: 14px;font-weight: bold; text-align:center">Nouveaux crédits</span></td>
+										<td style="width: calc(100% / 3);"><span style="font-size: 14px;font-weight: bold;">Total Projet budget {{record.$anne_current}}</span></td>
+									</tr>
+									<tr>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$mt_report_mobilier_bureau_amenagement_divers')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$mt_nouv_mobilier_bureau_amenagement_divers')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$mt_budget_mobilier_bureau_amenagement_divers')}}</span></td>
+									</tr>
+								</table>
+							]]>
+                        </viewer>
+                    </field>
+                </panel>
+            </panel>
+
+            <panel-dashlet canSearch="false" readonly="true" name="$titreDeParticipation" title="Titre de Participation"
+                           action="titreDeParticipation" colSpan="12"/>
+            <panel colSpan="12">
+                <panel colSpan="6" colOffset="6" title="TOTAL DES TITRES DE PARTICIPATION">
+                    <field colSpan="12" type="decimal" readonly="true" name="$equip_som1_1" showTitle="false">
+                        <viewer>
+                            <![CDATA[
+
+								<table class="table w-100 table-bordered">
+									<tr>
+										<td style="width: calc(100% / 3);"><span style="font-size: 14px;font-weight: bold; text-align:center">Total Report</span></td>
+										<td style="width: calc(100% / 3);"><span style="font-size: 14px;font-weight: bold; text-align:center">Nouveaux crédits</span></td>
+										<td style="width: calc(100% / 3);"><span style="font-size: 14px;font-weight: bold;">Total Projet budget {{record.$anne_current}}</span></td>
+									</tr>
+									<tr>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$mt_report_titres_participation')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$mt_nouv_titres_participation')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$mt_budget_titres_participation')}}</span></td>
+									</tr>
+								</table>
+							]]>
+                        </viewer>
+                    </field>
+                </panel>
+            </panel>
+
+            <panel-dashlet canSearch="false" readonly="true" name="$planDeDeveloppement" title="Plan de Développement"
+                           action="planDeDeveloppement" colSpan="12"/>
+            <panel colSpan="12">
+                <panel colSpan="6" colOffset="6" title="TOTAL DES TITRES DE PARTICIPATION">
+                    <field colSpan="12" type="decimal" readonly="true" name="$equip_som1_1" showTitle="false">
+                        <viewer>
+                            <![CDATA[
+
+								<table class="table w-100 table-bordered">
+									<tr>
+										<td style="width: calc(100% / 3);"><span style="font-size: 14px;font-weight: bold; text-align:center">Total Report</span></td>
+										<td style="width: calc(100% / 3);"><span style="font-size: 14px;font-weight: bold; text-align:center">Nouveaux crédits</span></td>
+										<td style="width: calc(100% / 3);"><span style="font-size: 14px;font-weight: bold;">Total Projet budget {{record.$anne_current}}</span></td>
+									</tr>
+									<tr>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$mt_report_plan_developpement_CCISBK')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$mt_nouv_plan_developpement_CCISBK')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$mt_budget_plan_developpement_CCISBK')}}</span></td>
+									</tr>
+								</table>
+							]]>
+                        </viewer>
+                    </field>
+                </panel>
+            </panel>
+
+
+            <panel colSpan="12">
+                <panel colSpan="6">
+                    <panel colSpan="8">
+                        <button icon="fa-search" title="Detail Equip-d" name="btn_equip-d"
+                                onClick="getListEquipeDetail"/>
+                    </panel>
+                </panel>
+                <panel colSpan="6" title="TOTAL DES EMPLOIS">
+                    <field colSpan="12" type="decimal" readonly="true" name="$equip_som_total" showTitle="false">
+                        <viewer>
+                            <![CDATA[
+								<table class="table w-100 table-bordered">
+									<tr>
+										<td style="width: calc(100% / 3);"><span style="font-size: 14px;font-weight: bold; text-align:center">Total Report</span></td>
+										<td style="width: calc(100% / 3);"><span style="font-size: 14px;font-weight: bold; text-align:center">Nouveaux crédits</span></td>
+										<td style="width: calc(100% / 3);"><span style="font-size: 14px;font-weight: bold;">Total Projet budget {{record.$anne_current}}</span></td>
+									</tr>
+									<tr>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_total_x_1')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_total_x_2')}}</span></td>
+										<td style="text-align: right;"><span style="font-size: 14px;font-weight: bold;" >{{$fmt('$equip_som_total_x_3')}}</span></td>
+									</tr>
+								</table>
+							]]>
+                        </viewer>
+                    </field>
+                </panel>
+            </panel>
+
+        </panel>
+    </form>
+
+
+    <grid title="Budget Detail" orderBy="code_budget" name="tw_detail_EmploiInvestissement_grid"
+          model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+        <field name="code_budget" title="Code"/>
+        <field name="titre_budget" title="Rubriques"/>
+        <field name="equip_mt_reportCredit" title="Report"/>
+        <field name="equip_mt_nouvCredit" title="Nouveaux crédits"/>
+        <field name="equip_mt_montant_Budget" title="Projet budget"/>
+    </grid>
+
+
+    <action-view name="immobilisation_non_valeur" title="IMMOBILISATION EN NON-VALEURS"
+                 model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+        <view type="grid" name="tw_detail_EmploiInvestissement_grid"/>
+        <domain>self.id_version=:id_version and self.anneCurrent =:fieldanne and self.is_detaille is true and
+            self.typeRubriqueDetaille.id=:immobilisation_en_non_valeurs and self.show_row_equipe is true
+        </domain>
+    </action-view>
+
+    <action-view name="terrain" title="Terrain" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+        <view type="grid" name="tw_detail_EmploiInvestissement_grid"/>
+        <domain>self.id_version=:id_version and ( self.anneCurrent =:fieldanne and self.is_detaille is true and
+            self.typeRubriqueDetaille.id=:terrains and self.show_row_equipe is true )
+        </domain>
+    </action-view>
+
+    <action-view name="construction" title="Construction" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+        <view type="grid" name="tw_detail_EmploiInvestissement_grid"/>
+        <domain>self.id_version=:id_version and (self.anneCurrent =:fieldanne and self.is_detaille is true and
+            self.typeRubriqueDetaille.id=:construction and self.show_row_equipe is true )
+        </domain>
+    </action-view>
+
+    <action-view name="mattrans" title="MATERIEL DE TRANSPORT"
+                 model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+        <view type="grid" name="tw_detail_EmploiInvestissement_grid"/>
+        <domain>self.id_version=:id_version and (self.anneCurrent =:fieldanne and self.is_detaille is true and
+            self.typeRubriqueDetaille.id=:materiel_transport and self.show_row_equipe is true)
+        </domain>
+    </action-view>
+
+    <action-view name="mobAmenag" title="MOBILIER DE BURAU ET AMENAGEMENT DIVERS"
+                 model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+        <view type="grid" name="tw_detail_EmploiInvestissement_grid"/>
+        <domain>self.id_version=:id_version and (self.anneCurrent =:fieldanne and self.is_detaille is true and
+            self.typeRubriqueDetaille.id=:mobilier_bureau_amenagement_divers and self.show_row_equipe is true )
+        </domain>
+    </action-view>
+
+    <action-view name="titreDeParticipation" title="Titre de Participation"
+                 model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+        <view type="grid" name="tw_detail_EmploiInvestissement_grid"/>
+        <domain>self.id_version=:id_version and (self.anneCurrent =:fieldanne and self.is_detaille is true and
+            self.typeRubriqueDetaille.id=:titres_participation and self.show_row_equipe is true )
+        </domain>
+    </action-view>
+
+    <action-view name="planDeDeveloppement" title="Pan de Développement"
+                 model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+        <view type="grid" name="tw_detail_EmploiInvestissement_grid"/>
+        <domain>self.id_version=:id_version and (self.anneCurrent =:fieldanne and self.is_detaille is true and
+            self.typeRubriqueDetaille.id=:plan_developpement_CCISBK and self.show_row_equipe is true )
+        </domain>
+    </action-view>
+
+
+    <action-method name="getTotalEquipeByType">
+        <call class="com.axelor.apps.configuration.web.AppConfigurationController" method="tw_getTotalEquipeByType"/>
+    </action-method>
+
+    <action-method name="getListEquipeDetail">
+        <call class="com.axelor.apps.configuration.web.AppConfigurationController" method="tw_getListEquipeDetail"/>
+    </action-method>
+
+
+</object-views>

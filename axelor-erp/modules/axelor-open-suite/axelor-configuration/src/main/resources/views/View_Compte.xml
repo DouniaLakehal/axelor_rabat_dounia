@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+	<grid canDelete="false" name="Compte_detail_grid" canSave="false" title="Liste des comptes" model="com.axelor.apps.configuration.db.Compte">
+		<field name="designation"/>
+		<field name="rib"/>
+		<field name="montant"/>
+		<field name="description"/>
+		<field name="annexe"/>
+		<field name="action"/>
+	</grid>
+
+	<form name="Compte_detail_form" canSave="false" canDelete="false" title="Comptes" model="com.axelor.apps.configuration.db.Compte" >
+		<panel name="articlePanel" >
+			<field name="designation" colSpan="4"/>
+			<field name="rib" colSpan="4"/>
+			<field name="montant" colSpan="4"/>
+			<field name="description" colSpan="4"/>
+			<field name="annexe" colSpan="4"/>
+			<field name="action" colSpan="4"/>
+		</panel>
+
+		<panel>
+			<button name="save" onClick="saveCompte" title="Enregistrer" icon="fa-save"/>
+		</panel>
+	</form>
+
+	<grid name="HistCompte_detail_grid" canSave="false" canEdit="false" canDelete="false" canNew="false"  title="Historique des comptes" model="com.axelor.apps.configuration.db.HistoriqueCompte">
+		<field name="dateTransaction"/>
+		<field name="designation"/>
+		<field name="rib"/>
+		<field name="recette"/>
+		<field name="depense"/>
+		<field name="montant"/>
+		<field name="description"/>
+		<field name="action"/>
+		<field name="annexe"/>
+	</grid>
+
+	<form name="HistCompte_detail_form" canSave="false" canEdit="false" canDelete="false" canNew="false"  title="Historique des comptes" model="com.axelor.apps.configuration.db.HistoriqueCompte">
+		<panel>
+			<field name="dateTransaction" readonly="true"/>
+			<field name="designation" readonly="true"/>
+			<field name="rib" readonly="true"/>
+			<field name="recette" readonly="true"/>
+			<field name="depense" readonly="true"/>
+			<field name="montant" readonly="true"/>
+			<field name="description" readonly="true"/>
+			<field name="action" readonly="true"/>
+			<field name="annexe" readonly="true"/>
+		</panel>
+	</form>
+
+	<action-group name="saveCompte">
+		<action name="save" if="designation!=null &amp;&amp; rib!=null &amp;&amp; description!=null &amp;&amp; annexe!=null &amp;&amp; action &gt; 0"/>
+		<action name="com.axelor.apps.purchase.web.AppPurchaseController:update_historiquecompte" if="designation!=null &amp;&amp; rib!=null &amp;&amp; description!=null &amp;&amp; annexe!=null &amp;&amp; action &gt; 0"/>
+		<action name="error_message" if="designation==null || rib==null || description==null || annexe==null || action == 0"/>
+	</action-group>
+
+	<action-method name="">
+		<call class="com.axelor.apps.configuration.web.AppConfigurationController" method="afficheMessage"/>
+	</action-method>
+
+</object-views>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+   <module name="account" package="com.axelor.apps.account.db"/>
+
+    <entity name="RegieTest" lang="java" >
+        <string name="ordredereceete" title="Ordre de recette" />
+        <many-to-one name="compteregie" ref="com.axelor.apps.configuration.db.Compte" title="Compte"  />
+        <many-to-one name="partierversement" ref="com.axelor.apps.configuration.db.PartierVersement" title="Partie Versement" />
+        <many-to-one name="natureoperation" ref="com.axelor.apps.configuration.db.NatureOperation" title="Nature Operation" />
+        <integer name="montant" title="Montant" />
+        <string name="montantenlettre" title="Montant en lettres"/>
+        <string name="piecesJointes" title="Pièces  Jointes " />
+        <many-to-one name="docAttach" title="Attacher le document" ref="com.axelor.meta.db.MetaFile" />
+    </entity>
+
+</domain-models>

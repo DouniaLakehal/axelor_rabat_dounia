@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="mois-grid" title="Liste de mois" model="com.axelor.apps.configuration.db.Mois">
+        <field name="nom_fr" title="Mois"/>
+        <field name="nom_ar"/>
+    </grid>
+
+    <form name="mois-form" title="Mois" model="com.axelor.apps.configuration.db.Mois" >
+        <panel name="articlePanel">
+            <field name="nom_fr" title="mois" colSpan="6"/>
+            <field name="nom_ar" css="tw_arabe_orient" colSpan="6"/>
+        </panel>
+    </form>
+
+</object-views>

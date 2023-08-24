@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="config.retenu-grid" title="Liste des Retenues" model="com.axelor.apps.configuration.db.Retenues" >
+	    <field name="name" />
+		<field name="pourcentage"/>
+		<field name="min"/>
+		<field name="max"/>
+		<field name="annee"/>
+		<field name="rubriquebudgetaire"/>
+    </grid>
+
+    <form name="config.retenu-form" title="Ajouter une Retenues" model="com.axelor.apps.configuration.db.Retenues">
+    	<panel name="mainPanel">
+			<field name="name" title ="Echelle" colSpan="6"/>
+			<field name="pourcentage" colSpan="6"/>
+			<field name="min" colSpan="6"/>
+			<field name="max" colSpan="6"/>
+			<field name="annee"  colSpan="6"/>
+			<field name="rubriquebudgetaire" colSpan="6"/>
+        </panel>
+    </form>
+
+</object-views>

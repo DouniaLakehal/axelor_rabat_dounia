@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="configuration" package="com.axelor.apps.configuration.db"/>
+
+
+    <entity name="Bordereau_detail" lang="java">
+        <string name="objet"/>
+        <string name="beneficiare"/>
+        <decimal name="montant_net"/>
+        <string name="code"/>
+        <boolean name="is_patronal"/>
+    </entity>
+
+    <entity name="Bordereau" lang="java">
+        <integer name="annee"/>
+        <one-to-many name="productivite_salariel" ref="com.axelor.apps.configuration.db.Bordereau_detail"/>
+        <one-to-many name="productivite_patronal" ref="com.axelor.apps.configuration.db.Bordereau_detail"/>
+        <boolean name="active"/>
+    </entity>
+
+
+</domain-models>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views
+              http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="nomcourrier-grid" title="Nom de courrier" model="com.axelor.apps.contract.db.Nomcourrier">
+		<field name="name" title="Nom de courrier" />
+	</grid>
+	<form name="nomcourrier-form" title="Nom de courrier" model="com.axelor.apps.contract.db.Nomcourrier" >
+		<panel name="mainPanel">
+		  <field name="name" title="Nom de courrier"/>
+		</panel>
+
+	</form>
+</object-views>

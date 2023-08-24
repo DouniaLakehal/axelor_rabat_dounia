@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+ 
+	<grid name="Afranchissement-grid" title="Releve des frais d'affranchissement" model="com.axelor.apps.account.db.Afranchissement" orderBy="id" >
+		<toolbar>
+		     <button onClick="show-affranchismForm" name="affran-btn" title="Releve d'affranchissement" icon="fa-print"/>
+		</toolbar>
+	  <field name="code"/>
+	   <field name="beneficiaire"/>
+	  <field name="designation"/>
+	  <field name="montant"/>
+	  <field name="dateAjout" />
+	  <field name="annee" title="annee"/>
+
+    </grid>
+	 
+    <form name="Afranchissement-form" title="Releve des frais d'affranchissement" model="com.axelor.apps.account.db.Afranchissement" >
+		<panel name="mainPanel">
+			  <field name="code" required="true"  />
+			   <field name="beneficiaire"  required="true"/>
+			  <field name="designation" required="true"/>
+			  <field name="montant"/>
+			  <button onClick="add-new-affranchissement" name="affranchisBtn" title="Enregistrer"/>
+		</panel>
+    </form>
+    
+    <action-group name="add-new-affranchissement">
+       <action name="validation_champsAffranchissement" if="code==null || beneficiaire==null || designation==null || montant==null "/>
+       <action name="com.axelor.apps.account.web.ComptabiliteController:saveFirstAffranchisement"  if="code!=null &amp;&amp; beneficiaire!=null &amp;&amp; designation!=null &amp;&amp; montant!=null"/>
+      
+    </action-group>
+    
+    <action-validate name="validation_champsAffranchissement">
+         <alert message="Tous les champs sont obligatoires"/>
+    </action-validate>
+    
+    <action-view name="show-affranchismForm" title="Financial Accounts"
+		model="com.axelor.apps.account.db.Afranchissement" >
+		<view type="form" name="Releve-Afranchissement-form" />
+		<view-param name="popup" value="reload"/>
+        <view-param name="show-toolbar" value="false"/>
+  		<view-param name="show-confirm" value="false" />
+ 	  	<view-param name="popup-save" value="false"/>
+    	<context name="_showRecord" expr="eval: id"/>
+	</action-view>
+	
+	<form name="Releve-Afranchissement-form" title="Releve des frais d'affranchissement" model="com.axelor.apps.account.db.Afranchissement" >
+		<panel name="mainPanel">
+			  <field name="annee" min="0" max="9999" required="true"  />
+			  <button onClick="com.axelor.apps.account.web.ComptabiliteController:genererReleveAffranchAnnuel" name="genereRelFranch" title="Imprimer"/>
+			 
+		</panel>
+    </form> 
+    
+    
+    
+    
+    
+    
+    </object-views>
