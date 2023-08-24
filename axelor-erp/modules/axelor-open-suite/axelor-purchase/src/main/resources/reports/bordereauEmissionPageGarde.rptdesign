@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <parameters>
+        <scalar-parameter name="id_bordereau" id="7">
+            <property name="hidden">true</property>
+            <property name="valueType">static</property>
+            <property name="dataType">decimal</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">1</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="dataSource" id="5">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/axelor_b</property>
+            <property name="odaUser">postgres</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">cm9vdA==</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="dtset" id="6">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">code</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">code</text-property>
+                    <text-property name="heading">code</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">year</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">year</text-property>
+                    <text-property name="heading">year</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">type</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">type</text-property>
+                    <text-property name="heading">type</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">name</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">name</text-property>
+                    <text-property name="heading">name</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">montant_lettre</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">montant_lettre</text-property>
+                    <text-property name="heading">montant_lettre</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">nbrop</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">nbrop</text-property>
+                    <text-property name="heading">nbrop</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param_1</property>
+                    <property name="paramName">id_bordereau</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">code</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">year</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">type</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">name</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">montant_lettre</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">nbrop</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">dataSource</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">code</property>
+                    <property name="nativeName">code</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">year</property>
+                    <property name="nativeName">year</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">type</property>
+                    <property name="nativeName">type</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">name</property>
+                    <property name="nativeName">name</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">montant_lettre</property>
+                    <property name="nativeName">montant_lettre</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">nbrop</property>
+                    <property name="nativeName">nbrop</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select brd.code,
+       brd.year,
+       brd.type,
+       crbg.name,
+       brd.montant_lettre,
+       brd.nbrop
+from configuration_borderau_emission brd
+    left join configuration_rubrique_budgetaire_generale crbg on brd.budget = crbg.id
+where brd.id = ?]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="headerHeight">1in</property>
+            <page-header>
+                <grid id="8">
+                    <property name="dataSet">dtset</property>
+                    <list-property name="boundDataColumns">
+                        <structure>
+                            <property name="name">code</property>
+                            <text-property name="displayName">code</text-property>
+                            <expression name="expression" type="javascript">dataSetRow["code"]</expression>
+                            <property name="dataType">string</property>
+                        </structure>
+                    </list-property>
+                    <column id="9">
+                        <property name="width">30mm</property>
+                    </column>
+                    <column id="10"/>
+                    <column id="11">
+                        <property name="width">30mm</property>
+                    </column>
+                    <row id="12">
+                        <property name="height">7mm</property>
+                        <cell id="13">
+                            <property name="colSpan">1</property>
+                            <property name="rowSpan">3</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <image id="35">
+                                <property name="height">20mm</property>
+                                <property name="width">100%</property>
+                                <property name="source">file</property>
+                                <expression name="uri" type="constant">src/main/webapp/img/axelor_bm.png</expression>
+                            </image>
+                        </cell>
+                        <cell id="14">
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                        </cell>
+                        <cell id="15">
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <text id="24">
+                                <property name="contentType">auto</property>
+                                <text-property name="content"><![CDATA[EN.AGI.21]]></text-property>
+                            </text>
+                        </cell>
+                    </row>
+                    <row id="16">
+                        <property name="height">7mm</property>
+                        <cell id="18">
+                            <property name="colSpan">1</property>
+                            <property name="rowSpan">2</property>
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <property name="verticalAlign">middle</property>
+                            <text id="34">
+                                <property name="fontSize">12pt</property>
+                                <property name="fontWeight">bold</property>
+                                <property name="textAlign">center</property>
+                                <property name="contentType">html</property>
+                                <text-property name="content"><![CDATA[BORDEREAU D'EMISSION <BR>
+N° <VALUE-OF>row["code"]</VALUE-OF>]]></text-property>
+                            </text>
+                        </cell>
+                        <cell id="19">
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <text id="25">
+                                <property name="contentType">auto</property>
+                                <text-property name="content"><![CDATA[Version : 01]]></text-property>
+                            </text>
+                        </cell>
+                    </row>
+                    <row id="20">
+                        <property name="verticalAlign">middle</property>
+                        <property name="height">7mm</property>
+                        <cell id="23">
+                            <property name="borderBottomStyle">solid</property>
+                            <property name="borderBottomWidth">thin</property>
+                            <property name="borderLeftStyle">solid</property>
+                            <property name="borderLeftWidth">thin</property>
+                            <property name="borderRightStyle">solid</property>
+                            <property name="borderRightWidth">thin</property>
+                            <property name="borderTopStyle">solid</property>
+                            <property name="borderTopWidth">thin</property>
+                            <grid id="28">
+                                <column id="29"/>
+                                <column id="30"/>
+                                <row id="31">
+                                    <cell id="32">
+                                        <text id="27">
+                                            <property name="contentType">auto</property>
+                                            <text-property name="content"><![CDATA[Page :]]></text-property>
+                                        </text>
+                                    </cell>
+                                    <cell id="33">
+                                        <auto-text id="26">
+                                            <property name="type">page-number</property>
+                                        </auto-text>
+                                    </cell>
+                                </row>
+                            </grid>
+                        </cell>
+                    </row>
+                </grid>
+            </page-header>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="36">
+            <property name="fontSize">12pt</property>
+            <property name="marginLeft">2cm</property>
+            <property name="marginRight">2cm</property>
+            <property name="dataSet">dtset</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">code</property>
+                    <text-property name="displayName">code</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["code"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <text-property name="displayName">year</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["year"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">type</property>
+                    <text-property name="displayName">type</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["type"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">name</property>
+                    <text-property name="displayName">name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">montant_lettre</property>
+                    <text-property name="displayName">montant_lettre</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["montant_lettre"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">nbrop</property>
+                    <text-property name="displayName">nbrop</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["nbrop"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <column id="37"/>
+            <column id="38">
+                <property name="width">40%</property>
+            </column>
+            <column id="39"/>
+            <row id="40">
+                <cell id="41">
+                    <property name="colSpan">2</property>
+                    <property name="rowSpan">1</property>
+                    <text id="52">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[BUDGET DE L'EXERCICE  : <B><VALUE-OF>row["year"]</VALUE-OF></B>]]></text-property>
+                    </text>
+                </cell>
+                <cell id="43">
+                    <data id="54">
+                        <property name="fontWeight">bold</property>
+                        <property name="resultSetColumn">type</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="44">
+                <cell id="45">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <text id="53">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[RUBRIQUE : <B><VALUE-OF>row["name"]</VALUE-OF></B>]]></text-property>
+                    </text>
+                </cell>
+            </row>
+        </grid>
+        <grid id="57">
+            <property name="fontSize">12pt</property>
+            <property name="marginTop">50pt</property>
+            <property name="marginLeft">2cm</property>
+            <property name="marginRight">2cm</property>
+            <property name="textAlign">justify</property>
+            <property name="dataSet">dtset</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">code</property>
+                    <text-property name="displayName">code</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["code"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">year</property>
+                    <text-property name="displayName">year</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["year"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+                <structure>
+                    <property name="name">type</property>
+                    <text-property name="displayName">type</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["type"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">name</property>
+                    <text-property name="displayName">name</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["name"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">montant_lettre</property>
+                    <text-property name="displayName">montant_lettre</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["montant_lettre"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">nbrop</property>
+                    <text-property name="displayName">nbrop</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["nbrop"]</expression>
+                    <property name="dataType">integer</property>
+                </structure>
+            </list-property>
+            <column id="58"/>
+            <row id="61">
+                <cell id="62">
+                    <text id="73">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;CERTIFIE PAR MOI ORDONNATEUR, PRESIDENT 
+DE LA CHAMBRE <BR>DE COMMERCE, D'INDUSTRIE ET DE SERVICES DE BENI-MELLAL KHENIFRA,<BR>
+LE PRESENT BORDOREAU A LA SOMME DE : <BR>]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="65">
+                <cell id="66">
+                    <data id="74">
+                        <property name="fontWeight">bold</property>
+                        <property name="resultSetColumn">montant_lettre</property>
+                    </data>
+                </cell>
+            </row>
+            <row id="69">
+                <cell id="70">
+                    <text id="75">
+                        <property name="contentType">html</property>
+                        <text-property name="content"><![CDATA[APPUYE DE <B><VALUE-OF>row["nbrop"]</VALUE-OF></B> OP]]></text-property>
+                    </text>
+                </cell>
+            </row>
+        </grid>
+        <grid id="76">
+            <column id="77"/>
+            <column id="78"/>
+            <column id="79"/>
+            <row id="80">
+                <cell id="81">
+                    <property name="colSpan">3</property>
+                    <property name="rowSpan">1</property>
+                    <text id="92">
+                        <property name="textAlign">center</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[BENI-MELLAL, LE ..............................................]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="84">
+                <property name="height">2cm</property>
+                <cell id="85"/>
+                <cell id="86"/>
+                <cell id="87"/>
+            </row>
+            <row id="88">
+                <cell id="89">
+                    <text id="93">
+                        <property name="textAlign">center</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[LE TRESORIER PAYEUR]]></text-property>
+                    </text>
+                </cell>
+                <cell id="90"/>
+                <cell id="91">
+                    <text id="94">
+                        <property name="textAlign">center</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[L'ORDONNATEUR]]></text-property>
+                    </text>
+                </cell>
+            </row>
+        </grid>
+    </body>
+</report>

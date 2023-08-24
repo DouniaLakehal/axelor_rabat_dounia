@@ -1,0 +1,2948 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">120</property>
+    <parameters>
+        <scalar-parameter name="datedebut" id="5234">
+            <property name="valueType">static</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Short Date</property>
+                <property name="pattern">Short Date</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="datefin" id="5235">
+            <property name="valueType">static</property>
+            <property name="dataType">date</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Short Date</property>
+                <property name="pattern">Short Date</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="rubrique" id="5236">
+            <property name="valueType">static</property>
+            <property name="dataType">decimal</property>
+            <property name="distinct">true</property>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="hatim" id="5233">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5433/khnifra</property>
+            <property name="odaUser">postgres</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">cm9vdA==</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="Inventaire" id="5237">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">id</property>
+                    <text-property name="displayName">id</text-property>
+                    <text-property name="heading">id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">archived</property>
+                    <text-property name="displayName">archived</text-property>
+                    <text-property name="heading">archived</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">date_archived</property>
+                    <text-property name="displayName">date_archived</text-property>
+                    <text-property name="heading">date_archived</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">import_id</property>
+                    <text-property name="displayName">import_id</text-property>
+                    <text-property name="heading">import_id</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">import_origin</property>
+                    <text-property name="displayName">import_origin</text-property>
+                    <text-property name="heading">import_origin</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">version</property>
+                    <text-property name="displayName">version</text-property>
+                    <text-property name="heading">version</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">created_on</property>
+                    <text-property name="displayName">created_on</text-property>
+                    <text-property name="heading">created_on</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">updated_on</property>
+                    <text-property name="displayName">updated_on</text-property>
+                    <text-property name="heading">updated_on</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">annee</property>
+                    <text-property name="displayName">annee</text-property>
+                    <text-property name="heading">annee</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">attrs</property>
+                    <text-property name="displayName">attrs</text-property>
+                    <text-property name="heading">attrs</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">bor</property>
+                    <text-property name="displayName">bor</text-property>
+                    <text-property name="heading">bor</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">designation</property>
+                    <text-property name="displayName">designation</text-property>
+                    <text-property name="heading">designation</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">inv</property>
+                    <text-property name="displayName">inv</text-property>
+                    <text-property name="heading">inv</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">inv_comptable</property>
+                    <text-property name="displayName">inv_comptable</text-property>
+                    <text-property name="heading">inv_comptable</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">libelle</property>
+                    <text-property name="displayName">libelle</text-property>
+                    <text-property name="heading">libelle</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">observation</property>
+                    <text-property name="displayName">observation</text-property>
+                    <text-property name="heading">observation</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">prix</property>
+                    <text-property name="displayName">prix</text-property>
+                    <text-property name="heading">prix</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">type</property>
+                    <text-property name="displayName">type</text-property>
+                    <text-property name="heading">type</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">type_prix</property>
+                    <text-property name="displayName">type_prix</text-property>
+                    <text-property name="heading">type_prix</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">created_by</property>
+                    <text-property name="displayName">created_by</text-property>
+                    <text-property name="heading">created_by</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">updated_by</property>
+                    <text-property name="displayName">updated_by</text-property>
+                    <text-property name="heading">updated_by</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">affectation</property>
+                    <text-property name="displayName">affectation</text-property>
+                    <text-property name="heading">affectation</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">categorie</property>
+                    <text-property name="displayName">categorie</text-property>
+                    <text-property name="heading">categorie</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">code_inv</property>
+                    <text-property name="displayName">code_inv</text-property>
+                    <text-property name="heading">code_inv</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">dateacquisition</property>
+                    <text-property name="displayName">dateacquisition</text-property>
+                    <text-property name="heading">dateacquisition</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">designationdubien</property>
+                    <text-property name="displayName">designationdubien</text-property>
+                    <text-property name="heading">designationdubien</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">dureedamortissement</property>
+                    <text-property name="displayName">dureedamortissement</text-property>
+                    <text-property name="heading">dureedamortissement</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">dureedaortissement</property>
+                    <text-property name="displayName">dureedaortissement</text-property>
+                    <text-property name="heading">dureedaortissement</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">etat</property>
+                    <text-property name="displayName">etat</text-property>
+                    <text-property name="heading">etat</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">famille</property>
+                    <text-property name="displayName">famille</text-property>
+                    <text-property name="heading">famille</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">frs</property>
+                    <text-property name="displayName">frs</text-property>
+                    <text-property name="heading">frs</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">marque</property>
+                    <text-property name="displayName">marque</text-property>
+                    <text-property name="heading">marque</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">modedamortissement</property>
+                    <text-property name="displayName">modedamortissement</text-property>
+                    <text-property name="heading">modedamortissement</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">n_facture</property>
+                    <text-property name="displayName">n_facture</text-property>
+                    <text-property name="heading">n_facture</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">nop</property>
+                    <text-property name="displayName">nop</text-property>
+                    <text-property name="heading">nop</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">qte</property>
+                    <text-property name="displayName">qte</text-property>
+                    <text-property name="heading">qte</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">servicea</property>
+                    <text-property name="displayName">servicea</text-property>
+                    <text-property name="heading">servicea</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">vnc</property>
+                    <text-property name="displayName">vnc</text-property>
+                    <text-property name="heading">vnc</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">valdacquisitionttc</property>
+                    <text-property name="displayName">valdacquisitionttc</text-property>
+                    <text-property name="heading">valdacquisitionttc</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">valdacquisitionht</property>
+                    <text-property name="displayName">valdacquisitionht</text-property>
+                    <text-property name="heading">valdacquisitionht</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">annexe</property>
+                    <text-property name="displayName">annexe</text-property>
+                    <text-property name="heading">annexe</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">dateaff</property>
+                    <text-property name="displayName">dateaff</text-property>
+                    <text-property name="heading">dateaff</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">dateres</property>
+                    <text-property name="displayName">dateres</text-property>
+                    <text-property name="heading">dateres</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">num_ann</property>
+                    <text-property name="displayName">num_ann</text-property>
+                    <text-property name="heading">num_ann</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">budgetrub</property>
+                    <text-property name="displayName">budgetrub</text-property>
+                    <text-property name="heading">budgetrub</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">fournisseur</property>
+                    <text-property name="displayName">fournisseur</text-property>
+                    <text-property name="heading">fournisseur</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">datedebut</property>
+                    <property name="paramName">datedebut</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">91</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">datefin</property>
+                    <property name="paramName">datefin</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">91</property>
+                    <property name="position">2</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">param_3</property>
+                    <property name="paramName">rubrique</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">-5</property>
+                    <property name="position">3</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">id</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">archived</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">date_archived</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">import_id</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">import_origin</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">6</property>
+                        <property name="name">version</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">7</property>
+                        <property name="name">created_on</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">8</property>
+                        <property name="name">updated_on</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">9</property>
+                        <property name="name">annee</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">10</property>
+                        <property name="name">attrs</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">11</property>
+                        <property name="name">bor</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">12</property>
+                        <property name="name">designation</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">13</property>
+                        <property name="name">inv</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">14</property>
+                        <property name="name">inv_comptable</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">15</property>
+                        <property name="name">libelle</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">16</property>
+                        <property name="name">observation</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">17</property>
+                        <property name="name">prix</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">18</property>
+                        <property name="name">type</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">19</property>
+                        <property name="name">type_prix</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">20</property>
+                        <property name="name">created_by</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">21</property>
+                        <property name="name">updated_by</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">22</property>
+                        <property name="name">affectation</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">23</property>
+                        <property name="name">categorie</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">24</property>
+                        <property name="name">code_inv</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">25</property>
+                        <property name="name">dateacquisition</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">26</property>
+                        <property name="name">designationdubien</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">27</property>
+                        <property name="name">dureedamortissement</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">28</property>
+                        <property name="name">dureedaortissement</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">29</property>
+                        <property name="name">etat</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">30</property>
+                        <property name="name">famille</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">31</property>
+                        <property name="name">frs</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">32</property>
+                        <property name="name">marque</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">33</property>
+                        <property name="name">modedamortissement</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">34</property>
+                        <property name="name">n_facture</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">35</property>
+                        <property name="name">nop</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">36</property>
+                        <property name="name">qte</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">37</property>
+                        <property name="name">servicea</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">38</property>
+                        <property name="name">vnc</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                    <structure>
+                        <property name="position">39</property>
+                        <property name="name">valdacquisitionttc</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">40</property>
+                        <property name="name">valdacquisitionht</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">41</property>
+                        <property name="name">annexe</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">42</property>
+                        <property name="name">dateaff</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">43</property>
+                        <property name="name">dateres</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">44</property>
+                        <property name="name">num_ann</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">45</property>
+                        <property name="name">budgetrub</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">46</property>
+                        <property name="name">fournisseur</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">hatim</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">id</property>
+                    <property name="nativeName">id</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">archived</property>
+                    <property name="nativeName">archived</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">-7</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">date_archived</property>
+                    <property name="nativeName">date_archived</property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">91</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">import_id</property>
+                    <property name="nativeName">import_id</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">import_origin</property>
+                    <property name="nativeName">import_origin</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">6</property>
+                    <property name="name">version</property>
+                    <property name="nativeName">version</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">7</property>
+                    <property name="name">created_on</property>
+                    <property name="nativeName">created_on</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">8</property>
+                    <property name="name">updated_on</property>
+                    <property name="nativeName">updated_on</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">9</property>
+                    <property name="name">annee</property>
+                    <property name="nativeName">annee</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">10</property>
+                    <property name="name">attrs</property>
+                    <property name="nativeName">attrs</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">11</property>
+                    <property name="name">bor</property>
+                    <property name="nativeName">bor</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">12</property>
+                    <property name="name">designation</property>
+                    <property name="nativeName">designation</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">13</property>
+                    <property name="name">inv</property>
+                    <property name="nativeName">inv</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">14</property>
+                    <property name="name">inv_comptable</property>
+                    <property name="nativeName">inv_comptable</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">15</property>
+                    <property name="name">libelle</property>
+                    <property name="nativeName">libelle</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">16</property>
+                    <property name="name">observation</property>
+                    <property name="nativeName">observation</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">17</property>
+                    <property name="name">prix</property>
+                    <property name="nativeName">prix</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">18</property>
+                    <property name="name">type</property>
+                    <property name="nativeName">type</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">19</property>
+                    <property name="name">type_prix</property>
+                    <property name="nativeName">type_prix</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">20</property>
+                    <property name="name">created_by</property>
+                    <property name="nativeName">created_by</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">21</property>
+                    <property name="name">updated_by</property>
+                    <property name="nativeName">updated_by</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">22</property>
+                    <property name="name">affectation</property>
+                    <property name="nativeName">affectation</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">23</property>
+                    <property name="name">categorie</property>
+                    <property name="nativeName">categorie</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">24</property>
+                    <property name="name">code_inv</property>
+                    <property name="nativeName">code_inv</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">25</property>
+                    <property name="name">dateacquisition</property>
+                    <property name="nativeName">dateacquisition</property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">91</property>
+                </structure>
+                <structure>
+                    <property name="position">26</property>
+                    <property name="name">designationdubien</property>
+                    <property name="nativeName">designationdubien</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">27</property>
+                    <property name="name">dureedamortissement</property>
+                    <property name="nativeName">dureedamortissement</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">28</property>
+                    <property name="name">dureedaortissement</property>
+                    <property name="nativeName">dureedaortissement</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">29</property>
+                    <property name="name">etat</property>
+                    <property name="nativeName">etat</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">30</property>
+                    <property name="name">famille</property>
+                    <property name="nativeName">famille</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">31</property>
+                    <property name="name">frs</property>
+                    <property name="nativeName">frs</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">32</property>
+                    <property name="name">marque</property>
+                    <property name="nativeName">marque</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">33</property>
+                    <property name="name">modedamortissement</property>
+                    <property name="nativeName">modedamortissement</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">34</property>
+                    <property name="name">n_facture</property>
+                    <property name="nativeName">n_facture</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">35</property>
+                    <property name="name">nop</property>
+                    <property name="nativeName">nop</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">36</property>
+                    <property name="name">qte</property>
+                    <property name="nativeName">qte</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">37</property>
+                    <property name="name">servicea</property>
+                    <property name="nativeName">servicea</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">38</property>
+                    <property name="name">vnc</property>
+                    <property name="nativeName">vnc</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">4</property>
+                </structure>
+                <structure>
+                    <property name="position">39</property>
+                    <property name="name">valdacquisitionttc</property>
+                    <property name="nativeName">valdacquisitionttc</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">40</property>
+                    <property name="name">valdacquisitionht</property>
+                    <property name="nativeName">valdacquisitionht</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">41</property>
+                    <property name="name">annexe</property>
+                    <property name="nativeName">annexe</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">42</property>
+                    <property name="name">dateaff</property>
+                    <property name="nativeName">dateaff</property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">91</property>
+                </structure>
+                <structure>
+                    <property name="position">43</property>
+                    <property name="name">dateres</property>
+                    <property name="nativeName">dateres</property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">91</property>
+                </structure>
+                <structure>
+                    <property name="position">44</property>
+                    <property name="name">num_ann</property>
+                    <property name="nativeName">num_ann</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">45</property>
+                    <property name="name">budgetrub</property>
+                    <property name="nativeName">budgetrub</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">46</property>
+                    <property name="name">fournisseur</property>
+                    <property name="nativeName">fournisseur</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select * from purchase_inventaire i where (i.dateaff between ? and ?) and i.budgetrub=?]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>91</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>2</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>91</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>3</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>id</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>NotNullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>id</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>archived</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-7</design:nativeDataTypeCode>
+            <design:precision>1</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>archived</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>archived</design:label>
+            <design:formattingHints>
+              <design:displaySize>1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>date_archived</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>91</design:nativeDataTypeCode>
+            <design:precision>13</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>date_archived</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>date_archived</design:label>
+            <design:formattingHints>
+              <design:displaySize>13</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>import_id</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>import_id</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>import_id</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>import_origin</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>import_origin</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>import_origin</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>version</design:name>
+              <design:position>6</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>version</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>version</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>created_on</design:name>
+              <design:position>7</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
+            <design:precision>29</design:precision>
+            <design:scale>6</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>created_on</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>created_on</design:label>
+            <design:formattingHints>
+              <design:displaySize>29</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>updated_on</design:name>
+              <design:position>8</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
+            <design:precision>29</design:precision>
+            <design:scale>6</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>updated_on</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>updated_on</design:label>
+            <design:formattingHints>
+              <design:displaySize>29</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>annee</design:name>
+              <design:position>9</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>annee</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>annee</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>attrs</design:name>
+              <design:position>10</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>2147483647</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>attrs</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>attrs</design:label>
+            <design:formattingHints>
+              <design:displaySize>2147483647</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>bor</design:name>
+              <design:position>11</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>bor</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>bor</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>designation</design:name>
+              <design:position>12</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>designation</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>designation</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>inv</design:name>
+              <design:position>13</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>inv</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>inv</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>inv_comptable</design:name>
+              <design:position>14</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>inv_comptable</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>inv_comptable</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>libelle</design:name>
+              <design:position>15</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>libelle</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>libelle</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>observation</design:name>
+              <design:position>16</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>observation</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>observation</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>prix</design:name>
+              <design:position>17</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>prix</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>prix</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>type</design:name>
+              <design:position>18</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>type</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>type</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>type_prix</design:name>
+              <design:position>19</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>type_prix</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>type_prix</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>created_by</design:name>
+              <design:position>20</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>created_by</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>created_by</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>updated_by</design:name>
+              <design:position>21</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>updated_by</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>updated_by</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>affectation</design:name>
+              <design:position>22</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>affectation</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>affectation</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>categorie</design:name>
+              <design:position>23</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>categorie</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>categorie</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>code_inv</design:name>
+              <design:position>24</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>code_inv</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>code_inv</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>dateacquisition</design:name>
+              <design:position>25</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>91</design:nativeDataTypeCode>
+            <design:precision>13</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>dateacquisition</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>dateacquisition</design:label>
+            <design:formattingHints>
+              <design:displaySize>13</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>designationdubien</design:name>
+              <design:position>26</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>designationdubien</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>designationdubien</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>dureedamortissement</design:name>
+              <design:position>27</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>dureedamortissement</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>dureedamortissement</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>dureedaortissement</design:name>
+              <design:position>28</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>dureedaortissement</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>dureedaortissement</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>etat</design:name>
+              <design:position>29</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>etat</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>etat</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>famille</design:name>
+              <design:position>30</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>famille</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>famille</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>frs</design:name>
+              <design:position>31</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>frs</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>frs</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>marque</design:name>
+              <design:position>32</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>marque</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>marque</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>modedamortissement</design:name>
+              <design:position>33</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>modedamortissement</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>modedamortissement</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>n_facture</design:name>
+              <design:position>34</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>n_facture</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>n_facture</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>nop</design:name>
+              <design:position>35</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>nop</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>nop</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>qte</design:name>
+              <design:position>36</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>qte</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>qte</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>servicea</design:name>
+              <design:position>37</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>servicea</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>servicea</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>vnc</design:name>
+              <design:position>38</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>4</design:nativeDataTypeCode>
+            <design:precision>10</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>vnc</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>vnc</design:label>
+            <design:formattingHints>
+              <design:displaySize>11</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>valdacquisitionttc</design:name>
+              <design:position>39</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>valdacquisitionttc</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>valdacquisitionttc</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>valdacquisitionht</design:name>
+              <design:position>40</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>valdacquisitionht</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>valdacquisitionht</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>annexe</design:name>
+              <design:position>41</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>annexe</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>annexe</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>dateaff</design:name>
+              <design:position>42</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>91</design:nativeDataTypeCode>
+            <design:precision>13</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>dateaff</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>dateaff</design:label>
+            <design:formattingHints>
+              <design:displaySize>13</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>dateres</design:name>
+              <design:position>43</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>91</design:nativeDataTypeCode>
+            <design:precision>13</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>dateres</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>dateres</design:label>
+            <design:formattingHints>
+              <design:displaySize>13</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>num_ann</design:name>
+              <design:position>44</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>num_ann</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>num_ann</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>budgetrub</design:name>
+              <design:position>45</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>budgetrub</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>budgetrub</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>fournisseur</design:name>
+              <design:position>46</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>fournisseur</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>fournisseur</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="headerHeight">4cm</property>
+            <page-header>
+                <image id="5224">
+                    <property name="height">1.2857142857142858in</property>
+                    <property name="width">7.816666666666666in</property>
+                    <property name="source">embed</property>
+                    <property name="imageName">hearderdocument.png</property>
+                </image>
+            </page-header>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="5238">
+            <column id="5239"/>
+            <column id="5240"/>
+            <column id="5241"/>
+            <column id="5242"/>
+            <column id="5243"/>
+            <column id="5244"/>
+            <column id="5245"/>
+            <column id="5246"/>
+            <column id="5247"/>
+            <row id="5248">
+                <property name="backgroundColor">#FFFF00</property>
+                <cell id="5249">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <text id="5268">
+                        <property name="textAlign">center</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Inventaire N°]]></text-property>
+                    </text>
+                </cell>
+                <cell id="5250">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <text id="5269">
+                        <property name="textAlign">center</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Affectation]]></text-property>
+                    </text>
+                </cell>
+                <cell id="5251">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <text id="5270">
+                        <property name="textAlign">center</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Services]]></text-property>
+                    </text>
+                </cell>
+                <cell id="5252">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <text id="5271">
+                        <property name="textAlign">center</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Code inv CCIS-BK]]></text-property>
+                    </text>
+                </cell>
+                <cell id="5253">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <text id="5272">
+                        <property name="textAlign">center</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Date de réception]]></text-property>
+                    </text>
+                </cell>
+                <cell id="5254">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <text id="5273">
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Date d'affectation]]></text-property>
+                    </text>
+                </cell>
+                <cell id="5255">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <text id="5274">
+                        <property name="textAlign">center</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Mode d'amortissement]]></text-property>
+                    </text>
+                </cell>
+                <cell id="5256">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <text id="5275">
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[N° Facture]]></text-property>
+                    </text>
+                </cell>
+                <cell id="5257">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <text id="5276">
+                        <property name="textAlign">center</property>
+                        <property name="contentType">auto</property>
+                        <text-property name="content"><![CDATA[Durée d'aortissement]]></text-property>
+                    </text>
+                </cell>
+            </row>
+            <row id="5258">
+                <cell id="5259">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <data id="5278">
+                        <property name="dataSet">Inventaire</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">num_ann</property>
+                                <text-property name="displayName">num_ann</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["num_ann"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">num_ann</property>
+                    </data>
+                </cell>
+                <cell id="5260">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <data id="5277">
+                        <property name="dataSet">Inventaire</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">affectation</property>
+                                <text-property name="displayName">affectation</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["affectation"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">affectation</property>
+                    </data>
+                </cell>
+                <cell id="5261">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <data id="5279">
+                        <property name="dataSet">Inventaire</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">servicea</property>
+                                <text-property name="displayName">servicea</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["servicea"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">servicea</property>
+                    </data>
+                </cell>
+                <cell id="5262">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <data id="5280">
+                        <property name="dataSet">Inventaire</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">code_inv</property>
+                                <text-property name="displayName">code_inv</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["code_inv"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">code_inv</property>
+                    </data>
+                </cell>
+                <cell id="5263">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <data id="5281">
+                        <property name="dataSet">Inventaire</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">dateres</property>
+                                <text-property name="displayName">dateres</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["dateres"]</expression>
+                                <property name="dataType">date</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">dateres</property>
+                    </data>
+                </cell>
+                <cell id="5264">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <data id="5282">
+                        <property name="dataSet">Inventaire</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">dateaff</property>
+                                <text-property name="displayName">dateaff</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["dateaff"]</expression>
+                                <property name="dataType">date</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">dateaff</property>
+                    </data>
+                </cell>
+                <cell id="5265">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <data id="5286">
+                        <property name="dataSet">Inventaire</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">modedamortissement</property>
+                                <text-property name="displayName">modedamortissement</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["modedamortissement"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">modedamortissement</property>
+                    </data>
+                </cell>
+                <cell id="5266">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <data id="5284">
+                        <property name="dataSet">Inventaire</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">n_facture</property>
+                                <text-property name="displayName">n_facture</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["n_facture"]</expression>
+                                <property name="dataType">string</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">n_facture</property>
+                    </data>
+                </cell>
+                <cell id="5267">
+                    <property name="borderBottomStyle">solid</property>
+                    <property name="borderBottomWidth">thin</property>
+                    <property name="borderLeftStyle">solid</property>
+                    <property name="borderLeftWidth">thin</property>
+                    <property name="borderRightStyle">solid</property>
+                    <property name="borderRightWidth">thin</property>
+                    <property name="borderTopStyle">solid</property>
+                    <property name="borderTopWidth">thin</property>
+                    <data id="5287">
+                        <property name="dataSet">Inventaire</property>
+                        <list-property name="boundDataColumns">
+                            <structure>
+                                <property name="name">dureedaortissement</property>
+                                <text-property name="displayName">dureedaortissement</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["dureedaortissement"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
+                        </list-property>
+                        <property name="resultSetColumn">dureedaortissement</property>
+                    </data>
+                </cell>
+            </row>
+        </grid>
+    </body>
+    <list-property name="images">
+        <structure>
+            <property name="name">hearderdocument.png</property>
+            <property name="type">image/png</property>
+            <property name="data">
+                iVBORw0KGgoAAAANSUhEUgAAAs0AAACZCAYAAADUzwdJAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8
+                YQUAAAAJcEhZcwAAEnQAABJ0Ad5mH3gAAJlrSURBVHhe7Z0FgF3F+cXP7lvNZrObbLJxd6JYkJBgxd2t
+                hVKBUrxAKaW0f1papIXiFCilhQLF3YIFCRBIgLi7u22S1ff+85v3JnlZ1iIQ2e/Ay3t7Ze7M3Hu/OXPm
+                m29SYg4yGAwGg8FgMBgM1SI18W0wGAwGg8FgMBiqgZFmg8FgMBgMBoOhFhhpNhgMBoPBYDAYaoGRZoPB
+                YDAYDAaDoRYYaTYYDAaDwWAwGGqBkWaDwWAwGAwGg6EWGGk2GAwGg8FgMBhqgZFmg8FgMBgMBoOhFhhp
+                NhgMhtqwyRJQm64H5f+yJaIMBoNhl4eRZoPBYKgWMfdfVLEUWHH8E1PKhj1+QdVYVEpxx7j/Ngv+8ORz
+                NvN8g8FgMHyvMNJsMBgM1QCCHP5zzNhvS3FbPUH2hNlR6liKytjuyPNm0V6IuDt340nx9A0Gg8GwYyIl
+                5qUSg8FgMFRG1JnHovWlWrZuvRatWqcFy1Zpzoq1WryiSEvXlGjNulKtL1mnI/p21IVHDkicVQdgdlOM
+                JBsMBsPOBCPNBoPBUA1Wry/WX14Yphc+n6x1pTGVx1K8OBxJTXWcN0XuX1VEy3VA1wI9+avTlLYZRHjR
+                6rUaO2uxChplq02Thmqa2zCxJxmY55Bm8m+DwWAwfN8w0mwwGHZtBAsX3CFq451J3HTW0pU6965XNHFp
+                sTIjbMSjbaPJ5FdFRVTtCzL12KXHqWvzJvEd1cGZ25gj1pjdW1/6RPe/9bUK8nPVq22B+rdtqr7tCtWv
+                Y3O1cNviiLpPqj8+xftVk4faCmAwGAyG7wJGmg0Gwy6OONn0ps4RT/ThmpA42v8ePXuxTr/9Ra2pSFOa
+                2xbfuilpjUZjapAh/d8pA3T2oH6JrdUgnrjeHzNdv/rPB1q4Nuq9NMrKypQarVCzvBx1bpGn/u2b6tA+
+                7bVPtzbKTCO/ca/quI+1wWAwGLYHbCKgwWDYpRGPdpGs1NYVKVq2tkRrSyv8WWi+3z4/qtSUVBUVV2js
+                nGWJbTXAnb5wVZEe/XCs5q8qVXqalO6scE5mhrKys7WipELDpy7UI0PH68KH3tFNTw/V6rXF7rT4dQOZ
+                NxgMBsP3DyPNBoNhl4KnlRv/8URz5bpiPTt8sn73+DtasGK131493HmJATgIbnk0NWEov024OSrqNlfE
+                opq8cJVLu0glZeUqLS9z28oTRyQjpheHT9T7Y+YoIyPNe4zEc0jaMaW5r8yMLKVE0rVoTbHWxyLKzsrk
+                IB+lo6o8GAwGg+H7gblnGL43rFu3TuvXr1dBQUFii8Gw7RF3ooi7Yaxcu14fT5yr/3wwyiu4pdE0nbVv
+                R/3p7IOU68koUZhBcNrg3I3E9JbXvtSdr45UBpJwFUh1x1fwbzSqhtkR7dWxQC3yc9QwM0O52ZlqktvA
+                u1w0bZipggZZWrByra769xDNK4oqEknZQJo3RQqRoVVRVqZfH7+3rjxmr3iuCGmXwtRDg8FgMGwPGGne
+                CowePVoff/yxioqKPCEMgBQecMAB2mOPPRJb6jfmzp2rRx99VFOmTNFuu+2ma6+91kce2BJAuocMGeLT
+                ysrK0nnnnafc3DBpKg6utXz5crVp00YHHnigWrRokdhj2PURJ70VjsQOHTddTw2bqHdGzVJpLF0ZaVBc
+                d0R5qS4+or9+dfw+yohEFHNkNMWR0YBlRes0bcEyTZq/So8NG6cJc1crNbXq55VJfd5xIxYhYZVVoAhH
+                /UcuD1ww3THjhplpKmzsntNIumYuWemjb8Qc2U719Dg5bX7HVOY+2e7nn0/fT2cN6u238eGcqnNiMBgM
+                hu8a5p6xFcjMzNT999+vhx56SE2bNvWfxo0ba/jw4Tr//PP10UcfJY6s30hLS1P79u31/vvvq7y8fIsJ
+                M0h1ZGPlypW65557dOmll2rJkiWJPXF8+OGHuv766/X73/9e2dnZ/tqG+oQUTV+0Qjc8NVSX/ftDvTRy
+                lipSM5SehnobR9T9/fB7Y/TER2P93xDm1SWlevubqfq/Zz/SRQ8O0aWPDtV1T3+scXNWVkuYQQqagyPI
+                qQnineGuk5mRpgaZGcpxnbqc7CylZTXQeqVp+vJ1Lm+rFPEEHS/lmKLfehccLfaEO6b8Bmlq1aRBYjvH
+                GWE2GGpCRUWFxo4d678Nhu8CpjRvJVCU9957b/39739PbJHWrFmjnj176qijjtLDDz+c2Fq/UVJSon33
+                3Vf33Xef9t9//8TWLcOnn37q6xUS/vjjj2vw4MF+e3FxsS655BLNnj3bk+U33njDbzfUA2DFHKOcsWi5
+                rn70LQ2bvlKKpCndh4mLu15smBDoPqUVUbXMzdIlR/bxLhxDRs3WvJXFWr62RGXlMXdqRJEINLU2XSE+
+                NS/+74Zs1Ipqj4txxQqtK6/Qnu0a6/4LjlTHZnn+BJby/nbsjKTrYsoh5JDuDWS8LrkxGHYMPPPMM2rb
+                tq1vP1988UUNGjRIXbp0SeytHtCYFStW6OKLL9bq1av12GOPbeIGSJvwwQcf6Mgjj1Tz5s0TW2sGAg/t
+                yz777OMFsZdeeknHH3+8jVzWc0T+zyHx27CZWLx4se666y797Gc/8y95AErq7bffrn79+unoo49WNBr1
+                vd9nn31W77zzjieQ7dq1c41yRIsWLdJnn33mCR4qdXjRR4wYoTfffFO9evXyBJCe88iRI/XEE0/o66+/
+                Vl5enldV2c7vSZMmeWV72LBh2nPPPX0aXBeSiuKKoSC/EE7SadCggV5//XV/DYwACi5/v/LKK2rSpIma
+                NWvm0whYsGCBd4vAcHz++ef+HI6rDkuXLvVpvfDCC1q1apVmzpypTz75RBdeeKGvnzFjxvj9GCbcKMCs
+                WbO80WzZsuW3XC6S8dZbb/kQXZBk8hHK++STT6phw4b68ssv1bdvX1/3gGO/+OILvx+XGuoZg0xdU3fz
+                58/X0KFDNXnyZH9dDO6oUaN8uriDUK/cO+4J6VM3QS0vLS311/vf//7n7wdpJ+83fH/AeSGnQZaijnaO
+                nDZfxZBfxyHjd2Lj/YB64h6xrqRcH01coGHTlmjByhKV4lsRSVc6hDkVelq3e5h8VF3venXHMdcP0lwW
+                TVXH5nk6ds8uysvO2HBC/CvpbHeCJ8xs8gq2K0NCyY77dte1FAbDpqBtoV3ARvO9NQhpVQfaiF//+te+
+                vTrxxBP105/+1I8onnXWWUpPT08cFSfH2NbKeWJ094EHHvCjv+PGjfOCVWjDaPNOO+00b7tPOumkOtnm
+                efPm+Ty8/fbbOuKII3Tqqaf6tuK4447z7bah/mLr3oR6DogwvdpAvObMmaNvvvlG11xzjd/2wx/+0BM2
+                XuZzzz3XE8mMjAxdeeWVXplm34MPPqhf/epXuuOOO7xCDSC7kLB3333XGwEMzi233KIf//jH/hgMB39j
+                ZEhv6tSp3h3h5z//+SYuIfgS33nnnd7AgOeff97nA8P05z//WQsXLvTXwDhcd911njSSf/KX7KMNuT39
+                9NP12muveZI6YcIE/zflqQpfffWVN06UAcMFUb311luVn5/vSSnE/qKLLvL5T3avoPPwr3/9y3cqqgN1
+                g6LQu3dv3/ufNm2a306HgM5Enz59fB0NGBBf0hjS+6c//cnXDQSXv6k78kO9Ujf//ve/fceH+sG1A3LN
+                vYXEo1zfdNNNysnJ8cT/7LPP9uQf4Mt+1VVXeXUDAs/fhxxyiC+H4fsHNDHDkd0fDuqtP5y2vwpzIip1
+                xJk9G4FXMI4a8RX9op5ix5RG3Lc0VF6O57OdkBJThSO9WY7tfz1tsS568HU99/kELVldlKC/VTT4flNK
+                PELIZxP1/thZPppHnPZvx7IYdlpgo3/72996O/nf//7X290tBfYfbY62sjogDNFuMBqJoIOogsLL7wBI
+                NCLV3/72N992YI8DOI829JhjjlHr1q03UZlpD2gLsc2bQ/5pTyDJ5Hv69Ol+VJn21lC/YaR5K0CPFjz3
+                3HOeeP7mN7/xJHjZsmWeKPPS40IAQYaoYTgg1BAxhn1QbyG7N998szp16uQ/YO3atV4NRmUGkE/IL/7T
+                EEB8eemB8wJzDgQSwsfEw7322sufA0gDsoc/MYCoMrwEOb788st19dVX6wc/+IHvpR966KGeONPLhzBD
+                6AHqKds5lgl2P/nJT3TQQQd54ko+KwMiftlll6lHjx6+Xrjm7373O3Xr1s3nFSPIEBnEFCUX4gswyhhK
+                jmnVqpXfVhVQJCDrHEO5UAQ4F8UcYwkpJ/8DBw70x2PwyTf35YYbbvAk9+CDD/ZqNnlBxaBxOPzww70i
+                gZGkwcA4c87EiRO9ysw9wyhTLtKkfrivKBEo05SRjgjGmzwavmd4PpkwZ44wnr5/L/3hjAPUJi9NZa5z
+                tJFsQiM5ztFlfzxLlrhvz5WDOrv9EHexcHklrIb7GjlrpS5/9H1d8eh7em3kJK0vi3eAN4BD3X9fzVig
+                3z4xVFf850Nd/M+39cj7o1SMcs4BBsNmArvH6Cd2lXZqa0gzZBjbXpPCi+jANU455RT/3b17d98mJQPy
+                io1m9JK2DREkGU899ZS3zbQ5hYWFia1x0kx6oU2oCxBAUJRPPvlkL7TQroYRTUP9hpHmrQDD9bvvvrtX
+                gFFRMTS//OUvPSGmV4shgPCievJ3AL1gFM6gqGIIOnfu7If2AYo17hZEmgBMeoNoEgkiAIMGwQxDV7h5
+                cF6yYUBFRhkmygQgogQKKi4SKLJcH+KPoYJMY6xQBUgXpRzceOONXu3G8EA6GaaCDKNABDKeDFRpevWQ
+                7DAJDyKN0cSXOWzjOlw/+JeRNyKR9O/f31+vOtAhQXGgbiC+GFL81bgXqN9ch3rs0KGDJ/YYUfLMtQNw
+                1YBghzKiWFAvhx12mO80ABRs3ECoq0DsUSlQzqlrzmECKAp16NwwAgDRZjjP8P3B09wE1/Uey75xjunk
+                vXvoz2cfqHZ5mQnizEGJAx3QmeMUOu7nHP9sb5LpcpAgztGUiNIjaUpJz9Q74+bpV499qGv/+57GzF6U
+                ODamdaVl+sfbIx1RfkfPfjHD9QHStbIkVbe88IVuf+lzrVxbnDjSpenS3Vh6g6F6dOzY0ZNciCttWrDb
+                tQG7jugQgJsbdha7ivtfGKWbMWOGFzMgpIBzIKkQU4g6tr1r165+X0CjRo18e4FY9Je//MULMQA7j7BD
+                O4oocuyxx/rtgDaNEVJU4uBOiG8zbWMyaLv/85//+NFHwH7qgDYOl0quFdwIDfUbRpq3ELzsDN8zUQFF
+                mTBqKJyQ3dCjRnHkZUQJTvbLGj9+vFc5MSakwzmBeAEmuUEcIbYQQnr6KKABDBVBmiGYAZA+fLZ40QFp
+                8uKjPochLvKLQoq/F8A1AoILIccQQWJRoYN/NkQZEoqxgfhiQCCJ9957r/cRqww6AgxpcU0mcwRgpEg3
+                2QjyN37dkFeAwUORoPNQE3DDgDRjPFGbUZ2Dykx6uKdg3CC4EFs6Eqjp4Z5wP/DLpnOBrzfAgEPGzzjj
+                jA3Dd9QV14J8B3A/yTf3hXrDwKK6B3ANjP3mDAEathESXBfCGSe+jgK730f066JbfnSgOhdk+wl+m5o8
+                aDKEMn78hkS2O+L5CLkjx1nu/SwqS9HTn0/XBQ+9pcc/Gq3Ppi3QBfe/ob+9OlIzl6xXVma6Iu6stEiK
+                SqIp+sf743XjMx9qedF6t9WlxkRCY82GOoDRM2w/RDaIC5BTRjqD2EP7wehaIL7YXkZcsZO0M4yunnPO
+                OV54gdQiJmFPES3OPPNMPzcmtIuQadpAiPF7773niW9l32GEDEQoRAuEHYA9RxRh1BM3usphXskjgkoQ
+                QxixReQKZQCQYtoz2mVsN0SbOS4IXbTptEsIIWbXDcCegi0EZAw/5qBgQmAxBBgICBVA4YVwJvv+8mKi
+                1P7oRz/yqiWGiJjDTBoEr776qu/xQr6YNcwQFC9xUF8ZNsL1A+KMCsDfkAN8kSGSGDhI5T//+U9PBiGM
+                kF+A0cFdA/UZQApRagNRJa1A8jFCGAmOp2z4OUOYIdhsx6WjMsgHRBJVIuQXpQEfNEg05eV6KPDUA2ox
+                x5HP2267zecL0s+1SasqUOchv5Bm6gFFGJcVQFp0ZABpQGQDYaauqRcIMmUkLxyDTziEOygXAONN2ZNd
+                LVAsOBa/uTBaQFoB1DvGP9kf3PD9gIARHu5ez125XHNXufuSYIgH9+qov5wzWJ2bZquknAjI2w5xWrvp
+                57tCWmqKX2Rl1rJi/d+zn+vHd7+m9yfPdwQ5pnRWFxSLnzij7v5JJWpIakzPDZ+p6554V8vWQpxT/X6D
+                oTpAgHEZRFgAjAAC2jSII0Qam42owAglbUoYyXz66ac9QYWQ8g3ZZCQTGwppZe4I7ooIQBBn7CVtBSQY
+                sYWRVH5DdHGXSwbtCIo3afGhncHucw5p0m7RzuBqx7yUMLcHAo4tp8244IILvAslQhR2H/vNOYgliE6k
+                S1tB20T5cONDJKFOQptiMFj0jM0ELxsvNT7ERGDArQGix8tP7/eZZ57xhoReM8SX3jIuArygvIj0dOlt
+                M5EBBRhC+49//MMfy4uPgoxSCgHGnwoSDBFDicXtAMMEueQaKL9EbsBFhG+MFG4iGDyMCh+IH0NfGBd6
+                +hBHetr08DE2TFpjIiKqKwSQSYKUh7T4xkcYXzHKzblE0MDHl2tWHq6irBBe8ojxYcIgKjDlxVCRF8pI
+                3aCCY5Ah4BhTfMYwVqjl1C8dhuQhQToPEFZcItge3FAgwfhnQ3jJG3+j/uJ7TH1RDvzfMPQMD1In5JPr
+                sg9lAlWF+qbTE0BnhzxjmFHhUcsZAcBfjvtC2tQdRplyUVY6QxBxhgIDUTd8t4CkUtNU97L1a/TsuGH6
+                y7tPqV1eoboXtomTWPfsdmiWr66tGmvczIVatKrYkUr0gmR3jJBSHJvePVRr+QVTcPMode9ymftEKxxJ
+                dTtYDZAFUvib54t9peUVKmd/4vx4583/sQk2vWpdQOQP1+A7AozLclpKRFFflvg+/ifOczTVPeP+mqma
+                tGCVZi9cqr26tFLD7AxykzjeYNgIxJk//OEP3vUBkogAgW8wwgttCpO0abNQdnHDo92ifWCBKZ5viCpt
+                DTYVG4w4gs1FbYaI094gFiFQQLQh4thctkOaIcXYd85jDkkAx2HvaVtok2gHUIGZF0NbgfscbROEnnS4
+                JjabULCIMdhqlGPaGdoi0kdwgRAjBjGyCjHGdmPbad8QPsgr59MW8NtgAEaaNxMYFggr5A+SDEmFsGEE
+                ILi4CUCO2Y47Aoom5JYJdZzHsBOTAen9AowOJBjlFoPEhLJHHnnEG5399tvPkztIGMo2vWFUTiYBcj3y
+                gB8v18QY8NJzDESeaBGQQ47BaHENFG98xoKqHchpIKBcn3NQb4l+gTHB9QSjAykn/xgtDA3fVYG6wNBC
+                9DGkGD8MMIScusNHGGKM8oz/G9uvuOIKfwzKAySEMoUhwQCMGuoE6jjlJd8QXeoBBQEXFgw2xpC6xzBD
+                6iH3GH9ILW4p559/vh86ZBuTGikbecDvPNk1BGJO/aOaQJj5hpzTYADqCeUFdYIODYYYxeKEE07w5TZ8
+                N4iTYP8zcERVuGfm3Wmj9IcPntIt7z+l5o2b6dKBJ6hRJgqYO5j74Yhke0ecu7dpoolzF2veirVKTQuL
+                hcRJJ789icWNwf2HN0dZaZlKy0qVGUlRYV6WujVvpL7tC7R3l+ba130Gdm+tfbu28J99urTQ7u2bqpe7
+                RpcW+WqR30C5mSn+uS9aX6zikvgkvhT3TnNJ3C/wvw4kFhU4/qt6cE78DKJ/+ET4P1EC4PYltoX0mSA5
+                deFq5WelaN9uG92mDIZk4M4WoioxoofQwygotp/OIKSUtg3VF5uJCyD2k7YGm4eAgA3G1kKEORbhgbYL
+                IotrBcQXsQS7SXvFcc8884y397RTjLLShjEKycgk9h2yy+Q/BCbaLNoIXDsA1+dc2lPsPmSZvJM3RBRs
+                N2IMeQe0Mdh/RmaZQ0O7Qn4gybQttNNcC9EFRfzuu+/2pJ2/addI31C/keIewNAEGb5nYEDo7ULsAjA6
+                kGKMSV2CuhsM9Q2e2MZ/avqqxbrv09f01JgPtWAtblAp+sXex+i+Yy9yRDJ+JNPfoJp+pT1HIL+ZvVB/
+                ePoTDZ+2ROnpGRv8oOOGkGHbClWUl6l5Xqb6d2ihXu2aqVurxmrpSHBho4YqaOTIcHZmElH9NkpdmquL
+                1mnp6nVasmqt5jqSPn7eCo2dvUhjZi3SiuKYstPTFXFkA19j1w3z3iSxFPxMQum2BWKqiMbU3pXl3gsO
+                1x4dWya2GwybAkIKyYTQ0tFDsAH4/EJAiUCB6ACJZhIfbnu4N6D6MgoH4URogEAzsoc4Q3SjQMARIviQ
+                NsfwQYxAgEAtRtFGRUYtRpBCKYYQQ5Ah0pwHXSFfEF+IPGmwLXyzD2LLPq7J70Bx2BeOZT+/Q37CPvLD
+                KCyiDu4ZjFLSCYA0Mxoa5gcZ6i+MNG9H0DNnSIqoFPSyUWdRMxmywn3DYDBsCowVlJI57q9N+EI3Df2f
+                Ri6Z7ra7xtA1fFmxNP3lkB/qioEn+G3h6DgpjpMAtkxcsFS/f/IjfThpvifOqTHXEEcr1CAtpn26ttAx
+                e3ZR//aFapHfUI1zG1RDkEP6dQOuHUvXrNe8ZWs0bPIcvTFyisbPXanySIajzK5Rd0kRNTpO9rcNoi7N
+                DEcKbj7nAJ2x/24uyy5tRxoMhroAdZewmrgY0jYxKonyy8gek+cQdvAThngyqmhCj2FXh5Hm7QiGhuip
+                40NFrxiDw2Q7XDDofRsMhm9jRfFa/e2j53XvF29odUWxUiKOaMZSvJtGs6xc/eu4X+rYnvu4I51pc9s9
+                vJrrfgdz54jjtMUr9Lsnh2rYxIVqmpOpo/buoDMH9lGX5vnKykj/Fh2O69Ug/m8wnJsct2Fj+MEmjtj0
+                3Kgj6GtKyjVi2gI9OXS0Pp26RGtKy132Uty7HzTy+HlbCs5GkTtz3876y48OVVawKfEsGAw1ArcFXC9w
+                baCtYj4OE/xwa8C/mW24ExKqk+NCNCKDYVeGkWaDwbBDI04g4xi9ZLauf/NRvT79K68spyDPJvZWOCLa
+                Jb+lXjnrd+rZrPUm51VGnACnaKojzh+NmqpBfbqoa4v8xN7vl1UyXfBLR54ffedrfTJ5oRavLVNGWppS
+                A9HfDFAq3FDoKxBir1+rXD1w8VHqWODKZiqzYTOBTzNuhHyY44LrAnM4UJqZSM0KqSzoZDDUFxhpNhgM
+                OzwwUm9M/UrXv/VvjVo6U6mQSscMo6luj1eTY4pWVGiP5p319o//pKZZOf4csClNjDtt+K3O9DHpL0yj
+                IwIGpDKu8H5PSGSfK6KUDxk1XU98PFZDJ8xzf6cp3avDoSS1w3cFUipcByJFeZkp+tt5B+vofkzaDT7b
+                32vpDAaDYZdCTXNZDAaDYbsDJfafI4foopfv1ajFMxRJw3WCCXTshXFCFeOUMD8zR42y4pN12P1tghgn
+                xRxPZIn4mfHQcH5yUt356TZBnO+7i7oPoZWP6t9Zd55/uP5w8r5q1zhDJZWWCq4NvlyxuBuGLxmqszfz
+                8Zr4vstnMBgMuxKMNG8m8PMi5iPheb5vEKJne12biR6EDyIWMbOrDYbvDgk12P2D+nr7Ry/q10P+rTlr
+                liqSFPLJK7TumBTPPD37VE4kU9/2Rq4acSoJUSb0HFckQb9r2yKJqMbp+Ub4nOMykXCboORNG2br5z/Y
+                Q/f+9DAd1K1QZWWlcRXc7609g5SFqBzL10X1t+eHa8I8FuBx19300gaDwWDYTJh7RhIghcwSJqoFYXKI
+                AcnKRKyUx2QHFiAhfjGxI4knSQia7wvkjdA+kFfC/bBYyfcFJhMR5J3A80xQJKY0MTS3FPjHsfIhEyAJ
+                uUeahBciTWIws4BICHdkqL8ojVboz0Of1u3DXtLaaKkiqRHP+xL8cgO8euq2lUfLdUbX/fW/s66N79gh
+                kBxCrnbCWxlLitbr1hc+0/OfTZarAfeubF4a5Y5wH+iI9wMXHav8BpmedG9+LgwGg8EAjJkkwMp1LH7B
+                xIe///3vPiA6Qc5ZtIKVj1iRrm/fvrrrrrt87MfkJZe/D7BYB7EwWb45LIP9fYHJHyxNet111/kFW7Ym
+                wDsB75k8Qj2ee+65fjY2JJwOATOyIdFGmA0sd33b0Gf1t09f1FqVKc0RZtien/dXCQjNCd6s7PQdbfGB
+                uJ5N/uLqRPzfOsEd2qxhtm46Z7B+eWQ/NcyUKiriC6TUFanu3f1o2hI99NZIRV1FpZhGYjAYDFsMYycO
+                BGtnKVBWokPFhRwzZAo5ZcFEFhthxSDASkKsvscKRASDJxwPhLoy2MY+FGKASwWB0wNQW5mBDFhpL9nl
+                gnPYVhms7ocaS5B5Vm0i4Hvla7NSEy4kgFXvKrtS0CmgDMTfrA0MQrCyEh9AeVg1r3KAd8rCPvJH0Pjq
+                QF4ITcSqTHRIWD2PIPh8qGPqmt+o6QHUA2kn1x2gM8NKTYD6Iih+GDShbiDfyekARgxY9QlUrnNWrWIl
+                xOoQZosTrD8Z1HWob/IR0gco9Nyjqu4loANBmjxHho0oi5br/i/f0N8+e0nrKxxhdmbKe2A4VEf54h4a
+                KUpjlbwdCDhUfDFqquYvWp4grFWw/urgD40qK5Kqq0/YV9ecsJcaZab55bnrCuJPKyWixz4Zr/fHuue7
+                skxvMBgMhjqj3rtnlJeXe4UZ4vfuu+9WueIPqjMxKCHLLDzC6kAQa/yLIYK4cdx8880bzmUN/nvvvdev
+                ZpSTk+PP41hcOiCFLJONss0KSJDBRYsW+VWHIJTkg2VKIbcEj//hD3/o04SAXXXVVZ4YosqyShIkjWvf
+                eOONfj9LoELEWOoZwoz/8dVXX+1XcSJPTzzxhFdxKTP5/sMf/qBevXr59CsDYk1cTo5neVKuQ3osusJC
+                LADCjjsLcTtZGhvyx0pK1157rV/hqTJQ8Mkrq04lr4IYANmF9LOEKmW7/fbbPTmmzNTTb3/7W6/wP/XU
+                U37pVZYE57oQWuoP1xmWJWcVJ+qPpcgvu+wynzb55hhcalhqe9y4cZ7ko3ajnLOwDOSWpbVJJwAy/cAD
+                D/iycRykGaWc5dAvvfRS/zf1TczSf/7znz7G9l/+8hd/f6lvngl80SkveeE54nnC1YVz6Jxx/y+++GL/
+                PNRLJCyQ/3Kc7r/ffKAr335Ey4rXKC2S5hfoqGkCG7sgzSnRCv2018F66OTL4zu2EKSX4r2PvcdzfONm
+                oqS0QqMnztGQTyequLRcvzzzALUsDCHttgwVrhP4nw++0d9e+1orSyqU5t7NeB6rr5x4WbAfFRrYtbHu
+                +dnRapnf0O8LQLtetGKNit071rGwwIe685MH3bc5cxgMBsNG1HvSjGsABOiPf/yj96WtCZDEPn36eKIJ
+                EYbQol5CbiGlKMB8X3DBBZ5YolxDUFGvIZYQZ1wdUE45BsUVEgmhYlVAliGFGB9//PGeVEF8UWTx+YV4
+                kSbkjXTxtUYthsRDUiF/rNzE94knnugXStl///09wYdEQqi5Jr7Q5AHiB/mG7FcG6ueFF16oQYMGeRIJ
+                0Sc256233uoJP0ulQmapM9wrfvWrX3kyCwnl9x133KGjjz46kVocHA8phHiyRHhNWLFihSeiLKUK0eQc
+                Vp2iLl966SWvfF955ZVexf3973+vwYMH67777vMEHvKJav3666/rlVde8UvAQlzpEEGcSeOaa67xPtSM
+                LkB6uQb5/dOf/uT342tNZ4HrsC8sH0vHAeL/xRdf+LTxfYcgk/6RRx7p6wWfbFRvrsFqj6TL/aZDRJ44
+                lueM408++WRP+rnndAooG/emvsEbIGeG6EAMnTFOP3z2b5q3foVSE4tx1EbbOB/SHKso1/k9D9a/Trsi
+                vmMLEabbsdDI9HnLNHryHM1dtNw9G/G8pCT8ihG1U1MibpvPgaLRmCoqYlqyfL0Wr1qvJeujiqRHdPFJ
+                e+qQ/h38ORxXe4mqB6sKPvDWCN311tcqqUjZ4OddHdiX6joAZe6a6Y50/+rY3XXSvj00Zf5yTXFlm7Zg
+                uWYsW62lRWVqlJ6ihy85Ts0bZSeyueX5NBgMhl0R9d49A0IDoYMg1gaG7/nQz8CVYI899vCTAiFChYWF
+                nvjccsstnqhC8iBbEGxcFlBPw9r7uDhARA844ABPXiGcKJAc89Of/tR/QxRJM/j3okpC0kgTMta7d2+v
+                mvI3aijkC6LM8SjcrNR0xBFH+L8hcBBJroXLCUQXwl5VUHquc/fdd/tro0RzHfyYIYxcI0wAhDSi9kLY
+                Ia3UAx0DFOaqllJFDYbwQyxrw/333+/VV5RmOimU8Uc/+pHv4OByQfrkpV+/fn47Qff5u02bNp7ckmfy
+                g/8334AOAmmyDCz1wD0iLcqGYsw5EOb27dv7OuNeQogZKcCXm3uEGwYKNWmQNko2BJn8UcfUN5NF6QBB
+                iCH27GM7dUrdQ9z79++vK664wne8GBngQ/54NuojPBF1BG3qioW6/LWHNG9d3Qkz4BjCNYOS6Ob5/H4b
+                LqFYVCMnzNWlf35Wv7jlFT363gwNnVWqz5fE9MWyVH2xNMV/PlskDVtYoU/mR/XJ3KiGue/PF8c0vTRb
+                63IL1KFrW1161n46sF97l2agtuF7y0Dc5ouO3Eun7dPdJVXxrWgc3wKqcSwinizHsXXfkG90zJ+f1sUP
+                vatbXx+hJ76cqWGTF2vS/BUaOWu5Xhw+kZNcqkaYDQaDoTLqPWmmseZT07LVkCkAaYM8QhTxaQb4Q0O0
+                2I5Ci2sFpDYohhBFFGTU5LANN4GlS5d65Rfgm4uqCeGDlKIg45MLsSNvgCF9rvmLX/xiAxHExQI3BAgu
+                gLRyDMQsXAvVlGvhv3vJJZd4VR03CxRjfIorA3UbRRwVHfIN6CSgYjdv3tx/6AQENfa1117z+UbdDu4a
+                VU2SDOWobXlw0kCRhZCGOga4bUAqOR/XDYgmS47TYUGZpt7pGECoyd/o0aM9YQ2dDuqPckCySQMCTb1Q
+                J3RYqHMiptABCMczasC9R6VH+b788su9so8iTbq4sHAuIwCQa4AiD7mmPgJwGeG6KPGcgwsO94hjSBu3
+                E0h0qKP6iNWlxbru7f9ozLLZSk3f+IxsFsV01VdcsXlxjSsDdfmVD8fpyttf1bT1KerUv7u69m6vLp0K
+                1aFVE7Vtlac2zd2nME/tmjdWuxaN1aZVY7Vt00TtW+ero/vu3b2pTti3g645oa8O7NEyPnnR31oI+daa
+                3JgnztecvJ8Gd2up8rLq5xDE4QhwIrxIakqqistStLxYKnKnlUZThU4eSc9QmvvEImmONE/S8nUl7lnc
+                OnJv2Ahc57BZAFsV5pPgjsa+nRHM8cEmb+1ANTaY0dptCfIU5pYgiFHP3zUQm7bmOrRH4Vlg9LOmuUFb
+                AtKn3akrqDfOATyv3CdDHPWeNKNkQqIgf1WB4X3IE0ChxZc5WaFlqB7FE0CWID4oiAFPPvmkJ3TJCiu+
+                s6iiRMQAqLC86MG/mIcURTvZ3/jrr7/210lOB99ewFA/gNTjdpB8fdKG0OOnixpKeSC8qORVGWyMOio0
+                fr8Bn332mf73v/95ZRsCyHmki8KLqwiKLPWAMozSXHkCHqAzwAc3iaqAYvv88897NxRU3qBoA9Lj/lDv
+                kFUIM0p9IOcYbzonKLiAF576Sq4/OirUd7h3dFLofAQ/Yuobwo7KD+iQ0DAwAkGn4N///rfvlEDUAyDm
+                dIYYMQjAWDdp4shV27aJLXFgVKkz8n/ooYd69xfuA/cDd5zQMasvoKkNzW3UPfsPfvGGXp86Qkpz5M49
+                PijH8My6Gyh3QjSm9e7ZrPs0uSQkMjN6ynw99vpX2mv37vrJsXvrvAM76qJDOunSH3TTZUd00+WHd/Xf
+                lxzRVZcc3kWXHNZFl/+giy5z35cd3k1XHtlD1xzdW6fv21GtmyTmRzgiHk/elciT562BS8vVV0GDLF1/
+                2kC1L8j2sazjCN8bEee+OJzwr6tN/ncfnDqoW8hx3DM66sn99CVr9c6oqezhRMNWAlvPqCRiAu0Hrlhv
+                vfWWn+9ARCLsws4EbDGjbXT6hwwZssWkGdvKvA9G47CL2woIUIRHxV2PfFLH1Pd3CdoBRiOra9tqAm3t
+                008/7fOJqIJrI66Z26ozBVFmhBqxrS7El/uJYMcoM88s3AVBB7HHEEfd26RdFBBBVEAIH6QtAMUVH14m
+                rYVJbRCxZF9deoNsGzBggCdlqL64VYQoDLgvYFggc5BNXBoALzO+ryFdCGNwrwCQQl4afHohVZBxFG2U
+                1hDFA7UYVxCMF+SV48kDSnIyINm8OHQMcEGA1POSMlGxKnKLuktecPkAGILgrgGh5G9IPWVGmYX8426C
+                sWLiIIawKqDE4u+MYcAPOUScQGUgP/gKo47j9kBHho5KaFC4Pv7LkH4A4SWf1CGgviCdnAfo8UP+6WTg
+                P00+abAg2UF55m9GCIJCjLJMubl/EHQ6DZBsjBoTDlHYhw0btmGyJcBYcm9RuwO4F1w/+G1zPj7tL7/8
+                su9wkW/uIZ0WyDXPB0Ye4l9fQDMLmQvhzz6dPUkPfPGm1peXKgLBdHyND6hLkwwljdNC10iUl6g4Gldp
+                2FKX8zmI65W6Z2jG3IU6ev9u+t25B+i0/dpr/64t1aV5vto0aajWjXPUKt995+eobeOGauu28WlT4D7s
+                b5KrwkbZyogEsxqfSMgAwrabUIfvd3ylv15tCnXpMXsoPVrutvJf1eY8not4PVFQFoNhNcSwNQ6U6BQV
+                lZTrvVGzVLoZETq2J2jksad0mquLUrO9QN6wiYQsxf0KW00bgT3GJQwbkzyatjOAdgZCSluJrQv2dHOB
+                TWZEFvuIi9y2AgSZkUDaJEZTH3zwQS9SbC4g8rRptFcIOTWBeUl0gnDD21zQllEPtD20cXSqEL7CaHJN
+                oP1mdBsyXFOEJubQcN9o72oDaULaH3/8cT9Si6shI89hBDYAYQrXVuppczs9vK/33HOPF6m4/9taVf+u
+                Ue9JMy/9TTfd5I0Yk+KYPMfDD5GBlDERDLIDEeIBTPZ9hoDyYEGkUJQhrEwuo/eMeogh5yWAmDG0DyHj
+                YeOh4bwQXo3eHAQZRRjwXe4acCa18UJwHoQYdwom+pEHIjqg8AblE6LO9ZJVTwDJ56WkfJyHSwgPOeo0
+                168MiCV5pi5QYTFCnM8EQuqJHicvOL1PSD5lxihxPIQ3qMFVAT9fIojQESFiycEHH+zzg3FCeaXOqFOM
+                EB0K0uUYIltA8ukA8IJRfxhFonoAjA3KLgQekD86KdQ5vWZ+8+Inu41AgFGig7sI50PkyQdGkvsRDAYd
+                BOr+jTfe0D777OOvQ8OHAl85CgidMFQHOmEYGp4fGk/SgCjj2hMmU1IfjA7gikLd1RskSCpscun6Nbp3
+                +GuasXKBUtLTNpDlzQEuFXHyl6LVpeu0unjjMGRtyUE1o46EclxGWqoOHdBDPz5hHzXJde8GpN594v9x
+                bPyzAZv88X0B6gvBjV/8hL266eg9O6qkrMIrxlufqRSNnbtMo2eFhnC7FLLOwLWJ9whbBTmtCggA2LQg
+                BHxfwJbRGea9x14hemDP6IxDls8444zEkTsPsO2Ui/YA98EtBW0PdhGXum0J7Dm2mzactpNoRswz2Rzg
+                lkD7dtxxx3m3POx+MiCLPHcIMwARhOslj47WFdQDH1z8GN2Ea/CpCxjBOOWUU/zCa5DQqsAzRz0zj6cu
+                4N7SxiKwcY+pC1wS4SDJoN1m9JprB7ER4YvR09qAsAZ/Ic+MYHPNnQn1PnpGAOSVoXXIEDcR4hV8hQE9
+                NQwgL0YgWgCCxfYQlo3eE6SUamXiFz1G0oUshyF7jscXNqicvHwYo2QfYh5W3BR44Xlg+RsiSQ+da2B0
+                k19StkH6kicPBkDAOR/lluuSTlWEOYDjKQNpciz54oUmn6QflFWMBWXjJYOYkp+6vADBBYTzqB/Oq5yf
+                5JjKKLKBIFM3nMs9CCoN94C0QqcD0IHgXqIQU2Y6PeQx1Dn72c59BpyPkQ11HnzCuVfheqQf7hHPC2lC
+                divnPeyjfsIk0TDJj/xTLtT6oKyHPNQrYHXco/LU6I/14xf+rjJXPamO/PL0bDZxdmlxTtQ9t12atNQr
+                59ygngWtwyVqQfyodz8fp6eHjHH3N1vnHLGndu/Rxu3ZmEL8X/4Gm5vBbQlUZpcP957F3/IUfTppjn75
+                z3e0aG2F0qta/WUzgL6cUlGma4/bS5ccvXd84w4MOtB0UunMIgokK2LYXOwLHX+O+etf/+rFByICBTsQ
+                wMginWxECDrvKG2MDNJZx4ZsCbCfiBYIKXSMIRikj31g3gajdsHObEtgw0i3OvGiMhBtsHnYKdzsmMRO
+                p7+yIACwhxBdRA/EodpAHYQ2IbmsjKByPnUQFuviftHWkW/sZPg7ub0F2GoEJew59zQZbKftCOE/qfsQ
+                IrUqUFeV7TdtPSIYKi55RugIbS35RrhCdOIatDF02FC3ad/pnBHmta7qNgt68YxR77ho0GYwOpFcZuqQ
+                9qPy/YS8Q5wRg3hmk103Q7kgqBB8nrdkl8sASO5jjz3m65v3B4GM8vE+4ZbICElVqx8jJv3tb3/zx/E8
+                0C5yXuhMUV9MmAekTZ0G4k17zX2iLhGQuE87E+r2VtUD8EDy8qII0FNNJsyAl4f9lV9giFvHjh03EDYe
+                DIZB8CsOQyykhbqA8eADEU022slkDHAM1yKd8KBhuLk2LyZ5TCbMgOM4pypDyQuHao4yzHdNhBlwfLhO
+                yBfflCnZFYHfbOM4ylgXwgwoL3VGflBtq8oPRJL7wCcQZsA1OD95WJPfof4DqB/yBjEG1E1ynbM/maxS
+                t9Qx9ynZuENqKR9pJd8j6hkjVFXewz7Kx3cgzID8cx32cX/rJWEG7lFZuHaV7vjoeZWmRJ0hchvc/5tN
+                mEH8VFfxKSoqLdG8FfHFYjzFhWDWiPgFF69crwWlWVqWWaAVCffyuKYbjgCb/rV9EJ/Q5+srkZc9O7fS
+                cXt2VKysdAOtryuiPo34WfwL515fWqEvZi7UyrU7vr/tM88844kBndBAmCFbDJez6igIBAfizAhTsAOc
+                Q4c4gPc2vKvYA8gtk7IQEbYEuO6RPmSGdLErEDFG2iAnyXZmW4D8otwROQmRpDZA+HBfgBxBbAD2ifpJ
+                bucgyogmAFdCSCkdgJqAMIAvLdGg6CgwEokoEVwdCK8J4cIuh78ZlQtD/cwfYdQ3zCdKBveDthXynDx6
+                QB4Jr4oySh0jzuBaVxUoA/7DdA4qA8JJqFeiOEFGQ1vLOXQwsN24ClJHPHuQWkhlEIGS7X1tYII9IyU8
+                ZzybEM1Q99wT6iXUXWVwr3H747kNhBnSDcmFjAKIKXmjHaLucSlMfuZ5BuEOoc3nOozOMkmdtEM7Vhm4
+                6HB/6WyxnzriHWPCK6Fog0CIkEcnIHnOGNt4VgnVG+YU7Uww0mwwGL5XBGL31KiPNHLJrE0a6K2Ca/DX
+                lRZrToI0bw69TXFsMT0jXbFIupasI5Qb+cQ8bi4N/X5Bw5qZFtExe3RVm8KGm7VaIIj7gzMN0NWW+7+0
+                pEw5WWlqk5ftSMCOPTkVf1PIDQ1waKQBPplMfKIxh0TQmEMCmMcAUQREE0IRROEDkAfSgEBAKiBIuH2h
+                njG6F8AIEucwx4RP+B3maHA9zgWvvvqq99elIw6pwFcVIgJZTI6usy0AscV9jvk5lLGy6FMZ+FajbKL2
+                QjwhfADCjAgR3knmeqCeQrYAczUoC+6FVYHn8cUXX/T5wPUM0SKM4qHY4kYIeUMlxbWAvDJ3iOPpxATx
+                A5c9CCrXJa/4/kLIuNf473K/ILXcwwDc5UgPAkkUI8giYkdlcO9xw6NcKKCVwcgEnRuIZPADZiQC32Du
+                KRPww4RxSD1qLPmGMCMCkUcAgUeRpaMBEQ2fQICpC0ZKcO3gWebZC+osdYSKjgsP5ycLPoDzcBuhvpPd
+                ZOgEUTbyzTNJOSCmEHI6R8zzoaMZwN/kmQ4LLhw8n3RkeHfIe+UoVoD7SrnJU6hf3gM6Kw8//LC/BzyP
+                gM4FpD88L3QyGH3hvcA9ozYBb0eEkWaDwfC9AnfcBetW6uEv31IsbdvRUiayraso1ZyiOIHxpLmOzHlD
+                HtzxLExSVMxyIGytYwLbCWF0Z4/OrbR/p+ZKjW3uBL64mk7M55KSYu3RsYluO2eQrjvlABU0yvX7d0QQ
+                xpNGGlWQOgikDqCuBdKLkkdYSdRAiCRqJOegMkKmGXmDeKCGMUwO8YEwQpT5oHwGQgxIB3KX/AkkGXWX
+                NFG62Q4xZBEqyBCkBeUZAgIR35ZkAUIHUWKOC6ojhDNZTQSQQ3xPySN1wiRyRvsY2oegocpSN0zWpiPC
+                aCjkh7kwTFYOLir8huRVpZJDlMgDBIzjuEeQQOoashhcBCDeEFLIGYo7ZJ/0OIZ6AxBfRvhID3JNlCb8
+                jAPB55v7GOoekG9IHmWFQFc1oQ6iCTlEieY+B3IHSI9J5xA97iF1iWLOh04Y0SRwhwhzZwKxZyQDokzd
+                Ucc8ZxxLnvH7RUkOH55Z5ksBntOg5ELUKS/PIx0E1HnqBRcUnkHuRQAKL2QaF0PKAIEOoLNAOSDkdBJ5
+                N1DsKU8YfQhlph4pK3kNo6jcI/IMUQ9zuKiHAI5FIaZe6SDyjtCp4Zlm7hFzqrhO6Ghyr7k2ZeB36NRR
+                jzsrIi7zO2/uDQbDzgfH0v755RA9M/FT+SgO7u849ds64BFdUV6mzvktdWzPAUlp1p762GkLNG5ukXLy
+                c1ReVqLerRsrPycQm0Ce41MCuc4mdDr5D0fAKBPwc/Xi/7hP/Jt/QdgCto6cx5c3YUntSCRFH06Yp+Iy
+                3F0cfJI1p8txFeVR5TdI08VH9tO1J+yngd3bevU6nq0tzdd3B8gdKinEhwgOKJAME0NIIAmff/65V76C
+                axZqGwQBcgyBJeIN50KqIbEQHo5nkjOuYDTykAL+pvGHJEAwAeQClzH+5hN+Q/hQIkMISggERIiJZBBp
+                iBIEDwJOGpAIiD4f8hG+IdqVt1W1j998UIJR1hmqpyzkG1LCxGWIL0AdxzUF8kNZIS4cC3GGZJEmpJV9
+                qIuQcIgf5AtVEoJKvVCPHA9lSHaZA6SBKwadA5RNIhlBjCGwkEImaULOmVwHeUKphNjj00takEMUYHyQ
+                iQzFdalLVG3KAQmk00Ga3FfIIulQpnCvcMnBf5e6pc4hnkEpBtxXiC1lhKDyrHD/yBOgnDxDKMGhg8V1
+                KDcuDwB3Op4jOht0DFBWIdHkCwUaNwvKglsFeeJe0wGgHMzNIc/cD8pMVCX8eZl0R76pN54dXEa4p3Qq
+                yD/3AQJOuhBeiC73gTJQVhRf1lUAdBYY+aCzRp1xPVwMqSPqm7LwDnCveR6JXAX5p1w8w+QbX2XeD87l
+                mQ7qP+QYv3++uTb1RTqcy/GkT14YsaHjRH4h4eSDYxiBgOBTV5SfbeEZ3ZlgEwENBsP3ihUl63Tif/6o
+                j+aPV6ozoBA7jC8EM74s9ZajoqxUR3bdW/897VcqyHQNnNtWl/SeHDJSz36+QE3bNlfEEdGLD+umPm1c
+                YxES8GbS/0gkSJ4rVO4IZ1okzbt3+L3uH797A2IqLin1KxymOyLq9wXHbU+o4+lWVDjy666R5o7bHKIa
+                cgV5XlNcptP++oJGL1jjSXTy3qrgJzq6Mgzq3lJXnTBA/du5siepSjsqII2QBNQwyB7EjKF4SCpAdUXx
+                o3GGqECYUQv5mw+qKdsgCxAwGnCIAenSkHMMYOI0yifDyKRZlboagIsBE+ggq5A+/oYsQLiZeAihYA5I
+                IOSQsW0FSBV+vhBIiCD5hPyESEoQatRV8sJQOT7PIe49Q/vsJw1UTwB5hfBQFxAsSDR/83xSn4899tgG
+                H1rA33QKuB/UJ8cGdZJ0UU8hkxAkyDPRplChyWfIdzge4om6DEGG7FEeQEeAuiM/4f6EUQPqk7rlnpI+
+                JB0llrLhfsKkPNLBxkCmIc6opPg7M7qAuwyAQEL8OZb8cDzX4jfXAfwNmSX6A8SV+mTUgOuTDzpwlB+E
+                /EKcqTs+KPqAY9kPKcVNhHtDefiN6wL5Jy0IKNGkUHJ5ZnhG8bPmeQ7PPp0LCDz5ptPBc0u+SIvOG0SW
+                fdQP1+eb5z08+9w37jWgfLig0Fmk04ErBQo/EWAgwDzL3ItwbfJEGek4QLpR3RlZgOzTOUBdp3PHMdxr
+                rk09cG0iyeBOwjO1M8FIcwLcUB5Eel885GE4igebHhU9Tx4sjuGBDzNaefjCC19X8OCgOGCQqX56bdsD
+                vKT0qnngdxTfIgwVdYMqwW8M4NaCesZIcv8wIKQbDOJ3Ae4vzwzGE8NviCNQuJcnfK6fvXaflpascpXF
+                1ohaZOepb7P2Kk6JaticCTVxvRqB0tyzWTs9cfKV2r1l3d+rJ4eMcKR5oZq1a6FSR7zP2b+DDu3VSq7p
+                dHuD52/8PS8tq9CCJav04YhpmrdwsX551iHKy0XV3JSkLlq6Wl9PXKC3Pxmrs47dUwN6d6h0hHsH16zT
+                lNnLNOTTcdqjZ2sdeUA81nhdQe5SaZBdo0gub37hY9337kRvk1gJkJjM1aHCvQO5jgfedOZAnbpfr2/l
+                bUcFNpP3N4CyQgqIjIEfKCQNYoh9Y/ifRhv/V8gTdgXSRNQGCBRD1z//+c+9AoeLBseQPulBqlEASQd/
+                3OTIHJUBQYDooKBChCA8EHu2JecVkH64xtYipFM5rVAngLxAuiCqLNKECwOKIW0XYcJQnbFXRJnAJlJX
+                kCnCiWLDqFNIEyDN5LQB9o4yhnYwuXwM8UPkaEe5NmE+Q31UVQekEfbzHfaH7+S0UVVRXQnRxv3mvrM9
+                pBHyFPIFIIOou3QQIL74mwdwPGknI/ydfH2QXFZIKiox21BpCS8KwjnVlYPffJLzS/1D0LkXKLp0RnCH
+                CeA8jgvgXNKATKNQQ1YZVaA9574A1Gk6NjzruH7gghLcTbgWJDcs+hXyw3cguPzNp/K1A+gg0lnhPSJM
+                K+BZIz+41vAehPIG8DeAdCdv3xlgpDkBesLccHrg9E5RDbiZ9HgxpAw30HNj2Ihj6A0yrEMvlV7U5gBf
+                JAw2PXx6WQxtbCtwOzH29HxrI2wMLWEQ6UFuywDzyaCTgVFJHiarCTRqzMylniG49JS3FPSq8XPD+IRe
+                McOGvPgoJclxm7cleJZocGio6hKWqd7AWRqW4bjqtYd095ev8rCqc5O2OqxTH53Wd5AGd+yrn79wp/4z
+                9kNvpGsDoddisagiqRtVO+5tTmqmHjnhUp3eZ6C/Zl2YYDJpLimv0EHdm+rs/TooM42T43lZsbpIYyYv
+                0PBxc/XJ2DlaWZaiQXt01rWn76ncrHins9w1NBOmztdXkxbo/ZHTNX1xsVq3ba7f/nCA+rbb+D7OmrdU
+                IybM1bBRc/TN9MWKOHJy8Ym768R9N+899MVz/3iC7P4bMWOhzrrzZZWWp22IP10dsPzlrpPxq2N31zXH
+                uUaTDTtZAxaASoi6TCMNUQ1ARYNAoNhhF2ncIQ6QQtwTsJEoqYgg1U1uqyuwo7QbqHCsqIbqvKOA8HmQ
+                F94rhu4RgVhshXqANEOQqBfUYIgULhjYSPxbt7bjTxuKGwRi1PYEbju0u7R12OXNbbdrAq4YkHbcMLYG
+                jE7gtoHbBVEogvpfHWjvUecZZYGPoFhXBoo4nQvIdFj8jOgkPKeIUlvrIkFe6Vii7PNN/umEQswh6rsa
+                zKc5gdDD4uHHUITZsRhcZuvSA+SBQ4GGQOMXxnFbOszGg8qEDIbQtmXYFZRjVtzD4NVmpCgTPoEMbX4X
+                SjMNEY8XdVbVLOaqgBFAAWGGLo1YeMk3F6jLGB38uwiPRO8fI0GPm8aVIS6M3HcBysD95R6EEYv6jA28
+                1f0zZ81y3fnZqypaX6SfDzhafzj4LP1iwFHq2Li5istL9ef3n9aiktXVqg9+a4xoDzG1zGmsboVtNW/F
+                Yu/+wJViKanuuStWv1adNKh9rzpzwDHTFmjCvLXKacQwtLMFsXIN6NzUkeY0zV+ySq8NHaP/vj1KLw2b
+                rqkry9TYPTuFbVupVWGOBnZrrpLScn305WQ99cZIPTN0kj6bvkrpjZuqVee2ym/MMYUqaJipEeNm6YX3
+                RuvJd8bp/VHzVJSeoxadO6pJ03z1ad9EXVts3gpx3h/aldF7erjvBlkZem34RC0rrpC3TDWUn7opcWSp
+                Y2GuDu7VLu4ashOBdxxFCyIM2cAuV7aliBLBDtKZhVzzNx1yJjnxjb3ZWuIA6ISTJp3loNztKCBvlJvR
+                NkgxggJD+ozqMWGOdgzCR31QT9QrLh11FTtqAv7mjM5uD9CJxs8a8YTy0p7ggrGl7XZ1wGWDutsS0F7g
+                EoOIRtxk2sqq/MaTwX1DUMK9ATWfya5E8agKdBhRq2nnA7ivjDAjrm0tGI1AlEL8Iz+M2kPQGVXYFWFK
+                cxIYxsPwMtwQhljw06F3ioKBqswLiFEkNAsO/FsKXmZ8qvBXgsBtC6CohpWKGH7cnmAYDN81Xmw6Ips7
+                BMMLjiH48Y9/nNiyeWC4ip43QeqT/e+YiICPFvWET5Xhu4fncwlS9/rYL/TIV+/pJ/scrsO69lNmaiJ8
+                hts3feViDXroWs0vWaVIDc8Lh0ej5Tqm45765cDjdPEL92nm+iWu0+saQgh1WYlO7jFQD51wiQoaxP0L
+                a8MGpbltS79EdW6GdP7gTnrng1H6aupirShJVboj1I0L8pSRneWV3Wg0ptZ56erWUPrwi6laWFSqaEam
+                8h0By87N8X7OMXdMpsvWXm2zNWXsDI2bt1IlqdnKadLIkelGiqS7CzlbgOJ76l6tdHT/jaHTtgTlzpxf
+                9Z939OzwGUqPsEZgze9dcVm5DnSk/86fHKrWLj8bbsZOAIb8UYlxLcBe1MU3EqIdhq7xq6xPoM1ByMA2
+                QopRWhGHsIOVR3ZwUwx+rjszoDd0qGiPII91FW++byB2MakT4l1dbOlk4G4IWaaDA1dhtGB7As7Be8g3
+                EVO+K9fHHQG1j4HuouBlYjiNlY3oEbFCDeFoMB6hd42fGrN7mbkaSDSzrDHO9NyJrchwHL1Xwrsww5YH
+                hlVxGOpKBsMVDI/hHsCwHcHHefBRJILvHMNm+DAFXyTSh6yHkDLkGQKKyk06zALHMZ+wNxhCtqOikheG
+                RRiCwW+JGcGQc/5G2SZGKLPPIZWoNAEYVIZ6yB91gu8bvfOaACnGl4l4j3zwl8KHjkkEuH/Q6cDnjOHB
+                6kDe6YhwPhMPyAM96TCRBZA3CDDqPnlD0SH0TnV9PhpG3EK4x8F3HHAu/olh2IvwOHSSKCv7GN5iuAlj
+                hFKNHyPxNsMKWZSP3jR+cfwG3C/uAzOecSvhPp9//vneiASgeLOdukARSK4PjDo+eTw7NGI8ixh5gLsK
+                947nhPxRP48//viGZ2RnQoUjkD1atNUdx/5Mx3bf0xPmZA+56SsWqaiipA6ULSam1HVo1ExHduyvK/Y7
+                QbmpWYqGGMWRNI2YM1mzVsbjNW8ecHJwxDsW0bSFa/Tu+IWqyGumFt06qLBtc6U3cITLXZ/niYVAFq4u
+                07uTlml5Ro4ad2ivVp3bKycPxckd48pLWqUuW59MWamp6zOU26at2nZpr4LCJkLsikbLXFpESd42RDXN
+                pTOge2uluGvHFy6pGbi2zF9epKWr4wuZVPM67ZBAvWSkDLtZ18lEqGKQxfpGmAFtG3VGBwNXQ8LJ4XpY
+                mTCDXYEwA8Qa5gzRXuyohBkw0kFbUxfCDFCIefYZWdnehBkwWkPbBvfZlQkzqJekmR43JAjFEYd7SBEk
+                j1nPEOYwpM43sRIxMkEphbTin4XhhbhAaiDSkDMc7gnejUFmkkEABIlZpCjThLthxi7f9CoZMmM4g9/0
+                NBnKCkNH/A15CkNbkGsmcOCTRT5CcHPcMcgr6gF5ZXIH4WIg+jzAuDpAbskTqjYkH6MIkedhB5SDCRsQ
+                fwg1RBYSh/JeFTElz0ycYT8vCtfgb+qV8EMo8ZBvjDOEsbqlMolVCRHEsEGCIZ58k+9g5MgbpBTXCjop
+                pA/JJe0QKL4yqCPIMOWBcEKUKS/qFIYG1w86I3QcIMikTT7xwYbAcn3ShkDj942LDuvtcw9pZPCPw2gB
+                7hfbuPfUC0Qcwh782xhyw8+SyTTcB67Js0deuE90argeM95Jg7Tp/AA6UTwrzGjGN5DniJnRpLOzwL85
+                7h/iKHcqaKkOTRJ+f+6xwgDFEtxu6tJ5jmCW10r1eBrTUyLq3aqTT/OX+x2jy/c9Tlmp6Y44V/h7MWft
+                Mo1aMssfWzdw1QR1TSVjOICkKLtRnnIK8pWaHvHkVlFcNxJlciD9tIaN1KR5M2W5jprjqv6DuYgf4/IT
+                c2VKT1desybKzs1WLFLhOhAsoOLS3JDSNoJLrn2TRkqLkLPaQf0tX1eiVWvj0QE2d0TIYDAY6hPqJWlG
+                iYVYQohR/yClkCiGb5KjNdCAJPeaIMmoumFNfpQ/PhAkenvMyuYbMoSPE0B1ZVIIhBTCx6QKrgOhQi2m
+                gYccQpwgzGFyGkQVYkw6TNoA5AfCjzKJcz+9TVxHUETxf2JoBHUclZkyobYSJxRFG58jJr4w+YMOAoQW
+                co8/G2ASJCQRvyoILMQNohhmTVcG/tgoySxVyzU4lnPwkwozkiHeIcB8VT5kEFTILEo+dURvm/Opm0BO
+                yTdKK8cSh5P6oZPCBB96tqFDURWoc9xUSJ+8Qdy5HuVk+BESDIGmDOQPJZ664r7QCUHpRvGmPMwoZ1Y8
+                KjHuHtwXlPEAjsF9h7qg/nieyBuEnDonL+H5QOmns4YKzwgDIwTUP6F8yAP3LYx2QMLJA50SOlDcO/wy
+                yeNOB/iY+2ygcwl+5l03HKYujpPmQKKrA8dnOoLcuzD+nKWnpOp3B5+l3w08VU0zchQti6fx6thPtaa0
+                2B9TF8QvG4vnz2cCrTbq0qtwz2GFyitiqoi53xXlKi0nYgB5iYeRY1+J2879IhRdmbMVJa4sZS6xmNd/
+                3VGOdJeVxlReynscU7Q8qvIy9/GDBu7AeAa2GvnZWcpKS6mTapziKrO4tFxri0sTWyojJFKHxAwGg2EX
+                R70kzbgsQGxQ/ALwD0LJCxMAqwLEDVKaTFhQ/CByuCgACA6KcJg1inLINkhTAKQNcgQhZXIawBUDEhwm
+                pHAOKiwuGGGoDEKJeoq7ASorBA33EfJMOhB6yHMy8UeVpSHn+snhdVBVuRbkDDcClExINwQcAocLAnWE
+                qllZfYLIQq6ZKQuBw+kflZnJDMTYhMzia8iEk+DWUhWIQoI6j1odgKoM0Q0dCu4LBJ0y08mBXONSwoIC
+                f/rTnzbExEwGnQpIMoC8cg5uJtQdCi5B1rlv1Bdkn7ok35By3Cogx4D9jCig7icDAgtpDsNikF3ccZhs
+                QT4hw3SMAIo75SD0VUDIO+lwf+gAsRwsdY3yzLEMOQOINhMZyR9Em7wyFF3X4egdCTxF4bMJ3AYo2fw1
+                y7xSXJurAlEhctOz1LagefxEd3hmakTXHXyG7j36Qu1e2Mn1cMv17ozRmrwisQRyHThf/JCYI8IuB45x
+                Qs6JW9yuIEt92jRUl6aZapabph6tctS9ZUPlZaU4Eo1LSFTNctLUu3WOerZoqMLsDHVvmqNe7pjWuemK
+                xspU4fKYlZGi7q0bqIc7rnluhjoUZKpXmxx1aprlihAP77Qt0LBBunKzULHjC5/UCPdur3P2Ya37VIbv
+                Pri6SHQjtln+DAaDYWdFvSPNqMVM+MPFIswcpTFgCB61MQy5VwWIJiQqEEHII0P8Z5111gZiS9qQTBRo
+                AClLJlgAv1eOC0HVATFGIbyBNEO2uR6KK+lBzJiECBmH9KN84tbAZDvUZoAyDWFOVnVxPUG5TQ7DBHBV
+                II8cC8mH4ELCmRRCeSCapB0Uz2RQbsgspB/lFZcP3A3IE64aAJUZhTwo7lWBYyC9yXUDGWc7RBHQwaDs
+                kEjyhmrMzGJIZFV5AxBi4mUmA9UX0kmdkyYEH9cUFHfSplOBawmEFaWX+oD8Um/BXSeA+0B4HY4DkG2e
+                GzovuGbg0hEmiYYwTsFVIxnUO6QeBZyg8CjfdD7C6Adkmm/KQoxTCDSxSZM7GbsKyqIVWrZutf9dM2WO
+                oyC7oZpk5mw4GDqHMTuj32A9cfpVumLgKe7vFP3jk9c9sWW/p3x14H1eZE5FY5ayIyk6ql9L/eLgbjqu
+                bwv1zI2539114UGd1UTFWuk6fZDsvu3y/XYmD7ZNL9bp+7TVLw/tpn6FmVo0Z5FirnzNczN1wYFd3Pau
+                6u0e+R90y9dFh3TT8X2ba/mc+aooKfPX31pkug50QSPikdfu/BFxti89kqZ/vz9aNz/3sV75coJmLV3p
+                w2f7zovrOUDoqYvKnWeDwWCob6h3pBnVD5WOFZogf7hS4GMMiWRyGMQVMoMbRGWgDEKgAgFCTSUdyGsA
+                ZBhFFyKOawY+y7hv8GEyG4onpBeCxT7IMiDyBSQQlwlUUnx7IWJcC+WUYX5cOCCmEHd8lyFZqNzsBxBk
+                1GHyRHoAVxSOrRxaBvIFYUNdJh98SBf1nUkTkF3iJROsvzJQtfEZpo4oO2SWvOKLHCYWQuApD8orrhSU
+                vzIgk6jguERQN8SaJDQQbirUM+dxDOSWD+Qcl4mQN9T6qkBa+JjjggP55Rpso8zEyMZXm84FHSjuA4SV
+                jhDPA50F6oRRBcg1vtPJLjocQ76oU36jlkPy8bmGROOHTkeAfKOa48IBiYaAk4/gx8wzR/1wDO4+qNRM
+                AkH1ZwUynh06LZB56of7zKRQOjbc211N9SspL1NRedyvtla4oudn5SjTkb3En4l/4796Nmurmw87T0N+
+                +me1bdhY81c4Yuv3ONSB95EKbz8RPHC7+Hj0XD347DA9/tJwff71DD364he6/8kPNXrsLKUk5mNOnb9c
+                /3p1uB7431B9Nnqmnn33G9375Ed658OxKi/BrzlFK9eW6sl3R+u+x4fqg88m6o1PJuqBZz7SEy9/qpXL
+                17gLx/O/tWAJ7LycBnV6RmKuBSDqyFezluv+D8brmic/1cl/fUUn3vy0rn/iPb0yYrKKyL+ruG2TO8P3
+                CWw0NrCq9gxgF7FJfLAz2GmO55vnh/3YOX6zvfIEZPZXlzbnhHMBvzm+pueytmOwoeSD/cl543coQygH
+                +Qq2P6SXfH4Av8O5pFcd2FdV+TmPNA31A/UuTjNqCfF5iUDA0DiqL4QR0sJEOpRh/I6TF/vgxcCflGgJ
+                gVhCQlEcIYcof2wHKIsohJBhyCvRHnA3gAgTxxDCBfmBXPHhZYOwoVhDAiFgkF/cPSC8kHlIKuQNQg+Z
+                Ji1cB/Ap5oVn4hodASaMkR/SguihJKNckt/KvslEqKBzADGk7Ki9kExIP+VCvUZNRQWt7I/M3yj1RLOA
+                NFIOJtyhshIDM0wyDPUAMQzuKsmgcwGBhJiTd4gl/r5884FsQpSpW8pB2UgTlxRIZFV5A9xH7jPp4uKC
+                6wuTPMkvM8Y5D8LKveCecs8pB24bdExIm3yTJ+5V5QDzdA6op+Bbjc8yrjOAtNiPEg/xp27JM9dmG6o0
+                zwUuIBB36o77SMeHCYM8I+SB54+OCPliO/VBhwJXFSZq1uRGtDNieelaPfbN+1qwdoXv2NYEnvk9WnTS
+                Gb0H+4ls8ODwbwDLSLfObaLBnfsoNyvbpVmz04eP0zy3SDl5Db3SnB6JqUNBA42bsVhdOhaqbWG+svJz
+                ldYgV13aNVF+kzwVp2SoLDVTsUypEHeLFgXKbZKvaHqGOrZpqmZNCxRpkKOiWJoimRnKyUhTt9b5aurO
+                VVaWez4K1LJFMzXIy9Wy8hT169RM3VpVH5u1rljviMHb38zUjMVr3PtRmy4Srzdf58S4dp2EopJyLVhd
+                olFzVuj9UdN0aP/OapmXU2P9GXZMIB5ge3GZw65VBh1zIkgxmkXbggsbwgF2mRE47B/tEu8ctgybFuZy
+                IEKQNkQ0RDqCVOK2h10kbSbBM68FIYHFLhghZCJ6VW51gFE2XNcY4ass9ABcAVnSPMwtwbaTB0YmWcAD
+                MYJ2jPaIPCEy0T6THpPtKR8RkigzZWHEkXkuRCyiDqgv+AD2l7YFMo3QQhvOgii0q9Ql25lYT3uH2yBt
+                Ei6VuFPWNM/GsPOj3sZp5qUOLgp8eAkgW/iiViYkqI4QydBjhVTzkpIGZBrlMpA3DAjpQELDJDv8oCFO
+                vKS84BA6XAj45lzA9dnGSwlBBrhnQKo5JxAJCBfb8QWGzGE4gl80vWsIG4QQn2DyAgnjJefayUDJhLDh
+                ThHCL4U6gYBzzaqMVjLIC/VCHnF7SF4sBOOJocEA1RToH9IOuUWZ5ZqUnzRRCVC8AyCj5I30OK6mkEiU
+                A8UdBQBiC5nnnlFXlc9j9ADCCoEN9wtwX+l8kPfKBh4lmjwzCkBeksEzwn3k3tDpAOGZoL5Qk5NDH3F8
+                mOTHcxjcOgJ43ig35ec+Uc9hYuiuhFmrl+q4//5RY5bMcu9SzSGLKiqiOrf3gXr0lCu22VDZk0NG+jjN
+                hJVDS8pJj+nArk310ofj9dNjd1eXJtmaMm+pRk9dpFMOdvaipEwPvvSVpqyKqmnrphrUpbF+0LNQq4vW
+                64V3x+iYA3upScMsvfn5ZD33+Qy17dZFHQuydN7A9oqWlenVoePUvUOhenZqrqlzlurmJ4fpojMG6cR9
+                t35J/VXrSnTlY+/rjW9mKyPt253KzUFmSoWeu/Zk9WuzdSudGbYPsMEID8xZIbxcZWAbcXmjLWC+BMcj
+                1iAyMJoGwcWWMtIHSaSDT3hQgLsYBDVEBcI+0S4xJwYCTjvGJGeuz/mMjJI2bRJ2vCpAaBGzaANoEyqD
+                uR/Mo2ECNWQYkg0Rpj1mBJKJ0oBRP0K4MUeHeSUIUYhOTIZn7gjtMfYbV0RsK6SZNhJhAltN/skLdh6S
+                DnFm1I+6oryQf65LXXBthCxGWckPbn61tZ2GnRe2uInBYNjumLpioY5/6iZNWDxHkSR3mKpQUV6hC/v/
+                QP848ZLElq3HxmW0WdwkpoYJ0vy/98aqXetmKitardVrSlXmaHrTvCytW1+ipauLlenIQMNGue74qFJc
+                p3XN6rVaU1SmwmbxVbJWrVqvkki68ls08xEtGkZLtXrlGq0oWqe8/FylK6a1a0u0aPV6XXjiXjp+QMdE
+                jrYcRcWluvbJoXp++DRlJDrUWwIahgapUb3wm1PVq2Vi4qnJzTsNcHdjPQBCWTKCx4hkcsSfAAglZA8S
+                SeedUU5UWxRjzkOwocPPSN/jjz/uj2UUkPkguA0i1rCdETwEFK53xx13ePGJcKhMfCYfRCmCpOPKxtyR
+                MFk6GXUhzYySIkpAwFn8CvJKh4API5LJYK4NHQAmtiM2MILKvBmECsgyI8Go0pBnAOlnZJZrMyqIQEL6
+                kGI6CYwCIqLhUke5IOCQccpNZ4ERSEYsaxKKDDs3tpVQYzAYDFsMFj4J/fdae/HOahHVguO2ts+/8WxC
+                tMXDtBEtImwvjaZoSUmqlkZyVZ7XVBmNm2ppSrbWZTdRo9at1KBRI3/eylJpSTRT6xvkK6NVC62IZGt1
+                RiOlNS9Uo5bNxfLexeXS/NIUrc7KU3rzVlqf2Ugr0hqqPL+pCtu3Vlp65c7ClpYtXpfbIgZ0elpEDTId
+                8TayvNMBAsz8B0bt+MZNjueC0UgIcACjX6i2uGHgwoGyClHmWBRbCCajorg3hPcNRRrXCFzTUJghioDj
+                UZYB7m2QbYB7WZjUjarNKOCWgBFd0qEs5CcZjG5W9q9mG8SejgCEl/lE5IFykAauf7gaBqCIM9pHp4A8
+                4kLInBfqixFe0g/+z5QDJZ15PcTPJ/oWc3gg2oZdF0aaDQbDdofnZJtBzFCDObxmT+WqQCC2jXQ0nJ3l
+                eGGjLCkvrUJ56YS0iynbbWuSHVNBNj7L6WraKE15DVPdd4YK+d0gzR0XVaOMCuVnxdQsN6JmjdLVuEGK
+                mjVIdb/TVJCTqUaZ8WW5CVFX2DBdzfMz1Cwn4vZJzfIiaurOy81JVUZaIlc+jB3Y3LLFsb6sXPNXrPHL
+                eG9ZCglAmhyPb5AWT2VLKbxh+4BoQawNADHEFxj3NJRYIkXhtsB8CQB55DeElDk1yYQacokLGW6EuBxC
+                niGOuFigTAf/YPybcXNDdUaJJh2mS0FASQPFGT9k1FmunxwWdXPA9ckPbhK42gUSn4zkbai/zE8hn5BZ
+                FHH+xuWECeeQaibn40LHeajczBtBSUZBxj0DZRxXweDTzHWZw4I7HWo0x9NpoPOBi2JyaFfDrgdzzzAY
+                DNsd05bH3TPGL5mjVNcw1UT2WE3vJ30P0T9PvGwLSGEwd67xLa/Q+pISpTmygBtDsSObhJojzbQIjXOF
+                Vq4rVjaT+LIyPFHnU+aOI7IGJCOSlqqSsgqtXV/q1e/cBvEJwSyh7WNwpKBLuN+xFBWXl6miPOonGqal
+                Rlya6Y6AsDfq0ogqKyOihl5tjpdqXUmp0tz5GRk1u6tUxrRFK3Tqrc9ocUmqz+eWgrJ2LsjUS7853XUE
+                XI+CIm15cobtAPx5cbHgGwUYtwgUWlwvILT4AOPywH5cKpgYj4KKiwU+vkz+Y84ME95wdSBqEROUWRTq
+                kksu8ZP2UJSJoMT5TPbDFYIQmaiuqLD4H0NQw+q7TDKsPLk6gDxC2jkOUl4Z5AE3D0g76i75oyPA3ByI
+                L/mC0jAPBcU8TOjHjYKJfmGOD0Athszjp81cEYgw/syQYtw4mOPCfBKuF+awoKwTwQiSTF1CvnF5QcmH
+                cNM5QbWH3Bt2TdS76BkGg2HHw5qyYj099iMtWrdqw6TX6kA3v1t+K53aa6BrnBIb6wxOSNFX0xfof5+M
+                0TtfT9Xn0+b5VfG6t2mqLEfYEVY/nTRXL34+Xp+Mn6HRMxf58HYdC/MUdST7hc/Gqdyx3a4tCjR/+Wo9
+                P2yM3h81VSOmztOqdaXqVNhIedmZfhJeZiTVL7yyZGWRHnpvpL6eNl9fTV2gUS7NdSXl6tqysUqKS/TG
+                iAnC4aQVkTUcPho/Sy+4dNs0baTGuZs3qWjmklV6atgkVTh2vjWNN7GauzVrqNMO6KWMEIXDuMBOBcgx
+                CivkEhUUhZdJgfyG9BJBiTUBmNCGfzD7UYwh1pBjIv5AHpkUSFqoxZBTXB4g3KQDySRyBEQYX14mRzPp
+                j324bqDa8s21mGSO73F1E+W4HuQU9TrEwU8GLicowPgi85t8kT/Sxm5QVvKJjzHqeJg0jR8yYNIeLhgg
+                RKVC/WZiPOcSMYRJfmEBM8g+1yKKCCo6dcJEbr6JzsEkf0LP4p9NVCM6BkaYd22Y0lwNeBFQknaWoRaM
+                GMNwVfXOvyswaYIPdUSYHfzXME702Os6exgDTC8dg1vdjOrNAf5m3DtiUNdGvrYGzKZmoldlxQRjTTjA
+                ELbou8zDroRF69bo6Md/r68WTldaalp8gZFqwGIlh7XprTfOu9GHlttcfDF9nm597hMd0LOtujbP0zeT
+                puvDKUt15qC++ulhe+r54RP0zEdj9IN+HdW8UaY+GztNI2cv169PO0hd8tP022c+16H9u+lHB/bV1Y8O
+                cQQ5Xfv3bKOZcxfopeGTdMLgPfRzl066sx8gWlGuz8ZP19VPfKRLjtlHOZkRTZw6W2+PnavrzzlU7XPT
+                ddPLw3X83l11yr599fY3U3T/WyN0+v69dNpACOvmRcB4b8ws/fj+N5Xi6pH2uyYDH2PxEncA1Y3DS/yb
+                7cSlrdApe3XQnT85TOn2HBsMBoP5NFcGExzojTL0wwSILQVDUMTiJR3C9oQPQzuEvWGiQVVgmIxZupsD
+                hsHo5TIEVV1wdnrS+HdxfeJwQi6TwUxieslMbCCmMKSwOnAuQ1OUh6ExiCKqBUNx9NIrp10dCGFEXeMD
+                hzpQFSDV1CV+ZRxHzGJ88JjMwRAavmrnn3++HyIkTBAKBUOGlSeEVAficjLYQnp1BWmjpBCfMxmQf4Yx
+                Ge4jLij+btYnrRty0jOVFYlHeqiJMAOo3fL1a1Qe3XShgbpgzbr1eujN4dqra0tdedz+OnZAL/388L10
+                7v5dlNcgw/sCP//ZRJ3sCOvPD99bxzsSe+Fh/XX87m2UlZnu/aFx5SD+8byFizV25nwN3r2rjtqzh84/
+                ZA9dddze6tm6SeK+b/xAXnOzMnXSPj104oDddPFx+6l1Qa7mLlntiWpmetxF5L3RM/TwkJG68IgBOmdw
+                380mzFxrxtKVilKJ7v/anj5WM+QgvEkqXJ5LKqIqKylV6Xr3DpevV6cWjUQOKE9taRkMBsOuDiPNlcBQ
+                Ej5eDP1sjcpMjF5mDBcVFXmSGj7EemQ47PLLL//WLNvHHnvME1uGsjYHqLoMFUFAmahQFVCgGZaCgDI8
+                V5nY4rfFZBCUYvzDalJ9GdaCNKMo05jiP0YHgYkREFqGz+oCQhRBtCH91cUeRu3HB42ZywwBUk6GAxm6
+                Y0IHoYkIF8RwGrOcUdsZHuO82kC8T2KTcvzmBKRHPYacM+QZQD0wUYT7fuONN3rfPnwCbaiubshMS1ej
+                tPhzXytpduxtmSPNq8q+vcpkbVi8YqVmLFyuI/dILPQQi7pnr7nOPGSATt6vp8ZMmeU6gcXarW0YsYmp
+                bZu2uuDYgzSwW1vHQ53JdPcaP+gUd/3BXQt06zMf6ty7XtQDQyeocfMWGtSrUyI+MgXBRSLVPwfrSqO6
+                9cVhuuWlYfrt/z5VSiRDB/du7xVhpUb04heTdcNTQzVgtw46enfiNUNT69b5Cygrj+n9b6a5NOtm2qPu
+                v/TUqNrmZ2j/zgU6d2AX/fbkAfrHBYd5X+bzD+yvWKorB5VuMBgM9RxGmhNALUXtZBEMSBlxGqtadY3J
+                A7ghMOu2JjDTOPhM4XMVPsSARO1lYgEkMAD1EpJODEqU0mSQt6BYQsKZPZwMCCIqLCSuOpIWiDikE4KY
+                rEgz+YE08GPDZw1fNMhnAL5cyWXmWPzAII+QVb7x8WJ/+DsZEOlA0kkrqMCUl3xwTlX+a4DysI/8UEZ8
+                zEiDoPp0bKhH/NC4b6RH3TApxZMUd6/4VAfqBGWf+KXJJJs0Qh5RoKn/ysAHkHsJKBvkHRJPWCM6AJDm
+                4P8Xjgm/AXVFnSbvD/e4/iGmdHe/mufku/vm/6wW7IJUryxdrzkr436Km4PVq9f48HapifsdcxfkkukZ
+                6VrnyPJq14Hj2YlseI3ogKUp4khtmbtXIWsV7vlo266Dfji4j357XH/t262Zxs+Ypyseel0PDvlSi1cX
+                6fPJM/XJhBkaO2eRih2ZhUd3aVeoHm2aqU2TBlriCPyHY2e5NCu0Yl2p5i0p0qG9Wun9UdP1zWzKRiY2
+                z0TPXrlGY+Ysi9uBWnoflCXqyvSTg3vr/f87R09edoJuPvsgXXLknjppQHft26WVmuRmK9UdmBJzxL+G
+                +2IwGAz1AfV+IiCkBZcMlsEkTiUxIBnqh/gxxB6UW9wVmDHLsqAoxcRkZOYs5LgqoNjec8893nUgObwO
+                ExZYuhlSjisExA3XCVYiYqYuoXuIfxliRTKbmWF+wtkw85e/+cZflmtzzvPPP+9VYohrdfmBlFFOJjFw
+                DhMbUJ4hoLhJcD1WdUJBhhAD6gJSyYcycx4xLbkGeSbmJcSRvNDhIAg8kyZIC7BEKS4U5I3V9ahrVk1i
+                pSY6FJBEXEpYYQmiWx0IX8S1WO4UQsssbdRp3Fwg+AHkiUD1zJrmHFw5cL9A+ea40KGYM2eO38csccgu
+                IwLEJ+UeU9csCsD9wTcZNZq/8ZEmHQLq8xwQIJ+JJnRAIO50dDif+mQEgVUJyQtqM/eUJWUh5nTESJd6
+                4H5QRzwrIcxRdSMFuzbi92X0oln6ZM4ERRNEtjqwj2dn3xbd1K/V5i0GMn/+XH09e7nriGVoz06tXFou
+                NXe9ETMW6NmPx2i3Vk30yaS56tauhbo0j08YAi8Nn6DRjvy2apiljycvUPvCPGWlp+qdifN07H79NbB7
+                Ow3u2kyNMtP06ojpapRaopc/n6DPJ8zSWvfuFeRmaeTURfrtKQPVv30L9W/VSMUVZXr9q+ka2KO1vpm+
+                QKcM7KXDuzbRtLnueRg1U4N7d1DDrI2d16oAj/X1kfh+bcQkvTl6brzzkXjeqwPRMXKzUnXaft3Vr31z
+                1zFIUapXxdmbSNURb94b+HeKZ801p2kwGAy7Muo1aUblxCcXEsasX8LOoP5C0CBEuDvQYECqGMbHZ5WZ
+                wSijrHDE6kYoyZWVVQDxRQ3lGhAtAspD4AjlA+mk2gOBJYwOJJA4mpAzfGVRu3GRIH9heW2UVcLbcG2U
+                UPLIcqAQflYiOvvss6t1q4CAoyjjekGnYMCAAZ4cQ4YhvKijkHHid6LsUlbcVCCWlBkXCUIJQUxRtAmv
+                g5sHbhnMiIYkkg9C7kDGJ02a5GdXkzYuGJBLVmbCzYJzqFeU1nvvvdeT3EDUq8I777zj80Hng5A/EG7O
+                q+zGgg869UG6qL50NKhf6h7/a8pFKCPKxX2m/lCncU1hH+UgVBKdEMguhJZ7zfMAIeZ54F5wDPeU0ELk
+                hbJwDvmjIwS5pqMAsUalpq4g4f379/ezw8PMctJjP2WhQ8EKW1U9S/UFi9av1muTR6isosLXaVUIfI7I
+                Dm1zmuio7nv67TUDssdXitIdMVy8dIneHbfQPT8ZfkGRMXMW646XP1XrJnka2KWZJs+cp89nLlfDBpn4
+                4uiTibP1yDsj1adDC7Vrkq33xs9Vu2Z5ahhbp3+/+40Wr6tQk4bZWh+LuGMdYXX/nX3Q7jr7kAE6af++
+                2q9nJy1aXqTXv5mmvo6oF5WUaf6aUr399XQ1y8vRXp1a6tOp89WzdYEG9euh7PI1+nLGEo2du0z7dm/r
+                yHn1HakU3Dc8sY2pPBrTHa8M19Ql6x35heXWTHHLK6Lq3CxfPzu0nyP12a6WQmclnLUxgU23G3Y00PFG
+                /GBErqpwboz2MVcFe4+LHm0Btow2iDaDTiideOwYIgCCCQIRE71xOQNso/1CNKDjj81k6erKIGQcAhRi
+                CkIBosMbb7zhbSn2siogXiBQICpU5Z6IGEH+abvIM+0joA1GAKEtQijhXGw3oN3mHEYnKSNRQRAyGFHF
+                RmPXmTROPikTeUZ4Ir+0x9QJog9tb7I4QxvGB9EseYSyMkiPGNC0C5vj/mfYsVF/W2gH1D2ILQSWZUPx
+                iYV44iMM4YLAYDQgguElY7IcLxaNOi9fdY37F1984cPQoKDykvPB9xdyCXnCgJA2E+j4m0lsBGzHT5g0
+                MS64czDcH9wFcCNgYiHp8iJzHBPhIISQWohZdcC4YDjpGHAu5BfiyPKgkDcMCteG0EM6uRblo8y4ReCv
+                jIHA+HBdlGOOb9++vU8f5R3DQjnpKDAxkTw/+uijXn0mDdJGhQ7EkI4FecH41AQIMAaQ+0UadB6SXVsC
+                INZ8cGFB+cUNJqj8XIfwQPiSY5gh+NQ3+aehYT/3nPsLkaUMPBPUN52AkGfOIWRSsioc7gfXoxNFIHwm
+                BFJXRDUhPiidH+45hJ1Yojx3+EUT5onGhw5TSK++okfT1spJcZ2QxN/VAWoXjVZozJKZKqrY1FUJuLau
+                EkgRtTSmZq5zeMwe3bR/uwZ648sJuv/14Xpu2Fgd1KuDLjp6H7VyJOCsQX3UtkFMz33yje5x+9/5ZobO
+                HNxHJ+3T0xvM7i0aO9LcWLt1aKPT9uqgabPn6sG3h+sfb32pUsdhLzpmH7Ut5F2MZ4ToGWmxMvVs10yv
+                fz1Jz3wyWs99Nk6tCvJ1yVH7KCslVd0KG6lZI1Y4S9Xe/XrrmN4t/OjQuNnxCcOhTMlli/+kbPxK0axl
+                qzV10Rp3LTodbhvycA1gb8fmjdSpkDkIUOakxA07FbAz2CsIcVVg9AsxhtFAiGcgzsFFjMnnjIriHgiB
+                ZAU9RgGDaxqEFEGA4yCVdPQZiaV9ALixQbJJA1sPASZtAHFF7MAuVwcEJY6pbgI6BJ8J1hB6rknbQrvA
+                iCltDeQUm0qeECsA5J00EXAAbRbiF8IK7xblo92l/LQniDmUm7aPD/OPmJ9CuweJpkNBHeCaRx3RnlYH
+                8gevIE3q27DroN6SZogoPVTICuQlAENCrz30rlEJMRKASXoQTIgsqiBKY3U9TVRPlEzUVpRUPqi4uBjw
+                crMfQ0H6EDLSwm0Bo4Txg7wDXnAIO24THIdrAaox8Skhr7z8EFbyW1UPPQCiyfGQThRVomWQB8ghqjNG
+                CZUbQPgxqpA4Xnw6E5BzguRD+vDHhZxyfFAOUF7pTJBHyoRyQFD7EHoOA0O6kM0A1AryQmcCkAZ1g1sL
+                7gsYeu4TqjdElbxg+FHVUTwqA+NIWqyCRTlRCiDb1BV1g/HC+JMm5BnVHaOKocTQA+41RBqfZM4h36jD
+                +CcH0NGgExHKToOF7zTlD6Cs1Dl5CZ0Z1Ge28SwEUAfc0xBwvz6jQ+Pmap6dq2gtzrPx3VHNWrVEk5fO
+                89sC2FXu7nuZ+xANgt98+M1y1yjUPLcXnXiIfnvyAbr4qAH6zcmD9Isj9lZDlotOz1CfXt119WmH6jcn
+                HqBLjx6g608bpDMH9VOWu99Nmzbz5Hr/nu3UyD27px8+SL8/7SBdcsy+utSR5WvcOX3bNXfXibrrkheX
+                05SIurdrpT+ffYguOXyAfnbYnrrCHX/VifupY4smalGYp58dMUB7dmnjz8tp2EgnDN5XfzjzEPVq18JH
+                tsDDnjJs8nE7yihwgux+NHaWlqwpUTQ1sRx4StwvvyrwbmSmp2r3DgVKCzGYDTslIGgANRObFP5OBnYZ
+                W4yAgSsg9pP2DwGB35BH7CBtEu0Bgg7qbojyhF3GprOiHnaMUUlc2mjPEGBoEyDNjMJBKrHhiA1sRxTA
+                HpMvnruqQN4RL8hnVeA82jrsLESedGlfsKeQcsqAqILKTgQn8kR5uW6w03zzN9ehLUSt5hjyBdl/7LHH
+                PLGmHcGljmOoD9wHuSb1BWFH6KLzUd2oLoDQ056Rz8AfDLsG6q21ZKiJFwTXA15qwAOOzzAvUojmwBA9
+                LzLD+Lhw3HbbbZ5QQh55AasCLyFpVzWRECWWXiuEEAKHYcE1ATJOT5phLMKrBcLG8BHEG3IJILuQ2TAs
+                BsHHwCUTtsogPxiXoLqi7ELWMDQYOIwjvtbUBUB1RhVAQcWA0iNn6C6UGcMFMUY5DcCgQk4BZSePKOgB
+                1CvnJJNPXCcwvNQBvX3200nAYNERgABTPvKGgsAwG0o1ajB1lRy2L/gRo/AG9ZtzUS4CIcWQ0QGBNFHf
+                999/vze0uEtwzzHMEGL8tEN9kybPBYYT8NyQZnI5KC+GmHIEsA1VP3S+ANdnwmJIm+vRCFGflK2+Izc9
+                S/3adPEKqBdK45u/hag7IDU1TQuKVunjqWMTW+Nggt6UpYv0wdQJ+nD6JH00Y7I+nj5Z702dqNcnjdOr
+                7vPGpPH6aO4sjVmxUONXzddXi+e4bWP1yoQxet11Bt9ynbRh8+dqzJolmrBygUYsmKE3xo/TyxPGasis
+                qfp0wUy9M22iO36chsycqhEunQkrF7r05uvDWZP1yvgxemVi/FqvThyr11zaQxfM1vCFM9y1ZunrJXP8
+                9/suXy9PGK13Zk3Xp3PnuDQn+eNfdp9PFszR8EVzNXT21Hg6Lo333f6PXXk+cud94D4fTp+oKYvcO5Di
+                OtPLVunFL6aoqLTcNfYRV4fuvyoqMMU9c9QvnYeCnIgO6dMpvgPUokwbdkxAVHGBg9ixwh3uZgBBBKKZ
+                DMgpdooPthA7DRmkfUOFpZ2gw4+SjB3lN3YUW42Qg93E5Y42h84/bQeuCrQLuDkyMgehhLRi3y699FJP
+                NDmeUVds4JYgiCaM5iEwYTOx1URgYoST/SjLlB+hhPaDdpt2jPpAOUaIQf2uTNz5m3pAOMEVENuOQgzZ
+                ZeI8QPgIIVKZS0M9cU51oMyQboQw3DTIk2HXQL0lzRBlPrzMgJcJVwJ6lijEkDgUQPyj6JFCKFFaUUpR
+                Fpkcx3dVwMjgCsALkwy28eLRG4ZMBXLHiw9Rg8zxcmHEIGpcn2EvhvwDcGnAbYJeLsdCHMk7IeXIT1Uq
+                A9sg//hDA4wM5JSyQXxJk+ugvAIIHOSOMqNMUGbyjkIBYeTDdUkP40g+qEcMDH9jTLgmhg2gYjO0hTsH
+                +eR4jBkdAuoIko6Bp7NA2VEO8J8mHeqAdILPM4YI40YdJ/fgKTtp4hoRQLo0GtQzajXXhtxiYHFpQS1G
+                VUA5oSGgjDQCDPkF0FiQbxobOiwYfUYXqCP+BnR+qK9AmqlL8s09Te5Y0REiPxhzyosywyd0PkJ69RE0
+                Y1C2Q7r0U0pFnBjXROEIg7a+rFjD50/WuoSLBmmwlHX3Zi1cOj01qGM37deukw7u3F39W7ZVtrtvuELk
+                pGcoJzNLDYgNnZqh7LSIGrrnooGzB3w3dN+oytmRNKFRZaS689z23IxMNXLnNohkqFFGlhq5NPLS3Lcj
+                +9lp6cqJuA/puGclj/0u/Xx3DPsbuH0NIpn+3Oy0DGWmpCniyG1OWqby3HENM915Lu3c9Gw1cvsz3L4M
+                VxaOz3TfTbMaaJ/2nTTIleWATt10YGc+3dW9eQu//Pd/Pxqjr2YsVbrLMysLguChHMBWooX4uo1F1adN
+                U3Vt6Tpwbkd8nz/MsJMBm0e4S+wSI6CMDGKPIbEIHsENDlSl5GK3gqqM8IFAgg3EVqHOYjP5RjAAiBqE
+                +XzmmWd8erSPjN4xdwR7id2jzeAc3BkQXhAlGNWryt+6LqCNw1ZjVyGsXJf0EZawq7Q92GncENlO247w
+                xfwbRBcmYlMPkF46CJWJM6CNhFhDvmlbEDSCCwZ1gT84tp6lvkNbWhU4B3cRyk2YWdo7iLNh10C9nQjI
+                Swwxxv+JhxpfKYgRBIthFYwOpDJM3sJA8NLS8+YDGcIwYFACeBFxHaCXjuHh5cUFAmPCS8hEOF54ho84
+                FyWX/fh/QeroOdNDxrCgqJIGLxt+r0GdRMFEjQ49Zsgaw0oQNX5DLpMNI9fj+Pvuu89PeIAoQmwxDAyh
+                8Ztv3FIgySjhkGqME3UTykw+KTP1Qd1gUDC05IG8UQbILR9cXlCNKTN1S1qUh9/kB0JNBwESjqEiDxgY
+                6j+AYzDATMRADcaYoxhzPeoKo0T6lBeVHfWfD0OM1AOABHPfuCbGFGPHvYXAoyBj/KkHjsefmfOpK9SK
+                cF9xQ+E6kHQaBtQZFHp84DDMdH7wj0YxDyH/IL+oP6gubA+go8OwJnnA+EKceQbIA0o5ynoYDaiPgLNl
+                OcL41Mj3tc4x59QqaLNXT93mOMGLab27J/u16a62eXEXGPbz9DMR7oWvP9ab40do4ZqVqnD/fTp1tDu+
+                SO1d52lF0XJ1zGuiFWuXK69BlvZx5Hrh6sVatXaFI7UpWlq0TMvdZ8ayeWrcIFsZjj13K2iqXi3baPz8
+                qTq0Rx91bdxUa8qKNH/VIg3s0FWLVi3W7m3aq5cj7e2bFGjl+lWOiEe0bM0yl9NyNXfkok1evmYtmqMl
+                65Zr5pK56lDQRHOXz1fPFq3cs12upauXOLvhOmuzJzgSnabi8nUaO3+Ke66i6t2ivT6fMU5TF81Vt2at
+                XBnj5VxVXKJnh43X2HnL/QIp1SHUJlpzJDWq8w/urT07MsIRn3jpFzoJBxl2GmC/+DD6xkgbqjP2GFsG
+                Iab9QShA/aRNwiYFm4jNgWxyLvaZNg9yfPvtt3v7iwtEaAOZgI6Nph1hH8IR5+L3i93/61//6kccEXkg
+                0ogURFtCicbeMrKH/awKtD+0dRdffPGGti4ZtAGcHwQgbC0kH4EFcgyJRzjBtZG2BhcK8skIJYQaMoyL
+                CXkkT5Bg2k3yQweBcyH4tCuQcDoZ1CHXgGjT5qEwU27mpCBcUefUZ2VQL0w4pF4YbYRbkA73JYxqG3Ze
+                1OvoGSh8vFgA0sawP9tCpANUUF4gviGS9OQhOaiUDDUlE2ZAw0MvE8PCMRgsXi4ME8YIMolRCMoi2zFm
+                GBfSxm0CosWLBnjBIIsYgfByQuohiuSHY8krpBFDwMtcOU8YB8gt5YHgcR4fhqD4G1cR8oHaTQ+cfZDj
+                EFkCAs42ysM5pA/5g/SitmK8INqkhQHib86jrNQD5WZIDTWEdHArQb2m00K++SZt9lUGHQMMKMYGMknd
+                U8d0EOjpcw3Oo06oK+4h24OqglHDRYbycE3ySR2xnWOob7bjdgO4BxhYyhY6HqQdOhLUEXkgL5QdVYf7
+                TeeC54H7BMgj9cFETu5/AOewjbRpuKgX8kwd0Zmh7uojPA9OkOH01DS9O+0bzV6zVBFoc2USl/ib41Mc
+                a1xVtFrdmrbV/u16bOR7icTu/+wN995kaMryeVpVWqyJ82eqb5vOWl66Xvd+/LIy3b6xC2eq1DXETEJ8
+                bcpIvT9rnGasWOQI6AyNnj9D7Zu2VNvGzTRi9iQ1zs5Rs9zGeujTNzW4W19lurz+47PX9fLoT7Rfp94a
+                MukrT2YbZzOzP6rXJ4/Qy+OH0wNUxD1vYxbO1rqKEr0y+lNHtouV3yBHrRzxvvnd/2n5+iIROf2jaaO0
+                vGydVha7Z7xVJw2bNsZ1EGL6eOoo7dm+ux778h3NcOR8YMfE8tquqNnpzi41y9fkuUs0f8U6v7BJddyX
+                miHuMvWzdl2xWuRnqX1hXG32//gTqzvbsKMCNRVhBDuE+IGrBmQZsgfpw97QuUeYYWSNCX+IB4wuYoOw
+                cRDGED0I28tkauayYM+wbdhHRgCZBEe7gZ3nOhBW2iFsL20XxBkCjOKMfUcsQhiAyCbbw2QgECEo4M6B
+                fa4M2jDKw4ggdphrYUsZXYTwQ1IpF+0lqnLy5HJGHDmGeP7BhZD08OOm7YNYQ4Mg5hBp6pJ6pG2gDig7
+                ogofzseFg/IwFwp+kAxGiLk+QhETwGnbGZnl3oQ21rBzIyWGdGcwGLYIKA9M8MTo0jExbB2IHXzzx8/r
+                d+/8R6mZGbXSt4ryMg1s1VNPnn612uWHVfziuOSVB1W0rkhZGdnqUthan0z4Wgd17KNOrdvrX458rl+/
+                Tvt27a0OjhSf3HNfvTxlhF6bOkLRspg65zbT9CXz1CInXwd27qN565Zr/7Y91NsR2d+98R/ddMyPVVZe
+                qhvefFzLStbqhJ77aNayxTp990FqkpWj4TMnadjCSfrnp2/oxh+co3aFrXTPBy8qx3XucjOzFcE9ozyq
+                UwYcpLvff1GlqVEd0LW/Fi5frALX+fxq1hSd0nM/TVk2V2878j24U1+dvfvBuv3jF9Qyv0Bn9hqo3Vt1
+                cTQ3tkEhnjB/qa5+9G19PXe1J+n4L8d192+DPWVl5Wqdl6lLj+qvswf3cyQcxw7cuxKOHRz0rV6LYUcE
+                JBClmFFKiBrNOqOEbEc4gPAyAgbJhNiB0LmHOALUZ0bnOJeOPCpyMhgZQ+VlVAyyiBjByChCRAgBByDc
+                kPUw6gmBhOxyrSBoVAbXRfnmmKrUWBRm1GoUbY4Jo5LkCVJM+uQJUlp5gh7nUDcIHoGQUwekhwiEMEIa
+                jDyTNm6DkHsEG0YaUbKTQ+tRNsQSzkse1QXUHfVM+ogvgLyxDSJf0+RBw84BI80Gw2YCdYWhSkYMUD94
+                hSDNNEKGrcc3C2fphMdv1OziFb5R8sJxNfC8zpHPR06+TOf1TSyQ4zdKV7/6sPp26K4ZS+ZrqWvom+bm
+                6/h+AzW/aLlGTB2v8Utmq2WTQvVr0UEnOdL73uzxeubrD3y0igFtu2rUtEk6Y+CR6lzQQi+N+kQdmjRX
+                /zZddNfQF3Th4OM0Z+kiPTP6Y0fcy9UwNUPtmrXUgI491aFhM308ZbRWp5bSOrvnpUwN8G3Oylbrxk31
+                7IgP1L55W+3l0mrlCPB/PnxD+U3yNXv1MjVOzVR+fp7a5xXquB776JFhryuSnq5JC2Zpv6599dSId319
+                /HTfo3RSn33jdePKSmQQwszNWLJaV/zzdX05e6VSI+liSiCHVIfyclZjrNCZA7voymP3UYt8CFT8jI1x
+                mw0Gg8EA6v2KgAbD5gJFggl8DOWhLhO+rrJbjGHLgRI7feVijZw9wRG/mmNXQ+oI07Zg1Qod33Nv5aRn
+                bZjQtnTtGo2cOVGd8lvooG79NXruFE2YO0PdW7RT18YttXf77mqSmaNOjhS3atQkrrBl56l3YTt1adxC
+                WekZ7vwJKi4pVtOcXA2fOV6r1xYpPz1bw6eM1YrVq/Xz/Y7SeXseqlVr1igrK0PDJo9S6/wmOrHf/kqP
+                pqh/607KVJp3mditWVu1cNfJSU1XeTSqL6dN8JMSO7tr7d+plwqzc9WiYb46NC7029rmFWhdcbEGtOuq
+                tLSISitKdcnA43RQp35+5b5WjQr8xEfUYYocc9sa52Rpnx5tNXn2Ys1cusYdF4lXUjVgufDy1IhGzVyi
+                r6fN0x6dm6ugYYNEHRppNhgMhmSY0mwwGHY4vDrxS53/4p1aVl7kXRlqRUVUfz38J7pyv+M8+YX0Ve/Z
+                WwUSiu2WAAv6rUGGRHpbkWw1CW8EaceP2XgNyp7iyPPMpat0w5Mf6P3xC5TiOh74f1el2BNNw4ehcxWW
+                GivW45cerQN6dnRps80dYKMnhnoM3FuIusHEfYMBVO3wZjAYDNsRB3Xqo4M79EXW9wSuNkSdJbv705c1
+                buk8x/McAXQ0krNqPzOBreCGVfLKxLatopy1EFb2Uta4Hpz4cI4rdIemebr5h4foiD6tXB2Wem5dVW0Q
+                eo4zyyrKdGT/Dtq7W3yikk+zlusbDLs68AFn4p/BEGCk2WAw7Fhw3C43I0tn9B2kgpwmfhJQdYDWoSoT
+                aWPmmiW67YNnVBItj++sh4hPCmT1w5jaNGnkifNRu7dXrKIk0YnYlAizjZUFc7Ok8w7eXZlE5DDs8PCj
+                KUmfZFTeFn5XPi4ZNe3bXqicp+ry+F3mnU5p5YmJVV0veVt1vw27Bow0GwyGHQpxf1rpqO57aXDrnrQ8
+                8Q1VgD3+A1eMpOr5yZ/r4S+H+H0+mXrWZlEPaMeUnWprnper2879gU7co6Njx+VuXzxywkakqqy8RGfs
+                21P9O2wafcSw/UEYNaJQEHMZECaNyBZEcyBSBh9WryMuPmExCXPKN5Ei+E3EBuLRE86NsJ9EuiA6BCAK
+                xg033OCjPJAO8ZWJQR+ia5SXl/vID4SPYzVAwrbVBOLtEwaUFftqAwouYeOIqw8gl8RLJqwpnWTC37EK
+                KwuKEX2DideUmTKxaAvRNignkULOO+88n8+6gHqkPgmbVx2oK0K4EsYO0kzkEUK3En4uhFqlLlmIizri
+                Q96JJsK9IaoG+SJSBiH06gLKz6qFlJl6NOy4MNJsMBh2KOBYAeHLScvQ1YNOVovsPD/ZryrAiSNuF9/4
+                8q4tX697hr+mYbMn+v1y5xHGzv/0/+6aCGVLcbTYG3XvWhFXHBs3yNKfzjlYp+7TSamOkLDUuN/n/iVs
+                XtfCXJ2yXw+/CqJhxwIh2gjhFkK1Qd6IkcwS1iy2cdNNN/k4ycSOP/300/0+FnGCbBIWjRjNxKGHJBJD
+                mcg/uBsQ6541A1j0g3jKrFxHnH0W0mJBKJ4biDgx9IlHzDoByWHXqgLpspAJcetZDKomEL+Z/JGfAPLO
+                Bz9iOguQasrL6rWQVDoHLDBFmDnCy0G86QSwkmzywlg1gfPpLCRftzIoK3VO5B5Cz5HPq6++WnfeeaeP
+                zc8iKYSh+9nPfuYX+eI4Ogp801mBKJMf6quupBkQGo/r1jSyZtj+MNJsMBh2MMSVUrBfux766R6H+9Bt
+                nhpWYr6eGrp/+OYTiaRr8vLZ+sN7T2j6isU+aoU/LUGcdzVQKooWJvnFnEmHFC9avdLv8/XjPk0aZOuG
+                UwfpnP27uG0V3iWDfkhmaorOPGA39WnfnNMdEgkZtjtQPCGgEDwWI2G1WcgzkXpY2AqFlRUAWaAEEopS
+                yQJJrBqLuoxqC6mGzLEdQoqCynb2v/rqq15pZhGOX/ziF15ZhWDffffdXrmFGBIdCHWVBb5Ynrs6QPiG
+                Dh3qYz5DMiG91YHFQ1g1l+NYGRVCj7rtw0sm3CEg6hBc4i6jvrI4y5lnnuljJ7NyK3nmnWZxMBTyqmI7
+                VwU/3yFxnapAHGpWTqTOiZDEgifUO6sDXnfddfrlL3/plee77rrLX5fFXlhBkd8o0RBy6oFjINchVnNd
+                EPJm2LFhd8hgMOx4SLA9vi7b/1gd0rZvfNi46rZuE6Smp+u9maP067ce1eL1RX6paVCHU3c6JKpJUfcv
+                JILvtyeM1MpEuelQwI5jjiQ3adhAvzlxoM4/cDdF3HGozPt3LdQZ+/dMNASBZht2BEDWWMEP8ojaylLP
+                kCruM2prZbBwB8R5woQJXiX+y1/+4lfqA6xGh+rMUtGo0izQgVsBK5EG4E4ASZ4yZYonwSxuAlFlYRDI
+                Y03qLOSXVf1QX1np9YknnvD5rgpcG1UapZjluSkj6iqkkbLxTV5RzM8///wNq/aSHuWnU4CbBflPrgcU
+                agg17hxbCgjwJ5984svKwlWs/EdnA8WbuPwsiU1HBaWelRRZFIVyAMrOioHkjXpmJdsAjmOpcPJs2Llh
+                pNlgMOyYSDDCwgb5uuHgs9Q2qyDhWlAzUmIRpaSn6YWJn+s3rz+iNeWusXcNcdwpYddCoLkQjTL3x10f
+                vaLpKxepU9OWGwrrlfjUuDtGfsNs/frE/XThob20W2EDXXLM3mrWqKHbx95dsYZ2XkDOUDdZbe/666/3
+                CnEgidUpkqNGjfKED/IJSQtAEcXt4tZbb9WIESO8PzAuDqiiwYcZAou6DRmEQJMWpBWVl+Ucklf9qwxI
+                PUQbFxGW3oZEQzirAisUsqw0/r+o5JQNl4hAnPlG9X700Uf9ktQjR47051Fmyo9/NUuC4wLB8QGkQ7q/
+                +c1vPEndEuASQllRzHFfueCCC7wfNX9DyFHsKSv5ffPNN30nA7cWwDUpNxg+fLh3tQDUA4r+X//6V18e
+                w84NI80Gg2HHRYI4H9Spl3590KnKiqYqWrGROFdN8YgR4U5MS9Fj44bqqtce0srStd7YQSbiBNEftksA
+                3lBUVqLr3vqXPp81UWftfpDSE1Ew8A9PjVHyjaY+NzNDvz5hXz3/mzO1X9fWbks8pkZMnLORhBi2L/Cn
+                ZXIZRBESi1sGSiXKJv61kEN8bVF12Y4azLYrr7xSv/71rz1BwwWDZx71GH9b1FpIHBP2mISHmwGKLuec
+                dNJJfintX/3qV/7akFSU0wULFnjyCFGtCkzK++c//+lJPcr1GWec4ZVYiG9V/rkQThRw8oy7CWUE5A3C
+                zzfLV+MTTN5xmUCNhvCTF8g7hJtrPPnkk96dAjWYMuJGAnkPkx0rgw4CqnHoKFQGeYMEU+dcB7cXYjSz
+                gNUDDzzgOzJckzJyDXyZcRmhDvBf5ve///1vr85fccUV/loo35D7Aw44wKvY1YH6CB0ew44LWxFwFwMG
+                hyEk1tWn58uQFQaQbax/zzYMGcaKWdH8zQdjgaEYNmzYhm0YDYwRBitso9fNJA8mfPA3Bg0DiErBcBbb
+                8FljG8YZ48c2huQ494svvtCkSZP8NtKmB0+vHCPDNowGCgLXxAiyDSOCAU/ext+kZ9j14ZVS971b8zZa
+                WVykL+dPdtvclrBgRxU8j000VJz7zcLpmrNiqfZp10N5mdk+LBvbOai683ckeKLvPjT0FDtZXePXlBWL
+                dPmrD2nE7Am6+6SL1D6/mdeM44dxAt8bvjxYSTA7Iy2RVvyTvN+wY2DJkiWedB1++OE+KgMuGosWLfJu
+                BNhe9kE6IXb4Cffu3du7aHA8dha7ii8yrhYQaIgoRI824eCDD/ZEGncOjiON22+/XQMHDvTXhpgSFQLl
+                GNW0Q4cO3vWiMsgDivUPf/hD7bnnnj4/bKONwde3qtVSaWtQvCHZHANwKaHd4Jpc+6233vJlhqh+/fXX
+                Xtnlb/yY8RWmLaG9o+2iLLinQFhRr3Erwa+4Mqi3UJ/4d1cF2ioIMfmi3mjD6EgQdQOXGf4m3/hVc12A
+                SwZtImo3+ad+addQ1ZmAiUsJbTATLilDVaB95j1n8iXtomHHhK0IuIsBo3Duued6ssytZWY0CgKqAmSZ
+                bQy5MbkihAZiO8oEPWxe+tAoo1QsX77cGwcQJjcwbEcIIEBPnIkjTPwgXBFgAsnNN9+s2267zRtursn1
+                rrrqKn8d1Ay2oUyQV7bROLANg4ORv/baa/2kCkB++/btq9///veeaJM/Jq7Q2zfs+nCPhed1PJXzi1bo
+                8tcf0nPjP/UuGHG6VzNiRNAoj+q4Lnvrj0f8SP0L441W3PAlVOmdALwf/McS2gGvTv1Kf373Sc1avliP
+                nnaljuy6e7xcCauexK8NBsNmgvYUJR+l2WAARpp3MTDEA2H2Kpu7tfR4UahQcEHYxnH00sM2erYcgwIA
+                OJ/jSCsMZUGaUYHZFobdwjaGygBpoSygMnBc2MYxHMvQWdiGTx3XCceRJtdkH8NaARBz8pWcN86tzq/P
+                sIsh2UI5Ejhz5RJd9Mp9emvaV4qk1yFMmjvHPVKKlpWqf/Muun7w6Tq1936JnTsHeCf4RKMx925FtGjt
+                at3/2Wv6x8g3VFxapruO/YXO7X9QfNIjZU2cl2qk2WDYYiDm4GaCG4zBAIw0GwyGnQ5TVizUZS//Q2/N
+                HKlIWnz4F0Pm/Zb9X98G2yHOzbLz9ZPdf6BfDT5ZhdmJYVC305/nSOaOxDO9dSZPnjRDhmP6YMYY3Tz0
+                eQ2d9Y2yXNlvO/wnumDAEUpPJSbGjpV/g2FnBkINajMLmhgMwEizwWDYuYCM6tjxjBWLdMUbD+uVSV9I
+                GSyk7TbCGJ1Fq4444sNcHq1wR6ZoYMvuuv7QM3VIhz4bJs5hDRFrtwaMmDAaAsJ3nZFgvf4r8Rtgpqev
+                XKy7P31JT4z+UMuK1yg3vYFuPuw8Xbj3kUrzoy5JJxgMBoNhm8NIs8Fg2KngDZb7Bz46d81y/W7I43py
+                3Icqi0WrnPxTGX4SoDN7sYqoctOydE7fg/RzRzz7NG+ntCR/4S1BMmHGtG6uC5GnvUncl5/Tli3QixM+
+                14PD39S0okVuY4VaNSjQHw/9kX685w+8uh5OtOl8BoPB8N3BSLPBYNgpgemCoK4qWa87PnlJdw9/1YeW
+                i6TFlxyuDp4zJz78Gy0tU7vcQp3Z/0Cd0G1v7d2uu9K3kDwHX3+u4Vcj3EKw9PfXC6br7Slf6+kxH2r0
+                ollShkuvvFy9Cjro5iN+rOO675Uow8YyGWU21ASiUBDViPkrRI8g0kRYTY8IGkRUYlGOZHcEolowAXvv
+                vff2kSOIEsF8mEAdmKRNNAkiSBCBgzkwRItgQRUiKXE8aRL9iGuxcEnlziTHEw2DlQCJqsGcGI6r3AnG
+                XYKoGoTdI7oFsZO55sSJE/1cGs4nVjL5JKYyIeACiGZBpI0ePXroueee8/NriLhBNA7OJw/M9WHJbqKQ
+                AKJokG8mxLdq1cqHjWvWrJnfZ6ifMNJsMBh2elQ4M/bs6E9088fPafSS6YqkZ3jFNprqiLWXlqtGIJp+
+                smtZudo3bqFDOvbVUV331MHd+qlpZmJBh8SB3lq673iK8T/41/92/0Pi4xY1Tug94odtQKU/N8Gy4rX6
+                aNoYvTllhD6cPV6Tl8whPpxSHHmIuTwe1XFP3fiDc7R3686JMwyG2kEzT0g6oh/RsWNyNaHVCG9G/GNC
+                vbEAClGJWNmPsHPEfR4yZIgPQ0ooOaIo8WGlQULPMXmctM466yxPNIn9zFLShDtl+W9CkLIUNdGRSJNV
+                8lgohTQrh6Fj4Q+OY99PfvITH96Ocyovjw1pJizeH//4Rx/ijhBzRGHiWiwgwjLX5IFysrgLYeIoB+Hq
+                IO8nnHCCj4RB3GliJvOOsjrhPffc4+NQ0zEg1jXLlJMX0iREHaH6iMVM54BjId6G+oktl0IMBoNhR4Bj
+                oRHX+J3Zb5CeOO1qndf3B0qLSuUx948nsNUjkFcUrdTsTM1au0SPfvOOfvH6Azrm0Rt1zZv/0rvTRml1
+                eTzCC8dvJLzxX/Ft7l9HIKKQb79h41GJwzag0p9aVrpOb039Wle9+YiOe+z/9LPX7tXDX7+tycvnKTU9
+                zVnpVDVMTdcNg07Xv065zBNmigU5r6V4BoMHxJAYwajCkFEIIbGHCaf28MMP+2MgqCjAqLx0ItnOoiWQ
+                U8J9QpLZD6FloQ8IMbGfIaCAkKWotyi6REHiWNLkPAgrkSiqiz/McawLwOp/xKGubvVBlGLyDbl/7LHH
+                PGl/7733/Op9EGbeY9IiVjS/icwEIX/++ef9Ai4ch/pM2S666CJ/LGkSjQmCDdlHrUZZJt41UaFef/11
+                H1KVRU3CoiUo0ob6CSPNBoNhp8YGIdkxyN7N2+qBE36pB4+7RD3yWipWEVNFtKJO5BJlOiWSppTMDC0v
+                XasvFkzW3798TSc/c4v2uf8qnffCnXroq3c1cuEMLVq7SkWlxSquKFeFI+feVSTVEW/38Zw5nqRHLBpT
+                mWvc15WVaY07Z17Rcg2bPVH3fvmGznrmr9r/3it1uvu+y/392fzJ7tpFSiGUHou3uP8OaNFNz555nW44
+                6Ey1aBhfsteXx12kMgE3GKoCpJW495BWiCGqKkozRJcV9ZLBswzpZUlqFu9AzV29erUn0wCSifLKAiR8
+                Q3A5B/UYIo0yG9wvUHIhtsT1D6FLA0II0QDSIF8Q0g2jNFWA66Am77vvvj7NU089Vddcc823XDlIjzyS
+                fxRuluWGRFMOXCz4sMIg7hkcQ7osZgKBxkWERbRYLwD3D1wzcAdhzQNcXFjMC3D94JJlqB8w0mwwGHZq
+                hOY1kOfstHSdt/vBGvLTm3TVPserXU5TrwBXlNNI10yfI679S3Nte2okVZH0NLECdVFFiSatXqDHx36o
+                X7x6r/Z/8Crtde8VOuo//6efv3SvfvfB//T34a/qXyPf0VOjP9JzYz/Vs+M+039HfaSHRwzR3z5/Sde9
+                +x/9+MW/67BHrvfnDn70Ol36xoN6euKnmrJ2sbtGscu/I94oy47ox8qj6prbQjcOPlMv/ugGHdG5v4/w
+                AREAqXXpBRgMCQQSC3nGVQG/YBRnVvojhn5lQAYhjqyAh99z585xd6Dw/FVFatmHXzALWQWCzXGotRBk
+                lFyOgdySNsQXAs8+8odKja811wrXqQ74NBPLHwKPv3WI9V8ZpI2vNL7JuHGgkgdwDQgyC3+RZxDKRbqA
+                6yQjrG2AQo2/Nq4iLO5FPRrqB4w0GwyGXQKVm/G2DZvor0eer2dP/7Uu3vNIdc5voYqSUkcIyjx1TnZ1
+                9n+7T9Rtizqr6CNYOKD0Ep6OVfho2FPTIqqIpGh+2Sp9snCS/jvmA90y9Cld9fqD+ulLd+rs527TaU/f
+                otP/d7N+9OxtuuClu/XrNx/R7cNe0LMTPtXwpdO1uLxIKZByVG3SdJ9YKopcuWLFZerauJUuG3Ccnjn7
+                Ol1/0Olqmt1wA9XfQFbcV+XyGgzVYfDgwV5FZSLbQw895NVllqdGUWZV1mTwjEEWcWtAnWaFVybKQRh5
+                ViGrrPTKhyW4cbvgHAgq6ffp0yeRUhzs41q4TPAbQn7TTTd5RfnOO+/0k/aCSow/M+p3TaQZksxiI7hx
+                3HjjjX6FWlwpwgJeAeQVP+RbbrnFXxO/bfJMOViyGkW8cePGOuecc9SvXz9PvJlECAGGRFMOzsU9gzw+
+                9dRTfgIh6jt1iTpNp4L9L7zwQuKqhl0dRpoNBsMuC5reAW276Z5jf6H/nnK1/nDwD7VH886KlZQp6hp5
+                lqX25NP9A4kOZLk2QKYjjkgTqSOSkaFIZpYirHqZmek+6fFPlvvNh23p7hhHDNI8BY/TXf6NpURVUV4q
+                ufz0b9pRvz/0bP331Kt019E/Vf/m8eW+QfwMg2HLwMS+O+64w/sME8kC1ZXJcvgGQ1QBZBJXA8gsCiyE
+                FlKKzzBqKooxZBayyXlMIuTzj3/8w5PhVatWeUKJuwbElrQgspzDJEHINmoyZBZ3CVRp3CeIYJF8HL/D
+                yrGVwT4INwr1zTffrOuuu877W+PfDMEl75QD0s9v0sYvG3/mxx9/3HcW6Aj87Gc/8/mG6JMmeZs9e7ZO
+                P/10HwUkLy/Pq8gQ5/PPP99HArnqqqu8vzOTIQGqNQufkO927dr5bYZdHxY9w2Aw7NLAwrk2Pf7bfWYs
+                W6jhC6bo1Qlf6J0pX2tp6WpmAno6G2engdZuW8QNbXxlP8i6KqJqlJalAzr00sk999OBHXqrc0FLf+34
+                sUaWDdsW+OLiqwtZJKwc0SAgsQD/XpTY/v37e7U3AJIMicVtYt68eV6l5fxAHSCMfAhlhwsG++bPn+99
+                gfGb5nqkySQ6/IaZjIg6jW9w27ZtfSQOXB04DsWX9OlgQlhD3gJQjDkPoktHAPCbbbhUcE3S4sN1kicU
+                kj7kvnXr1j6MHOQaH2/Cy5FfygnRJj/kC5B/6gSfbiYQUl+o84BOBFE7uC5RNyr7VBt2TRhpNhgM9QIY
+                ukBC+b2utETzipbp4xnj9MqE4T4u8pKSIpXHKvxnI9t2JJpvf3KcUG+k1Y7+sithReNfMUX9D/ePZ8j8
+                kaJIakRpLp38tGz1at5Bx3TfS0d221NtGzVVbkZlv9J4SomLGgwGg2EHgJFmg8FQLxBMnSfAcR67ASwm
+                sqS4SN/MnapPZ4/TqPkzNHPVUq0oXau1FaUqLo9/iMShEMoOZuzTcf94cu2AYp0SUUYkTVlpGWroPnmZ
+                DdQ6t0B9Cjton7bdNKBDD7XMaayMrVx90GAwGAzfL4w0GwyGegFMHR9IsyfObIP18r//k0l/G7HCkehZ
+                K5dqzopFmr9qmRauXaWVJetU5D7rSks3KNKEmUtzaWSnZyg3K8eT5GbZuWreqInaN26uDo2bqTAnfxPN
+                2OeDH4FsGwwGg2GHh5Fmg8FQb5AcUzX4S24wgO5HFSJ0tShPEG4IOCnVif5yCgcmLlKncwwGg8GwQ8BI
+                s8FgqBcIpo7vZLXZYDAYDIa6wJzqDAZDvQAkOYTUMq3AYDAYDJsLU5oNBkO9QTB3pjIbDAaDYXNhpNlg
+                MOzyMLJsMBgMhq2FkWaDwWAwGAwGg6EWmE+zwWAwGAwGg8FQC4w0GwwGg8FgMBgMtcDcMwwGg8FgMGj9
+                +vWaNm2aSkpK/N9NmzZVkyZNNGPGDJWVlfltzZs3V8OGDf22EPe8TZs2Sk9P18yZM/38AWKgt2/fXqWl
+                pZo3b54/Ji0tTd27d9fSpUu1aNEivy0zM1NdunTRwoULtWzZMr8tKytLnTt31ty5c7Vq1Sq/rUGDBurY
+                saNPf+3atX4beeAaU6ZM8dfhugUFBWrWrJnfRt7YxjEZGRmaOnXqhrkNXJPf06dP99/MdejWrZsv/5w5
+                c/w2ytCjRw9/bYMhwEizwWAwGAwGTZ48Wdddd51mz57t/z7llFN02GGH6YYbbtCSJUv8th/96Efafffd
+                df3113uSCRm+7LLL1LhxY/3xj3/05Do7O9vvhwzfe++9/jwI+P33369XX31Vjz32mCeqkO077rhDjz/+
+                uF555RW/DcJ866236p577tGHH37oz91tt9182nxGjx7tt4U8XH755RuI+dFHH62TTjrJb1u3bp3fdu21
+                16p169Z+W6A7t99+uyoqKnTNNdf4a1IG8gmJvu222/wxkPdHHnnEk2mDIcBIs8FgMBgMBh/DHCU3KMgo
+                wSjIENCwDTIJyeQ46AOkk20osxwXtkGc+c02/mY/6jCqMGSbbZFIRDk5OSouLvbqdvI2juFYtnE9FF/S
+                gpQnbyMfEGCAokyei4qKNhBk8kGabAsgH2DNmjU+LT5ck3RCfvlwHNcxGAKMNBsMBoPBYDAYDLXAJgIa
+                DAaDwWAwGAy1wEizwWAwGAwGg8FQC4w0GwwGg8FgMBgMtcB8mg0Gg8FgMBgMOxWWL1/uJ24mgwmcbOva
+                tWtiy7aFKc0Gg8FgMBgMhp0KxPwmMgpRVMKHaCmQ6e8KRpoNBoPBYDAYDDsVCGPI4juVP7m5uYkjtj3M
+                PcNgMBgMBoPBYKgFpjQbDAaDwWAwGAy1wEizwWAwGAwGg8FQC4w0GwwGg8FgMBgMtcBIs8FgMBgMBoPB
+                UAuMNBsMBoPBYDAYDLXASLPBYDAYDAaDwVALjDQbDAaDwWAwGAy1wEizwWAwGAwGg8FQC4w0GwwGg8Fg
+                MBgMtcBIs8FgMBgMBoPBUAuMNBsMBoPBYDAYDLXASLPBYDAYDAaDwVALjDQbDAaDwWAwGAy1wEizwWAw
+                GAwGg8FQC4w0GwwGg8FgMBgMtcBIs8FgMBgMBoPBUAuMNBsMBoPBYDAYDLXASLPBYDAYDAaDwVALjDQb
+                DAaDwWAwGAy1wEizwWAwGAwGg8FQC4w0GwwGg8FgMBgMtcBIs8FgMBgMBoPBUAuMNBsMBoPBYDAYDDVC
+                +n+OqtlZaBB+cgAAAABJRU5ErkJggg==
+</property>
+        </structure>
+    </list-property>
+</report>

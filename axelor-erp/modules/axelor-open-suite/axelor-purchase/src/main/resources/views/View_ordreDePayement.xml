@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid canEdit="true" canMove="false" canArchive="false" canSave="false" canNew="false" canDelete="false"
+		  name="ordrePayement_grid" title="Ordre de paiement" model="com.axelor.apps.purchase.db.OrderPaymentCommande">
+
+		<field name="numero" title="Numero OP"/>
+		<field name="beneficiaire" title="Bénificaire"/>
+		<field name="compteBenef" title="Comptes a crediter"/>
+		<field name="sommeVerement" title="Somme"/>
+		<field name="haspayer" title="payer"/>
+
+    </grid>
+
+	<form canEdit="true" canArchive="false" canSave="true" canNew="false" canDelete="false"
+		  name="ordrePayement_form" title="paiement" model="com.axelor.apps.purchase.db.OrderPaymentCommande">
+		<panel>
+			<field name="numero" title="Numero OP" readonly="false"/>
+			<field name="beneficiaire" title="Bénificaire" readonly="true"/>
+			<field name="compteBenef" title="Comptes a crediter" readonly="true"/>
+			<field name="sommeVerement" title="Somme" readonly="true"/>
+			<field name="haspayer" title="payer" readonly="true"/>
+		</panel>
+
+
+	</form>
+	
+    
+
+</object-views>

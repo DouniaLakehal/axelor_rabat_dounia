@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid canDelete="false" name="budgetParRubrique-grid" title="Budget par rubrique" model="com.axelor.apps.configuration.db.BudgetParRubrique">
+	  <field name="name"/>
+	  <field name="rubriqueBudgetaire"/>
+	   <field name="montant"/>
+	  <field name="year"/>
+    </grid>
+	
+    <form name="budgetParRubrique-form" title="Budget par rubrique" model="com.axelor.apps.configuration.db.BudgetParRubrique" onSave="updateHistorique">
+		<panel name="mainPanel">
+		    <field name="name" required="true"/>
+			<field name="rubriqueBudgetaire"/>
+			<field name="montant" colSpan="4"/>
+			<field name="year" colSpan="4"/>
+			<field name="show_is_principale" colSpan="4"/>
+		</panel>
+    </form>
+
+	<action-group name="updateHistorique">
+		<action name="save"/>
+		<action name="com.axelor.apps.configuration.web.AppConfigurationController:updateHistoriqueBudgetaire"/>
+	</action-group>
+
+</object-views>

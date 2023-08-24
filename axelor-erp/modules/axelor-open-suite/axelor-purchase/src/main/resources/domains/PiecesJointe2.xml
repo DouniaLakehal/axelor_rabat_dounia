@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="purchase" package="com.axelor.apps.purchase.db"/>
+
+    <entity name="PiecesJointe2" cacheable="true">
+        <string name="titre" title="Titre"/>
+        <many-to-one name="titreSelect" ref="com.axelor.apps.configuration.db.TitrePiece"/>
+        <string name="remarque" title="Remarque"/>
+        <many-to-one name="piece" title="Piece" ref="com.axelor.meta.db.MetaFile"/>
+        <string name="etat" title="Etat" selection="validation.document.string"/>
+        <many-to-one name="soumissionnaire" ref="com.axelor.apps.purchase.db.Soumissionnaire"/>
+        <track>
+            <field name="titre" on="UPDATE"/>
+            <field name="piece" on="UPDATE"/>
+            <field name="remarque" on="UPDATE"/>
+        </track>
+    </entity>
+</domain-models>

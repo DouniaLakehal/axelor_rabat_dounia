@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+			  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+	<grid canNew="false" canEdit="false" canSave="false" canDelete="false" canArchive="false" canMove="false"
+			name="DossierTechnique_grid" title="Dossier Technique"  model="com.axelor.apps.purchase.db.OffreAppel" >
+		<field name="numero"  title="Numero d'offre d'appel"/>
+		<field name="nom" title="Nom d'offre d'appel"/>
+		<field name="dateLancement" title="Date de lancement"/>
+		<field name="dateOverture" title="Date d'offre d'appel"  />
+		<button name="btn_print_pv_sous_comission" onClick="print_pv_sous_comission" icon="fa-get-pocket" title="PV sous comission"/>
+		<button name="btn_valide" title="Afficher Les soumissionnaires" icon="fa-plus" onClick="getListSoumissionaireTechnique"/>
+	</grid>
+
+	<form canArchive="false" canDelete="false" canSave="false" canEdit="false" canNew="false" canAttach="false" canCopy="false"
+		  title="Information sur l'offre d'appel" name="DossierTechnique_form" onLoad="show_panel_critereNotation" model="com.axelor.apps.purchase.db.OffreAppel">
+		<panel name="mainPanel" title="Information générale" readonly="true">
+			<field name="numero" title="Numéros de l'appel d'offre" readonly="true"/>
+			<field name="nom" title="Objet de l'appel d'offre" required="true"/>
+			<field name="dateLancement" title="date de lancement" required="true"/>
+			<field name="dateOverture" title="Date d'overture " required="true"/>
+			<panel colSpan="6">
+				<field name="typeDossier" selection="electro.papier.string" widget="CheckboxSelect"/>
+			</panel>
+			<panel>
+				<field name="offreTechnique" title="Offre technique" colSpan="3" onChange="show_panel_critereNotation"/>
+			</panel>
+			<panel colSpan="12">
+				<field colSpan="12" name="echantillionnage" widget="boolean-radio" x-true-text="Échantillon" x-false-text="Documentation Technique" />
+			</panel>
+		</panel>
+
+		<panel name="mainPanel2" readonly="true">
+			<field name="decisionMemebre" title="Décision sélection des membres de comité" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid"/>
+			<field name="comite" title="Comite" required="true" colSpan="12"/>
+			<field name="piecesJointes" grid-view="pieceJointe3-grid" form-view="pieceJointe3-form" title="les Pieces"
+				   required="true" colSpan="12"/>
+		</panel>
+		<panel name="critereNotationPanel" hidden="true" colSpan="12" readonly="true">
+			<field name="critereNotation" title="Critère de notation"
+				   form-view="critereNotationSelect-form" grid-view="critereNotationSelect-grid" colSpan="12"/>
+			<field name="pourcentageValideNote" title="Pourcentage des points pour validation (%)"/>
+		</panel>
+	</form>
+
+	<action-method name="getListSoumissionaireTechnique">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="ListSoumissionnaireDossierAdministrativeValide"/>
+	</action-method>
+
+
+	<!--soumissionnaire-->
+	<grid canNew="false" canEdit="false" canArchive="false" canSave="false" canMove="false" canDelete="false"
+			title="Liste soumissionnaire" name="soumissionnaireTechnique-grid" model="com.axelor.apps.purchase.db.Soumissionnaire">
+		<field name="societe" title="Société"/>
+		<field name="representant" title="Représentant"/>
+		<field name="telephone" title="Téléphone"/>
+		<field name="email" title="E-mail"/>
+		<field name="typeSoumission" title="Type"/>
+		<field name="note" title="Note (%)"/>
+		<field name="note_point" title="Note (point)"/>
+	</grid>
+
+	<form canNew="false" canArchive="false" canDelete="false" canAttach="false" canCopy="false" title="Soumissionnaire"
+		  name="soumissionnaireTechnique-form" model="com.axelor.apps.purchase.db.Soumissionnaire" onLoad="get_Note_Pour_Validation">
+		<panel title="information générale" readonly="true">
+			<field name="societe" title="Société"/>
+			<field name="representant" title="Représentant"/>
+			<field name="dateDepot" title="Date de dépôt" />
+			<field name="heurDepot" title="Heure de dépôt" />
+			<field name="registreCommerce" title="N° Registre de commerce (RC)" colSpan="4"/>
+			<field name="telephone" title="Téléphone" colSpan="4"/>
+			<field name="email" title="E-mail" colSpan="4"/>
+			<field name="adresse" widget="Text" height="2" title="Adresse" colSpan="12"/>
+			<field name="soumissionElectro" title="Soumission Electronique" hidden="true" colSpan="6"/>
+			<field name="soumissionPapier" title="Soumission Papier" hidden="true" colSpan="6"/>
+		</panel>
+		<panel>
+			<field name="critereNotation" title="critère de Notation" colSpan="12" canNew="false" canRemove="false" onChange="load_point_obtenu"
+				   form-view="critereNotationDetail-form" grid-view="critereNotationDetail-grid"/>
+			<field name="notePourValidation" showIf="offreappels.pourcentage" title="Validation de pourcentage (%)" readonly="true"/>
+			<field name="pointPourValidation" hideIf="offreappels.pourcentage" title="Validation de point" readonly="true"/>
+			<field name="note" title="Pourcentage des points Obtenus (%)" showIf="offreappels.pourcentage" readonly="true"/>
+			<field name="note_point" title="Les points Obtenus" hideIf="offreappels.pourcentage" readonly="true"/>
+		</panel>
+		<panel hidden="true">
+			<field name="dossierTechnique" title="dossier technique"/>
+		</panel>
+		<panel readonly="false">
+			<field name="etat" title="Statut" colSpan="6" readonly="true"/>
+			<field name="remarque" widget="Text" title="Remarque" colSpan="12" height="3"/>
+		</panel>
+	</form>
+
+	<action-method name="get_Note_Pour_Validation">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="getNote_PourValidation"/>
+	</action-method>
+
+	<action-method name="load_point_obtenu">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="load_point_obtenu"/>
+	</action-method>
+
+	<action-method name="print_pv_sous_comission">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="tw_print_pv_sous_comission"/>
+	</action-method>
+
+</object-views>

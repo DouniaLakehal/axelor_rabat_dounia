@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+   <module name="purchase" package="com.axelor.apps.purchase.db"/>
+
+    <entity name="MarcheProvisoire" lang="java" >
+        <boolean name="complementAdministrative"/>
+        <boolean name="justifPrix" />
+        <boolean name="documentPapier"/>
+        <string name="remarqueComplementAdministrative"/>
+        <string name="remarqueJustifPrix"/>
+        <string name="remarqueDocumentPapier"/>
+        <date name="dateDepot"/>
+        <time name="heurDepot"/>
+    </entity>
+
+</domain-models>

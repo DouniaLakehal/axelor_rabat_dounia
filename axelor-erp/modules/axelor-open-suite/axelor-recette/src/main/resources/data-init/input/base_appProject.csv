@@ -1,0 +1,2 @@
+name;code;installOrder;description;imagePath;modules;dependsOn;sequence
+recette;recette;70010;recette Management;app-project.png;axelor-recette;base;12

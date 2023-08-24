@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+   <module name="purchase" package="com.axelor.apps.purchase.db"/>
+
+    <entity name="EngagementAchat" lang="java" >
+        <date name="dateEngagment"/>
+        <decimal name="montantEngagement"/>
+        <many-to-one name="budget" ref="com.axelor.apps.configuration.db.RubriqueBudgetaireGenerale"/>
+        <string name="etatEngagement" selection="etatEngagementAchat.select"/>
+        <string name="natureOperation" selection="natureEngagementAchat.select"/>
+        <long name="id_reference_nature"/>
+    </entity>
+
+</domain-models>

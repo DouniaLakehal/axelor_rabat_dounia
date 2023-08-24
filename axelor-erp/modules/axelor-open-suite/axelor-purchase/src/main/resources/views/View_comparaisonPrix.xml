@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<!--comparaison prix-->
+	<form title="remplir prix" name="remplirForm" model="com.axelor.apps.purchase.db.ComparaisonPrix" canNew="false" canSave="false">
+		<panel name="infoFourn" title="Fournisseur">
+			<field readonly="true" name="fournisseur.name"  title="Fournisseur" colSpan="4"/>
+			<field readonly="true" name="fournisseur.email"  title="Email" colSpan="4"/>
+			<field readonly="true" name="fournisseur.tele"  title="Téléphone" colSpan="4"/>
+			<field readonly="true" name="fournisseur.adresse"  title="Adresse" colSpan="12"/>
+		</panel>
+		<panel name="prod" title="" colSpan="12">
+			<panel-related title="Article" onChange="com.axelor.apps.purchase.web.AppPurchaseController:updateTotole"
+						   canRemove="false" colSpan="12" field="articleprix" canNew="false" canSelect="false"
+						   grid-view="remplirPrixArticleGrid" form-view="remplirPrixArticleForm" />
+		</panel>
+		<panel>
+			<field onChange="com.axelor.apps.purchase.web.AppPurchaseController:updateTotole" name="tva" title="TVA (%)" colSpan="3" colOffset="9"/>
+			<field name="total" title="TOTAL (Dhs)" colSpan="3" colOffset="9"/>
+		</panel>
+	</form>
+
+	<grid canDelete="false" canNew="false" title="List" onNew="false" name="remplirGrid" model="com.axelor.apps.purchase.db.ComparaisonPrix" >
+		<field name="fournisseur.name" title="Fournisseur"/>
+		<field name="nbr" title="Nombre de produits"/>
+		<field name="tva" title="TVA"/>
+		<field name="total" title="Total"/>
+		<field name="idCommandeAchat" title="CommandeId" hidden="true"/>
+		<field name="hasCommande" title="hascommande" hidden="true"/>
+		<button name="Enregistrer" title="Commande" onClick="start_commande" icon="fa-plus" showIf="idCommandeAchat &gt; 0 || hasCommande==false"/>
+		<button name="consulterLettre" title="Lettre de consultaion" onClick="start_consultaion" icon="fa-envelope"/>
+	</grid>
+
+
+
+	<form onLoad="com.axelor.apps.purchase.web.AppPurchaseController:calculeAutoMontantGenerale" canEdit="hasCommande==false" title="remplir prix" name="remplirPrixArticleForm" model="com.axelor.apps.purchase.db.ArticlesPrix" >
+		<panel>
+			<field name="articleprix.article.name" title="Article" colSpan="6" readonly="true"/>
+			<field name="articleprix.quantite2" title="Quantite" colSpan="6" readonly="true"/>
+			<field name="articleprix.unite" title="Unite" colSpan="4" readonly="true"/>
+			<field name="p_unitaire" title="Prix Unitaire" colSpan="4" onChange="com.axelor.apps.purchase.web.AppPurchaseController:calculeAutoMontantGenerale"/>
+			<field name="prixtotal" title="Prix total" colSpan="4" readonly="true"/>
+			<field name="articleprix.description" title="Description" widget="Text" colSpan="12" readonly="true"/>
+		</panel>
+	</form>
+
+
+
+	<grid title="remplir prix" name="remplirPrixArticleGrid" model="com.axelor.apps.purchase.db.ArticlesPrix" orderBy="articleprix.myorder" canNew="false" canDelete="false">
+		<field name="articleprix.article.name" title="Article" readonly="true" />
+		<field name="articleprix.quantite2" title="Quantite" readonly="true"/>
+		<field name="articleprix.unite" title="Unite" readonly="true" />
+		<field name="p_unitaire" title="Prix Unitaire" readonly="true" />
+		<field name="prixtotal" title="Prix Total" readonly="true" />
+		<field name="articleprix.myorder" hidden="true" />
+	</grid>
+
+	<action-group name="start_commande">
+		<action name="com.axelor.apps.purchase.web.AppPurchaseController:definir_commande" if="hasCommande==true"/>
+		<action name="form_commande_info" if="hasCommande==false &amp;&amp; total != 0"/>
+		<action name="alert_message" if="hasCommande==false &amp;&amp; total == 0"/>
+	</action-group>
+	<action-validate name="alert_message">
+		<alert message="Le montant des articles n'est pas saisie"/>
+	</action-validate>
+
+	<action-view name="start_consultaion" title="info" model="com.axelor.apps.purchase.db.ComparaisonPrix">
+		<view type="form" name="form_type_file"/>
+		<view-param name="popup" value="true"/>
+		<view-param name="show-toolbar" value="false"/>
+	</action-view>
+
+	<form onNew="com.axelor.apps.purchase.web.AppPurchaseController:loadIdfile"
+		  onSave="com.axelor.apps.purchase.web.AppPurchaseController:imprimer_coonsultaion" title="Type de document"
+		  name="form_type_file" model="com.axelor.apps.purchase.db.ComparaisonPrix">
+		<panel >
+			<field name="valId" title="id" hidden="true"/>
+			<field colOffset="4" colSpan="4" name="typefichier" title="type de document" widget="boolean-radio" x-true-text="PDF" x-false-text="WORD" />
+		</panel>
+	</form>
+
+	<!--<action-group name="start_consultaion">
+		<action name="com.axelor.apps.purchase.web.AppPurchaseController:imprimer_coonsultaion"/>
+	</action-group>-->
+
+	<action-method name="form_commande_info">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="verifierStockAndLoadForm"/>
+	</action-method>
+
+	<action-view name="form_commande_info" title="commande" model="com.axelor.apps.purchase.db.CommandeAchat">
+		<view type="form" name="commande_form"/>
+		<view-param name="show-toolbar" value="false"/>
+		<view-param name="show-confirm" value="false" />
+		<view-param name="popup-save" value="false"/>
+		<view-param name="popup" value="reload"/>
+	</action-view>
+
+	<form title="Commande" name="commande_form" model="com.axelor.apps.purchase.db.CommandeAchat">
+		<panel>
+			<field name="objet" title="Objet" required="true" />
+			<field name="conserne_desc" title="Description" required="true"/>
+			<field name="motif" title="Motif" required="true"/>
+			<field name="justificatif" title="Justification" required="true"/>
+			<button-group>
+				<button name="save_that" onClick="save_Commande_achat" title="Enregistrer"/>
+			</button-group>
+		</panel>
+	</form>
+
+	<action-group name="save_Commande_achat">
+		<action name="com.axelor.apps.purchase.web.AppPurchaseController:validationFields" if="objet==null || conserne_desc==null || motif==null || justificatif==null"/>
+		<action name="com.axelor.apps.purchase.web.AppPurchaseController:saveCommandeAchat" if="objet!=null &amp;&amp; conserne_desc!=null &amp;&amp; motif!=null &amp;&amp; justificatif!=null"/>
+		<action name="create_engagement_achat" if="objet!=null &amp;&amp; conserne_desc!=null &amp;&amp; motif!=null &amp;&amp; justificatif!=null"/>
+		<action name="close"/>
+	</action-group>
+
+	<action-method name="create_engagement_achat">
+		<call class="com.axelor.apps.purchase.web.PurchaseOrderController" method="tw_create_engagement_achat"/>
+	</action-method>
+
+</object-views>

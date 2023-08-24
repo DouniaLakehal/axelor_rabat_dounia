@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+    <grid canNew="false" canEdit="false" canDelete="false" canSave="false" canArchive="false" canMove="false"
+          name="soumissionnaireOffres-grid" title="Offre Appel" model="com.axelor.apps.purchase.db.OffreAppel">
+        <field name="numero" title="Numero d'offre d'appel"/>
+        <field name="nom" title="Nom d'offre d'appel"/>
+        <field name="dateLancement" title="Date de lancement"/>
+        <field name="dateOverture" title="Date d'offre d'appel"/>
+        <button name="btn_add" title="Ajouter Soumissionnaire" icon="fa-plus" onClick="AjouterSoumissionnaire"/>
+    </grid>
+
+
+    <form canCopy="false" canAttach="false" canNew="false" canEdit="false" canSave="false" canDelete="false" canArchive="false"
+            name="soumissionnaireOffres-form" title="Offre Appel" onLoad="show_panel_critereNotation"
+          model="com.axelor.apps.purchase.db.OffreAppel">
+        <panel name="mainPanel" title="Information générale" readonly="true">
+            <field name="numero" title="Numéros de l'appel d'offre" readonly="true"/>
+            <field name="nom" title="Objet de l'appel d'offre" required="true"/>
+            <field name="dateLancement" title="date de lancement" required="true"/>
+            <field name="dateOverture" title="Date d'overture " required="true"/>
+            <panel colSpan="6">
+                <field name="typeDossier" selection="electro.papier.string" widget="CheckboxSelect"/>
+            </panel>
+            <panel>
+                <field name="offreTechnique" title="Offre technique" colSpan="3" onChange="show_panel_critereNotation"/>
+            </panel>
+            <panel colSpan="12">
+                <field colSpan="12" name="echantillionnage" widget="boolean-radio" x-true-text="Échantillon" x-false-text="Documentation Technique" />
+            </panel>
+        </panel>
+
+        <panel name="mainPanel2" readonly="true">
+            <field name="decisionMemebre" title="Décision sélection des membres de comité" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid"/>
+            <field name="comite" title="Comite" required="true" colSpan="12"/>
+            <field name="piecesJointes" grid-view="pieceJointe3-grid" form-view="pieceJointe3-form" title="les Pieces"
+                   required="true" colSpan="12"/>
+        </panel>
+        <panel name="critereNotationPanel" hidden="true" colSpan="12" readonly="true">
+            <field name="critereNotation" title="Critère de notation"
+                   form-view="critereNotationSelect-form" grid-view="critereNotationSelect-grid" colSpan="12"/>
+            <field name="pourcentageValideNote" title="Pourcentage des points pour validation (%)"/>
+        </panel>
+    </form>
+
+
+    <action-method name="AjouterSoumissionnaire">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="verifierSoumissionnaire"/>
+    </action-method>
+
+    <grid title="List soumissionnaire" name="soumissionnaire-grid" model="com.axelor.apps.purchase.db.Soumissionnaire">
+        <menubar>
+            <menu title="Imprimer" icon="fa-print">
+                <item title="imprimer les Soumissionnaires" action="com.axelor.apps.purchase.web.AppPurchaseController:imprimerListSoumissionnaire"/>
+            </menu>
+        </menubar>
+        <field name="societe" title="Société"/>
+        <field name="dateDepot" title="Date de dépôt"/>
+        <field name="registreCommerce" title="N° RC"/>
+        <field name="representant" title="Représentant"/>
+        <field name="telephone" title="Téléphone"/>
+        <field name="email" title="E-mail"/>
+        <field name="typeSoumission" title="Type"/>
+        <field name="offreFiance" title="Offre Financière"/>
+    </grid>
+
+    <form onSave="save,attacheOffre_tw" onNew="checkTypeSoumission" onLoad="showTypeSoumission" title="Ajouter Soumissionnaire" name="soumissionnaire-form" model="com.axelor.apps.purchase.db.Soumissionnaire">
+
+        <panel title="information générale">
+            <field name="societe" title="Société" required="true"/>
+            <field name="representant" title="Représentant" required="true"/>
+            <field name="dateDepot" title="Date de dépôt du dossier" required="true"/>
+            <field name="heurDepot" title="Heure de dépôt du dossier" required="true"/>
+            <field name="registreCommerce" title="N° Registre de commerce (RC)" colSpan="4" required="true"/>
+            <field name="telephone" title="Téléphone" colSpan="4" required="true"/>
+            <field name="email" title="E-mail" colSpan="4" required="true"/>
+            <field name="adresse" widget="Text" height="2" title="Adresse" colSpan="12" required="true"/>
+        </panel>
+        <panel>
+            <field hidden="true" name="dateEchantillon" title="Date des échantillions" required="true"/>
+            <field hidden="true" name="heurEchantillon" title="Heure des échantillions" required="true"/>
+            <field name="soumissionElectro" title="Soumission Electronique" hidden="true" colSpan="6" onChange="com.axelor.apps.purchase.web.AppPurchaseController:disableSoumissionPapier"/>
+            <field name="soumissionPapier" title="Soumission Papier" hidden="true" colSpan="6" onChange="com.axelor.apps.purchase.web.AppPurchaseController:disableSoumissionElectro"/>
+        </panel>
+        <panel title="Lieux de visite">
+            <field name="validation" widget="boolean-radio" x-false-text="Non valide" x-true-text="Valide"/>
+        </panel>
+        <panel>
+            <field name="remarque" widget="Text" title="Remarque" colSpan="12" height="3"/>
+        </panel>
+    </form>
+
+    <action-method name="checkTypeSoumission">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="check_type_soumission"/>
+    </action-method>
+
+    <action-method name="showTypeSoumission">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="show_typeSoumission"/>
+    </action-method>
+
+
+    <action-method name="attacheOffre_tw">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="attacherOffreToSoumissionnaire"/>
+    </action-method>
+
+</object-views>

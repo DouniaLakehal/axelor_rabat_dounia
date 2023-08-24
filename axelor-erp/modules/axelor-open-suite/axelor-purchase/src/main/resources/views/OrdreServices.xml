@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+	<grid name="OrdreServices-grid" title="Ordre de Service" model="com.axelor.apps.purchase.db.OrdreServices">
+		<field name="numero"  title="ORDRE DE SERVICE N°" />
+		<field name="code" title="Numéro d’enregistrement "/>
+		<field name="date_start" title="Date de commencement"/>
+		<field name="description" title="Prestations"/>
+		<button title="Ordre de Service" icon="fa-print" name="btn_print_orderService" onClick="print_orderService_offre_appel"/>
+	</grid>
+    <form name="OrdreServices-form" title="Ordre de Service" model="com.axelor.apps.purchase.db.OrdreServices" >
+	<panel name="mainPanel">
+		<panel colSpan="12">
+			<field name="numero"  title="ORDRE DE SERVICE N°" colSpan="4" />
+			<field name="code"  title="Numéro d’enregistrement" colSpan="4" />
+			<field name="date_start" title="Date de commencement" colSpan="4"/>
+			<field widget="Text" height="4"  name="description"  title="Prestations" colSpan="12" />
+		</panel>
+	</panel>
+    </form>
+
+	<action-method name="print_orderService_offre_appel">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="tw_print_orderService_offre_appel"/>
+	</action-method>
+
+</object-views>

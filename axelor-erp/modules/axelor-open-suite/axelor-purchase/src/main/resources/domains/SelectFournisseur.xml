@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="purchase" package="com.axelor.apps.purchase.db"/>
+
+    <entity name="SelectFournisseur" lang="java">
+        <string name="name"/>
+        <string name="tele"/>
+        <string name="email"/>
+        <string name="ville"/>
+        <string name="adresse"/>
+        <many-to-one name="consultationPrix" ref="com.axelor.apps.purchase.db.ConsultationPrix"/>
+       <one-to-one name="fournisseurSelect" ref="com.axelor.apps.configuration.db.Fournisseur"/>
+    </entity>
+
+</domain-models>

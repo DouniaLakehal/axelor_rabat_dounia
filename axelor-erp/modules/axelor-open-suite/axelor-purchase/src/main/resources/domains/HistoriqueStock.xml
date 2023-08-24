@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="purchase" package="com.axelor.apps.purchase.db"/>
+
+    <entity name="HistoriqueStock" lang="java">
+        <many-to-one name="article" ref="com.axelor.apps.purchase.db.Article" title="Article" />
+        <string name="typeOperation" title="Type d'operation"/>
+        <many-to-one ref="com.axelor.apps.hr.db.Employee" name="employee" title="Fonctionnaire"/>
+        <many-to-one name="annexe" ref="com.axelor.apps.configuration.db.AnnexeGenerale" title="Annexe" />
+        <integer name="quantity" title="Quantité"/>
+        <date name="dateOperation" title="Date"/>
+
+    </entity>
+
+</domain-models>

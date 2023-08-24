@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="vehicule_entretien_grid" title="Liste des véhicules" model="com.axelor.apps.purchase.db.VehiculeEntretien">
+        <field name="vehicules"/>
+        <field name="entretiens"/>
+        <field name="annee"/>
+    </grid>
+
+    <form name="vehicule_entretien_form" title="Véhicules" model="com.axelor.apps.purchase.db.VehiculeEntretien" >
+        <panel name="articlePanel" >
+            <field name="vehicules" title="Vehicules" onChange="com.axelor.apps.purchase.web.AppPurchaseController:refresh_vehicule"/>
+            <field name="matricule" title="Immatriculation" readonly="true"/>
+            <field name="modele" title="Modéle" readonly="true"/>
+            <field name="entretiens" title="Entretiens" widget="TagSelect"/>
+            <field name="annee"/>
+<!--
+            <button name="addentretiens" icon="fa-plus" onClick="addentretiens"/>
+-->
+        </panel>
+    </form>
+
+    <!--<action-view name="addentretiens" title="Ajouter Entretiens" model="com.axelor.apps.configuration.db.Entretiens">
+        <view type="form" name="actionEntretiens_detail_form"/>
+        <view-param name="popup" value="reload"/>
+        <view-param name="show-toolbar" value="false"/>
+        <view-param name="show-confirm" value="true" />
+        <view-param name="popup-save" value="true"/>
+    </action-view>-->
+    
+</object-views>

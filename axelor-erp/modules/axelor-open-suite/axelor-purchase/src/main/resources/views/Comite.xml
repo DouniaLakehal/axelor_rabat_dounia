@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+	<grid name="comite-grid" title="Commission d'appel d'offre" model="com.axelor.apps.purchase.db.Comite">
+		<field name="post_direction"/>
+		<field name="nom"  title="Nom complet"/>
+		<field name="email"  title="Email"/>
+		<field name="telephone"  title="Téléphone"/>
+	</grid>
+    <form name="comite-form" title="Commission d'appel d'offre" model="com.axelor.apps.purchase.db.Comite">
+	<panel name="mainPanel">
+		<panel colSpan="12">
+			<field name="post_direction" title="Poste" />
+			<field name="nom" title="Nom complet" required="true"/>
+			<field name="email" title="Email" required="true"/>
+			<field name="telephone" title="Téléphone" required="true"/>
+		</panel>
+
+		<panel name="zone_annexe_comite" colSpan="12" hidden="true">
+			<field name="annexe" title="Annexe"/>
+			<field name="nom" title="Nom complet"/>
+		</panel>
+		<field name="introduction_convocation" hidden="true"/>
+	</panel>
+    </form>
+
+	<action-method name="modifier_introduction_convocation">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="tw_modifier_introduction_convocation"/>
+	</action-method>
+
+</object-views>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="immob-grid" title="Immobilisation" model="com.axelor.apps.purchase.db.Immobilisation">
+		<field name="article"/>
+		<field name="annexe"/>
+		<field name="immobtype"/>
+		<field name="numInventaire"/>
+		<field name="commentaire"/>
+		<field name="superficie"/>
+		<field name="immob" target-name="immob"/>
+		<field name="dateAcquisition"/>
+		
+    </grid>
+	
+    <form name="immob-form" title="Immobilisation" model="com.axelor.apps.purchase.db.Immobilisation">
+		<panel name="mainPanel">
+		<field name="article"/>
+		<field name="annexe"/>
+		<field name="immobtype" title="type immobilisation" />
+		<field name="numInventaire"/>
+		<field name="commentaire"/>
+		<field name="superficie"/>
+		<field name="immob"  title="valeur" domain="self.type = :immobtype" target-name="immob"    />
+		<field name="dateAcquisition"/>
+		</panel>
+    </form>
+
+</object-views>

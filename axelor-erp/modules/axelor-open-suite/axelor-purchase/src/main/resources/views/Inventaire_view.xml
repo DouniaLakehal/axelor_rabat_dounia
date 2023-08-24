@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="ListInventaire-grid" title="Liste des inventaires" model="com.axelor.apps.purchase.db.Inventaire" >
+        <toolbar>
+
+            <!--ajout par ayoub-->
+            <button name="imprimerinventaire" title="Imprimer"
+                    onClick="action-inventaire-view-imprimer-wizard"/>
+            <!--ajout par ayoub-->
+        </toolbar>
+       <field name="affectation" title="Affectation"   />
+        <field name="servicea" title="Services" />
+        <field name="annexe" title="Annexe" />
+        <field name="code_inv" title="Code inv CCIS-BK"/>
+        <field name="dateres" title="Date de réception" />
+        <field name="dateaff" title="Date d'affectation" />
+        <field name="famille" title="Famille"/>
+        <field name="categorie" title="Catégorie"/>
+        <field name="modedamortissement" title="Mode d'amortissement"/>
+        <field name="dureedaortissement" title="Durée d'aortissement"/>
+        <field name="dureedamortissement" title="Durée d'amortissement"/>
+        <field name="designationdubien" title="Désignation du bien"/>
+        <field name="marque" title="Marque"/>
+        <field name="qte" title="Qté"/>
+        <field name="valdacquisitionht" title="Val. d'acquisition ht"/>
+        <field name="valdacquisitionTTC" title="Val. d'acquisition TTC"/>
+        <field name="vNC" title="VNC 31-12-2019"/>
+        <field name="dateacquisition" title="Date acquisition"/>
+        <field name="frs" title="Frs"/>
+        <field name="nFacture" title="N° Facture"/>
+        <field name="nOP" title="N°OP"/>
+        <field name="etat" title="Etat"/>
+        <field name="fournisseur" title="Fournisseur" />
+    </grid>
+
+    <form name="ListInventaire-form" model="com.axelor.apps.purchase.db.Inventaire" title="Liste des inventaires"  onNew="action-burique-butget-on-new,action-rub_bud">
+
+        <panel name="inventairePanel" colSpan="12">
+            <field name="numAnn" showTitle="false" colSpan="12">
+                <viewer depends="numAnn">
+                    <![CDATA[
+						<h3>
+							<span  style="margin: 5px 0 !important; display: inline-table; line-height: initial;"><span x-translate>Inventaire N° </span>{{record.numAnn}}</span>
+						</h3>
+					]]>
+                </viewer>
+            </field>
+            <field name="affectation" title="Affectation"  selection="tw.Interne_externe" widget="single-select" />
+            <field name="servicea" title="Services" showIf="affectation=='Interne'"/>
+            <field name="annexe" title="Annexe" ref="com.axelor.apps.configuration.db.AnnexeGenerale"  showIf="affectation=='Externe'"/>
+            <field name="code_inv" title="Code inv CCIS-BK"/>
+            <field name="dateres" title="Date de réception" required="true"/>
+            <field name="dateaff" title="Date d'affectation" required="true"/>
+            <field name="famille" title="Famille"/>
+            <field name="categorie" title="Catégorie"/>
+            <field name="budgetrub" title="Rubrique butgetaire" />
+            <field name="modedamortissement" title="Mode d'amortissement"/>
+            <field name="dureedaortissement" title="Durée d'aortissement"/>
+            <field name="dureedamortissement" title="Durée d'amortissement"/>
+            <field name="designationdubien" title="Désignation du bien"/>
+            <field name="marque" title="Marque"/>
+            <field name="qte" title="Qté"/>
+            <field name="valdacquisitionht" title="Val. d'acquisition ht"/>
+            <field name="valdacquisitionTTC" title="Val. d'acquisition TTC"/>
+            <field name="vNC" title="VNC 31-12-2019"/>
+            <field name="dateacquisition" title="Date acquisition"/>
+            <field name="frs" title="Frs"/>
+            <field name="nFacture" title="N° Facture"/>
+            <field name="nOP" title="N°OP"/>
+            <field name="etat" title="Etat"/>
+            <field name="fournisseur" title="Fournisseur" ref="com.axelor.apps.configuration.db.Fournisseur" />
+        </panel>
+    </form>
+
+    <!--//ajout par ayoub lamghari-->
+    <action-view name="action-inventaire-view-imprimer-wizard" title="Formulaire Inventaire"
+                 model="com.axelor.apps.purchase.db.Inventaire">
+        <view type="form" name="inventaire-imprimer-report-form"/>
+        <view-param name="popup" value="reload"/>
+        <view-param name="show-toolbar" value="false"/>
+        <view-param name="show-confirm" value="false"/>
+        <view-param name="popup-save" value="false"/>
+        <view-param name="width" value="800"/>
+    </action-view>
+    <!--//ajout par ayoub lamghari-->
+    <!--    //Ajout par ayoub lamghari-->
+    <form name="inventaire-imprimer-report-form"  title="Imprimer inventaire" model="com.axelor.apps.purchase.db.Inventaire" onNew="action-burique-butget-on-new">
+
+        <panel colSpan="12">
+            <panel name="mainPanel" colSpan="10" colOffset="1">
+                <field name="dateDebut" title="Date Début" type="date" colSpan="4"/>
+                <field name="dateFin" title="Date Fin" type="date" colSpan="4"/>
+                <field name="budgetrub" title="Rubrique butgetaire" />
+
+                <button name="showDECOMPTE" title="Rechercher" onClick="com.axelor.apps.purchase.web.AppPurchaseController:Imprimer_inventaire,close" colOffset="10" colSpan="2" />
+            </panel>
+        </panel>
+
+    </form>
+    <!--    //Ajout par ayoub lamghari-->
+
+    <action-method name="action-burique-butget-on-new" >
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="get_all_rubriqueBudgetaireAC"/>
+    </action-method>
+
+</object-views>

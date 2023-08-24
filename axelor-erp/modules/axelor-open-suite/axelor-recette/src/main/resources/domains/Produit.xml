@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+  <module name="recette" package="com.axelor.apps.recette.db"/>
+
+  <entity name="Produit" lang="java" sequential="true">
+    <string name="designation" title="Designation" />
+    <string name="designationAr" title="الإسم" />
+    <integer name="nbr" title="Nombre" />
+    <integer name="nbrAr" title="العدد" />
+    <one-to-many name="categorieRecuDetail" ref="com.axelor.apps.recette.db.Categorie" />
+  </entity>
+
+</domain-models>

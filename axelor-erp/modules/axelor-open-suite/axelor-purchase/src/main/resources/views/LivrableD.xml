@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+    <grid name="livrable-d-grid" title="Les livrables définitifs" model="com.axelor.apps.purchase.db.LivrableD" orderBy="titre">
+        <field name="titre" title="Titre"/>
+        <field name="piece" title="Document" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid"/>
+        <field name="etat" title="Statut" readonly="true"/>
+        <field name="remarque" title="Remarque" readonly="true"/>
+        <button name="btn_valide" title="Valider" icon="fa-check" onClick="valider_Document2"/>
+        <button name="btn_valideResev" title="Valider avec reserve" icon="fa-check-circle" onClick="valideReserve_Document2"/>
+        <button name="btn_Notvalide" title="Non Valider" icon="fa-times" onClick="Novalide_Document2"/>
+    </grid>
+
+    <form name="livrable-d-form" title="Les livrables définitifs" model="com.axelor.apps.purchase.db.LivrableD" >
+        <panel>
+            <field name="titre" title="Titre"/>
+            <field name="piece" title="Document" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid"/>
+            <button colSpan="3" title="Enregistrer" name="btn_valide" onClick="save,close"/>
+        </panel>
+    </form>
+
+    <action-method name="valider_Document2">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="valider_definitif_courrant"/>
+    </action-method>
+
+    <action-method name="save_ValideReserve2">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="valide_definitif_courrant_reserve"/>
+    </action-method>
+
+    <action-method name="save_notValideFile2">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="Notvalide_definitif_courrant"/>
+    </action-method>
+
+
+
+    <form onSave="save_ValideReserve2" title="Saisir un commentaire" name="commentaire-form-info4" model="com.axelor.apps.purchase.db.LivrableD">
+        <panel colSpan="10">
+            <field name="remarque" title="Remarque" widget="Text" height="3" colSpan="12"/>
+        </panel>
+    </form>
+
+    <form onSave="save_notValideFile2" title="Saisir un commentaire" name="commentaire-form-info3" model="com.axelor.apps.purchase.db.LivrableD">
+        <panel colSpan="10">
+            <field name="remarque" title="Remarque" widget="Text" height="3" colSpan="12"/>
+        </panel>
+    </form>
+
+    <action-view name="valideReserve_Document2" title="Saisir un commentaire"
+                 model="com.axelor.apps.purchase.db.LivrableD">
+        <view type="form" name="commentaire-form-info4"/>
+        <view-param name="forceEdit" value="true"/>
+        <view-param name="popup" value="true"/>
+        <view-param name="popup" value="reload"/>
+        <view-param name="popup-save" value="true"/>
+        <view-param name="show-toolbar" value="false"/>
+        <view-param name="show-confirm" value="false"/>
+        <view-param name="popup-save" value="true"/>
+    </action-view>
+
+    <action-view name="Novalide_Document2" title="Saisir un commentaire"
+                 model="com.axelor.apps.purchase.db.LivrableD">
+        <view type="form" name="commentaire-form-info3"/>
+        <view-param name="forceEdit" value="true"/>
+        <view-param name="popup" value="true"/>
+        <view-param name="popup" value="reload"/>
+        <view-param name="popup-save" value="true"/>
+        <view-param name="show-toolbar" value="false"/>
+        <view-param name="show-confirm" value="false"/>
+        <view-param name="popup-save" value="true"/>
+    </action-view>
+</object-views>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+   <module name="purchase" package="com.axelor.apps.purchase.db"/>
+
+    <entity name="Media" lang="java" >
+        <string name="type" selection="media.type.appel.offre"/>
+        <string name="nom_media" />
+        <date name="date_publication" />
+        <date name="date_publication2" />
+        <string name="numero_publication" />
+    </entity>
+
+</domain-models>

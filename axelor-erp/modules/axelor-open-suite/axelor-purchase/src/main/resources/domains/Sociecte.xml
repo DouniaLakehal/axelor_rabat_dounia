@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+   <module name="purchase" package="com.axelor.apps.purchase.db"/>
+
+    <entity name="Sociecte" lang="java" >
+        <string name="nomSociete" title="Nom de la Sociecte" required="true"/>
+        <string name="raisonSocial" title="Raison Social" />
+        <string name="description" title="Description" />
+        <string name="email" title="email" />
+        <string name="tel" title="Telephone" />
+        <string name="motif" title="Motif de refus" />
+        <one-to-one name="pvdoc" title="PV" ref="com.axelor.meta.db.MetaFile" />
+        <many-to-one name="statut1" ref="com.axelor.apps.purchase.db.Statut" title="Status" required="false"/>
+        <many-to-one name="statut2" ref="com.axelor.apps.purchase.db.Statut" title="Status" required="false"/>
+        <many-to-one name="statut3" ref="com.axelor.apps.purchase.db.Statut" title="Status" required="false"/>
+        <decimal name="offreFinanciere_prix" title="offre Financiere" />
+        <one-to-many name="piecesJointess" ref="com.axelor.apps.helpdesk.db.PiecesJointe" />
+    </entity>
+
+</domain-models>

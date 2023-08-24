@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+
+
+    <grid name="OffreAppel-grid_1" title="Offre Appel" model="com.axelor.apps.purchase.db.OffreAppel" >
+        <field name="numero" title="Numéro de l'appel d'offre"/>
+        <field name="nom" title="Objet de l'appel d'offre"/>
+        <field name="dateLancement" title="date de lancement"/>
+        <field name="dateOverture" title="Date d'offre d'appel"/>
+        <field name="annulation" title="Annulation" />
+        <button name="btn_annulation" hideIf="annulation" onClick="action_annulation_oa" title="Annulation" icon="fa-times"/>
+        <button name="btn_avis" onClick="action_print_avis" title="Avis" icon="fa-get-pocket"/>
+        <button name="btn_print_annulation" onClick="action_print_annulation_oa" showIf="annulation" title="Imprimer Annulation" icon="fa-print"/>
+    </grid>
+
+    <form name="OffreAppel-form" title="Offre Appel" onNew="generate_numeroOffre" onLoad="show_panel_critereNotation"
+          model="com.axelor.apps.purchase.db.OffreAppel">
+        <panel name="mainPanel" title="Information générale">
+            <field name="numero" title="Numéro de l'appel d'offre" readonly="true"/>
+            <field name="nom" title="Objet de l'appel d'offre" required="true"/>
+            <field name="dateLancement" title="date de lancement" required="true" colSpan="8"/>
+            <field name="heureLancement" title="Heure de lancement" required="true" colSpan="4"/>
+            <field name="dateOverture" title="Date d'ouverture" required="true" colSpan="8"/>
+            <field name="heureOverture" title="heure d'ouverture" required="true" colSpan="4"/>
+
+            <panel colSpan="6">
+                <field name="typeDossier" selection="electro.papier.string" widget="CheckboxSelect"/>
+            </panel>
+            <panel colSpan="6">
+                <field name="dossierAddetive" title="Dossier additif" colSpan="6" />
+                <field name="offreTechnique" title="Offre technique" colSpan="6"/>
+                <field name="prestation" showIf="offreTechnique" target-name="nom_fr" onChange="show_panel_critereNotation" title="Nature de prestation" required="true" colSpan="12"/>
+            </panel>
+            <panel colSpan="12">
+                <field colSpan="6" name="echantillionnage" title="Échantillon"/>
+                <field colSpan="6" name="documentationTechnique" title="Documentation technique"/>
+                <field colSpan="6" showIf="echantillionnage" name="dateLimiteEchantillionnage" title="Date limite de dépôt des échantillons"/>
+                <field colSpan="6" showIf="documentationTechnique" name="dateLimiteDocumentationTechnique" title="Date limite de dépôt de documentation technique"/>
+            </panel>
+        </panel>
+        <panel>
+            <field name="montantCaution" onChange="load_new_cuation_lettre" required="true" title="Montant caution provisoire"/>
+            <field name="estimation_coup" title="Estimation du maitre d'ouvrage" onChange="load_new_estimation_coup_lettre"/>
+            <field name="caution_lettre" hidden="true"/>
+            <field name="estimation_coup_lettre" hidden="true"/>
+
+        </panel>
+
+        <panel>
+            <field name="visiteDesLieux" title="Visite des lieux"/>
+            <field name="dateVisiteDesLieux" showIf="visiteDesLieux" title="Date de visite des lieux"/>
+        </panel>
+
+        <panel colSpan="12">
+            <field name="mediaPublication" title="Publicité de l'appel d'offre" required="true" colSpan="12"/>
+        </panel>
+
+        <panel name="mainPanel2">
+            <field name="decisionMemebre" title="Décision sélection des membres de comité" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid"/>
+            <field name="comite" title="Commission d'appel d'offre" required="true" colSpan="12"/>
+            <field name="piecesJointes" grid-view="pieceJointe3-grid" form-view="pieceJointe3-form" title="Documents de consultation"
+                   required="true" colSpan="12"/>
+        </panel>
+        <panel name="critereNotationPanel" hidden="true" colSpan="12">
+            <field name="critereNotation" title="Grille de notation"
+                   form-view="critereNotationSelect-form" grid-view="critereNotationSelect-grid" colSpan="12"/>
+            <field name="pourcentage" widget="boolean-radio" x-true-text="Validation de pourcentage (%)" x-false-text="Validation de point" colSpan="12"/>
+            <field name="pourcentageValideNote" showIf="pourcentage"/>
+            <field name="pointValideNote" hideIf="pourcentage"/>
+        </panel>
+    </form>
+
+    <form title="Langue" name="form_langue_choix" model="com.axelor.apps.purchase.db.OffreAppel">
+        <panel colSpan="12">
+            <field title="Langue" name="$langue" widget="boolean-radio" x-false-text="Langue étrangère" x-true-text="Arabe" />
+        </panel>
+        <panel colSpan="12">
+            <button-group colOffset="8" colSpan="4">
+                <button name="btn_save_langue_avis_ao" onClick="print_avis_ao_document,close" title="Imprimer"/>
+            </button-group>
+        </panel>
+
+    </form>
+
+    <action-method name="generate_numeroOffre">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="geneateNumeroOffre"/>
+    </action-method>
+
+	<action-method name="show_panel_critereNotation">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="showPanelCriterNotation"/>
+	</action-method>
+
+    <action-method name="action_annulation_oa">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="tw_action_annulation_oa"/>
+    </action-method>
+
+    <action-method name="action_print_annulation_oa">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="tw_action_print_annulation_oa"/>
+    </action-method>
+
+    <action-method name="load_new_cuation_lettre">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="tw_load_new_cuation_lettre"/>
+    </action-method>
+    <action-method name="load_new_estimation_coup_lettre">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="tw_load_new_estimation_coup_lettre"/>
+    </action-method>
+
+
+    <action-view name="action_print_avis" title="Langue" model="com.axelor.apps.purchase.db.OffreAppel">
+        <view type="form" name="form_langue_choix"/>
+        <view-param name="popup" value="reload"/>
+        <view-param name="show-toolbar" value="false"/>
+        <view-param name="show-confirm" value="false" />
+        <view-param name="popup-save" value="false"/>
+    </action-view>
+
+    <action-method name="print_avis_ao_document">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="tw_print_avis_ao_document"/>
+    </action-method>
+
+</object-views>

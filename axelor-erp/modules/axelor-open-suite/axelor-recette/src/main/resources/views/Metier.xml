@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+  <grid name="metier-grid" title="Activité" model="com.axelor.apps.recette.db.Metier">
+      <field name="nom" title="Activité"/>
+      <field name="nom_ar" title="المهنة" css="tw_arabe_orient"/>
+    <field name="description" title="Description"/>
+  </grid>
+
+  <form name="metier-form" title="Activité" model="com.axelor.apps.recette.db.Metier">
+      <panel>
+    <field name="nom" title="Activité"/>
+    <field name="nom_ar" title="المهنة"/>
+    <field name="description" title="Description"/>
+      </panel>
+
+  </form>
+
+</object-views>

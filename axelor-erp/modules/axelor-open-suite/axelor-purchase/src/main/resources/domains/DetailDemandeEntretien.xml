@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="purchase" package="com.axelor.apps.purchase.db"/>
+
+    <entity name="DetailDemandeEntretien" lang="java">
+        <!--<many-to-one name="demandesentretien" ref="com.axelor.apps.purchase.db.DemandeEntretien" title="Demande entretien"/>-->
+        <string name="numero" title="Numéro"/>
+        <date name="dateDemande" title="Date de la demande"/>
+        <many-to-one name="vehicules" ref="com.axelor.apps.configuration.db.Vehicules" title="Vehicules"/>
+        <many-to-one name="entretiens" ref="com.axelor.apps.configuration.db.Entretiens" title="Entretiens"/>
+        <decimal name="quantite" title="Quantité"/>
+        <one-to-many title="Liste des entretiens" name="entretiendetail" ref="com.axelor.apps.purchase.db.EntretienQuantite"  />
+    </entity>
+
+</domain-models>

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+    <grid name="pieceJointe2-grid" title="Documents de consultation" model="com.axelor.apps.purchase.db.PiecesJointe2" orderBy="titre">
+        <field name="titre" title="Titre"/>
+        <field name="piece" title="Document" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid"/>
+    </grid>
+
+    <form name="pieceJointe2-form" title="Documents de consultation" model="com.axelor.apps.purchase.db.PiecesJointe2" >
+        <panel>
+            <field name="titre" title="Titre"/>
+            <field name="piece" title="Document" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid"/>
+        </panel>
+    </form>
+
+    <grid name="pieceJointe3-grid" title="Documents de consultation" model="com.axelor.apps.purchase.db.PiecesJointe2" orderBy="titre">
+        <field name="titreSelect" title="Titre"/>
+        <field name="piece" title="Document" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid"/>
+    </grid>
+
+    <form name="pieceJointe3-form" title="Documents de consultation" model="com.axelor.apps.purchase.db.PiecesJointe2" >
+        <panel>
+            <field name="titreSelect" title="Titre" domain="self.typeDoc='Maitre ouvrage'"/>
+            <field name="piece" title="Document" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid"/>
+        </panel>
+    </form>
+
+    <form name="pieceJointe4-form" title="Documents de consultation" model="com.axelor.apps.purchase.db.PiecesJointe2" >
+        <panel>
+            <field name="titreSelect" title="Titre" domain="self.typeDoc='Soumissionnaire'"/>
+            <field name="piece" title="Document" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid"/>
+        </panel>
+    </form>
+
+    <grid name="validationDocument-grid" title="Validation des Documents"
+          model="com.axelor.apps.purchase.db.PiecesJointe2">
+        <field name="titreSelect" title="Titre"/>
+        <field name="piece" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid"/>
+        <field name="etat" title="Statut" readonly="true"/>
+        <field name="remarque" title="Remarque" />
+        <field name="soumissionnaire" hidden="true" title="soumissionnaire" colSpan="12"/>
+        <button title="Valider" name="btn_valide" onClick="validerDocument" icon="fa-check" />
+        <button title="Valider avec reserve" name="btn_valideResev" onClick="valideReserveDocument" icon="fa-check-circle"/>
+        <button title="Non Valider" name="btn_Notvalide_wt" onClick="NovalideDocument_wt" icon="fa-times"/>
+    </grid>
+
+    <form name="validationDocument-form" onNew="getSoumissionaireDoc" title="PiecesJointe" model="com.axelor.apps.purchase.db.PiecesJointe2" >
+       <panel>
+           <field name="titreSelect" title="Titre" colSpan="4" domain="self.typeDoc='Soumissionnaire' and self.nature='Dossier administratif technique et additif'"/>
+           <field name="piece" title="Document" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid" colSpan="4"/>
+<!--
+           <field name="etat" title="Etat" colSpan="4"/>
+-->
+           <field name="remarque" title="Remarques" colSpan="12"/>
+           <field name="soumissionnaire" hidden="true" title="soumissionnaire" colSpan="12"/>
+       </panel>
+    </form>
+
+    <form onSave="save_notValideFile_wt" title="Saisir un commentaire" name="commentaire-form-info_wt" model="com.axelor.apps.purchase.db.PiecesJointe2">
+        <panel colSpan="10">
+            <field name="remarque" title="Remarque" widget="Text" height="3" colSpan="12"/>
+        </panel>
+    </form>
+
+    <form onSave="save_ValideReserve" title="Saisir un commentaire" name="commentaire-form-info2" model="com.axelor.apps.purchase.db.PiecesJointe2">
+        <panel colSpan="10">
+            <field name="remarque" title="Remarque" widget="Text" height="3" colSpan="12"/>
+        </panel>
+    </form>
+
+
+    <action-method name="validerDocument">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="validerdocumentcourrant"/>
+    </action-method>
+
+    <action-method name="getSoumissionaireDoc">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="get_Soumissionaire_Doc"/>
+    </action-method>
+
+    <action-method name="save_notValideFile_wt">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="Notvalide_document_courrant"/>
+    </action-method>
+
+    <action-method name="save_ValideReserve">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="valide_document_courrant_reserve"/>
+    </action-method>
+
+
+
+
+    <action-view name="NovalideDocument_wt" title="Saisir un commentaire"
+                 model="com.axelor.apps.purchase.db.PiecesJointe2">
+        <view type="form" name="commentaire-form-info_wt"/>
+        <view-param name="forceEdit" value="true"/>
+        <view-param name="popup" value="true"/>
+        <view-param name="popup" value="reload"/>
+        <view-param name="popup-save" value="true"/>
+        <view-param name="show-toolbar" value="false"/>
+        <view-param name="show-confirm" value="false"/>
+        <view-param name="popup-save" value="true"/>
+    </action-view>
+
+
+    <action-view name="valideReserveDocument" title="Saisir un commentaire"
+                 model="com.axelor.apps.purchase.db.PiecesJointe2">
+        <view type="form" name="commentaire-form-info2"/>
+        <view-param name="forceEdit" value="true"/>
+        <view-param name="popup" value="true"/>
+        <view-param name="popup" value="reload"/>
+        <view-param name="popup-save" value="true"/>
+        <view-param name="show-toolbar" value="false"/>
+        <view-param name="show-confirm" value="false"/>
+        <view-param name="popup-save" value="true"/>
+    </action-view>
+</object-views>

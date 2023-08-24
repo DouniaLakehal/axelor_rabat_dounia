@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<menuitem name="recette-root" title="Prestation de services" icon="fa-briefcase" icon-background="purple"  order="-200"/>
+
+	<menuitem name="ressortissant_gestion" parent="recette-root" title="Attestation professionnelle" action="ressort_gestion"  order="0"/>
+	<action-view name="ressort_gestion" title="Attestation professionnelle"  model="com.axelor.apps.recette.db.Ressortissant">
+		<view type="grid" name="ressortissant_attestation-grid" />
+		<view type="form" name="ressortissant_attestation-form"  />
+		<domain>self.type=1 </domain>
+		<context name="_type" expr="eval:1"/>
+	</action-view>
+	<menuitem name="cart_gestion" parent="recette-root" title="Certificat d'origine" action="cart_gestions" order="1"/>
+	<action-view name="cart_gestions" title="Certificat d'origine"  model="com.axelor.apps.recette.db.Ressortissant">
+		<view type="grid" name="ressortissant_origin-grid" />
+		<view type="form" name="ressortissant_origin-form" />
+		<domain>self.type=2 </domain>
+		<context name="_type" expr="eval:2"/>
+	</action-view>
+
+	<menuitem name="autorisation_gestion" parent="recette-root" title="Carte professionnelle" action="autorisation_gestions" order="2"/>
+	<action-view name="autorisation_gestions" title="Cart"  model="com.axelor.apps.recette.db.Ressortissant">
+		<view type="grid" name="ressortissant_attestation-grid" />
+		<view type="form" name="ressortissant_attestation-form" />
+	</action-view>
+
+	<menuitem name="ressortissant-recette" title="Configuration" icon="fa-cog" parent="recette-root"  order="4"/>
+	<menuitem name="metier_gestion" parent="ressortissant-recette" title="Activités" action="metier_gestions" order="1"/>
+	<action-view name="metier_gestions" title="Activités"  model="com.axelor.apps.recette.db.Metier">
+		<view type="grid" name="metier-grid" />
+		<view type="form" name="metier-form" />
+	</action-view>
+	<menuitem name="pays_gestion" parent="ressortissant-recette" title="Pays" action="pays_gestions" order="2"/>
+	<action-view name="pays_gestions" title="Pays"  model="com.axelor.apps.recette.db.Pays">
+		<view type="grid" name="pays-grid" />
+		<view type="form" name="pays-form" />
+	</action-view>
+	<menuitem name="produitRecette_gestion" parent="ressortissant-recette" title="Produits" action="recetteProduit_gestion" order="3" />
+	<action-view name="recetteProduit_gestion" title="Produits"  model="com.axelor.apps.recette.db.Produit">
+		<view type="grid" name="recetteproduit-grid" />
+		<view type="form" name="recetteproduit-form" />
+	</action-view>
+
+
+
+
+</object-views>

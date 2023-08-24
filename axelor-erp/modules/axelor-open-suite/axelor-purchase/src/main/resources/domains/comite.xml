@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+   <module name="purchase" package="com.axelor.apps.purchase.db"/>
+
+    <entity name="Comite" lang="java" >
+        <string name="post_direction" selection="post_comission_nom"/>
+        <string name="nom_service_departement"/>
+        <many-to-one name="annexe" ref="com.axelor.apps.configuration.db.AnnexeGenerale"/>
+        <string name="nom" title="Nom" required="true"/>
+        <string name="email" title="email" required="true"/>
+        <string name="telephone" title="Telephone" required="true"/>
+        <string name="introduction_convocation"/>
+    </entity>
+
+</domain-models>

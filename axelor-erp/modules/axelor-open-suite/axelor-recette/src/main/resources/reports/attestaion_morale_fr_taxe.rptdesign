@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.7.0.v201706222054</property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">96</property>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="topMargin">1in</property>
+            <page-footer>
+                <text id="3">
+                    <property name="contentType">html</property>
+                    <text-property name="content"><![CDATA[<value-of>new Date()</value-of>]]></text-property>
+                </text>
+            </page-footer>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <grid id="4">
+            <column id="5"/>
+            <column id="6"/>
+            <column id="7"/>
+            <row id="8">
+                <cell id="9"/>
+                <cell id="10"/>
+                <cell id="11"/>
+            </row>
+            <row id="12">
+                <cell id="13"/>
+                <cell id="14"/>
+                <cell id="15"/>
+            </row>
+        </grid>
+    </body>
+</report>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+  <module name="recette" package="com.axelor.apps.recette.db"/>
+
+  <entity name="InfoAttestation" lang="java" sequential="true">
+    <string name="numModel"/>
+    <many-to-one name="ressortissant" ref="com.axelor.apps.recette.db.Ressortissant"/>
+    <boolean name="typeDelivrance"/>
+    <string name="lang_de_type" selection="tw.recette.lang"/>
+    <string name="taxe_attes"/>
+    <date name="date_delivration"/>
+    <string name="taxe_tribunal"/>
+    <date name="date_delivration_tribunal"/>
+    <string name="adresseImpot"/>
+  </entity>
+
+</domain-models>

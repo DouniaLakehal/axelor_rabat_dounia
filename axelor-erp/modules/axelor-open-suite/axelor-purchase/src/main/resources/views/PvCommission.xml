@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <form name="pvdecommission-form" title="Pv de commission" model="com.axelor.apps.purchase.db.OffreAppel">
+        <panel>
+            <field name="numero_offre" type="many-to-one" target="com.axelor.apps.purchase.db.OffreAppel" target-name="numero" title="Numéro d'appel d'offre" required="true"/>
+            <button colSpan="4" colOffset="8" name="btn_principale" title="Pv de commission" onClick="com.axelor.apps.purchase.web.AppPurchaseController:verifier_liste_pv"/>
+        </panel>
+        <panel title="Les pv de la commission" hidden="true" name="btn_1">
+            <panel colOffset="2" colSpan="10">
+                <button  name="btn_1" colSpan="5" title="Imprimer tableau administratif et technique" onClick="com.axelor.apps.purchase.web.AppPurchaseController:tw_print_TableauAdmiEtTechnique"/>
+                <button name="btn_1" colSpan="5" title="Imprimer PV sous commission" onClick="com.axelor.apps.purchase.web.AppPurchaseController:tw_print_pv_sous_comission"/>
+            </panel>
+            <panel colOffset="2" colSpan="10">
+                <button  name="btn_1" colSpan="5" title="Imprimer PV de réception provisoire" onClick="com.axelor.apps.purchase.web.AppPurchaseController:tw_print_pv_provisoire"/>
+                <button  name="btn_1" colSpan="5" title="Imprimer feuille de présence" onClick="com.axelor.apps.purchase.web.AppPurchaseController:tw_print_feuille_presence"/>
+            </panel>
+        </panel>
+    </form>
+
+
+    <action-method name="choix_type_etat">
+        <call class="com.axelor.apps.recette.web.RecetteControlleur" method="show_button_imprimerEtatSalaire"/>
+    </action-method>
+
+    <action-method name="test_show_hide_compteInformationDetail">
+        <call class="com.axelor.apps.hr.web.CustomController" method="tw_test_show_hide_compteInformationDetail"/>
+    </action-method>
+
+    <action-method name="loadCheckButtonClicked">
+        <call class="com.axelor.apps.recette.web.RecetteControlleur" method="loadCheckButtonClicked"/>
+    </action-method>
+</object-views>

@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+   <module name="purchase" package="com.axelor.apps.purchase.db"/>
+  
+   <entity name="Immobilisation" lang="java">
+    
+       <many-to-one ref="com.axelor.apps.purchase.db.Article" name="article" title="Article"/>
+       <many-to-one ref="com.axelor.apps.purchase.db.ImmobilisationType" name="immob" title="Type d'immobilisation"/>
+       <string name="immobtype" title="Type immobilisation" selection="purchase.order.immob.type"/>
+       <string  name="commentaire" title="Commentaire"/>
+       <string  name="numInventaire" title="Num d'inventaire"/>
+       <string  name="superficie" title="Superficie"/>
+       <date name="dateAcquisition" title="Date d'Acquisition" required="true"/>
+      
+       
+       <many-to-one ref="com.axelor.apps.configuration.db.AnnexeGenerale" name="annexe" title="Annexe"/>
+		
+    </entity>
+
+</domain-models>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="purchase" package="com.axelor.apps.purchase.db"/>
+
+    <entity name="CommandeAchat" lang="java">
+        <string name="numero" title="Numero"/>
+        <date name="dateCommande" title="Date"/>
+        <integer name="year" title="annee"/>
+        <string name="objet" title="Objet"/>
+        <string name="conserne_desc" title="desc"/>
+        <string name="motif" title="motif"/>
+        <string name="justificatif" title="justificatif"/>
+        <string name="numLivraison" title="numLivraison"/>
+        <boolean name="reception" default="false"/>
+        <one-to-many mappedBy="commandeAchat" name="articleCommande" ref="com.axelor.apps.purchase.db.ArticlesPrix" title="Article Prix"/>
+        <one-to-one mappedBy="commandeAchat" name="comparaisonPrix" ref="com.axelor.apps.purchase.db.ComparaisonPrix" title="comparaison Prix" />
+        <one-to-many name="receptionCommande" ref="com.axelor.apps.purchase.db.ReceptionCommande"/>
+        <boolean name="hasPaymentCommande" default="false"/>
+        <many-to-one name="docAttach" title="Attacher le document" ref="com.axelor.meta.db.MetaFile" />
+    </entity>
+
+</domain-models>

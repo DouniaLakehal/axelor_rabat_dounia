@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid canDelete="false" name="consultation-prix-grid" title="Liste des consultations" model="com.axelor.apps.purchase.db.ConsultationPrix">
+		<field name="numero"/>
+		<field name="dateConsultation"/>
+		<field name="rubriqueBudgetaire"/>
+		<field name="hasCommande" title="Commande"/>
+		<button icon="fa-plus" title="Remplir" name="remplir" onClick="action-view-select-fournisseur2"/>
+		<button icon="fa-trash-o" title="Supprimer" name="delete" onClick="deleteConsultation"/>
+    </grid>
+
+
+    <form canSave="false" canEdit="hasCommande==true?false:true"
+		  onNew="generate_numeros,get_rubrique_by_year" onLoad="get_rubrique_by_year"
+		  name="consultation-prix-form"
+		  title="Ajouter Nouvelle consultation" model="com.axelor.apps.purchase.db.ConsultationPrix"
+		  width="large">
+		<panel name="information" title="Informations Générales" colSpan="12">
+			<field name="numero" title="Numéro" colSpan="3" readonly="true"/>
+			<field name="dateConsultation" title="Date ouverture" colSpan="3"/>
+			<field name="dateFermeture" title="Date fermeture" colSpan="3"/>
+			<field name="rubriqueBudgetaire" title="Rubrique budgetaire" colSpan="3" />
+			<field name="compte" target-name="designation" title="RIB" colSpan="3"/>
+			<field name="annexe" title="Annexe" colSpan="3"/>
+			<field  name="occasion" colSpan="6"/>
+			<field name="year" title="annee" hidden="true"/>
+			<field name="hasCommande"  title="commande" hidden="true"/>
+		</panel>
+
+		<panel>
+			<field required="true" name="listFournisseur" title="Liste des fournisseurs" colSpan="12"/>
+		</panel>
+
+		<panel name="panelArticle">
+			<panel-related required="true" grid-view="Article-detail-grid_delete" form-view="Article-detail-form" canRemove="false"
+						   title="Articles" colSpan="12"
+						   field="articlesDetailspourconsultation"/>
+		</panel>
+		<panel>
+			<button-group colSpan="4">
+				<button title="Enregistrer" name="sauvegarde" onClick="test_consultationPrix" showIf="id &amp;&amp; hasCommande!=true" />
+				<button title="Enregistrer" name="sauvegarde" onClick="add_comparaisonPrix" showIf="!id" />
+			</button-group>
+		</panel>
+
+    </form>
+
+	<grid name="Article-detail-grid_delete" title="Liste des Articles" model="com.axelor.apps.purchase.db.ArticleDetails" orderBy="myorder">
+		<field name="article"/>
+		<field name="quantite2"/>
+		<field name="unite"/>
+		<field name="myorder" hidden="true"/>
+		<button icon="fa-trash" name="deleteaction" onClick="DeleteArticlesDetails"/>
+	</grid>
+
+	<!--comparaison prix-->
+
+	<action-view name="action-view-select-fournisseur2" title="Liste de comparaison" model="com.axelor.apps.purchase.db.ComparaisonPrix">
+		<view type="grid" name="remplirGrid" />
+		<view type="form" name="remplirForm" />
+		<view-param name="forceEdit" value="true"/>
+		<domain>self.consultationPrix.id = :id and self.isDeleted=false </domain>
+		<context name="id" expr="eval: id"/>
+	</action-view>
+
+	<action-group name="groupeactionhtml">
+		<action name="com.axelor.apps.purchase.web.AppPurchaseController:remplirConsultation"/>
+		<action name="close"/>
+	</action-group>
+
+	<action-group name="add_comparaisonPrix">
+		<action name="validation_champs_null" if="articlesDetailspourconsultation==null || listFournisseur==null "/>
+		<action name="save" if="articlesDetailspourconsultation!=null &amp;&amp; listFournisseur!=null" />
+		<action name="com.axelor.apps.purchase.web.AppPurchaseController:addNew_comparaisonPrix" if="articlesDetailspourconsultation!=null &amp;&amp; listFournisseur!=null "/>
+	</action-group>
+
+	<action-group name="test_consultationPrix">
+		<action name="validation_champs" if="articlesDetailspourconsultation.size()==0 || listFournisseur.size()==0 || hasCommande==true"/>
+		<action name="save" if="articlesDetailspourconsultation.size()!=0 &amp;&amp; listFournisseur.size()!=0 &amp;&amp; hasCommande!=true"/>
+		<action name="com.axelor.apps.purchase.web.AppPurchaseController:addNew_comparaisonPrix" if="articlesDetailspourconsultation.size()!=0 &amp;&amp; listFournisseur.size()!=0 &amp;&amp; hasCommande!=true"/>
+	</action-group>
+
+	<action-validate name="validation_champs">
+		<error message="&lt;p&gt;les champs suivant sont obligatoire : &lt;p&gt; &lt;ul&gt; &lt;li&gt;Liste des Articles&lt;/li&gt; &lt;li&gt;Liste des Fournisseurs&lt;/li&gt; &lt;/ul&gt;" if="articlesDetailspourconsultation.size()==0 &amp;&amp; listFournisseur.size()==0 "/>
+		<error message="&lt;p&gt;les champs suivant sont obligatoire : &lt;p&gt; &lt;ul&gt; &lt;li&gt;Liste des Articles&lt;/li&gt; &lt;/ul&gt;" if="articlesDetailspourconsultation.size()==0 &amp;&amp; listFournisseur.size()!=0 "/>
+		<error message="&lt;p&gt;les champs suivant sont obligatoire : &lt;p&gt; &lt;ul&gt; &lt;li&gt;Liste des Fournisseurs&lt;/li&gt; &lt;/ul&gt;" if="articlesDetailspourconsultation.size()!=0 &amp;&amp; listFournisseur.size()==0 "/>
+		<error message="&lt;p&gt;consulatation des prix dispose déja d'une commande &lt;p&gt; " if="hasCommande==true"/>
+	</action-validate>
+
+	<action-validate name="validation_champs_null">
+		<error message="&lt;p&gt;les champs suivant sont obligatoire : &lt;p&gt; &lt;ul&gt; &lt;li&gt;Liste des Articles&lt;/li&gt; &lt;li&gt;Liste des Fournisseurs&lt;/li&gt; &lt;/ul&gt;" if="articlesDetailspourconsultation==null &amp;&amp; listFournisseur==null "/>
+		<error message="&lt;p&gt;les champs suivant sont obligatoire : &lt;p&gt; &lt;ul&gt; &lt;li&gt;Liste des Articles&lt;/li&gt; &lt;/ul&gt;" if="articlesDetailspourconsultation==null &amp;&amp; listFournisseur!=null "/>
+		<error message="&lt;p&gt;les champs suivant sont obligatoire : &lt;p&gt; &lt;ul&gt; &lt;li&gt;Liste des Fournisseurs&lt;/li&gt; &lt;/ul&gt;" if="articlesDetailspourconsultation!=null &amp;&amp; listFournisseur==null "/>
+	</action-validate>
+
+
+	<!--<action-method name="DeleteArticlesDetails">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="removeArticleDetails"/>
+	</action-method>-->
+
+	<action-group name="DeleteArticlesDetails">
+		<action name="validation_champs" if="hasCommande==true"/>
+		<action name="save" if="hasCommande!=true"/>
+		<action name="com.axelor.apps.purchase.web.AppPurchaseController:removeArticleDetails" if="hasCommande!=true"/>
+	</action-group>
+
+	<action-method name="generate_numeros">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="geneateNumeroConsultation"/>
+	</action-method>
+	<action-method name="get_rubrique_by_year">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="tw_get_rubrique_by_year"/>
+	</action-method>
+
+	<action-group name="deleteConsultation">
+		<action name="com.axelor.apps.purchase.web.AppPurchaseController:removeConsultation"/>
+	</action-group>
+
+</object-views>

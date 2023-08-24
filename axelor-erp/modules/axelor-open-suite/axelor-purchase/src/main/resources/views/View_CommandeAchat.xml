@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid canDelete="true" canSave="false" canEdit="true" canNew="false" canArchive="false" editable="false"
+			name="commandeAchat_grid" title="Commande d'achat" model="com.axelor.apps.purchase.db.CommandeAchat">
+		<field name="numero" title="Numero"/>
+		<field name="dateCommande" title="Date de commande"/>
+		<field name="comparaisonPrix.fournisseur" title="Fournisseur"/>
+		<field name="comparaisonPrix.total" title="Total"/>
+    </grid>
+
+    <form canDelete="false" canSave="true" canEdit="true" canNew="false" canAttach="false"
+		  canArchive="false" canCopy="false"
+		  name="commandeAchat_form" title="Nouvelle Commande" model="com.axelor.apps.purchase.db.CommandeAchat" width="large">
+		<toolbar>
+			<button name="printNotePresentation" title="Note de présentation" icon="fa-print"
+					onClick="action-printNotePresentation"/>
+		</toolbar>
+		<panel name="info_commande" >
+			<field name="numero" title="Numero de commande" readonly="true" colSpan="3"/>
+			<field name="comparaisonPrix.fournisseur" title="Fournisseur" readonly="true" colSpan="3"/>
+			<field name="dateCommande" title="Date de commande" readonly="true" colSpan="2"/>
+			<field name="comparaisonPrix.tva" title="TVA(%)" readonly="true" colSpan="2"/>
+			<field name="comparaisonPrix.total" title="Total(Dhs)" readonly="true" colSpan="2"/>
+		</panel>
+
+		<panel colSpan="12">
+			<field colSpan="12" name="articleCommande" canNew="false" canEdit="false" canSelect="false" canRemove="false"/>
+		</panel>
+
+		<panel>
+			<field name="reception" hidden="true"/>
+			<field name="numLivraison" hidden="true"/>
+			<field name="docAttach" widget="binary-link" title="Bon de livraison" form-view="meta-files-form" grid-view="meta-files-grid"/>
+			<button-group colSpan="8">
+				<button title="imprimer Bon de commande" name="imprimerBC" onClick="imprimerBonDeCommande" colSpan="3"/>
+				<button title="Reception de la commande" name="reception" showIf="reception==false" colSpan="3"
+						onClick="com.axelor.apps.purchase.web.AppPurchaseController:receptionCommande" />
+				<button title="imprimer Bon de reception" name="imprimerBRcp" showIf="reception==true" colSpan="3"
+						onClick="Numero_BLN_bon_reception" />
+				<button title="imprimer PV de réception" name="imprimerordreBn"  colSpan="3" showIf="reception==true"
+						onClick="imprimerPvDeReception"/>
+				<button title="imprimer ordre de paiement" name="imprimerordreBn"  colSpan="3" showIf="reception==true"
+						onClick="imprimerOrdreDePayement" />
+			</button-group>
+		</panel>
+    </form>
+
+
+	<action-view name="action-printNotePresentation" title="info" model="com.axelor.apps.purchase.db.CommandeAchat">
+		<view type="form" name="form_type_file_c1"/>
+		<view-param name="popup" value="true"/>
+		<view-param name="show-toolbar" value="false"/>
+	</action-view>
+
+	<form onNew="com.axelor.apps.purchase.web.AppPurchaseController:loadIdfile"
+		  onSave="com.axelor.apps.purchase.web.AppPurchaseController:imprimer_printNotePresentation" title="Type de document"
+		  name="form_type_file_c1" model="com.axelor.apps.purchase.db.CommandeAchat">
+		<panel >
+			<field name="valId" title="id" hidden="true"/>
+			<field colOffset="4" colSpan="4" name="typefichier" title="type de document" widget="boolean-radio" x-true-text="PDF" x-false-text="WORD" />
+		</panel>
+	</form>
+
+	<action-view name="imprimerBonDeCommande" title="info" model="com.axelor.apps.purchase.db.CommandeAchat">
+		<view type="form" name="form_type_file_c2"/>
+		<view-param name="popup" value="true"/>
+		<view-param name="show-toolbar" value="false"/>
+	</action-view>
+
+	<form onNew="com.axelor.apps.purchase.web.AppPurchaseController:loadIdfile"
+		  onSave="com.axelor.apps.purchase.web.AppPurchaseController:imprimerBonCommande" title="Type de document"
+		  name="form_type_file_c2" model="com.axelor.apps.purchase.db.CommandeAchat">
+		<panel >
+			<field name="valId" title="id" hidden="true"/>
+			<field colOffset="4" colSpan="4" name="typefichier" title="type de document" widget="boolean-radio" x-true-text="PDF" x-false-text="WORD" />
+		</panel>
+	</form>
+
+	<!--<action-group name="action-printNotePresentation">
+		<action name="com.axelor.apps.purchase.web.AppPurchaseController:imprimer_printNotePresentation"/>
+	</action-group>-->
+
+	<action-group name="Numero_BLN_bon_reception">
+	    <action name="form_Numero_BLN_bon_reception" />
+	</action-group>
+
+	<action-view name="form_Numero_BLN_bon_reception" title="Bon de Reception" model="com.axelor.apps.purchase.db.CommandeAchat">
+		<view type="form" name="Numero_BLN_Livraison_form"/>
+		<view-param name="show-toolbar" value="false"/>
+		<view-param name="show-confirm" value="false"/>
+		<view-param name="popup" value="true"/>
+		<view-param name="popup-save" value="false"/>
+	</action-view>
+
+	<action-group name="imprimer_bon_reception">
+		<action name="com.axelor.apps.purchase.web.AppPurchaseController:ImprimerBonreception" />
+	</action-group>
+
+	<action-view name="form_bon_reception" title="Bon de Reception" model="com.axelor.apps.purchase.db.CommandeAchat">
+		<view type="form" name="Livraison_info"/>
+		<view-param name="show-toolbar" value="false"/>
+		<view-param name="show-confirm" value="false"/>
+		<view-param name="popup" value="true"/>
+		<view-param name="popup-save" value="false"/>
+	</action-view>
+
+	<form title="Livraison Info" name="Livraison_info" model="com.axelor.apps.purchase.db.CommandeAchat">
+		<panel>
+			<field name="numLivraison" title="Numero de Livraison"/>
+			<button name="enreg" title="Enregistrer" onClick="saveNumerosLivraison"/>
+		</panel>
+	</form>
+
+	<form title="Livraison_BLNInfo" name="Numero_BLN_Livraison_form" model="com.axelor.apps.purchase.db.CommandeAchat">
+		<panel>
+			<field name="num_BLN" title="Numéro B.L" colSpan="6"/>
+			<field name="typefichier" title="type de document" selection="type.document.pdf.word" colSpan="2"/>
+			<button name="enreg" title="imprimer Bon de reception" onClick="imprimer_bon_reception" colSpan="4"/>
+		</panel>
+	</form>
+
+	<action-method name="saveNumerosLivraison">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="saveNumerosLivraison"/>
+	</action-method>
+
+
+
+
+	<grid title="Liste des Articles" name="article_commande_info" orderBy="articleprix.myorder" model="com.axelor.apps.purchase.db.ArticlesPrix">
+		<field name="articleprix.article.name" title="Article"/>
+		<field name="articleprix.quantite2" title="Quantite"/>
+		<field name="articleprix.unite" title="Unite"/>
+		<field name="p_unitaire" title="Prix unitaire"/>
+		<field name="prixtotal" title="Prix Total"/>
+		<field name="articleprix.myorder" hidden="true" />
+	</grid>
+
+	<form name="ArreteCompte_form" title="Arrete des comptes" model="com.axelor.apps.purchase.db.CommandeAchat" width="large">
+		<field  name="moisRubrique" title="Mois" colSpan="4" colOffset="2" required="true"/>
+		<field  name="anneeRubrique" title="Année" type="integer" min="1990" max="3000" colSpan="4" required="true"/>
+		<button name="showAnnualReportRubrique" title="Rechercher" onClick="com.axelor.apps.purchase.web.AppPurchaseController:printArreteCompte,close" colOffset="8" colSpan="2" />
+	</form>
+
+	<action-view name="imprimerPvDeReception" title="info" model="com.axelor.apps.purchase.db.CommandeAchat">
+		<view type="form" name="form_type_file_c3"/>
+		<view-param name="popup" value="true"/>
+		<view-param name="show-toolbar" value="false"/>
+	</action-view>
+
+	<form onNew="com.axelor.apps.purchase.web.AppPurchaseController:loadIdfile"
+		  onSave="com.axelor.apps.purchase.web.AppPurchaseController:imprimerPVreception" title="Type de document"
+		  name="form_type_file_c3" model="com.axelor.apps.purchase.db.CommandeAchat">
+		<panel >
+			<field name="valId" title="id" hidden="true"/>
+			<field colOffset="4" colSpan="4" name="typefichier" title="type de document" widget="boolean-radio" x-true-text="PDF" x-false-text="WORD" />
+		</panel>
+	</form>
+
+
+
+	<action-view name="imprimerOrdreDePayement" title="info" model="com.axelor.apps.purchase.db.CommandeAchat">
+		<view type="form" name="form_type_file_c4"/>
+		<view-param name="popup" value="true"/>
+		<view-param name="show-toolbar" value="false"/>
+	</action-view>
+
+	<form onNew="com.axelor.apps.purchase.web.AppPurchaseController:loadIdfile"
+		  onSave="com.axelor.apps.purchase.web.AppPurchaseController:imprimerOrdrePayement" title="Type de document"
+		  name="form_type_file_c4" model="com.axelor.apps.purchase.db.CommandeAchat">
+		<panel >
+			<field name="valId" title="id" hidden="true"/>
+			<field colOffset="4" colSpan="4" name="typefichier" title="type de document" widget="boolean-radio" x-true-text="PDF" x-false-text="WORD" />
+		</panel>
+	</form>
+
+</object-views>

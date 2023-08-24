@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid canDelete="false" name="factureAchat-grid" title="Liste des entretiens" model="com.axelor.apps.purchase.db.FactureAchat" >
+        <field name="fournisseur"/>
+        <field name="numFacture"/>
+        <field name="natureOperation"/>
+        <field name="dateFacturation"/>
+        <field name="montant"/>
+        <field name="ordreDePayment.haspayer" hidden="true"/>
+        <button name="genererOP" title="Imprimer Ordre de Paiement" icon="fa-print" onClick="com.axelor.apps.purchase.web.AppPurchaseController:genererOrdreDePayeent"/>
+        <button name="deleteFacture" icon="fa-trash" title="Supprimer" onClick="deleteFacture" showIf="!ordreDePayment.haspayer"/>
+    </grid>
+
+    <form onNew="get_rubrique_by_year" canSave="false" name="factureAchat-form" title="Gestion des factures"
+          model="com.axelor.apps.purchase.db.FactureAchat" >
+        <panel>
+            <field name="numFacture" title="Numéro de Facture" readonlyIf="ordreDePayment.haspayer"/>
+            <field name="dateFacturation" title="Date de Facture" readonlyIf="ordreDePayment.haspayer"/>
+            <field name="fournisseur" title="Société" readonlyIf="ordreDePayment.haspayer"/>
+            <field name="rubriqueBudg" readonlyIf="ordreDePayment.haspayer"/>
+            <field name="fichier" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid" colSpan="6" readonlyIf="ordreDePayment.haspayer" />
+            <field name="montant" title="Montant" readonlyIf="ordreDePayment.haspayer"/>
+            <field name="natureOperation" colSpan="12" widget="text" height="2" readonlyIf="ordreDePayment.haspayer"/>
+            <button-group>
+                <button showIf="!id" name="btn_save" title="creer" onClick="creerNouvelleFactureAchat"/>
+                <button showIf="( ordreDePayment==null ||  ordreDePayment.haspayer==false) &amp;&amp; id " name="btn_uptade" title="update" onClick="creerNouvelleFactureAchat"/>
+            </button-group>
+            <panel hidden="true">
+                <field name="ordreDePayment.haspayer"/>
+            </panel>
+
+        </panel>
+    </form>
+
+    <action-method name="getVersionBudget_valide">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="tw_et_all_rubriqueBudgetaire"/>
+    </action-method>
+
+    <action-group name="creerNouvelleFactureAchat">
+        <action name="save"/>
+        <action name="com.axelor.apps.purchase.web.PurchaseOrderController:tw_create_engagement_facture"/>
+        <action name="UpdateOp"/>
+    </action-group>
+
+    <action-method name="UpdateOp">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="updateOPInfo"/>
+    </action-method>
+
+    <action-method name="deleteFacture">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="deleteFacture"/>
+    </action-method>
+
+</object-views>

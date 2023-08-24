@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="purchase" package="com.axelor.apps.purchase.db"/>
+
+    <entity name="ConsultationPrix" lang="java">
+        <string name="numero" title="Numéro"/>
+        <date name="dateConsultation" title="Date"/>
+        <date name="dateFermeture" title="Date"/>
+        <many-to-one name="rubriqueBudgetaire" ref="com.axelor.apps.configuration.db.RubriqueBudgetaireGenerale" title="Rubrique Budgétaire" required="true"/>
+        <one-to-one name="annexe" ref="com.axelor.apps.configuration.db.AnnexeGenerale" title="annexe" required="true"/>
+        <integer name="year" title="annee"/>
+        <one-to-many required="true" name="listFournisseur" ref="com.axelor.apps.purchase.db.SelectFournisseur" mappedBy="consultationPrix"/>
+        <string name="occasion" title="Occasion"/>
+        <one-to-many required="true" name="articlesDetailspourconsultation" ref="com.axelor.apps.purchase.db.ArticleDetails" title="Articles" mappedBy="consultationPrix"/>
+        <many-to-one name="compte" ref="com.axelor.apps.configuration.db.Compte" title="Compte" required="true"/>
+        <boolean name="hasCommande" default="false" title="hasCommande"/>
+    </entity>
+
+</domain-models>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+	<grid name="societe-grid"  title="Lists des sociétés" model="com.axelor.apps.purchase.db.Sociecte">
+		<field name="nomSociete"  title="Raison Sociale"/>
+		<field name="raisonSocial"  title="Identifiant Fiscale"/>
+		<field name="description"  title="description"/>
+		<field name="email"  title="Email"/>
+		<field name="tel"  title="Téléphone"/>
+	</grid>
+
+    <form name="societe-form" title="Ajouter Societe" model="com.axelor.apps.purchase.db.Sociecte">
+	<panel name="mainPanel" title="Nouvelle Societe">
+		<field name="nomSociete"  title="Raison Sociale" required="true"/>
+		<field name="raisonSocial"  title="Identifiant Fiscale" required="true"/>
+		<field name="description"  title="description :" required="true"/>
+		<field name="email"  title="Email :" required="true"/>
+		<field name="tel"  title="Telephone :" required="true"/>
+		<field name="statut1"  title="Statut :" target-name="nom" required="true" />
+		<field name="motif"  title="Commentaire :" />
+	</panel>
+    </form>
+
+	<!--<action-method name="get_id_offre">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="get_id_offre"/>
+	</action-method>-->
+
+
+
+</object-views>

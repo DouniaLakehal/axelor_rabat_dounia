@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+			  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+	<form canNew="false" canArchive="false" canDelete="false" canAttach="false" canCopy="false" title="Validation des documents"
+		  name="validation-MarcheProvisoire" model="com.axelor.apps.purchase.db.MarcheProvisoire" onLoad="verifierVersionpapier">
+
+		<panel>
+			<field name="dateDepot" title="Date de dépôt"/>
+			<field name="heurDepot" title="Heure de dépôt"/>
+		</panel>
+
+		<panel>
+			<field colSpan="4"  title="Complément du dossier Administrative" name="complementAdministrative" widget="boolean-radio" x-true-text="Valide" x-false-text="Non Valide" />
+			<field colSpan="8" title="Remarque sur le Complément du dossier Administrative" widget="text" height="2" name="remarqueComplementAdministrative"/>
+		</panel>
+
+		<panel>
+			<field colSpan="4"  title="Justifier les Prix" name="justifPrix" widget="boolean-radio" x-true-text="Valide" x-false-text="Non Valide" />
+			<field colSpan="8" title="Remarque sur la justification des prix" widget="text" height="2" name="remarqueJustifPrix"/>
+		</panel>
+
+		<panel name="panelVersionPapier">
+			<field colSpan="4"  title="Version papier du dossier" name="documentPapier" widget="boolean-radio" x-true-text="Valide" x-false-text="Non Valide" />
+			<field colSpan="8" title="Remarque sur la version papier du dossier" widget="text" height="2" name="remarqueDocumentPapier"/>
+		</panel>
+
+		<panel>
+			<button colSpan="3" colOffset="9" icon="fa-save" title="Enregistrer"  name="btn-save" onClick="save,com.axelor.apps.purchase.web.AppPurchaseController:validationProvisoire,menu.marcheProvisoire,close"/>
+		</panel>
+
+	</form>
+
+
+
+	<!--	<grid canNew="false" canEdit="false" canSave="false" canDelete="false" canArchive="false" canMove="false"
+                name="DossierTechnique_grid" title="Dossier Technique"  model="com.axelor.apps.purchase.db.OffreAppel" >
+            <field name="numero"  title="Numero d'offre d'appel"/>
+            <field name="nom" title="Nom d'offre d'appel"/>
+            <field name="dateLancement" title="Date de lancement"/>
+            <field name="dateOverture" title="Date d'offre d'appel"  />
+            <button name="btn_valide" title="Afficher Les soumissionnaires" icon="fa-plus" onClick="getListSoumissionaireTechnique"/>
+        </grid>-->
+
+	<action-method name="verifierVersionpapier">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="verfierVersionPapier"/>
+	</action-method>
+
+</object-views>

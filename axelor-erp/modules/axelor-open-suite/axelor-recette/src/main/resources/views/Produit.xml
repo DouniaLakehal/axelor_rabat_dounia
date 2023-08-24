@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+  <grid name="recetteproduit-grid" title="Produits" model="com.axelor.apps.recette.db.Produit">
+   <field name="designation" title="Designation"/>
+    <field name="nbr" title="Nombre"/>
+  </grid>
+
+  <form name="recetteproduit-form" title="Produits" model="com.axelor.apps.recette.db.Produit">
+      <panel-stack name="generalProduitPanel">
+          <panel name="ProduitDetailsPanel" colSpan="12">
+              <panel colSpan="12">
+                  <field name="designation" title="Designation"/>
+                  <field name="designationAr" title="الإسم" css="tw_arabe_orient"/>
+                  <field name="nbr" title="Nombre"/>
+                  <field name="nbrAr" title="العدد" css="tw_arabe_orient"/>
+              </panel>
+              <panel name="listCategorie1" showTitle="false" colSpan="12">
+                  <field name="categorieRecuDetail" title="Les sous produits" colSpan="12" canEdit="true"
+                         grid-view="recettecategorie-grid" form-view="recettecategorie-form"/>
+              </panel>
+          </panel>
+      </panel-stack>
+  </form>
+
+</object-views>

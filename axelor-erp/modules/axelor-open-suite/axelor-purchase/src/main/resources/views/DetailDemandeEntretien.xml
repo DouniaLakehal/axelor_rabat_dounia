@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+    <grid name="demande_entretien_grid" title="Liste"
+          model="com.axelor.apps.purchase.db.DetailDemandeEntretien" >
+        <field name="numero" title="Numéro de la demande"/>
+        <field name="dateDemande" title="Date de la demande"/>
+        <button title="Imprimer" name="imprimer" onClick="imprimer_demande_entretien" icon="fa-print"/>
+    </grid>
+
+    <form canSave="true" onNew="generate_numeros" name="demande_entretien_form" title="Ajouter Nouvelle demande d'entretien" model="com.axelor.apps.purchase.db.DetailDemandeEntretien" width="large">
+        <panel name="information" colSpan="12">
+            <field name="numero" title="Numéro" />
+            <field name="dateDemande" title="Date de la demande" />
+        </panel>
+        <panel name="information1" title="Enregistrement d'une véhicule" colSpan="12">
+            <field name="vehicules" ref="com.axelor.apps.configuration.db.Vehicules" title="Véhicule" onChange="com.axelor.apps.purchase.web.AppPurchaseController:refresh_vehicule"/>
+            <field name="matricule" title="Immatriculation" readonly="true"/>
+            <field name="modele" title="Modéle" readonly="true"/>
+        </panel>
+        <panel name="test">
+            <panel-related title="Liste des entretiens" name="entretienList" field="entretiendetail" colSpan="12" form-view="entretien_quantite_form1" grid-view="entretien_quantite_grid1"/>
+        </panel>
+    </form>
+
+    <action-method name="imprimer_demande_entretien">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="imprimerDemandeEntretien"/>
+    </action-method>
+
+</object-views>

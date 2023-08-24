@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+	<grid name="media-grid" title="Publicité de l'appel d'offre" model="com.axelor.apps.purchase.db.Media">
+		<field name="type" title="Type" />
+		<field name="nom_media" title="Nom"/>
+		<field name="date_publication" title="Date de publication"/>
+		<field name="numero_publication" title="Numéro de publication" />
+	</grid>
+    <form name="media-form" title="Publicité de l'appel d'offre" model="com.axelor.apps.purchase.db.Media" onNew="default_numeros">
+	<panel name="mainPanel">
+		<panel colSpan="12">
+			<field name="type"  title="Type" onChange="show_hide_num_publication" />
+			<field name="nom_media" title="Nom" />
+			<field name="numero_publication" title="Numéro de publication" />
+			<field name="date_publication" title="Date de publication" showIf="type=='Portail des marchés publics'"/>
+		</panel>
+		<panel title="Date de publication" showIf="type!='Portail des marchés publics'">
+			<field name="date_publication" title="Du" />
+			<field name="date_publication2" title="Au" />
+		</panel>
+	</panel>
+    </form>
+	<action-attrs name="default_numeros">
+		<attribute for="numero_publication" name="value" expr="eval:'0'"/>
+	</action-attrs>
+	<action-method name="show_hide_num_publication">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="tw_show_hide_num_publication"/>
+	</action-method>
+</object-views>

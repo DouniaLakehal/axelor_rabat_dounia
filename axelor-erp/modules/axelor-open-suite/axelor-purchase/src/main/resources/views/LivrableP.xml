@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+    <grid name="livrable-p-grid" title="Les livrables provisoire" model="com.axelor.apps.purchase.db.LivrableP" orderBy="titre">
+        <field name="titre" title="Titre"/>
+        <field name="piece" title="Document" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid"/>
+        <field name="etat" title="Statut" readonly="true"/>
+        <field name="remarque" title="Remarque" readonly="true"/>
+        <button name="btn_valide_ss" title="Valider" icon="fa-check" onClick="valider_Document_ss"/>
+        <button name="btn_valideResev_ss" title="Valider avec reserve" icon="fa-check-circle" onClick="valideReserve_Document_ss"/>
+        <button name="btn_Notvalide_ss" title="Non valider" icon="fa-times" onClick="Novalide_Document_ss"/>
+    </grid>
+
+    <form name="livrable-p-form" title="Les livrables provisoire" model="com.axelor.apps.purchase.db.LivrableP" >
+        <panel>
+            <field name="titre" title="Titre"/>
+            <field name="piece" title="Document" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid"/>
+            <button colSpan="3" title="Enregistrer" name="btn_valide_p" onClick="save_p"/>
+        </panel>
+    </form>
+
+    <action-group name="save_p">
+        <action name="save"/>
+        <action name="com.axelor.apps.purchase.web.AppPurchaseController:update_livrable"/>
+        <action name="close"/>
+    </action-group>
+
+    <action-method name="valider_Document_ss">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="valider_provisoire_courrant_ss"/>
+    </action-method>
+
+    <action-method name="save_ValideReserve_ss">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="valide_provisoire_courrant_reserve_ss"/>
+    </action-method>
+
+    <action-method name="save_notValideFile_ss">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="Notvalide_provisoire_courrant_ss"/>
+    </action-method>
+
+
+
+    <form onSave="save_ValideReserve_ss" title="Saisir un commentaire" name="commentaire-form-info2_ss" model="com.axelor.apps.purchase.db.LivrableP">
+        <panel colSpan="10">
+            <field name="remarque" title="Remarque" widget="Text" height="3" colSpan="12"/>
+        </panel>
+    </form>
+
+    <form onSave="save_notValideFile_ss" title="Saisir un commentaire" name="commentaire-form-info_ss" model="com.axelor.apps.purchase.db.LivrableP">
+        <panel colSpan="10">
+            <field name="remarque" title="Remarque" widget="Text" height="3" colSpan="12"/>
+        </panel>
+    </form>
+
+    <action-view name="valideReserve_Document_ss" title="Saisir un commentaire"
+                 model="com.axelor.apps.purchase.db.LivrableP">
+        <view type="form" name="commentaire-form-info2_ss"/>
+        <view-param name="forceEdit" value="true"/>
+        <view-param name="popup" value="true"/>
+        <view-param name="popup" value="reload"/>
+        <view-param name="popup-save" value="true"/>
+        <view-param name="show-toolbar" value="false"/>
+        <view-param name="show-confirm" value="false"/>
+        <view-param name="popup-save" value="true"/>
+    </action-view>
+
+    <action-view name="Novalide_Document_ss" title="Saisir un commentaire"
+                 model="com.axelor.apps.purchase.db.LivrableP">
+        <view type="form" name="commentaire-form-info_ss"/>
+        <view-param name="forceEdit" value="true"/>
+        <view-param name="popup" value="true"/>
+        <view-param name="popup" value="reload"/>
+        <view-param name="popup-save" value="true"/>
+        <view-param name="show-toolbar" value="false"/>
+        <view-param name="show-confirm" value="false"/>
+        <view-param name="popup-save" value="true"/>
+    </action-view>
+</object-views>

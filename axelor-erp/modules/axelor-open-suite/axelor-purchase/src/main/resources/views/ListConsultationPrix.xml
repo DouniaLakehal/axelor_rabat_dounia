@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+              
+             <grid name="ListConsultationPrix-grid" title="Liste Consultation de prix" model="com.axelor.apps.purchase.db.ListConsultationPrix" >
+		             <field name="numero" title="Numéro"/>
+		 <field name="dateList" title="Date"/>
+             <field name="statusSlection" title="Status"/>
+             
+		
+	         </grid>
+              
+    <form name="ListConsultationPrix-form" model="com.axelor.apps.purchase.db.ListConsultationPrix" title="Consultation Prix" >
+    <panel name="statusSelectPanel" colSpan="12">
+			<field name="statusSlection" readonly="true" colSpan="12" widget="nav-select"
+				showTitle="false" />
+			<field name="purchaseRequestSeq" showTitle="false" readonly="true">
+				<viewer depends="purchaseRequestSeq"><![CDATA[
+					<h3>
+						<span ng-show="record.purchaseRequestSeq" x-translate>Purchase request</span>
+						{{record.purchaseRequestSeq}}
+					</h3>
+				]]></viewer>
+			</field>
+		</panel>
+			<panel name="detailPanel" sidebar="true">
+			<button name="requestBtn" title="Request" icon="fa-bullhorn"
+				showIf="statusSlection == 1" onClick="save,action-purchase-consultation-set-status-requested,action-purchase-consultation-record-set-requester-user,save" />
+			<button name="acceptBtn" title="Accept" icon="fa-check" showIf="statusSlection == 2"
+				onClick="save,action-consultation-request-set-status-accepted,action-purchase-consultation-record-set-validator-user,save" />
+			<button name="refuseBtn" title="Refuse" icon="fa-times" css="btn-danger"
+				showIf="statusSlection == 2" onClick="save,action-purchase-consultation-set-status-refused,save" />
+			<button name="cancelBtn" title="Cancel" icon="fa-times-circle"
+				css="btn-danger"
+				onClick="save,action-purchase-consultation-set-status-cancel,save" hideIf="statusSlection == 6"/>
+			
+		</panel>
+		<panel name="mainPanel" colSpan="6" colOffset="3">
+				             <field name="numero" title="Numéro"/>
+				             		 <field name="dateList" title="Date"/>
+				             <field name="firstsupplier"  title="Fournisseur 1" form-view="partner-form" grid-view="partner-grid"/>
+             <field name="secondsupplier"  title="Fournisseur 2" form-view="partner-form" grid-view="partner-grid"/>
+             <field name="thirdsupplier"  title="Fournisseur 3" form-view="partner-form" grid-view="partner-grid"/>
+            <field name="budget"  if="__config__.app.getApp('budget').getManageMultiBudget()"  form-view="purchase-order-budget-distribution-form" grid-view="purchase-order-budget-distribution-grid"/>
+             
+		</panel>
+		<panel-tabs name="mainPanelTab" hideIf="firstsupplier == null">
+			<panel name="contentPanel" title="Content" colSpan="12">
+				<panel-related name="purchaseOrderLineListPanel" field="purchaseOrderLineList" canNew="statusSelect &lt; 3" canRemove="statusSelect &lt; 3" grid-view="purchase-order-line-purchase-order-grid" title="PO lines detail" colSpan="12" onChange="action-purchase-order-method-compute" form-view="purchase-order-line-form" canMove="true" orderBy="sequence" height="30"/>
+				<field name="notes" colSpan="12" x-lite="true" widget="html"/>
+			</panel>
+			
+		</panel-tabs>
+		
+    </form>
+              <!-- update status -->
+	<action-record name="action-purchase-consultation-set-status-requested" model="com.axelor.apps.purchase.db.ListConsultationPrix">
+    	<field name="statusSlection" expr="eval:2"/>
+  	</action-record>
+  	
+  	<action-record name="action-purchase-consultation-set-status-accepted" model="com.axelor.apps.purchase.db.ListConsultationPrix">
+    	<field name="statusSlection" expr="eval:3"/>
+  	</action-record>
+  	
+  	<action-record name="action-purchase-consultation-set-status-purchased" model="com.axelor.apps.purchase.db.ListConsultationPrix">
+    	<field name="statusSlection" expr="eval:4"/>
+  	</action-record>
+  	  	
+  	<action-record name="action-purchase-consultation-set-status-refused" model="com.axelor.apps.purchase.db.ListConsultationPrix">
+    	<field name="statusSlection" expr="eval:5"/>
+  	</action-record>
+  	
+  	<action-record name="action-purchase-consultation-set-status-cancel" model="com.axelor.apps.purchase.db.ListConsultationPrix">
+    	<field name="statusSlection" expr="eval:6"/>
+  	</action-record>
+
+  	<action-record name="action-purchase-consultation-set-status-draft" model="com.axelor.apps.purchase.db.ListConsultationPrix">
+		<field name="statusSlection" expr="eval:1"/>
+  	</action-record>
+           
+              
+              
+              
+</object-views>

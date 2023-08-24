@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+<grid name="demande-achat-grid" title="Liste des demandes d'achats" model="com.axelor.apps.purchase.db.DemandeAchat">
+	<field name="numero" title="numeros"/>
+	<field name="dateDemandeAchat" title="date"/>
+	<field name="annexe" title="Annexe" target="name"/>
+	<button title="Detail" name="detail" onClick="affiche_detail_demande_achat" icon="fa-plus"/>
+</grid>
+
+<form onNew="genere_numero_demande_achat" name="demande-achat-form" title="Nouvelle demande" model="com.axelor.apps.purchase.db.DemandeAchat" >
+	<panel name="info_Panel" >
+		<field name="numero" title="Numero" readonly="true"/>
+		<field name="dateDemandeAchat" title="date"/>
+		<field name="annexe" title="Annexe"/>
+		<field name="nbr" title="nbr" hidden="true"/>
+		<field name="year" title="Annee" hidden="true"/>
+	</panel>
+	<panel name="test">
+		<panel-related field="articledetail" colSpan="12" grid-view="list_article_detail" form-view="form-demande-achat23"/>
+	</panel>
+</form>
+
+	<grid title="" name="list_article_detail" model="com.axelor.apps.purchase.db.ArticleDetails">
+		<field name="article" target="name" title="Article"/>
+		<field name="quantite2" title="Quantite"/>
+		<field name="unite" title="Unite"/>
+	</grid>
+
+	<action-method name="genere_numero_demande_achat">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="genereNumeroDemandeAchat"/>
+	</action-method>
+
+	<action-method name="affiche_detail_demande_achat">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="afficheDetailDemandeAchat"/>
+	</action-method>
+
+	<grid editable="false" canNew="false" canEdit="false" canDelete="false" canSave="false" canMove="false" canArchive="false" name="detail-demande-achat" title="Detail" model="com.axelor.apps.purchase.db.ArticleDetails">
+		<field canNew="false" canView="false" canEdit="false" name="article" target="name" title="Article" readonly="true" />
+		<field canNew="false" canView="false" canEdit="false" name="quantite2" title="Quantite" readonly="true"/>
+		<field canNew="false" canView="false" canEdit="false" name="unite" title="Unite" readonly="true"/>
+		<button showIf="!etat.equals('regler')" title="verifier le stock" name="detail" onClick="com.axelor.apps.purchase.web.AppPurchaseController:affiche_form" icon="fa-cube"/>
+	</grid>
+	<form canNew="true" canEdit="true" editable="true" canSave="true" canDelete="true" canArchive="true" title="information" name="form-demande-achat23" model="com.axelor.apps.purchase.db.ArticleDetails">
+		<panel>
+			<field name="article" target-name="name" title="Article" />
+			<field name="quantite2" title="Quantite" />
+			<field name="unite" title="Unite" />
+		</panel>
+	</form>
+	<form canNew="false" canEdit="false" editable="false" canSave="false" canDelete="false" canArchive="false" title="information" name="form-demande-achat" model="com.axelor.apps.purchase.db.ArticleDetails">
+		<panel>
+			<field name="article" target-name="name"  title="Article" readonly="true" />
+			<field name="quantite2" title="Quantite" readonly="true"/>
+			<field name="unite" title="Unite" readonly="true"/>
+		</panel>
+	</form>
+
+
+	<form colWidths="100%" onNew="com.axelor.apps.purchase.web.AppPurchaseController:verifier_stock" title="Confirmation" name="stock_non_ok" model="com.axelor.apps.purchase.db.DemandeAchat">
+		<panel name="message1">
+			<field name="idval" title="id" hidden="true"/>
+			<field name="valueText" title="value text" hidden="true"/>
+			<label css="text-center" title="L'article est dispobible, souhaitez vous faire le retrais depuis le Stock " name="message1" colSpan="12" showIf="valueText>0"/>
+			<label css="text-center" title="L'article n'est pas dispobible, souhaitez vous faire une consultat de prix " name="message2" colSpan="12" showIf="valueText==0"/>
+			<button title="Valider" name="oui" onClick="com.axelor.apps.purchase.web.AppPurchaseController:retrait_stock" colSpan="3" colOffset="6" hideIf="valueText==0" showIf="valueText>0"/>
+			<button title="Annuler" name="non" onClick="close" colSpan="3" showIf="valueText>0" hideIf="valueText==0"/>
+			<button title="Valider" name="oui" onClick="cons.prix,close" colSpan="3" colOffset="6" showIf="valueText==0" hideIf="valueText>0" />
+			<button title="Annuler" name="non" onClick="close" colSpan="3" showIf="valueText==0" hideIf="valueText>0"/>
+		</panel>
+	</form>
+
+	<!--<action-view name="cons.prix" title="Liste Consultation des prix"
+				 model="com.axelor.apps.purchase.db.ConsultationPrix" >
+		<view type="grid" name="consultation-prix-grid" />
+		<view type="form" name="consultation-prix-form" />
+	</action-view>-->
+
+
+
+</object-views>

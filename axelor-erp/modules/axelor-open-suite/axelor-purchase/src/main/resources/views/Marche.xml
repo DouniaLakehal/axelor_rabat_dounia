@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+	<grid onNew="showSoumisNotValide" name="Marche_grid" title="Marche définitive" canNew="false" canDelete="false" canEdit="false" model="com.axelor.apps.purchase.db.OffreAppel">
+		<field name="numMarche"  title="Numéros Marché"/>
+		<field name="dateApprobation"  title="Numero d'offre d'appel"/>
+		<field name="dateVisa" title="Nom d'offre d'appel"/>
+		<field name="soumissGagnant.societe" title="Attribuer" />
+		<button name="btn-print-lettre" icon="fa-envelope" title="Lettre de notification" onClick="com.axelor.apps.purchase.web.AppPurchaseController:tw_print_LettreNotification"/>
+		<!--showIf="validationMarheProvisoire==true"-->
+		<button name="btn-print-document" icon="fa-download" title="PV de réception" onClick="com.axelor.apps.purchase.web.AppPurchaseController:imprimerPVreceptionMarche"/>
+		<button name="btn-print-livrable" icon="fa-check" title="Les livrables" onClick="addValidation"/>
+		<button name="btn-print-ordre" icon="fa-plus" title="L'ordre de service" onClick="addOrdreService"/>
+	</grid>
+
+
+	<form name="Marche_from" title="Marché"
+		  canNew="false" canDelete="false" canArchive="false" canAttach="false" canCopy="false"
+		  model="com.axelor.apps.purchase.db.OffreAppel" editable="false" onLoad="show_panel_critereNotationMarche">
+		<panel>
+			<field name="dateApprobation" title="Date d'approbation"/>
+			<field name="dateVisa" title="Date de visa"/>
+			<field name="acteEngament" title="Acte d'engagement" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid"/>
+		</panel>
+		<panel>
+			<field name="cautionDefinitive" title="Caution définitive" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid"/>
+			<field name="assurances" title="Les assurances" required="true" colSpan="12"/>
+		</panel>
+		<panel name="mainPanel" title="Information générale" >
+			<field name="numero" title="Numéro d'offre d'appel :" readonly="true"/>
+			<field name="nom" title="Nom d'offre d'appel :" required="true"/>
+			<field name="dateLancement" title="Date de lancement :" required="true"/>
+			<field name="dateOverture" title="Date d'ouverture :" required="true"/>
+			<panel colSpan="6" readonly="true">
+				<field name="typeDossier" selection="electro.papier.string" widget="CheckboxSelect"/>
+			</panel>
+			<panel>
+				<field readonly="true" name="offreTechnique" title="Offre technique" colSpan="3" onChange="show_panel_critereNotationMarche"/>
+			</panel>
+			<panel colSpan="12">
+				<field colSpan="12" name="echantillionnage" widget="boolean-radio" x-true-text="Échantillon" x-false-text="Documentation Technique" />
+			</panel>
+		</panel>
+
+		<panel name="mainPanel2" readonly="true">
+			<field name="decisionMemebre" title="Décision sélection des membres de comité" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid"/>
+			<field name="comite" title="Comité" required="true" colSpan="12"/>
+			<field name="piecesJointes" grid-view="pieceJointe3-grid" form-view="pieceJointe3-form" title="Documents de consultation"
+				   required="true" colSpan="12"/>
+		</panel>
+		<panel name="critereNotationPanel" hidden="true" colSpan="12">
+			<field name="critereNotation" title="Critère de notation"
+				   form-view="critereNotationSelect-form" grid-view="critereNotationSelect-grid" colSpan="12"/>
+			<field name="pourcentageValideNote" title="Validation de pourcentage (%)" showIf="pourcentage"/>
+			<field name="pointValideNote" title="Validation de point" hideIf="pourcentage"/>
+		</panel>
+		<panel colSpan="12">
+			<field canEdit="false" canNew="false" canRemove="false" canSelect="false" canSuggest="false"
+				   form-view="soumssionnaireNotValidDetail-form" grid-view="soumssionnaireNotValidDetail-grid"
+				   name="soumisField" title="Soumissionnaire Non valide" type="one-to-many" target="com.axelor.apps.purchase.db.Soumissionnaire" colSpan="12"/>
+		</panel>
+		<panel colSpan="12">
+			<field colSpan="12" name="ordreServices" title="Ordre de Service"/>
+		</panel>
+		<panel colSpan="6">
+			<field name="soumissGagnant" title="Attribuer au soumissionnaire" target-name="societe"/>
+		</panel>
+	</form>
+
+	<action-group name="show_panel_critereNotationMarche">
+		<action name="showSoumisNotValide"/>
+		<action name="show_panel_critereNotation_methode"/>
+	</action-group>
+
+	<action-method name="showSoumisNotValide">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="load_soumiss_not_valide"/>
+	</action-method>
+
+
+	<form name="add_validation-form" canNew="false" canSave="false" title="Validation des livrables" model="com.axelor.apps.purchase.db.OffreAppel">
+		<panel>
+			<field name="livrablep" grid-view="livrable-p-grid" form-view="livrable-p-form" onChange="save" title="Les livrables provisoires"
+				    colSpan="12"/>
+		</panel>
+		<panel>
+			<field name="datereunion" title="Date de la réunion" onChange="save"/>
+		</panel>
+		<panel>
+			<field onChange="save" name="livrabled" grid-view="livrable-d-grid" form-view="livrable-d-form" title="Les livrables définitifs"
+				    colSpan="12"/>
+		</panel>
+	</form>
+
+
+	<form name="add_ordre-form" canNew="false" title="Les ordres de service" model="com.axelor.apps.purchase.db.OffreAppel">
+		<panel>
+			<field name="ordreServices" grid-view="OrdreServices-grid" form-view="OrdreServices-form" title="Les ordres de service"
+				   required="true" colSpan="12"/>
+		</panel>
+	</form>
+
+	<action-method name="addValidation">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="add_validation"/>
+	</action-method>
+
+	<action-method name="addOrdreService">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="add_ordreService"/>
+	</action-method>
+
+	<action-method name="show_panel_critereNotation_methode">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="showPanelCriterNotation"/>
+	</action-method>
+
+	<form canNew="false" canEdit="false" canCopy="false" canAttach="false" canDelete="false" canArchive="false" canSave="false"
+			title="Information Soumissionnaire" name="soumssionnaireNotValidDetail-form" model="com.axelor.apps.purchase.db.Soumissionnaire">
+		<panel title="Information Générale" readonly="true">
+			<field name="societe" title="société"/>
+			<field name="representant" title="Représentant"/>
+			<field name="telephone" title="Téléphone"/>
+			<field name="email" title="email"/>
+			<field name="offreFiance" title="Offre Financier"/>
+			<field name="typeSoumission" widget="CheckboxSelect" selection="electro.papier.string" />
+		</panel>
+		<panel title="Validation">
+			<field name="dossierAdministrative" title="Dossier Administrative" widget="boolean-radio" x-true-text="Valider" x-false-text="Non valide" />
+			<field name="dossierTechnique" title="Dossier technique" widget="boolean-radio" x-true-text="Valider" x-false-text="Non valide" />
+		</panel>
+	</form>
+
+	<grid canNew="false" canEdit="false" canMove="false" canDelete="false" canArchive="false" canSave="false"
+		  title="Information Soumissionnaire" name="soumssionnaireNotValidDetail-grid" model="com.axelor.apps.purchase.db.Soumissionnaire">
+		<field name="societe" title="Soumissionnaire"/>
+		<field name="representant" title="Représentant"/>
+		<field name="telephone" title="Téléphone"/>
+		<field name="email" title="email"/>
+		<field name="typeSoumission" widget="CheckboxSelect" selection="electro.papier.string" />
+	</grid>
+
+	<!--Marche provisoire-->
+	<grid onNew="showSoumisNotValide" name="MarcheProvisoire_grid" title="Complément du dossiers"
+		  canNew="false" canDelete="false" canEdit="false" model="com.axelor.apps.purchase.db.OffreAppel">
+		<hilite if="nbrJourLimit &gt;= 10 &amp;&amp; validationMarheProvisoire==false" color="danger"/>
+		<field name="numero"  title="Numero d'offre d'appel"/>
+		<field name="nom" title="Nom d'offre d'appel"/>
+		<field name="dateLancement" title="Date de lancement"  />
+		<field name="dateOverture" title="Date d'offre d'appel" />
+		<field name="soumissGagnant.societe" title="Attribuer" />
+		<field name="dateDocument" title="Date de demande des documents" />
+		<field name="nbrJourLimit" title="Nombre des jours"/>
+		<field name="nbrSoumiss" title="nbrSoumiss" hidden="true"/>
+		<field name="validationMarheProvisoire" title="validation" hidden="true"/>
+		<button showIf="validationMarheProvisoire==true" name="btn-print-document_prorogation" icon="fa-hourglass" title="Demande de prorogation" onClick="lunch_form_prorogation"/>
+<!--		<button showIf="validationMarheProvisoire==true" name="btn-print-document" icon="fa-envelope" title="Lettre de Notification" onClick="com.axelor.apps.purchase.web.AppPurchaseController:imprimerLettreDeNotification"/>-->
+		<button name="btn-check-document" icon="fa-files-o" title="Valider les Documents" onClick="com.axelor.apps.purchase.web.AppPurchaseController:show_validation_doc_soumission"/>
+		<button showIf="nbrSoumiss &gt; 1" name="btn-remove-soumissionnaire" icon="fa-user-times" title="Rejeter le Soumissionnaire" onClick="com.axelor.apps.purchase.web.AppPurchaseController:rejeter_soumissionnaire"/>
+	</grid>
+
+	<form name="MarcheProvisoire_form" title="Complément du dossiers"
+		  canNew="false" canEdit="false" canDelete="false" canSave="false" canArchive="false" canAttach="false" canCopy="false"
+		  model="com.axelor.apps.purchase.db.OffreAppel" editable="false" onLoad="show_panel_critereNotationMarche">
+		<panel name="soum" title="Information Soumissionnaire">
+			<field name="soumissGagnant.societe" title="Société"/>
+			<field name="soumissGagnant.representant" title="Représentant"/>
+			<field name="soumissGagnant.registreCommerce" title="N° Registre de Commerce (RC)" colSpan="4"/>
+			<field name="soumissGagnant.telephone" title="Téléphone" colSpan="4"/>
+			<field name="soumissGagnant.email" title="E-mail" colSpan="4"/>
+			<field name="soumissGagnant.adresse" title="Adresse" widget="text" height="2" colSpan="12"/>
+		</panel>
+		<panel name="mainPanel" title="Information Offres">
+			<field name="numero" title="Numéros de l'appel d'offre" readonly="true"/>
+			<field name="nom" title="Objet de l'appel d'offre" required="true"/>
+			<field name="dateLancement" title="date de lancement" required="true"/>
+			<field name="dateOverture" title="Date d'overture " required="true"/>
+			<panel colSpan="6">
+				<field name="typeDossier" selection="electro.papier.string" widget="CheckboxSelect"/>
+			</panel>
+			<panel>
+				<field name="offreTechnique" title="Offre technique" colSpan="3" onChange="show_panel_critereNotation"/>
+			</panel>
+			<panel colSpan="12">
+				<field colSpan="12" name="echantillionnage" widget="boolean-radio" x-true-text="Échantillon" x-false-text="Documentation Technique" />
+			</panel>
+		</panel>
+
+		<panel name="mainPanel2">
+			<field name="decisionMemebre" title="Décision sélection des membres de comité" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid"/>
+			<field name="comite" title="Comité" required="true" colSpan="12"/>
+			<field name="piecesJointes" grid-view="pieceJointe3-grid" form-view="pieceJointe3-form" title="Documents de consultation"
+				   required="true" colSpan="12"/>
+		</panel>
+		<panel name="critereNotationPanel" hidden="true" colSpan="12">
+			<field name="critereNotation" title="Critère de notation"
+				   form-view="critereNotationSelect-form" grid-view="critereNotationSelect-grid" colSpan="12"/>
+			<field name="pourcentageValideNote" title="Pourcentage des points pour validation (%)"/>
+		</panel>
+	</form>
+
+	<form title="Démarrer une prorogation" name="form_demandeProrogation" model="com.axelor.apps.purchase.db.OffreAppel">
+		<panel>
+			<field name="nbrJourProrogation" type="Integer" title="Nombre de jour de prorogation" />
+			<field name="dateProrogation" title="Date d'attente de réponse"/>
+			<button icon="fa-print" title="Imprimer la lettre de prorogation" name="imprimer_prorogation" onClick="com.axelor.apps.purchase.web.AppPurchaseController:print_prorogation"/>
+		</panel>
+	</form>
+
+	<action-view name="lunch_form_prorogation" title="Démarrer une prorogation" model="com.axelor.apps.purchase.db.OffreAppel">
+		<view type="form" name="form_demandeProrogation"/>
+		<view-param name="forceEdit" value="true"/>
+		<view-param name="popup" value="reload"/>
+		<view-param name="popup" value="true"/>
+		<view-param name="popup-save" value="false"/>
+		<view-param name="show-toolbar" value="false"/>
+		<view-param name="show-confirm" value="false"/>
+		<view-param name="popup-save" value="false"/>
+	</action-view>
+
+</object-views>

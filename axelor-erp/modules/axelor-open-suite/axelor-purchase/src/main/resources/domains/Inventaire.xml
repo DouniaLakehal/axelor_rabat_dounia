@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="purchase" package="com.axelor.apps.purchase.db"/>
+
+    <entity name="Inventaire" lang="java" >
+        <string name="numAnn"  title="numAnn" readonly="true"/>
+        <string  name="affectation" selection="tw.Interne_externe" default="1" />
+        <string name="servicea" title="Services" />
+        <many-to-one name="annexe" title="Annexe" ref="com.axelor.apps.configuration.db.AnnexeGenerale"/>
+        <string name="code_inv" title="Code inv CCIS-BK"/>
+        <date name="dateres" title="Date de réception"/>
+        <date name="dateaff" title="Date d'affectation"/>
+        <string name="famille" title="Famille"/>
+        <many-to-one name="budgetrub"  ref="com.axelor.apps.configuration.db.RubriqueBudgetaireGenerale"/>
+
+        <string name="categorie" title="Catégorie"/>
+        <string name="modedamortissement" title="Mode d'amortissement"/>
+        <integer name="dureedaortissement" title="Durée d'aortissement"/>
+        <integer name="dureedamortissement" title="Durée d'amortissement"/>
+        <string name="designationdubien" title="Désignation du bien"/>
+        <string name="marque" title="Marque"/>
+        <integer name="qte" title="Qté"/>
+        <decimal name="valdacquisitionht" title="Val. d'acquisition ht"/>
+        <decimal name="valdacquisitionTTC" title="Val. d'acquisition TTC"/>
+        <integer name="vNC" title="VNC 31-12-2019"/>
+        <date name="dateacquisition" title="Date acquisition"/>
+        <string name="frs" title="Frs"/>
+        <string name="nFacture" title="N° Facture"/>
+        <many-to-one name="fournisseur" title="Fournisseur" ref="com.axelor.apps.configuration.db.Fournisseur"/>
+
+        <string name="nOP" title="N°OP"/>
+        <string name="etat" title="Etat"/>
+    </entity>
+</domain-models>

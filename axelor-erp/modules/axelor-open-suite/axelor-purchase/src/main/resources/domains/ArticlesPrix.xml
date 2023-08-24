@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+  <module name="purchase" package="com.axelor.apps.purchase.db"/>
+
+  <entity name="ArticlesPrix" lang="java" cacheable="true">
+      <many-to-one name="comparaisonPrix" ref="com.axelor.apps.purchase.db.ComparaisonPrix"/>
+      <many-to-one name="commandeAchat" ref="com.axelor.apps.purchase.db.CommandeAchat"/>
+      <many-to-one name="articleprix" ref="com.axelor.apps.purchase.db.ArticleDetails" title="DetailArticle"/>
+      <decimal name="p_unitaire" title="Prix unitaire"/>
+      <decimal name="prixtotal" title="Prix Total">
+          <![CDATA[
+          BigDecimal total= new BigDecimal(0);
+          if (p_unitaire.compareTo(new BigDecimal(0))>0) total=p_unitaire.multiply(articleprix.getQuantite2());
+          return total ;
+  	  		      ]]>
+      </decimal>
+  </entity>
+
+</domain-models>

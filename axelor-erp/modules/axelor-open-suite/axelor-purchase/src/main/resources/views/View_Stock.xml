@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid canEdit="false" name="stock-grid" title="Stock" model="com.axelor.apps.purchase.db.StockAchat">
+		<field name="article"/>
+		<field name="quantity"/>
+		<field name="annexe"/>
+    </grid>
+	
+    <form canEdit="false" onSave="save,updateHistoriqueStock" name="stock-form" title="Stock" model="com.axelor.apps.purchase.db.StockAchat">
+		<panel name="mainPanel">
+			<field name="article" title="Article"/>
+			<field name="quantity" title="Quantite"/>
+			<field name="annexe" title="Annexe"/>
+		</panel>
+    </form>
+
+	<action-group name="updateHistoriqueStock">
+		<action name="addhistoriqueCompte"/>
+	</action-group>
+
+	<action-method name="addhistoriqueCompte">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="addHistoriqueStockByAddStock"/>
+	</action-method>
+
+</object-views>

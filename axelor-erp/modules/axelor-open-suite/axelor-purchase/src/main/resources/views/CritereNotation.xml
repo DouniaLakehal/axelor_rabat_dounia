@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+
+
+    <grid name="critereNotationSelect-grid" title="Notation" model="com.axelor.apps.purchase.db.CritereNotationaSelect">
+        <field name="notationSelect.name" title="Critère"/>
+        <field name="notationSelect.noteMax" title="Note Max"/>
+    </grid>
+
+    <form name="critereNotationSelect-form" title="Notation" model="com.axelor.apps.purchase.db.CritereNotationDetail">
+        <panel name="mainPanel" showTitle="false">
+            <field name="notationSelect" title="Critère" colSpan="6" onSelect="getPrestationCritere" onChange="load_data_notation_select"/>
+            <field name="notationSelect.noteMax" title="Note Max" colSpan="6" readonly="true"/>
+            <field name="description" title="Note Max" colSpan="12" readonly="true"/>
+        </panel>
+    </form>
+
+    <action-method name="load_data_notation_select">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="loadDataNotationSelect"/>
+    </action-method>
+
+    <action-method name="getPrestationCritere">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="tw_getPrestationCritere"/>
+    </action-method>
+
+     <!--note detail-->
+    <grid name="critereNotationDetail-grid" title="Notation" model="com.axelor.apps.purchase.db.CritereNotationDetail">
+        <field name="titre" title="Critère"/>
+        <field name="note" title="Note Obtenu"/>
+        <field name="noteMax" title="Note Max"/>
+    </grid>
+
+    <form name="critereNotationDetail-form" title="Notation" model="com.axelor.apps.purchase.db.CritereNotationDetail">
+        <panel name="mainPanel" showTitle="false">
+            <field name="titre" title="Critère" readonly="true"/>
+            <field name="note" title="Note Obtenu" min="0" onChange="verifier_note_Max" />
+            <field name="noteMax" title="Note Max" readonly="true"/>
+        </panel>
+    </form>
+
+    <action-method name="verifier_note_Max">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="verifier_noteMax"/>
+    </action-method>
+
+</object-views>

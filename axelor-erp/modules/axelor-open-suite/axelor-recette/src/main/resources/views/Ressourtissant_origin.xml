@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="ressortissant_origin-grid" title="Certificat d'origine" model="com.axelor.apps.recette.db.Ressortissant">
+		<field name="raisonSocial_ste" title="Raison Social"/>
+		<field name="adresseSociete"/>
+        <field name="valeur"/>
+        <field name="produit" title="Produit" target-name="designation"/>
+		<field name="typePersonne" title="typePersonne" hidden="true"/>
+		<button name="imprimerRessortissentayoub" icon="fa-download"  title="Imprimer Certificat D'origine" onClick="imprimerRessortissentayoub"/>
+		<!--<button name="imp_attestation" icon="fa-download" title="Imprimer Attestation" onClick="afficher-attestion_hatim"/>-->
+	</grid>
+
+
+
+	<form name="ressortissant_origin-form" title="Certificat d'origine" model="com.axelor.apps.recette.db.Ressortissant" onLoad="getType" onNew="nametype1">
+
+		<panel title="Personne morale" name="p_morale" >
+			<field name="type" hidden="true" />
+			<panel title="Adresse de la société" colSpan="12">
+				<field name="raisonSocial_ste" title="Raison social" colSpan="6"/>
+				<field name="raisonSocial_steAr" title="إسم الشركة" colSpan="6"/>
+				<field name="rueEtNumRue_ste" title="Adresse de la societé" colSpan="6"/>
+				<field name="rueEtNumRue_ste_ar" css="tw_arabe_orient" title="عنوان الشركة" colSpan="6"/>
+				<field name="etatProvinceRegion_ste" title="Etat/Province/Région" colSpan="6"/>
+				<field name="etatProvinceRegion_ste_ar" css="tw_arabe_orient" title="الدولة / الإقليم / المنطقة" colSpan="6"/>
+				<field name="p_ste" target-name="nom" title="Pays" colSpan="6"/>
+				<field name="p_ste_ar" target-name="nom_ar" title="البلد" colSpan="6"/>
+				<field name="ville_ste"  title="Ville" colSpan="6" />
+				<field name="ville_ste_ar"  title="المدينة" colSpan="6" />
+				<field name="codePostale_ste" title="Code postal" colSpan="6" />
+			</panel>
+			<panel title="Adresse de la facturation" colSpan="12">
+				<field name="raisonSocial_fact" title="Raison social" colSpan="6"/>
+				<field name="raisonSocial_factAr" title="إسم الشركة" colSpan="6"/>
+				<field name="rc_fct" title="RC" colSpan="6" />
+				<field name="codePostale_fct" title="Code postal" colSpan="6"/>
+				<field name="rueEtNumRue_fct" title="Adresse de la facturation" colSpan="6"/>
+				<field name="rueEtNumRue_fct_ar" css="tw_arabe_orient" title="عنوان وصول الفواتير" colSpan="6"/>
+<!--					<field name="etatProvinceRegion_fct" title="Etat/Province/Région" colSpan="6"/>-->
+<!--					<field name="etatProvinceRegion_fct_ar" css="tw_arabe_orient" title="الدولة / الإقليم / المنطقة" colSpan="6"/>-->
+				<field name="p_fct" target-name="nom" title="Pays" colSpan="6"/>
+				<field name="p_fct_ar" target-name="nom_ar"  title="بلد" colSpan="6"/>
+				<field name="ville_fct" title="Ville" colSpan="6" />
+				<field name="ville_fct_ar" title="المدينة" colSpan="6" />
+			</panel>
+			<field title="Voulez-vous entrer une valeur ?" name="activite" selection="test_test_test_value" colSpan="6"/>
+			<panel  colSpan="12" showIf="activite == 1">
+			<field name="valeur" title="Valeur" colSpan="6"/>
+			<field name="valeurAr" title="القيمة" colSpan="6"/>
+			<field name="devise" colSpan="6"/>
+			</panel>
+			<field name="produit" title="Produits" target-name="designation" colSpan="6"/>
+		</panel>
+	</form>
+
+	<action-group name="imprimerRessortissentayoub">
+		<action name="afficheFormRessortissentayoub"/>
+	</action-group>
+
+	<action-view name="afficher-attestion_hatim" title="Attestation" model="com.axelor.apps.recette.db.InfoAttestation" >
+		<view type="form" name="pays-info-form" />
+		<view-param name="popup" value="true"/>
+		<view-param name="show-toolbar" value="false"/>
+		<view-param name="show-confirm" value="false" />
+		<view-param name="popup-save" value="false"/>
+		<domain>self.ressortissant=:id</domain>
+		<context name="id" expr="eval: id"/>
+	</action-view>
+
+	<action-method name="showPanelAttestation">
+		<call class="com.axelor.apps.recette.web.RecetteControlleur" method="showformTaxe"/>
+	</action-method>
+
+
+	<form name="pays-info-form" title="Attestation" model="com.axelor.apps.recette.db.InfoAttestation" onNew="showInfoAttestation,showPanelAttestation" onLoad="showInfoAttestation,showPanelAttestation">
+		<panel name="pan1" showTitle="false">
+
+			<panel hidden="true">
+				<field name="ressortissant"/>
+			</panel>
+
+			<panel colSpan="12">
+				<field name="typeDelivrance" title="Délivré Par" onChange="showPanelAttestation" widget="boolean-radio"
+					   x-false-text="la Direction des impots"
+					   x-true-text="Tribunal de commerce" colSpan="9" />
+				<field title="Langue du document" name="lang_de_type" selection="tw.recette.lang" colSpan="3"/>
+			</panel>
+
+			<panel showTitle="false" name="p_taxe" hidden="false" colSpan="12">
+				<field name="taxe_attes" title="Numeros de la Taxe Professionnelle" colSpan="6"/>
+				<field name="date_delivration" title="Date de delivration" colSpan="6"/>
+			</panel>
+			<panel showTitle="false" name="p_model" hidden="true" colSpan="12" >
+				<field name="numModel" title="Numero du Modele" colSpan="4"/>
+				<field name="taxe_tribunal" title="Numero du Registre du commerce" colSpan="4"/>
+				<field name="date_delivration_tribunal" title="Date de delivration" colSpan="4"/>
+			</panel>
+		</panel>
+
+		<panel>
+			<button-group>
+				<button name="imprimer_attestation" title="Imprimer" onClick="imprimerAttestation1" />
+				<button name="creer_attestation" title="creer" onClick="imprimerAttestation2" />
+			</button-group>
+		</panel>
+	</form>
+
+	<action-method name="showInfoAttestation">
+		<call class="com.axelor.apps.recette.web.RecetteControlleur" method="loadRessortissant"/>
+	</action-method>
+
+	<action-method name="showInfoAttestationorigin">
+		<call class="com.axelor.apps.recette.web.RecetteControlleur" method="loadRessortissantorigin"/>
+	</action-method>
+	<action-method name="getType">
+		<call class="com.axelor.apps.recette.web.RecetteControlleur" method="getTypecontroller"/>
+	</action-method>
+	<action-record name="nametype1" model="com.axelor.apps.recette.db.Ressortissant">
+		<field name="type" expr="eval:2"/>
+	</action-record>
+	<action-view name="afficheFormRessortissentayoub" title="title" model="com.axelor.apps.recette.db.InfoOrigin">
+		<view type="form" name="form_ressortissent_downloadayoub"/>
+		<view-param name="popup" value="true"/>
+		<view-param name="show-toolbar" value="false"/>
+		<view-param name="show-confirm" value="false"/>
+		<view-param name="popup-save" value="false"/>
+		<domain>self.ressortissant=:id</domain>
+		<context name="id" expr="eval: id"/>
+	</action-view>
+
+	<form title="Imprimer ressortissant" name="form_ressortissent_downloadayoub" model="com.axelor.apps.recette.db.InfoOrigin" onNew="showInfoAttestationorigin"   onLoad="showInfoAttestationorigin">
+		<panel>
+			<field name="dateFacture" title="Date de facture" colSpan="6" required="true" type="date"/>
+			<field name="numero" title="Numéro de facture" colSpan="6" required="true"/>
+			<field name="lang_Type" title="Langue du document" required="true" selection="tw.recette.language"/>
+
+
+<!--			<button colSpan="6" title="Imprimer" name="btn_imprimer" onClick="com.axelor.apps.recette.web.RecetteControlleur:imprimmerRessortissant"/>-->
+			<panel>
+				<button-group colSpan="6">
+					<button name="imprimer_origin" title="Imprimer" onClick="imprimerOrigin1" colSpan="6" />
+					<button name="creer_origin" title="creer" onClick="imprimerOrigin2" colSpan="6" />
+				</button-group>
+			</panel>
+		</panel>
+	</form>
+
+
+	<action-method name="showPanelReccet">
+		<call class="com.axelor.apps.recette.web.RecetteControlleur" method="showformPersonne"/>
+	</action-method>
+
+	<action-group name="imprimerAttestation1">
+		<action name="com.axelor.apps.recette.web.RecetteControlleur:imrpimer_doc"/>
+		<action name="close"/>
+	</action-group>
+
+	<action-group name="imprimerAttestation2">
+		<action name="save"/>
+		<action name="com.axelor.apps.recette.web.RecetteControlleur:updateRessortissant"/>
+		<action name="com.axelor.apps.recette.web.RecetteControlleur:imrpimer_doc"/>
+		<action name="close"/>
+	</action-group>
+
+<!--Ayoub-->
+	<action-group name="imprimerOrigin1">
+		<action name="com.axelor.apps.recette.web.RecetteControlleur:imprimmerRessortissant"/>
+		<action name="close"/>
+	</action-group>
+
+	<action-group name="imprimerOrigin2">
+		<action name="save"/>
+		<action name="com.axelor.apps.recette.web.RecetteControlleur:updateRessortissantorigin"/>
+		<action name="com.axelor.apps.recette.web.RecetteControlleur:imprimmerRessortissant"/>
+		<action name="close"/>
+	</action-group>
+	<!--Ayoub-->
+</object-views>

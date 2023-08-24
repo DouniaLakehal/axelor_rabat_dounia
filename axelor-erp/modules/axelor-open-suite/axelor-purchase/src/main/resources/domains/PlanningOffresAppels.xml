@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+   <module name="purchase" package="com.axelor.apps.purchase.db"/>
+
+    <entity name="PlannigOffresAppels" lang="java" >
+        <string name="object" />
+        <boolean name="is_langue_ar"/>
+        <string name="object_ar" />
+        <string name="periode">
+            <![CDATA[
+            return mois_fr.getNom_fr() +" "+annee;
+            ]]>
+        </string>
+
+        <string name="periode_ar">
+            <![CDATA[
+            return mois_ar.getNom_ar() +" "+annee;
+            ]]>
+        </string>
+        <integer name="annee"/>
+        <string name="adress"/>
+        <string name="telephone"/>
+        <string name="email"/>
+        <boolean name="reserveePme"/>
+        <many-to-one name="naturePrestation" ref="com.axelor.apps.configuration.db.TypePrestation"/>
+        <many-to-one name="naturePrestation_ar" ref="com.axelor.apps.configuration.db.TypePrestation"/>
+        <many-to-one name="lieuExecution_fr" ref="com.axelor.apps.configuration.db.LieuExecution"/>
+        <many-to-one name="lieuExecution_ar" ref="com.axelor.apps.configuration.db.LieuExecution"/>
+        <many-to-one name="modePassassion_fr" ref="com.axelor.apps.configuration.db.ModePassation"/>
+        <many-to-one name="modePassassion_ar" ref="com.axelor.apps.configuration.db.ModePassation"/>
+        <many-to-one name="article" ref="com.axelor.apps.purchase.db.Article"/>
+        <many-to-one name="article_ar" ref="com.axelor.apps.purchase.db.Article"/>
+        <many-to-one name="mois_fr" ref="com.axelor.apps.configuration.db.Mois"/>
+        <many-to-one name="mois_ar" ref="com.axelor.apps.configuration.db.Mois"/>
+    </entity>
+
+</domain-models>

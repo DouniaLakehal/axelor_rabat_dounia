@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+<grid name="grid_ov" canSave="false" title="Ordre de Versement" model="com.axelor.apps.purchase.db.OrdrevirementCommande">
+	<field name="numero" title="Numero virement"/>
+	<field name="datevirement" title="Date virement"/>
+	<button name="imprimer" onClick="imprimerOV" icon="fa-print"/>
+</grid>
+
+<form onNew="com.axelor.apps.purchase.web.AppPurchaseController:getNumerosOV"
+	  canEdit="false" name="form_ov"
+	  canSave="false" title="Ordre Versement" model="com.axelor.apps.purchase.db.OrdrevirementCommande" >
+	<panel name="info_ov" colSpan="12">
+		<field name="numero" title="Numero virement" colSpan="4" />
+		<field readonlyIf="id" name="compte" target-name="designation" required="true" title="Compte" colSpan="4" onChange="verifierMontanBycompte" />
+		<field readonlyIf="id" name="datevirement" required="true" title="Date de Virement" colSpan="4"/>
+	</panel>
+	<panel colSpan="12">
+		<field readonlyIf="id" onChange="verifierMontanBycompte" name="selectOP" colSpan="12" form-view="form_selectOP" grid-view="grid_selectOP"/>
+	</panel>
+
+	<panel>
+		<button-group>
+			<!--show bouton if sold disponible-->
+			<button title="Enregistrer" name="save1" onClick="saveOv" hidden="true"/>
+			<button title="Modifier" name="save2" onClick="updateov" hideIf="!id"/>
+		</button-group>
+
+	</panel>
+</form>
+
+	<action-group name="saveOv">
+		<action name="save"/>
+		<action name="com.axelor.apps.purchase.web.AppPurchaseController:updateCompteOv"/>
+		<action name="com.axelor.apps.purchase.web.AppPurchaseController:tw_modifierEngagementAchat"/>
+		<action name="com.axelor.apps.purchase.web.AppPurchaseController:imprimerOV"/>
+	</action-group>
+
+
+	<action-group name="verifierMontanBycompte">
+		<action name="com.axelor.apps.purchase.web.AppPurchaseController:checkMontantByListSelectOP"/>
+	</action-group>
+
+
+
+	<action-group name="updateov">
+		<action name="save"/>
+		<action name="com.axelor.apps.purchase.web.AppPurchaseController:imprimerOV"/>
+	</action-group>
+
+	<action-group name="imprimerOV">
+		<action name="com.axelor.apps.purchase.web.AppPurchaseController:imprimerOV" if="id"/>
+	</action-group>
+
+
+</object-views>

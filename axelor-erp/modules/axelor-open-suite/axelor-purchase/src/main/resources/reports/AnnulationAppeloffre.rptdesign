@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
+    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
+    <property name="units">in</property>
+    <property name="iconFile">/templates/blank_report.gif</property>
+    <property name="bidiLayoutOrientation">ltr</property>
+    <property name="imageDPI">120</property>
+    <parameters>
+        <scalar-parameter name="id" id="211">
+            <property name="valueType">static</property>
+            <property name="dataType">decimal</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant">27</value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="journal_info" id="348">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+        <scalar-parameter name="web_info" id="355">
+            <property name="valueType">static</property>
+            <property name="isRequired">false</property>
+            <property name="dataType">string</property>
+            <property name="distinct">true</property>
+            <simple-property-list name="defaultValue">
+                <value type="constant"></value>
+            </simple-property-list>
+            <list-property name="selectionList"/>
+            <property name="paramType">simple</property>
+            <property name="controlType">text-box</property>
+            <structure name="format">
+                <property name="category">Unformatted</property>
+            </structure>
+        </scalar-parameter>
+    </parameters>
+    <data-sources>
+        <oda-data-source extensionID="org.eclipse.birt.report.data.oda.jdbc" name="ayoube" id="272">
+            <list-property name="privateDriverProperties">
+                <ex-property>
+                    <name>metadataBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledMetadataBidiFormatStr</name>
+                </ex-property>
+                <ex-property>
+                    <name>contentBidiFormatStr</name>
+                    <value>ILYNN</value>
+                </ex-property>
+                <ex-property>
+                    <name>disabledContentBidiFormatStr</name>
+                </ex-property>
+            </list-property>
+            <property name="odaDriverClass">org.postgresql.Driver</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/axelor_b</property>
+            <property name="odaUser">postgres</property>
+            <encrypted-property name="odaPassword" encryptionID="base64">cm9vdA==</encrypted-property>
+        </oda-data-source>
+    </data-sources>
+    <data-sets>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="data1" id="273">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">num</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">num</text-property>
+                    <text-property name="heading">num</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ouvert_date</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">ouvert_date</text-property>
+                    <text-property name="heading">ouvert_date</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">ouvert_heur</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">ouvert_heur</text-property>
+                    <text-property name="heading">ouvert_heur</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">description</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">description</text-property>
+                    <text-property name="heading">description</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">param_1</property>
+                    <property name="paramName">id</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">num</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">ouvert_date</property>
+                        <property name="dataType">date</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">ouvert_heur</property>
+                        <property name="dataType">time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">description</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">ayoube</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">num</property>
+                    <property name="nativeName">num</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">ouvert_date</property>
+                    <property name="nativeName">ouvert_date</property>
+                    <property name="dataType">date</property>
+                    <property name="nativeDataType">91</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">ouvert_heur</property>
+                    <property name="nativeName">ouvert_heur</property>
+                    <property name="dataType">time</property>
+                    <property name="nativeDataType">92</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">description</property>
+                    <property name="nativeName">description</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select ao.numero as num ,
+       ao.date_lancement as ouvert_date,
+       ao.heure_overture as ouvert_heur,
+       ao.nom as description 
+from 
+     purchase_offre_appel ao 
+where id = ?
+]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>num</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>num</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>num</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ouvert_date</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>91</design:nativeDataTypeCode>
+            <design:precision>13</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>ouvert_date</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ouvert_date</design:label>
+            <design:formattingHints>
+              <design:displaySize>13</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>ouvert_heur</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>92</design:nativeDataTypeCode>
+            <design:precision>15</design:precision>
+            <design:scale>6</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>ouvert_heur</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>ouvert_heur</design:label>
+            <design:formattingHints>
+              <design:displaySize>15</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>description</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>description</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>description</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+    </data-sets>
+    <page-setup>
+        <simple-master-page name="Simple MasterPage" id="2">
+            <property name="type">a4</property>
+            <property name="leftMargin">1.5cm</property>
+            <property name="rightMargin">1.5cm</property>
+            <property name="headerHeight">0.5in</property>
+        </simple-master-page>
+    </page-setup>
+    <body>
+        <text id="210">
+            <property name="fontWeight">bold</property>
+            <property name="textUnderline">underline</property>
+            <property name="textAlign">center</property>
+            <property name="contentType">auto</property>
+            <text-property name="content"><![CDATA[DECISION D'ANNULATION 
+APPEL D'OFFRES OUVERT
+]]></text-property>
+        </text>
+        <table id="294">
+            <property name="dataSet">data1</property>
+            <list-property name="boundDataColumns">
+                <structure>
+                    <property name="name">num</property>
+                    <text-property name="displayName">num</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["num"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+                <structure>
+                    <property name="name">ouvert_date</property>
+                    <text-property name="displayName">ouvert_date</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ouvert_date"]</expression>
+                    <property name="dataType">date</property>
+                </structure>
+                <structure>
+                    <property name="name">ouvert_heur</property>
+                    <text-property name="displayName">ouvert_heur</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["ouvert_heur"]</expression>
+                    <property name="dataType">time</property>
+                </structure>
+                <structure>
+                    <property name="name">description</property>
+                    <text-property name="displayName">description</text-property>
+                    <expression name="expression" type="javascript">dataSetRow["description"]</expression>
+                    <property name="dataType">string</property>
+                </structure>
+            </list-property>
+            <column id="318"/>
+            <detail>
+                <row id="304">
+                    <cell id="305">
+                        <text id="322">
+                            <property name="fontWeight">bold</property>
+                            <property name="textUnderline">underline</property>
+                            <property name="marginTop">1pt</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[N° : <VALUE-OF>row["num"]</VALUE-OF> du <VALUE-OF  format="Short Date">row["ouvert_date"]</VALUE-OF> à <VALUE-OF  format="hh 'h' mm 'min'">row["ouvert_heur"]</VALUE-OF>]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+                <row id="324">
+                    <cell id="325">
+                        <text id="326">
+                            <property name="fontWeight">bold</property>
+                            <property name="marginTop">1cm</property>
+                            <property name="marginRight">4cm</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[<U>Objet</U> : <VALUE-OF>row["description"]</VALUE-OF>]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+                <row id="330">
+                    <cell id="331">
+                        <text id="327">
+                            <property name="marginTop">1cm</property>
+                            <property name="contentType">auto</property>
+                            <text-property name="content"><![CDATA[Le Président de la Chambre de Commerce d’Industrie et de Services de Beni Mellal- Khenifra, en qualité de Maitre d’ouvrage.]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+                <row id="332">
+                    <cell id="333">
+                        <text id="328">
+                            <property name="marginTop">0.5cm</property>
+                            <property name="contentType">auto</property>
+                            <text-property name="content"><![CDATA[-Vu le décret n°: 2-12-349 du (8 joumada 1er 1434) (20 mars 2013) relatif aux marchés publics.]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+                <row id="334">
+                    <cell id="335">
+                        <text id="329">
+                            <property name="fontWeight">normal</property>
+                            <property name="textUnderline">none</property>
+                            <property name="marginTop">0.5cm</property>
+                            <property name="textAlign">left</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[-Vu l'appel d'offre ouvert sur offre de prix n° : <U><B><VALUE-OF>row["num"]</VALUE-OF> à <VALUE-OF   format="hh 'h' mm 'min'">row["ouvert_heur"]</VALUE-OF></B></U> du <VALUE-OF  format="Short Date">row["ouvert_date"]</VALUE-OF>]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+                <row id="349">
+                    <cell id="350">
+                        <text id="351">
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[-Vu la publication de l'appel d'offre ouvert sur offre de prix n° : <B><VALUE-OF>row["num"]</VALUE-OF></B> <VALUE-OF>params["journal_info"].value</VALUE-OF>]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+                <row id="352">
+                    <cell id="353">
+                        <text id="354">
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[-Vu la mise en ligne dédit dossier d'appel au portail des marchés publics sur le site: <VALUE-OF>params["web_info"].value</VALUE-OF>.]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+                <row id="336">
+                    <cell id="337">
+                        <text id="338">
+                            <property name="marginTop">0.5cm</property>
+                            <property name="contentType">auto</property>
+                            <text-property name="content"><![CDATA[-Vu la paragraphe 1 de l'article 45 décret n" : 2-12-349 du (8 joumada l " 1434) (20 mars 2013) relatif aux marchés publics. Qui stipule que l'autorité compétente peut sans de ce fait encourir aucune responsabilité à l'égard des concurrents et quelque soit le stade de la procédure de la conclusion du marché, annuler l'appel d'offres.]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+                <row id="339">
+                    <cell id="340">
+                        <text id="341">
+                            <property name="marginTop">0.5cm</property>
+                            <property name="contentType">auto</property>
+                            <text-property name="content"><![CDATA[-Vu l’alinéa (b) du paragraphe 1 de l’article 45 du décret précité qui stipule que lorsque des circonstances exceptionnelles ne permettent pas d’assurer l’exécution normale du marché.]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+                <row id="342">
+                    <cell id="343">
+                        <text id="344">
+                            <property name="marginTop">1cm</property>
+                            <property name="textAlign">center</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[<U><B>DECIDE</B></U>]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+                <row id="345">
+                    <cell id="346">
+                        <text id="347">
+                            <property name="marginTop">0.5cm</property>
+                            <property name="contentType">html</property>
+                            <text-property name="content"><![CDATA[Article Un : D'annuler l'appel d'offre ouvert n° :<U><B><VALUE-OF>row["num"]</VALUE-OF></B></U> en date du :<VALUE-OF  format="Short Date" >row["ouvert_date"]</VALUE-OF> à <VALUE-OF   format="hh 'h' mm 'min'">row["ouvert_heur"]</VALUE-OF> relatif aux : <B><VALUE-OF>row["description"]</VALUE-OF></B>]]></text-property>
+                        </text>
+                    </cell>
+                </row>
+            </detail>
+        </table>
+    </body>
+</report>

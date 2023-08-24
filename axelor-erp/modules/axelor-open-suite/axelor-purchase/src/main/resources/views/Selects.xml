@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+	<!-- Nomenclature : * name : "interfaceName" + "fieldName" + ".select" -->
+
+	<selection name="purchase.purchase.order.status.select">
+		<option value="1">Draft</option>
+		<option value="2">Requested</option>
+		<option value="3">Validated</option>
+		<option value="4">Finished</option>
+		<option value="5">Canceled</option>
+	</selection>
+
+
+
+
+
+	<selection name="purchase.order.receipt.state">
+		<option value="1">Not received</option>
+		<option value="2">Partially received</option>
+		<option value="3">Received</option>
+	</selection>
+
+	<selection name="purchase.order.immob.type">
+		<option value="1">Corporrel</option>
+		<option value="2">Incorporelle</option>
+
+	</selection>
+
+	<selection name="purchase.request.status.select">
+		<option value="1">Draft</option>
+		<option value="2">Requested</option>
+		<option value="3">Accepted</option>
+		<option value="4">Purchased</option>
+		<option value="5">Refused</option>
+		<option value="6">Canceled</option>
+	</selection>
+	<selection name="purchase.consultation.status.slection">
+		<option value="1">Draft</option>
+		<option value="2">Requested</option>
+		<option value="3">Accepted</option>
+		<option value="5">Refused</option>
+		<option value="6">Canceled</option>
+	</selection>
+	<selection name="base.blocking.select" id="purchase.blocking.select">
+		<option value="6">Purchase blocking</option>
+	</selection>
+
+	<selection name="sequence.generic.code.select" id="purchase.sequence.generic.code.select">
+		<option value="purchaseOrder">Purchase order</option>
+		<option value="PurchaseRequest">Purchase request</option>
+	</selection>
+
+	<selection name="abc.analysis.type.select" id="purchase.abc.analysis.type.select">
+		<option value="com.axelor.apps.purchase.service.ABCAnalysisServicePurchaseImpl">Purchase</option>
+	</selection>
+
+	<selection name="purchase.fournisseur.slection">
+		<option value="1">Personne morale</option>
+		<option value="2">Personne physique</option>
+	</selection>
+	<selection name="purchase.budget.slection">
+		<option value="Depenses">Depenses</option>
+		<option value="Recettes">Recettes</option>
+	</selection>
+
+	<selection name="type.document.pdf.word">
+		<option value="pdf">PDF</option>
+		<option value="doc">WORD</option>
+	</selection>
+
+	<selection name="type.ville.region">
+		<option value="Béni Mellal">Béni Mellal - بني ملال</option>
+		<option value="Azilal">Azilal - أزيلال</option>
+		<option value="Fkih Ben Salah">Fkih Ben Salah - الفقيه بن صالح</option>
+		<option value="Khouribga">Khouribga - خريبكة</option>
+		<option value="Khénifra">Khénifra -خنيفرة </option>
+	</selection>
+
+	<selection name="mois.string.value">
+		<option	value = "Janvier">Janvier</option>
+		<option	value = "Février">Février</option>
+		<option	value = "Mars">Mars</option>
+		<option	value = "Avril">Avril</option>
+		<option	value = "Mai">Mai</option>
+		<option	value = "Juin">Juin</option>
+		<option	value = "Juillet">Juillet</option>
+		<option	value = "Août">Août</option>
+		<option	value = "Septembre">Septembre</option>
+		<option	value = "Octobre">Octobre</option>
+		<option	value = "Novembre">Novembre</option>
+		<option	value = "Décembre">Décembre</option>
+	</selection>
+
+	<selection name="nature.prestation.string">
+		<option	value = "Travaux">Travaux - الأشغال </option>
+		<option	value = "Fourniture">Fourniture - التوريدات</option>
+		<option	value = "Sérvices">Sérvices - الخدمات</option>
+	</selection>
+
+	<selection name="mode.passasion.string">
+		<option	value = "Appel d’offres Ouvert">Appel d’offres Ouvert - طلب عروض مفتوح</option>
+		<option	value = "Bon de Commande">Bon de commande - سند طلب</option>
+	</selection>
+
+	<selection name="electro.papier.string">
+		<option	value = "éléctronique">Eléctronique</option>
+		<option	value = "papier">Papier</option>
+	</selection>
+
+	<selection name="validation.document.string">
+		<option	value = "valide">Document valide</option>
+		<option	value = "nonValide">Document non valide</option>
+		<option	value = "ValideReserve">Document valide avec reserve</option>
+	</selection>
+
+	<selection name="media.type.appel.offre">
+		<option	value = "Journaux">Journaux</option>
+		<option	value = "Portail des marchés publics">Portail des marchés publics</option>
+	</selection>
+
+	<selection name="post_comission_nom">
+		<option value="Président de la commision de l'appel d'offre">Président de la commision de l'appel d'offre</option>
+		<option value="Contrôle d'état ou son représentant">Contrôle d'état ou son représentant</option>
+		<option value="Représentant du maitre d'ouvrage 1">Représentant du maitre d'ouvrage 1</option>
+		<option value="Représentant du maitre d'ouvrage 2">Représentant du maitre d'ouvrage 2</option>
+		<option value="Le responsable du service des achats">Le responsable du service des achats</option>
+		<option value="Le responsable du service financier">Le responsable du service financier</option>
+	</selection>
+
+	<selection name="tw.article.language">
+		<option value="français">Français</option>
+		<option value="arabe">Arabic</option>
+	</selection>
+
+	<selection name="tw.Interne_externe">
+		<option value="Interne">Interne</option>
+		<option value="Externe">Externe</option>
+	</selection>
+
+	<selection name="etatEngagementAchat.select">
+		<option value="Non Payé">Montant Non payé</option>
+		<option value="Payé">Montant payé</option>
+	</selection>
+
+	<selection name="natureEngagementAchat.select">
+		<option value="Facture">Facture</option>
+		<option value="Commande">Commande achat</option>
+		<option value="EtatSalaireOps">Etat de salaire</option>
+	</selection>
+
+
+
+
+</object-views>

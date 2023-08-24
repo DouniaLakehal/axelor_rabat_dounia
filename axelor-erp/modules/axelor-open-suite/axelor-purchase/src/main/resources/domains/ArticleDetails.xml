@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="purchase" package="com.axelor.apps.purchase.db"/>
+
+    <entity name="ArticleDetails" lang="java">
+        <many-to-one name="article" ref="com.axelor.apps.purchase.db.Article" title="Article"/>
+        <decimal name="quantite2" title="Quantité"/>
+        <integer name="quantite" title="Quantité"/>
+        <one-to-one name="unite" ref="com.axelor.apps.base.db.Unit"/>
+        <!--<string name="unite" title="Unité"/>-->
+        <string name="description" title="Description"/>
+        <many-to-one name="consultationPrix" ref="com.axelor.apps.purchase.db.ConsultationPrix" title="consultationPrix"/>
+        <many-to-one name="demandeAchat" ref="com.axelor.apps.purchase.db.DemandeAchat" title="demandeAchat"/>
+        <string name="etat" default="no_regle"/>
+        <integer name="myorder">
+           <![CDATA[
+           return getId().intValue();
+           ]]>
+        </integer>
+
+        <!--<track on="UPDATE">
+            <field name="article"/>
+            <field name="quantite"/>
+            <field name="unite"/>
+            <field name="consultationPrix"/>
+        </track>-->
+
+    </entity>
+
+</domain-models>

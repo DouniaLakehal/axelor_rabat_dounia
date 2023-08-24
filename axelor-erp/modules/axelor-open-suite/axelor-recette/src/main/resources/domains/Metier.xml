@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+  <module name="recette" package="com.axelor.apps.recette.db"/>
+
+  <entity name="Metier" lang="java" sequential="true">
+    <string name="nom" title="Nom" />
+    <string name="nom_ar" />
+    <string name="description" title="Description" />
+  </entity>
+
+</domain-models>

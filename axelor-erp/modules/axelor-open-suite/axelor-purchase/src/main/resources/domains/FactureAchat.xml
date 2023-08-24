@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="purchase" package="com.axelor.apps.purchase.db"/>
+
+    <entity name="FactureAchat" lang="java">
+        <many-to-one name="fournisseur" ref="com.axelor.apps.configuration.db.Fournisseur"/>
+        <many-to-one name="rubriqueBudg" ref="com.axelor.apps.configuration.db.RubriqueBudgetaireGenerale"/>
+        <many-to-one name="fichier" ref="com.axelor.meta.db.MetaFile"/>
+        <many-to-one name="ordreDePayment" ref="com.axelor.apps.purchase.db.OrderPaymentCommande"/>
+        <string name="numFacture"/>
+        <string name="natureOperation"/>
+        <decimal name="montant"/>
+        <date name="dateFacturation"/>
+
+        <track>
+            <field name="fournisseur"/>
+            <field name="rubriqueBudg"/>
+            <field name="fichier"/>
+            <field name="numFacture"/>
+            <field name="natureOperation"/>
+            <field name="montant"/>
+            <field name="dateFacturation"/>
+        </track>
+    </entity>
+
+</domain-models>

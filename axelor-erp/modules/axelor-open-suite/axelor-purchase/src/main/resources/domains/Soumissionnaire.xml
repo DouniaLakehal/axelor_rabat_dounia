@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+   <module name="purchase" package="com.axelor.apps.purchase.db"/>
+
+    <entity name="Soumissionnaire" lang="java" >
+        <string name="societe" />
+        <string name="representant" />
+        <string name="telephone"/>
+        <string name="email"/>
+        <string name="registreCommerce"/>
+        <string name="adresse"/>
+        <boolean name="openEnveloppe"/>
+        <boolean name="soumissionElectro"/>
+        <boolean name="soumissionPapier"/>
+        <string name="typeSoumission">
+            <![CDATA[
+            String res = "";
+            if(soumissionElectro)
+                res = "éléctronique";
+            if(soumissionPapier)
+                res = "papier";
+            return res;
+            ]]>
+        </string>
+        <one-to-many name="piecesJointes" ref="com.axelor.apps.purchase.db.PiecesJointe2" mappedBy="soumissionnaire"/>
+        <many-to-one name="offreappels" ref="com.axelor.apps.purchase.db.OffreAppel"/>
+        <one-to-many name="critereNotation" ref="com.axelor.apps.purchase.db.CritereNotationDetail"/>
+        <decimal name="note"/>
+        <decimal name="note_point"/>
+        <boolean name="dossierAdministrative"/>
+        <boolean name="dossierTechnique"/>
+        <decimal name="offreFiance" title="Offre Financière"/>
+        <decimal name="offreecart"/>
+        <boolean name="hasMarche" title="decroche Marche"/>
+        <boolean name="closeOffre"/>
+        <string name="remarque"/>
+        <boolean name="validation"/>
+        <date name="dateDepot"/>
+        <time name="heurDepot"/>
+        <boolean name="recalerMarcheProvisoire"/>
+        <date name="dateEchantillon"/>
+        <time name="heurEchantillon"/>
+        <many-to-one name="dossierAdetive" ref="com.axelor.meta.db.MetaFile"/>
+        <many-to-one name="actEngament" ref="com.axelor.meta.db.MetaFile"/>
+        <many-to-one name="bordereau" ref="com.axelor.meta.db.MetaFile"/>
+        <string name="etat"/>
+    </entity>
+
+</domain-models>

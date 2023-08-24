@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+			  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+	<grid name="OffreFinanciere_grid" title="Offre Financiére Grid" model="com.axelor.apps.purchase.db.OffreAppel" canNew="false">
+		<field name="numero"  title="Numéro d'offre d'appel"/>
+		<field name="nom" title="Nom d'offre d'appel"/>
+		<field name="dateLancement" title="Date de lancement"/>
+		<field name="dateOverture" title="Date d'offre d'appel"  />
+		<button name="btn-soum" onClick="showSoumissionOffrezFinance" title="Afficher les Soumissionnaires" icon="fa-plus"/>
+		<button name="btn-soum" onClick="showSoumissionOffrezFinance2" title="Choisir meilleur offre" icon="fa-check"/>
+	</grid>
+
+	<form canCopy="false" canAttach="false" canDelete="false" canArchive="false" canNew="false" canSave="false" canEdit="false"
+		  onLoad="show_panel_critereNotation" name="OffreFinanciere_form" title="Offre Financiére" model="com.axelor.apps.purchase.db.OffreAppel">
+		<panel name="mainPanel" title="Information générale" readonly="true">
+			<field name="numero" title="Numéros de l'appel d'offre" readonly="true"/>
+			<field name="nom" title="Objet de l'appel d'offre" required="true"/>
+			<field name="dateLancement" title="date de lancement" required="true"/>
+			<field name="dateOverture" title="Date d'overture " required="true"/>
+			<panel colSpan="6">
+				<field name="typeDossier" selection="electro.papier.string" widget="CheckboxSelect"/>
+			</panel>
+			<panel>
+				<field name="offreTechnique" title="Offre technique" colSpan="3" onChange="show_panel_critereNotation"/>
+			</panel>
+			<panel colSpan="12">
+				<field colSpan="12" name="echantillionnage" widget="boolean-radio" x-true-text="Échantillon" x-false-text="Documentation Technique" />
+			</panel>
+		</panel>
+
+		<panel name="mainPanel2" readonly="true">
+			<field name="decisionMemebre" title="Décision sélection des membres de comité" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid"/>
+			<field name="comite" title="Comite" required="true" colSpan="12"/>
+			<field name="piecesJointes" grid-view="pieceJointe3-grid" form-view="pieceJointe3-form" title="les Pieces"
+				   required="true" colSpan="12"/>
+		</panel>
+		<panel name="critereNotationPanel" hidden="true" colSpan="12" readonly="true">
+			<field name="critereNotation" title="Critère de notation"
+				   form-view="critereNotationSelect-form" grid-view="critereNotationSelect-grid" colSpan="12"/>
+		</panel>
+	</form>
+
+	<action-method name="show_panel_critereNotation">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="showPanelCriterNotation"/>
+	</action-method>
+
+	<action-method name="showSoumissionOffrezFinance">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="Afficher_list_soum_offreFiance"/>
+	</action-method>
+
+	<action-method name="showSoumissionOffrezFinance2">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="Afficher_list_soum_offreFiance2"/>
+	</action-method>
+
+	<grid canNew="false" canEdit="false" canSave="false" canArchive="false" canDelete="false" canMove="false" orderBy="offreFiance"
+			name="soumissionnaireFinance-grid" title="Liste des sociétés" model="com.axelor.apps.purchase.db.Soumissionnaire">
+		<field name="societe" title="Société"/>
+		<field name="representant" title="Représentant"/>
+		<field name="telephone" title="Téléphone"/>
+		<field name="email" title="E-mail"/>
+		<field name="typeSoumission" title="Type"/>
+		<field name="offreFiance" title="Offre Financière"/>
+		<field name="etat" title="Statut"/>
+		<field name="closeOffre" title="cloturer" hidden="true"/>
+		<field name="hasMarche" title="hasMarche" hidden="true"/>
+		<button showIf="closeOffre==true &amp;&amp; hasMarche==true" name="btn_marche" icon="fa-envelope" onClick="LoadLettreInformation" title="Lettre d'information"/>
+		<button hideIf="closeOffre==true" name="btn_marche" icon="fa-plus" onClick="affecter_offre_to_marche" title="Attribuer le marché"/>
+	</grid>
+
+	<form canNew="false" canArchive="false" canDelete="false" canAttach="false" canCopy="false"
+			name="soumissionnaireFinance-form" onSave="save,ecarter_Offre,save" title="Ajouter Offre Financiere" model="com.axelor.apps.purchase.db.Soumissionnaire">
+		<panel colSpan="12">
+			<field colSpan="6" name="offreFiance" title="Offre financière"/>
+			<field name="actEngament" title="Acte d'engagement" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid" colSpan="6"/>
+			<field name="bordereau" title="Bordereau des prix" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid" colSpan="6"/>
+
+		</panel>
+		<panel readonly="true">
+			<field name="societe" title="Société"/>
+			<field name="representant" title="Représentant"/>
+			<field name="telephone" title="Téléphone"/>
+			<field name="email" title="E-mail"/>
+			<field name="typeSoumission" title="Type"/>
+			<field name="etat" title="Statut" readonly="true"/>
+		</panel>
+	</form>
+
+
+
+	<form canNew="false" canArchive="false" canDelete="false" canAttach="false" canCopy="false" onLoad="tw_load_etat"
+		  name="soumissionnaireFinance2-form" title="Ajouter Offre financière" model="com.axelor.apps.purchase.db.OffreAppel">
+		<panel>
+		<field name="soumissionnaire" title="Soumissionnaire"
+			   form-view="soumissionnaireFinance-form"
+			   grid-view="soumissionnaireFinance-grid" canNew="false" canRemove="false" colSpan="12"/>
+			<button name="meilleurPrix" title="Choisir le meilleur offre"
+					onClick="action-meilleurPrix" colSpan="3"/>
+
+			<button onClick="show-meilleurPrix" colSpan="3" title="Afficher le meilleur offre" hideIf="soumChoisi==null" name="btn_show"/>
+		</panel>
+	</form>
+
+	<action-method name="ecarter_Offre">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="ecarterOffre"/>
+	</action-method>
+
+	<action-method name="tw_load_etat">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="tw_load_etat"/>
+	</action-method>
+
+	<form title="Bordereau Estimatif anormale" name="form_bordereauAnormale" model="com.axelor.apps.purchase.db.OffreAppel">
+		<panel colSpan="10">
+			<field name="BrAnormale" title="Saisir les numéros des prix unitaire" placeholder="Prix N° 1.1.1/ 1.1.4/ 1.2.2 ..." widget="Text" height="3" colSpan="12"/>
+			<field name="dateDocument" title="Date de demande des documents"   colSpan="12"/>
+			<button colSpan="4" colOffset="8" title="Imprimer la Lettre d'information" name="btn_valide" onClick="com.axelor.apps.purchase.web.AppPurchaseController:imprimerLetteInformation_methode,close"/>
+		</panel>
+	</form>
+
+	<action-method name="affecter_offre_to_marche">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="affecter_offre_to_Soumissionnaire"/>
+	</action-method>
+
+	<action-method name="add_offre_financiere">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="affecter_offre_to_Soumissionnaire"/>
+	</action-method>
+
+
+	<action-view name="LoadLettreInformation" title="Bordereau Estimatif anormale"
+				 model="com.axelor.apps.purchase.db.OffreAppel">
+		<view type="form" name="form_bordereauAnormale"/>
+		<view-param name="forceEdit" value="true"/>
+		<view-param name="popup" value="true"/>
+		<view-param name="popup" value="reload"/>
+		<view-param name="popup-save" value="false"/>
+		<view-param name="show-toolbar" value="false"/>
+		<view-param name="show-confirm" value="false"/>
+		<view-param name="popup-save" value="false"/>
+	</action-view>
+
+
+	<form title="Choisir meilleur prix" name="form_meilleurPrix"
+		  onNew="validerMeilleurOffre"
+		  model="com.axelor.apps.purchase.db.OffreAppel">
+		<panel colSpan="12">
+			<field name="moyenne" title="Moyenne" colOffset="9" colSpan="3" readonly="true"/>
+		</panel>
+		<panel>
+			<field name="soumChoisi" target-name="societe" title="Meilleur offre" colSpan="6" readonly="true"/>
+			<field name="montant" title="Montant" colSpan="6" readonly="true"/>
+			<button colSpan="3" title="Enregistrer" name="btn_valide" onClick="com.axelor.apps.purchase.web.AppPurchaseController:saveMeilleurOffre,close"/>
+		</panel>
+	</form>
+
+	<form title="Afficher meilleur prix" name="form_showmeilleurPrix"
+		  model="com.axelor.apps.purchase.db.OffreAppel">
+		<panel colSpan="12">
+			<field name="moyenne" title="Moyenne" colOffset="9" colSpan="3" readonly="true"/>
+		</panel>
+		<panel>
+			<field name="soumChoisi" target-name="societe" title="Meilleur offre" colSpan="6" readonly="true"/>
+			<field name="montant" title="Montant" colSpan="6" readonly="true"/>
+		</panel>
+	</form>
+
+
+	<action-view name="action-meilleurPrix" title="Choisir meilleur prix"
+				 model="com.axelor.apps.purchase.db.OffreAppel">
+		<view type="form" name="form_meilleurPrix"/>
+		<view-param name="popup" value="reload"/>
+		<view-param name="show-toolbar" value="false"/>
+		<view-param name="show-confirm" value="false"/>
+		<view-param name="popup-save" value="false"/>
+		<view-param name="width" value="800"/>
+	</action-view>
+
+	<action-view name="show-meilleurPrix" title="Afficher meilleur prix"
+				 model="com.axelor.apps.purchase.db.OffreAppel">
+		<view type="form" name="form_showmeilleurPrix"/>
+		<view-param name="popup" value="reload"/>
+		<view-param name="show-toolbar" value="false"/>
+		<view-param name="show-confirm" value="false"/>
+		<view-param name="popup-save" value="false"/>
+		<view-param name="width" value="800"/>
+	</action-view>
+
+	<action-method name="validerMeilleurOffre">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="validerMeilleurOffre"/>
+	</action-method>
+
+	<action-method name="saveMeilleurOffre">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="save"/>
+	</action-method>
+
+	<!--<action-view name="addOfrreFinanciere" title="Offre Financiere Form" model="com.axelor.apps.purchase.db.Sociecte">
+		<view type="form" name="OffreFinanciere_Societe_form"/>
+		<view-param name="forceEdit" value="true"/>
+		<context name="_showRecord" expr="eval:id"/>
+	</action-view>-->
+
+	<!--<action-method name="getSociete2">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="getSocieteAccept2"/>
+	</action-method>-->
+
+	<!--<action-view name="AfficheHistoSociete" title="Liste des societes non accepter" model="com.axelor.apps.purchase.db.Sociecte">
+		<view type="grid" name="societeNonaccepter_grid"/>
+		<view-param name="forceEdit" value="true"/>
+		<view-param name="show-toolbar" value="false"/>
+		<view-param name="popup" value="true" />
+		<view-param name="popup-save" value="false" />
+		<view-param name="show-confirm" value="false" />
+		<view-param name="height" value="400" />
+		<domain>self.statut2=2 OR self.statut1=2 OR self.statut3=2</domain>
+	</action-view>-->
+
+	<grid name="societeNonaccepter_grid" canNew="false" canEdit="false" canDelete="false" title="Liste des sociétés non accepter" model="com.axelor.apps.purchase.db.Sociecte">
+		<field name="nomSociete"  title="Raison sociale" />
+		<field name="raisonSocial"  title="Identifiant fiscale"/>
+		<field name="description"  title="Description"/>
+		<field name="email"  title="Email"/>
+		<field name="statut2" title="Statut"/>
+		<field name="motif"  title="Commentaire"/>
+		<field name="tel"  title="Téléphone"/>
+		<field name="pvdoc"  title="PV"/>
+		<field name="piecesJointess"  title="Pièces jointes" />
+		<field name="offreFinanciere_prix"  title="Offre financière"/>
+	</grid>
+
+	<form name="societeNonaccepter_form" title="informations sur societe"  canNew="false" canEdit="false"  canDelete="false" model="com.axelor.apps.purchase.db.Sociecte">
+		<panel name="mainPanel" title="informations sur societe">
+			<field name="nomSociete"  title="Raison sociale :" readonly="true"/>
+			<field name="raisonSocial"  title="Identifiant fiscale :" readonly="true"/>
+			<field name="description"  title="Description :" readonly="true"/>
+			<field name="email"  title="Email :" readonly="true"/>
+			<field name="tel"  title="Téléphone :" readonly="true"/>
+			<field name="statut3"  title="Statut :" target-name="nom" readonly="true"/>
+			<field name="motif"  title="Commentaire :" readonly="true"/>
+			<field name="offreFinanciere_prix"  title="Offre Financière:" readonly="true"/>
+			<field name="piecesJointess"  title="Ajouter les documents" colSpan="12" readonly="true"/>
+		</panel>
+	</form>
+
+	<action-group name="AfficheHistoSociete">
+		<action name="com.axelor.apps.purchase.web.AppPurchaseController:remplir_grid_societe_statut2"/>
+		<action name="close"/>
+	</action-group>
+
+
+</object-views>

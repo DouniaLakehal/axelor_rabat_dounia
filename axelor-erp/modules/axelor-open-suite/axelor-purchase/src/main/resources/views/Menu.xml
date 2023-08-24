@@ -1,0 +1,659 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+			  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+	<menuitem name="sc-root-purchase" title="Gestion des ressources logistiques" order="-105"  if="__config__.app.isApp('purchase')"
+			  icon="fa-shopping-cart"  icon-background="#b6473f" tag-style="success"/>
+
+
+
+	<!-- _________________ "Gestion des achats"__________________ -->
+
+	<menuitem name="sc-root-Gestion_achats" parent="sc-root-purchase" order="5"
+			  title="Gestion des achats"  />
+
+	<menuitem name="sc-root-Maintenance" parent="sc-root-Gestion_achats" order="5"
+			  title="Maintenance du référentiel d’articles"  />
+
+	<menuitem name="ref_article" parent="sc-root-Maintenance" title="Article" action="ref_art" />
+	<action-view name="ref_art" title="Article" model="com.axelor.apps.purchase.db.Article" >
+		<view type="grid" name="article-grid" />
+		<view type="form" name="article-form" />
+	</action-view>
+
+	<menuitem name="sc-root-processus_achat" parent="sc-root-Gestion_achats" order="5"
+			  title="Gestion du processus d’achat"  />
+
+		<menuitem name="dmd_achat" parent="sc-root-processus_achat" order="15"
+				  title="Demande Materiel" action="dmd_achat"  hidden="true"/>
+		<action-view name="dmd_achat" title="Demande Materiel"
+					 model="com.axelor.apps.purchase.db.DemandeAchat" >
+			<view type="grid" name="demande-achat-grid" />
+			<view type="form" name="demande-achat-form" />
+			<domain>self.etat != 'cloturer'</domain>
+		</action-view>
+		<menuitem name="cons-prix" parent="sc-root-processus_achat" order="15"
+			  title="Consultation des prix" action="cons.prix" />
+
+		<action-view name="cons.prix" title="Liste Consultation des prix"
+					 model="com.axelor.apps.purchase.db.ConsultationPrix" >
+			<view type="grid" name="consultation-prix-grid" />
+			<view type="form" name="consultation-prix-form" />
+		</action-view>
+
+
+	<menuitem name="sc-root-Suivi_receptions" parent="sc-root-Gestion_achats" order="5"
+			  title="Suivi des réceptions" action="receptionCommande.article" />
+
+	<action-view name="receptionCommande.article" title="Reception Commande"
+				 model="com.axelor.apps.purchase.db.ReceptionCommande" >
+		<view type="grid" name="reception-commande-achat-grid" />
+		<view type="form" name="reception-commande-achat-form" />
+		<view-param name="forceEdit" value="true"/>
+	</action-view>
+
+	<menuitem name="sc-root-Gestion_bons_commande_offres" parent="sc-root-Gestion_achats" order="5"
+			  title="Gestion des bons de commande"  />
+
+
+	<menuitem name="sc-root-Gestion_bons_commande" parent="sc-root-Gestion_bons_commande_offres" order="5"
+			  title="Gestion des bons de commande"  />
+
+	<menuitem name="com-achat" parent="sc-root-Gestion_bons_commande" order="15"
+			  title="Gestion des commandes d'achat" action="com.achat" />
+	<action-view name="com.achat" title="Commande d'achat"
+				 model="com.axelor.apps.purchase.db.CommandeAchat" >
+		<view type="grid" name="commandeAchat_grid" />
+		<view type="form" name="commandeAchat_form" />
+	</action-view>
+
+	<!--   Offre Appel /Youssef -->
+
+	<menuitem name="OffreAppel" parent="sc-root-Gestion_achats" title="Gestion des appels d'offre " />
+
+	<menuitem order="1" name="planing.offres" parent="OffreAppel" title="Programme prévisionnel" action="planing.offreAppel" />
+	<action-view name="planing.offreAppel" title="Programme prévisionnel" model="com.axelor.apps.purchase.db.PlannigOffresAppels" >
+		<view type="grid" name="planingOffres-grid" />
+		<view type="form" name="planingOffres-form" />
+	</action-view>
+
+	<menuitem order="2" name="encours" parent="OffreAppel" title="Nouveau appel d'offre" action="menu.encours" />
+	<action-view name="menu.encours" title="Appels d'Offres" model="com.axelor.apps.purchase.db.OffreAppel" >
+		<view type="grid" name="OffreAppel-grid_1" />
+		<view type="form" name="OffreAppel-form" />
+		<view-param name="forceEdit" value="true"/>
+		<domain>self.hasMarche=false or self.hasMarche=null</domain>
+	</action-view>
+
+	<menuitem order="3" name="offres.soumission" parent="OffreAppel" title="Soumissionnaires" action="soumission.offres" />
+	<action-view name="soumission.offres" title="Soumissionnaire" model="com.axelor.apps.purchase.db.OffreAppel" >
+		<view type="grid" name="soumissionnaireOffres-grid" />
+		<view type="form" name="soumissionnaireOffres-form" />
+		<domain>self.hasMarche=false or self.hasMarche=null</domain>
+	</action-view>
+
+	<menuitem order="4" name="administrative" parent="OffreAppel" title="Dossier administrative et technique" action="menu.administrative" />
+	<action-view name="menu.administrative" title="Dossier administrative et technique" model="com.axelor.apps.purchase.db.OffreAppel" >
+		<view type="grid" name="DossierAdministrative_grid" />
+		<view type="form" name="DossierAdministrative_form"/>
+		<domain>self.hasMarche=false or self.hasMarche=null</domain>
+	</action-view>
+
+	<menuitem order="5" name="gOffreAppel" parent="OffreAppel" title="PV de commission" action="pv.gOffreAppel" />
+	<action-view name="pv.gOffreAppel" title="Pv de commission" model="com.axelor.apps.purchase.db.OffreAppel">
+		<view type="form" name="pvdecommission-form"/>
+		<view-param name="forceEdit" value="false"/>
+		<view-param name="show-toolbar" value="false"/>
+		<view-param name="show-confirm" value="false" />
+		<view-param name="popup-save" value="false"/>
+	</action-view>
+
+	<menuitem order="6" name="technique" parent="OffreAppel" title="Offre technique" action="menu.technique" />
+	<action-view name="menu.technique" title="Offres techniques" model="com.axelor.apps.purchase.db.OffreAppel" >
+		<view type="grid" name="DossierTechnique_grid" />
+		<view type="form" name="DossierTechnique_form" />
+		<domain>self.offreTechnique=true and (self.hasMarche=false or self.hasMarche=null)</domain>
+	</action-view>
+
+	<menuitem order="7" name="financiere" parent="OffreAppel" title="Offre Financière" action="menu.financiere" />
+	<action-view name="menu.financiere" title="Offres Financières" model="com.axelor.apps.purchase.db.OffreAppel" >
+		<view type="grid" name="OffreFinanciere_grid" />
+		<view type="form" name="OffreFinanciere_form" />
+		<domain>self.hasMarche=false or self.hasMarche=null</domain>
+	</action-view>
+
+	<menuitem order="8" name="marcheProvisoire" parent="OffreAppel" title="Complément du dossiers" action="menu.marcheProvisoire" />
+	<action-group name="menu.marcheProvisoire">
+		<action name="menu.marcheProvisoire1" />
+		<action name="menu.marcheProvisoire2" />
+	</action-group>
+	<action-method name="menu.marcheProvisoire1">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="action_rafraichir_date"/>
+	</action-method>
+	<action-view name="menu.marcheProvisoire2" title="Complément du dossiers" model="com.axelor.apps.purchase.db.OffreAppel" >
+		<view type="grid" name="MarcheProvisoire_grid" />
+		<view type="form" name="MarcheProvisoire_form" />
+		<domain>self.offreFinanciereValide=true</domain>
+	</action-view>
+
+	<menuitem order="9" name="marche" parent="OffreAppel" title="Marché" action="menu.marche" />
+	<action-view name="menu.marche" title="Marché" model="com.axelor.apps.purchase.db.OffreAppel" >
+		<view type="grid" name="Marche_grid" />
+		<view type="form" name="Marche_from" />
+		<view-param name="forceEdit" value="true" />
+		<domain>self.validationMarheProvisoire=true</domain>
+	</action-view>
+
+	<!-- End OffreAppel -->
+
+	<menuitem name="com-OrdrePayement" parent="sc-root-Gestion_achats" order="15"
+			  title="Gestion des Ordres de payement" action="com.OrdrePayement" />
+
+	<action-view name="com.OrdrePayement" title="Ordre de paiement"
+				 model="com.axelor.apps.purchase.db.OrderPaymentCommande" >
+		<view type="grid" name="ordrePayement_grid" />
+		<view type="form" name="ordrePayement_form" />
+
+	</action-view>
+
+
+	<menuitem name="com-ov" parent="sc-root-Gestion_achats" order="15"
+			  title="Gestion des Ordres de virement" action="com.ov" />
+
+	<action-view name="com.ov" title="Ordre de virement"
+				 model="com.axelor.apps.purchase.db.OrdrevirementCommande" >
+		<view type="grid" name="grid_ov" />
+		<view type="form" name="form_ov" />
+		<view-param name="forceEdit" value="true"/>
+	</action-view>
+
+	<menuitem name="sc-root-purchase-inventaire" parent="sc-root-purchase" order="4" icon="fa-file-invoice-dollar"
+			  title="Inventaires" action="cons.gestionInv" />
+
+	<action-view name="cons.gestionInv" title="Inventaires"
+				 model="com.axelor.apps.purchase.db.Inventaire" >
+		<view type="grid" name="ListInventaire-grid" />
+		<view type="form" name="ListInventaire-form" />
+		<view-param name="forceEdit" value="true"/>
+	</action-view>
+
+	<!-- _________________ "Gestion des stocks" __________________ -->
+
+
+	<menuitem name="sc-root-Gestion_stocks" parent="sc-root-purchase" order="5"
+			  title="Gestion des stocks"  />
+
+	<menuitem name="sc-root-Gestion_Previsionnelle_Stocks" parent="sc-root-Gestion_stocks" order="5"
+			  title="Gestion Prévisionnelle des Stocks"  />
+
+	<menuitem name="sc-root-Gestion_physique_stocks" parent="sc-root-Gestion_stocks" order="5"
+			  title="Gestion physique des stocks"  />
+
+	<menuitem name="cons-stock" parent="sc-root-Gestion_physique_stocks" order="15"
+			  title="Stock" action="cons.stock" />
+
+	<action-view name="cons.stock" title="Stock"
+				 model="com.axelor.apps.purchase.db.StockAchat" >
+		<view type="grid" name="stock-grid" />
+		<view type="form" name="stock-form" />
+	</action-view>
+
+	<menuitem name="cons-historiqueStock" parent="sc-root-Gestion_physique_stocks" order="15"
+			  title="Historique du stock" action="cons.historiqueStock" />
+
+	<action-view name="cons.historiqueStock" title="Historique du stock"
+				 model="com.axelor.apps.purchase.db.HistoriqueStock" >
+		<view type="grid" name="historiqueStock_grid" />
+		<view type="form" name="historiqueStock_form" />
+	</action-view>
+
+
+	<menuitem name="sc-root-réceptions_CPS_APPEL_OFFRES " parent="sc-root-Gestion_stocks" order="5"
+			  title=" Réceptions CPS APPEL D’OFFRES "  />
+
+
+
+
+	<!-- _________________ "Gestion des immobilisations" __________________ -->
+
+	<!--<menuitem name="sc-root-Gestion_immobilisations" parent="sc-root-purchase" order="5"
+			  title="Gestion des immobilisations"  />
+
+	<menuitem name="sc-root-Gestion_amortissements" parent="sc-root-Gestion_immobilisations" order="5"
+			  title="Amortissements"  />
+	<menuitem name="sc-root-mouvements_exercice" parent="sc-root-Gestion_immobilisations" order="5"
+			  title="Mouvements de l'exercice"  />
+	<menuitem name="sc-root-generation_comptables" parent="sc-root-Gestion_immobilisations" order="5"
+			  title="Génération des écritures comptables"  />-->
+
+	<!--<menuitem name="sc-root-immobilisation_type" parent="sc-root-Gestion_immobilisations" order="5"
+			  title="immobilisation type" action="purchase.immobilisation.orders" />
+    <action-view name="purchase.immobilisation.orders" title="immobilisation type"
+				 model="com.axelor.apps.purchase.db.ImmobilisationType" >
+				 <view type="grid" name="immobilisation_grid" />
+		         <view type="form" name="immobilisation_form" />
+
+
+	</action-view>-->
+
+
+
+
+	<!--__________________________________________________________________________________________________________________-->
+
+	<!-- _________________ "Facturation" __________________ -->
+
+	<!--__________________________________________________________________________________________________________________-->
+
+	<menuitem name="sc-root-purchase-orders" parent="sc-root-purchase" order="4" icon="fa-file-invoice-dollar"
+			  title="Gestion des Facture" action="cons.gestionFacturation" />
+
+	<action-view name="cons.gestionFacturation" title="Gestion des Facture"
+				 model="com.axelor.apps.purchase.db.FactureAchat" >
+		<view type="grid" name="factureAchat-grid" />
+		<view type="form" name="factureAchat-form" />
+		<view-param name="forceEdit" value="true"/>
+	</action-view>
+
+
+
+
+
+
+
+	<!--__________________________________________________________________________________________________________________-->
+
+	<!-- _________________ "la configuration" __________________ -->
+
+	<!--__________________________________________________________________________________________________________________-->
+
+	<!--
+	<menuitem name="sc-root-purchase-fournisseur" parent="sc-root-purchase" order="5"
+		title="Fournisseurs" action="sc.root.purchase.fournisseur" />
+
+	<action-view name="sc.root.purchase.fournisseur" title="Fournisseurs"
+		model="com.axelor.apps.purchase.db.Fournisseur" >
+		<view type="grid" name="Fournisseur-grid" />
+		<view type="form" name="Fournisseur-form" />
+	</action-view>
+
+	-->
+
+	<!--__________________________________________________________________________________________________________________-->
+
+	<!-- _________________ "A deplacer vers autres modules" __________________ -->
+
+	<!--__________________________________________________________________________________________________________________-->
+
+	<!--
+	<menuitem name="historique_bb" parent="sc-root-purchase" order="15"
+			  title="Historique Budgétaires" action="historique_bb" />
+
+	<action-view name="historique_bb" title="Historique Budgétaires"
+				 model="com.axelor.apps.configuration.db.HistoriqueBudgetaire" >
+		<view type="grid" name="historique_bud_grid" />
+		<view type="form" name="historique_bud_form" />
+	</action-view>
+
+	<menuitem name="Nature_Op" parent="sc-root-purchase" order="15"
+			  title="Nature d'opération" action="Nature_Op" />
+
+	<action-view name="Nature_Op" title="Nature d'opération"
+				 model="com.axelor.apps.custom.db.NatureOperation" >
+		<view type="grid" name="Nature_Op_grid" />
+		<view type="form" name="Nature_Op_form" />
+	</action-view>
+
+	<menuitem name="partier_ver" parent="sc-root-purchase" order="15"
+			  title="Partier versement" action="partier_ver" />
+
+	<action-view name="partier_ver" title="Partier versement"
+				 model="com.axelor.apps.custom.db.PartierVersement" >
+		<view type="grid" name="partier_ver_grid" />
+		<view type="form" name="partier_ver_form" />
+	</action-view>
+
+	<menuitem name="sc-root-purchase-vehicule" title="Gestion des véhicules" order="30" parent="sc-root-purchase"
+			  action="purchase.vehicule.orders"/>
+
+	<action-view name="purchase.vehicule.orders" title="Gestion des véhicules"
+				 model="com.axelor.apps.purchase.db.VehiculeEntretien" >
+		<view type="grid" name="vehicule_entretien_grid" />
+		<view type="form" name="vehicule_entretien_form" />
+	</action-view>
+
+	<menuitem name="sc-root-purchase-planning" title="Planning annuel de maintenance" order="30" parent="sc-root-purchase"
+			  action="purchase.planning.orders"/>
+
+	<action-view name="purchase.planning.orders" title="Planning annuel de maintenance"
+				 model="com.axelor.apps.purchase.db.VehiculeEntretien" >
+		<view type="form" name="planning_form" />
+	</action-view>
+
+	<menuitem name="sc-root-purchase-demande-entretien" title="Demande d'entretien" order="30" parent="sc-root-purchase"
+			  action="purchase.demande.entretien"/>
+
+	<action-view name="purchase.demande.entretien" title="Demande d'entretien"
+				 model="com.axelor.apps.purchase.db.DetailDemandeEntretien" >
+		<view type="grid" name="demande_entretien_grid" />
+		<view type="form" name="demande_entretien_form" />
+	</action-view>
+	-->
+
+
+	<!--__________________________________________________________________________________________________________________-->
+
+	<!-- _________________ "A supprimer" __________________ -->
+
+	<!--__________________________________________________________________________________________________________________-->
+
+	<!--
+
+		<menuitem name="sc-root-purchase-contacts" parent="sc-root-purchase" order="10"
+		title="Contacts" action="sc.root.purchase.contacts" />
+
+	<action-view name="sc.root.purchase.contacts" title="Contacts"
+		model="com.axelor.apps.base.db.Partner" >
+		<view type="cards" name="partner-contact-cards" />
+		<view type="grid" name="partner-contact-grid" />
+		<view type="form" name="partner-contact-form" />
+	  	<view-param name="limit" value="39"/>
+		<view-param name="search-filters" value="partner-filters"/>
+		<domain>self.isContact = true AND self.mainPartner.isSupplier = true</domain>
+		<context name="_domain" expr="self.isContact = true AND self.mainPartner.isSupplier = true"/>
+	</action-view>
+
+	<menuitem name="sc-root-purchase-products" parent="sc-root-purchase" order="15"
+		title="Products &amp; services" action="sc.root.purchase.products" />
+
+	<action-view name="sc.root.purchase.products" title="Products &amp; services"
+		model="com.axelor.apps.base.db.Product" >
+		<view type="cards" name="product-cards" />
+		<view type="grid" name="product-grid" />
+		<view type="form" name="product-form" />
+		<view-param name="search-filters" value="products-filters"/>
+		<domain>self.isModel = false AND self.purchasable = true AND self.dtype = 'Product'</domain>
+		<context name="_activeCompany" expr="eval:__user__.activeCompany"/>
+		<context name="_fromPurchase" expr="eval:true" />
+	</action-view>
+
+     <menuitem name="sc.root.purchase.Cps" parent="sc-root-purchase" order="15"
+		title="Liste CP" action="sc.root.purchase.Cps" />
+
+	<action-view name="sc.root.purchase.Cps" title="Liste Consultation des prix"
+		model="com.axelor.apps.purchase.db.ListConsultationPrix" >
+		<view type="grid" name="ListConsultationPrix-grid" />
+		<view type="form" name="ListConsultationPrix-form" />
+
+	</action-view>
+
+	<menuitem name="sc-root-purchase-request" parent="sc-root-purchase" if="__config__.app.isApp('purchase-request')"
+		title="Internal purchase requests" order="16" icon="fa-bullhorn" icon-background="#b6473f"
+		action="sc.root.purchase.request.all" />
+
+	<action-view name="sc.root.purchase.request.all" model="com.axelor.apps.purchase.db.PurchaseRequest"
+		title="Internal purchase requests">
+		<view type="grid" name="purchase-request-grid"/>
+		<view type="form" name="purchase-request-form"/>
+		<view-param name="search-filters" value="purchase-request-filters"/>
+	</action-view>
+
+
+
+	<menuitem name="sc-root-purchase-quotations" title="Purchase quotations" order="20"
+		 action="sc.root.purchase.quotations" parent="sc-root-purchase"/>
+
+	<action-view name="sc.root.purchase.quotations" title="Purchase quotations"
+		model="com.axelor.apps.purchase.db.PurchaseOrder" >
+		<view type="cards" name="purchase-quotations-order-cards" />
+		<view type="grid" name="purchase-order-quotation-grid" />
+		<view type="form" name="purchase-order-form" />
+		<view-param name="search-filters" value="purchase-order-filters"/>
+		<domain>self.statusSelect &lt; 3</domain>
+		<context name="_internalUser" expr="eval: __user__.id"/>
+		<context name="_status" expr="eval: [1,2]"/>
+	</action-view>
+
+	<menuitem name="sc-root-purchase-orders" title="Purchase orders" order="25"
+		 action="sc.root.purchase.orders" parent="sc-root-purchase"/>
+
+	<action-view name="sc.root.purchase.orders" title="Purchase orders"
+		model="com.axelor.apps.purchase.db.PurchaseOrder" >
+		<view type="cards" name="purchase-order-cards" />
+		<view type="grid" name="purchase-order-grid" />
+		<view type="form" name="purchase-order-form" />
+		<view-param name="search-filters" value="purchase-order-filters"/>
+		<domain>self.statusSelect IN (3)</domain>
+		<context name="_internalUser" expr="eval: __user__.id"/>
+		<context name="_status" expr="eval: 3"/>
+	</action-view>
+
+	<menuitem name="purchase-root-abc-analysis" title="ABC analysis" order="27"
+		action="purchase.root.abc.analysis" parent="sc-root-purchase"/>
+
+	<action-view name="purchase.root.abc.analysis" title="ABC analysis"
+		model="com.axelor.apps.base.db.ABCAnalysis">
+		<view type="grid" name="abc-analysis-grid"/>
+		<view type="form" name="abc-analysis-form"/>
+		<domain>self.typeSelect = :_type</domain>
+		<context name="_type" expr="com.axelor.apps.purchase.service.ABCAnalysisServicePurchaseImpl"/>
+	</action-view>
+
+
+
+	<menuitem name="sc-root-purchase-historical" title="Historical" order="30" parent="sc-root-purchase"
+		action="purchase.historical.orders"/>
+
+	<action-view name="purchase.historical.orders" title="Historical"
+		model="com.axelor.apps.purchase.db.PurchaseOrder" >
+		<view type="cards" name="purchase-order-cards" />
+		<view type="grid" name="purchase-order-grid" />
+		<view type="form" name="purchase-order-form" />
+		<view-param name="search-filters" value="purchase-order-filters"/>
+		<context name="_internalUser" expr="eval: __user__.id"/>
+	</action-view>
+
+	<menuitem name="sc-root-purchase-report" parent="sc-root-purchase" title="Reportings" order="200" icon="fa-bar-chart"/>
+
+	<menuitem name="purchase-report-maps" parent="sc-root-purchase-report" title="Maps" order="10"/>
+
+	<menuitem name="purchase-maps-partner-suppliers" parent="purchase-report-maps"
+		title="Suppliers" action="action-purchase-method-show-suppliers-on-map-page"/>
+
+	<action-method name="action-purchase-method-show-suppliers-on-map-page">
+	  <call method="showSuppliersOnMap" class="com.axelor.apps.base.web.AppBaseController"/>
+	</action-method>
+
+
+
+	<menuitem name="top-menu-purchase" title="Purchases" order="3" top="true" left="false" if="__config__.app.isApp('purchase')"/>
+
+	<menuitem name="top-menu-purchase-quotations" title="Purchase quotations" top="true"
+		 action="top.menu.purchase.quotations" parent="top-menu-purchase"/>
+
+	<action-view name="top.menu.purchase.quotations" title="Purchase quotations"
+		model="com.axelor.apps.purchase.db.PurchaseOrder" >
+		<view type="cards" name="purchase-order-cards" />
+		<view type="grid" name="purchase-order-quotation-grid" />
+		<view type="form" name="purchase-order-form" />
+		<view-param name="search-filters" value="purchase-order-filters"/>
+		<domain>self.statusSelect &lt; 3</domain>
+		<context name="_internalUser" expr="eval: __user__.id"/>
+	</action-view>
+
+	<menuitem name="top-menu-purchase-purchase-orders" title="Purchase orders" top="true"
+		 action="top.menu.purchase.purchase.orders" parent="top-menu-purchase"/>
+
+	<action-view name="top.menu.purchase.purchase.orders" title="Purchase orders"
+		model="com.axelor.apps.purchase.db.PurchaseOrder" >
+		<view type="cards" name="purchase-order-cards" />
+		<view type="grid" name="purchase-order-grid" />
+		<view type="form" name="purchase-order-form" />
+		<view-param name="search-filters" value="purchase-order-filters"/>
+		<domain>self.statusSelect &gt; 2</domain>
+		<context name="_internalUser" expr="eval: __user__.id"/>
+	</action-view>
+
+
+
+
+	<menuitem name="menu-purchase-dashboard-1" parent="sc-root-purchase-report"
+		title="Purchase Buyer"  action="purchase.dashboard.1" />
+
+	<action-view name="purchase.dashboard.1" title="Purchase Buyer">
+		<view type="dashboard" name="purchase.dashboard.1" />
+		<context name="_user_id" expr="eval:__user__.id"/>
+	</action-view>
+
+	<menuitem name="menu-purchase-dashboard-2" parent="sc-root-purchase-report"
+		title="Purchase Manager"  action="purchase.dashboard.2" />
+
+	<action-view name="purchase.dashboard.2" title="Purchase Manager">
+		<view type="dashboard" name="purchase.dashboard.2" />
+	</action-view>
+
+
+	<menuitem name="sc-root-purchase-conf-price-list" parent="sc-root-purchase-conf"
+		title="Price lists" action="sc.root.purchase.conf.price.list" />
+
+	<action-view name="sc.root.purchase.conf.price.list" title="Price lists"
+		model="com.axelor.apps.base.db.PriceList" >
+		<view type="grid" name="price-list-grid" />
+		<view type="form" name="purchase-price-list-form" />
+		<domain>self.typeSelect = 2</domain>
+	</action-view>
+
+	<menuitem name="sc-root-purchase-conf-partner-price-list" parent="sc-root-purchase-conf"
+		title="Partner price lists" action="sc.root.purchase.conf.partner.price.list" />
+
+	<action-view name="sc.root.purchase.conf.partner.price.list" title="Partner price lists"
+		model="com.axelor.apps.base.db.PartnerPriceList" >
+		<view type="grid" name="partner-price-list-grid" />
+		<view type="form" name="purchase-partner-price-list-form" />
+		<domain>self.typeSelect = 2</domain>
+	</action-view>
+
+	-->
+
+
+
+	<!--__________________________________________________________________________________________________________________-->
+
+
+
+
+	<!--<menuitem name="sc-root-purchase-listfournisseur" parent="sc-root-purchase" order="5"
+			  title="List Fournisseur" action="sc.root.purchase.listfournisseur" />
+
+	<action-view name="sc.root.purchase.listfournisseur" title="List Fournisseur"
+				 model="com.axelor.apps.purchase.db.SelectFournisseur" >
+		<view type="grid" name="Fournisseur-select-grid" />
+		<view type="form" name="Fournisseur-select-form" />
+	</action-view>-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	<!-- Purchase request menus -->
+
+	<!-- demandeur menus -->
+
+	<!-- <menuitem name="sc-purchase-request" title="Purchase requests" order="-105"  if="__config__.app.isApp('purchase')"
+		icon="fa-shopping-cart" groups="demandeur" icon-background="#b6473f"/>
+
+	<menuitem name="sc-root-purchase-request-my-request-new" parent="sc-purchase-request"
+		title="New Request" action="sc.root.purchase.request.my.request.new" order="2" groups="demandeur" />
+
+	<action-view name="sc.root.purchase.request.my.request.new" model="com.axelor.apps.purchase.db.PurchaseRequest"
+		title="New Request ">
+		<view type="form" name="purchase-request-form"/>
+		<view type="grid" name="purchase-request-grid"/>
+		<domain>self.createdBy = :__user__</domain>
+	</action-view>
+
+	<menuitem name="sc-root-purchase-request-my-current-cart" parent="sc-purchase-request"
+		title="My current cart" action="sc.root.purchase.request.my.current.cart" order="3"  groups="demandeur" />
+
+	<action-view name="sc.root.purchase.request.my.current.cart" model="com.axelor.apps.purchase.db.PurchaseRequest"
+		title="My current cart">
+		<view type="grid" name="my-current-cart-purchase-request-grid"/>
+		<view type="form" name="purchase-request-form"/>
+		<domain>self.createdBy = :__user__ and self.statusSelect = 1</domain>
+	</action-view>
+
+	<menuitem name="sc-root-purchase-request-my-sent" parent="sc-purchase-request" groups="demandeur"
+		title="My sent requests" action="sc.root.purchase.request.my.sent" order="4" />
+
+	<action-view name="sc.root.purchase.request.my.sent" model="com.axelor.apps.purchase.db.PurchaseRequest"
+		title="My sent requests">
+		<view type="grid" name="sent-purchase-request-grid"/>
+		<view type="form" name="purchase-request-form"/>
+		<domain>self.createdBy = :__user__ and self.statusSelect = 2</domain>
+	</action-view>
+
+	<menuitem name="sc-root-purchase-request-my-accepted" parent="sc-purchase-request" groups="demandeur"
+		title="My accepted requests" action="sc.root.purchase.request.my.accepted" order="5" />
+
+	<action-view name="sc.root.purchase.request.my.accepted" model="com.axelor.apps.purchase.db.PurchaseRequest"
+		title="My accepted requests">
+		<view type="grid" name="purchase-request-grid"/>
+		<view type="form" name="purchase-request-form"/>
+		<domain>self.createdBy = :__user__ and self.statusSelect = 3</domain>
+	</action-view>
+
+	<menuitem name="sc-root-purchase-request-my-refused" parent="sc-purchase-request" groups="demandeur"
+		title="My refused requests" action="sc.root.purchase.request.my.refused" order="6" />
+
+	<action-view name="sc.root.purchase.request.my.refused" model="com.axelor.apps.purchase.db.PurchaseRequest"
+		title="My refused requestes">
+		<view type="grid" name="purchase-request-grid"/>
+		<view type="form" name="purchase-request-form"/>
+		<domain>self.createdBy = :__user__ and self.statusSelect = 7</domain>
+	</action-view>
+
+	<menuitem name="sc-root-purchase-request-my" parent="sc-purchase-request"
+		title="All my requests" action="sc.root.purchase.request.my" order="7" groups="demandeur" />
+
+	<action-view name="sc.root.purchase.request.my" model="com.axelor.apps.purchase.db.PurchaseRequest"
+		title="All my requests">
+		<view type="grid" name="purchase-request-grid"/>
+		<view type="form" name="purchase-request-form"/>
+		<domain>self.createdBy = :__user__</domain>
+	</action-view>  -->
+
+	<!--demandeur menus end  -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+</object-views>

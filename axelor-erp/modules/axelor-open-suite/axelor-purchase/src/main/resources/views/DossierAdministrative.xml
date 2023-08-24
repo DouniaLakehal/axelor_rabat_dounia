@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+	<grid name="DossierAdministrative_grid" title="Offre d'appel"  model="com.axelor.apps.purchase.db.OffreAppel" canNew="false">
+		<field name="numero"  title="Numéro d'offre d'appel"/>
+		<field name="nom" title="Nom d'offre d'appel"/>
+		<field name="dateLancement" title="Date de lancement"/>
+		<field name="dateOverture" title="Date d'offre d'appel" />
+		<button icon="fa-plus" title="Afficher Les soumissionnaires" name="btn_valide" onClick="valideDocAdministrative"/>
+		<button name="btn_imprimer" icon="fa-print" onClick="imprimerpv1" title="Imprimer"/>
+	</grid>
+
+
+
+	<form canCopy="false" canAttach="false" canNew="false" canEdit="false" canSave="false" canDelete="false" canArchive="false"
+			name="DossierAdministrative_form" title="Offre Appel" onLoad="show_panel_critereNotation"
+		  model="com.axelor.apps.purchase.db.OffreAppel">
+		<panel name="mainPanel" title="Information générale" readonly="true">
+			<field name="numero" title="Numéros de l'appel d'offre" readonly="true"/>
+			<field name="nom" title="Objet de l'appel d'offre" required="true"/>
+			<field name="dateLancement" title="date de lancement" required="true"/>
+			<field name="dateOverture" title="Date d'overture " required="true"/>
+			<panel colSpan="6">
+				<field name="typeDossier" selection="electro.papier.string" widget="CheckboxSelect"/>
+			</panel>
+			<panel>
+				<field name="offreTechnique" title="Offre technique" colSpan="3" onChange="show_panel_critereNotation"/>
+			</panel>
+			<panel colSpan="12">
+				<field colSpan="12" name="echantillionnage" widget="boolean-radio" x-true-text="Échantillon" x-false-text="Documentation Technique" />
+			</panel>
+		</panel>
+
+		<panel name="mainPanel2" readonly="true">
+			<field name="decisionMemebre" title="Décision sélection des membres de comité" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid"/>
+			<field name="comite" title="Comite" required="true" colSpan="12"/>
+			<field name="piecesJointes" grid-view="pieceJointe3-grid" form-view="pieceJointe3-form" title="les Pieces"
+				   required="true" colSpan="12"/>
+		</panel>
+		<panel readonly="true" name="critereNotationPanel" hidden="true" colSpan="12">
+			<field name="critereNotation" title="Critère de notation"
+				   form-view="critereNotationSelect-form" grid-view="critereNotationSelect-grid" colSpan="12"/>
+			<field name="pourcentageValideNote" title="Pourcentage des points pour validation (%)"/>
+		</panel>
+	</form>
+
+	<action-method name="valideDocAdministrative">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="valide_doc_administratite"/>
+	</action-method>
+
+	<action-method name="imprimerpv1">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="imprimer_pv_1"/>
+	</action-method>
+	<action-method name="show_panel_critereNotation">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="showPanelCriterNotation"/>
+	</action-method>
+
+	<!--<action-view name="addSociete" title="Societe" model="com.axelor.apps.purchase.db.OffreAppel">
+		<view type="form" name="DossierAdministrative_form"/>
+		<view-param name="forceEdit" value="true"/>
+		<context name="_showRecord" expr="eval:id"/>
+	</action-view>-->
+
+	<grid canSave="false" canDelete="false" canNew="false" canArchive="false" canEdit="false" canMove="false" editable="false"
+		  title="Liste soumissionnaire" name="soumissionnaire_valide-grid" model="com.axelor.apps.purchase.db.Soumissionnaire">
+		<field name="societe" title="Société"/>
+		<field name="representant" title="Représentant"/>
+		<field name="telephone" title="Téléphone"/>
+		<field name="email" title="E-mail"/>
+		<field name="typeSoumission" title="Type"/>
+		<button title="Afficher Les documents" name="btn_valide" icon="fa-plus" onClick="showAllFile"/>
+		<!--<button name="btn_valide" icon="fa-check-square-o" onClick="validateFile"/>
+		<button name="btn_NotValid" icon="fa-minus-circle" onClick="NotValidate" />-->
+	</grid>
+
+	<grid canSave="false" canDelete="false" canNew="false" canArchive="false" canEdit="false" canMove="false" editable="false"
+		  title="Liste soumissionnaire" name="soumissionnaire_2-grid" model="com.axelor.apps.purchase.db.Soumissionnaire">
+		<field name="societe" title="Société"/>
+		<field name="representant" title="Représentant"/>
+		<field name="telephone" title="Téléphone"/>
+		<field name="email" title="E-mail"/>
+		<field name="typeSoumission" title="Type"/>
+		<!--<button name="btn_valide" icon="fa-check-square-o" onClick="validateFile"/>
+		<button name="btn_NotValid" icon="fa-minus-circle" onClick="NotValidate" />-->
+	</grid>
+
+	<form canEdit="true" canArchive="false" canNew="false" canDelete="false" canSave="true" canCopy="false" canAttach="false"
+		  title="information Petitionnaire" name="soumissionnaire_valide-form" model="com.axelor.apps.purchase.db.Soumissionnaire">
+		<panel title="information générale" readonly="true">
+			<field name="societe" title="Société"/>
+			<field name="representant" title="Représentant"/>
+			<field name="dateDepot" title="Date de dépôt" />
+			<field name="heurDepot" title="Heure de dépôt" />
+			<field name="registreCommerce" title="N° Registre de commerce (RC)" colSpan="4"/>
+			<field name="telephone" title="Téléphone" colSpan="4"/>
+			<field name="email" title="E-mail" colSpan="4"/>
+			<field name="adresse" widget="Text" height="2" title="Adresse" colSpan="12"/>
+			<field name="soumissionElectro" title="Soumission Electronique" hidden="true" colSpan="6"/>
+			<field name="soumissionPapier" title="Soumission Papier" hidden="true" colSpan="6"/>
+		</panel>
+		<panel >
+			<field name="remarque" widget="Text" title="Remarque" colSpan="12" height="3"/>
+		</panel>
+		<panel name="docField" showTitle="false" colSpan="12" readonly="true">
+			<field name="piecesJointes" colSpan="12" grid-view="pieceJointe3-grid" form-view="pieceJointe4-form"/>
+			<field name="offreFiance" title="Offre Financière" min="0" colSpan="6"/>
+		</panel>
+	</form>
+
+	<action-method name="showAllFile">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="showAll_all_file"/>
+	</action-method>
+
+</object-views>

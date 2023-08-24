@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="purchase" package="com.axelor.apps.purchase.db"/>
+
+    <entity name="OrderPaymentCommande" lang="java">
+        <string name="beneficiaire"/>
+        <string name="compteBenef"/>
+        <decimal name="sommeVerement"/>
+        <string name="numero" title="Numero" />
+        <many-to-one name="rubriqueBudgetaire" ref="com.axelor.apps.configuration.db.RubriqueBudgetaireGenerale" title="rubriqueBudgetaire"/>
+        <many-to-one name="commandeAchat" ref="com.axelor.apps.purchase.db.CommandeAchat" title="Commande"/>
+        <date name="dateOrdre" />
+        <integer name="year"/>
+        <boolean name="haspayer" default="false"/>
+        <string name="nature_operation" selection="natureEngagementAchat.select"/>
+        <long name="id_reference"/>
+        <string name="objet_depences" large="true" multiline="true"/>
+        <many-to-one name="fournisseur" ref="com.axelor.apps.configuration.db.Fournisseur"/>
+        <boolean name="is_rh_module"/>
+    </entity>
+
+</domain-models>

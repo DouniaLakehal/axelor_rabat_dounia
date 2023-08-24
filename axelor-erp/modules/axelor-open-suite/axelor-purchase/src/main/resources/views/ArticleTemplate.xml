@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid name="article-grid" title="Article" model="com.axelor.apps.purchase.db.Article">
+		<field name="naturePrestation.naturePrestation" title="Nature de prestation"/>
+		<field name="nom_fr" title="Prestation FR"/>
+		<field name="nom_ar" title="Prestation AR"/>
+        <field name ="reference" title="Reference"/>
+	    <field name="rubriqueBudgetaire"/>
+    </grid>
+
+    <form name="article-form" title="Article" model="com.axelor.apps.purchase.db.Article" width="large" >
+		<panel name="mainPanel">
+			<field name="naturePrestation" target-name="naturePrestation" title="Nature de prestation" colSpan="4" colOffset="4"/>
+			<field name="nom_fr" title="Prestation FR" colSpan="12"/>
+			<field name="nom_ar" css="tw_arabe_orient" title="الأعمال" colSpan="12"/>
+            <field name ="reference" title="Reference"/>
+			<field name="rubriqueBudgetaire"/>
+		</panel>
+    </form>
+	<form name="employee-ARTICLE-report-form" title="LES ARTICLES" model="com.axelor.apps.purchase.db.Article" onNew="test_callFlous_article">
+
+		<panel colSpan="12">
+			<panel name="mainPanel" colSpan="10" colOffset="1">
+				<field title="Langue du document" name="lang_de_article_type" selection="tw.article.language" colSpan="3"/>
+
+				<button name="showtousarticle" title="Imprimer" onClick="com.axelor.apps.purchase.web.AppPurchaseController:tw_print_tous_article,close" colOffset="10" colSpan="2" />
+			</panel>
+		</panel>
+
+	</form>
+	<action-method name="test_callFlous_article">
+		<call class="com.axelor.apps.hr.web.EmployeeController" method="verifierRappel"/>
+	</action-method>
+	<action-view name="action-article-view-wizard" title="Formulaire Articles"
+				 model="com.axelor.apps.purchase.db.Article">
+		<view type="form" name="employee-ARTICLE-report-form"/>
+		<view-param name="popup" value="reload"/>
+		<view-param name="show-toolbar" value="false"/>
+		<view-param name="show-confirm" value="false"/>
+		<view-param name="popup-save" value="false"/>
+		<view-param name="width" value="800"/>
+	</action-view>
+</object-views>

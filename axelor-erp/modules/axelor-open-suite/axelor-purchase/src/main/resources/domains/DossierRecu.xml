@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+   <module name="purchase" package="com.axelor.apps.purchase.db"/>
+
+    <entity name="DossierRecu" lang="java" >
+        <string name="nomSociete" title="Nom de la Societe" required="true"/>
+        <string name="nom" title="Nom d'offre d'appel" required="true"/>
+        <date name="dateOffre" title="Date d'offre d'appel" required="true"/>
+        <many-to-one name="piecesjointes" title="" ref="com.axelor.meta.db.MetaFile" />
+    </entity>
+
+</domain-models>

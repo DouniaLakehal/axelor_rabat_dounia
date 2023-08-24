@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+  <grid name="metierSelect-grid" title="Activité" model="com.axelor.apps.recette.db.MetierSelect">
+      <field name="s_name_fr" title="Activité"/>
+      <field name="s_name_ar" title="المهنة"/>
+      <field name="s_desc" title="Descritpion"/>
+  </grid>
+
+  <form name="metierSelect-form" title="Activité" model="com.axelor.apps.recette.db.MetierSelect">
+      <panel colSpan="12">
+          <field onChange="loadDataMetier" name="emploi" target-name="nom" title="Activités" colSpan="4" colOffset="4"/>
+      </panel>
+      <panel colSpan="12">
+          <field title="Activité" name="s_name_fr" readonly="true" colSpan="4"/>
+          <field title="المهنة" name="s_name_ar" readonly="true" colSpan="4"/>
+          <field title="Description" name="s_desc" readonly="true" colSpan="4"/>
+      </panel>
+  </form>
+
+    <action-method name="loadDataMetier">
+        <call class="com.axelor.apps.recette.web.RecetteControlleur" method="affecterSelectMetier"/>
+    </action-method>
+
+</object-views>

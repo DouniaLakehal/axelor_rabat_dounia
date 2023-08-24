@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="purchase" package="com.axelor.apps.purchase.db"/>
+
+    <entity name="DemandeEntretien" lang="java">
+        <!--<string name="numero" title="Numéro"/>
+        <date name="dateDemande" title="Date de la demande"/>-->
+        <boolean name="isDeleted" title="isDeleted" default="false"/>
+        <boolean name="hasCommande" title="hasCommande" default="false"/>
+    </entity>
+
+</domain-models>

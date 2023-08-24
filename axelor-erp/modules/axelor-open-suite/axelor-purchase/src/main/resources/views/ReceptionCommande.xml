@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+	<grid canDelete="false" name="reception-commande-achat-grid" title="Liste des Commandes reçus"
+		  model="com.axelor.apps.purchase.db.ReceptionCommande" >
+		<field name="commandeAchat.numero" title="N° Commande"/>
+		<field name="nbrArticleRecu" title="Nombre de reception"/>
+		<button title="Supprimer" icon="fa-trash" name="deleteReception" onClick="com.axelor.apps.purchase.web.AppPurchaseController:deleteReceptionCommande"/>
+	</grid>
+
+	<form onNew="default-data" onSave="save,addReceptionToCommande,updateStock" name="reception-commande-achat-form" title="Gestion des Receptions" model="com.axelor.apps.purchase.db.ReceptionCommande">
+		<panel-stack name="generalDetailsPanel">
+			<panel name="employeeDetailsPanel" colSpan="12">
+				<panel colSpan="12">
+					<field canView="false" onChange="afficheListArticle" required="true" colSpan="4" name="commandeAchat" domain="self.reception=false" title="Commande" target-name="numero"/>
+					<field required="true" colSpan="4" name="bonLivraison" title="Bon de Livraison" />
+					<field required="true" colSpan="4" name="dateReception" title="Date reception" readonly="true"/>
+				</panel>
+				<panel colSpan="12" showTitle="false" name="listArticle1" >
+					<field form-view="reception-article-form" name="articleRecuDetail" title="Liste des Articles" colSpan="12" canEdit="false" />
+				</panel>
+
+			</panel>
+		</panel-stack>
+	</form>
+
+	<grid canDelete="false" canEdit="false" canSave="false" canArchive="false" canMove="false"
+		  title="Reception Articles" name="recption-article-grid" model="com.axelor.apps.purchase.db.ArticlesRecu">
+		<field name="nameProduct" title="Article"/>
+		<field name="quantiteRecu" title="Quantite"/>
+		<field name="reliquat" title="Reliquat"/>
+	</grid>
+	<form onNew="updateListArticle" canEdit="false" canArchive="false" canSave="false" canDelete="false" canCopy="false" canAttach="false"
+		  canNew="false" title="Reception Articles" name="reception-article-form" model="com.axelor.apps.purchase.db.ArticlesRecu">
+		<panel hidden="true">
+			<field name="id_commande" title="id_commande"/>
+			<field name="nameProduct" title="nameProduct"/>
+		</panel>
+		<panel>
+			<field required="true" name="articleRecuDetail" domain="self.id in (:Listid)" onChange="load_quantiter" title="Article" target-name="articleprix.article.name"/>
+			<field readonly="true" name="quantiteRecu" title="Quantite" type="integer" min="0" onChange="verifierMax"/>
+			<field name="reliquat" title="Reliquat" readonly="true"/>
+		</panel>
+	</form>
+
+	<action-record name="default-data" model="com.axelor.apps.purchase.db.ReceptionCommande">
+		<field name="dateReception" expr="eval:__date__"/>
+	</action-record>
+
+	<action-method name="load_quantiter">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="load_quantite_reliquat"/>
+	</action-method>
+
+	<action-group name="updateListArticle">
+		<action name="executerMethode"/>
+	</action-group>
+
+
+
+	<action-method name="executerMethode">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="update_list_article"/>
+	</action-method>
+
+	
+	<action-method name="verifierMax">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="verifiermax"/>
+	</action-method>
+
+	<action-method name="updateStock">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="updateStockAchat"/>
+	</action-method>
+
+	<action-method name="addReceptionToCommande">
+		<call class="com.axelor.apps.purchase.web.AppPurchaseController" method="addreceptionToCommandeAchat"/>
+	</action-method>
+
+</object-views>

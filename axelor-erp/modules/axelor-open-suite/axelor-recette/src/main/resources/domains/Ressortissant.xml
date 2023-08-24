@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+  <module name="recette" package="com.axelor.apps.recette.db"/>
+
+  <entity name="Ressortissant" lang="java" sequential="true">
+    <boolean name="typePersonne"/>
+    <string name="increment_num"/>
+    <string name="nom_fr"/>
+    <string name="nom_ar"/>
+    <string name="prenom_fr"/>
+    <string name="prenom_ar"/>
+    <string name="cin"/>
+    <string name="sex" selection="tw.recette.sex"/>
+    <string name="num_tax"/>
+    <string name="num_rc"/>
+
+    <string name="rueEtNumRue_ste" />
+    <string name="rueEtNumRue_ste_ar" />
+    <string name="rc_ste" />
+    <string name="rc_ste_ar" />
+    <many-to-one name="p_ste" ref="com.axelor.apps.recette.db.Pays" title="Pays" />
+    <many-to-one name="p_ste_ar" ref="com.axelor.apps.recette.db.Pays" title="Pays" />
+    <string name="etatProvinceRegion_ste" />
+    <string name="etatProvinceRegion_ste_ar" />
+    <string name="ville_ste" />
+    <string name="ville_ste_ar" />
+    <string name="codePostale_ste" />
+    <string name="raisonSocial_ste"/>
+    <string name="raisonSocial_steAr"/>
+
+    <string name="adresseSociete" title="Adresse Societe">
+      <![CDATA[
+      String adresse = "";
+		adresse += this.rueEtNumRue_ste!=null?this.rueEtNumRue_ste+" " :"";
+		//adresse += this.p_ste!=null?this.p_ste.getNom()+" ":"";
+		//adresse += this.etatProvinceRegion_ste!=null?this.etatProvinceRegion_ste+" ":"";
+		adresse += this.ville_ste!=null?this.ville_ste+" ":"";
+		//adresse += this.codePostale_ste!=null?this.codePostale_ste+" ":"";
+		return adresse;
+        ]]>
+    </string>
+
+    <string name="adresseSociete_ar" title="Adresse Societe">
+      <![CDATA[
+      String adresse = "";
+		adresse += this.rueEtNumRue_ste_ar!=null?this.rueEtNumRue_ste_ar+" " :"";
+		adresse += this.etatProvinceRegion_ste_ar!=null?this.etatProvinceRegion_ste_ar+" ":"";
+		adresse += this.ville_ste_ar!=null?this.ville_ste_ar+" ":"";
+		adresse += this.p_ste_ar!=null?this.p_ste_ar.getNom_ar()+" ":"";
+		return adresse;
+        ]]>
+    </string>
+
+    <string name="rueEtNumRue_fct" />
+    <string name="rueEtNumRue_fct_ar" />
+    <string name="rc_fct_ar" />
+    <string name="rc_fct" />
+    <many-to-one name="p_fct" ref="com.axelor.apps.recette.db.Pays" title="Pays" />
+    <many-to-one name="p_fct_ar" ref="com.axelor.apps.recette.db.Pays" title="Pays" />
+    <string name="etatProvinceRegion_fct_ar" />
+    <string name="etatProvinceRegion_fct" />
+    <string name="ville_fct" />
+    <string name="ville_fct_ar" />
+    <string name="codePostale_fct" />
+    <string name="raisonSocial_fact"/>
+    <string name="raisonSocial_factAr"/>
+    <date name="dateFacture" title="Date Facture" />
+    <string name="numeroFacture" title="Numero Facture" />
+    <decimal name="valeur" title="Valeur" />
+    <string name="devise" title="Devise" />
+    <string name="valeurAr" title="القيمة" />
+
+    <string name="valeur_devise" title="valeur devise">
+      <![CDATA[
+      String valeur = "";
+        valeur += this.valeur!=null?this.valeur+" ":"";
+        valeur += this.devise!=null?this.devise+" " :"";
+		return valeur;
+        ]]>
+    </string>
+
+    <many-to-one name="produit" ref="com.axelor.apps.recette.db.Produit" title="Produit" />
+
+    <string name="adresseFacture" title="Adresse Facture">
+      <![CDATA[
+      String adresse = "";
+		adresse += this.rueEtNumRue_fct!=null?this.rueEtNumRue_fct+" " :"";
+		adresse += this.p_fct!=null?this.p_fct.getNom()+" ":"";
+		adresse += this.etatProvinceRegion_fct!=null?this.etatProvinceRegion_fct+" ":"";
+		adresse += this.ville_fct!=null?this.ville_fct+" ":"";
+		adresse += this.codePostale_fct!=null?this.codePostale_fct+" ":"";
+		return adresse;
+      ]]>
+    </string>
+
+    <string name="adresseFacture_ar" title="Adresse Facture">
+      <![CDATA[
+      String adresse = "";
+        adresse += this.raisonSocial_factAr!=null?this.rueEtNumRue_fct_ar+" ":"";
+		adresse += this.rueEtNumRue_fct_ar!=null?this.rueEtNumRue_fct_ar+" " :"";
+		adresse += this.etatProvinceRegion_fct_ar!=null?this.etatProvinceRegion_fct_ar+" ":"";
+		adresse += this.ville_fct_ar!=null?this.ville_fct_ar+" ":"";
+		adresse += this.p_fct_ar!=null?this.p_fct_ar.getNom_ar()+" ":"";
+		return adresse;
+        ]]>
+    </string>
+
+    <one-to-many name="metiers" ref="com.axelor.apps.recette.db.MetierSelect"/>
+    <string name="identifiantFiscale"/>
+    <string name="qualite"/>
+
+    <boolean name="has_attestation"/>
+    <boolean name="has_origin"/>
+    <integer name="type"  />
+  </entity>
+
+</domain-models>

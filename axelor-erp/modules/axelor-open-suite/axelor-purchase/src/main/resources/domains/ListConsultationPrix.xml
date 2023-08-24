@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+  <module name="purchase" package="com.axelor.apps.purchase.db"/>
+ 
+  <entity name="ListConsultationPrix" lang="java">
+             <string name="numero" title="Numéro"/>
+             <date name="dateList" title="Date"/>
+                 <string name="purchaseRequestSeq" title="Ref."/>
+             <string name="nom" title="essai"/>
+             <integer name="statusSlection" title="Status" selection="purchase.consultation.status.slection" default="1"/>
+           <many-to-one name="firstsupplier" ref="com.axelor.apps.base.db.Partner" title="Fournisseur 1" />
+             <many-to-one name="secondsupplier" ref="com.axelor.apps.base.db.Partner" title="Fournisseur 2"/>
+             <many-to-one name="thirdsupplier" ref="com.axelor.apps.base.db.Partner" title="Fournisseur 3"/>
+             
+   </entity>
+  </domain-models>

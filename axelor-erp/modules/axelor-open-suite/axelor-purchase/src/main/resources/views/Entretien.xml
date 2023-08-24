@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <grid name="entretien_quantite_grid1" title="Liste des entretiens"
+          model="com.axelor.apps.purchase.db.EntretienQuantite" >
+        <field name="entretiens" title="Nom de l'entretien"/>
+        <field name="quantite" title="Quantité"/>
+
+    </grid>
+
+    <form name="entretien_quantite_form1"
+          title="Gestion des etretiens"
+          model="com.axelor.apps.purchase.db.EntretienQuantite" width="large" onLoad=""
+          onNew="">
+
+        <panel-stack name="generalDetailsPanel">
+            <panel name="employeeDetailsPanel" colSpan="12">
+                <field name="entretiens" title="Entretien"/>
+                <field name="quantite" title="Quantité"/>
+
+            </panel>
+
+        </panel-stack>
+
+    </form>
+
+</object-views>

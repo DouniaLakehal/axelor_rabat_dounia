@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+    <grid name="BorderauEmission-grid" title="Bordereau d'emission" model="com.axelor.apps.configuration.db.BorderauEmission">
+        <field name="code" title="Code"/>
+        <field name="year" title="Annee"/>
+        <field name="budget" title="Budget"/>
+        <field name="type" title="Nature de budget"/>
+        <field name="montantChiffre" title="Montant"/>
+        <field name="nbrOP" title="Nombre OP"/>
+        <button name="btn_print_bord_emission" onClick="print_bord_emission"
+                title="imprimer bordereau emission" icon="fa-print"/>
+    </grid>
+    <action-method name="print_bord_emission">
+        <call class="com.axelor.apps.purchase.web.PurchaseOrderController" method="tw_print_bord_emission"/>
+    </action-method>
+    <action-method name="load_budget_depenses_bordereau_emission">
+        <call class="com.axelor.apps.purchase.web.PurchaseOrderController" method="tw_load_budget_depenses_bordereau_emission"/>
+    </action-method>
+
+    <action-method name="affecter_nature_budget">
+        <call class="com.axelor.apps.purchase.web.PurchaseOrderController" method="tw_affecter_nature_budget"/>
+    </action-method>
+
+    <action-method name="affecter_information_op_brdEmission">
+        <call class="com.axelor.apps.purchase.web.PurchaseOrderController" method="tw_affecter_information_op_brdEmission"/>
+    </action-method>
+
+
+
+    <form name="BorderauEmission-form" title="Bordereau d'emission" onNew="load_budget_depenses_bordereau_emission"
+          model="com.axelor.apps.configuration.db.BorderauEmission">
+        <panel name="mainPanel">
+            <field name="code" title="Code" colSpan="2"/>
+            <field name="year" title="Annee" colSpan="2" onChange="load_budget_depenses_bordereau_emission"/>
+            <field name="budget" title="Budget" colSpan="4" onChange="affecter_nature_budget"/>
+            <field name="type" title="Nature de budget" colSpan="4" readonly="true"/>
+            <field name="ordrePayement" title="Ordre de Payement" colSpan="12" onChange="affecter_information_op_brdEmission"
+                   canEdit="false" canNew="false" canRemove="false"/>
+            <field name="nbrOP" title="Nombre OP" colSpan="2" readonly="true"/>
+            <field name="montantChiffre" title="Montant" colSpan="3" readonly="true"/>
+            <field name="montantLettre" title="Montant Lettres" colSpan="7" readonly="true"/>
+
+        </panel>
+    </form>
+</object-views>

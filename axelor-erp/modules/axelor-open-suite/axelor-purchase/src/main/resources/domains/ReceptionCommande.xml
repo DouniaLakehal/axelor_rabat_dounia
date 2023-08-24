@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+   <module name="purchase" package="com.axelor.apps.purchase.db"/>
+
+    <entity name="ReceptionCommande" lang="java" >
+        <string name="bonLivraison" required="true"/>
+        <date name="dateReception" required="true"/>
+        <many-to-one name="commandeAchat" ref="com.axelor.apps.purchase.db.CommandeAchat"/>
+        <one-to-many name="articleRecuDetail" title="articleRecu" ref="com.axelor.apps.purchase.db.ArticlesRecu" mappedBy="receptionCommande"/>
+        <integer name="nbrArticleRecu" title="nbrArticleRecu">
+            <![CDATA[
+                return articleRecuDetail==null?0:articleRecuDetail.size();
+            ]]>
+        </integer>
+    </entity>
+
+</domain-models>

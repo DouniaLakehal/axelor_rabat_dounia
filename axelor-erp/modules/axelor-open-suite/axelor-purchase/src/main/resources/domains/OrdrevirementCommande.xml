@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+    <module name="purchase" package="com.axelor.apps.purchase.db"/>
+
+    <entity name="OrdrevirementCommande" lang="java">
+        <date name="datevirement"/>
+        <string name="numero" />
+        <many-to-one name="compte" ref="com.axelor.apps.configuration.db.Compte"/>
+        <many-to-one name="historique" ref="com.axelor.apps.configuration.db.HistoriqueCompte"/>
+       <one-to-many mappedBy="ordrevirementCommande" name="selectOP" ref="com.axelor.apps.purchase.db.SelectOP"/>
+        <long name="id_historique_budget"/>
+        <decimal name="montant"/>
+        <string name="fournisseurName"/>
+        <string name="banqueName"/>
+        <string name="rib"/>
+        <string name="montantLettre"/>
+        <string name="objetVirement" large="true" multiline="true"/>
+    </entity>
+
+</domain-models>

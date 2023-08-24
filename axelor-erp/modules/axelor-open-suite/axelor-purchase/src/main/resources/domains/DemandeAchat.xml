@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+   <module name="purchase" package="com.axelor.apps.purchase.db"/>
+  
+   <entity name="DemandeAchat" lang="java">
+       <string name="numero" title="numero"/>
+       <string name="etat" title="etat" default="Ouvert"/>
+       <date name="dateDemandeAchat" title="date"/>
+       <integer name="nbr" title="nbr" min="0"/>
+       <integer name="year" title="year" min="1900"/>
+       <one-to-one name="personnel" ref="com.axelor.apps.hr.db.Employee"/>
+       <one-to-many name="articledetail" ref="com.axelor.apps.purchase.db.ArticleDetails" mappedBy="demandeAchat"/>
+       <many-to-one name="annexe" ref="com.axelor.apps.configuration.db.AnnexeGenerale"/>
+
+    </entity>
+
+</domain-models>

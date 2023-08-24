@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+   <module name="purchase" package="com.axelor.apps.purchase.db"/>
+
+    <entity name="OffreAppel" lang="java" >
+        <string name="numero" title="Numero d'offre d'appel" />
+        <string name="nom" title="Nom d'offre d'appel" />
+        <date name="dateLancement" title="Date d'offre d'appel"/>
+        <time name="heureLancement"/>
+        <date name="dateOverture" title="Date de l'overture" />
+        <time name="heureOverture"/>
+        <string name="typeDossier"/>
+        <boolean name="offreTechnique"  title="Offre Technique" default="false"/>
+        <boolean name="dossierAddetive"  default="false"/>
+        <one-to-many name="comite" ref="com.axelor.apps.purchase.db.Comite" />
+        <one-to-many name="assurances" ref="com.axelor.apps.purchase.db.Assurances" />
+        <one-to-many name="piecesJointes" ref="com.axelor.apps.purchase.db.PiecesJointe2" />
+        <one-to-many name="soumissionnaire" ref="com.axelor.apps.purchase.db.Soumissionnaire" mappedBy="offreappels"/>
+        <one-to-many name="critereNotation" ref="com.axelor.apps.purchase.db.CritereNotationaSelect" mappedBy="offreappel"/>
+        <boolean name="pourcentage"/>
+        <decimal name="pourcentageValideNote"/>
+        <decimal name="pointValideNote"/>
+        <boolean name="hasMarche" title="marché"/>
+        <string name="numMarche" title="Numero marche"/>
+        <many-to-one name="soumissGagnant" ref="com.axelor.apps.purchase.db.Soumissionnaire" />
+        <integer name="year" title="year"/>
+        <integer name="yearCode" title="yearCode">
+            <![CDATA[
+            return getCreatedOn().toLocalDate().getYear();
+            ]]>
+        </integer>
+        <integer name="nbrSoumiss" title="nbrSoumiss">
+            <![CDATA[
+            return soumissionnaire.size();
+            ]]>
+        </integer>
+        <many-to-one name="marcheProvisoire" ref="com.axelor.apps.purchase.db.MarcheProvisoire"/>
+        <boolean name="validationMarheProvisoire"/>
+        <date name="dateApprobation"/>
+        <date name="dateVisa"/>
+        <many-to-one name="acteEngament" ref="com.axelor.meta.db.MetaFile"/>
+        <boolean name="visiteDesLieux"/>
+        <date name="dateVisiteDesLieux"/>
+        <boolean name="echantillionnage"/>
+        <boolean name="documentationTechnique"/>
+        <date name="dateLimiteEchantillionnage"/>
+        <date name="dateLimiteDocumentationTechnique"/>
+        <boolean name="offreFinanciereValide"/>
+        <boolean name="annulation"/>
+        <date name="dateProrogation"/>
+        <integer name="nbrJourProrogation"/>
+        <many-to-one name="decisionMemebre" title="Piece" ref="com.axelor.meta.db.MetaFile"/>
+        <one-to-many name="mediaPublication" ref="com.axelor.apps.purchase.db.Media"/>
+        <decimal name="montantCaution"/>
+        <many-to-one name="cautionDefinitive" title="Caution définitive" ref="com.axelor.meta.db.MetaFile"/>
+        <many-to-one name="prestation" title="Type de prestation" ref="com.axelor.apps.configuration.db.TypePrestation"/>
+        <string name="caution_lettre"/>
+        <decimal name="estimation_coup"/>
+        <string name="estimation_coup_lettre"/>
+        <one-to-many name="ordreServices" ref="com.axelor.apps.purchase.db.OrdreServices"/>
+        <many-to-one name="soum1" ref="com.axelor.apps.purchase.db.Soumissionnaire"/>
+        <many-to-one name="soum2" ref="com.axelor.apps.purchase.db.Soumissionnaire"/>
+        <many-to-one name="soum3" ref="com.axelor.apps.purchase.db.Soumissionnaire"/>
+        <many-to-one name="soumChoisi" ref="com.axelor.apps.purchase.db.Soumissionnaire"/>
+        <date name="datereunion"/>
+        <one-to-many name="livrablep" ref="com.axelor.apps.purchase.db.LivrableP" />
+        <one-to-many name="livrabled" ref="com.axelor.apps.purchase.db.LivrableD" />
+        <boolean name="livrer"/>
+        <date name="dateDocument"/>
+        <integer name="nbrJourLimit"/>
+    </entity>
+
+</domain-models>

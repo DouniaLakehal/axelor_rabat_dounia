@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+			  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+<grid name="grid_selectOP" canSave="false" title="Ordre de paiement" model="com.axelor.apps.purchase.db.SelectOP">
+	<field name="ndart" title="N D'ART"/>
+	<field name="numero" title="N O.P"/>
+	<field name="benificiaire" title="NOMS DES BENIFICIAIRES"/>
+	<field name="compte" title="COMPTES A CREDITER"/>
+	<field name="somme" title="SOMMES A VIRER"/>
+</grid>
+
+<form  name="form_selectOP" title="Select OP" model="com.axelor.apps.purchase.db.SelectOP" >
+	<panel name="infoifo" colSpan="12">
+		<field name="orderPaymentCommande" colSpan="4" colOffset="4" domain="self.haspayer=false" target-name="numero"
+			   onChange="com.axelor.apps.purchase.web.AppPurchaseController:load_selectOP"/>
+	</panel>
+	<panel colSpan="12">
+		<field name="numero" colSpan="6" readonly="true"/>
+		<field name="benificiaire" colSpan="6" readonly="true"/>
+		<field name="rubriqueBudgetaire" colSpan="6" readonly="true"/>
+		<field name="compte" colSpan="6" readonly="true"/>
+		<field name="somme" colSpan="6" readonly="true"/>
+	</panel>
+</form>
+
+
+</object-views>

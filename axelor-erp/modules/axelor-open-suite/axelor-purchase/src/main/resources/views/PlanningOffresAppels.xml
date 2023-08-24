@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+
+    <grid name="planingOffres-grid" title="Programme prévisionnel"
+          model="com.axelor.apps.purchase.db.PlannigOffresAppels">
+        <toolbar>
+            <button name="imrimerPlaning" onClick="imprimerPlaning" title="imprimer programme prévisionnel"/>
+        </toolbar>
+        <field name="object" title="Object"/>
+        <field name="naturePrestation.naturePrestation" title="Nature de prestation"/>
+        <field name="article.nom_fr" title="Article"/>
+        <field name="lieuxExecution_fr" title="Lieu d'exécution"/>
+        <field name="modePassassion_fr" title="Mode de passation"/>
+        <field name="periode" title="Période prévue pour le lancement"/>
+        <field name="email" title="E-mail"/>
+        <field name="telephone" title="Telephone"/>
+        <field name="adress" title="Adresse"/>
+        <field name="reserveePme" title="Marchés réservés aux PME"/>
+    </grid>
+
+    <form name="planingOffres-form" title="Programme prévisionnel"
+          model="com.axelor.apps.purchase.db.PlannigOffresAppels" onNew="LoadDefaultData_coordonnée">
+
+
+        <panel name="infoGenerale" colSpan="12">
+        <panel title="Information Générale" colSpan="6"/>
+        <panel title="معلومات عامة" css="tw_arabe_orient" colSpan="6"/>
+			<field name="object" title="Object" colSpan="12"/>
+			<field name="object_ar" css="tw_arabe_orient" title="وصف فني مفصل" colSpan="12"/>
+
+            <field name="naturePrestation" onChange="default_prestation" target-name="nom_fr" title="Nature de prestation" colSpan="6"/>
+            <field name="naturePrestation_ar" target-name="nom_ar" css="tw_arabe_orient" title="طرق ابرام الصفقات" colSpan="6"/>
+
+            <field name="article" target-name="nom_fr" onChange="default_article" domain="self.naturePrestation = :naturePrestation" title="Article"/>
+            <field name="article_ar" target-name="nom_ar" css="tw_arabe_orient" title="الظهير"/>
+
+            <field name="lieuExecution_fr" onChange="default_lieu" target-name="nom_fr" title="Lieu d'exécution" colSpan="6"/>
+            <field name="lieuExecution_ar" target-name="nom_ar" css="tw_arabe_orient" domain="self.id=:lieuExecution_fr" title="مكان التنفيذ" colSpan="6"/>
+
+            <field name="modePassassion_fr" onChange="default_passation" target-name="nom_fr" title="Mode de passation" colSpan="6"/>
+            <field name="modePassassion_ar" target-name="nom_ar" css="tw_arabe_orient" domain="self.id=:modePassassion_fr" title="طرق ابرام الصفقات" colSpan="6"/>
+
+            <field name="reserveePme" title="Projet réserver au PME"/>
+        </panel>
+        <panel name="periodeLancement" colSpan="12">
+            <panel title="Période prévue pour le lancement" colSpan="6"/>
+            <panel title="الفترة المقررة للإطلاق" css="tw_arabe_orient" colSpan="6"/>
+            <field name="mois_fr" target-name="nom_fr" onChange="default_mois" title="Mois"/>
+            <field name="annee" title="Année"/>
+            <field name="mois_ar" title="mois" hidden="true"/>
+        </panel>
+
+        <panel name="coodoneeDuService" colSpan="12">
+            <panel title="Coordonnées du service concerné" colSpan="6"/>
+            <panel title="بيانات الاتصال بالخدمة المعنية" css="tw_arabe_orient" colSpan="6"/>
+            <field name="telephone" title="Téléphone" readonly="true"/>
+            <field name="email" title="Email" readonly="true"/>
+            <field name="adress" title="Adresse" colSpan="12" readonly="true"/>
+            <button colSpan="3" colOffset="9" name="btn_active_field_coordonnee" title="Modifier les coordonnées"
+                    onClick="com.axelor.apps.purchase.web.AppPurchaseController:activerModification_cordonnee"/>
+        </panel>
+
+
+    </form>
+
+    <action-attrs name="default_article">
+        <attribute for="article_ar" name="value" expr="eval:article"/>
+    </action-attrs>
+
+    <action-attrs name="default_prestation">
+        <attribute for="naturePrestation_ar" name="value" expr="eval:naturePrestation"/>
+    </action-attrs>
+
+    <action-attrs name="default_lieu">
+        <attribute for="lieuExecution_ar" name="value" expr="eval:lieuExecution_fr"/>
+    </action-attrs>
+
+    <action-attrs name="default_passation">
+        <attribute for="modePassassion_ar" name="value" expr="eval:modePassassion_fr"/>
+    </action-attrs>
+
+    <action-attrs name="default_mois">
+        <attribute for="mois_ar" name="value" expr="eval:mois_fr"/>
+    </action-attrs>
+
+    <action-group name="imprimerPlaning">
+        <action name="afficheFormImpresseion"/>
+    </action-group>
+
+    <action-method name="changer_Langue_affichage">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="changer_langue_programe_previsionnel"/>
+    </action-method>
+
+    <action-view name="afficheFormImpresseion" title="title" model="com.axelor.apps.purchase.db.PlannigOffresAppels">
+        <view type="form" name="form_planing_download"/>
+        <view-param name="forceEdit" value="true"/>
+        <view-param name="popup" value="true"/>
+        <view-param name="popup-save" value="false"/>
+        <view-param name="show-toolbar" value="false"/>
+    </action-view>
+
+    <form title="Imprimer le programme prévisionnel" name="form_planing_download"
+          model="com.axelor.apps.purchase.db.PlannigOffresAppels">
+        <panel>
+            <field title="Langue du document" name="lang_de_article_type" selection="tw.article.language" colSpan="6"/>
+            <field name="year" title="Année" colSpan="6"/>
+            <field colSpan="6" name="typefichier" title="type de document" selection="type.document.pdf.word"/>
+            <button colSpan="4" title="Imprimer" name="btn_imprimer"
+                    onClick="com.axelor.apps.purchase.web.AppPurchaseController:imprimerPlaningParAnnee, close"/>
+        </panel>
+    </form>
+
+    <action-method name="LoadDefaultData_coordonnée">
+        <call class="com.axelor.apps.purchase.web.AppPurchaseController" method="load_default_coordonnee"/>
+    </action-method>
+
+</object-views>

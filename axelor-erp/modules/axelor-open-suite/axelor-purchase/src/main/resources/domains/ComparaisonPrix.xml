@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<domain-models xmlns="http://axelor.com/xml/ns/domain-models"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://axelor.com/xml/ns/domain-models http://axelor.com/xml/ns/domain-models/domain-models_5.3.xsd">
+
+  <module name="purchase" package="com.axelor.apps.purchase.db"/>
+
+  <entity name="ComparaisonPrix" lang="java" cacheable="true">
+      <one-to-one name="consultationPrix" ref="com.axelor.apps.purchase.db.ConsultationPrix" title="consultation des Prix"/>
+      <one-to-one name="fournisseur" ref="com.axelor.apps.configuration.db.Fournisseur" title="Fournisseur"/>
+      <one-to-one name="commandeAchat" ref="com.axelor.apps.purchase.db.CommandeAchat" title="commandeAchat"/>
+      <many-to-many name="articleprix" ref="com.axelor.apps.purchase.db.ArticlesPrix"/>
+      <integer name="tva" title="tva"/>
+      <decimal name="qteDemande"/>
+      <integer name="nbr" title="Nombre articles"/>
+      <decimal name="total" title="total"/>
+      <boolean name="isDeleted" title="isDeleted" default="false"/>
+      <boolean name="hasCommande" title="hasCommande" default="false"/>
+      <long name="idCommandeAchat" title="idCommandeAchat" default="0"/>
+  </entity>
+  
+</domain-models>
