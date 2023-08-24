@@ -1078,10 +1078,7 @@ class EmployeeAdvanceService {
                 ccd_mt_new = gs_new.getTraitementDeBase().multiply(ccd.getPors().divide(_prcent));
                 ;
             }
-            if (employee.getIs_cnss()) {
-                ccd_mt_old = BigDecimal.valueOf(0.00);
-                ccd_mt_new = BigDecimal.valueOf(0.00);
-            }
+
 
             data.add(ccd_mt_old.setScale(2, RoundingMode.HALF_UP).toString());
             data.add(ccd_mt_new.setScale(2, RoundingMode.HALF_UP).toString());
@@ -1248,65 +1245,6 @@ class EmployeeAdvanceService {
         ls_retraite.add(ir_new);
         ls_diff_rappel.add(ir_diff);
 
-        ////// PROLONGATION //////////////////////
-
-        BigDecimal css_old = BigDecimal.ZERO;
-        BigDecimal css_new = BigDecimal.ZERO;
-        BigDecimal net = hasProlongation1 ? employee.getNet() : BigDecimal.valueOf(0);
-        BigDecimal ir = hasProlongation1 ? employee.getIrsalaire() : BigDecimal.valueOf(0);
-        BigDecimal prolongation_emp_old = BigDecimal.ZERO;
-        BigDecimal prolongation_emp_new = BigDecimal.ZERO;
-        if (!Objects.equals(net, BigDecimal.ZERO)) {
-            prolongation_emp_old =
-                    (total_brute_old
-                            .add(BigDecimal.valueOf(child_mt_old))
-                            .add(indem_foncNet_old.setScale(2, RoundingMode.HALF_UP))
-                            .add(indem_voitur_old.setScale(2, RoundingMode.HALF_UP))
-                            .add(indem_repres_old.setScale(2, RoundingMode.HALF_UP))
-                            .subtract(
-                                    rcar_mt_old
-                                            .add(compRcar_mt_old)
-                                            .add(amo_mt_old)
-                                            .add(sec_mt_old)
-                                            .add(ccd_mt_old)
-                                            .add(css_old)
-                                            .add(getcreditAtdate(employee, d1_moin1Day))
-                                            .add(
-                                                    employee.getIsCotisation()
-                                                            ? employee.getMontantCotisation()
-                                                            : BigDecimal.valueOf(0))
-                                            .add(ir)))
-                            .add(BigDecimal.valueOf(employee.getId() == 133 ? 300 : 0))
-                            .subtract(net);
-        } else {
-            prolongation_emp_old = BigDecimal.ZERO;
-        }
-        if (!Objects.equals(net, BigDecimal.ZERO)) {
-            prolongation_emp_new =
-                    (total_brute_new
-                            .add(BigDecimal.valueOf(child_mt_new))
-                            .add(indem_foncNet_new.setScale(2, RoundingMode.HALF_UP))
-                            .add(indem_voitur_new.setScale(2, RoundingMode.HALF_UP))
-                            .add(indem_repres_new.setScale(2, RoundingMode.HALF_UP))
-                            .subtract(
-                                    rcar_mt_new
-                                            .add(compRcar_mt_new)
-                                            .add(amo_mt_new)
-                                            .add(sec_mt_new)
-                                            .add(css_new)
-                                            .add(getcreditAtdate(employee, LocalDate.parse(dateFin)))
-                                            .add(
-                                                    employee.getIsCotisation()
-                                                            ? employee.getMontantCotisation()
-                                                            : BigDecimal.valueOf(0))
-                                            .add(ccd_mt_new)
-                                            .add(ir)))
-                            .add(BigDecimal.valueOf(employee.getId() == 133 ? 300 : 0))
-                            .subtract(net);
-        } else {
-            prolongation_emp_new = BigDecimal.ZERO;
-        }
-
         data.add("A.O.S.");
         Aos aos = employeHasAOSAtDate(employee.getId(), d1);
         BigDecimal mnt = BigDecimal.ZERO;
@@ -1326,8 +1264,6 @@ class EmployeeAdvanceService {
         BigDecimal tot_ret_old = new BigDecimal(0);
         BigDecimal tot_ret_new = new BigDecimal(0);
 
-        css_old = css_old;
-        css_new = css_new;
 
         tot_ret_old =
                 rcar_mt_old
@@ -1335,7 +1271,6 @@ class EmployeeAdvanceService {
                         .add(amo_mt_old)
                         .add(sec_mt_old)
                         .add(ccd_mt_old)
-                        .add(css_old)
                         .add(getcreditAtdate(employee, d1_moin1Day))
                         .add(
                                 employee.getIsCotisation()
@@ -1348,7 +1283,6 @@ class EmployeeAdvanceService {
                         .add(compRcar_mt_new)
                         .add(amo_mt_new)
                         .add(sec_mt_new)
-                        .add(css_new)
                         .add(getcreditAtdate(employee, LocalDate.parse(dateFin)))
                         .add(
                                 employee.getIsCotisation()
@@ -1928,14 +1862,7 @@ class EmployeeAdvanceService {
                 rcar_mt_new = total_brute_new.multiply(rcar_new.getPors().divide(_prcent));
             }
         }
-        if (employee.getRegem().getId() == 1) {
-            rcar_mt_old = BigDecimal.valueOf(0.00);
-            rcar_mt_new = BigDecimal.valueOf(0.00);
-        }
-        if (employee.getIs_cnss()) {
-            rcar_mt_old = BigDecimal.valueOf(0.00);
-            rcar_mt_new = BigDecimal.valueOf(0.00);
-        }
+
         data.add(rcar_mt_old.setScale(2, RoundingMode.HALF_UP).toString());
         data.add(rcar_mt_new.setScale(2, RoundingMode.HALF_UP).toString());
         data.add(rcar_mt_new.setScale(2, RoundingMode.HALF_UP).subtract(rcar_mt_old).toString());
@@ -1970,14 +1897,7 @@ class EmployeeAdvanceService {
                                 .multiply(comp_rcar_new.getPors().divide(_prcent));
             }
         }
-        if (employee.getRegem().getId() == 1) {
-            compRcar_mt_old = BigDecimal.valueOf(0.00);
-            compRcar_mt_new = BigDecimal.valueOf(0.00);
-        }
-        if (employee.getIs_cnss()) {
-            compRcar_mt_old = BigDecimal.valueOf(0.00);
-            compRcar_mt_new = BigDecimal.valueOf(0.00);
-        }
+
         data.add(compRcar_mt_old.setScale(2, RoundingMode.HALF_UP).toString());
         data.add(compRcar_mt_new.setScale(2, RoundingMode.HALF_UP).toString());
         data.add(
@@ -2063,10 +1983,7 @@ class EmployeeAdvanceService {
             sec_mt_new = total_2_new.multiply(sec.getPors().divide(_prcent));
             ;
         }
-        if (employee.getIs_cnss()) {
-            sec_mt_old = BigDecimal.valueOf(0.00);
-            sec_mt_new = BigDecimal.valueOf(0.00);
-        }
+
         if (o.getId() == 1) data.add("MUTUELLE SEC MUTUALISTE");
         else data.add("MUTUELLE OMFAM SM");
         data.add(sec_mt_old.setScale(2, RoundingMode.HALF_UP).toString());
@@ -2118,10 +2035,7 @@ class EmployeeAdvanceService {
                 ccd_mt_new = gs_new.getTraitementDeBase().multiply(ccd.getPors().divide(_prcent));
                 ;
             }
-            if (employee.getIs_cnss()) {
-                ccd_mt_old = BigDecimal.valueOf(0.00);
-                ccd_mt_new = BigDecimal.valueOf(0.00);
-            }
+
 
             data.add(ccd_mt_old.setScale(2, RoundingMode.HALF_UP).toString());
             data.add(ccd_mt_new.setScale(2, RoundingMode.HALF_UP).toString());
@@ -2146,10 +2060,7 @@ class EmployeeAdvanceService {
             ccd_mt_new =
                     ccd_mt_new.compareTo(ccd.getMontant_max()) > 0 ? ccd.getMontant_max() : ccd_mt_new;
 
-            if (employee.getIs_cnss()) {
-                ccd_mt_old = BigDecimal.valueOf(0.00);
-                ccd_mt_new = BigDecimal.valueOf(0.00);
-            }
+
 
             data.add(ccd_mt_old.setScale(2, RoundingMode.HALF_UP).toString());
             data.add(ccd_mt_new.setScale(2, RoundingMode.HALF_UP).toString());

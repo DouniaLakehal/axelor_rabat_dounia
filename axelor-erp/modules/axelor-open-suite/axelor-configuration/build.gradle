@@ -12,6 +12,7 @@ axelor {
 }
 
 dependencies {
+	api project(":modules:axelor-human-resource")
 	api project(":modules:axelor-base")
 	// https://mvnrepository.com/artifact/com.itextpdf/itextpdf
 	implementation group: 'com.itextpdf', name: 'itextpdf', version: '5.5.13.2'
