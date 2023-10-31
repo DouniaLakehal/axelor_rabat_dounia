@@ -12,6 +12,10 @@
         <panel name="mainPanel">
             <field name="employee"/>
             <field name="pourcentage"/>
+            <field name="brut"/>
+            <field name="net"/>
+            <field name="ir"/>
+            <field name="retenue"/>
             <field name="annee"/>
         </panel>
     </form>

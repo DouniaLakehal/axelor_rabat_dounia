@@ -1709,4 +1709,17 @@ public class EmployeeController {
             .getFileLink();
     response.setView(ActionView.define("Attestation de salaire").add("html", fileLink).map());
   }
+
+  public void imprimerAttestationDeTravail(ActionRequest request, ActionResponse response)
+          throws AxelorException {
+    Long id = (Long) request.getContext().get("id");
+    String fileLink =
+            ReportFactory.createReport(IReport.AttestationTravail, "Attestation de travail")
+                    .addParam("Locale", ReportSettings.getPrintingLocale(null))
+                    .addParam("id_employee", id)
+                    .generate()
+                    .getFileLink();
+    response.setView(ActionView.define("Attestation de salaire").add("html", fileLink).map());
+  }
+
 }

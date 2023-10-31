@@ -82,6 +82,8 @@ class EmployeeAdvanceService {
     private CompteRepository compteRepository;
     @Inject
     private RappelEmployeRepository rappelEmployeRepository;
+    @Inject
+    private PrimeRepository primeRepository;
 
     @Transactional
     public
@@ -806,8 +808,8 @@ class EmployeeAdvanceService {
                 data.add(indem_foncNet_new.subtract(indem_foncNet_old).toString());
                 ls_retraite.add(indem_foncNet_new);
                 ls_diff_rappel.add(indem_foncNet_new.subtract(indem_foncNet_old));
-                BigDecimal presentation_old = indem_voitur_old.add(indem_foncNet_old).add(indem_repres_old);
-                BigDecimal presentation_new = indem_voitur_new.add(indem_foncNet_new).add(indem_repres_new);
+                BigDecimal presentation_old = indem_voitur_old.add(indem_foncNet_old).add(indem_repres_old).add(indem_log_old);
+                BigDecimal presentation_new = indem_voitur_new.add(indem_foncNet_new).add(indem_repres_new).add(indem_log_new);
                 data.add("IND.RESPONSABILITE");
                 data.add(presentation_old.toString());
                 data.add(presentation_new.toString());
@@ -836,8 +838,7 @@ class EmployeeAdvanceService {
                         .add(resid_n_old)
                         .add(gs_old.getIndemniteDeHierarchieAdministrative())
                         .add(gs_old.getIndemniteDeSujetion())
-                        .add(gs_old.getIndemniteEncadrement())
-                        .add(indem_log_old);
+                        .add(gs_old.getIndemniteEncadrement());
         total_brute_new =
                 total_brute_new
                         .add(gs_new.getTraitementDeBase())
@@ -846,7 +847,7 @@ class EmployeeAdvanceService {
                         .add(gs_new.getIndemniteDeHierarchieAdministrative())
                         .add(gs_new.getIndemniteDeSujetion())
                         .add(gs_new.getIndemniteEncadrement())
-                        .add(indem_log_new);
+        ;
         data.add(
                 total_brute_old
                         .add(BigDecimal.valueOf(child_mt_old))
@@ -873,33 +874,27 @@ class EmployeeAdvanceService {
         BigDecimal rcar_mt_new = new BigDecimal("0");
         BigDecimal _prcent = new BigDecimal("100");
         // contractuelle == true
-        boolean hasProlongation1 = employeHasProlongationAtDate(id_emp, d1);
-        boolean hasProlongation2 = employeHasProlongationAtDate(id_emp, d2);
 
-        if (hasProlongation1) {
-            rcar_mt_old = rcar_mt_old.setScale(2, RoundingMode.HALF_UP);
-        } else if (hasProlongation2) {
-            rcar_mt_new = rcar_mt_new.setScale(2, RoundingMode.HALF_UP);
-        } else {
-            if (!employee.getTypePersonnel()) {
-                if (total_brute_old
-                        .multiply(rcar_old.getPors().divide(_prcent))
-                        .compareTo(rcar_old.getMontant_max())
-                        >= 0) {
-                    rcar_mt_old = rcar_old.getMontant_max();
-                } else {
-                    rcar_mt_old = total_brute_old.multiply(rcar_old.getPors().divide(_prcent));
-                }
-                if (total_brute_new
-                        .multiply(rcar_new.getPors().divide(_prcent))
-                        .compareTo(rcar_new.getMontant_max())
-                        >= 0) {
-                    rcar_mt_new = rcar_new.getMontant_max();
-                } else {
-                    rcar_mt_new = total_brute_new.multiply(rcar_new.getPors().divide(_prcent));
-                }
+
+        if (!employee.getTypePersonnel()) {
+            if (total_brute_old
+                    .multiply(rcar_old.getPors().divide(_prcent))
+                    .compareTo(rcar_old.getMontant_max())
+                    >= 0) {
+                rcar_mt_old = rcar_old.getMontant_max();
+            } else {
+                rcar_mt_old = total_brute_old.multiply(rcar_old.getPors().divide(_prcent));
+            }
+            if (total_brute_new
+                    .multiply(rcar_new.getPors().divide(_prcent))
+                    .compareTo(rcar_new.getMontant_max())
+                    >= 0) {
+                rcar_mt_new = rcar_new.getMontant_max();
+            } else {
+                rcar_mt_new = total_brute_new.multiply(rcar_new.getPors().divide(_prcent));
             }
         }
+
 
         RCARC comp_rcar_old = getComplementRcarByYear(d1_moin1Day.getYear());
         if (rappel.equals("rappel")) {
@@ -910,26 +905,22 @@ class EmployeeAdvanceService {
         RCARC comp_rcar_new = getComplementRcarByYear(LocalDate.parse(dateFin).getYear());
         BigDecimal compRcar_mt_old = new BigDecimal(0);
         BigDecimal compRcar_mt_new = new BigDecimal(0);
-        if (hasProlongation1) {
-            rcar_mt_old = rcar_mt_old.setScale(2, RoundingMode.HALF_UP);
-        } else if (hasProlongation2) {
-            rcar_mt_new = rcar_mt_new.setScale(2, RoundingMode.HALF_UP);
-        } else {
-            if (!employee.getTypePersonnel()) {
-                if (total_brute_old.compareTo(comp_rcar_old.getMontant()) > 0) {
-                    compRcar_mt_old =
-                            total_brute_old
-                                    .subtract(comp_rcar_old.getMontant())
-                                    .multiply(comp_rcar_old.getPors().divide(_prcent));
-                }
-                if (total_brute_new.compareTo(comp_rcar_new.getMontant()) > 0) {
-                    compRcar_mt_new =
-                            total_brute_new
-                                    .subtract(comp_rcar_new.getMontant())
-                                    .multiply(comp_rcar_new.getPors().divide(_prcent));
-                }
+
+        if (!employee.getTypePersonnel()) {
+            if (total_brute_old.compareTo(comp_rcar_old.getMontant()) > 0) {
+                compRcar_mt_old =
+                        total_brute_old
+                                .subtract(comp_rcar_old.getMontant())
+                                .multiply(comp_rcar_old.getPors().divide(_prcent));
+            }
+            if (total_brute_new.compareTo(comp_rcar_new.getMontant()) > 0) {
+                compRcar_mt_new =
+                        total_brute_new
+                                .subtract(comp_rcar_new.getMontant())
+                                .multiply(comp_rcar_new.getPors().divide(_prcent));
             }
         }
+
 
         BigDecimal rc_old = rcar_mt_old.add(compRcar_mt_old);
         BigDecimal rc_new = rcar_mt_new.add(compRcar_mt_new);
@@ -1103,11 +1094,15 @@ class EmployeeAdvanceService {
             } else {
                 ccd_mt_new = total_3_new.multiply(ccd.getPors().divide(_prcent));
             }
-            ccd_mt_old =
-                    ccd_mt_old.compareTo(ccd.getMontant_max()) > 0 ? ccd.getMontant_max() : ccd_mt_old;
-            ccd_mt_new =
-                    ccd_mt_new.compareTo(ccd.getMontant_max()) > 0 ? ccd.getMontant_max() : ccd_mt_new;
-
+            if (employee.getId() == 167) {
+                ccd_mt_old = BigDecimal.valueOf(40);
+                ccd_mt_new = BigDecimal.valueOf(40);
+            }else {
+                ccd_mt_old =
+                        ccd_mt_old.compareTo(ccd.getMontant_max()) > 0 ? ccd.getMontant_max() : ccd_mt_old;
+                ccd_mt_new =
+                        ccd_mt_new.compareTo(ccd.getMontant_max()) > 0 ? ccd.getMontant_max() : ccd_mt_new;
+            }
             data.add(ccd_mt_old.setScale(2, RoundingMode.HALF_UP).toString());
             data.add(ccd_mt_new.setScale(2, RoundingMode.HALF_UP).toString());
             data.add(ccd_mt_new.subtract(ccd_mt_old).setScale(2, RoundingMode.HALF_UP).toString());
@@ -1232,9 +1227,9 @@ class EmployeeAdvanceService {
                             .subtract(BigDecimal.valueOf(30).multiply(mariage_new));
         }
 
-        if(employee.getId()==142){
-            ir_old= BigDecimal.valueOf(7396);
-            ir_new= BigDecimal.valueOf(7396);
+        if (employee.getId() == 133) {
+            ir_old = BigDecimal.valueOf(1309);
+            ir_new = BigDecimal.valueOf(1309);
         }
         ir_old = BigDecimal.ZERO.compareTo(ir_old) > 0 ? BigDecimal.ZERO : ir_old;
         ir_new = BigDecimal.ZERO.compareTo(ir_new) > 0 ? BigDecimal.ZERO : ir_new;
@@ -1255,11 +1250,11 @@ class EmployeeAdvanceService {
                 aos != null ? aos.getRemboursement() : BigDecimal.ZERO);
 
 
-            data.add(mnt.setScale(2, RoundingMode.HALF_UP).toString());
-            data.add(mnt.setScale(2, RoundingMode.HALF_UP).toString());
-            data.add(mnt.setScale(2, RoundingMode.HALF_UP).toString());
-            ls_retraite.add(mnt);
-            ls_diff_rappel.add(mnt);
+        data.add(mnt.setScale(2, RoundingMode.HALF_UP).toString());
+        data.add(mnt.setScale(2, RoundingMode.HALF_UP).toString());
+        data.add(mnt.setScale(2, RoundingMode.HALF_UP).toString());
+        ls_retraite.add(mnt);
+        ls_diff_rappel.add(mnt);
 
         BigDecimal tot_ret_old = new BigDecimal(0);
         BigDecimal tot_ret_new = new BigDecimal(0);
@@ -1302,6 +1297,7 @@ class EmployeeAdvanceService {
                         .add(indem_foncNet_old.setScale(2, RoundingMode.HALF_UP))
                         .add(indem_voitur_old.setScale(2, RoundingMode.HALF_UP))
                         .add(indem_repres_old.setScale(2, RoundingMode.HALF_UP))
+                        .add(indem_log_old.setScale(2, RoundingMode.HALF_UP))
                         .subtract(total_cnss_old.setScale(2, RoundingMode.HALF_UP));
         net_ordo_new =
                 total_brute_new
@@ -1310,6 +1306,7 @@ class EmployeeAdvanceService {
                         .add(indem_foncNet_new.setScale(2, RoundingMode.HALF_UP))
                         .add(indem_voitur_new.setScale(2, RoundingMode.HALF_UP))
                         .add(indem_repres_new.setScale(2, RoundingMode.HALF_UP))
+                        .add(indem_log_new.setScale(2, RoundingMode.HALF_UP))
                         .subtract(total_cnss_new.setScale(2, RoundingMode.HALF_UP));
 
         data.add(net_ordo_old.setScale(2, RoundingMode.HALF_UP).toString());
@@ -1469,6 +1466,7 @@ class EmployeeAdvanceService {
                         .add(indem_foncNet_old)
                         .add(indem_voitur_old)
                         .add(indem_repres_old)
+                        .add(indem_log_old)
                         .toString());
         data.add(
                 total_brute_new
@@ -1476,6 +1474,7 @@ class EmployeeAdvanceService {
                         .add(indem_foncNet_new)
                         .add(indem_voitur_new)
                         .add(indem_repres_new)
+                        .add(indem_log_new)
                         .toString());
 
         data.add(String.valueOf(rappel_nbr1));
@@ -1816,7 +1815,7 @@ class EmployeeAdvanceService {
                         .add(gs_old.getIndemniteDeHierarchieAdministrative())
                         .add(gs_old.getIndemniteDeSujetion())
                         .add(gs_old.getIndemniteEncadrement())
-                        .add(indem_log_old);
+        ;
         total_brute_new =
                 total_brute_new
                         .add(gs_new.getTraitementDeBase())
@@ -1825,7 +1824,7 @@ class EmployeeAdvanceService {
                         .add(gs_new.getIndemniteDeHierarchieAdministrative())
                         .add(gs_new.getIndemniteDeSujetion())
                         .add(gs_new.getIndemniteEncadrement())
-                        .add(indem_log_new);
+        ;
         data.add(total_brute_old.setScale(2, RoundingMode.HALF_UP).toString());
         data.add(total_brute_new.setScale(2, RoundingMode.HALF_UP).toString());
         data.add(
@@ -2017,6 +2016,7 @@ class EmployeeAdvanceService {
                 ccd_mt_old = gs_old.getTraitementDeBase().multiply(ccd.getPors().divide(_prcent));
                 ;
             }
+
             if (gs_new
                     .getTraitementDeBase()
                     .multiply(ccd.getPors().divide(_prcent))
@@ -2055,12 +2055,16 @@ class EmployeeAdvanceService {
             total_3_new = total_3_new.add(gs_new.getTraitementDeBase()).add(resid_new).add(resid_n_new);
             ccd_mt_old = total_3_old.multiply(ccd.getPors().divide(_prcent));
             ccd_mt_new = total_3_new.multiply(ccd.getPors().divide(_prcent));
-            ccd_mt_old =
-                    ccd_mt_old.compareTo(ccd.getMontant_max()) > 0 ? ccd.getMontant_max() : ccd_mt_old;
-            ccd_mt_new =
-                    ccd_mt_new.compareTo(ccd.getMontant_max()) > 0 ? ccd.getMontant_max() : ccd_mt_new;
+            if (employee.getId() == 167) {
+                ccd_mt_new = BigDecimal.valueOf(40);
+                ccd_mt_old = BigDecimal.valueOf(40);
+            } else {
+                ccd_mt_old =
+                        ccd_mt_old.compareTo(ccd.getMontant_max()) > 0 ? ccd.getMontant_max() : ccd_mt_old;
+                ccd_mt_new =
+                        ccd_mt_new.compareTo(ccd.getMontant_max()) > 0 ? ccd.getMontant_max() : ccd_mt_new;
 
-
+            }
 
             data.add(ccd_mt_old.setScale(2, RoundingMode.HALF_UP).toString());
             data.add(ccd_mt_new.setScale(2, RoundingMode.HALF_UP).toString());
@@ -2396,6 +2400,7 @@ class EmployeeAdvanceService {
                         .add(indem_foncNet_old)
                         .add(indem_voitur_old)
                         .add(indem_repres_old)
+                        .add(indem_log_old)
                         .add(employee.getMontant_prime())
                         .toString());
         data.add(
@@ -2405,6 +2410,7 @@ class EmployeeAdvanceService {
                         .add(indem_foncNet_new)
                         .add(indem_voitur_new)
                         .add(indem_repres_new)
+                        .add(indem_log_new)
                         .toString());
 
         data.add(String.valueOf(rappel_nbr1));
@@ -2553,7 +2559,6 @@ class EmployeeAdvanceService {
         if (ls != null && ls.size() > 0) res = true;
         return res;
     }
-
 
 
     private
@@ -3666,7 +3671,7 @@ class EmployeeAdvanceService {
                         .createNativeQuery(
                                 "select sum(gc.remboursement) as salaf from hr_etat_salaire es\n"
                                         + "                                left join hr_employee he on es.employee = he.id\n"
-                                        + "                                left join HR_GESTION_CREDIT gc on he.id = gc.employee where es.mois=?1 and es.annee=?2 and gc.intituler=3")
+                                        + "                                left join HR_GESTION_CREDIT gc on he.id = gc.employee where es.mois=?1 and es.annee=?2 and gc.intituler=2")
                         .setParameter(1, mois)
                         .setParameter(2, annee);
         Object obj_eqdom = req_eqdom.getSingleResult();
@@ -3679,7 +3684,7 @@ class EmployeeAdvanceService {
                         .createNativeQuery(
                                 "select sum(gc.remboursement) as salaf from hr_etat_salaire es\n"
                                         + "                                left join hr_employee he on es.employee = he.id\n"
-                                        + "                                left join HR_GESTION_CREDIT gc on he.id = gc.employee where es.mois=?1 and es.annee=?2 and gc.intituler=2")
+                                        + "                                left join HR_GESTION_CREDIT gc on he.id = gc.employee where es.mois=?1 and es.annee=?2 and gc.intituler=1")
                         .setParameter(1, mois)
                         .setParameter(2, annee);
         Object obj_salaf = req_salaf.getSingleResult();
@@ -3692,7 +3697,7 @@ class EmployeeAdvanceService {
                         .createNativeQuery(
                                 "select sum(gc.remboursement) as salaf from hr_etat_salaire es\n"
                                         + "                                left join hr_employee he on es.employee = he.id\n"
-                                        + "                                left join HR_GESTION_CREDIT gc on he.id = gc.employee where es.mois=?1 and es.annee=?2 and gc.intituler=4")
+                                        + "                                left join HR_GESTION_CREDIT gc on he.id = gc.employee where es.mois=?1 and es.annee=?2 and gc.intituler=3")
                         .setParameter(1, mois)
                         .setParameter(2, annee);
         Object obj_sgmb = req_sgmb.getSingleResult();
@@ -3700,19 +3705,7 @@ class EmployeeAdvanceService {
         if (obj_sgmb != null) {
             somme_sgmb = ((BigDecimal) obj_sgmb).floatValue();
         }
-        javax.persistence.Query req_bcp =
-                JPA.em()
-                        .createNativeQuery(
-                                "select sum(gc.remboursement) as salaf from hr_etat_salaire es\n"
-                                        + "                                left join hr_employee he on es.employee = he.id\n"
-                                        + "                                left join HR_GESTION_CREDIT gc on he.id = gc.employee where es.mois=?1 and es.annee=?2 and gc.intituler=5")
-                        .setParameter(1, mois)
-                        .setParameter(2, annee);
-        Object obj_bcp = req_bcp.getSingleResult();
-        float somme_bcp = (BigDecimal.ZERO).floatValue();
-        if (obj_bcp != null) {
-            somme_bcp = ((BigDecimal) obj_bcp).floatValue();
-        }
+
         String req_rcar =
                 "select sum(es.rcar_rg+(es.rcar_rappel)) as rcar, sum(rcarrcomp+(comp_rappel)) as complement from hr_etat_salaire es where es.mois=?1 and es.annee=?2";
 
@@ -3783,8 +3776,7 @@ class EmployeeAdvanceService {
                         .createNativeQuery(
                                 "select sum(es.mutuelle_mgpapsm+(es.mutuelle_mgpapsm_rappel)) as sm_r"
                                         + "        from hr_etat_salaire es left join hr_employee he on es.employee = he.id"
-                                        + "     left join configuration_annexe_generale ag on he.annexe = ag.id"
-                                        + "    where es.mois=?1 and es.annee=?2 and ag.id=311")
+                                        + "    where es.mois=?1 and es.annee=?2")
                         .setParameter(1, mois)
                         .setParameter(2, annee);
         Object etat_sm_r = req_sm_r.getSingleResult();
@@ -3793,28 +3785,12 @@ class EmployeeAdvanceService {
             somme_sm_r = ((BigDecimal) etat_sm_r).floatValue();
         }
 
-        javax.persistence.Query req_sm_g =
-                JPA.em()
-                        .createNativeQuery(
-                                "select sum(es.mutuelle_mgpapsm+(es.mutuelle_mgpapsm_rappel)) as sm_ra"
-                                        + "        from hr_etat_salaire es left join hr_employee he on es.employee = he.id"
-                                        + "     left join configuration_annexe_generale ag on he.annexe = ag.id"
-                                        + "    where es.mois=?1 and es.annee=?2 and ag.id=312")
-                        .setParameter(1, mois)
-                        .setParameter(2, annee);
-        Object etat_sm_g = req_sm_g.getSingleResult();
-        float somme_sm_g = (BigDecimal.ZERO).floatValue();
-        if (etat_sm_g != null) {
-            somme_sm_g = ((BigDecimal) etat_sm_g).floatValue();
-        }
-
         javax.persistence.Query req_ccd_r =
                 JPA.em()
                         .createNativeQuery(
                                 "select sum(es.mutuelle_mgpap_ccd+(es.mutuelle_mgpap_ccd_rappel)) as ccd_ra"
                                         + " from hr_etat_salaire es left join hr_employee he on es.employee = he.id"
-                                        + " left join configuration_annexe_generale ag on he.annexe = ag.id"
-                                        + " where ag.id=311 and es.mois=?1 and es.annee=?2")
+                                        + " where es.mois=?1 and es.annee=?2")
                         .setParameter(1, mois)
                         .setParameter(2, annee);
         Object etat_ccd_r = req_ccd_r.getSingleResult();
@@ -3822,34 +3798,17 @@ class EmployeeAdvanceService {
         if (etat_ccd_r != null) {
             somme_ccd_r = ((BigDecimal) etat_ccd_r).floatValue();
         }
-        javax.persistence.Query req_ccd_g =
-                JPA.em()
-                        .createNativeQuery(
-                                "select sum(es.mutuelle_mgpap_ccd+(es.mutuelle_mgpap_ccd_rappel)) as ccd_ra"
-                                        + "        from hr_etat_salaire es left join hr_employee he on es.employee = he.id"
-                                        + "     left join configuration_annexe_generale ag on he.annexe = ag.id"
-                                        + "    where es.mois=?1 and es.annee=?2 and ag.id=312")
-                        .setParameter(1, mois)
-                        .setParameter(2, annee);
-        Object etat_ccd_g = req_ccd_g.getSingleResult();
-        float somme_ccd_g = (BigDecimal.ZERO).floatValue();
-        if (etat_ccd_g != null) {
-            somme_ccd_g = ((BigDecimal) etat_ccd_g).floatValue();
-        }
 
         BigDecimal total1 =
                 (somme_net)
                         .add(BigDecimal.valueOf(somme_eqdom))
                         .add(BigDecimal.valueOf(somme_salaf))
                         .add(BigDecimal.valueOf(somme_sgmb))
-                        .add(BigDecimal.valueOf(somme_bcp))
                         .add(BigDecimal.valueOf(somme_rcar_s))
                         .add(BigDecimal.valueOf(somme_amo))
                         .add(BigDecimal.valueOf(somme_sm_omfam))
                         .add(BigDecimal.valueOf(somme_caad_omfam))
-                        .add(BigDecimal.valueOf(somme_ccd_g))
                         .add(BigDecimal.valueOf(somme_ccd_r))
-                        .add(BigDecimal.valueOf(somme_sm_g))
                         .add(BigDecimal.valueOf(somme_sm_r));
 
         return total1.add(BigDecimal.valueOf(etat_log_p)).add(BigDecimal.valueOf(somme_amo));
@@ -3893,4 +3852,89 @@ class EmployeeAdvanceService {
         }
         return res;
     }
+
+    public
+    Map<String, BigDecimal> calcule_prime(int annee, Long employee) {
+        List<EtatSalaire> t =
+                etatSalaireRepository.all()
+                        .filter("self.annee=?1 and self.employee=?2 order by self.imatriculation", annee, employee)
+                        .fetch();
+
+        EtatSalaire etat = t.stream().max(Comparator.comparing(etatSalaire -> etatSalaire.getMois())).orElse(null);
+        Prime p = primeRepository.all().filter("self.annee=?1 and self.employee=?2", annee, employee).fetchOne();
+        BigDecimal b = BigDecimal.ZERO;
+        BigDecimal ir = BigDecimal.ZERO;
+        Map<String, BigDecimal> map = new HashMap<>();
+
+        if (p != null) {
+            if (p.getPourcentage().compareTo(BigDecimal.valueOf(0)) == 0) {
+                ir = ir.add(etat.getiR())
+                        .add(etat.getIr_rappel());
+                b = b
+                        .add(etat.getTotalSalairMensuelBrutImposable() != null ? etat.getTotalSalairMensuelBrutImposable() : BigDecimal.valueOf(0))
+                        .add(etat.getTotalSalairMensuelBrutImposable_rappel() != null ? etat.getTotalSalairMensuelBrutImposable_rappel() : BigDecimal.valueOf(0));
+            } else {
+                ir = ir.add(etat.getiR())
+                        .add(etat.getIr_rappel())
+                        .multiply(p.getPourcentage())
+                        .divide(BigDecimal.valueOf(100));
+
+                b = b.add(etat.getTotalSalairMensuelBrutImposable())
+                        .add(etat.getTotalSalairMensuelBrutImposable_rappel())
+                        .multiply(p.getPourcentage())
+                        .divide(BigDecimal.valueOf(100));
+            }
+        }
+        map.put("brut", b);
+        map.put("ir", ir);
+        return map;
+    }
+
+    @Transactional
+    public
+    Map<String, BigDecimal> calculebrutannee(Integer annee, Long id) {
+        List<EtatSalaire> list = etatSalaireRepository.all()
+                .filter("self.annee=?1 and self.employee=?2 order by self.imatriculation", annee, id).fetch();
+        BigDecimal c = BigDecimal.ZERO;
+        BigDecimal tmp = BigDecimal.ZERO;
+
+        BigDecimal ir = BigDecimal.valueOf(0);
+        BigDecimal tmp2 = BigDecimal.valueOf(0);
+
+        BigDecimal slr = BigDecimal.valueOf(0);
+        BigDecimal rtn = BigDecimal.valueOf(0);
+
+        Map<String, BigDecimal> map = new HashMap<>();
+
+        for (EtatSalaire e : list) {
+            c = c
+                    .add(e.getTotalSalairMensuelBrutImposable()
+                            .add(e.getTotalSalairMensuelBrutImposable_rappel()));
+            ir = ir.add(e.getiR()).add(e.getIr_rappel());
+
+            tmp = e.getTotalSalairMensuelBrutImposable()
+                    .add(e.getTotalSalairMensuelBrutImposable_rappel());
+            tmp2 = e.getiR().add(e.getIr_rappel());
+
+            slr = slr
+                    .add(e.getNetAPayer())
+                    .add(e.getNetAPayer_rappel());
+
+            rtn = rtn
+                    .add(e.getTotalRetenue());
+        }
+        Prime prime = Beans.get(PrimeRepository.class).all()
+                .filter("self.annee=?1 and self.employee=?2", annee, id)
+                .fetchOne();
+        prime.setBrut(c.subtract(tmp));
+        prime.setNet(slr);
+        prime.setRetenue(rtn);
+        prime.setIr(ir.subtract(tmp2));
+        primeRepository.save(prime);
+        map.put("brut", c.subtract(tmp));
+        map.put("ir", ir.subtract(tmp));
+
+        return map;
+    }
+
 }

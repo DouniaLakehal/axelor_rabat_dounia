@@ -104,5 +104,7 @@ public interface IReport {
   public static final String Etatdecompteirnowork = "Etatdecompteirnoworks.rptdesign";
   public static final String OrderdePaiement_N52 = "Op_51.rptdesign";
   public static final String AttestationSalaire = "AttestationSalaire.rptdesign";
+  public static final String AttestationTravail = "AttestationTravail.rptdesign";
   public static final String ETATSDESPRELEVEMENTSRCAR = "etatdesprelevementsRCAR.rptdesign";
+  public static final String DeclarationIR = "DeclarationIR.rptdesign";
 }

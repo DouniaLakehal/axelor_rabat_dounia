@@ -393,7 +393,7 @@
 (select case when sum(hgc.remboursement) is null then 0.00 else sum(hgc.remboursement) end as "CIH" from  hr_gestion_credit hgc where hgc.employee=he.id and hgc.intituler=3 and (date_trunc('month', cast( concat(es.annee,'-',es.mois,'-01') as date)) + interval '1 month' - interval '1 day' )  between hgc.date_debut and hgc.date_fin),
        es.aos as "AOS",
        es.netapayer+(es.netapayer_rappel) as NET,
-       es.netapayer+(es.netapayer_rappel)+es.indemnit_fonction_net+(indemnit_fonction_net_rappel)+es.indemnit_voiture_net+(es.indemnit_voiture_net_rappel)+es.indemnit_represent_net+(es.indemnit_represent_net_rappel) as Indem
+       es.netapayer+(es.netapayer_rappel)+es.indemnit_fonction_net+(indemnit_fonction_net_rappel)+es.indemnit_voiture_net+(es.indemnit_voiture_net_rappel)+es.indemnit_represent_net+(es.indemnit_represent_net_rappel) + es.indemnite_logem_brut+(es.indemnite_logem_brut_rappel) as Indem
 from hr_etat_salaire es
          left join hr_employee he on es.employee = he.id
 where titulaire= true and is_disposition= false and annee=? and mois=?
@@ -1019,7 +1019,7 @@ order by he.imatriculation LIMIT 15 OFFSET 0]]></xml-property>
        (select case when sum(hgc.remboursement) is null then 0.00 else sum(hgc.remboursement) end as "CIH" from  hr_gestion_credit hgc where hgc.employee=he.id and hgc.intituler=3 and (date_trunc('month', cast( concat(es.annee,'-',es.mois,'-01') as date)) + interval '1 month' - interval '1 day' )  between hgc.date_debut and hgc.date_fin),
         es.aos as "AOS",
        es.netapayer+(es.netapayer_rappel) as NET,
-       es.netapayer+(es.netapayer_rappel)+es.indemnit_fonction_net+(indemnit_fonction_net_rappel)+es.indemnit_voiture_net+(es.indemnit_voiture_net_rappel)+es.indemnit_represent_net+(es.indemnit_represent_net_rappel) as Indem
+       es.netapayer+(es.netapayer_rappel)+es.indemnit_fonction_net+(indemnit_fonction_net_rappel)+es.indemnit_voiture_net+(es.indemnit_voiture_net_rappel)+es.indemnit_represent_net+(es.indemnit_represent_net_rappel) + es.indemnite_logem_brut+(es.indemnite_logem_brut_rappel) as Indem
 from hr_etat_salaire es
          left join hr_employee he on es.employee = he.id
 where titulaire= true and is_disposition= false and annee=? and mois=?
@@ -1666,7 +1666,7 @@ order by he.imatriculation LIMIT 37 OFFSET 58]]></xml-property>
        (select case when sum(hgc.remboursement) is null then 0.00 else sum(hgc.remboursement) end as "CIH" from  hr_gestion_credit hgc where hgc.employee=he.id and hgc.intituler=3 and (date_trunc('month', cast( concat(es.annee,'-',es.mois,'-01') as date)) + interval '1 month' - interval '1 day' )  between hgc.date_debut and hgc.date_fin),
        es.aos as "AOS",
        es.netapayer+(es.netapayer_rappel) as NET,
-       es.netapayer+(es.netapayer_rappel)+es.indemnit_fonction_net+(indemnit_fonction_net_rappel)+es.indemnit_voiture_net+(es.indemnit_voiture_net_rappel)+es.indemnit_represent_net+(es.indemnit_represent_net_rappel) as Indem
+       es.netapayer+(es.netapayer_rappel)+es.indemnit_fonction_net+(indemnit_fonction_net_rappel)+es.indemnit_voiture_net+(es.indemnit_voiture_net_rappel)+es.indemnit_represent_net+(es.indemnit_represent_net_rappel) + es.indemnite_logem_brut+(es.indemnite_logem_brut_rappel) as Indem
 from hr_etat_salaire es
          left join hr_employee he on es.employee = he.id
 where titulaire= true and is_disposition= false and annee=? and mois=?
@@ -2313,7 +2313,7 @@ order by he.imatriculation LIMIT 22 OFFSET 15]]></xml-property>
        (select case when sum(hgc.remboursement) is null then 0.00 else sum(hgc.remboursement) end as "CIH" from  hr_gestion_credit hgc where hgc.employee=he.id and hgc.intituler=3 and (date_trunc('month', cast( concat(es.annee,'-',es.mois,'-01') as date)) + interval '1 month' - interval '1 day' )  between hgc.date_debut and hgc.date_fin),
        es.aos as "AOS",
        es.netapayer+(es.netapayer_rappel) as NET,
-       es.netapayer+(es.netapayer_rappel)+es.indemnit_fonction_net+(indemnit_fonction_net_rappel)+es.indemnit_voiture_net+(es.indemnit_voiture_net_rappel)+es.indemnit_represent_net+(es.indemnit_represent_net_rappel) as Indem
+       es.netapayer+(es.netapayer_rappel)+es.indemnit_fonction_net+(indemnit_fonction_net_rappel)+es.indemnit_voiture_net+(es.indemnit_voiture_net_rappel)+es.indemnit_represent_net+(es.indemnit_represent_net_rappel)+ es.indemnite_logem_brut+(es.indemnite_logem_brut_rappel)  as Indem
 from hr_etat_salaire es
          left join hr_employee he on es.employee = he.id
 where titulaire= true and is_disposition= false and annee=? and mois=?

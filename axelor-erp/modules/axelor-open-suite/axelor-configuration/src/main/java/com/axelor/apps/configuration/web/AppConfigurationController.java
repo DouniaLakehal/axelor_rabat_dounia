@@ -638,6 +638,7 @@ public class AppConfigurationController {
       Long id_parent = (Long) ctx.get("id");
       VersionRubriqueBudgetaire vv =
           Beans.get(VersionRubriqueBudgetaireRepository.class).find(id_parent);
+
       List<RubriquesBudgetaire> ls =
           configurationService.dupliqueAllRubriqueBudgetaire(
               id, annee, vv.getVersionRubriques().size() == 1);

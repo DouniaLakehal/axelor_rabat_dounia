@@ -67,25 +67,48 @@
         <view type="grid" name="emp-histo-respon-grid"/>
     </action-view>
 
-
-    <menuitem title="Gestion des missions" name="mission.all" parent="hr-root" icon="fa-address-card-o"
-              icon-background="#ff676c" order="2"/>
-
-    <menuitem name="employee-missions-all" parent="mission.all" title="Gestion des missions"
-              action="employee.missions.all" order="1"/>
-    <action-view name="employee.missions.all" title="Gestion des missions"
-                 model="com.axelor.apps.hr.db.EmployeeMissions">
-        <view type="grid" name="employee-missions-grid"/>
-        <view type="form" name="employee-missions-form"/>
+    <menuitem name="expense-root" parent="hr-root-emp-mgt" icon="fa-calendar" icon-background="#ffd700" title="Avancement" order="9"/>
+    <menuitem name="avancement-rapide" parent="expense-root" title="Rapide" action="avancement-rapide_action"/>
+    <action-group name="avancement-rapide_action">
+        <action name="com.axelor.apps.hr.web.CustomController:deleteCreateListEmployerRapide"/>
+        <action name="avancement-rapide_view"/>
+    </action-group>
+    <action-view name="avancement-rapide_view" title="Avancement" model="com.axelor.apps.hr.db.Avancement">
+        <view type="form" name="avancementEmployer-form1"/>
+        <view-param name="show-toolbar" value="true" />
+        <view-param name="show-confirm" value="false" />
+        <context name="_showRecord" expr="eval:1"/>
+        <context name="type_aug" expr="eval:'rapide'"/>
     </action-view>
 
-    <menuitem order="2" title="Etat des sommes dues" name="employee-mission-etat-somme" parent="mission.all"
-              action="employee.mission.etat.somme"/>
-    <action-view name="employee.mission.etat.somme" title="Etat des sommes dues"
-                 model="com.axelor.apps.hr.db.EmployeeEtatSomme">
-        <view type="grid" name="etat-somme-grid"/>
-        <view type="form" name="etat-somme-form"/>
+
+    <menuitem name="avancement-moyen" parent="expense-root" title="Moyen" action="avancement-moyen_action"/>
+    <action-group name="avancement-moyen_action">
+        <action name="com.axelor.apps.hr.web.CustomController:deleteCreateListEmployerMoyen"/>
+        <action name="avancement-moyen_view"/>
+    </action-group>
+    <action-view name="avancement-moyen_view" title="Avancement" model="com.axelor.apps.hr.db.Avancement">
+        <view type="form" name="avancementEmployer-form2"/>
+        <view-param name="show-toolbar" value="true" />
+        <view-param name="show-confirm" value="false" />
+        <context name="_showRecord" expr="eval: 2"/>
+        <context name="type_aug" expr="eval:'moyen'"/>
     </action-view>
+
+
+    <menuitem name="avancement-long" parent="expense-root" title="Long" action="avancement-long_action"/>
+    <action-group name="avancement-long_action">
+        <action name="com.axelor.apps.hr.web.CustomController:deleteCreateListEmployerLong"/>
+        <action name="avancement-long_view"/>
+    </action-group>
+    <action-view name="avancement-long_view" title="Avancement" model="com.axelor.apps.hr.db.Avancement">
+        <view type="form" name="avancementEmployer-form3"/>
+        <view-param name="show-toolbar" value="true" />
+        <view-param name="show-confirm" value="false" />
+        <context name="_showRecord" expr="eval: 3"/>
+        <context name="type_aug" expr="eval:'long'"/>
+    </action-view>
+
 
 
     <action-view name="employment.contracts.all" title="Employment Contracts"

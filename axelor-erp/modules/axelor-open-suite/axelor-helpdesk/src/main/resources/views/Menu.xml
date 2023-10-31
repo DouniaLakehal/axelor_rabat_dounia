@@ -3,9 +3,8 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
 
-	<menuitem name="helpdesk-root" title="Gestion des réclamations" order="1" if="__config__.app.isApp('helpdesk')"
-		icon="fa-exclamation-triangle" icon-background="#ff1100"/>
-	
+	<menuitem name="" title=""/>
+
 	<!--<menuitem hidden="false" title="Réclamation en cours" name="helpdesk-ticket-current" action="helpdesk.ticket.current" order="1" parent="helpdesk-root"/>
 	<action-view name="helpdesk.ticket.current" title="Réclamation" model="com.axelor.apps.helpdesk.db.Ticket">
 		<view type="grid" name="ticket-grid"/>
@@ -16,8 +15,8 @@
 		<domain>self.statusSelect in (0,1)</domain>
 		<context name="_user" expr="eval: __user__"/>
 	</action-view>-->
-	
-	
+
+
 	<!--<menuitem hidden="false" title="Mes réclamations" name="helpdesk-my-ticket-all" action="helpdesk.my.ticket.all" order="3" parent="helpdesk-root"/>
 	<action-view name="helpdesk.my.ticket.all" title="Mes réclamations" model="com.axelor.apps.helpdesk.db.Ticket">
 		<view type="grid" name="ticket-grid"/>
@@ -39,7 +38,7 @@
 		<view-param name="search-filters" value="ticket-filters"/>
 		<context name="_user" expr="eval: __user__"/>
 	</action-view>-->
-	
+
 	<!--<menuitem hidden="true" title="Tableau de bord" name="helpdesk-reporting" order="100" parent="helpdesk-root" icon="fa-bar-chart"/>
 
 	<menuitem title="Réclamations" name="helpdesk-report-ticket" action="helpdesk.report.ticket" parent="helpdesk-reporting"/>
@@ -49,8 +48,8 @@
 		<context name="_language" expr="eval: __user__.getLanguage()"/>
 		<context name="_myActiveTeam" expr="eval:__user__.activeTeam != null ? __user__.activeTeam.id : 0"/>
 	</action-view>-->
-	
-	<menuitem hidden="false" title="SLA" name="helpdesk-report-sla" action="helpdesk.report.sla" parent="helpdesk-reporting" if="__config__.app.getApp('helpdesk').getIsSla()"/>
+
+	<!--<menuitem hidden="false" title="SLA" name="helpdesk-report-sla" action="helpdesk.report.sla" parent="helpdesk-reporting" if="__config__.app.getApp('helpdesk').getIsSla()"/>
 	<action-view name="helpdesk.report.sla" title="SLA">
 	  <view name="helpdesk.sla.dashboard" type="dashboard"/>
 	  <context name="_language" expr="eval: __user__.getLanguage()"/>
@@ -109,9 +108,9 @@
 		<view type="grid" name="reclamation_resolu_directeur_grid"/>
 		<view type="form" name="reclamation_resolu_directeur_form"/>
 		<domain>self.statusSelect_new=2</domain>
-		
+
 	</action-view>
-	
+
 	<menuitem name="reclamation-affectee-directeur"  title="Réclamations affectées" parent="helpdesk-root" order="10" action="reclamation.affectee-directeur" />
 	<action-view name="reclamation.affectee-directeur" title="Réclamations affectées" model="com.axelor.apps.helpdesk.db.Reclamation">
 		<view type="grid" name="reclamation-affectee-directeur_grid"/>
@@ -126,5 +125,5 @@
 		<view type="form" name="reclamation_no_reception_form"/>
 		<domain>self.recevable = false </domain>
 	</action-view>
-
+-->
 </object-views>

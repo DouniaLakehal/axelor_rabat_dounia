@@ -282,10 +282,9 @@ class EtatSalaireServiceImpl extends AppBaseServiceImpl implements EtatSalaireSe
         etatSalaire.setTraitementDebase(gs_old.getTraitementDeBase().setScale(2, RoundingMode.HALF_UP));
         // Indemnité de résidence
         BigDecimal pourc = new BigDecimal(1);
-        if (employee.getZoneEmployee().getId() == 3) pourc = BigDecimal.valueOf(0.25);
-        else if (employee.getZoneEmployee().getId() == 2) pourc = BigDecimal.valueOf(0.15);
-        else if (employee.getZoneEmployee().getId() == 1 || employee.getZoneEmployee().getId() == 4)
-            pourc = BigDecimal.valueOf(0.1);
+        if (employee.getZoneEmployee().getId() == 3) pourc = BigDecimal.valueOf(0.10);
+        else if (employee.getZoneEmployee().getId() == 2) pourc = BigDecimal.valueOf(0.10);
+        else if (employee.getZoneEmployee().getId() == 1) pourc = BigDecimal.valueOf(0.10);
         BigDecimal resid_old = gs_old.getTraitementDeBase().multiply(pourc);
         etatSalaire.setIndemniteDeResidence(
                 (gs_old.getTraitementDeBase().multiply(pourc)).setScale(2, RoundingMode.HALF_UP));
@@ -408,25 +407,12 @@ class EtatSalaireServiceImpl extends AppBaseServiceImpl implements EtatSalaireSe
         }
         // TOTAL MENSUEL BRUT 617111
         BigDecimal totalBrut =
-                gs_old
-                        .getTraitementDeBase()
-                        .add(indem_foncNet_new)
-                        .add(indem_voitur_new)
-                        .add(indem_repres_new)
-                        .add(etatSalaire.getAllocationfamil())
-                        .add(gs_old.getTraitementDeBase().multiply(pourc))
-                        .add(gs_old.getIndemniteDeHierarchieAdministrative())
-                        .add(gs_old.getIndemniteDeSujetion())
-                        .add(gs_old.getIndemniteEncadrement())
+                etatSalaire.getTraitBaseIndemStatu()
                         .setScale(2, RoundingMode.HALF_UP);
-        etatSalaire.setTotalMensuelBrut617111(totalBrut.setScale(2, RoundingMode.HALF_UP));
-        // Total salaire mensuel brut imposable
-        BigDecimal salaireImposable = totalBrut;
-        if (newResp != null) {
-            salaireImposable = totalBrut.add(indem_log_new);
-        }
+        // Total salaire mensuel bru²t imposable
+        //totalBrut = totalBrut.add(BigDecimal.valueOf(child_mt_old));
         etatSalaire.setTotalSalairMensuelBrutImposable(
-                salaireImposable.setScale(2, RoundingMode.HALF_UP));
+                totalBrut.add(BigDecimal.valueOf(child_mt_old)).setScale(2, RoundingMode.HALF_UP));
         // RCAR
         RCAR rcar_old = serviceUtil.getRcarByYear(LocalDate.parse(dateDebut).getYear());
         BigDecimal rcar_mt_old = new BigDecimal("0").setScale(2, RoundingMode.HALF_UP);
@@ -435,10 +421,6 @@ class EtatSalaireServiceImpl extends AppBaseServiceImpl implements EtatSalaireSe
         if (!employee.getTypePersonnel()
                 && getDispositionByEmployee(employee, dateFinMois.toString()) == null) {
             if (totalBrut
-                    .subtract(indem_foncNet_new)
-                    .subtract(indem_voitur_new)
-                    .subtract(indem_repres_new)
-                    .subtract(etatSalaire.getAllocationfamil())
                     .multiply(rcar_old.getPors().divide(_prcent))
                     .compareTo(rcar_old.getMontant_max())
                     >= 0) {
@@ -447,10 +429,6 @@ class EtatSalaireServiceImpl extends AppBaseServiceImpl implements EtatSalaireSe
             } else {
                 rcar_mt_old =
                         totalBrut
-                                .subtract(indem_foncNet_new)
-                                .subtract(indem_voitur_new)
-                                .subtract(indem_repres_new)
-                                .subtract(etatSalaire.getAllocationfamil())
                                 .multiply(rcar_old.getPors().divide(_prcent))
                                 .setScale(2, RoundingMode.HALF_UP);
                 etatSalaire.setRcarRg(
@@ -458,12 +436,6 @@ class EtatSalaireServiceImpl extends AppBaseServiceImpl implements EtatSalaireSe
                                 .multiply(rcar_old.getPors().divide(_prcent))
                                 .setScale(2, RoundingMode.HALF_UP));
             }
-        }
-        if (employee.getIs_cnss()) {
-            rcar_mt_old = BigDecimal.valueOf(0.00);
-        }
-        if (employeeAdvanceService.employeHasProlongationAtDate(employee.getId(), date1)) {
-            rcar_mt_old = BigDecimal.valueOf(0.00);
         }
         etatSalaire.setRcarRg(rcar_mt_old.setScale(2, RoundingMode.HALF_UP));
 
@@ -474,21 +446,10 @@ class EtatSalaireServiceImpl extends AppBaseServiceImpl implements EtatSalaireSe
         if (!employee.getTypePersonnel() && getDispositionByEmployee(employee, dateFinMois) == null) {
             if (totalBrut.compareTo(comp_rcar_old.getMontant()) > 0) {
                 compRcar_mt_old =
-                        etatSalaire
-                                .getTotalSalairMensuelBrutImposable()
-                                .subtract(indem_foncNet_new)
-                                .subtract(indem_voitur_new)
-                                .subtract(indem_repres_new)
-                                .subtract(etatSalaire.getAllocationfamil())
+                        totalBrut
                                 .subtract(comp_rcar_old.getMontant())
                                 .multiply(comp_rcar_old.getPors().divide(_prcent));
             }
-        }
-
-        if (employee.getIs_cnss()
-                || compRcar_mt_old.compareTo(BigDecimal.ZERO) < 0
-                || employeeAdvanceService.employeHasProlongationAtDate(employee.getId(), date1)) {
-            compRcar_mt_old = BigDecimal.valueOf(0.00);
         }
 
         etatSalaire.setRcarRComp(compRcar_mt_old.setScale(2, RoundingMode.HALF_UP));
@@ -514,12 +475,7 @@ class EtatSalaireServiceImpl extends AppBaseServiceImpl implements EtatSalaireSe
         OrganismeMetuelle o = employee.getOrganismeMetuelle2();
         amo = employeeAdvanceService.getMutuelleById(1L);
         BigDecimal total_2_old =
-                totalBrut
-                        .subtract(indem_log_old)
-                        .subtract(indem_foncNet_new)
-                        .subtract(indem_voitur_new)
-                        .subtract(indem_repres_new)
-                        .subtract(etatSalaire.getAllocationfamil());
+                totalBrut.subtract(indem_log_old);
         if (getDispositionByEmployee(employee, dateFinMois.toString()) == null) {
             if (total_2_old.multiply(amo.getPors().divide(_prcent)).compareTo(amo.getMontant_max()) > 0) {
                 amo_mt_old = amo.getMontant_max().setScale(2, RoundingMode.HALF_UP);
@@ -539,6 +495,7 @@ class EtatSalaireServiceImpl extends AppBaseServiceImpl implements EtatSalaireSe
                 MgpapCcd =
                         calculMGPAP(gs_old.getTraitementDeBase(), sec1).setScale(2, RoundingMode.HALF_UP);
             }
+
             etatSalaire.setMutuelleMgpapCcd(MgpapCcd.setScale(2, RoundingMode.HALF_UP));
             ccd2 = employeeAdvanceService.getMutuelleById(2L);
             if (getDispositionByEmployee(employee, dateFinMois.toString()) == null) {
@@ -569,9 +526,13 @@ class EtatSalaireServiceImpl extends AppBaseServiceImpl implements EtatSalaireSe
                                 ? ccd4.getMontant_max().setScale(2, RoundingMode.HALF_UP)
                                 : OmfamCaad;
             }
-
-            etatSalaire.setMutuelleOmfamCaad(OmfamCaad.setScale(2, RoundingMode.HALF_UP));
+            if (employee.getId() == 167) {
+                etatSalaire.setMutuelleOmfamCaad(BigDecimal.valueOf(40));
+            } else {
+                etatSalaire.setMutuelleOmfamCaad(OmfamCaad.setScale(2, RoundingMode.HALF_UP));
+            }
         }
+
         // PRÊT AXACREDIT
         BigDecimal credit_mt_old = new BigDecimal(0);
         credit_mt_old = getcreditAtdate(employee, LocalDate.parse(dateDebut));
@@ -618,16 +579,6 @@ class EtatSalaireServiceImpl extends AppBaseServiceImpl implements EtatSalaireSe
         BigDecimal tva = new BigDecimal(20);
         BigDecimal mt1 = new BigDecimal(2500);
 
-        BigDecimal total_cnss = new BigDecimal(0);
-        BigDecimal tva_cnss = new BigDecimal(4.48);
-        BigDecimal mt_cnss = new BigDecimal(6000);
-        if (employee.getIs_cnss()) {
-            total_cnss = totalBrut.multiply(tva_cnss.divide(_prcent));
-            if (total_cnss.compareTo(mt_cnss) > 0) {
-                total_cnss = mt_cnss;
-            }
-        }
-
         if (date1.getYear() > 2022) {
             if (totalBrut.compareTo(new BigDecimal(6500)) > 0) {
                 tva = new BigDecimal(25);
@@ -639,12 +590,7 @@ class EtatSalaireServiceImpl extends AppBaseServiceImpl implements EtatSalaireSe
         }
 
         total_x_old =
-                etatSalaire
-                        .getTotalSalairMensuelBrutImposable()
-                        .subtract(indem_foncNet_new)
-                        .subtract(indem_voitur_new)
-                        .subtract(indem_repres_new)
-                        .subtract(etatSalaire.getAllocationfamil())
+                totalBrut
                         .multiply(tva.divide(_prcent))
                         .setScale(2, RoundingMode.HALF_UP);
 
@@ -653,12 +599,7 @@ class EtatSalaireServiceImpl extends AppBaseServiceImpl implements EtatSalaireSe
         }
 
         BigDecimal some1_old =
-                etatSalaire
-                        .getTotalSalairMensuelBrutImposable()
-                        .subtract(indem_foncNet_new)
-                        .subtract(indem_voitur_new)
-                        .subtract(indem_repres_new)
-                        .subtract(etatSalaire.getAllocationfamil())
+                totalBrut
                         .subtract(total_x_old)
                         .subtract(rcar_mt_old)
                         .subtract(compRcar_mt_old)
@@ -671,7 +612,6 @@ class EtatSalaireServiceImpl extends AppBaseServiceImpl implements EtatSalaireSe
                                 employee.getIsCotisation()
                                         ? employee.getMontantCotisation()
                                         : BigDecimal.valueOf(0))
-                        .subtract(total_cnss)
                         .setScale(2, RoundingMode.HALF_UP);
         BigDecimal ir_old = new BigDecimal(0);
         BigDecimal mariage_old = new BigDecimal(0);
@@ -712,26 +652,16 @@ class EtatSalaireServiceImpl extends AppBaseServiceImpl implements EtatSalaireSe
                                     .add(new BigDecimal(child_old_n).multiply(BigDecimal.valueOf(30)))));
         }
 
+        if (employee.getId() == 133) {
+            ir_old = BigDecimal.valueOf(1309);
+        }
+
         ir_old =
                 BigDecimal.ZERO.compareTo(ir_old) > 0
                         ? BigDecimal.ZERO.setScale(0, RoundingMode.HALF_UP)
                         : ir_old.setScale(0, RoundingMode.HALF_UP);
         etatSalaire.setiR(ir_old.setScale(0, RoundingMode.HALF_UP));
 
-        employee.setMontant_cnss(total_cnss);
-        // RETENUE SUR SALAIRE PLAFONNE
-        boolean hasProlongation1 =
-                employeeAdvanceService.employeHasProlongationAtDate(employee.getId(), date1);
-        BigDecimal prolongation = new BigDecimal(0);
-        if (hasProlongation1) {
-
-            prolongation = employee.getRetenueSalairePlafonne();
-
-        } else {
-            prolongation = BigDecimal.valueOf(0);
-        }
-
-        etatSalaire.setSalairePlafonne(prolongation);
 
         Aos aos = employeeAdvanceService.employeHasAOSAtDate(employee.getId(), date1);
         BigDecimal mnt = BigDecimal.ZERO;
@@ -752,7 +682,7 @@ class EtatSalaireServiceImpl extends AppBaseServiceImpl implements EtatSalaireSe
                         .add(amo_mt_old.setScale(2, RoundingMode.HALF_UP))
                         .add(MgpapCcd.setScale(2, RoundingMode.HALF_UP))
                         .add(MgpapSM.setScale(2, RoundingMode.HALF_UP))
-                        .add(OmfamCaad.setScale(2, RoundingMode.HALF_UP))
+                        .add(etatSalaire.getMutuelleOmfamCaad().setScale(2, RoundingMode.HALF_UP))
                         .add(OmfamSm.setScale(2, RoundingMode.HALF_UP))
                         .add(
                                 getcreditAtdate(employee, LocalDate.parse(dateDebut))
@@ -762,8 +692,6 @@ class EtatSalaireServiceImpl extends AppBaseServiceImpl implements EtatSalaireSe
                                         ? employee.getMontantCotisation().setScale(2, RoundingMode.HALF_UP)
                                         : BigDecimal.valueOf(0))
                         .add(ir_old)
-                        .add(etatSalaire.getSalairePlafonne())
-                        .add(total_cnss)
                         .add(css_old);
         etatSalaire.setTotalRetenue(tot_ret_old.setScale(2, RoundingMode.HALF_UP));
         // SALAIRE NET 617111
@@ -774,11 +702,10 @@ class EtatSalaireServiceImpl extends AppBaseServiceImpl implements EtatSalaireSe
         BigDecimal net_ordo_old = new BigDecimal(0);
         if (!employee.getIsIrRcar_6171313()) {
             net_ordo_old =
-                    salaireImposable
+                    totalBrut
                             .subtract(tot_ret_old)
-                            .subtract(etatSalaire.getAllocationfamil())
+                            .subtract(etatSalaire.getAos())
                             .add(BigDecimal.valueOf(child_mt_old))
-                            // .add(prolongation)
                             .add(BigDecimal.ZERO)
                             .add(BigDecimal.ZERO)
                             .add(BigDecimal.ZERO);
@@ -787,19 +714,14 @@ class EtatSalaireServiceImpl extends AppBaseServiceImpl implements EtatSalaireSe
             etatSalaire.setNetAPayer(net_ordo_old.setScale(2, RoundingMode.HALF_UP));
         } else {
             net_ordo_old =
-                    salaireImposable
+                    totalBrut
                             .subtract(tot_ret_old)
                             .add(BigDecimal.valueOf(child_mt_old))
                             .add(newResp != null ? indem_foncNet_new : BigDecimal.ZERO)
                             .add(newResp != null ? indem_voitur_new : BigDecimal.ZERO)
                             .add(newResp != null ? indem_repres_new : BigDecimal.ZERO)
-                            // .add(prolongation)
-                            .subtract(etatSalaire.getRcarComp617131())
-                            .subtract(etatSalaire.getAllocationfamil())
-                            .subtract(total_cnss.setScale(2, RoundingMode.HALF_UP))
-                            .subtract(etatSalaire.getiR617131());
-
-
+                            .add(newResp != null ? indem_log_new : BigDecimal.ZERO)
+                            .subtract(etatSalaire.getAos());
             etatSalaire.setNetAPayer(net_ordo_old.setScale(2, RoundingMode.HALF_UP));
         }
     }

@@ -13,7 +13,7 @@
         <field name="annexe" title="Annexe"/>
         <field name="archived" hidden="true"/>
         <button onClick="AjouterCredit" name="addcredit" title="Ajouter crédit" icon="fa-money"/>
-        <button onClick="AjouterConge" name="addconge" title="Ajouter congé" icon="fa-plus"/>
+        <!--<button onClick="AjouterConge" name="addconge" title="Ajouter congé" icon="fa-plus"/>-->
     </grid>
 
     <action-method name="AjouterCredit">
@@ -41,12 +41,12 @@
         <toolbar>
             <button name="etatEngagement" title="Etat d'engagement" icon="fa-print" showIf="id"
                     onClick="action-employee-view-etat-engagement-wizard"/>
-            <button name="attestationSalaire" title="Attestation de salaire" icon="fa-print" showIf="id"
+            <!--<button name="attestationSalaire" title="Attestation de salaire" icon="fa-print" showIf="id"
                     onClick="action-employee-view-attestation-salaire-wizard"/>
-            <!--ajout par ayoub-->
+            &lt;!&ndash;ajout par ayoub&ndash;&gt;
             <button name="etatDECOMPTEIR" title="ETAT DE DECOMPTE IR" icon="fa-print" showIf="id"
                     onClick="action-employee-view-etat-DECOMPTEIR-wizard"/>
-            <!--ajout par ayoub-->
+            &lt;!&ndash;ajout par ayoub&ndash;&gt;-->
         </toolbar>
 
         <!-- New employee wizard -->

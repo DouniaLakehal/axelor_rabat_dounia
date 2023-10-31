@@ -3,10 +3,9 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
 
-	<menuitem id="abs-menu-mail" name="menu-mail" if="__config__.app.isApp('base') &amp;&amp; __config__.app.getApp('base').getEnterpriseCommunication()" hidden="true" order="-110"
-    title="Messaging" icon="fa-users" icon-background="#84429f" />
-	
-	<menuitem title="Mailing lists" name="menu-mail-mailing-list" parent="menu-mail" order="-75"/>
+	<menuitem name="" title=""/>
+
+	<!--<menuitem title="Mailing lists" name="menu-mail-mailing-list" parent="menu-mail" order="-75"/>
 
 	<menuitem title="My Mailing lists" name="menu-mail-my-mailing-list" parent="menu-mail-mailing-list" action="menu.mail.my.mailing.list"/>
 	<menuitem title="All Mailing lists" name="menu-mail-all-mailing-list" parent="menu-mail-mailing-list" action="menu.mail.all.mailing.list"/>
@@ -21,9 +20,9 @@
 		<view type="cards" name="mailing-list-message-cards"/>
 		<view type="form" name="mailing-list-message-form"/>
 		<view type="grid" name="mailing-list-message-grid"/>
-	</action-view>
+	</action-view>-->
 
-	<menuitem id="abs-menu-dms" name="menu-dms" if="__config__.app.isApp('base') &amp;&amp; __config__.app.getApp('base').getDocument()" hidden="false" order="-109"
+	<!--<menuitem id="abs-menu-dms" name="menu-dms" if="__config__.app.isApp('base') &amp;&amp; __config__.app.getApp('base').getDocument()" hidden="false" order="-109"
     title="Documents" icon="fa-archive" icon-background="#3f6bb9" />
 
 	<menuitem id="abs-menu-dms-config" name="menu-dms-config" title="Configuration" hidden="true" parent="menu-dms" order="-70" icon="fa-cog"/>
@@ -145,7 +144,7 @@
     </action-view>
 
 	<menuitem name="referential-root" title="Referential" order="15" parent="admin-root" if="__config__.app.isApp('base')"/>
-		
+
 	<menuitem name="referential-root-partners" parent="referential-root"
 		title="Partners" action="referential.root.partners" order="10"/>
 
@@ -160,7 +159,7 @@
 		<context name="json-enhance" expr="eval:true" />
 		<context name="_domain" expr="self.isContact != true"/>
 	</action-view>
-	
+
 	<menuitem name="referential-root-contacts" parent="referential-root"
 		title="Contacts" action="referential.root.contacts" order="20"/>
 
@@ -174,7 +173,7 @@
 		<domain>self.isContact = true</domain>
 		<context name="_domain" expr="self.isContact = true"/>
 	</action-view>
-	
+
 	<menuitem name="referential-root-product-root" title="Products" order="30" parent="referential-root"/>
 
 	<menuitem name="product-root-product" parent="referential-root-product-root"
@@ -209,7 +208,7 @@
 		<context name="_isModel" expr="false"/>
 		<context name="_productTypeSelect" expr="service"/>
 	</action-view>
-	
+
 	<menuitem name="product-root-product-model" parent="referential-root-product-root"
 		title="Products models" action="product.root.product.model" if="__config__.app.getApp('base').getManageProductVariants()" />
 
@@ -224,7 +223,7 @@
 		<context name="_activeCompany" expr="eval:__user__.activeCompany"/>
 		<context name="_isModel" expr="true"/>
 	</action-view>
-	
+
 	<menuitem name="referential-root-price-list" parent="referential-root"
 		if="__config__.app.isApp('account') || __config__.app.isApp('sale') || __config__.app.isApp('purchase')"
 		title="Price lists" action="referential.root.price.list" order="95"/>
@@ -236,16 +235,16 @@
 	</action-view>
 
 	<menuitem name="referential-conf" title="Configuration" order="100" parent="referential-root" icon="fa-cog"/>
-	
+
 	<menuitem name="referential-conf-contact-function" parent="referential-conf"
 		title="Contact function" action="referential.conf.contact.function" />
-		
+
 	<action-view name="referential.conf.contact.function" title="Contact function"
 		model="com.axelor.apps.base.db.Function" >
 		<view type="grid" name="function-grid"/>
 		<view type="form" name="function-form"/>
 	</action-view>
-	
+
 	<menuitem name="referential-conf-address" parent="referential-conf"
 		title="Addresses" action="referential.conf.address" order="110"/>
 
@@ -257,7 +256,7 @@
 		<context name="fromMain" expr="eval:true"/>
 		<context name="_duplicateFinderFields" expr=" addressL4;addressL6"/>
 	</action-view>
-	
+
 	<menuitem name="referential-conf-invoice-rib" parent="referential-conf"
 		title="Bank details" action="referential.conf.invoice.rib" order="120"/>
 
@@ -276,7 +275,7 @@
 		<view type="grid" name="bank-grid"/>
 		<view type="form" name="bank-form"/>
 	</action-view>
-	
+
 	<menuitem name="referential-conf-partner-category" parent="referential-conf"
 		title="Partner categories" action="referential.conf.partner.category" order="140"/>
 
@@ -314,9 +313,9 @@
 		<view type="form" name="product-category-form"/>
 	</action-view>
 
-	<menuitem name="referential-conf-product-category-tree" title="Categories tree" 
+	<menuitem name="referential-conf-product-category-tree" title="Categories tree"
         parent="referential-conf" action="referential.conf.product.category.tree" order="171"/>
-    
+
     <action-view name="referential.conf.product.category.tree" title="Product category tree" model="com.axelor.apps.base.db.ProductCategory">
       <view type="tree" name="product-category-tree"/>
       <view-param name="forceTitle" value="true"/>
@@ -329,9 +328,9 @@
 		model="com.axelor.apps.base.db.ProductFamily" >
 		<view type="grid" name="product-family-grid"/>
 		<view type="form" name="product-family-form"/>
-		<context name="fromMenu" expr="eval:true"/>		
+		<context name="fromMenu" expr="eval:true"/>
 	</action-view>
-	
+
     <menuitem name="referential-conf-product-variant-attr"
         parent="referential-conf"
         title="Products variant attributes" action="referential.conf.product.variant.attr" order="190" if="__config__.app.getApp('base').manageProductVariants"/>
@@ -351,7 +350,7 @@
 		<view type="grid" name="stop-reason-grid"/>
 		<view type="form" name="stop-reason-form"/>
 	</action-view>
-	
+
 	<menuitem name="referential-conf-sync-contact" parent="referential-conf"
 		title="Contact synchronisation" action="referential.conf.sync.contact" order="210"/>
 
@@ -360,46 +359,46 @@
 		<view type="grid" name="sync-contact-grid"/>
     	<view type="form" name="sync-contact-form"/>
 	</action-view>
-	
+
 	<menuitem name="referential-report" parent="referential-root" order="90" title="Reportings" icon="fa-bar-chart"/>
 
 	<menuitem name="referential-report-dashboards-customers"  parent="referential-report"
     	title="Customers" icon="fa-bar-chart"  action="customer.list.dashboard.view"/>
-	
+
 	<action-view name="customer.list.dashboard.view" title="Customers">
 		<view type="dashboard" name="base.partner.list.dashboard" />
 	</action-view>
-	
+
 	<menuitem name="referential-report-maps" parent="referential-report" title="Maps" order="10"/>
-		
-	<menuitem name="referential-report-partner-customers" parent="referential-report-maps" 
+
+	<menuitem name="referential-report-partner-customers" parent="referential-report-maps"
 		title="Customers" action="action-show-customers-on-map-page"/>
-	
-	<menuitem name="referential-report-partner-prospects" parent="referential-report-maps" 
+
+	<menuitem name="referential-report-partner-prospects" parent="referential-report-maps"
 		title="Prospects" action="action-show-prospects-on-map-page"/>
-		
-<!-- 	<action-method name="action-show-customers-on-map-page">
+
+&lt;!&ndash; 	<action-method name="action-show-customers-on-map-page">
 	  <call method="showCustomersOnMap" class="com.axelor.apps.base.web.GeneralController"/>
-	</action-method> -->
-	
+	</action-method> &ndash;&gt;
+
 	<action-method name="action-show-customers-on-map-page">
 	  <call method="showCustomersOnMap" class="com.axelor.apps.base.web.AppBaseController"/>
 	</action-method>
 
-<!-- 	<action-method name="action-show-prospects-on-map-page">
+&lt;!&ndash; 	<action-method name="action-show-prospects-on-map-page">
 	  <call method="showProspectsOnMap" class="com.axelor.apps.base.web.GeneralController"/>
-	</action-method> -->
+	</action-method> &ndash;&gt;
 
 	<action-method name="action-show-prospects-on-map-page">
 	  <call method="showProspectsOnMap" class="com.axelor.apps.base.web.AppBaseController"/>
 	</action-method>
-	
-	<menuitem name="referential-report-partner-suppliers" parent="referential-report-maps" 
-		title="Suppliers" action="action-show-suppliers-on-map-page"/>	
-	
-<!-- 	<action-method name="action-show-suppliers-on-map-page">
+
+	<menuitem name="referential-report-partner-suppliers" parent="referential-report-maps"
+		title="Suppliers" action="action-show-suppliers-on-map-page"/>
+
+&lt;!&ndash; 	<action-method name="action-show-suppliers-on-map-page">
 	  <call method="showSuppliersOnMap" class="com.axelor.apps.base.web.GeneralController"/>
-	</action-method> -->
+	</action-method> &ndash;&gt;
 
 	<action-method name="action-show-suppliers-on-map-page">
 	  <call method="showSuppliersOnMap" class="com.axelor.apps.base.web.AppBaseController"/>
@@ -416,7 +415,7 @@
 		<view type="grid" name="territory-grid"/>
 		<view type="form" name="territory-form"/>
 	</action-view>
-    
+
     <menuitem name="admin-root-organisation-territory-street"
         parent="admin-root-organisation-territory" title="Streets"
         action="admin.root.organisation.territory.street" if="__config__.app.getApp('base').getStoreStreets()" />
@@ -426,7 +425,7 @@
         <view type="grid" name="street-grid"/>
         <view type="form" name="street-form"/>
     </action-view>
-    
+
 	<menuitem name="admin-root-organisation-territory-city"
 		parent="admin-root-organisation-territory" title="Cities"
 		action="admin.root.organisation.territory.city" />
@@ -482,17 +481,17 @@
     <menuitem name="admin-root-organisation-economic-area"
       parent="admin-root-organisation-territory" title="Economic areas"
       action="admin.root.organisation.economic.area" />
-  
+
     <action-view name="admin.root.organisation.economic.area"
       title="Economic areas" model="com.axelor.apps.base.db.EconomicArea">
       <view type="grid" name="economic-area-grid"/>
       <view type="form" name="economic-area-form"/>
     </action-view>
-    
+
     <menuitem name="admin-root-organisation-territory-citizenship"
       parent="admin-root-organisation-territory" title="menu.citizenship"
       action="admin.root.organisation.territory.citizenship" />
-  
+
     <action-view name="admin.root.organisation.territory.citizenship"
       title="menu.citizenship" model="com.axelor.apps.base.db.Citizenship">
       <view type="grid" name="citizenship-grid"/>
@@ -514,10 +513,10 @@
 
 	<menuitem name="admin-root-user-company" parent="admin-root-user"
 		title="Companies" action="admin.root.base.company" order="2"/>
-		
+
     <menuitem title="Company tree" name="admin-root-user-company-tree"
         parent="admin-root-user" action="action-company-view-tree" order="3"/>
-        
+
     <action-view name="action-company-view-tree" title="Company tree">
         <view type="tree" name="company-tree"/>
     </action-view>
@@ -607,7 +606,7 @@
 		<view type="grid" name="alarm-engine-batch-grid"/>
 		<view type="form" name="alarm-engine-batch-form"/>
 	</action-view>
-	
+
 	<menuitem name="admin-root-batch" parent="admin-root" if="__config__.app.isApp('base')"
 		title="Batches" order="35" />
 
@@ -620,7 +619,7 @@
 		<view type="form" name="base-batch-form"/>
 		<view-param name="search-filters" value="base-batch-filters"/>
 	</action-view>
-	
+
 	<menuitem name="admin-root-batch-mail" parent="admin-root-batch"
 		title="Mail batches" action="admin.root.batch.mail" />
 
@@ -630,7 +629,7 @@
 		<view type="form" name="mail-batch-form"/>
 		<view-param name="search-filters" value="mail-batch-filters"/>
 	</action-view>
-	
+
 	<menuitem id="bas-mail-conf" name="mail-conf" parent="admin-root" if="__config__.app.isApp('base')"
 		title="Message"  order="40" />
 
@@ -661,24 +660,24 @@
 		<view type="grid" name="import-configuration-grid" />
 		<view type="form" name="import-configuration-form" />
 	</action-view>
-	
+
 	<menuitem name="admin-root-advanced-import" parent="admin-root-maintenance"
    		title="Advanced import" action="admin.root.advanced.import"/>
-  
+
 	<action-view name="admin.root.advanced.import" title="Advanced import"
 		model="com.axelor.apps.base.db.AdvancedImport" >
 		<view type="grid" name="advanced-import-grid"/>
 		<view type="form" name="advanced-import-form"/>
 	</action-view>
-	
+
 	<menuitem name="admin-root-convert-demo-file" parent="admin-root-maintenance"
 		title="Convert demo file" action="admin.root.convert.demo.file"/>
-		
+
 	<action-view name="admin.root.convert.demo.file" title="Convert demo file"
 		model="com.axelor.apps.base.db.Wizard">
 		<view type="form" name="convert-demo-file-wizard-form" />
 	</action-view>
-	
+
 	<menuitem name="admin-root-import-demo-data" parent="admin-root-maintenance"
 		title="Import demo data" action="admin.root.import.demo.data" />
 
@@ -695,7 +694,7 @@
 		<view type="grid" name="indicator-generator-grouping-grid" />
 		<view type="form" name="indicator-generator-grouping-form"/>
 	</action-view>
-	
+
 	<menuitem name="admin-root-indicator-generator" parent="admin-root-maintenance"
 		title="Indicators generators" action="admin.root.indicator.generator" />
 
@@ -704,14 +703,14 @@
 		<view type="grid" name="indicator-generator-grid" />
 		<view type="form" name="indicator-generator-form"/>
 	</action-view>
-	
+
 	<menuitem title="Advanced exports" name="menu-advanced-export" parent="admin-root-maintenance" action="menu.advanced.export" />
 
 	<action-view name="menu.advanced.export" title="Advanced export" model="com.axelor.apps.base.db.AdvancedExport">
 		<view type="grid" name="advanced-export-grid"/>
 		<view type="form" name="advanced-export-form"/>
 	</action-view>
-	
+
 	<menuitem title="Printing Setting" name="menu-printing-setting" parent="admin-root-maintenance" action="menu-printing-setting" />
 
 	<action-view name="menu-printing-setting" title="Printing Setting" model="com.axelor.apps.base.db.PrintingSettings">
@@ -750,7 +749,7 @@
 		<view type="grid" name="calendar-event-grid"/>
 		<view type="form" name="calendar-event-form"/>
 	</action-view>
-	
+
 	<menuitem name="admin-root-calendars-config" parent="admin-root-calendars"
 		title="Calendar Configurations" action="admin.root.calendars.config" />
 
@@ -759,7 +758,7 @@
 		<view type="grid" name="calendar-configuration-grid"/>
 		<view type="form" name="calendar-configuration-form"/>
 	</action-view>
-	
+
 	<action-view id="base.team.tasks.due" name="team.tasks.due" model="com.axelor.team.db.TeamTask" title="Tasks due">
 	  <view name="team-task-grid" type="grid"/>
 	  <view name="team-task-calendar" type="calendar"/>
@@ -785,7 +784,7 @@
 	  </domain>
 	  <context name="closed_status" expr="#{['closed', 'canceled']}"/>
 	</action-view>
-	
+
 	<action-view id="base.team.tasks.open" name="team.tasks.open" model="com.axelor.team.db.TeamTask" title="My open tasks">
 	  <view name="team-task-grid" type="grid"/>
 	  <view name="team-task-calendar" type="calendar"/>
@@ -795,7 +794,7 @@
 	  <domain>self.assignedTo = :__user__ AND self.status NOT IN :closed_status</domain>
 	  <context name="closed_status" expr="#{['closed', 'canceled']}"/>
 	</action-view>
-	
+
 	<action-view id="base.team.tasks.assigned" name="team.tasks.assigned" model="com.axelor.team.db.TeamTask" title="My tasks">
 	  <view name="team-task-grid" type="grid"/>
 	  <view name="team-task-calendar" type="calendar"/>
@@ -805,7 +804,7 @@
     <domain>self.assignedTo = :__user__ AND self.typeSelect = :_typeSelect</domain>
     <context name="_typeSelect" expr="eval: com.axelor.team.db.repo.TeamTaskRepository.TYPE_TASK"/>
 	</action-view>
-	
+
 	<action-view id="base.team.tasks.created" name="team.tasks.created" model="com.axelor.team.db.TeamTask" title="Tasks created by me">
 	  <view name="team-task-grid" type="grid"/>
 	  <view name="team-task-calendar" type="calendar"/>
@@ -833,7 +832,7 @@
 	</action-view>
 
 
-  <!-- Print -->
+  &lt;!&ndash; Print &ndash;&gt;
   <menuitem name="print-conf" parent="admin-root" if="__config__.app.isApp('base')" title="Printing"  order="41" />
 
   <menuitem name="print-conf-print-templates" parent="print-conf" title="Print templates" action="action.print.template.view.all"/>
@@ -841,5 +840,5 @@
   <action-view name="action.print.template.view.all" title="Print templates" model="com.axelor.apps.base.db.PrintTemplate">
      <view type="grid" name="print-template-grid"/>
      <view type="form" name="print-template-form"/>
-  </action-view>
+  </action-view>-->
 </object-views>
