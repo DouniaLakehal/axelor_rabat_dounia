@@ -49,6 +49,7 @@ import com.axelor.rpc.Context;
 import com.google.common.base.Joiner;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.*;
@@ -66,11 +67,7 @@ public class AccountController {
 
   public void showAnnexe(ActionRequest request, ActionResponse response) {
     String choix = request.getContext().get("choixAnnexe").toString();
-    if (choix.equals("all")) {
-      response.setHidden("annexe", true);
-    } else {
-      response.setHidden("annexe", false);
-    }
+    response.setHidden("annexe", choix.equals("all"));
   }
 
   public void TraiterDemandeRetraitBudget(ActionRequest request, ActionResponse response) {
@@ -810,7 +807,7 @@ public class AccountController {
     response.setView(ActionView.define("Budget Generale").add("html", fileLink).map());
   }
 
-  public void tw_printCodeBudgetProdF(ActionRequest request, ActionResponse response)
+  /*public void tw_printCodeBudgetProdF(ActionRequest request, ActionResponse response)
       throws AxelorException {
     int annee = (int) request.getContext().get("anne");
     Long version = Long.valueOf(request.getContext().get("id_version").toString());
@@ -824,9 +821,9 @@ public class AccountController {
             .getFileLink();
     response.setCanClose(true);
     response.setView(ActionView.define("Budget Generale").add("html", fileLink).map());
-  }
+  }*/
 
-  public void tw_printCodeBudgetFONC(ActionRequest request, ActionResponse response)
+  /*public void tw_printCodeBudgetFONC(ActionRequest request, ActionResponse response)
       throws AxelorException {
     int annee = (int) request.getContext().get("anne");
     Long version = Long.valueOf(request.getContext().get("id_version").toString());
@@ -840,9 +837,9 @@ public class AccountController {
             .getFileLink();
     response.setCanClose(true);
     response.setView(ActionView.define("Budget Generale").add("html", fileLink).map());
-  }
+  }*/
 
-  public void tw_printCodeBudgetFONCDetail(ActionRequest request, ActionResponse response)
+  /*public void tw_printCodeBudgetFONCDetail(ActionRequest request, ActionResponse response)
       throws AxelorException {
     int annee = (int) request.getContext().get("anne");
     Long version = Long.valueOf(request.getContext().get("id_version").toString());
@@ -858,9 +855,9 @@ public class AccountController {
             .getFileLink();
     response.setCanClose(true);
     response.setView(ActionView.define("Budget Generale").add("html", fileLink).map());
-  }
+  }*/
 
-  public void tw_printCodeBudgetEquip(ActionRequest request, ActionResponse response)
+  /*public void tw_printCodeBudgetEquip(ActionRequest request, ActionResponse response)
       throws AxelorException {
     int annee = (int) request.getContext().get("anne");
     Long id_version = (Long) request.getContext().get("id_version");
@@ -878,8 +875,8 @@ public class AccountController {
     response.setCanClose(true);
     response.setView(ActionView.define("Budget Generale").add("html", fileLink).map());
   }
-
-  public void tw_printCodeBudgetEquipDetail(ActionRequest request, ActionResponse response)
+*/
+  /*public void tw_printCodeBudgetEquipDetail(ActionRequest request, ActionResponse response)
       throws AxelorException {
     int annee = (int) request.getContext().get("anne");
     Long id_version = (Long) request.getContext().get("id_version");
@@ -895,7 +892,7 @@ public class AccountController {
             .getFileLink();
     response.setCanClose(true);
     response.setView(ActionView.define("Budget Generale").add("html", fileLink).map());
-  }
+  }*/
 
   public void tw_ajouterSignataire(ActionRequest request, ActionResponse response)
       throws AxelorException {
@@ -994,17 +991,17 @@ public class AccountController {
     if (gm != null) {
       if (gm.getStatusSelect() != 3) {
         FixedAssetCategory fixedAssetCategory =
-            (FixedAssetCategory) request.getContext().get("fixedAssetCategory");
-        Long id = (Long) fixedAssetCategory.getId();
+                (FixedAssetCategory) request.getContext().get("fixedAssetCategory");
+        Long id = fixedAssetCategory.getId();
         FixedAssetCategory fc = Beans.get(FixedAssetCategoryRepository.class).find(id);
         Integer year = Integer.valueOf(gm.getPeriod().getYear().getName());
         Journal j =
-            Beans.get(JournalRepository.class)
-                .all()
-                .filter("self.id_journal_parent = :id and self.year=:year")
-                .bind("id", fc.getJournal().getId())
-                .bind("year", year)
-                .fetchOne();
+                Beans.get(JournalRepository.class)
+                        .all()
+                        .filter("self.id_journal_parent = :id and self.year=:year")
+                        .bind("id", fc.getJournal().getId())
+                        .bind("year", year)
+                        .fetchOne();
 
         // response.setAttr("journal","domain","self.id="+j!=null?j.getId():0);
         response.setValue("journal", j);

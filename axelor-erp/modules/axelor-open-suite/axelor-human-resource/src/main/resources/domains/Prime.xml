@@ -6,7 +6,11 @@
     <module name="human-resource" package="com.axelor.apps.hr.db"/>
 
     <entity name="Prime" lang="java">
-        <decimal name="pourcentage" title="Montant max"/>
+        <decimal name="pourcentage" title="Pourcentage"/>
+        <decimal name="brut" title="Brut"/>
+        <decimal name="net" title="Net"/>
+        <decimal name="ir" title="IR"/>
+        <decimal name="retenue" title="Retenue"/>
         <integer name="annee" title="Année" max="9999"/>
         <many-to-one name="employee" ref="com.axelor.apps.hr.db.Employee"/>
     </entity>

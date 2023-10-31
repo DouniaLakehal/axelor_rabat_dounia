@@ -1,70 +1,73 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-			  xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
 
-	<menuitem title="Gestion du courrier" name="contracts-root" order="-104" if="__config__.app.isApp('contract')" icon="fa-envelope" icon-background="#2091d8"/>
+    <menuitem hidden="true" title="Gestion du courrier" name="contracts-root" order="-104"
+              if="__config__.app.isApp('contract')" icon="fa-envelope" icon-background="#2091d8"/>
 
-	<menuitem title="Enregistrement du courrier" name="contracts-root-customer-all" action="contracts.root.customer.all" parent="contracts-root"/>
+    <menuitem title="Enregistrement du courrier" name="contracts-root-customer-all" action="contracts.root.customer.all"
+              parent="contracts-root"/>
 
-	<action-view name="contracts.root.customer.all" title="Enregistrement du courrier" model="com.axelor.apps.contract.db.Courrier">
-		<view type="grid" name="courrier-grid"/>
-		<view type="form" name="courrier-form"/>
-	</action-view>
+    <action-view name="contracts.root.customer.all" title="Enregistrement du courrier"
+                 model="com.axelor.apps.contract.db.Courrier">
+        <view type="grid" name="courrier-grid"/>
+        <view type="form" name="courrier-form"/>
+    </action-view>
 
 
+    <menuitem title="Autres" name="contracts-root-conf-all" parent="contracts-root" icon="fa-envelope"/>
 
-	<menuitem title="Autres" name="contracts-root-conf-all" parent="contracts-root" icon="fa-envelope"/>
+    <menuitem title="Suivi du courrier" name="suivi-courrier" parent="contracts-root-conf-all" order="-1"/>
 
-	<menuitem title="Suivi du courrier" name="suivi-courrier" parent="contracts-root-conf-all" order="-1"/>
+    <menuitem title="Normale" name="suivi-courrier-normal" action="suivi.courrier.normal" parent="suivi-courrier"
+              order="-1"/>
 
-	<menuitem title="Normale" name="suivi-courrier-normal" action="suivi.courrier.normal" parent="suivi-courrier" order="-1"/>
+    <menuitem title="Urgent" name="suivi-courrier-urgent" action="suivi.courrier.urgent" parent="suivi-courrier" order="-1"/>
+    <action-view name="suivi.courrier.normal" title="Normale" model="com.axelor.apps.contract.db.Courrier" >
+        <view type="grid" name="suivi-grid"/>
+        <view type="form" name="courrier-form"/>
+        <domain>self.datedelait &gt; :__date__ AND self.natureSelect='2' </domain>
+    </action-view>
 
-	<menuitem title="Urgent" name="suivi-courrier-urgent" action="suivi.courrier.urgent" parent="suivi-courrier" order="-1"/>
-	<action-view name="suivi.courrier.normal" title="Normale" model="com.axelor.apps.contract.db.Courrier" >
-		<view type="grid" name="suivi-grid"/>
-		<view type="form" name="courrier-form"/>
-		<domain>self.datedelait &gt; :__date__ AND self.natureSelect='2' </domain>
-	</action-view>
+    <action-view name="suivi.courrier.urgent" title="Urgent" model="com.axelor.apps.contract.db.Courrier" >
+        <view type="grid" name="suivi-grid"/>
+        <view type="form" name="courrier-form"/>
+        <domain>self.datedelait &lt; :__date__ AND self.natureSelect='2' </domain>
+    </action-view>
 
-	<action-view name="suivi.courrier.urgent" title="Urgent" model="com.axelor.apps.contract.db.Courrier" >
-		<view type="grid" name="suivi-grid"/>
-		<view type="form" name="courrier-form"/>
-		<domain>self.datedelait &lt; :__date__ AND self.natureSelect='2' </domain>
-	</action-view>
+    <menuitem name="localisation-all" title="Localisation physique du courrier" parent="contracts-root-conf-all" action="localisation.all" />
+    <action-view name="localisation.all" title="Localisation physique du courrier" model="com.axelor.apps.contract.db.Courrier">
+        <view type="grid" name="localisation-grid"/>
+    </action-view>
 
-	<menuitem name="localisation-all" title="Localisation physique du courrier" parent="contracts-root-conf-all" action="localisation.all" />
-	<action-view name="localisation.all" title="Localisation physique du courrier" model="com.axelor.apps.contract.db.Courrier">
-		<view type="grid" name="localisation-grid"/>
-	</action-view>
+    <menuitem name="expediteur-all" title="EXPEDITEUR" parent="contracts-root-conf-all" action="expediteur.all" />
+    <action-view name="expediteur.all" title="EXPEDITEUR" model="com.axelor.apps.contract.db.Expediteur">
+        <view type="grid" name="expediteur-grid"/>
+        <view type="form" name="expediteur-form"/>
+    </action-view>
 
-	<menuitem name="expediteur-all" title="EXPEDITEUR" parent="contracts-root-conf-all" action="expediteur.all" />
-	<action-view name="expediteur.all" title="EXPEDITEUR" model="com.axelor.apps.contract.db.Expediteur">
-		<view type="grid" name="expediteur-grid"/>
-		<view type="form" name="expediteur-form"/>
-	</action-view>
+    <menuitem name="nomcourrier-all" title="Nom de courrier" parent="contracts-root-conf-all" action="nomcourrier.all" />
+    <action-view name="nomcourrier.all" title="Nom de courrier" model="com.axelor.apps.contract.db.Nomcourrier">
+        <view type="grid" name="nomcourrier-grid"/>
+        <view type="form" name="nomcourrier-form"/>
+    </action-view>
 
-	<menuitem name="nomcourrier-all" title="Nom de courrier" parent="contracts-root-conf-all" action="nomcourrier.all" />
-	<action-view name="nomcourrier.all" title="Nom de courrier" model="com.axelor.apps.contract.db.Nomcourrier">
-		<view type="grid" name="nomcourrier-grid"/>
-		<view type="form" name="nomcourrier-form"/>
-	</action-view>
+    <menuitem name="statistique-all" title="Statistiques" parent="contracts-root-conf-all" action="statistique.all" icon="fa-bar-chart"/>
+    <action-view name="statistique.all" title="Statistiques" model="com.axelor.apps.base.db.Duration" >
+        <view type="grid" name="duration-grid2"/>
+        <view type="form" name="duration-form"/>
+        <domain>self.applicationTypeSelect = 2</domain>
+        <context name="_applicatioTypeSelect" expr="2"/>
+    </action-view>
 
-	<menuitem name="statistique-all" title="Statistiques" parent="contracts-root-conf-all" action="statistique.all" icon="fa-bar-chart"/>
-	<action-view name="statistique.all" title="Statistiques" model="com.axelor.apps.base.db.Duration" >
-		<view type="grid" name="duration-grid2"/>
-		<view type="form" name="duration-form"/>
-		<domain>self.applicationTypeSelect = 2</domain>
-		<context name="_applicatioTypeSelect" expr="2"/>
-	</action-view>
-
-	<menuitem name="admin-root-batch-contract" parent="admin-root-batch"
-			  title="Contract batches" action="admin.root.batch.contract" if="__config__.app.isApp('contract')"/>
-	<action-view name="admin.root.batch.contract" title="Contract batches"
-				 model="com.axelor.apps.contract.db.ContractBatch" >
-		<view type="grid" name="contract-batch-grid"/>
-		<view type="form" name="contract-batch-form"/>
-		<view-param name="search-filters" value="contract-batch-filters"/>
-	</action-view>
+    <menuitem name="admin-root-batch-contract" parent="admin-root-batch"
+              title="Contract batches" action="admin.root.batch.contract" if="__config__.app.isApp('contract')"/>
+    <action-view name="admin.root.batch.contract" title="Contract batches"
+                 model="com.axelor.apps.contract.db.ContractBatch" >
+        <view type="grid" name="contract-batch-grid"/>
+        <view type="form" name="contract-batch-form"/>
+        <view-param name="search-filters" value="contract-batch-filters"/>
+    </action-view>
 
 
 </object-views>

@@ -7,11 +7,12 @@
     <property name="imageDPI">96</property>
     <parameters>
         <scalar-parameter name="annee" id="182">
+            <property name="hidden">true</property>
             <property name="valueType">static</property>
             <property name="dataType">integer</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">2022</value>
+                <value type="constant">2023</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
@@ -21,11 +22,12 @@
             </structure>
         </scalar-parameter>
         <scalar-parameter name="id_version" id="2302">
+            <property name="hidden">true</property>
             <property name="valueType">static</property>
             <property name="dataType">decimal</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">1</value>
+                <value type="constant">2</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
@@ -35,6 +37,7 @@
             </structure>
         </scalar-parameter>
         <scalar-parameter name="id_doc" id="6774">
+            <property name="hidden">true</property>
             <property name="valueType">static</property>
             <property name="isRequired">false</property>
             <property name="dataType">decimal</property>
@@ -69,7 +72,7 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">org.postgresql.Driver</property>
-            <property name="odaURL">jdbc:postgresql://localhost:5432/axelor</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/rabat</property>
             <property name="odaUser">postgres</property>
             <encrypted-property name="odaPassword" encryptionID="base64">cm9vdA==</encrypted-property>
         </oda-data-source>
@@ -100,6 +103,12 @@
                     <property name="analysis">measure</property>
                     <text-property name="displayName">type_rubrique_principal</text-property>
                     <text-property name="heading">type_rubrique_principal</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">hide_in_principale</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">hide_in_principale</text-property>
+                    <text-property name="heading">hide_in_principale</text-property>
                 </structure>
             </list-property>
             <list-property name="parameters">
@@ -136,6 +145,11 @@
                         <property name="name">type_rubrique_principal</property>
                         <property name="dataType">decimal</property>
                     </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">hide_in_principale</property>
+                        <property name="dataType">integer</property>
+                    </structure>
                 </list-property>
             </structure>
             <property name="dataSource">Data Source</property>
@@ -168,12 +182,23 @@
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">-5</property>
                 </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">hide_in_principale</property>
+                    <property name="nativeName">hide_in_principale</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">-7</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[SELECT code_budget,titre_budget,x.somme_mt_children_mt_budget,type_rubrique_principal
+            <xml-property name="queryText"><![CDATA[SELECT code_budget, titre_budget, x.somme_mt_children_mt_budget, type_rubrique_principal,hide_in_principale
 from configuration_rubriques_budgetaire x
-where type_rubrique_principal=8 and is_principal=true and id_version = ?
-order by code_budget
-;]]></xml-property>
+where type_rubrique_principal =
+      (select distinct pp.type_rubrique_principal
+       from configuration_rubriques_budgetaire pp
+       where pp.code_budget = '148')
+  and is_principal = true
+  and id_version = ?
+order by code_budget]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
@@ -375,6 +400,12 @@ where
                     <text-property name="displayName">type_rubrique_principal</text-property>
                     <text-property name="heading">type_rubrique_principal</text-property>
                 </structure>
+                <structure>
+                    <property name="columnName">hide_in_principale</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">hide_in_principale</text-property>
+                    <text-property name="heading">hide_in_principale</text-property>
+                </structure>
             </list-property>
             <list-property name="parameters">
                 <structure>
@@ -410,6 +441,11 @@ where
                         <property name="name">type_rubrique_principal</property>
                         <property name="dataType">decimal</property>
                     </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">hide_in_principale</property>
+                        <property name="dataType">integer</property>
+                    </structure>
                 </list-property>
             </structure>
             <property name="dataSource">Data Source</property>
@@ -442,12 +478,23 @@ where
                     <property name="dataType">decimal</property>
                     <property name="nativeDataType">-5</property>
                 </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">hide_in_principale</property>
+                    <property name="nativeName">hide_in_principale</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">-7</property>
+                </structure>
             </list-property>
-            <xml-property name="queryText"><![CDATA[SELECT code_budget,titre_budget,x.somme_mt_children_mt_budget,type_rubrique_principal
+            <xml-property name="queryText"><![CDATA[SELECT code_budget, titre_budget, x.somme_mt_children_mt_budget, type_rubrique_principal,hide_in_principale
 from configuration_rubriques_budgetaire x
-where type_rubrique_principal=7 and is_principal=true and id_version = ?
-order by code_budget
-;]]></xml-property>
+where type_rubrique_principal =
+      (select distinct pp.type_rubrique_principal
+       from configuration_rubriques_budgetaire pp
+       where pp.code_budget = '71')
+  and is_principal = true
+  and id_version = ?
+order by code_budget]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
   <Version>2.0</Version>
@@ -640,7 +687,11 @@ order by code_budget
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT code_budget,titre_budget,x.somme_mt_children_mt_budget,type_rubrique_principal
 from configuration_rubriques_budgetaire x
-where type_rubrique_principal=9 and is_principal=true and id_version = ?
+where type_rubrique_principal in
+ (select distinct pp.type_rubrique_principal
+       from configuration_rubriques_budgetaire pp
+       where pp.code_budget like '6%')
+and is_principal=true and id_version = ?
 order by code_budget
 ;]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
@@ -837,10 +888,13 @@ order by code_budget
 	code_budget,titre_budget,x.somme_mt_children_mt_budget,type_rubrique_principal
 from configuration_rubriques_budgetaire x
 where 
-	type_rubrique_principal=10 
+	type_rubrique_principal in 
+	(select distinct pp.type_rubrique_principal
+from configuration_rubriques_budgetaire pp
+where pp.code_budget like '2%' )
 	and is_principal=true 
 	and id_version = ?
-order by code_budget
+order by created_on
 ;]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -1034,7 +1088,11 @@ order by code_budget
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT code_budget,titre_budget,x.somme_mt_children_mt_budget,type_rubrique_principal
 from configuration_rubriques_budgetaire x
-where type_rubrique_principal=29 and is_principal=true and id_version = ?
+where type_rubrique_principal IN 
+(select distinct pp.type_rubrique_principal
+from configuration_rubriques_budgetaire pp
+where pp.code_budget is null)
+and is_principal=true and id_version = ?
 order by code_budget
 ;]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
@@ -1176,7 +1234,12 @@ order by code_budget
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT sum(x.somme_mt_children_mt_budget)
 from configuration_rubriques_budgetaire x
-where ( type_rubrique_principal in (13,7,8) )  and is_principal=true and id_version = ?
+where ( type_rubrique_principal in (
+(select distinct pp.type_rubrique_principal
+       from configuration_rubriques_budgetaire pp
+       where pp.code_budget = '71' or pp.code_budget = '148' or pp.code_budget = '51' )
+) )  
+and is_principal=true and id_version = ?
 ;]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -1316,7 +1379,12 @@ where ( type_rubrique_principal in (13,7,8) )  and is_principal=true and id_vers
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT sum(x.somme_mt_children_mt_budget)
 from configuration_rubriques_budgetaire x
-where ( type_rubrique_principal in (9,23,11) )  and is_principal=true and id_version = ?
+where  type_rubrique_principal
+in
+ (select distinct pp.type_rubrique_principal
+       from configuration_rubriques_budgetaire pp
+       where pp.code_budget like '6%' or pp.code_budget like '2%' or pp.code_budget is null)
+and is_principal=true and id_version = ?
 ;]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -1456,7 +1524,11 @@ where ( type_rubrique_principal in (9,23,11) )  and is_principal=true and id_ver
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT sum(x.somme_mt_children_mt_budget)
 from configuration_rubriques_budgetaire x
-where type_rubrique_principal=7 and is_principal=true and id_version = ?
+where type_rubrique_principal =
+      (select distinct pp.type_rubrique_principal
+       from configuration_rubriques_budgetaire pp
+       where pp.code_budget = '71')
+and is_principal=true and id_version = ?
 ;]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -1596,7 +1668,10 @@ where type_rubrique_principal=7 and is_principal=true and id_version = ?
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT sum(x.somme_mt_children_mt_budget)
 from configuration_rubriques_budgetaire x
-where type_rubrique_principal=9 and is_principal=true and id_version = ?
+where type_rubrique_principal in (select distinct pp.type_rubrique_principal
+       from configuration_rubriques_budgetaire pp
+       where pp.code_budget like '6%')
+and is_principal=true and id_version = ?
 ;]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -1736,7 +1811,11 @@ where type_rubrique_principal=9 and is_principal=true and id_version = ?
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT sum(x.somme_mt_children_mt_budget)
 from configuration_rubriques_budgetaire x
-where type_rubrique_principal=8 and is_principal=true and id_version = ?
+where type_rubrique_principal =
+      (select distinct pp.type_rubrique_principal
+       from configuration_rubriques_budgetaire pp
+       where pp.code_budget = '148')
+and is_principal=true and id_version = ?
 ;]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -1876,7 +1955,12 @@ where type_rubrique_principal=8 and is_principal=true and id_version = ?
             </list-property>
             <xml-property name="queryText"><![CDATA[SELECT sum(x.somme_mt_children_mt_budget)
 from configuration_rubriques_budgetaire x
-where type_rubrique_principal=23 and is_principal=true and id_version = ?
+where type_rubrique_principal
+in
+ (select distinct pp.type_rubrique_principal
+       from configuration_rubriques_budgetaire pp
+       where pp.code_budget like '2%')
+ and is_principal=true and id_version = ?
 ;]]></xml-property>
             <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
 <model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
@@ -2152,27 +2236,27 @@ from configuration_management_documents where id = ?]]></xml-property>
         <simple-master-page name="Simple MasterPage" id="2">
             <property name="type">a4</property>
             <property name="orientation">landscape</property>
-            <property name="topMargin">0.1in</property>
+            <property name="topMargin">0.2in</property>
             <property name="bottomMargin">0in</property>
-            <property name="headerHeight">22mm</property>
+            <property name="headerHeight">0mm</property>
             <property name="footerHeight">0in</property>
         </simple-master-page>
     </page-setup>
     <body>
         <grid id="456">
             <column id="457">
-                <property name="width">15.2mm</property>
+                <property name="width">13mm</property>
             </column>
             <column id="458"/>
             <column id="459">
                 <property name="width">22mm</property>
             </column>
             <column id="460">
-                <property name="width">15.2mm</property>
+                <property name="width">13mm</property>
             </column>
             <column id="461"/>
             <column id="462">
-                <property name="width">22.3mm</property>
+                <property name="width">18mm</property>
             </column>
             <row id="463">
                 <property name="backgroundColor">yellow</property>
@@ -2291,15 +2375,6 @@ from configuration_management_documents where id = ?]]></xml-property>
                     <property name="paddingLeft">0pt</property>
                     <property name="paddingBottom">0pt</property>
                     <property name="paddingRight">0pt</property>
-                    <text id="588">
-                        <property name="fontFamily">"Times New Roman"</property>
-                        <property name="fontSize">10px</property>
-                        <property name="fontWeight">bold</property>
-                        <property name="paddingLeft">3pt</property>
-                        <property name="textAlign">left</property>
-                        <property name="contentType">auto</property>
-                        <text-property name="content"><![CDATA[51]]></text-property>
-                    </text>
                 </cell>
                 <cell id="580">
                     <property name="backgroundColor">yellow</property>
@@ -2314,13 +2389,6 @@ from configuration_management_documents where id = ?]]></xml-property>
                     <property name="paddingLeft">0pt</property>
                     <property name="paddingBottom">0pt</property>
                     <property name="paddingRight">0pt</property>
-                    <text id="589">
-                        <property name="fontFamily">"Times New Roman"</property>
-                        <property name="fontSize">10px</property>
-                        <property name="fontWeight">bold</property>
-                        <property name="contentType">auto</property>
-                        <text-property name="content"><![CDATA[ Disponible à la trésorerie ]]></text-property>
-                    </text>
                 </cell>
                 <cell id="581">
                     <property name="backgroundColor">yellow</property>
@@ -2335,24 +2403,6 @@ from configuration_management_documents where id = ?]]></xml-property>
                     <property name="paddingLeft">0pt</property>
                     <property name="paddingBottom">0pt</property>
                     <property name="paddingRight">0pt</property>
-                    <data id="599">
-                        <property name="fontWeight">bold</property>
-                        <structure name="numberFormat">
-                            <property name="category">Fixed</property>
-                            <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
-                        </structure>
-                        <property name="textAlign">right</property>
-                        <property name="dataSet">mt_tresorerie</property>
-                        <list-property name="boundDataColumns">
-                            <structure>
-                                <property name="name">somme_mt_children_mt_budget</property>
-                                <text-property name="displayName">somme_mt_children_mt_budget</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["somme_mt_children_mt_budget"]</expression>
-                                <property name="dataType">decimal</property>
-                            </structure>
-                        </list-property>
-                        <property name="resultSetColumn">somme_mt_children_mt_budget</property>
-                    </data>
                 </cell>
                 <cell id="582">
                     <property name="colSpan">3</property>
@@ -2405,21 +2455,32 @@ from configuration_management_documents where id = ?]]></xml-property>
                             </structure>
                         </list-property>
                         <column id="571">
-                            <property name="width">15mm</property>
+                            <property name="width">12.74mm</property>
                         </column>
                         <column id="572"/>
                         <column id="573">
-                            <property name="width">22mm</property>
+                            <property name="width">17.76mm</property>
                         </column>
                         <header>
                             <row id="554">
                                 <cell id="555">
+                                    <property name="backgroundColor">yellow</property>
                                     <property name="borderBottomStyle">solid</property>
                                     <property name="borderBottomWidth">thin</property>
                                     <property name="borderRightStyle">solid</property>
                                     <property name="borderRightWidth">thin</property>
+                                    <text id="6863">
+                                        <property name="fontFamily">"Times New Roman"</property>
+                                        <property name="fontSize">10px</property>
+                                        <property name="fontWeight">bold</property>
+                                        <property name="paddingLeft">3pt</property>
+                                        <property name="textAlign">right</property>
+                                        <property name="contentType">auto</property>
+                                        <text-property name="content"><![CDATA[61]]></text-property>
+                                    </text>
                                 </cell>
                                 <cell id="556">
+                                    <property name="backgroundColor">yellow</property>
                                     <property name="borderBottomStyle">solid</property>
                                     <property name="borderBottomWidth">thin</property>
                                     <property name="borderLeftStyle">solid</property>
@@ -2429,11 +2490,13 @@ from configuration_management_documents where id = ?]]></xml-property>
                                     <label id="557">
                                         <property name="fontFamily">"Times New Roman"</property>
                                         <property name="fontSize">10px</property>
+                                        <property name="fontWeight">bold</property>
                                         <property name="textAlign">left</property>
                                         <text-property name="text">CHARGES D'EXPLOITATION</text-property>
                                     </label>
                                 </cell>
                                 <cell id="558">
+                                    <property name="backgroundColor">yellow</property>
                                     <property name="borderBottomStyle">solid</property>
                                     <property name="borderBottomWidth">thin</property>
                                     <property name="borderLeftStyle">solid</property>
@@ -2450,10 +2513,12 @@ from configuration_management_documents where id = ?]]></xml-property>
                                     <property name="borderRightWidth">thin</property>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">thin</property>
+                                    <property name="paddingTop">0.5pt</property>
+                                    <property name="paddingBottom">0.5pt</property>
                                     <data id="561">
                                         <property name="fontFamily">"Times New Roman"</property>
                                         <property name="fontSize">10px</property>
-                                        <property name="textAlign">left</property>
+                                        <property name="textAlign">right</property>
                                         <property name="resultSetColumn">code_budget</property>
                                     </data>
                                 </cell>
@@ -2466,6 +2531,8 @@ from configuration_management_documents where id = ?]]></xml-property>
                                     <property name="borderRightWidth">thin</property>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">thin</property>
+                                    <property name="paddingTop">0.5pt</property>
+                                    <property name="paddingBottom">0.5pt</property>
                                     <data id="563">
                                         <property name="fontFamily">"Times New Roman"</property>
                                         <property name="fontSize">10px</property>
@@ -2479,6 +2546,9 @@ from configuration_management_documents where id = ?]]></xml-property>
                                     <property name="borderLeftWidth">thin</property>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">thin</property>
+                                    <property name="paddingTop">0.5pt</property>
+                                    <property name="paddingBottom">0.5pt</property>
+                                    <property name="verticalAlign">middle</property>
                                     <data id="565">
                                         <property name="fontFamily">"Times New Roman"</property>
                                         <property name="fontSize">10px</property>
@@ -2541,14 +2611,81 @@ from configuration_management_documents where id = ?]]></xml-property>
                                 </list-property>
                                 <property name="allowExport">true</property>
                             </structure>
+                            <structure>
+                                <property name="name">hide_in_principale</property>
+                                <text-property name="displayName">hide_in_principale</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["hide_in_principale"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
                         </list-property>
                         <column id="539">
-                            <property name="width">15mm</property>
+                            <property name="width">12mm</property>
                         </column>
                         <column id="540"/>
                         <column id="541">
                             <property name="width">22mm</property>
                         </column>
+                        <header>
+                            <row id="6859">
+                                <property name="backgroundColor">yellow</property>
+                                <cell id="6860">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <text id="588">
+                                        <property name="fontFamily">"Times New Roman"</property>
+                                        <property name="fontSize">10px</property>
+                                        <property name="fontWeight">bold</property>
+                                        <property name="paddingLeft">3pt</property>
+                                        <property name="textAlign">right</property>
+                                        <property name="contentType">auto</property>
+                                        <text-property name="content"><![CDATA[51]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="6861">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <text id="589">
+                                        <property name="fontFamily">"Times New Roman"</property>
+                                        <property name="fontSize">10px</property>
+                                        <property name="fontWeight">bold</property>
+                                        <property name="textAlign">left</property>
+                                        <property name="contentType">auto</property>
+                                        <text-property name="content"><![CDATA[ Disponible à la trésorerie ]]></text-property>
+                                    </text>
+                                </cell>
+                                <cell id="6862">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <data id="599">
+                                        <property name="fontFamily">"Times New Roman"</property>
+                                        <property name="fontWeight">bold</property>
+                                        <structure name="numberFormat">
+                                            <property name="category">Fixed</property>
+                                            <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                                        </structure>
+                                        <property name="textAlign">right</property>
+                                        <property name="dataSet">mt_tresorerie</property>
+                                        <list-property name="boundDataColumns">
+                                            <structure>
+                                                <property name="name">somme_mt_children_mt_budget</property>
+                                                <text-property name="displayName">somme_mt_children_mt_budget</text-property>
+                                                <expression name="expression" type="javascript">dataSetRow["somme_mt_children_mt_budget"]</expression>
+                                                <property name="dataType">decimal</property>
+                                            </structure>
+                                        </list-property>
+                                        <property name="resultSetColumn">somme_mt_children_mt_budget</property>
+                                    </data>
+                                </cell>
+                            </row>
+                        </header>
                         <detail>
                             <row id="527">
                                 <cell id="528">
@@ -2558,10 +2695,12 @@ from configuration_management_documents where id = ?]]></xml-property>
                                     <property name="borderRightWidth">thin</property>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">thin</property>
+                                    <property name="paddingTop">0.5pt</property>
+                                    <property name="paddingBottom">0.5pt</property>
                                     <data id="529">
                                         <property name="fontFamily">"Times New Roman"</property>
                                         <property name="fontSize">10px</property>
-                                        <property name="textAlign">left</property>
+                                        <property name="textAlign">right</property>
                                         <property name="resultSetColumn">code_budget</property>
                                     </data>
                                 </cell>
@@ -2574,6 +2713,8 @@ from configuration_management_documents where id = ?]]></xml-property>
                                     <property name="borderRightWidth">thin</property>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">thin</property>
+                                    <property name="paddingTop">0.5pt</property>
+                                    <property name="paddingBottom">0.5pt</property>
                                     <data id="531">
                                         <property name="fontFamily">"Times New Roman"</property>
                                         <property name="fontSize">10px</property>
@@ -2587,6 +2728,8 @@ from configuration_management_documents where id = ?]]></xml-property>
                                     <property name="borderLeftWidth">thin</property>
                                     <property name="borderTopStyle">solid</property>
                                     <property name="borderTopWidth">thin</property>
+                                    <property name="paddingTop">0.5pt</property>
+                                    <property name="paddingBottom">0.5pt</property>
                                     <data id="533">
                                         <property name="fontFamily">"Times New Roman"</property>
                                         <property name="fontSize">10px</property>
@@ -2595,6 +2738,12 @@ from configuration_management_documents where id = ?]]></xml-property>
                                             <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
                                         </structure>
                                         <property name="textAlign">right</property>
+                                        <list-property name="visibility">
+                                            <structure>
+                                                <property name="format">all</property>
+                                                <expression name="valueExpr" type="javascript">row["hide_in_principale"]</expression>
+                                            </structure>
+                                        </list-property>
                                         <property name="resultSetColumn">somme_mt_children_mt_budget</property>
                                     </data>
                                 </cell>
@@ -2618,6 +2767,7 @@ from configuration_management_documents where id = ?]]></xml-property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
                     <text id="525">
+                        <property name="fontFamily">"Times New Roman"</property>
                         <property name="fontSize">10px</property>
                         <property name="fontWeight">bold</property>
                         <property name="textAlign">center</property>
@@ -2636,6 +2786,7 @@ from configuration_management_documents where id = ?]]></xml-property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
                     <data id="575">
+                        <property name="fontFamily">"Times New Roman"</property>
                         <property name="fontWeight">bold</property>
                         <structure name="numberFormat">
                             <property name="category">Fixed</property>
@@ -2686,6 +2837,7 @@ from configuration_management_documents where id = ?]]></xml-property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
                     <data id="577">
+                        <property name="fontFamily">"Times New Roman"</property>
                         <property name="fontWeight">bold</property>
                         <structure name="numberFormat">
                             <property name="category">Fixed</property>
@@ -2755,6 +2907,12 @@ from configuration_management_documents where id = ?]]></xml-property>
                                 </list-property>
                                 <property name="allowExport">true</property>
                             </structure>
+                            <structure>
+                                <property name="name">hide_in_principale</property>
+                                <text-property name="displayName">hide_in_principale</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["hide_in_principale"]</expression>
+                                <property name="dataType">integer</property>
+                            </structure>
                         </list-property>
                         <column id="307">
                             <property name="width">15mm</property>
@@ -2763,6 +2921,29 @@ from configuration_management_documents where id = ?]]></xml-property>
                         <column id="309">
                             <property name="width">22mm</property>
                         </column>
+                        <header>
+                            <row id="6854">
+                                <cell id="6855">
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                </cell>
+                                <cell id="6856">
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <label id="6858">
+                                        <property name="fontWeight">bold</property>
+                                        <property name="textAlign">left</property>
+                                        <text-property name="text">RESSOURCES D'INVESTISSEMENT</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="6857">
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                </cell>
+                            </row>
+                        </header>
                         <detail>
                             <row id="296">
                                 <cell id="297">
@@ -2771,10 +2952,13 @@ from configuration_management_documents where id = ?]]></xml-property>
                                     <property name="borderLeftStyle">none</property>
                                     <property name="borderRightStyle">solid</property>
                                     <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">none</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="paddingTop">0.5pt</property>
+                                    <property name="paddingBottom">0.5pt</property>
                                     <data id="298">
                                         <property name="fontSize">10px</property>
-                                        <property name="textAlign">left</property>
+                                        <property name="textAlign">right</property>
                                         <property name="resultSetColumn">code_budget</property>
                                     </data>
                                 </cell>
@@ -2784,7 +2968,10 @@ from configuration_management_documents where id = ?]]></xml-property>
                                     <property name="borderLeftStyle">none</property>
                                     <property name="borderRightStyle">solid</property>
                                     <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">none</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="paddingTop">0.5pt</property>
+                                    <property name="paddingBottom">0.5pt</property>
                                     <data id="300">
                                         <property name="fontSize">10px</property>
                                         <property name="resultSetColumn">titre_budget</property>
@@ -2794,14 +2981,24 @@ from configuration_management_documents where id = ?]]></xml-property>
                                     <property name="borderBottomStyle">solid</property>
                                     <property name="borderBottomWidth">thin</property>
                                     <property name="borderLeftStyle">none</property>
-                                    <property name="borderTopStyle">none</property>
+                                    <property name="borderTopStyle">solid</property>
+                                    <property name="borderTopWidth">thin</property>
+                                    <property name="paddingTop">0.5pt</property>
+                                    <property name="paddingBottom">0.5pt</property>
                                     <data id="302">
+                                        <property name="fontFamily">"Times New Roman"</property>
                                         <property name="fontSize">10px</property>
                                         <structure name="numberFormat">
                                             <property name="category">Fixed</property>
                                             <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
                                         </structure>
                                         <property name="textAlign">right</property>
+                                        <list-property name="visibility">
+                                            <structure>
+                                                <property name="format">all</property>
+                                                <expression name="valueExpr" type="javascript">row["hide_in_principale"]</expression>
+                                            </structure>
+                                        </list-property>
                                         <property name="resultSetColumn">somme_mt_children_mt_budget</property>
                                     </data>
                                 </cell>
@@ -2860,12 +3057,43 @@ from configuration_management_documents where id = ?]]></xml-property>
                             </structure>
                         </list-property>
                         <column id="357">
-                            <property name="width">15mm</property>
+                            <property name="width">12.74mm</property>
                         </column>
                         <column id="358"/>
                         <column id="359">
-                            <property name="width">22mm</property>
+                            <property name="width">17.76mm</property>
                         </column>
+                        <header>
+                            <row id="6864">
+                                <cell id="6865">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                </cell>
+                                <cell id="6866">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                    <property name="borderRightStyle">solid</property>
+                                    <property name="borderRightWidth">thin</property>
+                                    <label id="6868">
+                                        <property name="fontFamily">"Times New Roman"</property>
+                                        <property name="fontSize">10px</property>
+                                        <property name="fontWeight">bold</property>
+                                        <property name="textAlign">left</property>
+                                        <text-property name="text">EMPLOIS D'INVESTISSEMENT</text-property>
+                                    </label>
+                                </cell>
+                                <cell id="6867">
+                                    <property name="borderBottomStyle">solid</property>
+                                    <property name="borderBottomWidth">thin</property>
+                                    <property name="borderLeftStyle">solid</property>
+                                    <property name="borderLeftWidth">thin</property>
+                                </cell>
+                            </row>
+                        </header>
                         <detail>
                             <row id="346">
                                 <cell id="347">
@@ -2875,10 +3103,12 @@ from configuration_management_documents where id = ?]]></xml-property>
                                     <property name="borderRightStyle">solid</property>
                                     <property name="borderRightWidth">thin</property>
                                     <property name="borderTopStyle">none</property>
+                                    <property name="paddingTop">0.5pt</property>
+                                    <property name="paddingBottom">0.5pt</property>
                                     <data id="348">
                                         <property name="fontFamily">"Times New Roman"</property>
                                         <property name="fontSize">10px</property>
-                                        <property name="textAlign">left</property>
+                                        <property name="textAlign">right</property>
                                         <property name="resultSetColumn">code_budget</property>
                                     </data>
                                 </cell>
@@ -2890,6 +3120,8 @@ from configuration_management_documents where id = ?]]></xml-property>
                                     <property name="borderRightStyle">solid</property>
                                     <property name="borderRightWidth">thin</property>
                                     <property name="borderTopStyle">none</property>
+                                    <property name="paddingTop">0.5pt</property>
+                                    <property name="paddingBottom">0.5pt</property>
                                     <data id="350">
                                         <property name="fontFamily">"Times New Roman"</property>
                                         <property name="fontSize">10px</property>
@@ -2903,6 +3135,9 @@ from configuration_management_documents where id = ?]]></xml-property>
                                     <property name="borderLeftStyle">none</property>
                                     <property name="borderRightStyle">none</property>
                                     <property name="borderTopStyle">none</property>
+                                    <property name="paddingTop">0.5pt</property>
+                                    <property name="paddingBottom">0.5pt</property>
+                                    <property name="verticalAlign">middle</property>
                                     <data id="352">
                                         <property name="fontFamily">"Times New Roman"</property>
                                         <property name="fontSize">10px</property>
@@ -2932,11 +3167,12 @@ from configuration_management_documents where id = ?]]></xml-property>
                     <property name="borderRightStyle">solid</property>
                     <property name="borderRightWidth">thin</property>
                     <text id="310">
+                        <property name="fontFamily">"Times New Roman"</property>
                         <property name="fontSize">10px</property>
                         <property name="fontWeight">bold</property>
                         <property name="textAlign">center</property>
                         <property name="contentType">auto</property>
-                        <text-property name="content"><![CDATA[TOTAL DES PRODUITS NON COURANTS]]></text-property>
+                        <text-property name="content"><![CDATA[TOTAL DES RESSOURCES D'INVESTISSEMENT]]></text-property>
                     </text>
                 </cell>
                 <cell id="494">
@@ -2948,6 +3184,7 @@ from configuration_management_documents where id = ?]]></xml-property>
                     <property name="borderRightStyle">solid</property>
                     <property name="borderRightWidth">thin</property>
                     <data id="592">
+                        <property name="fontFamily">"Times New Roman"</property>
                         <property name="fontWeight">bold</property>
                         <structure name="numberFormat">
                             <property name="category">Fixed</property>
@@ -2996,6 +3233,7 @@ from configuration_management_documents where id = ?]]></xml-property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
                     <data id="598">
+                        <property name="fontFamily">"Times New Roman"</property>
                         <property name="fontWeight">bold</property>
                         <structure name="numberFormat">
                             <property name="category">Fixed</property>
@@ -3068,11 +3306,11 @@ from configuration_management_documents where id = ?]]></xml-property>
                             </structure>
                         </list-property>
                         <column id="382">
-                            <property name="width">15mm</property>
+                            <property name="width">12.74mm</property>
                         </column>
                         <column id="383"/>
                         <column id="384">
-                            <property name="width">22mm</property>
+                            <property name="width">17.76mm</property>
                         </column>
                         <detail>
                             <row id="371">
@@ -3083,9 +3321,12 @@ from configuration_management_documents where id = ?]]></xml-property>
                                     <property name="borderRightStyle">solid</property>
                                     <property name="borderRightWidth">thin</property>
                                     <property name="borderTopStyle">none</property>
+                                    <property name="paddingTop">0.5pt</property>
+                                    <property name="paddingBottom">0.5pt</property>
                                     <data id="373">
+                                        <property name="fontFamily">"Times New Roman"</property>
                                         <property name="fontSize">10px</property>
-                                        <property name="textAlign">left</property>
+                                        <property name="textAlign">right</property>
                                         <property name="resultSetColumn">code_budget</property>
                                     </data>
                                 </cell>
@@ -3096,7 +3337,9 @@ from configuration_management_documents where id = ?]]></xml-property>
                                     <property name="borderRightStyle">solid</property>
                                     <property name="borderRightWidth">thin</property>
                                     <property name="borderTopStyle">none</property>
+                                    <property name="paddingTop">0.5pt</property>
                                     <data id="375">
+                                        <property name="fontFamily">"Times New Roman"</property>
                                         <property name="fontSize">10px</property>
                                         <property name="resultSetColumn">titre_budget</property>
                                     </data>
@@ -3107,7 +3350,10 @@ from configuration_management_documents where id = ?]]></xml-property>
                                     <property name="borderLeftStyle">none</property>
                                     <property name="borderRightStyle">none</property>
                                     <property name="borderTopStyle">none</property>
+                                    <property name="paddingTop">0.5pt</property>
+                                    <property name="verticalAlign">middle</property>
                                     <data id="377">
+                                        <property name="fontFamily">"Times New Roman"</property>
                                         <property name="fontSize">10px</property>
                                         <structure name="numberFormat">
                                             <property name="category">Fixed</property>
@@ -3137,6 +3383,7 @@ from configuration_management_documents where id = ?]]></xml-property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
                     <text id="594">
+                        <property name="fontFamily">"Times New Roman"</property>
                         <property name="fontSize">10px</property>
                         <property name="fontWeight">bold</property>
                         <property name="textAlign">center</property>
@@ -3155,6 +3402,7 @@ from configuration_management_documents where id = ?]]></xml-property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
                     <data id="643">
+                        <property name="fontFamily">"Times New Roman"</property>
                         <property name="fontWeight">bold</property>
                         <structure name="numberFormat">
                             <property name="category">Fixed</property>
@@ -3184,6 +3432,7 @@ from configuration_management_documents where id = ?]]></xml-property>
                     <property name="borderRightStyle">solid</property>
                     <property name="borderRightWidth">thin</property>
                     <text id="595">
+                        <property name="fontFamily">"Times New Roman"</property>
                         <property name="fontSize">10px</property>
                         <property name="fontWeight">bold</property>
                         <property name="textAlign">center</property>
@@ -3202,6 +3451,7 @@ from configuration_management_documents where id = ?]]></xml-property>
                     <property name="borderTopStyle">solid</property>
                     <property name="borderTopWidth">thin</property>
                     <data id="600">
+                        <property name="fontFamily">"Times New Roman"</property>
                         <property name="fontWeight">bold</property>
                         <structure name="numberFormat">
                             <property name="category">Fixed</property>
@@ -3233,27 +3483,25 @@ from configuration_management_documents where id = ?]]></xml-property>
                     <text id="445">
                         <property name="textAlign">center</property>
                         <property name="contentType">auto</property>
-                        <text-property name="content"><![CDATA[LE PRESIDENT, ORDONNATEUR DE LA 
-CHAMBRE DE COMMERCE, D'INDUSTRIE 
-ET DE SERVICES  DE  BENI - MELLAL KHENIFRA 
-]]></text-property>
+                        <text-property name="content"><![CDATA[LE PRESIDENT, ORDONNATEUR DE LA CHAMBRE DE 
+COMMERCE, D'INDUSTRIE ET DE SERVICES DE LA
+REGION DE RABAT-SALE-KENITRA]]></text-property>
                     </text>
                 </cell>
                 <cell id="442">
                     <text id="453">
                         <property name="textAlign">center</property>
                         <property name="contentType">auto</property>
-                        <text-property name="content"><![CDATA[LE MINISTRE DE L'INDUSTRIE,  DU COMMERCE,
- DE  L'ECONOMIE  VERTE  ET NUMERIQUE
-]]></text-property>
+                        <text-property name="content"><![CDATA[LE MINISTRE DE L'INDUSTRIE ET  
+DU COMMERCE]]></text-property>
                     </text>
                 </cell>
                 <cell id="443">
                     <text id="455">
                         <property name="textAlign">center</property>
                         <property name="contentType">auto</property>
-                        <text-property name="content"><![CDATA[LE MINISTRE  DE L'ECONOMIE ET DES FINANCES ET DE LA REFORME DE L'ADMINISTRATION
-]]></text-property>
+                        <text-property name="content"><![CDATA[LE MINISTRE  DE L'ECONOMIE
+ET DES FINANCES]]></text-property>
                     </text>
                 </cell>
             </row>

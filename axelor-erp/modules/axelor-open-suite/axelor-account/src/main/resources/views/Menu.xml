@@ -129,8 +129,10 @@
     <menuitem title="Comptabilité budgétaire" name="compt-budg-root" parent="account-root"/>
     <!--	<menuitem title="Suivi du budget mensuelle" name="suivi-budg-mensu" parent="compt-budg-root"/>-->
 
-    <menuitem order="1" name="version_rubrique" parent="compt-budg-root" title="Moras budgétaire" action="version_rub"/>
-    <action-view name="version_rub" title="Gestion des versions" model="com.axelor.apps.configuration.db.VersionRubriqueBudgetaire">
+    <menuitem order="1" name="version_rubrique" parent="compt-budg-root" title="Morasse Budgétaire"
+              action="version_rub"/>
+    <action-view name="version_rub" title="Morasse Budgétaire"
+                 model="com.axelor.apps.configuration.db.VersionRubriqueBudgetaire">
         <view type="grid" name="rubriqueBudgetaireVersionList_grid"/>
         <view type="form" name="rubriqueBudgetaireVersionList_form"/>
         <view-param name="show-confirm" value="false"/>
@@ -142,6 +144,7 @@
                  model="com.axelor.apps.account.db.ModificationBudgetList">
         <view type="grid" name="ModificationBudgetList-grid"/>
         <view type="form" name="ModificationBudgetList-form"/>
+        <view-param name="forceEdit" value="true"/>
     </action-view>
 
     <menuitem order="3" name="traiter_modificationBudget" parent="compt-budg-root"
@@ -150,47 +153,36 @@
                  model="com.axelor.apps.account.db.ModificationBudgetList">
         <view type="grid" name="validation_virement_ModificationBudget_grid"/>
         <view type="form" name="validation_virement_ModificationBudget_form"/>
+        <view-param name="forceEdit" value="true"/>
     </action-view>
 
     <menuitem name="account-root-ArreteCompte" parent="compt-budg-root" title="Arrete des comptes" order="35"
               action="accont.root.ArreteCompte"/>
     <action-view name="accont.root.ArreteCompte" title="Arrete des comptes"
-                 model="com.axelor.apps.account.db.GestionRecette">
+                 model="com.axelor.apps.configuration.db.TresorerieSituationAnnuelle">
         <view type="form" name="ArreteCompte-form"/>
+        <view-param name="show-confirm" value="false"/>
     </action-view>
 
-    <menuitem name="account-root-DepencesGeneraleSelect" parent="compt-budg-root" title="Dépenses Générale" order="35"
-              action="accont.root.DepencesGeneraleSelect" hidden="true"/>
-    <action-view name="accont.root.DepencesGeneraleSelect" title="Dépénces Générale"
-                 model="com.axelor.apps.account.db.DepencesGenerale">
-        <view type="grid" name="depencesGenerale-grid"/>
-        <view type="form" name="depencesGenerale-form"/>
-    </action-view>
-
-
-    <action-view name="accont.root.RecetteGeneraleGrand" title="Recette Générale"
-                 model="com.axelor.apps.account.db.RecetteGeneraleGrand">
-        <view type="grid" name="RecetteGenerale-grid"/>
-        <view type="form" name="RecetteGenerale-form"/>
-    </action-view>
-
-    <!---->
-
-    <!--<menuitem name="account-root-ArreteCompteSuite" parent="compt-budg-root" title="Arrete des comptes suite" order="35"
-              action="accont.root.ArreteCompteSuite"/>
-
-    <action-view name="accont.root.ArreteCompteSuite" title="Arrete des comptes suite"
-                 model="com.axelor.apps.account.db.GestionRecette">
-        <view type="form" name="ArreteCompteSuite-form"/>
-    </action-view>-->
-
-    <!--<menuitem name="account-root-JFinancier" parent="compt-budg-root" title="Journal financier" order="35"
+    <menuitem name="account-root-JFinancier" parent="compt-budg-root" title="Journal financier" order="35"
               action="accont.root.JFinancier"/>
 
     <action-view name="accont.root.JFinancier" title="Journal financier"
                  model="com.axelor.apps.account.db.GestionRecette">
         <view type="form" name="journalFinancier-form"/>
-    </action-view>-->
+    </action-view>
+
+    <menuitem name="account-root-saisie-recette" parent="compt-budg-root" title="Saisie des recette manuelle" order="36"
+              action="accont.root.saisie.recette"/>
+
+    <action-view name="accont.root.saisie.recette" title="Ordre de recette"
+                 model="com.axelor.apps.account.db.DataRecette">
+        <view type="grid" name="dataRecette-grid"/>
+        <view type="form" name="dataRecette-form"/>
+        <view-param name="forceEdit" value="true"/>
+
+    </action-view>
+
     <!--<menuitem name="account-root-affranchissement" parent="compt-budg-root" title="Releve d'affranchissement" order="35"
               action="accont.root.affranchissement"/>
 
@@ -207,7 +199,7 @@
               if="__config__.app.isApp('account')"
               icon="fa-money" icon-background="#2fa042"/>
 
-    <menuitem hidden="true" name="comptabilite-root" title="Comptabilité Générale" parent="account-root"/>
+    <menuitem name="comptabilite-root" title="Comptabilité Générale" parent="account-root"/>
 
     <menuitem name="account-root-move" parent="comptabilite-root"
               title="Moves" order="0"/>
@@ -950,22 +942,22 @@
     </action-view>-->
 
     <!--hatim menu cache-->
-    <!--<menuitem hidden="false" name="account-root-situation-recette" parent="tresorerie-root"
+    <menuitem hidden="false" name="account-root-situation-recette" parent="tresorerie-root"
               title="Situation des recettes" order="35"
-              action="accont.root.situation.recette"/>-->
-
-   <!-- <action-view name="accont.root.situation.recette" title="Situation des recettes"
-                 model="com.axelor.apps.account.db.GestionRecette">
-        <view type="form" name="situation-recette-form"/>
-    </action-view>-->
-
-   <!-- <menuitem name="account-root-situation-recette" parent="tresorerie-root" title="Situation des recettes" order="35"
               action="accont.root.situation.recette"/>
 
     <action-view name="accont.root.situation.recette" title="Situation des recettes"
                  model="com.axelor.apps.account.db.GestionRecette">
         <view type="form" name="situation-recette-form"/>
-    </action-view>-->
+    </action-view>
+
+    <menuitem name="account-root-situation-recette" parent="tresorerie-root" title="Situation des recettes" order="35"
+              action="accont.root.situation.recette"/>
+
+    <action-view name="accont.root.situation.recette" title="Situation des recettes"
+                 model="com.axelor.apps.account.db.GestionRecette">
+        <view type="form" name="situation-recette-form"/>
+    </action-view>
 
     <!--<menuitem name="account-root-Regie" parent="tresorerie-root" title="Ordre de Recette" action="account.root.conf.Regie" order="11" />
 
@@ -975,39 +967,29 @@
         <view type="form" name="regietest-form" />
     </action-view>
 -->
-    <!--<menuitem name="tresorerie-root" title="Gestion de trésorerie" parent="account-root"/>-->
+    <menuitem name="tresorerie-root" title="Gestion de trésorerie" parent="account-root"/>
 
-    <menuitem name="account-root-tresorerie" parent="account-root" order="5"
+    <menuitem name="account-root-tresorerie" parent="tresorerie-root" order="5"
               title="Gestion de trésorerie" action="accont.root.tresorerie"/>
 
-    <action-view name="accont.root.tresorerie" title="situation tresaurerie"
-                 model="com.axelor.apps.account.db.TresaurerieAnnuel">
-        <!--<view type="grid" name="tresaurerieAccount-grid"/>-->
-        <view type="form" name="tresaurerieAccount-form"/>
+    <action-view name="accont.root.tresorerie" title="Situation de tre"
+                 model="com.axelor.apps.account.db.GestionRecette">
+        <view type="form" name="tresorerie-form"/>
     </action-view>
 
-    <menuitem action="account.root.situationRecette.mensuel" name="account-root-sitation-recette"
-              parent="account-root" title="Situation des dépenses" order="14"/>
-
-    <action-view name="account.root.situationRecette.mensuel" title="Situation de dépenses"
-                 model="com.axelor.apps.configuration.db.HistoriqueBudgetaire">
-        <view type="form" name="situation_depenses_ccisbk"/>
-        <view-param name="show-confirm" value="false" />
-    </action-view>
-
-   <!-- <menuitem name="account-root-situationRecette-mensuel" parent="account-root-sitation-recette"
+    <menuitem name="account-root-sitation-recette" parent="compt-budg-root" title="Situation des dépenses" order="14"/>
+    <menuitem name="account-root-situationRecette-mensuel" parent="account-root-sitation-recette"
               title="Dépenses Mensuel" action="account.root.situationRecette.mensuel" order="1"/>
     <action-view name="account.root.situationRecette.mensuel" title="Situation Mensuel"
                  model="com.axelor.apps.configuration.db.HistoriqueBudgetaire">
         <view type="form" name="frm_situation_recette_monsuel"/>
     </action-view>
-
     <menuitem name="account-root-situationRecette-Anuelle" parent="account-root-sitation-recette"
               title="Dépenses Annuelle" action="account.root.situationRecette.anuelle" order="1"/>
     <action-view name="account.root.situationRecette.anuelle" title="Situation Annuelle"
                  model="com.axelor.apps.configuration.db.HistoriqueBudgetaire">
         <view type="form" name="frm_situation_recette_annuelle"/>
-    </action-view>-->
+    </action-view>
 
     <menuitem hidden="false" name="account-root-encaissemnt" parent="regie-root" title="Gestion des encaissements"
               order="100"

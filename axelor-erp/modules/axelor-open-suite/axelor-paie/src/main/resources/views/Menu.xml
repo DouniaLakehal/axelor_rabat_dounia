@@ -14,7 +14,7 @@
         <view-param name="search-filters" value="employee-filters"/>
     </action-view>
 
-    <menuitem order="2" title="Etat d'engagement" name="etat.engagement" parent="paie-root"
+    <!--<menuitem order="2" title="Etat d'engagement" name="etat.engagement" parent="paie-root"
               action="action.etat.engagement"/>
     <action-view name="action.etat.engagement" model="com.axelor.apps.hr.db.Employee" title="Etat d'engagement">
         <view name="etat_engagement_form" type="form"/>
@@ -29,7 +29,7 @@
         <view name="etat_salaire_form" type="form"/>
         <view-param name="forceEdit" value="true"/>
         <view-param name="show-toolbar" value="false"/>
-    </action-view>
+    </action-view>-->
 
     <menuitem order="4" title="Etat des salaires" name="etat.salaire" parent="paie-root" action="action.etat.salaire"/>
     <action-view name="action.etat.salaire" model="com.axelor.apps.hr.db.EtatSalaire" title="Etat salaire">
@@ -40,12 +40,12 @@
         <view-param name="popup-save" value="false"/>
     </action-view>
 
-    <menuitem order="8" name="etatSalaire_paie" parent="paie-root" title="E.S.I.P.P" action="etatSalaire_rh" />
+    <menuitem order="5" name="etatSalaire_paie" parent="paie-root" title="E.S.I.P.P" action="etatSalaire_rh" />
     <action-view name="etatSalaire_paie" model="com.axelor.apps.hr.db.EtatSalaire" title="ETAT DES SALAIRES">
         <view type="form" name="etatSalaire-form"/>
     </action-view>
 
-    <menuitem order="5" title="Orders de paiement" name="orderPaiementRH" parent="paie-root"
+    <menuitem order="6" title="Orders de paiement" name="orderPaiementRH" parent="paie-root"
               action="action.orderPaiementRH"/>
     <action-view name="action.orderPaiementRH" model="com.axelor.apps.purchase.db.OrderPaymentCommande"
                  title="Ordre paiment">
@@ -54,73 +54,41 @@
         <view-param name="forceEdit" value="true"/>
     </action-view>
 
-    <menuitem order="6" title="Orders de virement" name="orderVirementRH" parent="paie-root" action="com.ov"/>
+    <menuitem order="7" title="Orders de virement" name="orderVirementRH" parent="paie-root" action="com.ov"/>
     <action-view name="com.ov" title="Ordre de virement" model="com.axelor.apps.purchase.db.OrdrevirementCommande">
         <view type="grid" name="ordreVirementRH_grid"/>
         <view type="form" name="ordreVirementRH_form"/>
         <view-param name="forceEdit" value="true"/>
     </action-view>
 
-
-
-    <menuitem name="expense-root" parent="paie-root" icon="fa-calendar" icon-background="#ffd700" title="Avancement" order="10"/>
-    <menuitem name="avancement-rapide" parent="expense-root" title="Rapide" action="avancement-rapide_action"/>
-    <action-group name="avancement-rapide_action">
-        <action name="com.axelor.apps.hr.web.CustomController:deleteCreateListEmployerRapide"/>
-        <action name="avancement-rapide_view"/>
-    </action-group>
-    <action-view name="avancement-rapide_view" title="Avancement" model="com.axelor.apps.hr.db.Avancement">
-        <view type="form" name="avancementEmployer-form1"/>
-        <view-param name="show-toolbar" value="true" />
-        <view-param name="show-confirm" value="false" />
-        <context name="_showRecord" expr="eval:1"/>
-        <context name="type_aug" expr="eval:'rapide'"/>
+    <menuitem order="8" title="Declaration de IR" name="declaration_IR" parent="paie-root" action="declarationIR"/>
+    <action-view name="declarationIR" title="Declaration de IR" model="com.axelor.apps.hr.db.EtatSalaire">
+        <view name="declaration_ir_form" type="form"/>
+        <view-param name="forceEdit" value="false"/>
+        <view-param name="show-toolbar" value="false"/>
+        <view-param name="show-confirm" value="false"/>
+        <view-param name="popup-save" value="false"/>
     </action-view>
 
 
-    <menuitem name="avancement-moyen" parent="expense-root" title="Moyen" action="avancement-moyen_action"/>
-    <action-group name="avancement-moyen_action">
-        <action name="com.axelor.apps.hr.web.CustomController:deleteCreateListEmployerMoyen"/>
-        <action name="avancement-moyen_view"/>
-    </action-group>
-    <action-view name="avancement-moyen_view" title="Avancement" model="com.axelor.apps.hr.db.Avancement">
-        <view type="form" name="avancementEmployer-form2"/>
-        <view-param name="show-toolbar" value="true" />
-        <view-param name="show-confirm" value="false" />
-        <context name="_showRecord" expr="eval: 2"/>
-        <context name="type_aug" expr="eval:'moyen'"/>
+
+    <menuitem title="Gestion des missions" name="mission.all" parent="paie-gestion-salaire" icon="fa-address-card-o"
+              icon-background="#ff676c" order="2"/>
+
+    <menuitem name="employee-missions-all" parent="mission.all" title="Gestion des missions"
+              action="employee.missions.all" order="1"/>
+    <action-view name="employee.missions.all" title="Gestion des missions"
+                 model="com.axelor.apps.hr.db.EmployeeMissions">
+        <view type="grid" name="employee-missions-grid"/>
+        <view type="form" name="employee-missions-form"/>
     </action-view>
 
-
-    <menuitem name="avancement-long" parent="expense-root" title="Long" action="avancement-long_action"/>
-    <action-group name="avancement-long_action">
-        <action name="com.axelor.apps.hr.web.CustomController:deleteCreateListEmployerLong"/>
-        <action name="avancement-long_view"/>
-    </action-group>
-    <action-view name="avancement-long_view" title="Avancement" model="com.axelor.apps.hr.db.Avancement">
-        <view type="form" name="avancementEmployer-form3"/>
-        <view-param name="show-toolbar" value="true" />
-        <view-param name="show-confirm" value="false" />
-        <context name="_showRecord" expr="eval: 3"/>
-        <context name="type_aug" expr="eval:'long'"/>
-    </action-view>
-
-
-    <menuitem title="Gestion de carrière" name="paie-gestion-salaire" parent="paie-root" icon="fa-sitemap"
-              order="5"/>
-
-    <menuitem name="paie-augmentation-all" parent="paie-gestion-salaire" title="Gestion des promotions"
-              action="paie.augmentation.all"/>
-    <action-view name="paie.augmentation.all" title="Gestion des promotions" model="com.axelor.apps.hr.db.Augmentation">
-        <view type="grid" name="config.augmentation-grid"/>
-        <view type="form" name="config.augmentation-form"/>
-    </action-view>
-
-    <menuitem name="paie-responsabilite-all" parent="paie-gestion-salaire" title="Gestion des responsabilites"
-              action="paie.respon.all"/>
-    <action-view name="paie.respon.all" title="Gestion des responsabilites"
-                 model="com.axelor.apps.hr.db.HistoriqueResponsabilite">
-        <view type="grid" name="emp-histo-respon-grid"/>
+    <menuitem order="2" title="Etat des sommes dues" name="employee-mission-etat-somme" parent="mission.all"
+              action="employee.mission.etat.somme"/>
+    <action-view name="employee.mission.etat.somme" title="Etat des sommes dues"
+                 model="com.axelor.apps.hr.db.EmployeeEtatSomme">
+        <view type="grid" name="etat-somme-grid"/>
+        <view type="form" name="etat-somme-form"/>
     </action-view>
 
 </object-views>

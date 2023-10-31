@@ -12,6 +12,9 @@
         <button name="btn_generate_clock" onClick="start_generate_All_rubrique" icon="fa-plus" showIf="(is_saved==true) &amp;&amp; (is_generate==false || is_generate==null)" hideIf="is_generate" title="Generer les Rubriques"/>
         <button name="btn_link_rubrique" onClick="get_all_rubrique_budgetaire" icon="fa-link" showIf="(is_saved==true) &amp;&amp; (is_generate==true)" title="Afficher les rubriques" />
         <button name="btn_edit_rubrique" onClick="get_edit_rubrique_budgetaire" icon="fa-pencil" showIf="(is_saved==true) &amp;&amp; (is_generate==true) " title="Editer les rubriques" />
+        <button name="btn_edit_rubrique" onClick="get_edit_rubrique_budgetaire" icon="fa-eye"
+                showIf="(is_saved==true) &amp;&amp; (is_generate==true) &amp;&amp; !(has_version_final==false || has_version_final==null ) "
+                title="Afficher les rubriques"/>
         <button name="btn_final_version" showIf="(is_saved==true) &amp;&amp; (is_generate==true) &amp;&amp; (has_version_final==false || has_version_final==null )" onClick="versionFinale" icon="fa-lock" title="Version Finale" />
     </grid>
 
@@ -60,19 +63,19 @@
     </action-method>
 
     <action-method name="get_all_rubrique_budgetaire">
-        <call class="com.axelor.apps.configuration.web.AppConfigurationController" method="tw_get_all_rubrique_budgetaire"/>
+        <call class="com.axelor.apps.configuration.web.AppConfigurationController"
+              method="tw_get_all_rubrique_budgetaire"/>
     </action-method>
 
     <action-method name="get_edit_rubrique_budgetaire">
-        <call class="com.axelor.apps.configuration.web.AppConfigurationController" method="tw_get_edit_rubrique_budgetaire"/>
+        <call class="com.axelor.apps.configuration.web.AppConfigurationController"
+              method="tw_get_edit_rubrique_budgetaire"/>
     </action-method>
 
-
-
-
-
-
-
+    <action-method name="get_show_rubrique_budgetaire">
+        <call class="com.axelor.apps.configuration.web.AppConfigurationController"
+              method="tw_get_show_rubrique_budgetaire"/>
+    </action-method>
 
 
 </object-views>

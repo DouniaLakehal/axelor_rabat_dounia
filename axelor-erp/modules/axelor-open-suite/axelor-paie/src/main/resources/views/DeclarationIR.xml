@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<object-views xmlns="http://axelor.com/xml/ns/object-views" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+
+    <form name="declaration_ir_form" title="Declaration de IR" model="com.axelor.apps.hr.db.EtatSalaire">
+        <panel>
+            <field name="annee" required="true" colSpan="6"/>
+            <field required="true" name="type_doc" title="Document" selection="type_document" colSpan="6"/>
+            <button colSpan="4" colOffset="8" name="btn_principale" title="Imprimer" onClick="com.axelor.apps.hr.web.expense.ExpenseController:imprimmer_declaration_ir"/>
+        </panel>
+    </form>
+</object-views>

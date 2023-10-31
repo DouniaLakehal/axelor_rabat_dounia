@@ -7,11 +7,12 @@
     <property name="imageDPI">96</property>
     <parameters>
         <scalar-parameter name="annee" id="182">
+            <property name="hidden">true</property>
             <property name="valueType">static</property>
             <property name="dataType">integer</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">2022</value>
+                <value type="constant">2023</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
@@ -21,11 +22,12 @@
             </structure>
         </scalar-parameter>
         <scalar-parameter name="id_version" id="2302">
+            <property name="hidden">true</property>
             <property name="valueType">static</property>
             <property name="dataType">decimal</property>
             <property name="distinct">true</property>
             <simple-property-list name="defaultValue">
-                <value type="constant">1</value>
+                <value type="constant">2</value>
             </simple-property-list>
             <list-property name="selectionList"/>
             <property name="paramType">simple</property>
@@ -35,6 +37,7 @@
             </structure>
         </scalar-parameter>
         <scalar-parameter name="id_doc" id="6774">
+            <property name="hidden">true</property>
             <property name="valueType">static</property>
             <property name="isRequired">false</property>
             <property name="dataType">decimal</property>
@@ -69,540 +72,12 @@
                 </ex-property>
             </list-property>
             <property name="odaDriverClass">org.postgresql.Driver</property>
-            <property name="odaURL">jdbc:postgresql://localhost:5432/axelor</property>
+            <property name="odaURL">jdbc:postgresql://localhost:5432/rabat</property>
             <property name="odaUser">postgres</property>
             <encrypted-property name="odaPassword" encryptionID="base64">cm9vdA==</encrypted-property>
         </oda-data-source>
     </data-sources>
     <data-sets>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="prodF_1" id="479">
-            <list-property name="columnHints">
-                <structure>
-                    <property name="columnName">code_budget</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">code_budget</text-property>
-                    <text-property name="heading">code_budget</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">titre_budget</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">titre_budget</text-property>
-                    <text-property name="heading">titre_budget</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">montant_budget</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">montant_budget</text-property>
-                    <text-property name="heading">montant_budget</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">type_rubrique_detaille</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">type_rubrique_detaille</text-property>
-                    <text-property name="heading">type_rubrique_detaille</text-property>
-                </structure>
-            </list-property>
-            <list-property name="parameters">
-                <structure>
-                    <property name="name">param_1</property>
-                    <property name="paramName">id_version</property>
-                    <property name="nativeName"></property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
-                    <property name="position">1</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
-                </structure>
-            </list-property>
-            <structure name="cachedMetaData">
-                <list-property name="resultSet">
-                    <structure>
-                        <property name="position">1</property>
-                        <property name="name">code_budget</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">2</property>
-                        <property name="name">titre_budget</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">3</property>
-                        <property name="name">montant_budget</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">4</property>
-                        <property name="name">type_rubrique_detaille</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                </list-property>
-            </structure>
-            <property name="dataSource">Data Source</property>
-            <list-property name="resultSet">
-                <structure>
-                    <property name="position">1</property>
-                    <property name="name">code_budget</property>
-                    <property name="nativeName">code_budget</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">2</property>
-                    <property name="name">titre_budget</property>
-                    <property name="nativeName">titre_budget</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">3</property>
-                    <property name="name">montant_budget</property>
-                    <property name="nativeName">montant_budget</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">4</property>
-                    <property name="name">type_rubrique_detaille</property>
-                    <property name="nativeName">type_rubrique_detaille</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
-                </structure>
-            </list-property>
-            <xml-property name="queryText"><![CDATA[SELECT code_budget,titre_budget,montant_budget,type_rubrique_detaille
-from configuration_rubriques_budgetaire x
-where type_rubrique_detaille = 11 and is_detaille=true and id_version = ?
-order by code_budget;]]></xml-property>
-            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
-  <Version>2.0</Version>
-  <design:ResultSets derivedMetaData="true">
-    <design:resultSetDefinitions>
-      <design:resultSetColumns>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>code_budget</design:name>
-              <design:position>1</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
-            <design:precision>255</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>code_budget</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>code_budget</design:label>
-            <design:formattingHints>
-              <design:displaySize>255</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>titre_budget</design:name>
-              <design:position>2</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
-            <design:precision>255</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>titre_budget</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>titre_budget</design:label>
-            <design:formattingHints>
-              <design:displaySize>255</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>montant_budget</design:name>
-              <design:position>3</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
-            <design:precision>19</design:precision>
-            <design:scale>2</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>montant_budget</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>montant_budget</design:label>
-            <design:formattingHints>
-              <design:displaySize>21</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>type_rubrique_detaille</design:name>
-              <design:position>4</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
-            <design:precision>19</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>type_rubrique_detaille</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>type_rubrique_detaille</design:label>
-            <design:formattingHints>
-              <design:displaySize>20</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-      </design:resultSetColumns>
-      <design:criteria/>
-    </design:resultSetDefinitions>
-  </design:ResultSets>
-</model:DesignValues>]]></xml-property>
-        </oda-data-set>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="prodF_2" id="505">
-            <list-property name="columnHints">
-                <structure>
-                    <property name="columnName">code_budget</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">code_budget</text-property>
-                    <text-property name="heading">code_budget</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">titre_budget</property>
-                    <property name="analysis">dimension</property>
-                    <text-property name="displayName">titre_budget</text-property>
-                    <text-property name="heading">titre_budget</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">montant_budget</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">montant_budget</text-property>
-                    <text-property name="heading">montant_budget</text-property>
-                </structure>
-                <structure>
-                    <property name="columnName">type_rubrique_detaille</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">type_rubrique_detaille</text-property>
-                    <text-property name="heading">type_rubrique_detaille</text-property>
-                </structure>
-            </list-property>
-            <list-property name="parameters">
-                <structure>
-                    <property name="name">param_1</property>
-                    <property name="paramName">id_version</property>
-                    <property name="nativeName"></property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
-                    <property name="position">1</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
-                </structure>
-            </list-property>
-            <structure name="cachedMetaData">
-                <list-property name="resultSet">
-                    <structure>
-                        <property name="position">1</property>
-                        <property name="name">code_budget</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">2</property>
-                        <property name="name">titre_budget</property>
-                        <property name="dataType">string</property>
-                    </structure>
-                    <structure>
-                        <property name="position">3</property>
-                        <property name="name">montant_budget</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                    <structure>
-                        <property name="position">4</property>
-                        <property name="name">type_rubrique_detaille</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                </list-property>
-            </structure>
-            <property name="dataSource">Data Source</property>
-            <list-property name="resultSet">
-                <structure>
-                    <property name="position">1</property>
-                    <property name="name">code_budget</property>
-                    <property name="nativeName">code_budget</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">2</property>
-                    <property name="name">titre_budget</property>
-                    <property name="nativeName">titre_budget</property>
-                    <property name="dataType">string</property>
-                    <property name="nativeDataType">12</property>
-                </structure>
-                <structure>
-                    <property name="position">3</property>
-                    <property name="name">montant_budget</property>
-                    <property name="nativeName">montant_budget</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-                <structure>
-                    <property name="position">4</property>
-                    <property name="name">type_rubrique_detaille</property>
-                    <property name="nativeName">type_rubrique_detaille</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
-                </structure>
-            </list-property>
-            <xml-property name="queryText"><![CDATA[SELECT code_budget,titre_budget,montant_budget,type_rubrique_detaille
-from configuration_rubriques_budgetaire x
-where type_rubrique_detaille = 12 and is_detaille=true and id_version = ?
-order by code_budget;]]></xml-property>
-            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
-  <Version>2.0</Version>
-  <design:ResultSets derivedMetaData="true">
-    <design:resultSetDefinitions>
-      <design:resultSetColumns>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>code_budget</design:name>
-              <design:position>1</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
-            <design:precision>255</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>code_budget</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>code_budget</design:label>
-            <design:formattingHints>
-              <design:displaySize>255</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>titre_budget</design:name>
-              <design:position>2</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
-            <design:precision>255</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>titre_budget</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>titre_budget</design:label>
-            <design:formattingHints>
-              <design:displaySize>255</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>montant_budget</design:name>
-              <design:position>3</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
-            <design:precision>19</design:precision>
-            <design:scale>2</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>montant_budget</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>montant_budget</design:label>
-            <design:formattingHints>
-              <design:displaySize>21</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>type_rubrique_detaille</design:name>
-              <design:position>4</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
-            <design:precision>19</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>type_rubrique_detaille</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>type_rubrique_detaille</design:label>
-            <design:formattingHints>
-              <design:displaySize>20</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-      </design:resultSetColumns>
-      <design:criteria/>
-    </design:resultSetDefinitions>
-  </design:ResultSets>
-</model:DesignValues>]]></xml-property>
-        </oda-data-set>
-        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="prodF_som" id="535">
-            <list-property name="columnHints">
-                <structure>
-                    <property name="columnName">sum</property>
-                    <property name="analysis">measure</property>
-                    <text-property name="displayName">sum</text-property>
-                    <text-property name="heading">sum</text-property>
-                </structure>
-            </list-property>
-            <list-property name="parameters">
-                <structure>
-                    <property name="name">param_1</property>
-                    <property name="paramName">id_version</property>
-                    <property name="nativeName"></property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">-5</property>
-                    <property name="position">1</property>
-                    <property name="isInput">true</property>
-                    <property name="isOutput">false</property>
-                </structure>
-            </list-property>
-            <structure name="cachedMetaData">
-                <list-property name="resultSet">
-                    <structure>
-                        <property name="position">1</property>
-                        <property name="name">sum</property>
-                        <property name="dataType">decimal</property>
-                    </structure>
-                </list-property>
-            </structure>
-            <property name="dataSource">Data Source</property>
-            <list-property name="resultSet">
-                <structure>
-                    <property name="position">1</property>
-                    <property name="name">sum</property>
-                    <property name="nativeName">sum</property>
-                    <property name="dataType">decimal</property>
-                    <property name="nativeDataType">2</property>
-                </structure>
-            </list-property>
-            <xml-property name="queryText"><![CDATA[SELECT sum(montant_budget)
-from configuration_rubriques_budgetaire x
-where type_rubrique_detaille in (11,12) and is_detaille=true and id_version = ?
-;]]></xml-property>
-            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
-<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
-  <Version>2.0</Version>
-  <design:ResultSets derivedMetaData="true">
-    <design:resultSetDefinitions>
-      <design:resultSetColumns>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>code_budget</design:name>
-              <design:position>1</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
-            <design:precision>255</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>code_budget</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>code_budget</design:label>
-            <design:formattingHints>
-              <design:displaySize>255</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>titre_budget</design:name>
-              <design:position>2</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
-            <design:precision>255</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>titre_budget</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>titre_budget</design:label>
-            <design:formattingHints>
-              <design:displaySize>255</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>montant_budget</design:name>
-              <design:position>3</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
-            <design:precision>19</design:precision>
-            <design:scale>2</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>montant_budget</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>montant_budget</design:label>
-            <design:formattingHints>
-              <design:displaySize>21</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-        <design:resultColumnDefinitions>
-          <design:attributes>
-            <design:identifier>
-              <design:name>type_rubrique_detaille</design:name>
-              <design:position>4</design:position>
-            </design:identifier>
-            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
-            <design:precision>19</design:precision>
-            <design:scale>0</design:scale>
-            <design:nullability>Nullable</design:nullability>
-            <design:uiHints>
-              <design:displayName>type_rubrique_detaille</design:displayName>
-            </design:uiHints>
-          </design:attributes>
-          <design:usageHints>
-            <design:label>type_rubrique_detaille</design:label>
-            <design:formattingHints>
-              <design:displaySize>20</design:displaySize>
-            </design:formattingHints>
-          </design:usageHints>
-        </design:resultColumnDefinitions>
-      </design:resultSetColumns>
-      <design:criteria/>
-    </design:resultSetDefinitions>
-  </design:ResultSets>
-</model:DesignValues>]]></xml-property>
-        </oda-data-set>
         <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="header_info" id="6853">
             <list-property name="columnHints">
                 <structure>
@@ -776,6 +251,421 @@ from configuration_management_documents where id = ?]]></xml-property>
   </design:ResultSets>
 </model:DesignValues>]]></xml-property>
         </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="list_groupe" id="6854">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">type_rubrique_detaille</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">type_rubrique_detaille</text-property>
+                    <text-property name="heading">type_rubrique_detaille</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">titre</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">titre</text-property>
+                    <text-property name="heading">titre</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">created_on</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">created_on</text-property>
+                    <text-property name="heading">created_on</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">id_version</property>
+                    <property name="paramName">id_version</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">type_rubrique_detaille</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">titre</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">created_on</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">type_rubrique_detaille</property>
+                    <property name="nativeName">type_rubrique_detaille</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">titre</property>
+                    <property name="nativeName">titre</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">created_on</property>
+                    <property name="nativeName">created_on</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select distinct pp.type_rubrique_detaille,crc.name as titre, crc.created_on
+from configuration_rubriques_budgetaire pp
+         join configuration_rubrique_configuration crc on pp.type_rubrique_detaille = crc.id
+where pp.code_budget like '7%'
+  and is_detaille is true
+and id_version = ?
+order by crc.created_on]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>type_rubrique_detaille</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>type_rubrique_detaille</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>type_rubrique_detaille</design:label>
+            <design:formattingHints>
+              <design:displaySize>20</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>created_on</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
+            <design:precision>29</design:precision>
+            <design:scale>6</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>created_on</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>created_on</design:label>
+            <design:formattingHints>
+              <design:displaySize>29</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
+        <oda-data-set extensionID="org.eclipse.birt.report.data.oda.jdbc.JdbcSelectDataSet" name="data_detail" id="6889">
+            <list-property name="columnHints">
+                <structure>
+                    <property name="columnName">code_budget</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">code_budget</text-property>
+                    <text-property name="heading">code_budget</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">titre_budget</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">titre_budget</text-property>
+                    <text-property name="heading">titre_budget</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">montant_budget</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">montant_budget</text-property>
+                    <text-property name="heading">montant_budget</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">created_on</property>
+                    <property name="analysis">dimension</property>
+                    <text-property name="displayName">created_on</text-property>
+                    <text-property name="heading">created_on</text-property>
+                </structure>
+                <structure>
+                    <property name="columnName">show_row_fonc</property>
+                    <property name="analysis">measure</property>
+                    <text-property name="displayName">show_row_fonc</text-property>
+                    <text-property name="heading">show_row_fonc</text-property>
+                </structure>
+            </list-property>
+            <list-property name="parameters">
+                <structure>
+                    <property name="name">version</property>
+                    <property name="paramName">id_version</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                    <property name="position">1</property>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+                <structure>
+                    <property name="name">id_detail</property>
+                    <property name="nativeName"></property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">-5</property>
+                    <property name="position">2</property>
+                    <expression name="defaultValue" type="javascript">1</expression>
+                    <property name="isInput">true</property>
+                    <property name="isOutput">false</property>
+                </structure>
+            </list-property>
+            <structure name="cachedMetaData">
+                <list-property name="resultSet">
+                    <structure>
+                        <property name="position">1</property>
+                        <property name="name">code_budget</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">2</property>
+                        <property name="name">titre_budget</property>
+                        <property name="dataType">string</property>
+                    </structure>
+                    <structure>
+                        <property name="position">3</property>
+                        <property name="name">montant_budget</property>
+                        <property name="dataType">decimal</property>
+                    </structure>
+                    <structure>
+                        <property name="position">4</property>
+                        <property name="name">created_on</property>
+                        <property name="dataType">date-time</property>
+                    </structure>
+                    <structure>
+                        <property name="position">5</property>
+                        <property name="name">show_row_fonc</property>
+                        <property name="dataType">integer</property>
+                    </structure>
+                </list-property>
+            </structure>
+            <property name="dataSource">Data Source</property>
+            <list-property name="resultSet">
+                <structure>
+                    <property name="position">1</property>
+                    <property name="name">code_budget</property>
+                    <property name="nativeName">code_budget</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">2</property>
+                    <property name="name">titre_budget</property>
+                    <property name="nativeName">titre_budget</property>
+                    <property name="dataType">string</property>
+                    <property name="nativeDataType">12</property>
+                </structure>
+                <structure>
+                    <property name="position">3</property>
+                    <property name="name">montant_budget</property>
+                    <property name="nativeName">montant_budget</property>
+                    <property name="dataType">decimal</property>
+                    <property name="nativeDataType">2</property>
+                </structure>
+                <structure>
+                    <property name="position">4</property>
+                    <property name="name">created_on</property>
+                    <property name="nativeName">created_on</property>
+                    <property name="dataType">date-time</property>
+                    <property name="nativeDataType">93</property>
+                </structure>
+                <structure>
+                    <property name="position">5</property>
+                    <property name="name">show_row_fonc</property>
+                    <property name="nativeName">show_row_fonc</property>
+                    <property name="dataType">integer</property>
+                    <property name="nativeDataType">-7</property>
+                </structure>
+            </list-property>
+            <xml-property name="queryText"><![CDATA[select pp.code_budget,pp.titre_budget,pp.montant_budget, pp.created_on,pp.show_row_fonc
+from configuration_rubriques_budgetaire pp
+         join configuration_rubrique_configuration crc on pp.type_rubrique_detaille = crc.id
+where  is_detaille is true
+and id_version = ? and
+        pp.type_rubrique_detaille = ?
+order by pp.created_on]]></xml-property>
+            <xml-property name="designerValues"><![CDATA[<?xml version="1.0" encoding="UTF-8"?>
+<model:DesignValues xmlns:design="http://www.eclipse.org/datatools/connectivity/oda/design" xmlns:model="http://www.eclipse.org/birt/report/model/adapter/odaModel">
+  <Version>2.0</Version>
+  <DataSetParameters>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>1</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+    <parameter>
+      <design:ParameterDefinition>
+        <design:inOutMode>In</design:inOutMode>
+        <design:attributes>
+          <design:identifier>
+            <design:name></design:name>
+            <design:position>2</design:position>
+          </design:identifier>
+          <design:nativeDataTypeCode>-5</design:nativeDataTypeCode>
+          <design:precision>0</design:precision>
+          <design:scale>0</design:scale>
+          <design:nullability>Unknown</design:nullability>
+        </design:attributes>
+      </design:ParameterDefinition>
+    </parameter>
+  </DataSetParameters>
+  <design:ResultSets derivedMetaData="true">
+    <design:resultSetDefinitions>
+      <design:resultSetColumns>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>code_budget</design:name>
+              <design:position>1</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>code_budget</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>code_budget</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>titre_budget</design:name>
+              <design:position>2</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>12</design:nativeDataTypeCode>
+            <design:precision>255</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>titre_budget</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>titre_budget</design:label>
+            <design:formattingHints>
+              <design:displaySize>255</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>montant_budget</design:name>
+              <design:position>3</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>2</design:nativeDataTypeCode>
+            <design:precision>19</design:precision>
+            <design:scale>2</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>montant_budget</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>montant_budget</design:label>
+            <design:formattingHints>
+              <design:displaySize>21</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>created_on</design:name>
+              <design:position>4</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>93</design:nativeDataTypeCode>
+            <design:precision>29</design:precision>
+            <design:scale>6</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>created_on</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>created_on</design:label>
+            <design:formattingHints>
+              <design:displaySize>29</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+        <design:resultColumnDefinitions>
+          <design:attributes>
+            <design:identifier>
+              <design:name>show_row_fonc</design:name>
+              <design:position>5</design:position>
+            </design:identifier>
+            <design:nativeDataTypeCode>-7</design:nativeDataTypeCode>
+            <design:precision>1</design:precision>
+            <design:scale>0</design:scale>
+            <design:nullability>Nullable</design:nullability>
+            <design:uiHints>
+              <design:displayName>show_row_fonc</design:displayName>
+            </design:uiHints>
+          </design:attributes>
+          <design:usageHints>
+            <design:label>show_row_fonc</design:label>
+            <design:formattingHints>
+              <design:displaySize>1</design:displaySize>
+            </design:formattingHints>
+          </design:usageHints>
+        </design:resultColumnDefinitions>
+      </design:resultSetColumns>
+      <design:criteria/>
+    </design:resultSetDefinitions>
+  </design:ResultSets>
+</model:DesignValues>]]></xml-property>
+        </oda-data-set>
     </data-sets>
     <page-setup>
         <simple-master-page name="Simple MasterPage" id="2">
@@ -789,17 +679,15 @@ from configuration_management_documents where id = ?]]></xml-property>
             <property name="fontSize">10px</property>
             <property name="fontWeight">bold</property>
             <column id="457">
-                <property name="width">15.8mm</property>
+                <property name="width">13.28mm</property>
             </column>
             <column id="458"/>
             <column id="459">
-                <property name="width">22.3mm</property>
+                <property name="width">18mm</property>
             </column>
             <row id="460">
                 <property name="backgroundColor">yellow</property>
                 <cell id="461">
-                    <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">thin</property>
                     <property name="borderLeftStyle">solid</property>
                     <property name="borderLeftWidth">thin</property>
                     <property name="borderRightStyle">solid</property>
@@ -813,8 +701,6 @@ from configuration_management_documents where id = ?]]></xml-property>
                     </text>
                 </cell>
                 <cell id="462">
-                    <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">thin</property>
                     <property name="borderLeftStyle">solid</property>
                     <property name="borderLeftWidth">thin</property>
                     <property name="borderRightStyle">solid</property>
@@ -828,8 +714,6 @@ from configuration_management_documents where id = ?]]></xml-property>
                     </text>
                 </cell>
                 <cell id="463">
-                    <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">thin</property>
                     <property name="borderLeftStyle">solid</property>
                     <property name="borderLeftWidth">thin</property>
                     <property name="borderRightStyle">solid</property>
@@ -843,165 +727,6 @@ from configuration_management_documents where id = ?]]></xml-property>
                     </text>
                 </cell>
             </row>
-            <row id="464">
-                <cell id="465">
-                    <property name="colSpan">3</property>
-                    <property name="rowSpan">1</property>
-                    <property name="borderBottomStyle">solid</property>
-                    <property name="borderBottomWidth">thin</property>
-                    <property name="borderLeftStyle">solid</property>
-                    <property name="borderLeftWidth">thin</property>
-                    <property name="borderRightStyle">solid</property>
-                    <property name="borderRightWidth">thin</property>
-                    <property name="borderTopStyle">solid</property>
-                    <property name="borderTopWidth">thin</property>
-                    <property name="paddingTop">0pt</property>
-                    <property name="paddingLeft">0pt</property>
-                    <property name="paddingBottom">0pt</property>
-                    <property name="paddingRight">0pt</property>
-                    <table id="480">
-                        <property name="dataSet">prodF_1</property>
-                        <list-property name="boundDataColumns">
-                            <structure>
-                                <property name="name">code_budget</property>
-                                <text-property name="displayName">code_budget</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["code_budget"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">titre_budget</property>
-                                <text-property name="displayName">titre_budget</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["titre_budget"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">montant_budget</property>
-                                <text-property name="displayName">montant_budget</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["montant_budget"]</expression>
-                                <property name="dataType">decimal</property>
-                            </structure>
-                            <structure>
-                                <property name="name">Aggregation</property>
-                                <property name="dataType">float</property>
-                                <property name="aggregateFunction">SUM</property>
-                                <list-property name="arguments">
-                                    <structure>
-                                        <property name="name">Expression</property>
-                                        <expression name="value" type="javascript">row["montant_budget"]</expression>
-                                    </structure>
-                                </list-property>
-                                <property name="allowExport">true</property>
-                            </structure>
-                        </list-property>
-                        <column id="499">
-                            <property name="width">15.5mm</property>
-                        </column>
-                        <column id="500"/>
-                        <column id="501">
-                            <property name="width">22mm</property>
-                        </column>
-                        <detail>
-                            <row id="488">
-                                <cell id="489">
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <data id="490">
-                                        <property name="textAlign">center</property>
-                                        <property name="resultSetColumn">code_budget</property>
-                                    </data>
-                                </cell>
-                                <cell id="491">
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <data id="492">
-                                        <property name="resultSetColumn">titre_budget</property>
-                                    </data>
-                                </cell>
-                                <cell id="493">
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <data id="494">
-                                        <structure name="numberFormat">
-                                            <property name="category">Fixed</property>
-                                            <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
-                                        </structure>
-                                        <property name="textAlign">right</property>
-                                        <property name="resultSetColumn">montant_budget</property>
-                                    </data>
-                                </cell>
-                            </row>
-                        </detail>
-                        <footer>
-                            <row id="495">
-                                <property name="backgroundColor">yellow</property>
-                                <cell id="496">
-                                    <property name="colSpan">1</property>
-                                    <property name="rowSpan">1</property>
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                </cell>
-                                <cell id="534">
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <text id="502">
-                                        <property name="textAlign">center</property>
-                                        <property name="contentType">auto</property>
-                                        <text-property name="content"><![CDATA[TOTAL PRODUITS D'EXPLOITATION]]></text-property>
-                                    </text>
-                                </cell>
-                                <cell id="498">
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <property name="textAlign">right</property>
-                                    <data id="504">
-                                        <structure name="numberFormat">
-                                            <property name="category">Fixed</property>
-                                            <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
-                                        </structure>
-                                        <property name="resultSetColumn">Aggregation</property>
-                                    </data>
-                                </cell>
-                            </row>
-                        </footer>
-                    </table>
-                </cell>
-            </row>
             <row id="475">
                 <cell id="476">
                     <property name="colSpan">3</property>
@@ -1012,152 +737,195 @@ from configuration_management_documents where id = ?]]></xml-property>
                     <property name="borderLeftWidth">thin</property>
                     <property name="borderRightStyle">solid</property>
                     <property name="borderRightWidth">thin</property>
-                    <property name="borderTopStyle">solid</property>
-                    <property name="borderTopWidth">thin</property>
                     <property name="paddingTop">0pt</property>
                     <property name="paddingLeft">0pt</property>
                     <property name="paddingBottom">0pt</property>
                     <property name="paddingRight">0pt</property>
-                    <table id="506">
-                        <property name="dataSet">prodF_2</property>
+                    <table id="6855">
+                        <property name="dataSet">list_groupe</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">code_budget</property>
-                                <text-property name="displayName">code_budget</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["code_budget"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">titre_budget</property>
-                                <text-property name="displayName">titre_budget</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["titre_budget"]</expression>
-                                <property name="dataType">string</property>
-                            </structure>
-                            <structure>
-                                <property name="name">montant_budget</property>
-                                <text-property name="displayName">montant_budget</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["montant_budget"]</expression>
+                                <property name="name">type_rubrique_detaille</property>
+                                <text-property name="displayName">type_rubrique_detaille</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["type_rubrique_detaille"]</expression>
                                 <property name="dataType">decimal</property>
                             </structure>
                             <structure>
-                                <property name="name">Aggregation</property>
-                                <property name="dataType">float</property>
-                                <property name="aggregateFunction">SUM</property>
-                                <list-property name="arguments">
-                                    <structure>
-                                        <property name="name">Expression</property>
-                                        <expression name="value" type="javascript">row["montant_budget"]</expression>
-                                    </structure>
-                                </list-property>
+                                <property name="name">titre</property>
+                                <text-property name="displayName">titre</text-property>
+                                <expression name="expression" type="javascript">"TOTAL "+dataSetRow["titre"]</expression>
+                                <property name="dataType">string</property>
                                 <property name="allowExport">true</property>
                             </structure>
+                            <structure>
+                                <property name="name">created_on</property>
+                                <text-property name="displayName">created_on</text-property>
+                                <expression name="expression" type="javascript">dataSetRow["created_on"]</expression>
+                                <property name="dataType">date-time</property>
+                            </structure>
                         </list-property>
-                        <column id="525">
-                            <property name="width">15mm</property>
-                        </column>
-                        <column id="526"/>
-                        <column id="527">
-                            <property name="width">22mm</property>
-                        </column>
+                        <column id="6875"/>
                         <detail>
-                            <row id="514">
-                                <cell id="515">
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <data id="516">
-                                        <property name="textAlign">center</property>
-                                        <property name="resultSetColumn">code_budget</property>
-                                    </data>
-                                </cell>
-                                <cell id="517">
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <data id="518">
-                                        <property name="resultSetColumn">titre_budget</property>
-                                    </data>
-                                </cell>
-                                <cell id="519">
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <data id="520">
-                                        <structure name="numberFormat">
-                                            <property name="category">Fixed</property>
-                                            <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
-                                        </structure>
-                                        <property name="textAlign">right</property>
-                                        <property name="resultSetColumn">montant_budget</property>
-                                    </data>
+                            <row id="6863">
+                                <cell id="6866">
+                                    <property name="paddingTop">0pt</property>
+                                    <property name="paddingLeft">0pt</property>
+                                    <property name="paddingBottom">0pt</property>
+                                    <property name="paddingRight">0pt</property>
+                                    <table id="6890">
+                                        <property name="dataSet">data_detail</property>
+                                        <list-property name="paramBindings">
+                                            <structure>
+                                                <property name="paramName">id_detail</property>
+                                                <simple-property-list name="expression">
+                                                    <value type="javascript">row["type_rubrique_detaille"]</value>
+                                                </simple-property-list>
+                                            </structure>
+                                        </list-property>
+                                        <list-property name="boundDataColumns">
+                                            <structure>
+                                                <property name="name">code_budget</property>
+                                                <text-property name="displayName">code_budget</text-property>
+                                                <expression name="expression" type="javascript">dataSetRow["code_budget"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">titre_budget</property>
+                                                <text-property name="displayName">titre_budget</text-property>
+                                                <expression name="expression" type="javascript">dataSetRow["titre_budget"]</expression>
+                                                <property name="dataType">string</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">montant_budget</property>
+                                                <text-property name="displayName">montant_budget</text-property>
+                                                <expression name="expression" type="javascript">dataSetRow["montant_budget"]</expression>
+                                                <property name="dataType">decimal</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">created_on</property>
+                                                <text-property name="displayName">created_on</text-property>
+                                                <expression name="expression" type="javascript">dataSetRow["created_on"]</expression>
+                                                <property name="dataType">date-time</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">show_row_fonc</property>
+                                                <text-property name="displayName">show_row_fonc</text-property>
+                                                <expression name="expression" type="javascript">dataSetRow["show_row_fonc"]</expression>
+                                                <property name="dataType">integer</property>
+                                            </structure>
+                                            <structure>
+                                                <property name="name">Aggregation</property>
+                                                <property name="dataType">float</property>
+                                                <property name="aggregateFunction">SUM</property>
+                                                <list-property name="arguments">
+                                                    <structure>
+                                                        <property name="name">Expression</property>
+                                                        <expression name="value" type="javascript">row["montant_budget"]</expression>
+                                                    </structure>
+                                                </list-property>
+                                                <property name="allowExport">true</property>
+                                            </structure>
+                                        </list-property>
+                                        <column id="6919">
+                                            <property name="width">13mm</property>
+                                        </column>
+                                        <column id="6920"/>
+                                        <column id="6921">
+                                            <property name="width">17.7mm</property>
+                                        </column>
+                                        <detail>
+                                            <row id="6902">
+                                                <cell id="6903">
+                                                    <property name="borderBottomStyle">solid</property>
+                                                    <property name="borderBottomWidth">thin</property>
+                                                    <property name="borderRightStyle">solid</property>
+                                                    <property name="borderRightWidth">thin</property>
+                                                    <property name="borderTopStyle">solid</property>
+                                                    <property name="borderTopWidth">thin</property>
+                                                    <data id="6904">
+                                                        <property name="resultSetColumn">code_budget</property>
+                                                    </data>
+                                                </cell>
+                                                <cell id="6905">
+                                                    <property name="borderBottomStyle">solid</property>
+                                                    <property name="borderBottomWidth">thin</property>
+                                                    <property name="borderLeftStyle">solid</property>
+                                                    <property name="borderLeftWidth">thin</property>
+                                                    <property name="borderRightStyle">solid</property>
+                                                    <property name="borderRightWidth">thin</property>
+                                                    <property name="borderTopStyle">solid</property>
+                                                    <property name="borderTopWidth">thin</property>
+                                                    <data id="6906">
+                                                        <property name="resultSetColumn">titre_budget</property>
+                                                    </data>
+                                                </cell>
+                                                <cell id="6907">
+                                                    <property name="borderBottomStyle">solid</property>
+                                                    <property name="borderBottomWidth">thin</property>
+                                                    <property name="borderLeftStyle">solid</property>
+                                                    <property name="borderLeftWidth">thin</property>
+                                                    <property name="borderTopStyle">solid</property>
+                                                    <property name="borderTopWidth">thin</property>
+                                                    <data id="6908">
+                                                        <structure name="numberFormat">
+                                                            <property name="category">Fixed</property>
+                                                            <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                                                        </structure>
+                                                        <property name="textAlign">right</property>
+                                                        <list-property name="visibility">
+                                                            <structure>
+                                                                <property name="format">all</property>
+                                                                <expression name="valueExpr" type="javascript">row["montant_budget"]==0;</expression>
+                                                            </structure>
+                                                        </list-property>
+                                                        <property name="resultSetColumn">montant_budget</property>
+                                                    </data>
+                                                </cell>
+                                            </row>
+                                        </detail>
+                                        <footer>
+                                            <row id="6913">
+                                                <property name="backgroundColor">yellow</property>
+                                                <cell id="6914">
+                                                    <property name="borderRightStyle">solid</property>
+                                                    <property name="borderRightWidth">thin</property>
+                                                    <property name="borderTopStyle">solid</property>
+                                                    <property name="borderTopWidth">thin</property>
+                                                </cell>
+                                                <cell id="6915">
+                                                    <property name="borderLeftStyle">solid</property>
+                                                    <property name="borderLeftWidth">thin</property>
+                                                    <property name="borderRightStyle">solid</property>
+                                                    <property name="borderRightWidth">thin</property>
+                                                    <property name="borderTopStyle">solid</property>
+                                                    <property name="borderTopWidth">thin</property>
+                                                    <text id="6924">
+                                                        <property name="textAlign">center</property>
+                                                        <property name="contentType">html</property>
+                                                        <text-property name="content"><![CDATA[<VALUE-OF>row._outer["titre"]</VALUE-OF>]]></text-property>
+                                                    </text>
+                                                </cell>
+                                                <cell id="6916">
+                                                    <property name="borderLeftStyle">solid</property>
+                                                    <property name="borderLeftWidth">thin</property>
+                                                    <property name="borderTopStyle">solid</property>
+                                                    <property name="borderTopWidth">thin</property>
+                                                    <data id="6925">
+                                                        <structure name="numberFormat">
+                                                            <property name="category">Fixed</property>
+                                                            <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                                                        </structure>
+                                                        <property name="textAlign">right</property>
+                                                        <method name="onRender"><![CDATA[vars["TOTAL"] = parseFloat(vars["TOTAL"]) + parseFloat(this.value);]]></method>
+                                                        <property name="resultSetColumn">Aggregation</property>
+                                                    </data>
+                                                </cell>
+                                            </row>
+                                        </footer>
+                                    </table>
                                 </cell>
                             </row>
                         </detail>
-                        <footer>
-                            <row id="521">
-                                <property name="backgroundColor">yellow</property>
-                                <cell id="522">
-                                    <property name="colSpan">1</property>
-                                    <property name="rowSpan">1</property>
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                </cell>
-                                <cell id="533">
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <text id="528">
-                                        <property name="textAlign">center</property>
-                                        <property name="contentType">auto</property>
-                                        <text-property name="content"><![CDATA[TOTAL PRODUITS NON COURANTS]]></text-property>
-                                    </text>
-                                </cell>
-                                <cell id="524">
-                                    <property name="borderBottomStyle">solid</property>
-                                    <property name="borderBottomWidth">thin</property>
-                                    <property name="borderLeftStyle">solid</property>
-                                    <property name="borderLeftWidth">thin</property>
-                                    <property name="borderRightStyle">solid</property>
-                                    <property name="borderRightWidth">thin</property>
-                                    <property name="borderTopStyle">solid</property>
-                                    <property name="borderTopWidth">thin</property>
-                                    <property name="textAlign">right</property>
-                                    <data id="531">
-                                        <structure name="numberFormat">
-                                            <property name="category">Fixed</property>
-                                            <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
-                                        </structure>
-                                        <property name="resultSetColumn">Aggregation</property>
-                                    </data>
-                                </cell>
-                            </row>
-                        </footer>
                     </table>
                 </cell>
             </row>
@@ -1201,36 +969,33 @@ from configuration_management_documents where id = ?]]></xml-property>
                     <property name="paddingLeft">0pt</property>
                     <property name="paddingBottom">0pt</property>
                     <property name="paddingRight">0pt</property>
-                    <table id="536">
-                        <property name="dataSet">prodF_som</property>
+                    <data id="6926">
+                        <structure name="numberFormat">
+                            <property name="category">Fixed</property>
+                            <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
+                        </structure>
+                        <property name="textAlign">right</property>
                         <list-property name="boundDataColumns">
                             <structure>
-                                <property name="name">sum</property>
-                                <text-property name="displayName">sum</text-property>
-                                <expression name="expression" type="javascript">dataSetRow["sum"]</expression>
+                                <property name="name">TOTAL</property>
+                                <text-property name="displayName">TOTAL</text-property>
+                                <expression name="expression" type="javascript">vars["TOTAL"]</expression>
                                 <property name="dataType">decimal</property>
+                                <property name="allowExport">true</property>
                             </structure>
                         </list-property>
-                        <column id="545"/>
-                        <detail>
-                            <row id="540">
-                                <cell id="541">
-                                    <data id="542">
-                                        <structure name="numberFormat">
-                                            <property name="category">Fixed</property>
-                                            <property name="pattern">#,##0.00{RoundingMode=HALF_UP}</property>
-                                        </structure>
-                                        <property name="textAlign">right</property>
-                                        <property name="resultSetColumn">sum</property>
-                                    </data>
-                                </cell>
-                            </row>
-                        </detail>
-                    </table>
+                        <property name="resultSetColumn">TOTAL</property>
+                    </data>
                 </cell>
             </row>
         </grid>
     </body>
+    <property name="pageVariables">
+        <variable-element name="TOTAL">
+            <expression name="value" type="javascript">0</expression>
+            <property name="type">report</property>
+        </variable-element>
+    </property>
     <list-property name="images">
         <structure>
             <property name="name">axelor.png</property>

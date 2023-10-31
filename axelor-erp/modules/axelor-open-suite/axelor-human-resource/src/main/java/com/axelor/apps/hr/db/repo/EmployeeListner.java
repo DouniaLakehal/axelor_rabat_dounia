@@ -1,16 +1,13 @@
 package com.axelor.apps.hr.db.repo;
 
-import com.axelor.apps.hr.db.Employee;
 import com.axelor.apps.hr.service.EmployeeAdvanceService;
 import com.google.inject.Inject;
-import java.time.LocalDate;
-import javax.persistence.PreUpdate;
 
 public class EmployeeListner {
 
   @Inject EmployeeAdvanceService appservice;
 
- /* @PreUpdate
+  /* @PreUpdate
   private void onPostPersistOrUpdate(Employee emp) {
     if (emp != null && emp.getArchived() != null) {
       if (emp.getArchived()) {

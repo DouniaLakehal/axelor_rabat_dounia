@@ -34,6 +34,7 @@ import com.axelor.rpc.ActionRequest;
 import com.axelor.rpc.ActionResponse;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +57,7 @@ public class EtatSalaireController {
         c = (Compte) request.getContext().get("compte");
         test = appService.checkMontantAlltransaction(annee, mois, c.getId());
       } else if (retraitSalaire_transact.equals("oui")
-          && request.getContext().get("compte") == null) {
+              && request.getContext().get("compte") == null) {
         response.setFlash("Le compte est obligatoire");
         return;
       }
@@ -76,28 +77,31 @@ public class EtatSalaireController {
 
     if (etatSalaireServiceImpl.getNumberOfEtatSalaire(annee, mois) != 0) {
       EtatSalaire_ops etatSalaire_ops =
-          Beans.get(EtatSalaire_opsRepository.class)
-              .all()
-              .filter("self.mois=:mois and self.year=:year")
-              .bind("mois", mois)
-              .bind("year", annee)
-              .fetchOne();
+              Beans.get(EtatSalaire_opsRepository.class)
+                      .all()
+                      .filter("self.mois=:mois and self.year=:year")
+                      .bind("mois", mois)
+                      .bind("year", annee)
+                      .fetchOne();
       if (etatSalaire_ops == null) {
         etatSalaireServiceImpl.supprimerTousEtatSalaire(annee, mois);
-
+        ls = etatSalaireServiceImpl.AddDataToEtatSalaire(annee, mois);
+  
       } else {
         ls = new ArrayList<>(etatSalaire_ops.getEtatSalaireList());
       }
       if (request.getContext().get("saveTransaction") != null
-          && request.getContext().get("saveTransaction").toString().equals("oui")) {
+              && request.getContext().get("saveTransaction").toString().equals("oui")) {
         if (test) {
           appService.removeTransaction(mois, annee);
         }
       }
-    } else ls = etatSalaireServiceImpl.AddDataToEtatSalaire(annee, mois);
-
+    } else {
+      ls = etatSalaireServiceImpl.AddDataToEtatSalaire(annee, mois);
+    }
+  
     if (request.getContext().get("saveTransaction") != null
-        && request.getContext().get("saveTransaction").toString().equals("oui")) {
+            && request.getContext().get("saveTransaction").toString().equals("oui")) {
       // check all transaction ok?
       if (test) {
         // effectuer transaction
@@ -105,9 +109,9 @@ public class EtatSalaireController {
         appService.reduceFromRubriqueAndCompte(t);
       } else {
         String msg =
-            "Les montants dans les rubriques ou le compte "
-                + c.getDesignation()
-                + " ne sont pas suffisants";
+                "Les montants dans les rubriques ou le compte "
+                        + c.getDesignation()
+                        + " ne sont pas suffisants";
         response.setFlash(msg);
         return;
       }

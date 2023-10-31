@@ -47,22 +47,40 @@
 	</action-attrs>
 
 	<action-attrs name="auto_saisie_short_code">
-		<attribute if="code_budget!=null" for="budgetParent" name="domain" expr="eval: &quot; self.id_version=:id_version AND self.anneCurrent=:anneCurrent and self.montant_budget=0 &quot; "/>
-		<attribute for="investissement" name="hidden" expr="eval:!(code_budget.startsWith('2'))"/>
+		<attribute if="code_budget!=null" for="budgetParent" name="domain"
+				   expr="eval: &quot; self.id_version=:id_version AND self.anneCurrent=:anneCurrent and self.montant_budget=0 &quot; "/>
+		<attribute if="code_budget!=null" for="investissement" name="hidden"
+				   expr="eval:!(code_budget.startsWith('2'))"/>
 	</action-attrs>
 
 
-
 	<action-record name="load_default_date" model="com.axelor.apps.configuration.db.RubriqueConfiguration">
-<!--		<field name="anneCurrent" expr="eval:(__date__).getYear()"/>-->
-		<field name="anneCurrent" expr="eval:2022"/>
+		<field name="anneCurrent" expr="eval:(__date__).getYear()"/>
 		<field name="id_version" expr="eval:id_version"/>
 	</action-record>
 
-	<grid orderBy="code_budget" canDelete="false" title="Rubrique Bidgetaire" name="gridRubriquesBudgetaireSaisieNew" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+	<grid orderBy="code_budget" canDelete="false" title="Rubrique Bidgetaire" name="gridRubriquesBudgetaireShowAll"
+		  model="com.axelor.apps.configuration.db.RubriquesBudgetaire" canNew="false">
+		<hilite if="montant_total_children!=0" background="warning"/>
+		<hilite if="montant_old_version!=montant_budget &amp;&amp; montant_old_version!= null &amp;&amp; montant_old_version &gt; 0 "
+				background="info"/>
+		<field name="code_budget" title="Code"/>
+		<field name="titre_budget" title="Rubrique"/>
+		<field name="montant_budget" title="Montant Rubrique"/>
+		<field name="montant_total_children" title="Montant total des sous-rubrique"/>
+		<field name="montant_old_version" title="old version" hidden="true"/>
+		<field name="commentaire" hidden="true" title="commentaire"/>
+		<button icon="fa-commenting" name="btn_comment_view_rubrique" onClick="edit_comment_versionRb"
+				title="Ajouter un commentaire" css="red_comment"/>
+	</grid>
+
+
+	<grid orderBy="code_budget" canDelete="false" title="Rubrique Bidgetaire" name="gridRubriquesBudgetaireSaisieNew"
+		  model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
 		<menubar>
 			<menu title="Gestion Rubrique principale">
-				<item title="Cacher les montant des rubriques principale" action="tw_cacher_Rubrique_principale_version"/>
+				<item title="Cacher les montant des rubriques principale"
+					  action="tw_cacher_Rubrique_principale_version"/>
 			</menu>
 			<menu title="Gestion Rubrique detaillée">
 				<menu title="Gestion des charges Exploitation">

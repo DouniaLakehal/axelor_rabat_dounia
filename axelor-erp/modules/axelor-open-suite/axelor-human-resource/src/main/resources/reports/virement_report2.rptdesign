@@ -131,7 +131,7 @@
             <property name="textAlign">left</property>
             <property name="contentType">auto</property>
             <text-property name="content"><![CDATA[Compte  N° 310090100202470176740128  tenu  à la  Trésorerie  Provinciale				  
-                   de Béni-Mellal]]></text-property>
+                   de Rabat]]></text-property>
         </text>
         <grid id="6779">
             <column id="6780">
@@ -159,7 +159,7 @@
                         <property name="marginTop">2pt</property>
                         <property name="marginBottom">2pt</property>
                         <property name="contentType">auto</property>
-                        <text-property name="content"><![CDATA[CCIS  Béni-Mellal Khénifra	]]></text-property>
+                        <text-property name="content"><![CDATA[CCIS Rabat - Salé Kénitra]]></text-property>
                     </text>
                 </cell>
             </row>
@@ -271,7 +271,7 @@
             <property name="fontFamily">"Arial"</property>
             <property name="marginTop">30pt</property>
             <property name="contentType">auto</property>
-            <text-property name="content"><![CDATA[A Béni-Mellal, le …………………………………..]]></text-property>
+            <text-property name="content"><![CDATA[A Rabat, le …………………………………..]]></text-property>
         </text>
         <text id="6773">
             <property name="fontFamily">"Arial"</property>

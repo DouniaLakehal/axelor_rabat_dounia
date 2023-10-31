@@ -122,7 +122,7 @@
                         <text-property name="text">   ROYAUME DU MAROC&#13;
 CHAMBRE DE COMMERCE&#13;
  D'INDUSTRIE ET DE SERVICES &#13;
-DE BENI MELLAL KHENIFRA</text-property>
+DE RABAT-SALE KENITRA</text-property>
                     </label>
                 </cell>
                 <cell id="7045">
@@ -195,7 +195,7 @@ APPOINTEMENTS ET SALAIRES&#13;
                                     <property name="fontSize">14pt</property>
                                     <property name="marginTop">0cm</property>
                                     <property name="contentType">auto</property>
-                                    <text-property name="content"><![CDATA[CERTIFIE PAR MOI ORDONNATEUR, PRESIDENT DE LA CHAMBRE DE COMMERCE, D'INDUSTRIE ET DE SERVICES DE BENI-MELLAL KHENIFRA, LE PRESIDENT BORDEREAU A LA SOMME DE : ]]></text-property>
+                                    <text-property name="content"><![CDATA[CERTIFIE PAR MOI ORDONNATEUR, PRESIDENT DE LA CHAMBRE DE COMMERCE, D'INDUSTRIE ET DE SERVICES DE RABAT-SALE KENITRA, LE PRESIDENT BORDEREAU A LA SOMME DE : ]]></text-property>
                                 </text>
                             </cell>
                             <cell id="7101"/>
@@ -251,7 +251,7 @@ APPOINTEMENTS ET SALAIRES&#13;
                         <property name="fontWeight">bold</property>
                         <property name="marginTop">2cm</property>
                         <property name="textAlign">center</property>
-                        <text-property name="text">BENI-MELLAL, LE ......................................................</text-property>
+                        <text-property name="text">RABAT, LE ......................................................</text-property>
                     </label>
                 </cell>
             </row>

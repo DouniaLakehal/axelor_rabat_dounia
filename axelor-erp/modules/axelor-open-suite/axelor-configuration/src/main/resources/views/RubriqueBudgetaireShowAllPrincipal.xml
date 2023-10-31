@@ -9,11 +9,11 @@
         <menubar>
             <menu title="imprimer">
                 <item name="choix_1" title="Code budget Generale" action="printCodeBudgetPrincipal"/>
-                <item name="choix_2" title="prod F" action="imprimerBudgetProdF" />
-                <item name="choix_3" title="FONC" action="imprimerBudgetFonc" />
-                <item name="choix_4" title="FONC detail" action="imprimerBudgetFoncDetail" />
-                <item name="choix_5" title="Equip" action="printCodeBudgetPrincipal" />
-                <item name="choix_6" title="Equip Detail" action="printCodeBudgetPrincipal" />
+                <item name="choix_2" title="prod F" action="printCodeBudgetPrincipal"/>
+                <item name="choix_3" title="FONC" action="printCodeBudgetPrincipal"/>
+                <item name="choix_4" title="FONC detail" action="printCodeBudgetPrincipal"/>
+                <item name="choix_5" title="Equip" action="printCodeBudgetPrincipal"/>
+                <item name="choix_6" title="Equip Detail" action="printCodeBudgetPrincipal"/>
             </menu>
         </menubar>
         <panel>
@@ -35,7 +35,8 @@
                            title="Total Disponible à la trésorerie"/>
                 </panel>
 
-                <panel-dashlet readonly="true" name="$produit" title="Produit d'exploitation" action="afficher_produit_single"
+                <panel-dashlet readonly="true" name="$produit" title="Produit d'exploitation"
+                               action="afficher_produit_single"
                                colSpan="12"/>
                 <panel colSpan="3" colOffset="9">
                     <field type="decimal" readonly="true" name="$recette_som2_single"
@@ -44,9 +45,9 @@
 
                 <panel-dashlet readonly="true" name="$investissement" title="RESSOURCES D'INVESTISSEMENT"
                                action="afficher_ressource_single" colSpan="12"/>
-                <panel colSpan="12" >
-                    <button colSpan="2" name="afficher_detail"
-                            title="Détail prod F" onClick="afficher_detail_single" icon="fa-search"/>
+                <panel colSpan="12">
+                    <!--<button colSpan="2" name="afficher_detail"
+                            title="Détail prod F" onClick="afficher_detail_single" icon="fa-search"/>-->
                     <field colSpan="3" colOffset="9" type="decimal" readonly="true" name="$recette_som3_single"
                            title="Total des RESSOURCES D'INVESTISSEMENT"/>
                 </panel>
@@ -61,17 +62,19 @@
                 <panel-dashlet readonly="true" colSpan="12" name="$charges" title="Charges d'exploitation"
                                action="afficher_charges_single"/>
                 <panel colSpan="12">
-                    <button colSpan="2" name="afficher_detail_612"
-                            title="Détail fonc" onClick="afficher_detail_depense_single" icon="fa-search"/>
-                    <field colSpan="3" colOffset="9" type="decimal" readonly="true" name="$recette_som4_single" title="Total Charges d'exploitation"/>
+                    <!--<button colSpan="2" name="afficher_detail_612"
+                            title="Détail fonc" onClick="afficher_detail_depense_single" icon="fa-search"/>-->
+                    <field colSpan="3" colOffset="9" type="decimal" readonly="true" name="$recette_som4_single"
+                           title="Total Charges d'exploitation"/>
                 </panel>
 
                 <panel-dashlet readonly="true" colSpan="12" name="$emplois" title="Emplois d'investissement"
                                action="afficher_emplois_single"/>
-                <panel colSpan="12" >
-                    <button  colSpan="2" name="afficher_detail_23"
-                            title="Détail" onClick="afficher_detail_equip" icon="fa-search"/>
-                    <field colSpan="3" colOffset="9" type="decimal" readonly="true" name="$recette_som5_single" title="Total Emplois d'investissement"/>
+                <panel colSpan="12">
+                    <!--<button  colSpan="2" name="afficher_detail_23"
+                            title="Détail" onClick="afficher_detail_equip" icon="fa-search"/>-->
+                    <field colSpan="3" colOffset="9" type="decimal" readonly="true" name="$recette_som5_single"
+                           title="Total Emplois d'investissement"/>
                 </panel>
 
                 <panel-dashlet readonly="true" colSpan="12" name="$credit" title="Crédits non programmés"
@@ -93,14 +96,14 @@
     <action-view name="afficher_banque_single" title="Banque" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
         <view type="grid" name="gridRubriquesBudgetaireAfficher_single"/>
         <domain>self.anneCurrent =:anne and self.is_principal is true and self.depenceAndRecette is true and
-            self.typeRubriquePrincipal.id=13 and self.id_version =:id_version
+            self.typeRubriquePrincipal.id=:id_type_principale_banque and self.id_version =:id_version
         </domain>
     </action-view>
 
     <action-view name="afficher_produit_single" title="Produit" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
         <view type="grid" name="gridRubriquesBudgetaireAfficher_single"/>
         <domain>self.anneCurrent =:anne and self.is_principal is true and self.depenceAndRecette is true and
-            self.typeRubriquePrincipal.id=7 and self.id_version =:id_version
+            self.typeRubriquePrincipal.id=:id_type_principale_produitExploitation and self.id_version =:id_version
         </domain>
     </action-view>
 
@@ -108,28 +111,28 @@
     <action-view name="afficher_ressource_single" title="INVESTISEMENT" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
         <view type="grid" name="gridRubriquesBudgetaireAfficher_single"/>
         <domain>self.anneCurrent =:anne and self.is_principal is true and self.depenceAndRecette is true and
-            self.typeRubriquePrincipal.id=8 and self.id_version =:id_version
+            self.typeRubriquePrincipal.id=:id_type_principale_ressources and self.id_version =:id_version
         </domain>
     </action-view>
 
     <action-view name="afficher_charges_single" title="charges" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
         <view type="grid" name="gridRubriquesBudgetaireAfficher_single"/>
         <domain>self.anneCurrent =:anne and self.is_principal is true and self.depenceAndRecette is false and
-            self.typeRubriquePrincipal.id=9 and self.id_version =:id_version
+            self.typeRubriquePrincipal.id=:id_type_principale_chargesExterne and self.id_version =:id_version
         </domain>
     </action-view>
 
     <action-view name="afficher_emplois_single" title="emplois" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
         <view type="grid" name="gridRubriquesBudgetaireAfficher_single"/>
         <domain>self.anneCurrent =:anne and self.is_principal is true and self.depenceAndRecette is false and
-            self.typeRubriquePrincipal.id=10 and self.id_version =:id_version
+            self.typeRubriquePrincipal.id=:id_type_principale_emploi_inves and self.id_version =:id_version
         </domain>
     </action-view>
 
     <action-view name="afficher_credit_single" title="credit" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
         <view type="grid" name="gridRubriquesBudgetaireAfficher_single"/>
         <domain>self.anneCurrent =:anne and self.is_principal is true and self.depenceAndRecette is false and
-            self.typeRubriquePrincipal.id=29 and self.id_version =:id_version
+            self.typeRubriquePrincipal.id=:id_type_principale_creditNomProg and self.id_version =:id_version
         </domain>
     </action-view>
 
@@ -165,24 +168,6 @@
     <action-method name="printCodeBudgetPrincipal">
         <call class="com.axelor.apps.account.web.AccountController" method="tw_printCodeBudgetPrincipal"/>
     </action-method>
-
-    <action-method name="imprimerBudgetProdF">
-        <call class="com.axelor.apps.account.web.AccountController" method="tw_printCodeBudgetProdF"/>
-    </action-method>
-
-    <action-method name="imprimerBudgetFonc">
-        <call class="com.axelor.apps.account.web.AccountController" method="tw_printCodeBudgetFONC"/>
-    </action-method>
-
-    <action-method name="imprimerBudgetFoncDetail">
-        <call class="com.axelor.apps.account.web.AccountController" method="tw_printCodeBudgetFONCDetail"/>
-    </action-method>
-
-
-
-
-
-
 
 
     <action-method name="v_doc_budget_form_on_new">

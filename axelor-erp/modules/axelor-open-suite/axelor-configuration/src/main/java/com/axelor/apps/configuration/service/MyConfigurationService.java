@@ -5,37 +5,38 @@ import com.axelor.apps.configuration.db.*;
 import com.axelor.rpc.ActionRequest;
 import com.axelor.rpc.ActionResponse;
 import com.google.inject.persist.Transactional;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
 public interface MyConfigurationService extends AppBaseService {
-
-  public void save_new_Responsabilite(ActionRequest request, ActionResponse response);
-
-  public void update_Responsabilite(ActionRequest request, ActionResponse response);
-
-  public HistoriqueBudgetaire saveHistoriqueBudgetaire(HistoriqueBudgetaire hist);
-
-  public void updatehistoriqueBudgetaire2(Long id_hist, BigDecimal montant);
-
-  public BudgetParRubrique getBudgetParRubriqueById(Long id_budgparRub);
-
-  public BudgetParRubrique saveBudgetParRubrique(BudgetParRubrique budgetParRubrique);
-
-  public MUTUELLE getMutuelleById(Long id);
-
-  public String getRibRcar(int year);
-
-  void saveGestionsalire(GestionSalaire t);
-
-  GestionSalaire getGestionSalaireById(Long id);
-
-  List<Long> getListOfAllParents(Long id);
-
-  void modifierMontantParent(Long id, List<Long> ls);
-
-  void updateOldMontant(Long id);
+	
+	void save_new_Responsabilite(ActionRequest request, ActionResponse response);
+	
+	void update_Responsabilite(ActionRequest request, ActionResponse response);
+	
+	HistoriqueBudgetaire saveHistoriqueBudgetaire(HistoriqueBudgetaire hist);
+	
+	void updatehistoriqueBudgetaire2(Long id_hist, BigDecimal montant);
+	
+	BudgetParRubrique getBudgetParRubriqueById(Long id_budgparRub);
+	
+	BudgetParRubrique saveBudgetParRubrique(BudgetParRubrique budgetParRubrique);
+	
+	MUTUELLE getMutuelleById(Long id);
+	
+	String getRibRcar(int year);
+	
+	void saveGestionsalire(GestionSalaire t);
+	
+	GestionSalaire getGestionSalaireById(Long id);
+	
+	List<Long> getListOfAllParents(Long id);
+	
+	void modifierMontantParent(Long id, List<Long> ls);
+	
+	void updateOldMontant(Long id);
 
   RubriquesBudgetaire getRubriqueBudgetaire(Long id);
 
@@ -62,34 +63,36 @@ public interface MyConfigurationService extends AppBaseService {
   void reduireMontantBudget(Long id);
 
   void removeRubriqueBudgetaireById(Long id);
-
-  void reduireRubriqueBudgetaire(Long id);
-
-  BigDecimal getSomme(Long id_typeRubriquePricipal, int annee);
-
-  BigDecimal getSomme(Long id_typeRubriquePricipal, int annee, long id_version);
-
-  BigDecimal getSommeDetail(Long id_typeRubriquePricipal, int annee, Long version);
-
-  BigDecimal getSommeDetail_version(Long id_typeRubriquePricipal, int annee, Long version);
-
-  RubriquesBudgetaire getRubriqueBudgetaireByYearAndCode(String code, Integer annee);
-
-  List<RubriquesBudgetaire> getDetailRubriqueBudgetaireByStartWith(String s, Integer annee);
-
-  List<RubriquesBudgetaire> getDetailRubriqueBudgetaireByStartWith(
-      String startWith_code, Integer annee, Long version);
-
-  List<RubriquesBudgetaire> getAllIdTypeDetaillChargesExploitation(int annee, Long version);
-
-  Map<String, BigDecimal> getSommeDetailEquipe(Long id_typeRubriqueDetail, int annee, Long version);
-
-  VersionRubriqueBudgetaire createVersionRubriqueBudgetaire(int annee);
-
-  @Transactional
-  VersionRubriqueBudgetaire saveVersionRubriqueBudgetaire(VersionRubriqueBudgetaire v);
-
-  @Transactional
+	
+	void reduireRubriqueBudgetaire(Long id);
+	
+	BigDecimal getSomme(Long id_typeRubriquePricipal, int annee);
+	
+	BigDecimal getSomme(Long id_typeRubriquePricipal, int annee, long id_version);
+	
+	BigDecimal getSommeDetail(Long id_typeRubriquePricipal, int annee, Long version);
+	
+	BigDecimal getSommeDetail_version(Long id_typeRubriquePricipal, int annee, Long version);
+	
+	RubriquesBudgetaire getRubriqueBudgetaireByYearAndCode(String code, Long id_version);
+	
+	RubriqueConfiguration getCategorieBudgetaireByCode(String code, Long id_version);
+	
+	List<RubriquesBudgetaire> getDetailRubriqueBudgetaireByStartWith(String s, Integer annee);
+	
+	List<RubriquesBudgetaire> getDetailRubriqueBudgetaireByStartWith(
+			String startWith_code, Integer annee, Long version);
+	
+	List<RubriquesBudgetaire> getAllIdTypeDetaillChargesExploitation(int annee, Long version);
+	
+	Map<String, BigDecimal> getSommeDetailEquipe(Long id_typeRubriqueDetail, int annee, Long version);
+	
+	VersionRubriqueBudgetaire createVersionRubriqueBudgetaire(int annee);
+	
+	@Transactional
+	VersionRubriqueBudgetaire saveVersionRubriqueBudgetaire(VersionRubriqueBudgetaire v);
+	
+	@Transactional
   List<RubriquesBudgetaire> dupliqueAllRubriqueBudgetaire(long id, int annee, boolean fromMaquette)
       throws Exception;
 
