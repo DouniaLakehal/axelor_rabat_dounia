@@ -24,10 +24,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.transaction.Transactional;
+
 import java.lang.invoke.MethodHandles;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import javax.transaction.Transactional;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @Singleton
 public class DouniaController {
@@ -568,7 +573,7 @@ public class DouniaController {
     Object etat_ind = excuteRequette(mois, annee, req_ind);
     Object[] obj_ind = (Object[]) etat_ind;
 
-    /*BigDecimal x = (BigDecimal) obj_ind[0];
+        /*BigDecimal x = (BigDecimal) obj_ind[0];
 
     x =
             x.subtract(
@@ -576,7 +581,7 @@ public class DouniaController {
                             .add(x.multiply(new BigDecimal(0.03))));*/
     
     float somme_ind = ((BigDecimal) obj_ind[3]).floatValue();
-    BigDecimal somme_ind2 = ((BigDecimal) obj_ind[3]);
+        BigDecimal somme_ind2 = ((BigDecimal) obj_ind[3]);
     float somme_net =
             ((BigDecimal) obj_ind[0]).floatValue()
                     + ((BigDecimal) obj_ind[1]).floatValue()
@@ -786,8 +791,8 @@ public class DouniaController {
     String montant_salaf = ConvertNomreToLettres.getStringMontant(BigDecimal.valueOf(number_salaf));
     
     /////////////////////////////// ***************** CIH
-    // *****************///////////////////////////////
-    javax.persistence.Query req_cih =
+      // *****************///////////////////////////////
+      javax.persistence.Query req_cih =
             JPA.em()
                     .createNativeQuery(
                             "select sum(gc.remboursement) as salaf from hr_etat_salaire es\n"
@@ -864,7 +869,7 @@ public class DouniaController {
                     .addParam("MontantCAAD_OMFAM", montant_caad_omfam)
                     .addParam("MontantEQDOM", montant_eqdom)
                     .addParam("MontantSALAF", montant_salaf)
-                    .addParam("montant_cnss", montant_cnss)
+                    .addParam("montant_cnss", montant_cnss).addParam("logement", BigDecimal.valueOf(0))
                     .addParam("logement", BigDecimal.valueOf(0))
                     .addParam("RoundIR", round_ir)
                     .addParam("Lieu", "Emis à Béni Mellal, le")
@@ -917,7 +922,7 @@ public class DouniaController {
                     + "";
     BigDecimal etat_amo = RunSqlRequestForMe.runSqlRequest_Bigdecimal(req_amo);
     float somme_amo = etat_amo.floatValue();
-    float total_amo = etat_amo.floatValue() + etat_amo.floatValue();
+        float total_amo = etat_amo.floatValue() + etat_amo.floatValue();
     
     String montant_amo = ConvertNomreToLettres.getStringMontant(BigDecimal.valueOf(total_amo));
     

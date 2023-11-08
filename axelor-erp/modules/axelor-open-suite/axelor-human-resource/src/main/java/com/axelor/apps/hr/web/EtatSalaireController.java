@@ -34,7 +34,6 @@ import com.axelor.rpc.ActionRequest;
 import com.axelor.rpc.ActionResponse;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -86,7 +85,7 @@ public class EtatSalaireController {
       if (etatSalaire_ops == null) {
         etatSalaireServiceImpl.supprimerTousEtatSalaire(annee, mois);
         ls = etatSalaireServiceImpl.AddDataToEtatSalaire(annee, mois);
-  
+
       } else {
         ls = new ArrayList<>(etatSalaire_ops.getEtatSalaireList());
       }
@@ -99,7 +98,7 @@ public class EtatSalaireController {
     } else {
       ls = etatSalaireServiceImpl.AddDataToEtatSalaire(annee, mois);
     }
-  
+
     if (request.getContext().get("saveTransaction") != null
             && request.getContext().get("saveTransaction").toString().equals("oui")) {
       // check all transaction ok?

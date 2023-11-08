@@ -50,22 +50,18 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.ibm.icu.text.DateFormat;
 import com.ibm.icu.text.SimpleDateFormat;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import wslite.json.JSONException;
-import wslite.json.JSONObject;
-
 import java.lang.invoke.MethodHandles;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import wslite.json.JSONException;
+import wslite.json.JSONObject;
 
 @Singleton
 public class EmployeeController {
@@ -259,28 +255,31 @@ public class EmployeeController {
         new_corps;
     int old_children, new_children, old_children_21, new_children_21;
     old_echelle =
-            new_echelle =
-                    old_echelon = new_echelon = old_grade = new_grade = old_corps = new_corps = 0L;
+        new_echelle =
+            old_echelon = new_echelon = old_grade = new_grade = old_corps = new_corps = 0L;
     old_children = new_children = old_children_21 = new_children_21 = 0;
     String situation = " - ";
-    boolean hasresponsabilite = employee.getResponsabilite() != null;
+    boolean hasresponsabilite = employee.getResponsabilite() == null ? false : true;
     String d1, d2, situation_old, situation_new;
     d1 = d2 = situation_old = situation_new = "";
     boolean error_date = true;
-    boolean error_empty = request.getContext().get("dateDebut") == null
-            || request.getContext().get("dateFin") == null;
+    boolean error_empty = false;
+    if (request.getContext().get("dateDebut") == null
+        || request.getContext().get("dateFin") == null) {
+      error_empty = true;
+    }
     if (!error_empty) {
       String date1 = request.getContext().get("dateDebut").toString();
       String date2 = request.getContext().get("dateFin").toString();
       error_date =
-              Beans.get(EmployeeAdvanceService.class)
-                      .verifierdate(date1, employee.getDaterecrutement());
+          Beans.get(EmployeeAdvanceService.class)
+              .verifierdate(date1, employee.getDaterecrutement());
       new_children = Beans.get(EmployeeAdvanceService.class).getNombreEnfantAtDate(employee, date2);
       old_children = Beans.get(EmployeeAdvanceService.class).getNombreEnfantAtDate(employee, date1);
       new_children_21 =
-              Beans.get(EmployeeAdvanceService.class).getNombreEnfantAtDate_21(employee, date2);
+          Beans.get(EmployeeAdvanceService.class).getNombreEnfantAtDate_21(employee, date2);
       old_children_21 =
-              Beans.get(EmployeeAdvanceService.class).getNombreEnfantAtDate_21(employee, date1);
+          Beans.get(EmployeeAdvanceService.class).getNombreEnfantAtDate_21(employee, date1);
       if (employee.getMaritalStatus() != null
           && !employee.getMaritalStatus().equals("")
           && employee.getMarriageDate() != null) {
@@ -472,8 +471,8 @@ public class EmployeeController {
     String heure_depart = request.getContext().get("heure_depart").toString();
     String heure_arrivee = request.getContext().get("heure_arrivee").toString();
     DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-    Date date = formatter.parse(date_debut);
-    Date date2 = formatter.parse(date_fin);
+    Date date = (Date) formatter.parse(date_debut);
+    Date date2 = (Date) formatter.parse(date_fin);
     long difference_In_Time = date2.getTime() - date.getTime();
     long difference_In_Days = ((difference_In_Time / (1000 * 60 * 60 * 24)) % 365) + 1;
     String[] h1 = heure_depart.split(":");
@@ -836,7 +835,7 @@ public class EmployeeController {
     String test = request.getContext().get("id_Employee").toString();
     response.setValue("id_Employee", test);
     if (test == null || test.equals("")) return;
-    int[] nbr = appservice.getNombreDayRestByEmp(Long.valueOf(test), LocalDate.now());
+    int nbr[] = appservice.getNombreDayRestByEmp(Long.valueOf(test), LocalDate.now());
     response.setValue("nbrDayMax_conge", BigDecimal.valueOf(nbr[0]));
     response.setValue("nbrDayMax_autorisation", BigDecimal.valueOf(nbr[1]));
   }
@@ -1710,7 +1709,7 @@ public class EmployeeController {
             .getFileLink();
     response.setView(ActionView.define("Attestation de salaire").add("html", fileLink).map());
   }
-  
+
   public void imprimerAttestationDeTravail(ActionRequest request, ActionResponse response)
           throws AxelorException {
     Long id = (Long) request.getContext().get("id");
@@ -1722,4 +1721,5 @@ public class EmployeeController {
                     .getFileLink();
     response.setView(ActionView.define("Attestation de salaire").add("html", fileLink).map());
   }
+
 }
