@@ -1,21 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <object-views xmlns="http://axelor.com/xml/ns/object-views"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://axelor.com/xml/ns/object-views http://axelor.com/xml/ns/object-views/object-views_5.3.xsd">
 
-    <grid name="rubriqueBudgetaireVersion_grid" title="Version Rubrique Budgetaire" model="com.axelor.apps.configuration.db.VersionRB">
-        <field name="nomVersion" title="Version" width="120" />
-        <field name="is_versionFinale" title="Version Final" width="120" />
+    <grid name="rubriqueBudgetaireVersion_grid" title="Version Rubrique Budgetaire"
+          model="com.axelor.apps.configuration.db.VersionRB">
+        <field name="nomVersion" title="Version" width="120"/>
+        <field name="is_versionFinale" title="Version Final" width="120"/>
         <field name="is_generate" hidden="true"/>
         <field name="is_saved" hidden="true"/>
         <field name="has_version_final" hidden="true"/>
-        <button name="btn_generate_clock" onClick="start_generate_All_rubrique" icon="fa-plus" showIf="(is_saved==true) &amp;&amp; (is_generate==false || is_generate==null)" hideIf="is_generate" title="Generer les Rubriques"/>
-        <button name="btn_link_rubrique" onClick="get_all_rubrique_budgetaire" icon="fa-link" showIf="(is_saved==true) &amp;&amp; (is_generate==true)" title="Afficher les rubriques" />
-        <button name="btn_edit_rubrique" onClick="get_edit_rubrique_budgetaire" icon="fa-pencil" showIf="(is_saved==true) &amp;&amp; (is_generate==true) " title="Editer les rubriques" />
-        <button name="btn_edit_rubrique" onClick="get_edit_rubrique_budgetaire" icon="fa-eye"
+        <button name="btn_generate_clock" onClick="start_generate_All_rubrique" icon="fa-plus"
+                showIf="(is_saved==true) &amp;&amp; (is_generate==false || is_generate==null)" hideIf="is_generate"
+                title="Generer les Rubriques"/>
+        <button name="btn_link_rubrique" onClick="get_all_rubrique_budgetaire" icon="fa-link"
+                showIf="(is_saved==true) &amp;&amp; (is_generate==true)" title="Afficher les rubriques"/>
+        <button name="btn_edit_rubrique" onClick="get_edit_rubrique_budgetaire" icon="fa-pencil"
+                showIf="(is_saved==true) &amp;&amp; (is_generate==true) &amp;&amp; (has_version_final==false || has_version_final==null )"
+                title="Editer les rubriques"/>
+        <button name="btn_edit_rubrique" onClick="get_show_rubrique_budgetaire" icon="fa-eye"
                 showIf="(is_saved==true) &amp;&amp; (is_generate==true) &amp;&amp; !(has_version_final==false || has_version_final==null ) "
                 title="Afficher les rubriques"/>
-        <button name="btn_final_version" showIf="(is_saved==true) &amp;&amp; (is_generate==true) &amp;&amp; (has_version_final==false || has_version_final==null )" onClick="versionFinale" icon="fa-lock" title="Version Finale" />
+        <button name="btn_final_version"
+                showIf="(is_saved==true) &amp;&amp; (is_generate==true) &amp;&amp; (has_version_final==false || has_version_final==null )"
+                onClick="versionFinale" icon="fa-lock" title="Version Finale"/>
     </grid>
 
     <form name="rubriqueBudgetaireVersion_form" title="Version Rubrique Budgetaire"

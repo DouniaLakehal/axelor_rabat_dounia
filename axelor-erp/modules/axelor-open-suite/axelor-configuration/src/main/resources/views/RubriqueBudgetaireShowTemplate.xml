@@ -12,45 +12,94 @@
 			<panel name="investissement" hidden="true" colSpan="12">
 				<field name="reportCredit" colSpan="3"/>
 				<field name="nouvCredit" colSpan="3"/>
-				<field hidden="true" name="creditEngagement" colSpan="3"/>
-			</panel>
+                <field hidden="true" name="creditEngagement" colSpan="3"/>
+            </panel>
 
-			<field onChange="changerDomaineType" name="depenceAndRecette" colSpan="3" title="Type de la Rubrique" widget="boolean-radio" x-true-text="Recette" x-false-text="Dépense" />
-			<field name="montant_budget" colSpan="3"/>
-			<field canView="false" canNew="false" canRemove="false" canEdit="false" grid-view="select_rubrique" x-bind=""
-				   name="budgetParent" title="Rubrique parent" target-name="titre_budget" onSelect="changerDomaine"
-				   domain="self.id_version=:id_version and self.anneCurrent=:anneCurrent and self.montant_budget=0 "/>
-			<field name="is_principal" onChange="changerDomaineType" title="Afficher la rubrique dans le tableau principal"/>
-			<field name="is_detaille" onChange="changerDomaineType" title="Afficher la rubrique dans le tableau détaillé"/>
-			<panel colSpan="12">
-				<field title="Categorie de la rubrique principal" colSpan="6" showIf="is_principal" name="typeRubriquePrincipal" domain="self.depenceAndRecette=:depenceAndRecette and self.principalAndDetailler is true"/>
-				<field title="Categorie de la rubrique détaillée" colSpan="6" showIf="is_detaille" name="typeRubriqueDetaille" domain="self.depenceAndRecette=:depenceAndRecette and self.principalAndDetailler is false"/>
-			</panel>
-		</panel>
-		<panel hidden="true" colSpan="12">
-			<field name="id_version"/>
-		</panel>
-	</form>
+            <field onChange="changerDomaineType" name="depenceAndRecette" colSpan="3" title="Type de la Rubrique"
+                   widget="boolean-radio" x-true-text="Recette" x-false-text="Dépense"/>
+            <field name="montant_budget" colSpan="3"/>
+            <field canView="false" canNew="false" canRemove="false" canEdit="false" grid-view="select_rubrique"
+                   x-bind=""
+                   name="budgetParent" title="Rubrique parent" target-name="titre_budget" onSelect="changerDomaine"
+                   domain="self.id_version=:id_version and self.anneCurrent=:anneCurrent and self.montant_budget=0 "/>
+            <field name="is_principal" onChange="changerDomaineType"
+                   title="Afficher la rubrique dans le tableau principal"/>
+            <field name="is_detaille" onChange="changerDomaineType"
+                   title="Afficher la rubrique dans le tableau détaillé"/>
+            <panel colSpan="12">
+                <field title="Categorie de la rubrique principal" colSpan="6" showIf="is_principal"
+                       name="typeRubriquePrincipal"
+                       domain="self.depenceAndRecette=:depenceAndRecette and self.principalAndDetailler is true"/>
+                <field title="Categorie de la rubrique détaillée" colSpan="6" showIf="is_detaille"
+                       name="typeRubriqueDetaille"
+                       domain="self.depenceAndRecette=:depenceAndRecette and self.principalAndDetailler is false"/>
+            </panel>
+        </panel>
+        <panel hidden="true" colSpan="12">
+            <field name="id_version"/>
+        </panel>
+    </form>
 
-	<grid title="Rubrique Budgetaire" name="select_rubrique" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
-		<field name="code_budget" title="Code budgetaire"/>
-		<field name="titre_budget" title="Rubrique budgetaire"/>
-		<field name="anneCurrent" title="Annee"/>
-		<field name="id_version" title="Version" hidden="true"/>
-	</grid>
+    <form canDelete="false" canCopy="false" canAttach="false" canArchive="false"
+          canNew="false" canEdit="false" readonlyIf="id" onLoad="auto_saisie_short_code" title="Budget"
+          name="custom_budget_info_read_only" model="com.axelor.apps.configuration.db.RubriquesBudgetaire"
+          width="large">
+        <panel showTitle="false">
+            <field name="anneCurrent" title="Année" colSpan="2"/>
+            <field name="code_budget" colSpan="2" onChange="auto_saisie_short_code"/>
+            <field name="titre_budget" colSpan="8"/>
+            <panel name="investissement" hidden="true" colSpan="12">
+                <field name="reportCredit" colSpan="3"/>
+                <field name="nouvCredit" colSpan="3"/>
+                <field hidden="true" name="creditEngagement" colSpan="3"/>
+            </panel>
 
-	<action-attrs name="changerDomaineType">
-		<attribute if="!is_principal" for="typeRubriquePrincipal" name="value" expr="eval:null"/>
-		<attribute if="!is_detaille" for="typeRubriqueDetaille" name="value" expr="eval:null"/>
-		<!--<attribute for="typeRubrique" name="domain" expr="eval: &quot; self.depenceAndRecette=:depenceAndRecette and self.detailler=true &quot;" if="!is_principal &amp;&amp; is_detaille"/>
-		<attribute for="typeRubrique" name="domain" expr="eval: &quot; self.depenceAndRecette=:depenceAndRecette and self.principal=true &quot;" if="is_principal"/>-->
-	</action-attrs>
+            <field onChange="changerDomaineType" name="depenceAndRecette" colSpan="3" title="Type de la Rubrique"
+                   widget="boolean-radio" x-true-text="Recette" x-false-text="Dépense"/>
+            <field name="montant_budget" colSpan="3"/>
+            <field canView="false" canNew="false" canRemove="false" canEdit="false" grid-view="select_rubrique"
+                   x-bind=""
+                   name="budgetParent" title="Rubrique parent" target-name="titre_budget" onSelect="changerDomaine"
+                   domain="self.id_version=:id_version and self.anneCurrent=:anneCurrent and self.montant_budget=0 "/>
+            <field name="is_principal" onChange="changerDomaineType"
+                   title="Afficher la rubrique dans le tableau principal"/>
+            <field name="is_detaille" onChange="changerDomaineType"
+                   title="Afficher la rubrique dans le tableau détaillé"/>
+            <panel colSpan="12">
+                <field title="Categorie de la rubrique principal" colSpan="6" showIf="is_principal"
+                       name="typeRubriquePrincipal"
+                       domain="self.depenceAndRecette=:depenceAndRecette and self.principalAndDetailler is true"/>
+                <field title="Categorie de la rubrique détaillée" colSpan="6" showIf="is_detaille"
+                       name="typeRubriqueDetaille"
+                       domain="self.depenceAndRecette=:depenceAndRecette and self.principalAndDetailler is false"/>
+            </panel>
+        </panel>
+        <panel hidden="true" colSpan="12">
+            <field name="id_version"/>
+        </panel>
+    </form>
 
-	<action-attrs name="auto_saisie_short_code">
-		<attribute if="code_budget!=null" for="budgetParent" name="domain"
-				   expr="eval: &quot; self.id_version=:id_version AND self.anneCurrent=:anneCurrent and self.montant_budget=0 &quot; "/>
-		<attribute if="code_budget!=null" for="investissement" name="hidden"
-				   expr="eval:!(code_budget.startsWith('2'))"/>
+
+    <grid title="Rubrique Budgetaire" name="select_rubrique"
+          model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+        <field name="code_budget" title="Code budgetaire"/>
+        <field name="titre_budget" title="Rubrique budgetaire"/>
+        <field name="anneCurrent" title="Annee"/>
+        <field name="id_version" title="Version" hidden="true"/>
+    </grid>
+
+    <action-attrs name="changerDomaineType">
+        <attribute if="!is_principal" for="typeRubriquePrincipal" name="value" expr="eval:null"/>
+        <attribute if="!is_detaille" for="typeRubriqueDetaille" name="value" expr="eval:null"/>
+        <!--<attribute for="typeRubrique" name="domain" expr="eval: &quot; self.depenceAndRecette=:depenceAndRecette and self.detailler=true &quot;" if="!is_principal &amp;&amp; is_detaille"/>
+        <attribute for="typeRubrique" name="domain" expr="eval: &quot; self.depenceAndRecette=:depenceAndRecette and self.principal=true &quot;" if="is_principal"/>-->
+    </action-attrs>
+
+    <action-attrs name="auto_saisie_short_code">
+        <attribute if="code_budget!=null" for="budgetParent" name="domain"
+                   expr="eval: &quot; self.id_version=:id_version AND self.anneCurrent=:anneCurrent and self.montant_budget=0 &quot; "/>
+        <attribute if="code_budget!=null" for="investissement" name="hidden"
+                   expr="eval:!(code_budget.startsWith('2'))"/>
 	</action-attrs>
 
 

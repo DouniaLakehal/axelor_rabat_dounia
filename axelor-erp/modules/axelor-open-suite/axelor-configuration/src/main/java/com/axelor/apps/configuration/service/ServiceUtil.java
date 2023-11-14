@@ -7,18 +7,22 @@ import com.axelor.apps.configuration.db.repo.RubriquesBudgetaireRepository;
 import com.axelor.apps.configuration.db.repo.VersionRubriqueBudgetaireRepository;
 import com.axelor.inject.Beans;
 import com.google.inject.Inject;
+import org.apache.commons.collections.CollectionUtils;
+
 import java.math.BigDecimal;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.Collectors;
-import javax.mail.*;
-import org.apache.commons.collections.CollectionUtils;
 
 public class ServiceUtil {
-  @Inject IRRepository irRepository;
-  @Inject RCARRepository rcarRepository;
-
+  public static String[] MOIS_ARRABE = new String[]{"يناير", "فبراير", "مارس", "أبريل", "ماي", "يونيو", "يوليوز", "غشت", "شتنبر", "أكتوبر", "نونبر", "دجنبر"};
+  public static String[] MOIS_FRANCAIS = new String[]{"Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"};
+  @Inject
+  IRRepository irRepository;
+  @Inject
+  RCARRepository rcarRepository;
+  
   public static int getnombreJourWork(LocalDate d1, LocalDate d2) {
     int res = 0;
     LocalDate tmp = d1;

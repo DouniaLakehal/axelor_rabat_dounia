@@ -34,13 +34,13 @@ import com.axelor.rpc.ActionResponse;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.inject.persist.Transactional;
+
 import java.math.BigDecimal;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
-import org.checkerframework.checker.units.qual.s;
 
 @Singleton
 public class AppPurchaseServiceImpl extends AppBaseServiceImpl implements AppPurchaseService {
@@ -823,6 +823,7 @@ public class AppPurchaseServiceImpl extends AppBaseServiceImpl implements AppPur
         hist_budg.setAnnee(LocalDate.now().getYear());
         hist_budg.setMois(LocalDate.now().getMonthValue());
         hist_budg.setMontant(x);
+        hist_budg.setTypeOperation("debit");
         hist_budg.setMontantRubrique(xx);
         if (checkifSelectOpHasAnnexe(tmp))
           hist_budg.setAnnexe(

@@ -373,175 +373,60 @@ public class AccountController {
         || Integer.valueOf(request.getContext().get("annee").toString()) == 0) {
       String ul = "<ul>";
       ul +=
-          Integer.valueOf(request.getContext().get("mois").toString()) == 0 ? "<li>Mois</li>" : "";
+              Integer.valueOf(request.getContext().get("mois").toString()) == 0 ? "<li>Mois</li>" : "";
       ul +=
-          Integer.valueOf(request.getContext().get("annee").toString()) == 0
-              ? "<li>Année</li>"
-              : "";
+              Integer.valueOf(request.getContext().get("annee").toString()) == 0
+                      ? "<li>Année</li>"
+                      : "";
       ul += "</ul>";
       response.setError("<p>les champs suivants sont vides : </p>" + ul);
       return;
     }
-    int mois = Integer.valueOf(request.getContext().get("mois").toString());
-    int annee = Integer.valueOf(request.getContext().get("annee").toString());
-    String ls1 = "4,5,6,7,10,11,14,15,16,17,18,19,20,21,22,23,24";
-    String ls2 =
-        "27,28,29,31,34,35,36,38,41,42,43,44,46,48,49,50,53,54,"
-            + "55,57,58,59,60,62,63,64,67,68,69,70,71,72,75,76,77,79,80,82,83,84,86,88,89,90,91,92,"
-            + "96,97,98,99,100,101,105,107,108,109,111,112,113,115,116,117,118,119,120,121,122,123,124";
-    String ls3 = "127,129,130";
-    String ls4 =
-        "134,135,136,137,139,141,142,143,144,145,146,147,148,152,153,155,156,159,160,161,162,164,165";
-    String ls5 = "167,168";
-    String ls6 = "172,173";
-    String ls7 = "177,178,179,180,181";
-    String ls8 = "183,184,185,186,187,188,189,190,191,192,193";
-    String ls_terr = "200,201,202,203";
-    String ls_contr = "207,208,209,211,215,216";
-    String ls_trans = "218,219,220";
-    String ls_mobiler = "222,223,224,226,227,228,230,231";
-    String ls_particip = "235,236,237,238,239,240,241,242,243";
-    String ls_invest = "245,246";
-    String ls_arbitage = "248,249";
-    String ls_parc = "252,253,254,255,256,257";
-    String ls_foire = "259,260,261,262";
-    String ls_zi = "264,265";
-    String ls_ecole = "272,273,274,275,276,277";
-    String ls_center_miss = "279,280,281,282,283";
-    String ls_center_chkaf = "285,286,287,288";
-    String ls_planDev = "291,292,293,294,295,296,298";
-    String data_janv = appAccountService.getSituationMentuelleData(mois, annee, ls1);
-    String data_2 = appAccountService.getSituationMentuelleData(mois, annee, ls2);
-    String data_3 = appAccountService.getSituationMentuelleData(mois, annee, ls3);
-    String data_4 = appAccountService.getSituationMentuelleData(mois, annee, ls4);
-    String data_5 = appAccountService.getSituationMentuelleData(mois, annee, ls5);
-    String data_6 = appAccountService.getSituationMentuelleData(mois, annee, ls6);
-    String data_7 = appAccountService.getSituationMentuelleData(mois, annee, ls7);
-    String data_8 = appAccountService.getSituationMentuelleData(mois, annee, ls8);
-    List<String> data_tab_1 =
-        Arrays.asList(data_janv, data_2, data_3, data_4, data_5, data_6, data_7, data_8);
-    BigDecimal data_total = appAccountService.getTotalFromAll(data_tab_1);
-    String data_9 = appAccountService.getSituationMentuelleData(mois, annee, ls_terr);
-    String data_10 = appAccountService.getSituationMentuelleData(mois, annee, ls_contr);
-    String data_11 = appAccountService.getSituationMentuelleData(mois, annee, ls_trans);
-    String data_12 = appAccountService.getSituationMentuelleData(mois, annee, ls_mobiler);
-    String data_13 = appAccountService.getSituationMentuelleData(mois, annee, ls_particip);
-    String data_14 = appAccountService.getSituationMentuelleData(mois, annee, ls_invest);
-    String data_15 = appAccountService.getSituationMentuelleData(mois, annee, ls_arbitage);
-    String data_16 = appAccountService.getSituationMentuelleData(mois, annee, ls_parc);
-    String data_17 = appAccountService.getSituationMentuelleData(mois, annee, ls_foire);
-    String data_18 = appAccountService.getSituationMentuelleData(mois, annee, ls_zi);
-    String data_19 = appAccountService.getSituationMentuelleData(mois, annee, "267");
-    String data_20 = appAccountService.getSituationMentuelleData(mois, annee, ls_ecole);
-    String data_21 = appAccountService.getSituationMentuelleData(mois, annee, ls_center_miss);
-    String data_22 = appAccountService.getSituationMentuelleData(mois, annee, ls_center_chkaf);
-    String data_23 = appAccountService.getSituationMentuelleData(mois, annee, ls_planDev);
-    List<String> data_tab_2 =
-        Arrays.asList(
-            data_9, data_10, data_11, data_12, data_13, data_14, data_15, data_16, data_17, data_18,
-            data_19, data_20, data_21, data_22, data_23);
-    BigDecimal data_total2 = appAccountService.getTotalFromAll(data_tab_2);
-    String[] mois_tab = {
-      "Janvier",
-      "Février",
-      "Mars",
-      "Avril",
-      "Mai",
-      "Juin",
-      "Juillet",
-      "Août",
-      "Septembre",
-      "Octobre",
-      "Novembre",
-      "Décembre"
-    };
+  
+    int mois = (int) request.getContext().get("mois");
+    int annee = (int) request.getContext().get("annee");
+  
+    Long id_version = appAccountService.getId_version_valideByYear(annee, response);
+    if (id_version == 0L)
+      return;
+  
     String fileLink =
-        ReportFactory.createReport(IReport.DepenceMensuel, "Situation_Mensuel")
-            .addParam("Locale", ReportSettings.getPrintingLocale(null))
-            .addParam("data_janv", data_janv)
-            .addParam("data_2", data_2)
-            .addParam("data_3", data_3)
-            .addParam("data_4", data_4)
-            .addParam("data_5", data_5)
-            .addParam("data_6", data_6)
-            .addParam("data_7", data_7)
-            .addParam("data_8", data_8)
-            .addParam("my_total", data_total)
-            .addParam("current_mois", mois_tab[mois - 1])
-            .addParam("data_9", data_9)
-            .addParam("data_10", data_10)
-            .addParam("data_11", data_11)
-            .addParam("data_12", data_12)
-            .addParam("data_13", data_13)
-            .addParam("data_14", data_14)
-            .addParam("data_15", data_15)
-            .addParam("data_16", data_16)
-            .addParam("data_17", data_17)
-            .addParam("data_18", data_18)
-            .addParam("data_19", data_19)
-            .addParam("data_20", data_20)
-            .addParam("data_21", data_21)
-            .addParam("data_22", data_22)
-            .addParam("data_23", data_23)
-            .addParam("my_total_end", data_total2)
-            .generate()
-            .getFileLink();
+            ReportFactory.createReport(IReport.DepenceMensuel, "Situation_Mensuel")
+                    .addParam("Locale", ReportSettings.getPrintingLocale(null))
+                    .addParam("current_mois", ServiceUtil.MOIS_FRANCAIS[mois - 1])
+                    .addParam("id_version", id_version)
+                    .addParam("mois", mois)
+                    .addParam("year", annee)
+                    .generate()
+                    .getFileLink();
     response.setView(
         ActionView.define("Le fichier d'arrete des comptes").add("html", fileLink).map());
   }
 
   public void getsituation_anuelle(ActionRequest request, ActionResponse response)
       throws AxelorException {
-    if (Integer.valueOf(request.getContext().get("annee").toString()) == 0) {
+    Integer annee = (Integer) request.getContext().get("annee");
+    if (annee == 0) {
       String ul = "<ul>";
-      ul +=
-          Integer.valueOf(request.getContext().get("annee").toString()) == 0
-              ? "<li>Année</li>"
-              : "";
+      ul += "<li>Année</li>";
       ul += "</ul>";
       response.setError("<p>les champs suivants sont vides : </p>" + ul);
       return;
     }
-    int annee = Integer.valueOf(request.getContext().get("annee").toString());
+  
     if (annee > LocalDate.now().getYear()) {
       response.setFlash("Merci de saisir une année valide");
       return;
     }
-    List<String> ls_ids_1 = new ArrayList<>();
-    ls_ids_1.add("4,5,6,7,10,11,14,15,16,17,18,19,20,21,22,23,24");
-    ls_ids_1.add(
-        "27,28,29,31,34,35,36,38,41,42,43,44,46,49,50,"
-            + "53,54,55,57,58,59,60,62,63,64,67,68,69,70,71,72,75,76,"
-            + "77,79,80,82,83,84,86,88,89,90,91,92,96,97,98,99,100,101,"
-            + "105,107,108,109,111,112,113,115,116,117,118,119,120,121,122,123,124");
-    ls_ids_1.add("127,129,130");
-    ls_ids_1.add(
-        "134,135,136,137,139,141,142,143,144,145,146,147,148,152,153,155,156,159,160,161,162,164,165");
-    ls_ids_1.add("167,168");
-    ls_ids_1.add("172,173");
-    ls_ids_1.add("177,178,179,180,181");
-    ls_ids_1.add("183,184,185,186,187,188,189,190,191,192,193");
-    List<String> ls_ids_2 = new ArrayList<>();
-    ls_ids_2.add("200,201,202,203");
-    ls_ids_2.add("207,208,209,211,215,216");
-    ls_ids_2.add("218,219,220");
-    ls_ids_2.add("222,223,224,226,227,228,230,231");
-    ls_ids_2.add("235,236,237,238,239,240,241,242,243");
-    ls_ids_2.add("245,246");
-    ls_ids_2.add("248,249");
-    ls_ids_2.add("252,253,254,255,256,257");
-    ls_ids_2.add("259,260,261,262");
-    ls_ids_2.add("264,265");
-    ls_ids_2.add("267");
-    ls_ids_2.add("272,273,274,275,276,277");
-    ls_ids_2.add("279,280,281,282,283");
-    ls_ids_2.add("285,286,287,288");
-    ls_ids_2.add("291,292,293,294,295,296,298");
+    Long id_version = appAccountService.getId_version_valideByYear(annee, response);
+    if (id_version == 0L)
+      return;
+  
     ReportSettings file = ReportFactory.createReport(IReport.DepenceAnnuelle, "Situation_Anuelle");
     file.addParam("Locale", ReportSettings.getPrintingLocale(null));
     file.addParam("year", annee);
-    appAccountService.appendDatatoFile(annee, ls_ids_1, file);
-    appAccountService.appendDataInvestoFile(annee, ls_ids_2, file);
+    file.addParam("id_version", id_version);
+  
     String fileLink = file.generate().getFileLink();
     response.setView(ActionView.define("Situation annuelle").add("html", fileLink).map());
   }
@@ -909,16 +794,18 @@ public class AccountController {
             .context("_showRecord", id);
     response.setView(actionView.map());
   }
-
+  
   public void tw_reduireBudget(ActionRequest request, ActionResponse response) {
     Long id = (Long) request.getContext().get("id");
     String nouv_etat = (String) request.getContext().get("etat");
+    
     ModificationBudgetList m = Beans.get(ModificationBudgetListRepository.class).find(id);
     if ((m.getEtat() == null || m.getEtat().equals("2")) && nouv_etat.equals("1")) {
       for (Virements v : m.getVirements()) {
         appAccountService.modifierBudgetCascade(v);
-        RubriquesBudgetaire retrait =
-            Beans.get(RubriquesBudgetaireRepository.class).find(v.getBudget_retrait().getId());
+        /*RubriquesBudgetaire retrait = Beans.get(RubriquesBudgetaireRepository.class)
+        .find(v.getBudget_retrait().getId());*/
+  
       }
     }
   }
@@ -1228,19 +1115,159 @@ public class AccountController {
         temp = appAccountService.saveTresairerie(temp);
       }
     }
-
+  
     String fileLink =
-        ReportFactory.createReport(IReport.PRINT_TRESORERIE, "Recette")
-            .addParam("year", year)
-            .addParam("mois", month)
-            .generate()
-            .getFileLink();
+            ReportFactory.createReport(IReport.PRINT_TRESORERIE, "Recette")
+                    .addParam("year", year)
+                    .addParam("mois", month)
+                    .generate()
+                    .getFileLink();
     response.setView(ActionView.define("Recette").add("html", fileLink).map());
   }
-
+  
   public void tw_delete_old_version(ActionRequest request, ActionResponse response)
-      throws Exception {
+          throws Exception {
     Integer year = (Integer) request.getContext().get("year");
     appAccountService.updateAllTresaurerie(year);
+  }
+  
+  public void tw_new_test(ActionRequest request, ActionResponse response) {
+    Context ctx = request.getContext().getParent();
+    int annee = (int) ctx.get("annee");
+    VersionRubriqueBudgetaire v =
+            Beans.get(VersionRubriqueBudgetaireRepository.class)
+                    .all()
+                    .filter("self.annee=:annee and has_version_final is true")
+                    .bind("annee", annee)
+                    .fetchOne();
+    if (v != null) {
+      response.setAttr("budget_retrait", "readonly", false);
+      response.setAttr("budget_ajout", "readonly", false);
+      Beans.get(MyConfigurationServiceImpl.class).updateAllTotalRubriqueBudgetaire(annee);
+      Long id =
+              v.getVersionRubriques().stream()
+                      .filter(VersionRB::getIs_versionFinale)
+                      .map(VersionRB::getId)
+                      .collect(Collectors.toList())
+                      .get(0);
+      response.setAttr(
+              "budget_retrait",
+              "domain",
+              "(self.code_budget like '2%' or self.code_budget like '6%') and self.montant_budget > 0 and self.id_version="
+                      + id);
+      response.setAttr("budget_ajout", "domain", "self.id_version=" + id);
+    } else {
+      response.setAttr("budget_retrait", "readonly", true);
+      response.setAttr("budget_ajout", "readonly", true);
+      response.setFlash("Aucune Rubrique disponible dans cette date");
+      return;
+    }
+  }
+  
+  public void tw_getListBudgetValidePourVirement(ActionRequest request, ActionResponse response) {
+    Context p = request.getContext().getParent();
+    Context parent = p.getParent();
+    int annee = (int) parent.get("annee");
+    VersionRubriqueBudgetaire v =
+            Beans.get(VersionRubriqueBudgetaireRepository.class)
+                    .all()
+                    .filter("self.annee=:annee and self.has_version_final is true")
+                    .bind("annee", annee)
+                    .fetchOne();
+    if (v != null) {
+      Long id_version =
+              v.getVersionRubriques().stream()
+                      .filter(VersionRB::getIs_versionFinale)
+                      .map(VersionRB::getId)
+                      .findFirst()
+                      .orElse(null);
+      List<RubriquesBudgetaire> ls =
+              Beans.get(RubriquesBudgetaireRepository.class)
+                      .all()
+                      .filter("self.id_version=:version and self.code_budget not like '7%' ")
+                      .bind("version", id_version)
+                      .fetch();
+      response.setAttr(
+              "budget",
+              "domain",
+              "self.id in ("
+                      + ServiceUtil.getIdListString(
+                      ls.stream()
+                              .filter(r -> r.getMontant_budget().compareTo(BigDecimal.ZERO) > 0)
+                              .map(RubriquesBudgetaire::getId)
+                              .collect(Collectors.toList()))
+                      + ")");
+    } else {
+      response.setAttr("budget", "domain", "self.id = 0");
+    }
+  }
+  
+  public void tw_getListBudgetValidePourVirement2(ActionRequest request, ActionResponse response) {
+    Context p = request.getContext().getParent();
+    Context parent = p.getParent();
+    int annee = (int) parent.get("annee");
+    VersionRubriqueBudgetaire v =
+            Beans.get(VersionRubriqueBudgetaireRepository.class)
+                    .all()
+                    .filter("self.annee=:annee and self.has_version_final is true")
+                    .bind("annee", annee)
+                    .fetchOne();
+    if (v != null) {
+      Long id_version =
+              v.getVersionRubriques().stream()
+                      .filter(VersionRB::getIs_versionFinale)
+                      .map(VersionRB::getId)
+                      .findFirst()
+                      .orElse(null);
+      List<RubriquesBudgetaire> ls =
+              Beans.get(RubriquesBudgetaireRepository.class)
+                      .all()
+                      .filter("self.id_version=:version and self.code_budget not like '7%' ")
+                      .bind("version", id_version)
+                      .fetch();
+      response.setAttr(
+              "budget",
+              "domain",
+              "self.id in ("
+                      + ServiceUtil.getIdListString(
+                      ls.stream().map(RubriquesBudgetaire::getId).collect(Collectors.toList()))
+                      + ")");
+    } else {
+      response.setAttr("budget", "domain", "self.id = 0");
+    }
+  }
+  
+  public void tw_load_name_montant_code(ActionRequest request, ActionResponse response) {
+    RubriquesBudgetaire r = (RubriquesBudgetaire) request.getContext().get("budget");
+    response.setValue("code", r != null ? r.getCode_budget() : "");
+    response.setValue("titre", r != null ? r.getTitre_budget() : "");
+    response.setValue("montant_start", r != null ? r.getMontant_budget() : "");
+    
+  }
+  
+  public void modifierMontantTotalVirement(ActionRequest request, ActionResponse response) {
+    BigDecimal total = BigDecimal.ZERO;
+    if (request.getContext().get("budget_retrait") != null) {
+      List<VirementsDetail> ls1 =
+              (List<VirementsDetail>) request.getContext().get("budget_retrait");
+      total =
+              total.add(ls1.stream().map(v -> v.getMontant()).reduce(BigDecimal.ZERO, BigDecimal::add));
+    }
+    response.setValue("totalMontant", total);
+  }
+  
+  public void tw_genererNumerosVirement(ActionRequest request, ActionResponse response) {
+    Long id = (Long) request.getContext().get("id");
+    if (request.getContext().get("code") == null) {
+      ModificationBudgetList m = Beans.get(ModificationBudgetListRepository.class).find(id);
+      Integer x =
+              Beans.get(ModificationBudgetListRepository.class)
+                      .all()
+                      .filter("self.annee =:annee")
+                      .bind("annee", m.getAnnee())
+                      .fetch()
+                      .size();
+      response.setValue("code", x);
+    }
   }
 }

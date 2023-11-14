@@ -112,33 +112,43 @@
 	</action-view>
 
 
-	<menuitem name="budget_configuration" parent="menu-configuration-root" title="Gestion Budgétaires" order="5" icon="fa-cog" tag-style="default" />
+	<menuitem name="budget_configuration" parent="menu-configuration-root" title="Gestion Budgétaires" order="5"
+			  icon="fa-cog" tag-style="default"/>
 
-	<menuitem name="rub_budgetaire_configuration" parent="budget_configuration" title="Rubrique Budgetaire" action="rub_budgetaire_config" />
-	<action-view name="rub_budgetaire_config" title="Rubrique Budgetaire" model="com.axelor.apps.configuration.db.RubriqueBudgetaireGenerale" >
-		<view type="grid" name="rubriqueBudgetaire-grid" />
-		<view type="form" name="rubriqueBudgetaire-form" />
+	<menuitem hidden="true" name="rub_budgetaire_configuration" parent="budget_configuration"
+			  title="Rubrique Budgetaire" action="rub_budgetaire_config"/>
+	<action-view name="rub_budgetaire_config" title="Rubrique Budgetaire"
+				 model="com.axelor.apps.configuration.db.RubriqueBudgetaireGenerale">
+		<view type="grid" name="rubriqueBudgetaire-grid"/>
+		<view type="form" name="rubriqueBudgetaire-form"/>
 	</action-view>
 
-	<menuitem name="budget_par_rub_configuration" parent="budget_configuration" title="Budget par rubrique" action="budget_par_rub_config" />
-	<action-view name="budget_par_rub_config" title="Budget Par Rubrique" model="com.axelor.apps.configuration.db.BudgetParRubrique" >
-		<view type="grid" name="budgetParRubrique-grid" />
-		<view type="form" name="budgetParRubrique-form" />
+	<menuitem hidden="true" name="budget_par_rub_configuration" parent="budget_configuration"
+			  title="Budget par rubrique" action="budget_par_rub_config"/>
+	<action-view name="budget_par_rub_config" title="Budget Par Rubrique"
+				 model="com.axelor.apps.configuration.db.BudgetParRubrique">
+		<view type="grid" name="budgetParRubrique-grid"/>
+		<view type="form" name="budgetParRubrique-form"/>
 	</action-view>
 
-	<menuitem name="budget_par_rub_configuration_v2" parent="budget_configuration" title="Saisir le budget" action="budget_par_rub_config_custom_in_list" />
-	<action-view name="budget_par_rub_config_custom_in_list" title="Budget Par Rubrique" model="com.axelor.apps.configuration.db.RubriquesBudgetaire" >
+	<menuitem hidden="true" name="budget_par_rub_configuration_v2" parent="budget_configuration"
+			  title="Saisir le budget" action="budget_par_rub_config_custom_in_list"/>
+	<action-view name="budget_par_rub_config_custom_in_list" title="Budget Par Rubrique"
+				 model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
 		<view type="grid" name="gridRubriquesBudgetaireSaisieNew"/>
 		<view type="form" name="custom_budget_info"/>
 		<view-param name="forceEdit" value="true"/>
 	</action-view>
-	<menuitem name="budget_par_rub_configuration_v3" parent="budget_configuration" title="Categorie des rubriques" action="budget_categorie_configuration" />
-	<action-view name="budget_categorie_configuration" title="Configuration des Rubriques" model="com.axelor.apps.configuration.db.RubriqueConfiguration" >
+	<menuitem name="budget_par_rub_configuration_v3" parent="budget_configuration" title="Categorie des rubriques"
+			  action="budget_categorie_configuration"/>
+	<action-view name="budget_categorie_configuration" title="Configuration des Rubriques"
+				 model="com.axelor.apps.configuration.db.RubriqueConfiguration">
 		<view type="grid" name="gridRubriquesBudgetaireConfiguration"/>
 		<view type="form" name="formRubriquesBudgetaireConfiguration"/>
 		<view-param name="forceEdit" value="true"/>
 	</action-view>
-	<menuitem name="budget_par_rub_configuration_v4" parent="budget_configuration" title="Afficher le budget" action="budget_categorie_afficher" />
+	<menuitem hidden="true" name="budget_par_rub_configuration_v4" parent="budget_configuration"
+			  title="Afficher le budget" action="budget_categorie_afficher"/>
 	<action-group name="budget_categorie_afficher">
 		<action name="com.axelor.apps.configuration.web.AppConfigurationController:tw_updateAllTotal"/>
 	</action-group>
@@ -148,23 +158,28 @@
 		<context name="$date_anne" expr="eval:(__date__).getYear()"/>
 	</action-view>-->
 
-	<menuitem name="retraitFromRubrique_configuration" parent="budget_configuration" title="Retrait depuis une Rubrique" action="retraitFromRubrique_config" />
-	<action-view name="retraitFromRubrique_config" title="Retrait depuis une Rubrique" model="com.axelor.apps.configuration.db.RetraitFromRubrique" >
-		<view type="grid" name="retraitFromRubrique-grid" />
-		<view type="form" name="retraitFromRubrique-form" />
+	<menuitem hidden="true" name="retraitFromRubrique_configuration" parent="budget_configuration"
+			  title="Retrait depuis une Rubrique" action="retraitFromRubrique_config"/>
+	<action-view name="retraitFromRubrique_config" title="Retrait depuis une Rubrique"
+				 model="com.axelor.apps.configuration.db.RetraitFromRubrique">
+		<view type="grid" name="retraitFromRubrique-grid"/>
+		<view type="form" name="retraitFromRubrique-form"/>
 	</action-view>
 
-	<menuitem name="tw_retraitFromRubrique_configuration" parent="budget_configuration" title="Historique Budgetaire" action="tw_retraitFromRubrique_config" />
-	<action-view name="tw_retraitFromRubrique_config" title="Historique Budgetaire" model="com.axelor.apps.configuration.db.HistoriqueBudgetaire" >
-		<view type="grid" name="tw_HistoriquerubriqueBudgetaire-grid" />
-		<view-param name="show-toolbar" value="false" />
-		<view-param name="show-confirm" value="false" />
+	<menuitem name="tw_retraitFromRubrique_configuration" parent="budget_configuration" title="Historique Budgetaire"
+			  action="tw_retraitFromRubrique_config"/>
+	<action-view name="tw_retraitFromRubrique_config" title="Historique Budgetaire"
+				 model="com.axelor.apps.configuration.db.HistoriqueBudgetaire">
+		<view type="grid" name="tw_HistoriquerubriqueBudgetaire-grid"/>
+		<view-param name="show-toolbar" value="false"/>
+		<view-param name="show-confirm" value="false"/>
 	</action-view>
 
 
-
-	<menuitem name="previsionRecette_configuration" parent="budget_configuration" title="Prévision annuel des recettes" action="previsionRecette_config" />
-	<action-view name="previsionRecette_config" title="Prévision annuel des recettes" model="com.axelor.apps.configuration.db.PrevisionRecette" >
+	<menuitem name="previsionRecette_configuration" parent="budget_configuration" title="Prévision annuel des recettes"
+			  action="previsionRecette_config"/>
+	<action-view name="previsionRecette_config" title="Prévision annuel des recettes"
+				 model="com.axelor.apps.configuration.db.PrevisionRecette">
 		<view type="grid" name="previsionRecette-grid" />
 		<view type="form" name="previsionRecette-form" />
 	</action-view>

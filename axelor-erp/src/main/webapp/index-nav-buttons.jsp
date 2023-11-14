@@ -22,7 +22,7 @@
 <%@ page import="javax.inject.Inject" %>
 <%@ page import="com.axelor.apps.account.db.Notification" %>
 <%@ page import="java.math.BigDecimal" %>
-<%@ page import="com.axelor.dms.db.NotificationUser" %>
+<%-- <%@ page import="com.axelor.dms.db.NotificationUser" %> --%>
 <%@ page contentType="text/html; charset=UTF-8" %>
 <%@ page language="java" session="true" %>
 <%

@@ -18,66 +18,67 @@
 package com.axelor.apps.account.report;
 
 public interface IReport {
-  public static final String JournalFinancier = "JournalFinancier.rptdesign";
-  public static final String ACCOUNTING_REPORT_TYPE = "AccountingReportType%s.rptdesign";
-  public static final String ACCOUNTING_REPORT_TYPE_JOURNAL =
-      "AccountingReportType11journal.rptdesign";
-  public static final String ACCOUNTING_REPORT_TYPE1 = "AccountingReportType22.rptdesign";
-  public static final String PAYMENT_VOUCHER = "PaymentVoucher.rptdesign";
-  public static final String IRRECOVERABLE = "Irrecoverable.rptdesign";
-  public static final String INVOICE = "Invoice.rptdesign";
-  public static final String SALE_INVOICES_DETAILS = "SaleInvoicesDetails.rptdesign";
-  public static final String PURCHASE_INVOICES_DETAILS = "PurchaseInvoicesDetails.rptdesign";
-  public static final String ACCOUNT_MOVE = "AccountMove.rptdesign";
-  public static final String SUBROGATION_RELEASE = "SubrogationRelease.rptdesign";
-  public static final String CHEQUE_DEPOSIT_SLIP = "ChequeDepositSlip.rptdesign";
-  public static final String CASH_DEPOSIT_SLIP = "CashDepositSlip.rptdesign";
-  public static final String GestionRecette = "SituationRecette.rptdesign";
-  public static final String BilanActif = "BilanActif.rptdesign";
-  public static final String BilanPassif = "BilanPassif.rptdesign";
-  public static final String CPC = "cpc.rptdesign";
-
+  String JournalFinancier = "JournalFinancier.rptdesign";
+  String ACCOUNTING_REPORT_TYPE = "AccountingReportType%s.rptdesign";
+  String ACCOUNTING_REPORT_TYPE_JOURNAL =
+          "AccountingReportType11journal.rptdesign";
+  String ACCOUNTING_REPORT_TYPE1 = "AccountingReportType22.rptdesign";
+  String PAYMENT_VOUCHER = "PaymentVoucher.rptdesign";
+  String IRRECOVERABLE = "Irrecoverable.rptdesign";
+  String INVOICE = "Invoice.rptdesign";
+  String SALE_INVOICES_DETAILS = "SaleInvoicesDetails.rptdesign";
+  String PURCHASE_INVOICES_DETAILS = "PurchaseInvoicesDetails.rptdesign";
+  String ACCOUNT_MOVE = "AccountMove.rptdesign";
+  String SUBROGATION_RELEASE = "SubrogationRelease.rptdesign";
+  String CHEQUE_DEPOSIT_SLIP = "ChequeDepositSlip.rptdesign";
+  String CASH_DEPOSIT_SLIP = "CashDepositSlip.rptdesign";
+  String GestionRecette = "SituationRecette.rptdesign";
+  String BilanActif = "BilanActif.rptdesign";
+  String BilanPassif = "BilanPassif.rptdesign";
+  String CPC = "cpc.rptdesign";
+  
   // public static final String CompteProduit = "CompteProduits.rptdesign";
-  public static final String CompteProduit = "cpc_hors_taxe.rptdesign";
-
-  public static final String ArreteDeCompte = "ArreteDeCompte.rptdesign";
-  public static final String GestionRegie = "gestionRegies.rptdesign";
-  public static final String OrdreRecette = "OrdreDeRecette.rptdesign";
-  public static final String TRESORERIE = "Tresorerie.rptdesign";
-  public static final String DepenceMensuel = "SituationDeRecetteMensuel.rptdesign";
-  public static final String DepenceAnnuelle = "situationAnnuelle.rptdesign";
-  public static final String DepencesuiviAnnuelle = "SuiviAnnuelle.rptdesign";
+  String CompteProduit = "cpc_hors_taxe.rptdesign";
+  
+  String ArreteDeCompte = "ArreteDeCompte.rptdesign";
+  String GestionRegie = "gestionRegies.rptdesign";
+  String OrdreRecette = "OrdreDeRecette.rptdesign";
+  String TRESORERIE = "Tresorerie.rptdesign";
+  String DepenceMensuel = "SituationDeRecetteMensuel.rptdesign";
+  //public static final String DepenceAnnuelle = "situationAnnuelle.rptdesign";
+  String DepenceAnnuelle = "situation_depenses_annuelle.rptdesign";
+  String DepencesuiviAnnuelle = "SuiviAnnuelle.rptdesign";
   // public static final String ArreteCompte = "ArreteDeCompte.rptdesign";
-  public static final String ArreteCompte = "ArreteDeCompte_v2.rptdesign";
-  public static final String ArreteDeCompteSuite = "ArreteDeCompteSuite.rptdesign";
-  public static final String ReleveAffranchissement = "ReleveAffranchissement.rptdesign";
-  public static final String EtatEncaissementAnnuel = "EtatMensuelDesRecettesDeLaRegie.rptdesign";
-  public static final String EtatEncaissementAnnuelMoyenne =
-      "EtatAnnuelDesRecettesDeLaRegie.rptdesign";
-  public static final String EtatEncaissementMensuel = "EtatEncaissementMensuel.rptdesign";
-  public static final String EtatEncaissementHybdomadaire =
-      "EtatEncaissementHybdomadaire.rptdesign";
-  public static final String EtatEncaissementJournalier = "EtatEncaissementJournalier.rptdesign";
-  public static final String StPrestation = "Statistiquesdesprestation.rptdesign";
-
-  public static final String OrdreDeVersement = "OrdreVersement.rptdesign";
-  public static final String ReleveDesProduits = "ReleveDesProduits.rptdesign";
-
+  String ArreteCompte = "ArreteDeCompte_v2.rptdesign";
+  String ArreteDeCompteSuite = "ArreteDeCompteSuite.rptdesign";
+  String ReleveAffranchissement = "ReleveAffranchissement.rptdesign";
+  String EtatEncaissementAnnuel = "EtatMensuelDesRecettesDeLaRegie.rptdesign";
+  String EtatEncaissementAnnuelMoyenne =
+          "EtatAnnuelDesRecettesDeLaRegie.rptdesign";
+  String EtatEncaissementMensuel = "EtatEncaissementMensuel.rptdesign";
+  String EtatEncaissementHybdomadaire =
+          "EtatEncaissementHybdomadaire.rptdesign";
+  String EtatEncaissementJournalier = "EtatEncaissementJournalier.rptdesign";
+  String StPrestation = "Statistiquesdesprestation.rptdesign";
+  
+  String OrdreDeVersement = "OrdreVersement.rptdesign";
+  String ReleveDesProduits = "ReleveDesProduits.rptdesign";
+  
   // rubriques budgetaires
-
-  public static final String DecisionVirement = "DecisionVirement.rptdesign";
-  public static final String CodeBudgetaireGenerale = "CodeBudgetaireGenerale.rptdesign";
+  
+  String DecisionVirement = "DecisionVirement.rptdesign";
+  String CodeBudgetaireGenerale = "CodeBudgetaireGenerale.rptdesign";
   String CodeBudgetaireProdF = "CodeBudgetaireProdF.rptdesign";
-  public static final String CodeBudgetaireChargesExploitation =
-      "CodeBudgetaireChargesExploitation.rptdesign";
-  public static final String CodeBudgetaireChargesExploitationDetail =
-      "CodeBudgetaireChargesExploitation_detail.rptdesign";
-  public static final String CodeBudgetaireEmploisInvest = "CodeBudgetaireEmploisInvest.rptdesign";
-  public static final String CodeBudgetaireEmploisInvestDetail =
-      "CodeBudgetaireEmploisInvestDetail.rptdesign";
-
-  public static final String BilanGenerale = "Bilan.rptdesign";
-  public static final String LETTRAGE = "Lettarge.rptdesign";
-  public static final String RecetteGenerale = "RecetteGenerale.rptdesign";
-  public static final String PRINT_TRESORERIE = "printTresorerie.rptdesign";
+  String CodeBudgetaireChargesExploitation =
+          "CodeBudgetaireChargesExploitation.rptdesign";
+  String CodeBudgetaireChargesExploitationDetail =
+          "CodeBudgetaireChargesExploitation_detail.rptdesign";
+  String CodeBudgetaireEmploisInvest = "CodeBudgetaireEmploisInvest.rptdesign";
+  String CodeBudgetaireEmploisInvestDetail =
+          "CodeBudgetaireEmploisInvestDetail.rptdesign";
+  
+  String BilanGenerale = "Bilan.rptdesign";
+  String LETTRAGE = "Lettarge.rptdesign";
+  String RecetteGenerale = "RecetteGenerale.rptdesign";
+  String PRINT_TRESORERIE = "printTresorerie.rptdesign";
 }

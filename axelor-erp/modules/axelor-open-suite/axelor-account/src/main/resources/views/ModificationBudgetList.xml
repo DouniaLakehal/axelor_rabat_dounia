@@ -15,6 +15,7 @@
 
     <grid name="validation_virement_ModificationBudget_grid" title="Gestion des virements"
           model="com.axelor.apps.account.db.ModificationBudgetList"
+          canMove="false" canNew="false" canDelete="false" canArchive="false"
           canSave="false">
         <field name="annee" title="Année"/>
         <field name="code" title="Numéros"/>
@@ -34,61 +35,168 @@
         </panel>
         <panel>
             <field name="etat" title="Etat"/>
-            <field name="picture" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid" title="Ajouter document"/>
+            <field name="picture" widget="binary-link" form-view="meta-files-form" grid-view="meta-files-grid"
+                   title="Ajouter document"/>
             <field name="commentaire" title="Commentaire" colSpan="12"/>
         </panel>
     </form>
 
-    <form name="ModificationBudgetList-form" title="Gestion des virements"
-          model="com.axelor.apps.account.db.ModificationBudgetList" >
+    <form name="ModificationBudgetList-form" title="Gestion des virements" canSave="false" canDelete="false"
+          model="com.axelor.apps.account.db.ModificationBudgetList">
         <panel colSpan="12">
             <field name="annee" title="Annee" required="true"/>
-            <field name="code" title="Numéros" required="true"/>
+            <field name="code" title="Numéros" hidden="true"/>
+            <field name="etat" title="statut" hidden="true"/>
         </panel>
         <panel colSpan="12">
             <field form-view="gest_virements_form" grid-view="gest_virements_grid" name="virements" colSpan="12"/>
         </panel>
+        <panel colSpan="12">
+            <button-group>
+                <button icon="fa-save" title="Enregistrer" showIf="!id" name="Enregistrer"
+                        onClick="save,genererNumerosVirement,save"/>
+                <button icon="fa-save" title="Modifier" showIf="etat!='1' &amp;&amp; etat!='2' &amp;&amp; id"
+                        name="Modifier" onClick="save"/>
+            </button-group>
+
+        </panel>
     </form>
 
-
-    <grid title="Gestions des virements" name="gest_virements_grid" model="com.axelor.apps.account.db.Virements">
-        <field name="budget_retrait.titre_budget" title="Budget Retrait"/>
-        <field name="budget_ajout.titre_budget" title="Budget Ajout"/>
-        <field name="montant" title="Montant"/>
+    <grid title="Virement" name="gest_virements_grid" model="com.axelor.apps.account.db.Virements">
+        <field name="budget_retrait" title="Nombre de budget Retrait"/>
+        <field name="budget_ajout" title="Nombre de budget Ajout"/>
+        <field name="totalMontant" title="Montant total"/>
     </grid>
 
-    <form onNew="enable_desable_budget" title="Gestions des virements" name="gest_virements_form" model="com.axelor.apps.account.db.Virements">
-        <panel colSpan="12">
-            <field canEdit="false" canNew="false" canRemove="false" canSuggest="false" canView="false" grid-view="ribrique_gride" target-name="titre_budget"
-                   name="budget_retrait" colSpan="4" title="budget Retrait" required="true"/>
-            <field canEdit="false" canNew="false" canRemove="false" canSuggest="false" canView="false" grid-view="ribrique_gride" target-name="titre_budget"
-                   name="budget_ajout" colSpan="4" title="budget Ajout" required="true"/>
-            <field name="montant" colSpan="4" title="Montant" required="true"/>
+
+    <grid title="Gestions des virements detail" name="gest_virementsDetail_grid"
+          model="com.axelor.apps.account.db.VirementsDetail">
+        <field name="budget.titre_budget" title="Budget"/>
+        <field name="montant" title="Montant"/>
+        <!--<field name="code"/>
+        <field name="titre"/>
+        <field name="montant_start"/>-->
+    </grid>
+
+    <grid title="Liste du Budget" name="budget_simple_data_to_show_virement"
+          model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+        <field name="code_budget" title="code"/>
+        <field name="titre_budget" title="Rubrique"/>
+        <field name="montant_budget" title="Montant disponible"/>
+        <field name="anneCurrent" title="Annee"/>
+    </grid>
+
+    <form onNew="typeRetrait" onLoad="typeRetrait" title="Gestions des virements detail"
+          name="gest_virementsDetail_form"
+          model="com.axelor.apps.account.db.VirementsDetail">
+        <panel>
+            <field name="budget" target-name="titre_budget" canView="false" onSelect="getListBudgetValidePourVirement"
+                   onChange="load_name_montant_code"
+                   grid-view="budget_simple_data_to_show_virement"
+            />
+            <field name="montant"/>
+            <field name="type" selection="typedeBudgerDeVirement" hidden="true"/>
+        </panel>
+        <panel readonly="true" title="Information sur le budget sélectionné">
+            <field name="code"/>
+            <field title="Montant Disponible" name="montant_start"/>
+            <field colSpan="12" name="titre" title="Rubrique"/>
         </panel>
     </form>
 
-    <form title="Ajouter un signataire" name="form_ajouter_signataire" model="com.axelor.apps.account.db.ModificationBudgetList">
+    <form onNew="typeAjout" onLoad="typeAjout" title="Gestions des virements detail" name="gest_virementsDetail_form2"
+          model="com.axelor.apps.account.db.VirementsDetail">
+        <panel>
+            <field name="budget" target-name="titre_budget" canView="false" onSelect="getListBudgetValidePourVirement2"
+                   onChange="load_name_montant_code"/>
+            <field name="montant"/>
+            <field name="type" selection="typedeBudgerDeVirement" hidden="true"/>
+        </panel>
+        <panel>
+            <field name="code"/>
+            <field title="Montant budget" name="montant_start"/>
+            <field colSpan="12" name="titre"/>
+        </panel>
+    </form>
+
+    <action-record name="typeRetrait" model="com.axelor.apps.account.db.VirementsDetail">
+        <field name="type" expr="eval:'retrait'"/>
+    </action-record>
+
+
+    <action-record name="typeAjout" model="com.axelor.apps.account.db.VirementsDetail">
+        <field name="type" expr="eval:'ajout'"/>
+    </action-record>
+
+    <action-method name="getListBudgetValidePourVirement">
+        <call class="com.axelor.apps.account.web.AccountController" method="tw_getListBudgetValidePourVirement"/>
+    </action-method>
+    <action-method name="getListBudgetValidePourVirement2">
+        <call class="com.axelor.apps.account.web.AccountController" method="tw_getListBudgetValidePourVirement2"/>
+    </action-method>
+    <action-method name="load_name_montant_code">
+        <call class="com.axelor.apps.account.web.AccountController" method="tw_load_name_montant_code"/>
+    </action-method>
+
+
+    <form onNew="new_test" title="Gestions des virements"
+          name="gest_virements_form" model="com.axelor.apps.account.db.Virements">
         <panel colSpan="12">
-            <field name="signataire" title="Signature"/>
+            <field onChange="modifierMontantTotal" form-view="gest_virementsDetail_form"
+                   grid-view="gest_virementsDetail_grid"
+                   name="budget_retrait" colSpan="12" title="Budget de retrait"/>
+            <field onChange="modifierMontantTotal" form-view="gest_virementsDetail_form2"
+                   grid-view="gest_virementsDetail_grid"
+                   name="budget_ajout" colSpan="12" title="Budget d'ajout"/>
+        </panel>
+        <panel colSpan="3" colOffset="9">
+            <field name="totalMontant" title="Total"/>
+        </panel>
+    </form>
+
+    <action-method name="modifierMontantTotal">
+        <call class="com.axelor.apps.account.web.AccountController" method="modifierMontantTotalVirement"/>
+    </action-method>
+
+    <form title="Ajouter un signataire" name="form_ajouter_signataire"
+          model="com.axelor.apps.account.db.ModificationBudgetList">
+        <panel colSpan="12">
+            <field name="signataire" title="Signataire"/>
         </panel>
     </form>
 
 
-
-    <grid title="List des rubriques budgetaire" name="ribrique_gride" model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+    <grid title="List des rubriques budgetaire" name="ribrique_gride"
+          model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
         <field name="code_budget" title="Code"/>
         <field name="titre_budget" title="Rubrique"/>
         <field name="somme_mtChildren_mtBudget" title="Montant"/>
         <field name="anneCurrent" title="Annee"/>
     </grid>
 
-	<action-method name="print_decisionDeVirement">
-		<call class="com.axelor.apps.account.web.AccountController" method="tw_print_decisionDeVirement"/>
-	</action-method>
+    <form title="Version des Documents" name="v_doc_virement_form"
+          model="com.axelor.apps.configuration.db.RubriquesBudgetaire">
+        <panel>
+            <field name="$reference" title="Réference"/>
+            <field name="$version" title="Version"/>
+        </panel>
+        <panel>
+            <button-group colSpan="2">
+                <button colSpan="12" name="btn_print_1" onClick="print_decisionDeVirement,close" title="Imprimer"/>
+            </button-group>
+        </panel>
 
-    <action-method name="enable_desable_budget">
-        <call class="com.axelor.apps.account.web.AccountController" method="tw_enable_desable_budget"/>
+    </form>
+
+    <action-method name="print_decisionDeVirement">
+        <call class="com.axelor.apps.account.web.AccountController" method="tw_print_decisionDeVirement"/>
     </action-method>
+
+    <action-method name="new_test">
+        <call class="com.axelor.apps.account.web.AccountController" method="tw_new_test"/>
+    </action-method>
+
+
     <action-method name="ajouterSignataire">
         <call class="com.axelor.apps.account.web.AccountController" method="tw_ajouterSignataire"/>
     </action-method>
@@ -97,6 +205,13 @@
         <call class="com.axelor.apps.account.web.AccountController" method="tw_reduireBudget"/>
     </action-method>
 
+    <action-method name="genererNumerosVirement">
+        <call class="com.axelor.apps.account.web.AccountController" method="tw_genererNumerosVirement"/>
+    </action-method>
+
+    <action-method name="show_form_verson_reference_virement">
+        <call class="com.axelor.apps.account.web.AccountController" method="tw_show_form_verson_reference_virement"/>
+    </action-method>
 
 
 </object-views>

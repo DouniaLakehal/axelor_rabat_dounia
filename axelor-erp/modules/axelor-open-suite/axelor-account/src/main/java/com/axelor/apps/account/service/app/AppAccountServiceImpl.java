@@ -42,14 +42,15 @@ import com.axelor.rpc.ActionResponse;
 import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import com.google.inject.persist.Transactional;
+import org.apache.commons.lang3.StringUtils;
+
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.*;
 import java.util.ArrayList;
 import java.util.List;
-import org.apache.commons.lang3.StringUtils;
+import java.util.Objects;
 
 @Singleton
 public class AppAccountServiceImpl extends AppBaseServiceImpl implements AppAccountService {
@@ -1261,8 +1262,8 @@ public class AppAccountServiceImpl extends AppBaseServiceImpl implements AppAcco
 
   @Override
   public String getMontantReliquat(String data_init_update, String data_som_dep) {
-    String tab1[] = data_init_update.split("__");
-    String tab2[] = data_som_dep.split("__");
+    String[] tab1 = data_init_update.split("__");
+    String[] tab2 = data_som_dep.split("__");
     List<BigDecimal> ls = new ArrayList<>();
     for (int i = 0; i < tab1.length; i++) {
       BigDecimal x = new BigDecimal(tab1[i]);
@@ -1918,14 +1919,18 @@ public class AppAccountServiceImpl extends AppBaseServiceImpl implements AppAcco
     }
     return res;
   }
-
+  
   @Override
   @Transactional
   public void modifierBudgetCascade(Virements v) {
     // retrait en cacsade
-    RubriquesBudgetaire retrait = rubriquesBudgetaireRepository.find(v.getBudget_retrait().getId());
-    retraitEnCascadeMontantBudget(retrait, v.getMontant());
-    ajoutEnCascadeMontantBudget(v.getBudget_ajout(), v.getMontant());
+    for (VirementsDetail detail : v.getBudget_retrait()) {
+      retraitEnCascadeMontantBudget(detail.getBudget(), detail.getMontant());
+    }
+    // retrait en cacsade
+    for (VirementsDetail detail : v.getBudget_ajout()) {
+      ajoutEnCascadeMontantBudget(detail.getBudget(), detail.getMontant());
+    }
   }
 
   @Transactional
@@ -1996,14 +2001,28 @@ public class AppAccountServiceImpl extends AppBaseServiceImpl implements AppAcco
   @Transactional
   public void updateAllTresaurerie(Integer year) {
     List<TresaurerieAnnuel> ls =
-        Beans.get(TresaurerieAnnuelRepository.class)
-            .all()
-            .filter("self.year =:year")
-            .bind("year", year)
-            .fetch();
+            Beans.get(TresaurerieAnnuelRepository.class)
+                    .all()
+                    .filter("self.year =:year")
+                    .bind("year", year)
+                    .fetch();
     for (TresaurerieAnnuel trs : ls) {
       trs.setIs_deleted(true);
       Beans.get(TresaurerieAnnuelRepository.class).save(trs);
     }
+  }
+  
+  @Override
+  public Long getId_version_valideByYear(int year, ActionResponse response) {
+    VersionRubriqueBudgetaire v = Beans.get(VersionRubriqueBudgetaireRepository.class).all().filter("self.annee=:year and self.has_version_final is true")
+            .bind("year", year)
+            .fetchOne();
+    Long version_id = 0L;
+    if (v == null) {
+      response.setError("Attention : aucun Budget valide n'est disponible dans l'année " + year);
+    } else if (v.getVersionRubriques().stream().anyMatch(VersionRB::getIs_versionFinale)) {
+      version_id = v.getVersionRubriques().stream().filter(VersionRB::getIs_versionFinale).findFirst().get().getId();
+    }
+    return version_id;
   }
 }

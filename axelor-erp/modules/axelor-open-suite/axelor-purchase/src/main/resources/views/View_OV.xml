@@ -23,7 +23,7 @@
 	<panel>
 		<button-group>
 			<!--show bouton if sold disponible-->
-			<button title="Enregistrer" name="save1" onClick="saveOv" hidden="true"/>
+			<button title="Enregistrer" name="save1" onClick="saveOv" hideIf="id"/>
 			<button title="Modifier" name="save2" onClick="updateov" hideIf="!id"/>
 		</button-group>
 
