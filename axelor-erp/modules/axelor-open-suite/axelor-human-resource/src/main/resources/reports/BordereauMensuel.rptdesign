@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.2.2.v201301221637 Build &lt;4.2.2.v20130206-1509></property>
     <property name="units">in</property>
     <property name="iconFile">/templates/blank_report.gif</property>
     <property name="bidiLayoutOrientation">ltr</property>
@@ -886,7 +886,7 @@
                         <property name="marginTop">0pt</property>
                         <property name="textAlign">center</property>
                         <property name="contentType">auto</property>
-                        <text-property name="content"><![CDATA[ET DE SERVICES DE LA REGION FES MEKNES]]></text-property>
+                        <text-property name="content"><![CDATA[ET DE SERVICES DE LA REGION Rabat-Salé Kénitra]]></text-property>
                     </text>
                 </cell>
                 <cell id="5806"/>
@@ -1403,7 +1403,7 @@ RE CO RE</text-property>
                         <property name="fontSize">9pt</property>
                         <property name="fontWeight">bold</property>
                         <property name="contentType">auto</property>
-                        <text-property name="content"><![CDATA[FAIT A FES LE]]></text-property>
+                        <text-property name="content"><![CDATA[FAIT A RABAT LE]]></text-property>
                     </text>
                 </cell>
             </row>
@@ -2534,7 +2534,7 @@ RE CO RE</text-property>
                 pcJ0snIXlaRbzBWVvcLCfbnJ0yEOB9VZRK5spSgBU4AUqZS4UkmvTKUsE025Tn0KK7MS/uGKB/84cKGM
                 vKWRwCaOIgcHVjnkm2c8qexK6TdTTzjVXKip5YAio2RBEXIgCgfTCgc3eko13wxMZCc4wQlO+O8BTfv/
                 hBocrLVici0AAAAASUVORK5CYII=
-</property>
+            </property>
         </structure>
         <structure>
             <property name="name">rc.png</property>
@@ -2666,7 +2666,7 @@ RE CO RE</text-property>
                 VhNVEovSUspykgszCP2WoIXPzaoi3r+AyDelODu9PJ8r5IJDicincfn83PKCuhaie1RWJpWVRS3KhEiI
                 ya6oa20CAxlXkMZuaeLwWxMLU/NrS146rv3fLPx68YGgl/5PGr30f9Lopf+TRi/9nzR66f+EIRb/H9iL
                 Pjk/P2ccAAAAAElFTkSuQmCC
-</property>
+            </property>
         </structure>
     </list-property>
 </report>

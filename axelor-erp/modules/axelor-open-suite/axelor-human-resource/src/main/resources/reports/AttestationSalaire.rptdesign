@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.8.0.v201805221921</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.2.2.v201301221637 Build &lt;4.2.2.v20130206-1509></property>
     <property name="units">in</property>
     <property name="iconFile">/templates/blank_report.gif</property>
     <property name="bidiLayoutOrientation">ltr</property>
@@ -1539,7 +1539,7 @@ where emp.id=? order by  es.traitement_debase desc limit 1]]></xml-property>
                         <text-property name="content"><![CDATA[ROYAUME DU MAROC
 Chambre de Commerce
 d'Industrie et de Services
-de Beni Mellal-Khenifra]]></text-property>
+de Rabat-Salé Kénitra]]></text-property>
                     </text>
                 </cell>
                 <cell id="9"/>

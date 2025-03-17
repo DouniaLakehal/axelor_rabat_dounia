@@ -93,8 +93,8 @@
 
 <div class="container-fluid">
     <div class="panel login-panel">
-        <div class="panel-header panel-default">
-            <img src="img/axelor.png" width="192px">
+        <div class=" ">
+            <img src="img/axelor_r.png" width="492px">
         </div>
 
         <div id="error-msg" class="alert alert-block alert-error text-center <%= errorMsg == null ? "hidden" : "" %>">

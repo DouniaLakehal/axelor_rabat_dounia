@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <report xmlns="http://www.eclipse.org/birt/2005/design" version="3.2.23" id="1">
-    <property name="createdBy">Eclipse BIRT Designer Version 4.6.0.v201606072122</property>
+    <property name="createdBy">Eclipse BIRT Designer Version 4.2.2.v201301221637 Build &lt;4.2.2.v20130206-1509></property>
     <property name="units">in</property>
     <property name="iconFile">/templates/blank_report.gif</property>
     <property name="bidiLayoutOrientation">ltr</property>
@@ -380,7 +380,7 @@ where oc.id = ?]]></xml-property>
                         <property name="textAlign">left</property>
                         <property name="contentType">html</property>
                         <text-property name="content"><![CDATA[Compte N° <B><VALUE-OF>row["numero"]</VALUE-OF></B>
-tenu à la Trésorerie Provinciale de Béni-Mellal]]></text-property>
+tenu à la Trésorerie Provinciale de Rabat]]></text-property>
                     </text>
                     <text id="22">
                         <property name="fontSize">12pt</property>
@@ -389,7 +389,7 @@ tenu à la Trésorerie Provinciale de Béni-Mellal]]></text-property>
                         <property name="marginBottom">5pt</property>
                         <property name="textAlign">left</property>
                         <property name="contentType">html</property>
-                        <text-property name="content"><![CDATA[Nom et prénom du titulaire : <B>CCIS Béni-Mellal khénifra</B>]]></text-property>
+                        <text-property name="content"><![CDATA[Nom et prénom du titulaire : <B>CCIS Rabat-Salé Kénitra</B>]]></text-property>
                     </text>
                     <text id="24">
                         <property name="fontSize">12pt</property>
@@ -443,7 +443,7 @@ tenu à la Trésorerie Provinciale de Béni-Mellal]]></text-property>
                         <property name="marginBottom">5pt</property>
                         <property name="textAlign">left</property>
                         <property name="contentType">html</property>
-                        <text-property name="content"><![CDATA[A Béni-Mellal, le ....................................................]]></text-property>
+                        <text-property name="content"><![CDATA[A Rabat, le ....................................................]]></text-property>
                     </text>
                     <grid id="30">
                         <property name="marginTop">20pt</property>

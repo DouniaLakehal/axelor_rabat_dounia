@@ -36,7 +36,7 @@ import org.slf4j.LoggerFactory;
 
 @Singleton
 public class DouniaController {
-  
+
   private final String[] tableau_mois_francais = {
           "JANVIER",
           "FEVRIER",
@@ -68,20 +68,20 @@ public class DouniaController {
   OrdreVirementRepository ordreVirementRepository;
   @Inject
   EmployeeAdvanceService appservice;
-  
+
   public Object excuteRequette(int mois, int annee, String req) {
     Object etat = null;
-    
+
     javax.persistence.Query query =
             JPA.em().createNativeQuery(req).setParameter(1, mois).setParameter(2, annee);
     etat = query.getSingleResult();
     if (etat == null) {
       etat = new String[]{".", "0", "0"};
     }
-    
+
     return etat;
   }
-  
+
   public void SaveOrdreVirement(
           String benificaire,
           String objet,
@@ -99,11 +99,11 @@ public class DouniaController {
     ordreVirement.setMois(mois);
     appservice.saveOrderVirement(ordreVirement);
   }
-  
+
   @Transactional
   public void BordereauEmission(ActionRequest request, ActionResponse response)
           throws AxelorException {
-    
+
     Integer mois = (Integer) request.getContext().get("mois");
     Integer annee = (Integer) request.getContext().get("annee");
     List<OrdreVirement> ordreVirements =
@@ -113,7 +113,7 @@ public class DouniaController {
                     .bind("annee", annee)
                     .bind("mois", mois)
                     .fetch();
-    
+
     javax.persistence.Query req_pl =
             JPA.em()
                     .createNativeQuery(
@@ -121,12 +121,12 @@ public class DouniaController {
                     .setParameter(1, mois)
                     .setParameter(2, annee);
     Object obj_pl = req_pl.getSingleResult();
-    
+
     BigDecimal somme_pl = BigDecimal.ZERO;
     if (obj_pl != null) {
       somme_pl = (BigDecimal) obj_pl;
     }
-    
+
     /////////////////////////////// ***************** NET
     // *****************///////////////////////////////
 
@@ -137,7 +137,7 @@ public class DouniaController {
         appservice.deleteByQuery(new String[] {req});
       }
     }*/
-    
+
     javax.persistence.Query req_net =
             JPA.em()
                     .createNativeQuery(
@@ -157,10 +157,10 @@ public class DouniaController {
               annee,
               mois);
     }
-    
+
     /////////////////////////////// ***************** EQDOM
     // *****************///////////////////////////////
-    
+
     javax.persistence.Query req_eqdom =
             JPA.em()
                     .createNativeQuery(
@@ -173,7 +173,7 @@ public class DouniaController {
     float somme_eqdom = (BigDecimal.ZERO).floatValue();
     if (obj_eqdom != null) {
       somme_eqdom = ((BigDecimal) obj_eqdom).floatValue();
-      
+
       SaveOrdreVirement(
               "EQDOM",
               "Précomptes sur salaires mois : "
@@ -186,10 +186,10 @@ public class DouniaController {
               annee,
               mois);
     }
-    
+
     /////////////////////////////// ***************** AXA credit
     // *****************///////////////////////////////
-    
+
     javax.persistence.Query req_salaf =
             JPA.em()
                     .createNativeQuery(
@@ -203,10 +203,10 @@ public class DouniaController {
     if (obj_salaf != null) {
       somme_salaf = ((BigDecimal) obj_salaf).floatValue();
     }
-    
+
     /////////////////////////////// ***************** CIH
     // *****************///////////////////////////////
-    
+
     javax.persistence.Query req_sgmb =
             JPA.em()
                     .createNativeQuery(
@@ -220,10 +220,10 @@ public class DouniaController {
     if (obj_sgmb != null) {
       somme_sgmb = ((BigDecimal) obj_sgmb).floatValue();
     }
-    
+
     /////////////////////////////// ***************** BCP
     // *****************///////////////////////////////
-    
+
     javax.persistence.Query req_bcp =
             JPA.em()
                     .createNativeQuery(
@@ -237,12 +237,12 @@ public class DouniaController {
     if (obj_bcp != null) {
       somme_bcp = ((BigDecimal) obj_bcp).floatValue();
     }
-    
+
     /////////////////////////////// ***************** RCAR
     // *****************///////////////////////////////
     String req_rcar =
             "select sum(es.rcar_rg+(es.rcar_rappel)) as rcar, sum(rcarrcomp+(comp_rappel)) as complement from hr_etat_salaire es where es.mois=?1 and es.annee=?2";
-    
+
     javax.persistence.Query req_logement =
             JPA.em()
                     .createNativeQuery(
@@ -256,7 +256,7 @@ public class DouniaController {
     if (req_log != null) {
       etat_log = ((BigDecimal) req_log).floatValue();
     }
-    
+
     Object etat_rcar = excuteRequette(mois, annee, req_rcar);
     Object[] obj_rcar = (Object[]) etat_rcar;
     BigDecimal rcar_log = BigDecimal.valueOf(etat_log);
@@ -265,7 +265,7 @@ public class DouniaController {
     float somme_rcar_s =
             ((BigDecimal) obj_rcar[0]).floatValue() + ((BigDecimal) obj_rcar[1]).floatValue();
     etat_log_p = (somme_rcar * 2) + ((BigDecimal) obj_rcar[1]).floatValue();
-    
+
     SaveOrdreVirement(
             "R.C.A.R",
             "Cotisations salariales et Patronales du mois : "
@@ -277,7 +277,7 @@ public class DouniaController {
             BigDecimal.valueOf(somme_rcar_s + etat_log_p),
             annee,
             mois);
-    
+
     /////////////////////////////// ***************** CNSS
     // *****************///////////////////////////////
     javax.persistence.Query req_cnss =
@@ -292,10 +292,10 @@ public class DouniaController {
     if (etat_cnss != null) {
       somme_cnss = ((BigDecimal) etat_cnss).floatValue();
     }
-    
+
     /////////////////////////////// ***************** AMO
     // *****************///////////////////////////////
-    
+
     javax.persistence.Query req_amo =
             JPA.em()
                     .createNativeQuery(
@@ -319,10 +319,10 @@ public class DouniaController {
               annee,
               mois);
     }
-    
+
     /////////////////////////////// ***************** OMFAM SM
     // *****************///////////////////////////////
-    
+
     javax.persistence.Query req_sm_omfam =
             JPA.em()
                     .createNativeQuery(
@@ -346,10 +346,10 @@ public class DouniaController {
               annee,
               mois);
     }
-    
+
     /////////////////////////////// ***************** OMFAM CAAD
     // *****************///////////////////////////////
-    
+
     javax.persistence.Query req_caad_omfam =
             JPA.em()
                     .createNativeQuery(
@@ -373,7 +373,7 @@ public class DouniaController {
               annee,
               mois);
     }
-    
+
     /////////////////////////////// ***************** MGPAP SM KHENIFRA
     // *****************///////////////////////////////
     javax.persistence.Query req_sm_r =
@@ -401,7 +401,7 @@ public class DouniaController {
               annee,
               mois);
     }
-    
+
     /////////////////////////////// ***************** MGPAP SM KHERIBGA
     // *****************///////////////////////////////
     javax.persistence.Query req_sm_g =
@@ -429,7 +429,7 @@ public class DouniaController {
               annee,
               mois);
     }
-    
+
     /////////////////////////////// ***************** MGPAP CCD KHENIFRA
     // *****************///////////////////////////////
     javax.persistence.Query req_ccd_r =
@@ -453,7 +453,7 @@ public class DouniaController {
               annee,
               mois);
     }
-    
+
     /////////////////////////////// ***************** MGPAP CCD KHERIBGA
     // *****************///////////////////////////////
     javax.persistence.Query req_ccd_g =
@@ -477,10 +477,10 @@ public class DouniaController {
               annee,
               mois);
     }
-    
+
     /////////////////////////////// ***************** IR
     // *****************///////////////////////////////
-    
+
     javax.persistence.Query req_ir =
             JPA.em()
                     .createNativeQuery(
@@ -500,7 +500,7 @@ public class DouniaController {
               annee,
               mois);
     }
-    
+
     BigDecimal total1 =
             somme_pl
                     .add(somme_net)
@@ -517,10 +517,10 @@ public class DouniaController {
                     .add(BigDecimal.valueOf(somme_ccd_r))
                     .add(BigDecimal.valueOf(somme_sm_g))
                     .add(BigDecimal.valueOf(somme_sm_r));
-    
+
     BigDecimal total2 =
             total1.add(BigDecimal.valueOf(etat_log_p)).add(BigDecimal.valueOf(somme_amo));
-    
+
     String fileLink =
             ReportFactory.createReport(
                             com.axelor.apps.hr.report.IReport.BordereauDemission, "Bordereau d'emission")
@@ -548,7 +548,7 @@ public class DouniaController {
                     .addParam("etat_log_p", etat_log_p)
                     .addParam("total1", total1)
                     .addParam("total2", total2)
-                    .addParam("Lieu", "Emis à Béni Mellal, le")
+                    .addParam("Lieu", "Emis à Rabat, le")
                     .generate()
                     .getFileLink();
     response.setView(
@@ -556,14 +556,14 @@ public class DouniaController {
                     .add("html", fileLink)
                     .map());
   }
-  
+
   public void OrdrePaiement(ActionRequest request, ActionResponse response) throws AxelorException {
-    
+
     Integer mois = (Integer) request.getContext().get("mois");
     Integer annee = (Integer) request.getContext().get("annee");
     /////////////////////////////// ***************** indemnite
     // *****************///////////////////////////////
-    
+
     String req_ind =
             "select  sum(es.indemnit_fonction_net) as fonction,\n"
                     + "       sum(es.indemnit_voiture_net) as voiture,\n"
@@ -579,7 +579,7 @@ public class DouniaController {
             x.subtract(
                     ((x.subtract((x.multiply(new BigDecimal(0.03))))).multiply(new BigDecimal(0.38)))
                             .add(x.multiply(new BigDecimal(0.03))));*/
-    
+
     float somme_ind = ((BigDecimal) obj_ind[3]).floatValue();
         BigDecimal somme_ind2 = ((BigDecimal) obj_ind[3]);
     float somme_net =
@@ -588,17 +588,17 @@ public class DouniaController {
                     + ((BigDecimal) obj_ind[2]).floatValue();
     double number_ind = (Math.round(somme_ind * 100)) / 100.0;
     String montant_ind = ConvertNomreToLettres.getStringMontant(BigDecimal.valueOf(number_ind));
-    
+
     float net = somme_ind + somme_net;
-    
+
     /////////////////////////////// ***************** IR
     // *****************///////////////////////////////
-    
+
     String req_ir =
             "select sum(es.ir+(es.ir_rappel)) as ir,\n"
                     + "               sum(es.ir617131) as irInlogement\n"
                     + "               from hr_etat_salaire es  where es.mois=?1 and es.annee=?2";
-    
+
     javax.persistence.Query req_logement =
             JPA.em()
                     .createNativeQuery(
@@ -611,23 +611,23 @@ public class DouniaController {
     if (req_log != null) {
       etat_log = ((BigDecimal) req_log).floatValue();
     }
-    
+
     Object etat_ir = excuteRequette(mois, annee, req_ir);
     Object[] obj_ir = (Object[]) etat_ir;
-    
+
     BigDecimal somme_ir =
             BigDecimal.valueOf(
                     ((BigDecimal) obj_ir[0]).floatValue() + ((BigDecimal) obj_ir[1]).floatValue());
     BigDecimal round_ir = somme_ir;
     String montant_ir = ConvertNomreToLettres.getStringMontant(round_ir);
-    
+
     BigDecimal ir = BigDecimal.valueOf(etat_log);
-    
+
     ir = ((ir.subtract((ir.multiply(new BigDecimal(0.03))))).multiply(new BigDecimal(0.38)));
     BigDecimal sum_ir = somme_ir.subtract(ir);
     /////////////////////////////// ***************** RCAR
     // *****************///////////////////////////////
-    
+
     String req_rcar =
             "select sum(es.rcar_rg+(es.rcar_rappel)) as salaires,\n"
                     + "                 sum(es.rcarrcomp+(es.comp_rappel)) as logement\n"
@@ -644,17 +644,17 @@ public class DouniaController {
                     - rcar_log.floatValue();
     double number_rcar = (Math.round(somme_rcar * 100)) / 100.0;
     String montant_rcar = ConvertNomreToLettres.getStringMontant(BigDecimal.valueOf(number_rcar));
-    
+
     /////////////////////////////// ***************** AMO
     // *****************///////////////////////////////
-    
+
     String req_amo =
             "select sum(es.amo+(es.amo_rappel)) as amo from hr_etat_salaire es where es.mois=?1 and es.annee=?2";
     Object etat_amo = excuteRequette(mois, annee, req_amo);
     float somme_amo = ((BigDecimal) etat_amo).floatValue();
     double number_amo = (Math.round(somme_amo * 100)) / 100.0;
     String montant_amo = ConvertNomreToLettres.getStringMontant(BigDecimal.valueOf(number_amo));
-    
+
     /////////////////////////////// ***************** MGPAP CCD KHENIFRA
     // *****************///////////////////////////////
     javax.persistence.Query req_ccd_r =
@@ -672,7 +672,7 @@ public class DouniaController {
     }
     double number_ccd_r = (Math.round(somme_ccd_r * 100)) / 100.0;
     String montant_ccd_r = ConvertNomreToLettres.getStringMontant(BigDecimal.valueOf(number_ccd_r));
-    
+
     /////////////////////////////// ***************** MGPAP SM KHENIFRA
     // *****************///////////////////////////////
     javax.persistence.Query req_sm_r =
@@ -690,7 +690,7 @@ public class DouniaController {
     }
     double number_sm_r = (Math.round(somme_sm_r * 100)) / 100.0;
     String montant_sm_r = ConvertNomreToLettres.getStringMontant(BigDecimal.valueOf(number_sm_r));
-    
+
     /////////////////////////////// ***************** MGPAP SM KHERIBGA
     // *****************///////////////////////////////
     javax.persistence.Query req_sm_g =
@@ -709,7 +709,7 @@ public class DouniaController {
     }
     double number_sm_g = (Math.round(somme_sm_g * 100)) / 100.0;
     String montant_sm_g = ConvertNomreToLettres.getStringMontant(BigDecimal.valueOf(number_sm_g));
-    
+
     /////////////////////////////// ***************** MGPAP CCD KHERIBGA
     // *****************///////////////////////////////
     javax.persistence.Query req_ccd_g =
@@ -727,10 +727,10 @@ public class DouniaController {
     }
     double number_ccd_g = (Math.round(somme_ccd_g * 100)) / 100.0;
     String montant_ccd_g = ConvertNomreToLettres.getStringMontant(BigDecimal.valueOf(number_ccd_g));
-    
+
     /////////////////////////////// ***************** OMFAM SM
     // *****************///////////////////////////////
-    
+
     String req_sm_omfam =
             "select sum(es.mutuelle_omfam_sm+(es.mutuelle_omfam_sm_rappel)) as sm from hr_etat_salaire es where es.mois="
                     + mois
@@ -738,12 +738,12 @@ public class DouniaController {
                     + annee
                     + "";
     BigDecimal etat_sm_omfam = RunSqlRequestForMe.runSqlRequest_Bigdecimal(req_sm_omfam);
-    
+
     String montant_sm_omfam = ConvertNomreToLettres.getStringMontant(etat_sm_omfam);
-    
+
     /////////////////////////////// ***************** OMFAM CAAD
     // *****************///////////////////////////////
-    
+
     String req_caad_omfam =
             "select sum(es.mutuelle_omfam_caad+(es.mutuelle_omfam_caad_rappel)) as caad from hr_etat_salaire es where es.mois="
                     + mois
@@ -751,9 +751,9 @@ public class DouniaController {
                     + annee
                     + "";
     BigDecimal etat_caad_omfam = RunSqlRequestForMe.runSqlRequest_Bigdecimal(req_caad_omfam);
-    
+
     String montant_caad_omfam = ConvertNomreToLettres.getStringMontant(etat_caad_omfam);
-    
+
     /////////////////////////////// ***************** EQDOM
     // *****************///////////////////////////////
     javax.persistence.Query req_eqdom =
@@ -771,7 +771,7 @@ public class DouniaController {
     }
     double number_eqdom = (Math.round(somme_eqdom * 100)) / 100.0;
     String montant_eqdom = ConvertNomreToLettres.getStringMontant(BigDecimal.valueOf(number_eqdom));
-    
+
     /////////////////////////////// ***************** WAFA SALAF
     // *****************///////////////////////////////
     javax.persistence.Query req_salaf =
@@ -789,7 +789,7 @@ public class DouniaController {
     }
     double number_salaf = (Math.round(somme_salaf * 100)) / 100.0;
     String montant_salaf = ConvertNomreToLettres.getStringMontant(BigDecimal.valueOf(number_salaf));
-    
+
     /////////////////////////////// ***************** CIH
       // *****************///////////////////////////////
       javax.persistence.Query req_cih =
@@ -807,7 +807,7 @@ public class DouniaController {
     }
     double number_cih = (Math.round(somme_cih * 100)) / 100.0;
     String montant_cih = ConvertNomreToLettres.getStringMontant(BigDecimal.valueOf(number_cih));
-    
+
     /////////////////////////////// ***************** AOS
     // *****************///////////////////////////////
     javax.persistence.Query req_cnss =
@@ -825,7 +825,7 @@ public class DouniaController {
     }
     double number_cnss = (Math.round(somme_cnss * 100)) / 100.0;
     String montant_cnss = ConvertNomreToLettres.getStringMontant(BigDecimal.valueOf(number_cnss));
-    
+
     String fileLink =
             ReportFactory.createReport(
                             com.axelor.apps.hr.report.IReport.OrdrePaiement, "Personnel de la CCIS")
@@ -872,22 +872,22 @@ public class DouniaController {
                     .addParam("montant_cnss", montant_cnss).addParam("logement", BigDecimal.valueOf(0))
                     .addParam("logement", BigDecimal.valueOf(0))
                     .addParam("RoundIR", round_ir)
-                    .addParam("Lieu", "Emis à Béni Mellal, le")
+                    .addParam("Lieu", "Emis à Rabat, le")
                     .generate()
                     .getFileLink();
     response.setView(
             ActionView.define("Ordre de paiement du personnel de la CCIS").add("html", fileLink).map());
   }
-  
+
   public void ReleveBancaire(ActionRequest request, ActionResponse response)
           throws AxelorException {
-    
+
     Integer mois = (Integer) request.getContext().get("mois");
     Integer annee = (Integer) request.getContext().get("annee");
-    
+
     /////////////////////////////// ***************** OMFAM SM
     // *****************///////////////////////////////
-    
+
     String req_sm_omfam =
             "select sum(es.mutuelle_omfam_sm) as sm from hr_etat_salaire es where es.mois="
                     + mois
@@ -895,12 +895,12 @@ public class DouniaController {
                     + annee
                     + "";
     BigDecimal etat_sm_omfam = RunSqlRequestForMe.runSqlRequest_Bigdecimal(req_sm_omfam);
-    
+
     String montant_sm_omfam = ConvertNomreToLettres.getStringMontant(etat_sm_omfam);
-    
+
     /////////////////////////////// ***************** OMFAM CAAD
     // *****************///////////////////////////////
-    
+
     String req_caad_omfam =
             "select sum(es.mutuelle_omfam_caad) as caad from hr_etat_salaire es where es.mois="
                     + mois
@@ -908,12 +908,12 @@ public class DouniaController {
                     + annee
                     + "";
     BigDecimal etat_caad_omfam = RunSqlRequestForMe.runSqlRequest_Bigdecimal(req_caad_omfam);
-    
+
     String montant_caad_omfam = ConvertNomreToLettres.getStringMontant(etat_caad_omfam);
-    
+
     /////////////////////////////// ***************** AMO
     // *****************///////////////////////////////
-    
+
     String req_amo =
             "select sum(es.amo) as amo from hr_etat_salaire es where es.mois="
                     + mois
@@ -923,12 +923,12 @@ public class DouniaController {
     BigDecimal etat_amo = RunSqlRequestForMe.runSqlRequest_Bigdecimal(req_amo);
     float somme_amo = etat_amo.floatValue();
         float total_amo = etat_amo.floatValue() + etat_amo.floatValue();
-    
+
     String montant_amo = ConvertNomreToLettres.getStringMontant(BigDecimal.valueOf(total_amo));
-    
+
     /////////////////////////////// ***************** RCAR
     // *****************///////////////////////////////
-    
+
     javax.persistence.Query req_logement =
             JPA.em()
                     .createNativeQuery(
@@ -941,7 +941,7 @@ public class DouniaController {
     if (req_log != null) {
       etat_log = ((BigDecimal) req_log).floatValue();
     }
-    
+
     String req_rcar =
             "select sum(es.rcar_rg) as salaires,\n"
                     + "                 sum(es.rcarrcomp) as logement\n"
@@ -958,7 +958,7 @@ public class DouniaController {
     float total_rcar = somme_rcar + rcar_sal + rcar + compl_rcar + rcar_sal + compl_rcar;
     double number_rcar = (Math.round(somme_rcar * 100)) / 100.0;
     String montant_rcar = ConvertNomreToLettres.getStringMontant(BigDecimal.valueOf(total_rcar));
-    
+
     /////////////////////////////// ***************** CNSS
     // *****************///////////////////////////////
     javax.persistence.Query req_cnss =
@@ -975,7 +975,7 @@ public class DouniaController {
     }
     double number_cnss = (Math.round(somme_cnss * 100)) / 100.0;
     String montant_cnss = ConvertNomreToLettres.getStringMontant(BigDecimal.valueOf(number_cnss));
-    
+
     /////////////////////////////// ***************** EQDOM
     // *****************///////////////////////////////
     javax.persistence.Query req_eqdom =
@@ -993,7 +993,7 @@ public class DouniaController {
     }
     double number_eqdom = (Math.round(somme_eqdom * 100)) / 100.0;
     String montant_eqdom = ConvertNomreToLettres.getStringMontant(BigDecimal.valueOf(number_eqdom));
-    
+
     /////////////////////////////// ***************** WAFA SALAF
     // *****************///////////////////////////////
     javax.persistence.Query req_salaf =
@@ -1011,10 +1011,10 @@ public class DouniaController {
     }
     double number_salaf = (Math.round(somme_salaf * 100)) / 100.0;
     String montant_salaf = ConvertNomreToLettres.getStringMontant(BigDecimal.valueOf(number_salaf));
-    
+
     /////////////////////////////// ***************** MGPAP khnifra sm
     // *****************///////////////////////////////
-    
+
     javax.persistence.Query req_sm_r =
             JPA.em()
                     .createNativeQuery(
@@ -1030,10 +1030,10 @@ public class DouniaController {
     }
     double number_sm_r = (Math.round(somme_sm_r * 100)) / 100.0;
     String montant_sm_r = ConvertNomreToLettres.getStringMontant(BigDecimal.valueOf(number_sm_r));
-    
+
     /////////////////////////////// ***************** MGPAP  Khouribga sm
     // *****************///////////////////////////////
-    
+
     javax.persistence.Query req_sm_kho =
             JPA.em()
                     .createNativeQuery(
@@ -1049,7 +1049,7 @@ public class DouniaController {
     }
     double number_sm_kh = (Math.round(somme_sm_kh * 100)) / 100.0;
     String montant_sm_kh = ConvertNomreToLettres.getStringMontant(BigDecimal.valueOf(number_sm_kh));
-    
+
     /////////////////////////////// ***************** MGPAP CCD KHENIFRA
     // *****************///////////////////////////////
     javax.persistence.Query req_ccd_r =
@@ -1067,7 +1067,7 @@ public class DouniaController {
     }
     double number_ccd_r = (Math.round(somme_ccd_r * 100)) / 100.0;
     String montant_ccd_r = ConvertNomreToLettres.getStringMontant(BigDecimal.valueOf(number_ccd_r));
-    
+
     /////////////////////////////// ***************** MGPAP CCD KHERIBGA
     // *****************///////////////////////////////
     javax.persistence.Query req_ccd_g =
@@ -1086,7 +1086,7 @@ public class DouniaController {
     }
     double number_ccd_g = (Math.round(somme_ccd_g * 100)) / 100.0;
     String montant_ccd_g = ConvertNomreToLettres.getStringMontant(BigDecimal.valueOf(number_ccd_g));
-    
+
     javax.persistence.Query somme_Assiette1 =
             JPA.em()
                     .createNativeQuery(
@@ -1102,7 +1102,7 @@ public class DouniaController {
     float releve = somme_c1;
     double number_c1 = somme_c1;
     String montant_c1 = ConvertNomreToLettres.getStringMontant(BigDecimal.valueOf(number_c1));
-    
+
     javax.persistence.Query rel_eqdom =
             JPA.em()
                     .createNativeQuery(
@@ -1119,9 +1119,9 @@ public class DouniaController {
     double number_eqdom_r = (Math.round(somme_eqdom_r * 100)) / 100.0;
     String montant_eqdom_r =
             ConvertNomreToLettres.getStringMontant(BigDecimal.valueOf(number_eqdom_r));
-    
+
     /////////////////// exterieur /////////////
-    
+
     javax.persistence.Query rel_exterieur =
             JPA.em()
                     .createNativeQuery(
@@ -1138,9 +1138,9 @@ public class DouniaController {
     double number_exterieur = (Math.round(somme_exterieur * 100)) / 100.0;
     String montant_exterieur =
             ConvertNomreToLettres.getStringMontant(BigDecimal.valueOf(number_exterieur));
-    
+
     /////////////////// interieur /////////////
-    
+
     javax.persistence.Query rel_interieur =
             JPA.em()
                     .createNativeQuery(
@@ -1157,7 +1157,7 @@ public class DouniaController {
     double number_interieur = (Math.round(somme_interieur * 100)) / 100.0;
     String montant_interieur =
             ConvertNomreToLettres.getStringMontant(BigDecimal.valueOf(number_interieur));
-    
+
     String fileLink =
             ReportFactory.createReport(IReport.ReleveBancaire, "Releve bancaire")
                     .addParam("Locale", ReportSettings.getPrintingLocale(null))
@@ -1204,10 +1204,10 @@ public class DouniaController {
                     .getFileLink();
     response.setView(ActionView.define("Releve bancaire").add("html", fileLink).map());
   }
-  
+
   @Transactional
   public void pageDeGarde(ActionRequest request, ActionResponse response) throws AxelorException {
-    
+
     Integer mois = (Integer) request.getContext().get("mois");
     Integer annee = (Integer) request.getContext().get("annee");
     List<OrdreVirement> ordreVirements =
@@ -1217,7 +1217,7 @@ public class DouniaController {
                     .bind("annee", annee)
                     .bind("mois", mois)
                     .fetch();
-    
+
     javax.persistence.Query req_pl =
             JPA.em()
                     .createNativeQuery(
@@ -1225,12 +1225,12 @@ public class DouniaController {
                     .setParameter(1, mois)
                     .setParameter(2, annee);
     Object obj_pl = req_pl.getSingleResult();
-    
+
     BigDecimal somme_pl = BigDecimal.ZERO;
     if (obj_pl != null) {
       somme_pl = (BigDecimal) obj_pl;
     }
-    
+
     /////////////////////////////// ***************** NET
     // *****************///////////////////////////////
 
@@ -1241,7 +1241,7 @@ public class DouniaController {
         appservice.deleteByQuery(new String[] {req});
       }
     }*/
-    
+
     javax.persistence.Query req_net =
             JPA.em()
                     .createNativeQuery(
@@ -1261,10 +1261,10 @@ public class DouniaController {
               annee,
               mois);
     }
-    
+
     /////////////////////////////// ***************** EQDOM
     // *****************///////////////////////////////
-    
+
     javax.persistence.Query req_eqdom =
             JPA.em()
                     .createNativeQuery(
@@ -1277,7 +1277,7 @@ public class DouniaController {
     float somme_eqdom = (BigDecimal.ZERO).floatValue();
     if (obj_eqdom != null) {
       somme_eqdom = ((BigDecimal) obj_eqdom).floatValue();
-      
+
       SaveOrdreVirement(
               "EQDOM",
               "Précomptes sur salaires mois : "
@@ -1290,10 +1290,10 @@ public class DouniaController {
               annee,
               mois);
     }
-    
+
     /////////////////////////////// ***************** WAFA SALAF
     // *****************///////////////////////////////
-    
+
     javax.persistence.Query req_salaf =
             JPA.em()
                     .createNativeQuery(
@@ -1307,10 +1307,10 @@ public class DouniaController {
     if (obj_salaf != null) {
       somme_salaf = ((BigDecimal) obj_salaf).floatValue();
     }
-    
+
     /////////////////////////////// ***************** SGMB
     // *****************///////////////////////////////
-    
+
     javax.persistence.Query req_sgmb =
             JPA.em()
                     .createNativeQuery(
@@ -1324,10 +1324,10 @@ public class DouniaController {
     if (obj_sgmb != null) {
       somme_sgmb = ((BigDecimal) obj_sgmb).floatValue();
     }
-    
+
     /////////////////////////////// ***************** BCP
     // *****************///////////////////////////////
-    
+
     javax.persistence.Query req_bcp =
             JPA.em()
                     .createNativeQuery(
@@ -1341,12 +1341,12 @@ public class DouniaController {
     if (obj_bcp != null) {
       somme_bcp = ((BigDecimal) obj_bcp).floatValue();
     }
-    
+
     /////////////////////////////// ***************** RCAR
     // *****************///////////////////////////////
     String req_rcar =
             "select sum(es.rcar_rg+(es.rcar_rappel)) as rcar, sum(rcarrcomp+(comp_rappel)) as complement from hr_etat_salaire es where es.mois=?1 and es.annee=?2";
-    
+
     javax.persistence.Query req_logement =
             JPA.em()
                     .createNativeQuery(
@@ -1360,7 +1360,7 @@ public class DouniaController {
     if (req_log != null) {
       etat_log = ((BigDecimal) req_log).floatValue();
     }
-    
+
     Object etat_rcar = excuteRequette(mois, annee, req_rcar);
     Object[] obj_rcar = (Object[]) etat_rcar;
     BigDecimal rcar_log = BigDecimal.valueOf(etat_log);
@@ -1369,7 +1369,7 @@ public class DouniaController {
     float somme_rcar_s =
             ((BigDecimal) obj_rcar[0]).floatValue() + ((BigDecimal) obj_rcar[1]).floatValue();
     etat_log_p = (somme_rcar * 2) + ((BigDecimal) obj_rcar[1]).floatValue();
-    
+
     SaveOrdreVirement(
             "R.C.A.R",
             "Cotisations salariales et Patronales du mois : "
@@ -1381,7 +1381,7 @@ public class DouniaController {
             BigDecimal.valueOf(somme_rcar_s + etat_log_p),
             annee,
             mois);
-    
+
     /////////////////////////////// ***************** CNSS
     // *****************///////////////////////////////
     javax.persistence.Query req_cnss =
@@ -1396,10 +1396,10 @@ public class DouniaController {
     if (etat_cnss != null) {
       somme_cnss = ((BigDecimal) etat_cnss).floatValue();
     }
-    
+
     /////////////////////////////// ***************** AMO
     // *****************///////////////////////////////
-    
+
     javax.persistence.Query req_amo =
             JPA.em()
                     .createNativeQuery(
@@ -1423,10 +1423,10 @@ public class DouniaController {
               annee,
               mois);
     }
-    
+
     /////////////////////////////// ***************** OMFAM SM
     // *****************///////////////////////////////
-    
+
     javax.persistence.Query req_sm_omfam =
             JPA.em()
                     .createNativeQuery(
@@ -1450,10 +1450,10 @@ public class DouniaController {
               annee,
               mois);
     }
-    
+
     /////////////////////////////// ***************** OMFAM CAAD
     // *****************///////////////////////////////
-    
+
     javax.persistence.Query req_caad_omfam =
             JPA.em()
                     .createNativeQuery(
@@ -1477,7 +1477,7 @@ public class DouniaController {
               annee,
               mois);
     }
-    
+
     /////////////////////////////// ***************** MGPAP SM KHENIFRA
     // *****************///////////////////////////////
     javax.persistence.Query req_sm_r =
@@ -1505,7 +1505,7 @@ public class DouniaController {
               annee,
               mois);
     }
-    
+
     /////////////////////////////// ***************** MGPAP SM KHERIBGA
     // *****************///////////////////////////////
     javax.persistence.Query req_sm_g =
@@ -1533,7 +1533,7 @@ public class DouniaController {
               annee,
               mois);
     }
-    
+
     /////////////////////////////// ***************** MGPAP CCD KHENIFRA
     // *****************///////////////////////////////
     javax.persistence.Query req_ccd_r =
@@ -1557,7 +1557,7 @@ public class DouniaController {
               annee,
               mois);
     }
-    
+
     /////////////////////////////// ***************** MGPAP CCD KHERIBGA
     // *****************///////////////////////////////
     javax.persistence.Query req_ccd_g =
@@ -1581,10 +1581,10 @@ public class DouniaController {
               annee,
               mois);
     }
-    
+
     /////////////////////////////// ***************** IR
     // *****************///////////////////////////////
-    
+
     javax.persistence.Query req_ir =
             JPA.em()
                     .createNativeQuery(
@@ -1604,7 +1604,7 @@ public class DouniaController {
               annee,
               mois);
     }
-    
+
     BigDecimal total1 =
             somme_pl
                     .add(somme_net)
@@ -1621,12 +1621,12 @@ public class DouniaController {
                     .add(BigDecimal.valueOf(somme_ccd_r))
                     .add(BigDecimal.valueOf(somme_sm_g))
                     .add(BigDecimal.valueOf(somme_sm_r));
-    
+
     BigDecimal total =
             total1.add(BigDecimal.valueOf(etat_log_p)).add(BigDecimal.valueOf(somme_amo));
     double total2 = (Math.round(total.floatValue() * 100)) / 100.0;
     String montant_total = ConvertNomreToLettres.getStringMontant(BigDecimal.valueOf(total2));
-    
+
     String fileLink =
             ReportFactory.createReport(com.axelor.apps.hr.report.IReport.PageDeGarde, "Page de garde")
                     .addParam("Locale", ReportSettings.getPrintingLocale(null))
